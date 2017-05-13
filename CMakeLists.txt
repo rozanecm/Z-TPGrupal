@@ -8,7 +8,7 @@ link_directories(${GTKMM_LIBRARY_DIRS})
 
 include_directories(${GTKMM_INCLUDE_DIRS})
 set(SOURCE_FILES
-        src/main.cpp)
+        src/main.cpp src/GameWindow.cpp src/GameWindow.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 

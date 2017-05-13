@@ -1,13 +1,19 @@
 #include <gtkmm.h>
+#include <iostream>
+#include "GameWindow.h"
 
-int main(int argc, char *argv[])
+
+int main (int argc, char **argv)
 {
-    auto app =
-            Gtk::Application::create(argc, argv,
-                                     "org.gtkmm.examples.base");
+    auto app = Gtk::Application::create(argc, argv);
 
-    Gtk::Window window;
-    window.set_default_size(200, 200);
-    window.add_label("HELLO WORLD");
-    return app->run(window);
+    GameWindow game_window;
+    Gtk::Window* window = game_window.get_window();
+    if (window)
+    {
+        return app->run(*window);
+    }
+
+    return 1;
 }
+
