@@ -2,7 +2,8 @@
 #include <iostream>
 #include "GameWindow.h"
 #include "xml/pugixml.hpp"
-
+#include <SDL2>
+#include "sdl/SDL_mixer.h"
 
 void xml_play() {
     pugi::xml_document doc;

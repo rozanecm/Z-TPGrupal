@@ -5,8 +5,11 @@ set(CMAKE_CXX_STANDARD 11)
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
 link_directories(${GTKMM_LIBRARY_DIRS})
-
 include_directories(${GTKMM_INCLUDE_DIRS})
+include_directories(src/sdl)
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
+
 set(SOURCE_FILES
         src/main.cpp src/GameWindow.cpp src/GameWindow.h
         src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp)
@@ -15,4 +18,5 @@ add_executable(Z_TPGrupal ${SOURCE_FILES})
 
 
 target_link_libraries(Z_TPGrupal
-        ${GTKMM_LIBRARIES}  )
+        ${GTKMM_LIBRARIES}
+        ${SDL_LIBRARIES})
