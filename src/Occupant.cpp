@@ -6,7 +6,9 @@
 
 Occupant::Occupant(Cell* position, int id) : position(position), id(id){}
 
-Occupant::Occupant(int id) : id(id) {}
+Occupant::Occupant(int id) : id(id) {
+    position = nullptr;
+}
 
 int Occupant::getId() const {
     return this->id;

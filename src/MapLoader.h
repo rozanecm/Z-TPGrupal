@@ -7,6 +7,7 @@
 
 class MapLoader {
     std::vector<std::vector<Cell>> map;
+    std::vector<Occupant*> units;
 public:
     MapLoader(std::string path);
     ~MapLoader();

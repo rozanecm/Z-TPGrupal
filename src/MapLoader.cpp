@@ -18,6 +18,8 @@ MapLoader::MapLoader(std::string path) {
         int coord_x = 0; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
+        map.push_back(row_vec);
+
         // Iterate over every row creating cells
         auto cell = row->children().begin();
         for (; cell != row->children().end(); ++cell) {
@@ -26,19 +28,20 @@ MapLoader::MapLoader(std::string path) {
             int factor = 1; // TODO: actual factors
 
             // Create a real occupant if the cell's occupied
-            Occupant o(-1);
+            int ocpt_id = -1;
             if (structure != "") {
-                o = Occupant(std::stoi(structure));
+                ocpt_id = std::stoi(structure);
             }
+            Occupant* o = new Occupant(ocpt_id);
+            units.push_back(o);
 
             // Create a new cell and push it to the row
-            Cell c(coord_x, coord_y, terrain, factor, &o);
-            row_vec.push_back(c);
+            map.back().emplace_back(coord_x, coord_y, terrain, factor,
+                                    units.back());
             coord_x++;
         }
 
         // Push the whole row to the map
-        map.push_back(row_vec);
         coord_y++;
     }
 }
@@ -49,5 +52,7 @@ const std::vector<std::vector<Cell>>& MapLoader::get_map() {
 }
 
 MapLoader::~MapLoader() {
-
+    for(Occupant* o : units) {
+        delete o;
+    }
 }
