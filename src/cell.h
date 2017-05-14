@@ -24,7 +24,7 @@ class Cell {
         Cell(int x, int y, std::string& kind, int factor,  Occupant* ocpt);
 
         // Returns true if it's empty. If not, false
-        bool isEmpty();
+        bool isEmpty() const;
 
         // Returns the object on the cell.
         Occupant* getOccupant();

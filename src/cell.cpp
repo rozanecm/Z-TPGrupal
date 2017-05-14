@@ -7,7 +7,7 @@
 Cell::Cell(int x, int y, std::string &kind, int factor, Occupant* ocpt):
                         x(x), y(y) ,terrain(kind,factor), occupant(ocpt){}
 
-bool Cell::isEmpty() {
+bool Cell::isEmpty() const {
     return (this->occupant->getId() == -1);
 }
 
