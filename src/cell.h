@@ -33,6 +33,10 @@ class Cell {
 
         int getMovementFactor() const;
 
+        int getXPosition() const;
+
+        int getYPosition() const;
+
         // Returns the object on the cell.
         Occupant* getOccupant();
 

@@ -28,4 +28,12 @@ int Cell::getMovementFactor() const {
     return this->terrain.getFactor();
 }
 
+int Cell::getXPosition() const {
+    return this->x;
+}
+
+int Cell::getYPosition() const {
+    return this->y;
+}
+
 Cell::~Cell() {}
