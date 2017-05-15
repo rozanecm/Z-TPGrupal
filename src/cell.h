@@ -1,6 +1,7 @@
 #ifndef Z_TPGRUPAL_CELL_H
 #define Z_TPGRUPAL_CELL_H
 
+#include "lock.h"
 #include "Terrain.h"
 #include "Occupant.h"
 #include <iostream>
@@ -16,6 +17,7 @@ class Cell {
         Occupant* occupant;
         int x;
         int y;
+        std::mutex m;
 
     public:
         // Cell constructor on position (x,y). Builds the Terrain inside it and
