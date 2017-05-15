@@ -12,8 +12,12 @@ int main (int argc, char **argv)
 
     for(auto it = map.begin(); it != map.end(); ++it) {
         for(auto jt = it->begin(); jt != it->end(); ++jt) {
-            std::cout << jt->isEmpty() << std::endl;
+//            std::cout << jt->isEmpty() << std::endl;
+            std::cout << jt->getTerrainType() << "  ";
+            if (jt->getTerrainType() != "Tierra")
+                std::cout << "  ";
         }
+        std::cout << std::endl;
     }
 
     auto app = Gtk::Application::create(argc, argv);

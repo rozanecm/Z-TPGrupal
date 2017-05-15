@@ -26,6 +26,10 @@ class Cell {
         // Returns true if it's empty. If not, false
         bool isEmpty() const;
 
+        std::string getTerrainType() const;
+
+        int getMovementFactor() const;
+
         // Returns the object on the cell.
         Occupant* getOccupant();
 

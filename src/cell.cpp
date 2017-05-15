@@ -16,3 +16,11 @@ Occupant *Cell::getOccupant() {
 }
 
 Cell::~Cell() {}
+
+std::string Cell::getTerrainType() const{
+    return this->terrain.getKind();
+}
+
+int Cell::getMovementFactor() const {
+    return this->terrain.getFactor();
+}
