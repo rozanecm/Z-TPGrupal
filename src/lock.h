@@ -1,5 +1,5 @@
 //
-// Created by rodian on 14/05/17.
+// Created by rodian on 15/05/17.
 //
 
 #ifndef Z_TPGRUPAL_LOCK_H
@@ -17,12 +17,6 @@ public:
 
     // Frees the mutex
     ~Lock();
-
-private:
-    Lock(const Lock&) = delete;
-    Lock& operator=(const Lock&) = delete;
-    Lock(Lock&&) = delete;
-    Lock& operator=(Lock&&) = delete;
 };
 
 

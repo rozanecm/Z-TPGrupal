@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <cstdbool>
+#include <mutex>
 // Class Occupant later defined
 class Occupant;
 
@@ -17,7 +18,7 @@ class Cell {
         Occupant* occupant;
         int x;
         int y;
-        std::mutex m;
+//        std::mutex m;
 
     public:
         // Cell constructor on position (x,y). Builds the Terrain inside it and
