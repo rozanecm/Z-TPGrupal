@@ -12,7 +12,7 @@ include_directories(${SDL2_INCLUDE_DIR})
 
 set(SOURCE_FILES
         src/main.cpp src/GameWindow.cpp src/GameWindow.h src/cell.cpp src/cell.h src/Terrain.cpp src/Terrain.h src/Occupant.cpp src/Occupant.h
-        src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h)
+        src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h src/lock.cpp src/lock.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 
