@@ -2,7 +2,6 @@
 #include <iostream>
 #include "GameWindow.h"
 #include "../libs/xml/pugixml.hpp"
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
 void xml_play() {
@@ -20,16 +19,22 @@ void xml_play() {
 }
 
 void play_sound() {
-    int init = Mix_Init(0);
-    if (!init) {
-        std::cout << "ERROR ON SDL MIXER LIBRARY" << std::endl;
+    // Init, open the audio channel
+    Mix_Init(0);
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+        std::cout << "ERROR ON OPENING AUDIO" << Mix_GetError() << std::endl;
         return;
     }
+
+
+    Mix_AllocateChannels(16);
     Mix_Chunk* sample = Mix_LoadWAV("test.wav");
     if (!sample) {
-        std::cout << "ERROR ON PLAYING TEST.WAV" << std::endl;
+        std::cout << "ERROR ON PLAYING TEST.WAV " << Mix_GetError() << std::endl;
         return;
     }
+
+    // Plays
     Mix_PlayChannel(-1, sample, -1);
 }
 
