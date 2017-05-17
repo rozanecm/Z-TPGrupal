@@ -4,7 +4,7 @@ TP grupal de Taller de Programacion I (75.42) - FIUBA
 
 *Dependencies*:
 gtkmm-3.0-dev
-
+libsdl2-dev
 
 # Build Instructions
 1. Run `cmake CMakeLists.txt`
