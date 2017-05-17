@@ -4,19 +4,8 @@
 
 #include "cell.h"
 
-
-Cell::Cell(int x, int y, std::string &kind, int factor, Occupant* ocpt):
-                        x(x), y(y) ,terrain(kind,factor), occupant(ocpt){}
-
-bool Cell::isEmpty() const {
-//    Lock l(m);
-    return (this->occupant->getId() == -1);
-}
-
-Occupant* Cell::getOccupant() {
-//    Lock l(m);
-    return this->occupant;
-}
+Cell::Cell(int x, int y, int width, int lenght, std::string &kind, int factor):
+            size(x, y, width, lenght), terrain(kind,factor) {}
 
 std::string Cell::getTerrainType() const{
 //    Lock l(m);
@@ -29,11 +18,15 @@ int Cell::getMovementFactor() const {
 }
 
 int Cell::getXPosition() const {
-    return this->x;
+    return this->size.getXPosition();
 }
 
 int Cell::getYPosition() const {
-    return this->y;
+    return this->size.getYPosition();
 }
 
 Cell::~Cell() {}
+
+bool Cell::areYouOnThisPosition(int x_pos, int y_pos) {
+    return this->size.areYouOnThisPoint(x_pos, y_pos);
+}

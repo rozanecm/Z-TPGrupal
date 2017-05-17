@@ -4,6 +4,7 @@
 #include "lock.h"
 #include "Terrain.h"
 #include "Occupant.h"
+#include "size.h"
 #include <iostream>
 #include <string>
 #include <cstdbool>
@@ -15,30 +16,27 @@ class Occupant;
 class Cell {
     private:
         Terrain terrain;
-        Occupant* occupant;
-        int x;
-        int y;
+        Size size;
 //        std::mutex m;
 
     public:
         // Cell constructor on position (x,y). Builds the Terrain inside it and
         // always has an Occupant. The empty Cell will be the one who has an
         // Occupant with id = -1.
-        Cell(int x, int y, std::string& kind, int factor,  Occupant* ocpt);
+        Cell(int x, int y, int width, int lenght,
+                std::string& kind, int factor);
 
-        // Returns true if it's empty. If not, false
-        bool isEmpty() const;
-
+        // Returns a string with the king of Terrain
         std::string getTerrainType() const;
 
+        // Returns the movement factor of the Terrain
         int getMovementFactor() const;
 
         int getXPosition() const;
 
         int getYPosition() const;
 
-        // Returns the object on the cell.
-        Occupant* getOccupant();
+        bool areYouOnThisPosition(int x_pos, int y_pos);
 
         ~Cell();
 };
