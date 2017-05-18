@@ -4,27 +4,23 @@
 
 #include "Occupant.h"
 
-Occupant::Occupant(int life, int id, Size position) : life_points(life), id(id),
-                                                            position(position){}
+Occupant::Occupant(int life, int id, Size position, Map map) : life_points(life)
+        , id(id), occ_size(position), wordl_map(map) {}
 
 int Occupant::getId() const {
     return this->id;
 }
-
-//void Occupant::setNewPosition(int x, int y) {
-//    this->position.moveTo(x,y);
-//}
 
 void Occupant::reduceLifeBy(int dmg) {
     this->life_points -= dmg;
 }
 
 int Occupant::getXPosition() {
-    return this->position.getXPosition();
+    return this->occ_size.getXPosition();
 }
 
 int Occupant::getYPosition() {
-    return this->position.getYPosition();
+    return this->occ_size.getYPosition();
 }
 
 bool Occupant::areYouAlive() {

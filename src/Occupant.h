@@ -3,24 +3,25 @@
 
 #include <iostream>
 #include "cell.h"
+#include "size.h"
+#include "map.h"
+
 // Class Cell later defined
 class Cell;
 
 // Class Occupant so any object knows where is on the map
 class Occupant {
-private:
+protected:
     int id, life_points;
-    Size position;
+    Size occ_size;
+    Map wordl_map;
 
 public:
     // Constructor for Occupant on a specific position saved in Size and it's id
-    Occupant(int life, int id, Size position);
+    Occupant(int life, int id, Size position, Map map);
 
     // Returns the id of the object
     int getId() const;
-
-    // Indicates the Occupant it's new position
-//    void setNewPosition(int x, int y);
 
     void reduceLifeBy(int dmg);
 
