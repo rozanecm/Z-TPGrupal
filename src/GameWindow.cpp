@@ -29,7 +29,7 @@ GameWindow::GameWindow() {
     refBuilder->get_widget("GameWindow", window);
     refBuilder->get_widget("Portrait", portrait);
 
-    update_portrait("src/assets/portraits/sample.png");
+    update_portrait("assets/portraits/sample.png");
 }
 
 void GameWindow::update_portrait(const std::string& img_path) const {
