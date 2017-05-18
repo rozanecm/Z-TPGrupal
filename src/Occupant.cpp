@@ -4,22 +4,30 @@
 
 #include "Occupant.h"
 
-Occupant::Occupant(Cell* position, int id) : position(position), id(id){}
-
-Occupant::Occupant(int id) : id(id) {
-    position = nullptr;
-}
+Occupant::Occupant(int life, int id, Size position) : life_points(life), id(id),
+                                                            position(position){}
 
 int Occupant::getId() const {
     return this->id;
 }
+void Occupant::setNewPosition(int x, int y) {
+    this->position.moveTo(x,y);
+}
+
+void Occupant::reduceLifeBy(int dmg) {
+    this->life_points -= dmg;
+}
+
+int Occupant::getXPosition() {
+    return this->position.getXPosition();
+}
+
+int Occupant::getYPosition() {
+    return this->position.getYPosition();
+}
+
+bool Occupant::areYouAlive() {
+    return (this->life_points > 0);
+}
 
 Occupant::~Occupant() {}
-
-Cell *Occupant::getPosition() {
-    return this->position;
-}
-
-void Occupant::setNewPosition(Cell* position) {
-    this->position = position;
-}

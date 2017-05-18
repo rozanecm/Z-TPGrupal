@@ -8,27 +8,30 @@ class Cell;
 
 // Class Occupant so any object knows where is on the map
 class Occupant {
-    private:
-        Cell* position;
-        int id;
-    public:
-        // Constructor for Occupant on a specific Cell and it's id
-        Occupant(Cell* position, int id);
+private:
+    int id, life_points;
+    Size position;
 
-        // Constructor for Occupant with it's id. The position must be set
-        // later with setNewPosition method before using getPosition method
-        Occupant(int id);
+public:
+    // Constructor for Occupant on a specific position saved in Size and it's id
+    Occupant(int life, int id, Size position);
 
-        // Returns the id of the object
-        int getId() const;
+    // Returns the id of the object
+    int getId() const;
 
-        // Indicates the Occupant it's new position
-        void setNewPosition(Cell* position);
+    // Indicates the Occupant it's new position
+    void setNewPosition(int x, int y);
 
-        // Returns the cell
-        Cell* getPosition();
+    void reduceLifeBy(int dmg);
 
-        ~Occupant();
+    // Returns the
+    int getXPosition();
+
+    int getYPosition();
+
+    bool areYouAlive();
+
+    ~Occupant();
 };
 
 
