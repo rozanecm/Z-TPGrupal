@@ -20,7 +20,7 @@ public:
     int getId() const;
 
     // Indicates the Occupant it's new position
-    void setNewPosition(int x, int y);
+//    void setNewPosition(int x, int y);
 
     void reduceLifeBy(int dmg);
 
