@@ -2,8 +2,16 @@
 #define Z_TPGRUPAL_GAMEAREA_H
 
 
-class GameArea {
+#include <gtkmm/drawingarea.h>
 
+class GameArea : public Gtk::DrawingArea{
+public:
+    GameArea();
+
+    virtual ~GameArea();
+
+protected:
+    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 };
 
 
