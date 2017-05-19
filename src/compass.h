@@ -70,6 +70,8 @@ private:
     void insertNodeOnOpen(Node* node);
 
     std::vector<Position> getRoad(Node* destiny);
+
+    Node* searchForClosestNode();
 };
 
 

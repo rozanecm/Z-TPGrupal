@@ -43,15 +43,20 @@ std::vector<Position> Compass::getFastestWay(Position from, Position to) {
 
         // get the minimum F and add it to visit list (remove from looking list)
         closer_node = open_nodes.back();
+        open_nodes.pop_back();
         this->closed_nodes.push_back(closer_node);
 
         // check if destiny is between them
         if (closed_nodes.back()->getHvalue() == 0)
             finished = true;
     }
-    if (finished)
+    Node* closest;
+    if (finished) {
         road = this->getRoad(closer_node);
-    
+    } else {
+        closest = this->searchForClosestNode();
+        road = this->getRoad(closest);
+    }
     return road;
 }
 
@@ -208,5 +213,17 @@ std::vector<Position> Compass::getRoad(Node *destiny) {
         road.push_back(next_node->getPosition());
     }
     return road;
+}
+
+Node *Compass::searchForClosestNode() {
+    Node* closest = closed_nodes.front();
+    for (auto x: closed_nodes){
+        if ((x->getHvalue() < closest->getHvalue()) ||
+         ((x->getHvalue() == closest->getGValue()) &&
+          (x->getFValue() < closest->getFValue()))) {
+            closest = x;
+        }
+    }
+    return closest;
 }
 
