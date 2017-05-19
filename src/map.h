@@ -31,12 +31,17 @@ public:
     // position on the map.
     int getTerrainFactorOn(int x, int y);
 
+    // not implemented yet
     bool areThisPointsEmpty(Size size);
 
+    // Recieves the size of an object on the position that wants to be walk
+    // Returns true if the object fits and can step to that position
     bool canIWalkToThisPosition(Size& size);
 
+    // Returns the width of the map
     int getWidth();
 
+    // Returns the Heigth of the map
     int getHeigth();
 };
 

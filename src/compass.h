@@ -15,7 +15,7 @@ class Map;
 
 // class Compass so every moving unit knows the fastest way to destiny
 class Compass {
-    private:
+private:
     Map& map;
     std::vector<std::vector<Node*>> astar_map;
     std::vector<Node*> closed_nodes;
@@ -23,26 +23,28 @@ class Compass {
     int unit_speed;
     Size unit_size;
 
-    public:
-        // The Compass receives the map of Cells for calculations and the
-        // basic unit speed
-        Compass(Map& map, Size unit_size);
+public:
+    // The Compass receives the map of Cells for calculations and the
+    // basic unit speed
+    Compass(Map& map, Size unit_size);
 
-        // Receives the current position of the unit and the destiny
-        // Returns a vector of Cells with the fastest way
-        std::vector<Position> getFastestWay(Position from, Position to);
+    // Receives the current position of the unit and the destiny
+    // Returns a vector of Cells with the fastest way
+    std::vector<Position> getFastestWay(Position from, Position to);
 
-        void setHValueForDestiny(Position to);
+    void buildNodeMap();
 
-        void buildNodeMap();
+    ~Compass();
 
-        ~Compass();
+private:
+    // Writes the H value on every node of astar_map for the received position
+    void setHValueForDestiny(Position to);
 
-    private:
-        // Sets the H value for every Cell
-        void setHOnYPosition(int y_dest,int x_dest, int& h_value_y);
+    // Sets the H value for every Cell
+    void setHOnYPosition(int y_dest,int x_dest, int& h_value_y);
 
-        std::vector<Node*> getAdyacents(Node* node);
+    // Returns the adyacents nodes that can be walk to
+    std::vector<Node*> getAdyacents(Node* node);
 };
 
 

@@ -41,13 +41,18 @@ public:
     // If other is all inside this returns false.
     bool areYouHalfOutSide(Size& other);
 
+    // Returns true if the position (x,y) received is inside this Size
     bool areYouOnThisPoint(int x, int y);
 
     ~Size();
 
 private:
+    // Writes on max and min the maximum value on 'x' coordinate that this size
+    // has and the minimum value on min
     void calculateMaxAndMinForX(int& max, int& min);
 
+    // Writes on max and min the maximum value on 'y' coordinate that this size
+    // has and the minimum value on min
     void calculateMaxAndMinForY(int& max, int& min);
 };
 
