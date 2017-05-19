@@ -47,6 +47,7 @@ int main (int argc, char **argv)
 
     GameWindow game_window;
     Gtk::Window* window = game_window.get_window();
+    game_window.change_view_to_unit_group();
     if (window)
     {
         return app->run(*window);

@@ -4,7 +4,7 @@
 
 GameWindow::GameWindow() {
     //Load the GtkBuilder file and instantiate its widgets:
-    auto refBuilder = Gtk::Builder::create();
+    refBuilder = Gtk::Builder::create();
     try
     {
         refBuilder->add_from_file("src/Z.glade");
@@ -28,7 +28,11 @@ GameWindow::GameWindow() {
     // Save the widget refs in the class attributes
     refBuilder->get_widget("GameWindow", window);
     refBuilder->get_widget("Portrait", portrait);
-
+    refBuilder->get_widget("SidePanel", panel);
+    refBuilder->get_widget("BuildingView", building_panel);
+    refBuilder->get_widget("UnitView", unit_panel);
+    refBuilder->get_widget("GroupView", group_panel);
+    refBuilder->get_widget("Create", button);
     update_portrait("assets/portraits/sample.png");
 }
 
@@ -47,4 +51,20 @@ GameWindow::~GameWindow() {
 Gtk::Window *GameWindow::get_window() {
     return window;
 }
+
+bool GameWindow::change_view_to_unit() {
+    panel->pack_start(*unit_panel);
+    return true;
+}
+
+bool GameWindow::change_view_to_building() {
+    panel->pack_start(*building_panel);
+    return true;
+}
+
+bool GameWindow::change_view_to_unit_group() {
+    panel->pack_start(*group_panel);
+    return false;
+}
+
 
