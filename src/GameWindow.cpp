@@ -2,19 +2,18 @@
 #include "GameWindow.h"
 
 #define SCREENWIDTH 1920
-#define SCREENHEIGHT 1000
+#define SCREENHEIGHT 1080
 
-GameWindow::GameWindow() : button1("button1"){
+GameWindow::GameWindow() {
     /* set window size */
-    set_size_request(SCREENWIDTH, SCREENHEIGHT);
-//    fullscreen();
+//    set_size_request(SCREENWIDTH, SCREENHEIGHT);
+    fullscreen();
 
     /* set window title */
     set_title("Z");
 
     /* add main box to window */
     add(mainGrid);
-
 
     gameArea.set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
     mainGrid.add(gameArea);
