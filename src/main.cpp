@@ -1,7 +1,8 @@
 #include <gtkmm.h>
 #include <iostream>
 #include "GameWindow.h"
-#include "../libs/xml/pugixml.hpp"
+#include "pugixml.hpp"
+#include "MapGenerator.h"
 #include <SDL2/SDL_mixer.h>
 
 void xml_play() {
@@ -44,7 +45,8 @@ int main (int argc, char **argv)
     xml_play();
 
     auto app = Gtk::Application::create(argc, argv);
-
+    MapGenerator generator(1);
+    generator.generate("take me to the top");
     GameWindow game_window;
     Gtk::Window* window = game_window.get_window();
     if (window)

@@ -1,5 +1,6 @@
 #include <fstream>
 #include "MapGenerator.h"
+#include "pugixml.hpp"
 
 MapGenerator::MapGenerator(int size) :
     size(size)
@@ -9,6 +10,7 @@ MapGenerator::MapGenerator(int size) :
 void MapGenerator::generate(const std::string& name) {
     std::string path = "maps/" + name + ".xml";
     output.open(path, std::ios_base::out);
+
     output << "Get Bent";
 }
 
