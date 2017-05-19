@@ -12,6 +12,9 @@ public:
 
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+
+private:
+    Glib::RefPtr<Gdk::Pixbuf> image = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
 };
 
 
