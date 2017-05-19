@@ -5,7 +5,7 @@
 #include "node.h"
 
 Node::Node(int x, int y, int width, int lenght) : h_value(0), g_value(0),
-                         size(x, y, width, lenght) {}
+                        was_visited(false), size(x, y, width, lenght) {}
 
 void Node::setHValue(int h) {
     this->h_value = h;
@@ -13,6 +13,11 @@ void Node::setHValue(int h) {
 
 void Node::setGValue(int g, int terrain_factor) {
     this->g_value = (g + (size.getWidth() + size.getHeight())/4)*terrain_factor;
+    this->was_visited = true;
+}
+
+int Node::getGValue() {
+    return this->g_value;
 }
 
 int Node::getFValue() const {
@@ -39,5 +44,9 @@ Position Node::getPosition() const{
 
 Size Node::getSize() const {
     return this->size;
+}
+
+bool Node::beenSeen() const {
+    return this->was_visited;
 }
 

@@ -38,13 +38,38 @@ public:
 
 private:
     // Writes the H value on every node of astar_map for the received position
+    // It use Manhattan distance
     void setHValueForDestiny(Position to);
 
     // Sets the H value for every Cell
     void setHOnYPosition(int y_dest,int x_dest, int& h_value_y);
 
-    // Returns the adyacents nodes that can be walk to
-    std::vector<Node*> getAdyacents(Node* node);
+    // Only valid for Manhattan distance.
+    // Returns true if other is a diagonal node of reference
+    // otherwise flase. Reference and other must be adjacent.
+    bool isThisNodeOnDiagonal(Node* reference, Node* other);
+
+    // Put the adyacents nodes that can be walk to on the open_nodes vector
+    void getAdyacents(Node* node);
+
+    // Returns true if node and other are different nodes. Else, false
+    bool isNotMe(Node* node, Node* other);
+
+    // Puts the node in the correct order.
+    // The node with lower F will be on the back
+    void addToOpenInOrder(Node* node);
+
+    // If adj node hasn't been seen or the g value from ref node is lower
+    // than previous, it chages g value and the parent.
+    bool writeGandSetParent(Node* ref, Node* adj, int walk);
+
+    // Changes the position of the node
+    void changeNodePosition(Node* node);
+
+    // Inserts the node on the correct position
+    void insertNodeOnOpen(Node* node);
+
+    std::vector<Position> getRoad(Node* destiny);
 };
 
 

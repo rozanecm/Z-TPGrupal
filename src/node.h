@@ -15,6 +15,7 @@ class Node {
 private:
     int h_value, g_value;
     Node* parent;
+    bool was_visited;
     Size size;
 
 public:
@@ -23,6 +24,8 @@ public:
     void setHValue(int h);
 
     void setGValue(int g, int terrain_factor);
+
+    int getGValue();
 
     int getFValue() const;
 
@@ -36,8 +39,9 @@ public:
 
     Size getSize() const;
 
+    bool beenSeen() const;
+
     ~Node();
 };
-
 
 #endif //Z_TPGRUPAL_NODE_H

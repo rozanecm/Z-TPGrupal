@@ -32,11 +32,26 @@ std::vector<Position> Compass::getFastestWay(Position from, Position to) {
     Node* start_node = astar_map[from.getX()][from.getY()];
     start_node->setGValue(0,map.getTerrainFactorOn(from.getX(),from.getY()));
     this->closed_nodes.push_back(start_node);
-        // get adyacents and add them to looking list in order os F value. On tie use H value
+
+    Node *closer_node = start_node;
+    // While haven't reach destiny node or open_nodes has nodes to visit.
+    bool finished = false;
+    while (!finished && (!open_nodes.empty())) {
+        // get adyacents and add them to looking list in order of F value.
+        // On tie use H value.
+        this->getAdyacents(closer_node);
+
+        // get the minimum F and add it to visit list (remove from looking list)
+        closer_node = open_nodes.back();
+        this->closed_nodes.push_back(closer_node);
 
         // check if destiny is between them
-        // get the minimum F and add it to visit list (remove from looking list)
-        // repeat number two.
+        if (closed_nodes.back()->getHvalue() == 0)
+            finished = true;
+    }
+    if (finished)
+        road = this->getRoad(closer_node);
+    
     return road;
 }
 
@@ -73,55 +88,125 @@ void Compass::setHOnYPosition(int x_pos, int y_dest, int& h_value_y) {
     }
 }
 
-std::vector<Node *> Compass::getAdyacents(Node *node) {
-    std::vector<Node *> adyacents;
-    // check for border situation
-//    // Check left border
-//    int left_pos = node->getPosition().getX() - 1;
-//    if (unit_size.getWidth() <= left_pos) {
-//        int y_pos = node->getPosition().getY();
-//        Node* left = astar_map[left_pos][y_pos];
-//        left->setGValue(SIDEWALK, map.getTerrainFactorOn(left_pos,y_pos));
-//        left->setNewParent(node);
-//        adyacents.push_back(left);
-//    }
-//
-//    // Check top border
-//
-//    int y_min = node->getYPosition() - 1;
-//
-//    if (x_min < 0)
-//        x_min = 0;
-//
-//    if (y_min < 0)
-//        y_min = 0;
-//
-//    int x_max = node->getXPosition() + 1;
-//    int y_max = node->getYPosition() + 1;
-//
-//    if (x_max > this->width)
-//        x_max = this->width;
-//
-//    if (y_max > this->length)
-//        y_max = this->length;
-    // get the vector of adyacents
+void Compass::getAdyacents(Node *node) {
+    // get limits
     int x_min = node->getPosition().getX() - 1;
     int x_max = node->getPosition().getX() + 1;
     int y_min = node->getPosition().getY() - 1;
     int y_max = node->getPosition().getY() + 1;
 
+    bool adj_new_g;
     for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
         for (int y_pos = y_min; y_pos <= y_max; ++y_pos){
-            Node* ady = astar_map[x_pos][y_pos];
-            Size size = ady->getSize();
-            if (map.canIWalkToThisPosition(size)) {
+            Node* adj = astar_map[x_pos][y_pos];
+            Size size = adj->getSize();
 
+            // Check if whether node fit or the position is not available.
+            // Also discard the node looking for his adjacent
+            if ((map.canIWalkToThisPosition(size)) && this->isNotMe(node,adj)) {
+
+                // G value differs when the node is diagonal or next to it
+                if (this->isThisNodeOnDiagonal(node, adj)) {
+                    adj_new_g = this->writeGandSetParent(node,adj,DIAGONALWALK);
+
+                } else {
+                    adj_new_g = this->writeGandSetParent(node,adj,SIDEWALK);
+                }
+                if (adj_new_g)
+                    this->addToOpenInOrder(adj);
             }
-            adyacents.push_back(ady);
         }
     }
-    return adyacents;
 }
 
 Compass::~Compass() {}
+
+bool Compass::isThisNodeOnDiagonal(Node* ref, Node* other) {
+    int diff = ref->getHvalue() - other->getHvalue();
+    return (diff > 1) || (diff < -1);
+}
+
+bool Compass::isNotMe(Node *node, Node* other) {
+    Position ref = node->getPosition();
+    Position ady = other->getPosition();
+    return !((ref.getX() == ady.getX()) && (ref.getY() == ady.getY()));
+}
+
+void Compass::addToOpenInOrder(Node *new_node) {
+    // Only add to the vector those that haven't been seen
+    if (!new_node->beenSeen()){
+        this->insertNodeOnOpen(new_node);
+    } else {
+        this->changeNodePosition(new_node);
+    }
+}
+
+bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
+    int new_g = walk + ref->getGValue();
+    bool adj_change_g = false;
+    // if g value from node is lower than previous or this
+    // adjacent hasn't been seen yet,
+    // add new g value and change parent.
+    if ((adj->beenSeen() && new_g < adj->getGValue()) ||
+        (!adj->beenSeen())) {
+        Position pos = adj->getPosition();
+        adj->setGValue(new_g, map.getTerrainFactorOn(pos.getX(),pos.getY()));
+        adj->setNewParent(ref);
+        adj_change_g = true;
+    }
+    return adj_change_g;
+}
+
+void Compass::changeNodePosition(Node *node) {
+    // first erase node from vector
+    bool erased = false;
+    Position node_pos = node->getPosition();
+    std::vector<Node *>::iterator it = open_nodes.begin();
+    while ((!erased) && (it != open_nodes.end())) {
+        Position it_pos = (*it)->getPosition();
+        if ((it_pos.getX() == node_pos.getX()) &&
+                (it_pos.getY() == node_pos.getY())){
+            it = open_nodes.erase(it);
+            erased = true;
+        } else {
+            ++it;
+        }
+    }
+    // Add it again in correct position
+    this->insertNodeOnOpen(node);
+}
+
+void Compass::insertNodeOnOpen(Node *new_node) {
+    bool inserted = false;
+
+    // Save nodes by F value. The lowest on the back.
+    // If two nodes have same F value, the one with the lowest H value
+    // will be closer to the back.
+    std::vector<Node *>::iterator it = open_nodes.begin();
+    while ((!inserted) && (it != open_nodes.end())) {
+        if (((*it)->getFValue()) < new_node->getFValue()) {
+            open_nodes.insert(it, new_node);
+            inserted = true;
+        } else if (((*it)->getFValue()) == new_node->getFValue()) {
+            if (((*it)->getHvalue()) < new_node->getHvalue()) {
+                open_nodes.insert(it, new_node);
+                inserted = true;
+            }
+        }
+        ++it;
+    }
+    if (!inserted) {
+        open_nodes.push_back(new_node);
+    }
+}
+
+std::vector<Position> Compass::getRoad(Node *destiny) {
+    std::vector<Position> road;
+    road.push_back(destiny->getPosition());
+    Node* next_node = destiny->getParent();
+    while (next_node->getGValue() != 0) {
+        road.push_back(next_node->getPosition());
+    }
+    return road;
+}
 
