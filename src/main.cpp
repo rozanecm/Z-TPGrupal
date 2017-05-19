@@ -45,8 +45,8 @@ int main (int argc, char **argv)
     xml_play();
 
     auto app = Gtk::Application::create(argc, argv);
-    MapGenerator generator(1);
-    generator.generate("take me to the top");
+    MapGenerator generator(10);
+    generator.generate("map");
     GameWindow game_window;
     Gtk::Window* window = game_window.get_window();
     if (window)
