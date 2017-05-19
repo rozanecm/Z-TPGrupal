@@ -31,3 +31,8 @@ int Map::getWidth() {
 int Map::getHeigth() {
     return map_size.getHeight();
 }
+
+bool Map::canIWalkToThisPosition(Size& other_size) {
+    return (map_size.areYouHalfOutSide(other_size)/* &&
+            this->areThisPointsEmpty(other_size)*/);
+}

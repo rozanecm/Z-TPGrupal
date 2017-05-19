@@ -4,10 +4,15 @@
 
 #include "node.h"
 
-Node::Node(int h, Cell* cell) : h_value(h), g_value(0), cell(cell) {}
+Node::Node(int x, int y, int width, int lenght) : h_value(0), g_value(0),
+                         size(x, y, width, lenght) {}
 
-void Node::setGValue(int g, int unit_speed) {
-    this->g_value = g + (unit_speed *cell->getMovementFactor());
+void Node::setHValue(int h) {
+    this->h_value = h;
+}
+
+void Node::setGValue(int g, int terrain_factor) {
+    this->g_value = (g + (size.getWidth() + size.getHeight())/4)*terrain_factor;
 }
 
 int Node::getFValue() const {
@@ -25,8 +30,14 @@ void Node::setNewParent(Node *parent) {
 Node *Node::getParent() const {
     return this->parent;
 }
-Cell *Node::getRepresentedCell() const {
-    return this->cell;
-}
 
 Node::~Node() {}
+
+Position Node::getPosition() const{
+    return size.getPosition();
+}
+
+Size Node::getSize() const {
+    return this->size;
+}
+

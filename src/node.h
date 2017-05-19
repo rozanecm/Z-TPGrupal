@@ -6,6 +6,7 @@
 #define Z_TPGRUPAL_NODE_H
 
 #include "cell.h"
+#include "size.h"
 #include <iostream>
 #include <vector>
 
@@ -14,12 +15,14 @@ class Node {
 private:
     int h_value, g_value;
     Node* parent;
-    // This is the cell on the map that this node represents
-    Cell* cell;
-public:
-    Node(int h_value, Cell* cell);
+    Size size;
 
-    void setGValue(int g, int unit_speed);
+public:
+    Node(int x, int y, int width, int lenght);
+
+    void setHValue(int h);
+
+    void setGValue(int g, int terrain_factor);
 
     int getFValue() const;
 
@@ -29,7 +32,9 @@ public:
 
     Node* getParent() const;
 
-    Cell* getRepresentedCell() const;
+    Position getPosition() const;
+
+    Size getSize() const;
 
     ~Node();
 };

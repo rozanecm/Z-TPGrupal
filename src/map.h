@@ -5,20 +5,22 @@
 #ifndef Z_TPGRUPAL_MAP_H
 #define Z_TPGRUPAL_MAP_H
 
+
 #include <vector>
 #include "cell.h"
 #include "Occupant.h"
-#include "unit.h"
 
 // later written
-class Unit;
+//class Unit;
+class Compass;
+
 
 class Map {
 private:
     std::vector<std::vector<Cell>> terrain_map;
     Size map_size;
     std::vector<Occupant> all_occupants;
-    std::vector<Unit> all_units;
+//    std::vector<Unit*> all_units;
 
 public:
     // Map receives the center position (x,y) and dimensions width and height
@@ -30,6 +32,8 @@ public:
     int getTerrainFactorOn(int x, int y);
 
     bool areThisPointsEmpty(Size size);
+
+    bool canIWalkToThisPosition(Size& size);
 
     int getWidth();
 

@@ -32,12 +32,16 @@ MapLoader::MapLoader(std::string path) {
             if (structure != "") {
                 ocpt_id = std::stoi(structure);
             }
-            Occupant* o = new Occupant(ocpt_id);
+            ////
+            int life = 100;
+            Size size(10,10, 10, 10);
+            ////
+            Occupant* o = new Occupant(life, ocpt_id, size);
             units.push_back(o);
 
             // Create a new cell and push it to the row
-            map.back().emplace_back(coord_x, coord_y, terrain, factor,
-                                    units.back());
+            // first 10 is for width, the other is for height
+            map.back().emplace_back(coord_x, coord_y,10,10, terrain, factor);
             coord_x++;
         }
 

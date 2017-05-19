@@ -17,16 +17,16 @@ int Cell::getMovementFactor() const {
     return this->terrain.getFactor();
 }
 
-int Cell::getXPosition() const {
-    return this->size.getXPosition();
+Position Cell::getPosition() const {
+    return this->size.getPosition();
 }
-
-int Cell::getYPosition() const {
-    return this->size.getYPosition();
-}
-
-Cell::~Cell() {}
 
 bool Cell::areYouOnThisPosition(int x_pos, int y_pos) {
     return this->size.areYouOnThisPoint(x_pos, y_pos);
 }
+
+int Cell::getWidthOfCell() {
+    return size.getWidth();
+}
+
+Cell::~Cell() {}

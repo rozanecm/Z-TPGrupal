@@ -5,28 +5,41 @@
 #ifndef Z_TPGRUPAL_SIZE_H
 #define Z_TPGRUPAL_SIZE_H
 
+#include "position.h"
+
 //Class Size to represent the space on the map that an Occupant is standing on
 class Size {
 private:
     // (x,y) are the coordinates of the center o the object
     // all Occupants on game are Four-sided
-    int x, y, width, lenght;
+    Position position;
+    int width, height;
 
 public:
     // width and lenght must be even numbers
-    Size(int x, int y, int width, int lenght);
+    Size(int x, int y, int width, int height);
 
-    int getXPosition() const;
+    // Returns the x position on the map
+    Position getPosition() const;
 
-    int getYPosition() const;
-
+    // Returns the width of the Object of this size
     int getWidth() const;
 
-    int getLength() const;
+    // Returns the lenght of the Object of this size
+    int getHeight() const;
 
+    // Changes the position of the Object of this size to a new (x,y)
     void moveTo(int x, int y);
 
+    // Returns True is this Size collisions with other.
+    // Meant to check collision between different objects.
+    // To fully be sure there is no collison, use this method on the size of
+    // the other object as well
     bool isThereACollision(Size& other);
+
+    // If other is partly or completely outside returns true.
+    // If other is all inside this returns false.
+    bool areYouHalfOutSide(Size& other);
 
     bool areYouOnThisPoint(int x, int y);
 

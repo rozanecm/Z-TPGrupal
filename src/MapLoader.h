@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include "Occupant.h"
 #include "cell.h"
 
 class MapLoader {

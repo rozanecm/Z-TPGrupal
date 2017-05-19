@@ -3,14 +3,11 @@
 
 #include "lock.h"
 #include "Terrain.h"
-#include "Occupant.h"
 #include "size.h"
 #include <iostream>
 #include <string>
 #include <cstdbool>
 #include <mutex>
-// Class Occupant later defined
-class Occupant;
 
 // Class Cell to represent a position on the map
 class Cell {
@@ -32,9 +29,9 @@ class Cell {
         // Returns the movement factor of the Terrain
         int getMovementFactor() const;
 
-        int getXPosition() const;
+        Position getPosition() const;
 
-        int getYPosition() const;
+        int getWidthOfCell();
 
         bool areYouOnThisPosition(int x_pos, int y_pos);
 
