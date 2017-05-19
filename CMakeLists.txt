@@ -21,7 +21,7 @@ add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 
 set(SOURCE_FILES
         src/main.cpp src/GameWindow.cpp src/GameWindow.h
-        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp)
+        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp src/GameArea.cpp src/GameArea.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 
