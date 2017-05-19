@@ -1,50 +1,26 @@
 #include <iostream>
 #include "GameWindow.h"
 
+#define SCREENWIDTH 1920
+#define SCREENHEIGHT 1000
 
-GameWindow::GameWindow() {
-    //Load the GtkBuilder file and instantiate its widgets:
-    auto refBuilder = Gtk::Builder::create();
-    try
-    {
-        refBuilder->add_from_file("src/Z.glade");
-    }
-    catch(const Glib::FileError& ex)
-    {
-        std::cerr << "FileError: " << ex.what() << std::endl;
-        return;
-    }
-    catch(const Glib::MarkupError& ex)
-    {
-        std::cerr << "MarkupError: " << ex.what() << std::endl;
-        return;
-    }
-    catch(const Gtk::BuilderError& ex)
-    {
-        std::cerr << "BuilderError: " << ex.what() << std::endl;
-        return;
-    }
+GameWindow::GameWindow() : button1("button1"){
+    /* set window size */
+    set_size_request(SCREENWIDTH, SCREENHEIGHT);
+//    fullscreen();
 
-    // Save the widget refs in the class attributes
-    refBuilder->get_widget("GameWindow", window);
-    refBuilder->get_widget("Portrait", portrait);
+    /* set window title */
+    set_title("Z");
 
-    update_portrait("src/assets/portraits/sample.png");
-}
+    /* add main box to window */
+    add(mainGrid);
 
-void GameWindow::update_portrait(const std::string& img_path) const {
-    if (portrait) {
-        portrait->set(img_path);
-    }
+
+    gameArea.set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
+    mainGrid.add(gameArea);
+    show_all_children();
 }
 
 GameWindow::~GameWindow() {
-    if (window) {
-        delete window;
-    }
-}
 
-Gtk::Window *GameWindow::get_window() {
-    return window;
 }
-
