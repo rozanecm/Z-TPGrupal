@@ -44,13 +44,13 @@ int main (int argc, char **argv) {
 
     Compass compass(map, unit_size);
 
-    Position destination(7,4);
+    Position destination(6,7);
     std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),
                                                        destination);
 
     std::vector<std::vector<char>> pointed_map(9, std::vector<char>(9));
-    for (int x = 0; x<= 8; ++x){
-        for(int y = 0; y <= 8; ++y){
+    for(int y = 0; y <= 8; ++y){
+        for (int x = 0; x<= 8; ++x){
             pointed_map[x][y] = '.';
         }
     }
@@ -66,15 +66,15 @@ int main (int argc, char **argv) {
         std::cout <<std::endl;
     }
 
-    auto app = Gtk::Application::create(argc, argv);
-
-    GameWindow game_window;
-    Gtk::Window* window = game_window.get_window();
-    if (window)
-    {
-        return app->run(*window);
-    }
-
-    return 1;
+//    auto app = Gtk::Application::create(argc, argv);
+//
+//    GameWindow game_window;
+//    Gtk::Window* window = game_window.get_window();
+//    if (window)
+//    {
+//        return app->run(*window);
+//    }
+//
+//    return 1;
 }
 

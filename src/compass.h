@@ -73,6 +73,8 @@ private:
 
     // Returns a positive value of the result of x - y.
     int getModuleOfSubtraction(int x, int y);
+
+    void checkIfIsDestinyNeighbor(Node* new_node);
 };
 
 

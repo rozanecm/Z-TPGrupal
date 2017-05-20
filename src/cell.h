@@ -35,6 +35,8 @@ class Cell {
 
         bool areYouOnThisPosition(int x_pos, int y_pos);
 
+    bool isThereACollision(Size& size);
+
         ~Cell();
 };
 

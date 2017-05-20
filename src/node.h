@@ -41,6 +41,8 @@ public:
 
     bool beenSeen() const;
 
+    int getFValueIfGWere(int g, int terrain_factor);
+
     ~Node();
 };
 

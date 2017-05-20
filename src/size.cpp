@@ -33,14 +33,14 @@ bool Size::isThereACollision(Size &other) {
 
 bool Size::areYouHalfOutSide(Size &other) {
     int x_max, x_min, y_max, y_min;
-    this->calculateMaxAndMinForX(x_max, x_min);
-    this->calculateMaxAndMinForY(y_max, y_min);
+    other.calculateMaxAndMinForX(x_max, x_min);
+    other.calculateMaxAndMinForY(y_max, y_min);
 
     // If a point is not inside returns true
-    return (!other.areYouOnThisPoint(x_max, y_max) ||
-            !other.areYouOnThisPoint(x_max, y_min) ||
-            !other.areYouOnThisPoint(x_min, y_max) ||
-            !other.areYouOnThisPoint(x_min, y_min));
+    return (!this->areYouOnThisPoint(x_max, y_max) ||
+            !this->areYouOnThisPoint(x_max, y_min) ||
+            !this->areYouOnThisPoint(x_min, y_max) ||
+            !this->areYouOnThisPoint(x_min, y_min));
 }
 
 bool Size::areYouOnThisPoint(int x_pos, int y_pos) {

@@ -29,4 +29,10 @@ int Cell::getWidthOfCell() {
     return size.getWidth();
 }
 
+bool Cell::isThereACollision(Size &size) {
+    return size.isThereACollision(size);
+}
+
 Cell::~Cell() {}
+
+

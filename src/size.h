@@ -46,7 +46,6 @@ public:
 
     ~Size();
 
-private:
     // Writes on max and min the maximum value on 'x' coordinate that this size
     // has and the minimum value on min
     void calculateMaxAndMinForX(int& max, int& min);

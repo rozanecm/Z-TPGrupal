@@ -6,6 +6,7 @@
 
 #define SIDEWALK 10
 #define DIAGONALWALK 14
+#define HMIN 1
 
 Compass::Compass(Map &map, Size unit_size): map(map), unit_size(unit_size) {
     this->buildNodeMap();
@@ -33,17 +34,7 @@ void Compass::buildNodeMap() {
 std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
     // set H value for destiny
     this->setHValueForDestiny(to);
-/////////////////////////////////////////
-//    for(auto x: astar_map) {
-//        for (auto y: x) {
-//            std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
-//        }
-//        std::cout<<std::endl;
-//    }
-//    std::cout<<std::endl;
-//    std::cout<<std::endl;
-//    std::cout<<std::endl;
-/////////////////////////////////////////
+
     // start algorithm
         // add "from" to visited list
     Node* start_node = astar_map[from.getX()][from.getY()];
@@ -78,21 +69,23 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
             finished = true;
         if (open_nodes.empty())
             open_nodes_empty = true;
-//
-//        ///////////////////////////////////////
-//        for(auto x: astar_map) {
-//            for (auto y: x) {
-//                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
-//            }
-//            std::cout<<std::endl;
-//        }
-//        std::cout<<std::endl;
-//        std::cout<<std::endl;
-//        std::cout<<std::endl;
-/////////////////////////////////////////
-//        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
-//        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
+
+        ///////////////////////////////////////
+        for(auto x: astar_map) {
+            for (auto y: x) {
+                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+            }
+            std::cout<<std::endl;
+        }
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+///////////////////////////////////////
+        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
+        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
         ++i;
+//        char a;
+//        std::cin >> a;
     }
     Node* closest;
     std::cout<< "finished: "<<finished << std::endl;
@@ -112,13 +105,12 @@ void Compass::setHValueForDestiny(Position to) {
     for (auto x: astar_map) {
         for(auto y: x){
             Position tmp = y->getPosition();
-            int h_value = this->getModuleOfSubtraction(tmp.getX(),to.getX()) +
-                          this->getModuleOfSubtraction(tmp.getY(),to.getY());
+            int h_value = HMIN * (this->getModuleOfSubtraction(tmp.getX(),
+            to.getX()) + this->getModuleOfSubtraction(tmp.getY(),to.getY()));
             y->setHValue(h_value);
         }
     }
 }
-
 
 void Compass::getAdjacents(Node *node) {
     // get limits
@@ -127,11 +119,12 @@ void Compass::getAdjacents(Node *node) {
     int y_min = node->getPosition().getY() - 1;
     int y_max = node->getPosition().getY() + 1;
 
+    Node *adj;
     bool adj_new_g;
     for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
         for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
-                Node *adj = astar_map[x_pos][y_pos];
+                adj = astar_map[x_pos][y_pos];
                 Size size = adj->getSize();
 
                 // Check if whether node fit or the position is not available.
@@ -155,8 +148,6 @@ void Compass::getAdjacents(Node *node) {
         }
     }
 }
-
-Compass::~Compass() {}
 
 bool Compass::isThisNodeOnDiagonal(Node* ref, Node* other) {
     Position pos_ref = ref->getPosition();
@@ -184,13 +175,15 @@ void Compass::addToOpenInOrder(Node *new_node) {
 bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
     int new_g = walk + ref->getGValue();
     bool adj_change_g = false;
-    // if g value from node is lower than previous or this
+    // if F value from node is lower than previous or this
     // adjacent hasn't been seen yet,
     // add new g value and change parent.
-    if ((adj->beenSeen() && new_g < adj->getGValue()) ||
+    Position pos = adj->getPosition();
+    int terrain_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
+    if ((adj->beenSeen() &&
+        (adj->getFValueIfGWere(new_g,terrain_factor) < adj->getFValue())) ||
         (!adj->beenSeen())) {
-        Position pos = adj->getPosition();
-        adj->setGValue(new_g, map.getTerrainFactorOn(pos.getX(),pos.getY()));
+        adj->setGValue(new_g, terrain_factor);
         adj->setNewParent(ref);
         adj_change_g = true;
     }
@@ -242,12 +235,15 @@ void Compass::insertNodeOnOpen(Node *new_node) {
             open_nodes.push_back(new_node);
         }
     }
+    this->checkIfIsDestinyNeighbor(new_node);
 }
 
 void Compass::getRoad(Position from,Node *destiny) {
     road->push_back(destiny->getPosition());
     Node* next_node = destiny->getParent();
 
+    std::cout<< "From"<<std::endl;
+    std::cout<< "(" <<  from.getX() << "," << from.getY()<<") :";
     std::cout<< "Road"<<std::endl;
     std::cout<< "(" <<  destiny->getPosition().getX() << "," << destiny->getPosition().getY()<<") :";
     std::cout<< "  ( H:" << destiny->getHvalue() <<" , G: " <<destiny->getGValue()  <<" , F:" << destiny->getFValue()<<")  "<<std::endl;
@@ -255,7 +251,7 @@ void Compass::getRoad(Position from,Node *destiny) {
     std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :";
     std::cout<< "  ( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
     Position current_pos = next_node->getPosition();
-    while ((current_pos.getX() != from.getX()) &&
+    while ((current_pos.getX() != from.getX()) ||
             (current_pos.getY() != from.getY())) {
         road->push_back(current_pos);
         next_node = next_node->getParent();
@@ -286,3 +282,45 @@ int Compass::getModuleOfSubtraction(int x, int y) {
     return y - x;
 }
 
+Compass::~Compass() {
+    for(auto x: astar_map) {
+        for (auto y: x) {
+            delete(y);
+        }
+    }
+    delete(road);
+}
+
+void Compass::checkIfIsDestinyNeighbor(Node* node) {
+    if ((node->getHvalue() <= HMIN*2) && (node->getHvalue() != 0)){
+        // get limits
+        int x_min = node->getPosition().getX() - 1;
+        int x_max = node->getPosition().getX() + 1;
+        int y_min = node->getPosition().getY() - 1;
+        int y_max = node->getPosition().getY() + 1;
+
+        Node *adj;
+        bool adj_new_g;
+        for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
+            for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
+                if (map.doesThisPositionExist(x_pos, y_pos)) {
+                    adj = astar_map[x_pos][y_pos];
+                    Size size = adj->getSize();
+                    if (adj->getHvalue() == 0) {
+                        // G value differs when the node is diagonal
+                        // or next to it
+                        if (this->isThisNodeOnDiagonal(node, adj)) {
+                            adj_new_g = this->writeGandSetParent(node, adj,
+                                                                 DIAGONALWALK);
+                        } else {
+                            adj_new_g = this->writeGandSetParent(node, adj,
+                                                                     SIDEWALK);
+                        }
+                        if (adj_new_g)
+                            this->addToOpenInOrder(adj);
+                    }
+                }
+            }
+        }
+    }
+}

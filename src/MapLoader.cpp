@@ -1,13 +1,22 @@
+#include <map>
 #include "MapLoader.h"
 
 #include "xml/pugixml.hpp"
 
 using pugi::xml_attribute;
 
+const std::map<std::string, int> terrain_factor {
+        {std::string("Tierra"), int(1)},
+        {std::string("Agua"), int(7/10)},
+        {std::string("Carretera"), int(15/10)},
+        {std::string("Lava"), int(1000)}
+};
+
 MapLoader::MapLoader(std::string path) {
     pugi::xml_document doc;
     doc.load_file(path.c_str());
 
+    const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node_iterator map_node = doc.first_child();
 
@@ -25,7 +34,18 @@ MapLoader::MapLoader(std::string path) {
         for (; cell != row->children().end(); ++cell) {
             std::string terrain = cell->attribute("terrain").value();
             std::string structure = cell->attribute("struct").value();
-            int factor = 1; // TODO: actual factors
+
+
+
+//            auto it = terrain_factor.find(terrain); // TODO: actual factors
+            int factor = 1;
+            if (terrain == "Agua") {
+                factor = 2;
+            } else if (terrain == "Lava") {
+                factor = 1000;
+            } else if (terrain == "Carretera") {
+                factor = 5/10;
+            }
 
             // Create a real occupant if the cell's occupied
             int ocpt_id = -1;
@@ -41,7 +61,7 @@ MapLoader::MapLoader(std::string path) {
 
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_x, coord_y,3,3, terrain, factor);
+            map.back().emplace_back(coord_y, coord_x,3,3, terrain, factor);
             coord_x += 3;
         }
 

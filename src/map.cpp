@@ -33,10 +33,24 @@ int Map::getHeigth() {
 }
 
 bool Map::canIWalkToThisPosition(Size& other_size) {
-    return (map_size.areYouHalfOutSide(other_size)/* &&
+
+    return (!map_size.areYouHalfOutSide(other_size) ||
+            !isThereLava(other_size)/* &&
             this->areThisPointsEmpty(other_size)*/);
 }
 
 bool Map::doesThisPositionExist(int x, int y) {
     return map_size.areYouOnThisPoint(x,y);
+}
+
+bool Map::isThereLava(Size& other_size) {
+    int w_cell = terrain_map[0][0].getWidthOfCell();
+    int x_pos = other_size.getPosition().getX() / w_cell;
+    int y_pos = other_size.getPosition().getY() / w_cell;
+
+    if (terrain_map[x_pos][y_pos].getTerrainType() == "Lava"){
+      return  terrain_map[x_pos][y_pos].isThereACollision(other_size);
+    }
+
+    return false;
 }

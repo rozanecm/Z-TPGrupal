@@ -45,6 +45,8 @@ public:
     int getHeigth();
 
     bool doesThisPositionExist(int x, int y);
+
+    bool isThereLava(Size& other_size);
 };
 
 
