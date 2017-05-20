@@ -1,9 +1,10 @@
 #include <gtkmm.h>
 #include <iostream>
 #include "GameWindow.h"
-#include "pugixml.hpp"
 #include "MapGenerator.h"
 #include <SDL2/SDL_mixer.h>
+#include "GameBuilder.h"
+
 
 
 void play_sound() {
@@ -28,13 +29,18 @@ void play_sound() {
 
 int main (int argc, char **argv)
 {
-    //play_sound();
 
-    auto app = Gtk::Application::create(argc, argv);
     MapGenerator generator(10, 10, 30, 0);
     generator.generate("map");
-    GameWindow game_window;
-    Gtk::Window* window = game_window.get_window();
+
+    play_sound();
+
+    auto app = Gtk::Application::create(argc, argv);
+
+    GameBuilder game;
+    Gtk::Window* window = game.get_window();
+    game.change_view_to_building();
+
     if (window)
     {
         return app->run(*window);

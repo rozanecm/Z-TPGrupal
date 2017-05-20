@@ -1,19 +1,25 @@
 #ifndef Z_TPGRUPAL_GAMEWINDOW_H
 #define Z_TPGRUPAL_GAMEWINDOW_H
 
-#include <gtkmm.h>
+#include <gtkmm/window.h>
+#include <gtkmm/grid.h>
+#include <gtkmm/button.h>
+#include <gtkmm/builder.h>
+#include <gtkmm/box.h>
+#include "GameArea.h"
 
-class GameWindow {
-    Gtk::Window* window;
-    Gtk::Image* portrait;
+class GameWindow : public Gtk::Window {
+    GameArea* gameArea;
+
 public:
-    GameWindow();
-    ~GameWindow();
+    GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    virtual ~GameWindow();
 
-    Gtk::Window* get_window();
-private:
-    void update_portrait(const std::string& img_path) const;
+protected:
+    Gtk::Box mainGrid;
+
+    bool onTimeout();
+
 };
-
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H
