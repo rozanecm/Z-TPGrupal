@@ -5,19 +5,6 @@
 #include "MapGenerator.h"
 #include <SDL2/SDL_mixer.h>
 
-void xml_play() {
-    pugi::xml_document doc;
-    doc.load_file("src/map.xml");
-
-    pugi::xml_node_iterator row = doc.children().begin();
-    for (; row != doc.children().end(); ++row) {
-        pugi::xml_node_iterator cell = row->children().begin();
-        for (; cell != row->children().end(); ++cell) {
-            std::cout << "Name: " << cell->name() << std::endl;
-            std::cout << "Key: " << cell->attribute("key").value() << std::endl;
-        }
-    }
-}
 
 void play_sound() {
     // Init, open the audio channel
@@ -41,11 +28,10 @@ void play_sound() {
 
 int main (int argc, char **argv)
 {
-    play_sound();
-    xml_play();
+    //play_sound();
 
     auto app = Gtk::Application::create(argc, argv);
-    MapGenerator generator(10);
+    MapGenerator generator(10, 0, 30, 0);
     generator.generate("map");
     GameWindow game_window;
     Gtk::Window* window = game_window.get_window();
