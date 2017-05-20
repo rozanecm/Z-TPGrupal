@@ -14,7 +14,15 @@ protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
-    Glib::RefPtr<Gdk::Pixbuf> image = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
+    /* declare vector which contains imgs composing blue flag animation */
+    std::vector<Glib::RefPtr<Gdk::Pixbuf>> blueFlagVector;
+
+    /* declare counter used to know which of the flag imgs
+     * which compose the flag's animation should be showed */
+    int flagCounter;
+
+    /* DRAWING METHODS */
+    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr);
 };
 
 

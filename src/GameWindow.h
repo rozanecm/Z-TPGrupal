@@ -17,6 +17,9 @@ public:
 
 protected:
     Gtk::Grid mainGrid;
+
+    bool onTimeout();
+
 };
 
 
