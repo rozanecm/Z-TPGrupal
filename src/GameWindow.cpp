@@ -3,32 +3,25 @@
 #include <gdkmm.h>
 #include "GameWindow.h"
 
-#define SCREENWIDTH 1920
-#define SCREENHEIGHT 1080
+#define SCREENWIDTH 1200
+#define SCREENHEIGHT 800
 #define FRAMERATE 10        //fps
 
-GameWindow::GameWindow() {
-    /* set window size */
-//    set_size_request(SCREENWIDTH, SCREENHEIGHT);
-    fullscreen();
+GameWindow::GameWindow(BaseObjectType *cobject,
+                       const Glib::RefPtr<Gtk::Builder> &builder) :
+        Gtk::Window(cobject)
+{
+    builder->get_widget_derived("GameArea", gameArea);
 
-    /* set window title */
-    set_title("Z");
-
-    /* add main box to window */
-    add(mainGrid);
-
-    gameArea.set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
-    mainGrid.add(gameArea);
+    gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
 
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
-
     show_all_children();
+
 }
 
 GameWindow::~GameWindow() {
-
 }
 
 bool GameWindow::onTimeout() {
@@ -41,3 +34,5 @@ bool GameWindow::onTimeout() {
     }
     return true;
 }
+
+

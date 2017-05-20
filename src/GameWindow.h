@@ -4,23 +4,22 @@
 #include <gtkmm/window.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/button.h>
+#include <gtkmm/builder.h>
+#include <gtkmm/box.h>
 #include "GameArea.h"
 
 class GameWindow : public Gtk::Window {
-private:
-    GameArea gameArea;
+    GameArea* gameArea;
 
 public:
-    GameWindow();
-
+    GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
     virtual ~GameWindow();
 
 protected:
-    Gtk::Grid mainGrid;
+    Gtk::Box mainGrid;
 
     bool onTimeout();
 
 };
-
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

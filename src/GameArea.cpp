@@ -1,5 +1,6 @@
 #include <gtkmm/builder.h>
 #include <gdkmm.h>
+#include <iostream>
 #include "GameArea.h"
 
 GameArea::GameArea() : flagCounter(0){
@@ -55,5 +56,28 @@ GameArea::displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &cr,
                   someImg->get_width(), someImg->get_height());
     cr->fill();
     cr->restore();
+}
+
+GameArea::GameArea(BaseObjectType *cobject,
+                   const Glib::RefPtr<Gtk::Builder> &builder) :
+    Gtk::DrawingArea(cobject),
+    flagCounter(0)
+{
+    std::cout << "Llego acá? " << std::endl;
+    /* load blue flag imgs */
+    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/other/flag_blue_0.png"));
+
+    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/other/flag_blue_1.png"));
+
+    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/other/flag_blue_2.png"));
+
+    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/other/flag_blue_3.png"));
+
+    /* load some img */
+    someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
 }
 

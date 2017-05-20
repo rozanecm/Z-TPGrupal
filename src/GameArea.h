@@ -9,6 +9,7 @@ public:
     GameArea();
 
     virtual ~GameArea();
+    GameArea(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
 
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
