@@ -26,7 +26,7 @@ GameBuilder::GameBuilder() {
     }
 
     // Save the widget refs in the class attributes
-    refBuilder->get_widget("GameBuilder", window);
+    refBuilder->get_widget_derived("GameWindow", window);
     refBuilder->get_widget("Portrait", portrait);
     refBuilder->get_widget("SidePanel", panel);
     refBuilder->get_widget("BuildingView", building_panel);

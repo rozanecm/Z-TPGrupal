@@ -1,11 +1,13 @@
-#ifndef Z_TPGRUPAL_GAMEWINDOW_H
-#define Z_TPGRUPAL_GAMEWINDOW_H
+#ifndef Z_TPGRUPAL_GAMEBUILDER_H
+#define Z_TPGRUPAL_GAMEBUILDER_H
 
 #include <gtkmm.h>
 
+#include "GameWindow.h"
 class GameBuilder {
+    GameWindow* window;
+
     Glib::RefPtr<Gtk::Builder> refBuilder;
-    Gtk::Window* window;
     Gtk::Image* portrait;
     Gtk::Box* panel;
     Gtk::Box* unit_panel;
@@ -20,6 +22,7 @@ public:
     bool change_view_to_unit();
     bool change_view_to_building();
     bool change_view_to_unit_group();
+
 private:
     void update_portrait(const std::string& img_path) const;
 };

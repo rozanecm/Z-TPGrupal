@@ -24,9 +24,9 @@ include_directories(
         ${SDL2_mixer_INCLUDE_DIRS})
 
 
-set(SOURCE_FILES
-        src/main.cpp src/GameBuilder.cpp src/GameBuilder.h
-        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp)
+set(SOURCE_FILES src/GameBuilder.cpp src/GameBuilder.h
+        src/main.cpp src/GameWindow.cpp src/GameWindow.h
+        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp src/GameArea.cpp src/GameArea.h)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})
