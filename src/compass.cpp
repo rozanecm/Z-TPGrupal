@@ -33,14 +33,17 @@ void Compass::buildNodeMap() {
 std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
     // set H value for destiny
     this->setHValueForDestiny(to);
-
-    for(auto x: astar_map) {
-        for (auto y: x) {
-            std::cout<< "(" << y->getHvalue() <<")  ";
-        }
-        std::cout<<std::endl;
-    }
-
+/////////////////////////////////////////
+//    for(auto x: astar_map) {
+//        for (auto y: x) {
+//            std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+//        }
+//        std::cout<<std::endl;
+//    }
+//    std::cout<<std::endl;
+//    std::cout<<std::endl;
+//    std::cout<<std::endl;
+/////////////////////////////////////////
     // start algorithm
         // add "from" to visited list
     Node* start_node = astar_map[from.getX()][from.getY()];
@@ -49,7 +52,6 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
 
     std::cout<< "posicion de salida: (" <<  from.getX() << "," << from.getY()<<"): G :"<< start_node->getGValue()<<std::endl;
     std::cout<< "posicion de llegada: (" <<  to.getX() << "," << to.getY()<<")"<<std::endl;
-    std::cout<< "posicion de start_node: (" <<  start_node->getPosition().getX() << "," << start_node->getPosition().getY()<<")"<<std::endl;
 
     Node *closer_node = start_node;
     // While haven't reach destiny node or open_nodes has nodes to visit.
@@ -74,17 +76,29 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
             finished = true;
         if (open_nodes.empty())
             open_nodes_empty = true;
+//
+//        ///////////////////////////////////////
+//        for(auto x: astar_map) {
+//            for (auto y: x) {
+//                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+//            }
+//            std::cout<<std::endl;
+//        }
+//        std::cout<<std::endl;
+//        std::cout<<std::endl;
+//        std::cout<<std::endl;
+/////////////////////////////////////////
+//        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
+//        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
     }
     Node* closest;
     std::cout<< "finished: "<<finished << std::endl;
     if (finished) {
         this->getRoad(from,closer_node);
-        std::cout<< "bla" << (*road).size() <<std::endl;
     } else {
         closest = this->searchForClosestNode();
         this->getRoad(from,closest);
     }
-    std::cout << " ult"<<std::endl;
     return road;
 }
 
@@ -141,8 +155,11 @@ void Compass::getAdjacents(Node *node) {
 Compass::~Compass() {}
 
 bool Compass::isThisNodeOnDiagonal(Node* ref, Node* other) {
-    int diff = ref->getHvalue() - other->getHvalue();
-    return (diff > 1) || (diff < -1);
+    Position pos_ref = ref->getPosition();
+    Position pos_other = other->getPosition();
+    int diff_y = getModuleOfSubtraction(pos_ref.getY(),pos_other.getY());
+    int diff_x = getModuleOfSubtraction(pos_ref.getX(),pos_other.getX());
+    return ((diff_x > 0) && (diff_y > 0));
 }
 
 bool Compass::isNotMe(Node *node, Node* other) {
@@ -224,16 +241,23 @@ void Compass::getRoad(Position from,Node *destiny) {
     Node* next_node = destiny->getParent();
 
     std::cout<< "Road"<<std::endl;
-    std::cout<< "(" <<  destiny->getPosition().getX() << "," << destiny->getPosition().getY()<<")"<<std::endl;
-    Position current_pos = destiny->getPosition();
+    std::cout<< "(" <<  destiny->getPosition().getX() << "," << destiny->getPosition().getY()<<") :";
+    std::cout<< "  ( H:" << destiny->getHvalue() <<" , G: " <<destiny->getGValue()  <<" , F:" << destiny->getFValue()<<")  "<<std::endl;
+
+    std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :";
+    std::cout<< "  ( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
+    Position current_pos = next_node->getPosition();
     while ((current_pos.getX() != from.getX()) &&
             (current_pos.getY() != from.getY())) {
-        road->push_back(next_node->getPosition());
+        road->push_back(current_pos);
         next_node = next_node->getParent();
-        std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") : G: " << next_node->getHvalue()<<std::endl;
+
+        std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :  ";
+        std::cout<< "( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
+
         current_pos = next_node->getPosition();
     }
-    std::cout<< "sali" << (*road).size() <<std::endl;
+    std::cout<< "road size: " << (*road).size() <<std::endl;
 }
 
 Node *Compass::searchForClosestNode() {

@@ -31,7 +31,7 @@ int main (int argc, char **argv) {
     std::cout << std::endl;
     std::cout << std::endl;
 
-    Map map(50,50,100,100, cell_map);
+    Map map(4,4,8,8, cell_map);
 
 //    std::cout << "Probando si mapa me dice que tiene la pocision (4,27)"<< map.doesThisPositionExist(4,27)<<std::endl;
 //    std::cout << "Probando si mapa me dice que tiene la pocision (-1,27)"<< map.doesThisPositionExist(-1,27)<<std::endl;
@@ -39,31 +39,31 @@ int main (int argc, char **argv) {
 //    std::cout << "Probando si mapa me dice que tiene la pocision (-11,27)"<< map.doesThisPositionExist(-11,27)<<std::endl;
 //    std::cout << "Probando si mapa me dice que tiene la pocision (-11,-27)"<< map.doesThisPositionExist(-11,-27)<<std::endl;
 
-    Size unit_size(14,14,10,10);
+    Size unit_size(1,1,3,3);
 
 
     Compass compass(map, unit_size);
 
-    Position destination(89,89);
+    Position destination(7,4);
     std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),
                                                        destination);
 
-    std::cout << " hola1"<<std::endl;
-    std::vector<std::vector<char>> pointed_map;
-    for (auto x: pointed_map){
-        for(auto y: x){
-            y = '.';
+    std::vector<std::vector<char>> pointed_map(9, std::vector<char>(9));
+    for (int x = 0; x<= 8; ++x){
+        for(int y = 0; y <= 8; ++y){
+            pointed_map[x][y] = '.';
         }
     }
-    std::cout << " hola"<<std::endl;
+
     for (auto x: (*road)){
         (pointed_map)[x.getX()][x.getY()] = 'x';
     }
 
     for (auto x: pointed_map){
         for(auto y: x){
-            std::cout << y;
+            std::cout << y << " ";
         }
+        std::cout <<std::endl;
     }
 
     auto app = Gtk::Application::create(argc, argv);

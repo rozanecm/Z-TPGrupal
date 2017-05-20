@@ -11,11 +11,11 @@ MapLoader::MapLoader(std::string path) {
     // Get root node
     pugi::xml_node_iterator map_node = doc.first_child();
 
-    int coord_y = 4; // Y coordinate counter, each row is different Y coord
+    int coord_y = 1; // Y coordinate counter, each row is different Y coord
     // Iterate over every row
     auto row = map_node->children().begin();
     for (; row != map_node->children().end(); ++row) {
-        int coord_x = 4; // Each Cell has a different X coord
+        int coord_x = 1; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
         map.push_back(row_vec);
@@ -41,12 +41,12 @@ MapLoader::MapLoader(std::string path) {
 
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_x, coord_y,10,10, terrain, factor);
-            coord_x += 10;
+            map.back().emplace_back(coord_x, coord_y,3,3, terrain, factor);
+            coord_x += 3;
         }
 
         // Push the whole row to the map
-        coord_y += 10;
+        coord_y += 3;
     }
 }
 
