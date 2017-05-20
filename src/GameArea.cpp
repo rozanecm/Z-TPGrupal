@@ -17,9 +17,7 @@ GameArea::GameArea() : flagCounter(0){
             "res/assets/other/flag_blue_3.png"));
 
     /* load some img */
-    someImg = Gdk::Pixbuf::create_from_file("res/img.png");
-//    someImg->scale_simple(someImg->get_width()*5, someImg->get_height()*5,
-//                          Gdk::INTERP_BILINEAR);
+    someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
 }
 
 GameArea::~GameArea() { }
