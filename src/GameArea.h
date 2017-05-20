@@ -14,6 +14,8 @@ protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
+    Glib::RefPtr<Gdk::Pixbuf> someImg;
+
     /* declare vector which contains imgs composing blue flag animation */
     std::vector<Glib::RefPtr<Gdk::Pixbuf>> blueFlagVector;
 
@@ -25,7 +27,9 @@ private:
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
                            int xCoordinate, int yCoordinate);
 
-    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr);
+    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
+                              int xCoordinate, int yCoordinate);
+
 };
 
 
