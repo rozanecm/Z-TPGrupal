@@ -1,5 +1,4 @@
 #include <gtkmm/builder.h>
-#include <giomm.h>
 #include <gdkmm.h>
 #include "GameArea.h"
 
