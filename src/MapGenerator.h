@@ -14,6 +14,7 @@ class MapGenerator {
     float water_pct;
     float terrain_var;
     int water_cells;
+    int lava_cells;
 public:
     MapGenerator(int size, float lava_pct, float water_pct,
                  float terrain_variance_pct);
@@ -26,7 +27,7 @@ private:
     void generate_blank_map(pugi::xml_node root_node);
     void generate_rivers(pugi::xml_node root_node);
 
-    std::vector<std::vector<bool>> generate_water_path(int amt);
+    std::vector<std::vector<bool>> generate_path(int amt);
 };
 
 

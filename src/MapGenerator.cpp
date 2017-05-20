@@ -27,6 +27,7 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     terrain_var(terrain_variance_pct)
 {
     water_cells = (int) (size * size * water_pct / 100);
+    lava_cells = (int) (size * size * lava_pct / 100);
 }
 
 void MapGenerator::generate_blank_map(xml_node root_node) {
@@ -41,7 +42,7 @@ void MapGenerator::generate_blank_map(xml_node root_node) {
 }
 
 void MapGenerator::generate_rivers(pugi::xml_node root_node) {
-    std::vector<std::vector<bool>> water = generate_water_path(water_cells);
+    std::vector<std::vector<bool>> water = generate_path(water_cells);
     int count_y = 0;
     for(xml_node& row : root_node.children()) {
         int count_x = 0;
@@ -54,10 +55,21 @@ void MapGenerator::generate_rivers(pugi::xml_node root_node) {
         count_y++;
     }
 
-
+    std::vector<std::vector<bool>> lava = generate_path(lava_cells);
+    count_y = 0;
+    for(xml_node& row : root_node.children()) {
+        int count_x = 0;
+        for(xml_node& node : row.children()) {
+            if (lava[count_x][count_y]) {
+                node.attribute(TERRAIN).set_value("Lava");
+            }
+            count_x++;
+        }
+        count_y++;
+    }
 }
 
-std::vector<std::vector<bool>> MapGenerator::generate_water_path(int amt) {
+std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
     srand((unsigned int) time(NULL));
     std::vector<std::vector<bool>> path;
     for (int i = 0; i < size; ++i) {

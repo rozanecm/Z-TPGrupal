@@ -31,7 +31,7 @@ int main (int argc, char **argv)
     //play_sound();
 
     auto app = Gtk::Application::create(argc, argv);
-    MapGenerator generator(10, 0, 30, 0);
+    MapGenerator generator(10, 10, 30, 0);
     generator.generate("map");
     GameWindow game_window;
     Gtk::Window* window = game_window.get_window();
