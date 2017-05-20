@@ -24,13 +24,14 @@ GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
 //    displaySomeStaticImg(cr);
-    drawFlagAnimation(cr);
+    drawFlagAnimation(cr, 0, 0);
     return true;
 }
 
-void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr) {
-    Gdk::Cairo::set_source_pixbuf(cr, blueFlagVector.at(flagCounter), 110, 90);
-    cr->rectangle(110, 90, blueFlagVector.at(flagCounter)->get_width(),
+void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 int xCoordinate, int yCoordinate) {
+    Gdk::Cairo::set_source_pixbuf(cr, blueFlagVector.at(flagCounter), xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate, blueFlagVector.at(flagCounter)->get_width(),
                   blueFlagVector.at(flagCounter)->get_height());
     cr->fill();
     if (flagCounter == blueFlagVector.size()-1){

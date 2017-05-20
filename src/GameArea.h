@@ -22,7 +22,8 @@ private:
     int flagCounter;
 
     /* DRAWING METHODS */
-    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr);
+    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
+                           int xCoordinate, int yCoordinate);
 
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr);
 };
