@@ -20,6 +20,7 @@ private:
     std::vector<std::vector<Node*>> astar_map;
     std::vector<Node*> closed_nodes;
     std::vector<Node*> open_nodes;
+    std::vector<Position>* road;
     int unit_speed;
     Size unit_size;
 
@@ -30,7 +31,7 @@ public:
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position> getFastestWay(Position from, Position to);
+    std::vector<Position>* getFastestWay(Position from, Position to);
 
     void buildNodeMap();
 
@@ -41,16 +42,13 @@ private:
     // It use Manhattan distance
     void setHValueForDestiny(Position to);
 
-    // Sets the H value for every Cell
-    void setHOnYPosition(int y_dest,int x_dest, int& h_value_y);
-
     // Only valid for Manhattan distance.
     // Returns true if other is a diagonal node of reference
     // otherwise flase. Reference and other must be adjacent.
     bool isThisNodeOnDiagonal(Node* reference, Node* other);
 
     // Put the adyacents nodes that can be walk to on the open_nodes vector
-    void getAdyacents(Node* node);
+    void getAdjacents(Node* node);
 
     // Returns true if node and other are different nodes. Else, false
     bool isNotMe(Node* node, Node* other);
@@ -69,9 +67,12 @@ private:
     // Inserts the node on the correct position
     void insertNodeOnOpen(Node* node);
 
-    std::vector<Position> getRoad(Node* destiny);
+    void getRoad(Position from, Node* destiny);
 
     Node* searchForClosestNode();
+
+    // Returns a positive value of the result of x - y.
+    int getModuleOfSubtraction(int x, int y);
 };
 
 

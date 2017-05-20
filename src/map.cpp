@@ -36,3 +36,7 @@ bool Map::canIWalkToThisPosition(Size& other_size) {
     return (map_size.areYouHalfOutSide(other_size)/* &&
             this->areThisPointsEmpty(other_size)*/);
 }
+
+bool Map::doesThisPositionExist(int x, int y) {
+    return map_size.areYouOnThisPoint(x,y);
+}

@@ -43,6 +43,8 @@ public:
 
     // Returns the Heigth of the map
     int getHeigth();
+
+    bool doesThisPositionExist(int x, int y);
 };
 
 
