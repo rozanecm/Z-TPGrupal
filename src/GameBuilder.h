@@ -3,7 +3,7 @@
 
 #include <gtkmm.h>
 
-class GameWindow {
+class GameBuilder {
     Glib::RefPtr<Gtk::Builder> refBuilder;
     Gtk::Window* window;
     Gtk::Image* portrait;
@@ -13,8 +13,8 @@ class GameWindow {
     Gtk::Box* group_panel;
     Gtk::Button* button;
 public:
-    GameWindow();
-    ~GameWindow();
+    GameBuilder();
+    ~GameBuilder();
 
     Gtk::Window* get_window();
     bool change_view_to_unit();

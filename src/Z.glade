@@ -123,7 +123,7 @@ here</property>
       <placeholder/>
     </child>
   </object>
-  <object class="GtkWindow" id="GameWindow">
+  <object class="GtkWindow" id="GameBuilder">
     <property name="width_request">800</property>
     <property name="height_request">600</property>
     <property name="can_focus">False</property>

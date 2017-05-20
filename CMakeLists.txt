@@ -25,7 +25,7 @@ include_directories(
 
 
 set(SOURCE_FILES
-        src/main.cpp src/GameWindow.cpp src/GameWindow.h
+        src/main.cpp src/GameBuilder.cpp src/GameBuilder.h
         libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})

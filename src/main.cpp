@@ -1,6 +1,6 @@
 #include <gtkmm.h>
 #include <iostream>
-#include "GameWindow.h"
+#include "GameBuilder.h"
 #include "../libs/xml/pugixml.hpp"
 #include <SDL2/SDL_mixer.h>
 
@@ -45,9 +45,9 @@ int main (int argc, char **argv)
 
     auto app = Gtk::Application::create(argc, argv);
 
-    GameWindow game_window;
-    Gtk::Window* window = game_window.get_window();
-    game_window.change_view_to_building();
+    GameBuilder game;
+    Gtk::Window* window = game.get_window();
+    game.change_view_to_building();
     if (window)
     {
         return app->run(*window);
