@@ -23,6 +23,8 @@ private:
 
     /* DRAWING METHODS */
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr);
+
+    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr);
 };
 
 
