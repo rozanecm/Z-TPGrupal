@@ -59,6 +59,8 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
     bool open_nodes_empty = false;
 
     std::cout<< "finished: "<<finished << std::endl;
+    int i = 0;
+
 
     while (!finished && (!open_nodes_empty)) {
         // get adjacent's and add them to looking list in order of F value.
@@ -90,9 +92,11 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
 /////////////////////////////////////////
 //        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
 //        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
+        ++i;
     }
     Node* closest;
     std::cout<< "finished: "<<finished << std::endl;
+    std::cout<< "counter: "<<i << std::endl;
     if (finished) {
         this->getRoad(from,closer_node);
     } else {
@@ -213,26 +217,30 @@ void Compass::changeNodePosition(Node *node) {
 }
 
 void Compass::insertNodeOnOpen(Node *new_node) {
-    bool inserted = false;
+    if (new_node->getHvalue() == 0) {
+        open_nodes.push_back(new_node);
+    } else {
+        bool inserted = false;
 
-    // Save nodes by F value. The lowest on the back.
-    // If two nodes have same F value, the one with the lowest H value
-    // will be closer to the back.
-    std::vector<Node *>::iterator it = open_nodes.begin();
-    while ((!inserted) && (it != open_nodes.end())) {
-        if (((*it)->getFValue()) < new_node->getFValue()) {
-            open_nodes.insert(it, new_node);
-            inserted = true;
-        } else if (((*it)->getFValue()) == new_node->getFValue()) {
-            if (((*it)->getHvalue()) < new_node->getHvalue()) {
+        // Save nodes by F value. The lowest on the back.
+        // If two nodes have same F value, the one with the lowest H value
+        // will be closer to the back.
+        std::vector<Node *>::iterator it = open_nodes.begin();
+        while ((!inserted) && (it != open_nodes.end())) {
+            if (((*it)->getFValue()) < new_node->getFValue()) {
                 open_nodes.insert(it, new_node);
                 inserted = true;
+            } else if (((*it)->getFValue()) == new_node->getFValue()) {
+                if (((*it)->getHvalue()) < new_node->getHvalue()) {
+                    open_nodes.insert(it, new_node);
+                    inserted = true;
+                }
             }
+            ++it;
         }
-        ++it;
-    }
-    if (!inserted) {
-        open_nodes.push_back(new_node);
+        if (!inserted) {
+            open_nodes.push_back(new_node);
+        }
     }
 }
 
