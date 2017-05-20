@@ -2,7 +2,9 @@
 #define Z_TPGRUPAL_MAPGENERATOR_H
 
 #include <fstream>
+#include <vector>
 #include <pugixml.hpp>
+
 /* Map generator. Randomly generates a readable .xml map file basing off the
  * passed arguments on the constructor. The maps are saved to the 'maps' folder
  * in the root directory. */
