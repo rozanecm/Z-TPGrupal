@@ -34,8 +34,7 @@ GameWindow::~GameWindow() {
 bool GameWindow::onTimeout() {
     // force our program to redraw the entire thing
     auto win = get_window();
-    if (win)
-    {
+    if (win) {
         Gdk::Rectangle r(0, 0, get_allocation().get_width(),
                          get_allocation().get_height());
         win->invalidate_rect(r, false);

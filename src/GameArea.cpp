@@ -31,8 +31,10 @@ bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
 void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                                  int xCoordinate, int yCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, blueFlagVector.at(flagCounter), xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate, blueFlagVector.at(flagCounter)->get_width(),
+    Gdk::Cairo::set_source_pixbuf(cr, blueFlagVector.at(flagCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  blueFlagVector.at(flagCounter)->get_width(),
                   blueFlagVector.at(flagCounter)->get_height());
     cr->fill();
     if (flagCounter == blueFlagVector.size()-1){
