@@ -4,7 +4,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "GameBuilder.h"
 #include "GameWindow.h"
-
+#include "GraphicsThread.h"
 
 
 void play_sound() {
@@ -31,16 +31,10 @@ int main (int argc, char **argv)
 {
     play_sound();
 
-    auto app = Gtk::Application::create(argc, argv);
+    GraphicsThread graphicsThread(argc, argv);
+    graphicsThread.start();
 
-    GameBuilder game;
-    Gtk::Window* window = game.get_window();
-    GameWindow* ass;
-    game.change_view_to_building();
-    if (window)
-    {
-        return app->run(*window);
-    }
+    graphicsThread.join();
 
     return 1;
 }

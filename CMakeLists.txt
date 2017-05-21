@@ -24,15 +24,30 @@ include_directories(
         ${SDL2_mixer_INCLUDE_DIRS})
 
 
-set(SOURCE_FILES src/GameBuilder.cpp src/GameBuilder.h
-        src/main.cpp src/GameWindow.cpp src/GameWindow.h
-        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp src/GameArea.cpp src/GameArea.h)
+set(SOURCE_FILES
+        src/GameBuilder.cpp
+        src/GameBuilder.h
+        src/main.cpp
+        src/GameWindow.cpp
+        src/GameWindow.h
+        libs/xml/pugixml.cpp
+        libs/xml/pugiconfig.hpp
+        libs/xml/pugixml.hpp
+        src/GameArea.cpp
+        src/GameArea.h
+        src/GraphicsThread.cpp
+        src/GraphicsThread.h
+        src/Thread.h
+        src/Thread.cpp)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 target_link_libraries(Z_TPGrupal
         ${GTKMM_LIBRARIES}
         ${SDL_LIBRARY}
-        ${SDL2_mixer_LIBRARIES})
+        ${SDL2_mixer_LIBRARIES}
+        Threads::Threads)
