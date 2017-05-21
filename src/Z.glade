@@ -12,6 +12,7 @@
       <object class="GtkImage" id="FactoryImage">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="ypad">5</property>
         <property name="stock">gtk-missing-image</property>
       </object>
       <packing>
@@ -30,6 +31,7 @@
           <object class="GtkImage" id="FactoryUnitImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="ypad">5</property>
             <property name="stock">gtk-missing-image</property>
           </object>
           <packing>
@@ -66,6 +68,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="pack_type">end</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -171,13 +174,45 @@ here</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="SidePanel">
+              <object class="GtkBox" id="xx">
                 <property name="width_request">300</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="PanelDisplayLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_bottom">10</property>
+                    <property name="label" translatable="yes">Panel display label</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="SidePanel">
+                    <property name="width_request">300</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>

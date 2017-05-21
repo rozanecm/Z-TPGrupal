@@ -8,5 +8,9 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("FactoryUnitImage", unit);
 
     building->set("res/buildings/base_city.png");
-    unit->set("res/portraits/sample.png");
+    unit->set("res/portraits/grunt.png");
+}
+
+const std::string &BuildingPanel::get_label() {
+    return label;
 }

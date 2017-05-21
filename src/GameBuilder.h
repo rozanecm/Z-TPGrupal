@@ -8,7 +8,6 @@ class GameBuilder {
     GameWindow* window;
 
     Glib::RefPtr<Gtk::Builder> refBuilder;
-    Gtk::Image* portrait;
 public:
     GameBuilder();
     ~GameBuilder();

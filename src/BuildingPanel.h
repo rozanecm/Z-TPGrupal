@@ -10,9 +10,11 @@ class BuildingPanel : public Gtk::Box {
 
     Gtk::Image* building;
     Gtk::Image* unit;
+    const std::string label = "Factory";
 public:
     BuildingPanel(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
 
+    const std::string& get_label();
 };
 
 

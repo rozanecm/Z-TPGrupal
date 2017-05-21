@@ -18,7 +18,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     builder->get_widget_derived("BuildingView", building_panel);
     builder->get_widget("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
-
+    builder->get_widget("PanelDisplayLabel", panelLabel);
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
@@ -54,6 +54,8 @@ bool GameWindow::change_view_to_building() {
         panel->remove(*child);
     }
     panel->pack_start(*building_panel);
+
+    panelLabel->set_text(building_panel->get_label());
     return true;
 }
 

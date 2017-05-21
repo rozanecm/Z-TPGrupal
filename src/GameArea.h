@@ -6,8 +6,6 @@
 
 class GameArea : public Gtk::DrawingArea{
 public:
-    GameArea();
-
     virtual ~GameArea();
     GameArea(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
 

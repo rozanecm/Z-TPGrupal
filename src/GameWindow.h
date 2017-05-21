@@ -6,6 +6,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/builder.h>
 #include <gtkmm/box.h>
+#include <gtkmm/label.h>
 #include "GameArea.h"
 #include "BuildingPanel.h"
 
@@ -15,8 +16,10 @@ class GameWindow : public Gtk::Window {
     Gtk::Box* unit_panel;
     BuildingPanel* building_panel;
     Gtk::Box* group_panel;
+    Gtk::Label* panelLabel;
 public:
-    GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    GameWindow(BaseObjectType* cobject,
+               const Glib::RefPtr<Gtk::Builder>& builder);
     virtual ~GameWindow();
 
     // Functions to change the window's side panel

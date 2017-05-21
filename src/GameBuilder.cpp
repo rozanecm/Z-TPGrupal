@@ -27,9 +27,6 @@ GameBuilder::GameBuilder() {
 
     // Save the widget refs in the class attributes
     refBuilder->get_widget_derived("GameWindow", window);
-    if (portrait) {
-        portrait->set("assets/portraits/sample.png");
-    }
 }
 
 
