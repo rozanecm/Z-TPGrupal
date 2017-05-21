@@ -1,6 +1,8 @@
 #include <gtkmm/window.h>
 #include "GraphicsThread.h"
 #include "GameBuilder.h"
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
 
 void GraphicsThread::run() {
     auto app = Gtk::Application::create(argc, argv);
@@ -15,6 +17,11 @@ void GraphicsThread::run() {
     }
 }
 
-GraphicsThread::GraphicsThread(int argc, char **argv) : argc(argc), argv(argv){
+GraphicsThread::GraphicsThread(int argc, char **argv, PlayersMonitor &monitor,
+                               BuildingsMonitor &buildingsMonitor)
+        : argc(argc),
+          argv(argv),
+          playerMonitor(monitor),
+          buildingsMonitor(buildingsMonitor){
 
 }
