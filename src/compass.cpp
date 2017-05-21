@@ -70,19 +70,19 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
         if (open_nodes.empty())
             open_nodes_empty = true;
 
-        ///////////////////////////////////////
-        for(auto x: astar_map) {
-            for (auto y: x) {
-                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
-            }
-            std::cout<<std::endl;
-        }
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-        std::cout<<std::endl;
-///////////////////////////////////////
-        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
-        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
+//        ///////////////////////////////////////
+//        for(auto x: astar_map) {
+//            for (auto y: x) {
+//                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+//            }
+//            std::cout<<std::endl;
+//        }
+//        std::cout<<std::endl;
+//        std::cout<<std::endl;
+//        std::cout<<std::endl;
+/////////////////////////////////////////
+//        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
+//        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
         ++i;
 //        char a;
 //        std::cin >> a;

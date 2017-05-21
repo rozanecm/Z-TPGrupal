@@ -33,10 +33,18 @@ int Map::getHeigth() {
 }
 
 bool Map::canIWalkToThisPosition(Size& other_size) {
+    bool you_can = true;
 
-    return (!map_size.areYouHalfOutSide(other_size) ||
-            !isThereLava(other_size)/* &&
-            this->areThisPointsEmpty(other_size)*/);
+    // if the object is stepping out of the map
+    if (map_size.areYouHalfOutSide(other_size))
+        you_can = false;
+    // if the object is stepping into lava
+    if (isThereLava(other_size))
+        you_can = false;
+
+    /* this->areThisPointsEmpty(other_size)*/
+
+    return (you_can);
 }
 
 bool Map::doesThisPositionExist(int x, int y) {
