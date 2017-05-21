@@ -39,6 +39,7 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
         // add "from" to visited list
     Node* start_node = astar_map[from.getX()][from.getY()];
     start_node->setGValue(0,map.getTerrainFactorOn(from.getX(),from.getY()));
+    start_node->setNewParent(start_node);
     this->closed_nodes.push_back(start_node);
 
     std::cout<< "posicion de salida: (" <<  from.getX() << "," << from.getY()<<"): G :"<< start_node->getGValue()<<std::endl;
@@ -60,35 +61,36 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
         this->getAdjacents(closer_node);
 
         // if there are no adjacent's and open_node is empty, end search
-        if (open_nodes.empty())
+        if (open_nodes.empty()) {
             open_nodes_empty = true;
+        } else {
+            // get the minimum F and add it to visit list (remove from looking list)
+            closer_node = open_nodes.back();
+            open_nodes.pop_back();
+            this->closed_nodes.push_back(closer_node);
 
-        // get the minimum F and add it to visit list (remove from looking list)
-        closer_node = open_nodes.back();
-        open_nodes.pop_back();
-        this->closed_nodes.push_back(closer_node);
-
-        // check if destiny is between them
-        if (closed_nodes.back()->getHvalue() == 0)
-            finished = true;
-
-
-//        ///////////////////////////////////////
-//        for(auto x: astar_map) {
-//            for (auto y: x) {
-//                std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+//            ///////////////////////////////////////
+//            for(auto x: astar_map) {
+//                for (auto y: x) {
+//                    std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
+//                }
+//                std::cout<<std::endl;
 //            }
 //            std::cout<<std::endl;
-//        }
-//        std::cout<<std::endl;
-//        std::cout<<std::endl;
-//        std::cout<<std::endl;
+//            std::cout<<std::endl;
+//            std::cout<<std::endl;
 ///////////////////////////////////////////
-//        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
-//        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
-        ++i;
+//            std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
+//            std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
+
+            // check if destiny is between them
+            if (closed_nodes.back()->getHvalue() == 0)
+                finished = true;
+
+            ++i;
 //        char a;
 //        std::cin >> a;
+        }
     }
     Node* closest;
     std::cout<< "finished: "<<finished << std::endl;
@@ -274,6 +276,7 @@ Node *Compass::searchForClosestNode() {
          ((x->getHvalue() == closest->getGValue()) &&
           (x->getFValue() < closest->getFValue()))) {
             closest = x;
+            std::cout<< "closest node: (" <<  closest->getPosition().getX() << "," << closest->getPosition().getY()<<") :  ";
         }
     }
     return closest;

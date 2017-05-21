@@ -25,7 +25,7 @@
     </Row>
     <Row>
         <Cell terrain="Tierra" struct="" />
-        <Cell terrain="Tierra" struct="" />
+        <Cell terrain="Lava" struct="" />
         <Cell terrain="Tierra" struct="" />
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->

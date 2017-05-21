@@ -44,7 +44,7 @@ int main (int argc, char **argv) {
 
     Compass compass(map, unit_size);
 
-    Position destination(6,7);
+    Position destination(1,7);
     std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),
                                                        destination);
 
