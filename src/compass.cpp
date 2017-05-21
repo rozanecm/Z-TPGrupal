@@ -59,6 +59,10 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
 
         this->getAdjacents(closer_node);
 
+        // if there are no adjacent's and open_node is empty, end search
+        if (open_nodes.empty())
+            open_nodes_empty = true;
+
         // get the minimum F and add it to visit list (remove from looking list)
         closer_node = open_nodes.back();
         open_nodes.pop_back();
@@ -67,8 +71,7 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
         // check if destiny is between them
         if (closed_nodes.back()->getHvalue() == 0)
             finished = true;
-        if (open_nodes.empty())
-            open_nodes_empty = true;
+
 
 //        ///////////////////////////////////////
 //        for(auto x: astar_map) {
@@ -80,7 +83,7 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
 //        std::cout<<std::endl;
 //        std::cout<<std::endl;
 //        std::cout<<std::endl;
-/////////////////////////////////////////
+///////////////////////////////////////////
 //        std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
 //        std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
         ++i;

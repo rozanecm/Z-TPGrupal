@@ -52,12 +52,25 @@ bool Map::doesThisPositionExist(int x, int y) {
 }
 
 bool Map::isThereLava(Size& other_size) {
-    int w_cell = terrain_map[0][0].getWidthOfCell();
-    int x_pos = other_size.getPosition().getX() / w_cell;
-    int y_pos = other_size.getPosition().getY() / w_cell;
+    int x_max, x_min, y_max, y_min;
+    other_size.calculateMaxAndMinForX(x_max, x_min);
+    other_size.calculateMaxAndMinForY(y_max, y_min);
 
-    if (terrain_map[x_pos][y_pos].getTerrainType() == "Lava"){
-      return  terrain_map[x_pos][y_pos].isThereACollision(other_size);
+    int w_cell = terrain_map[0][0].getWidthOfCell();
+    // Check if any of the corners are stepping into lava
+    for (int y = y_min; y <= y_max; ++y) {
+        for (int x = x_min; x <= x_max; ++x) {
+            if (doesThisPositionExist(x,y)) {
+                // Calculate the cell that holds this position
+                int x_pos = x / w_cell;
+                int y_pos = y / w_cell;
+
+                if (terrain_map[x_pos][y_pos].getTerrainType() == "Lava") {
+                    return terrain_map[x_pos][y_pos].isThereACollision(
+                            other_size);
+                }
+            }
+        }
     }
 
     return false;
