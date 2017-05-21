@@ -5,11 +5,13 @@
 #include <vector>
 #include <pugixml.hpp>
 
+#define ROCK_PCT 2
 /* Map generator. Randomly generates a readable .xml map file basing off the
  * passed arguments on the constructor. The maps are saved to the 'maps' folder
  * in the root directory. */
 
 class MapGenerator {
+    std::vector<std::vector<bool>> occupied_cells;
     std::ofstream output;
     int size;
     float lava_pct;
@@ -32,13 +34,17 @@ private:
      * map given by the root node. The cells are written with a "terrain"
      * attribute as children of the root node, with the value given by the
      * string 'terrain'. */
-    void generate_rivers(pugi::xml_node root_node, int cell_amt,
+    std::vector<std::vector<bool>> generate_rivers(pugi::xml_node root_node, int cell_amt,
                              const std::string &terrain);
 
     /* Generates river-like paths in a 'size' big square map, represented by
      * a matrix of boolean values. You can modify the RNG seed with the 'seed'
      * attribute. */
-    std::vector<std::vector<bool>> generate_path(int amt, time_t seed);
+    void
+    generate_path(int amt, time_t seed, std::vector<std::vector<bool>>& path);
+
+    /* Generates rocks */
+    void generate_structs(pugi::xml_node root);
 };
 
 

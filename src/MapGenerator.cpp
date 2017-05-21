@@ -30,6 +30,13 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     water_pct(water_pct),
     terrain_var(terrain_variance_pct)
 {
+    for (int i = 0; i < size; ++i) {
+        std::vector<bool> row;
+        for (int j = 0; j < size; ++j) {
+            row.push_back(false);
+        }
+        occupied_cells.push_back(row);
+    }
     water_cells = (int) (size * size * water_pct / 100);
     lava_cells = (int) (size * size * lava_pct / 100);
 }
@@ -45,25 +52,35 @@ void MapGenerator::generate_blank_map(xml_node root_node) {
     }
 }
 
-void MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
+std::vector<std::vector<bool>> MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
                                    const std::string &terrain) {
-    std::vector<std::vector<bool>> water = generate_path(cell_amt, time(NULL));
+    std::vector<std::vector<bool>> map;
+    generate_path(cell_amt, time(NULL), map);
     int count_y = 0;
     for(xml_node& row : root_node.children()) {
         int count_x = 0;
         for(xml_node& node : row.children()) {
-            if (water[count_x][count_y]) {
+            if (map[count_x][count_y]) {
                 node.attribute(TERRAIN).set_value(terrain.c_str());
             }
             count_x++;
         }
         count_y++;
     }
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; ++j) {
+            if (map[i][j]) {
+                occupied_cells[i][j] = true;
+            }
+        }
+    }
+    return map;
 }
 
-std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed) {
+void MapGenerator::generate_path(int amt, time_t seed,
+                                 std::vector<std::vector<bool>>& path) {
     srand((unsigned int) seed);
-    std::vector<std::vector<bool>> path;
     for (int i = 0; i < size; ++i) {
         std::vector<bool> row;
         for (int j = 0; j < size; ++j) {
@@ -119,18 +136,38 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed)
             }
         }
     }
-    return path;
 }
 
+void MapGenerator::generate_structs(xml_node root) {
+    root.set_name("Structures");
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            if (!occupied_cells[i][j]) {
+                int chance = rand() % 100;
+                if (chance < ROCK_PCT) {
+                    xml_node rock = root.append_child("Struct");
+                    rock.append_attribute("Type").set_value("Rock");
+                    rock.append_attribute("x").set_value(i);
+                    rock.append_attribute("y").set_value(j);
+                }
+            }
+        }
+    }
+}
 
 void MapGenerator::generate(const std::string& name) {
     std::string path = "maps/" + name + ".xml";
     xml_document document;
     xml_node root = document.append_child("Map");
-    generate_blank_map(root);
-    generate_rivers(root, water_cells, "Agua");
-    generate_rivers(root, lava_cells, "Lava");
-    print_map(root);
+    xml_node terrain = root.append_child("Terrain");
+    generate_blank_map(terrain);
+    generate_rivers(terrain, water_cells, "Agua");
+    generate_rivers(terrain, lava_cells, "Lava");
+
+
+    xml_node structs = root.append_child("Structs");
+    generate_structs(structs);
+    print_map(terrain);
     document.save_file(path.c_str());
 }
 
