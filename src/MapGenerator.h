@@ -30,6 +30,8 @@ private:
     void generate_rivers(pugi::xml_node root_node);
 
     std::vector<std::vector<bool>> generate_path(int amt);
+    bool in_bounds(std::vector<std::vector<bool>> &vec,
+                   int x, int y);
 };
 
 

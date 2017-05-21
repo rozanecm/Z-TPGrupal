@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "MapGenerator.h"
-#include "pugixml.hpp"
+#include <pugixml.hpp>
 
 #define RIVER_END_PCT 10
 #define TERRAIN "terrain"
@@ -12,7 +12,11 @@ using namespace pugi;
 void print_map(xml_node& root_node) {
     for(xml_node& row : root_node.children()) {
         for (xml_node &node : row.children()) {
-            std::cout << node.attribute(TERRAIN).value() << " ";
+            char terrain = node.attribute(TERRAIN).value()[0];
+            if (terrain == 'T') {
+                terrain = ' ';
+            }
+            std::cout << terrain << " ";
         }
         std::cout << std::endl;
     }
@@ -69,6 +73,14 @@ void MapGenerator::generate_rivers(pugi::xml_node root_node) {
     }
 }
 
+bool MapGenerator::in_bounds(std::vector<std::vector<bool>> &vec,
+                             int x, int y) {
+    if (x > 0 && y > 0 && x < size && y < size) {
+        return vec[x][y];
+    }
+    return false;
+}
+
 std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
     srand((unsigned int) time(NULL));
     std::vector<std::vector<bool>> path;
@@ -85,8 +97,17 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
 
     while (amt) {
         path[river_x][river_y] = true;
+
+        int end = rand() % 100;
+        if (end < RIVER_END_PCT) { // Start another river somewhere else
+            river_x = rand() % size;
+            river_y = rand() % size;
+        }
+
         bool found = false;
+
         while (!found) {
+            // Grab an adjacent tile randomly to be the next water tile
             int next = rand() % 4;
             int next_x, next_y;
             if (next == 0) {
@@ -105,7 +126,16 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
             next_x += river_x;
             next_y += river_y;
 
-            if (next_x >= size or next_x < 0 or next_y >= size or next_y < 0) {
+
+            // Check for out of bounds
+            if (!(next_x > 0 && next_y > 0 && next_x < size && next_y < size)) {
+                continue;
+            }
+
+            if ((in_bounds(path, next_x + 1, next_y) +
+                    in_bounds(path, next_x, next_y + 1) +
+                    in_bounds(path, next_x - 1, next_y) +
+                    in_bounds(path, next_x, next_y - 1)) > 3) {
                 continue;
             }
 
@@ -114,12 +144,6 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
                 amt--;
                 river_x = next_x;
                 river_y = next_y;
-            }
-
-            int end = rand() % 100;
-            if (end < RIVER_END_PCT) { // Start another river somewhere else
-                river_x = rand() % size;
-                river_y = rand() % size;
             }
         }
     }

@@ -3,7 +3,7 @@
 int main (int argc, char **argv)
 {
 
-    MapGenerator generator(10, 10, 30, 0);
+    MapGenerator generator(100, 10, 5, 0);
     generator.generate("map");
 
 }
