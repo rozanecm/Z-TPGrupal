@@ -1,11 +1,9 @@
 #include <gtkmm.h>
 #include <iostream>
-#include <pugixml.hpp>
 #include <SDL2/SDL_mixer.h>
-#include "GameBuilder.h"
-#include "GameWindow.h"
 #include "GraphicsThread.h"
 
+#define SUCCESSRETURNCODE 0
 
 void play_sound() {
     // Init, open the audio channel
@@ -36,5 +34,5 @@ int main (int argc, char **argv)
 
     graphicsThread.join();
 
-    return 1;
+    return SUCCESSRETURNCODE;
 }
