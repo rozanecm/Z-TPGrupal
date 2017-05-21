@@ -14,9 +14,9 @@ public:
     virtual void run();
 
 private:
-    PlayersMonitor playersMonitor;
+    PlayersMonitor &playersMonitor;
 
-    BuildingsMonitor buildingsMonitor;
+    BuildingsMonitor &buildingsMonitor;
 };
 
 

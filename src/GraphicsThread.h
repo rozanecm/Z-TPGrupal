@@ -17,9 +17,9 @@ private:
 
     char **argv;
 
-    PlayersMonitor playerMonitor;
+    PlayersMonitor &playerMonitor;
 
-    BuildingsMonitor buildingsMonitor;
+    BuildingsMonitor &buildingsMonitor;
 };
 
 
