@@ -7,6 +7,11 @@
 #define RIVER_END_PCT 10
 #define TERRAIN "terrain"
 
+#define EAST 1
+#define SOUTH 2
+#define WEST -1
+#define NORTH -2
+
 using namespace pugi;
 
 void print_map(xml_node& root_node) {
@@ -46,7 +51,7 @@ void MapGenerator::generate_blank_map(xml_node root_node) {
 }
 
 void MapGenerator::generate_rivers(pugi::xml_node root_node) {
-    std::vector<std::vector<bool>> water = generate_path(water_cells);
+    std::vector<std::vector<bool>> water = generate_path(water_cells, time(NULL));
     int count_y = 0;
     for(xml_node& row : root_node.children()) {
         int count_x = 0;
@@ -59,7 +64,7 @@ void MapGenerator::generate_rivers(pugi::xml_node root_node) {
         count_y++;
     }
 
-    std::vector<std::vector<bool>> lava = generate_path(lava_cells);
+    std::vector<std::vector<bool>> lava = generate_path(lava_cells, 2*time(NULL));
     count_y = 0;
     for(xml_node& row : root_node.children()) {
         int count_x = 0;
@@ -81,8 +86,8 @@ bool MapGenerator::in_bounds(std::vector<std::vector<bool>> &vec,
     return false;
 }
 
-std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
-    srand((unsigned int) time(NULL));
+std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed) {
+    srand((unsigned int) seed);
     std::vector<std::vector<bool>> path;
     for (int i = 0; i < size; ++i) {
         std::vector<bool> row;
@@ -98,30 +103,35 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
     while (amt) {
         path[river_x][river_y] = true;
 
-        int end = rand() % 100;
-        if (end < RIVER_END_PCT) { // Start another river somewhere else
-            river_x = rand() % size;
-            river_y = rand() % size;
-        }
-
         bool found = false;
 
+        int prev_dir = 0;
         while (!found) {
+            int end = rand() % 100;
+            if (end < RIVER_END_PCT) { // Start another river somewhere else
+                river_x = rand() % size;
+                river_y = rand() % size;
+            }
             // Grab an adjacent tile randomly to be the next water tile
             int next = rand() % 4;
+            int next_dir = 0;
             int next_x, next_y;
             if (next == 0) {
                 next_x = 1;
                 next_y = 0;
+                next_dir = EAST;
             } else if (next == 1) {
                 next_x = 0;
                 next_y = -1;
+                next_dir = SOUTH;
             } else if (next == 2) {
                 next_x = -1;
                 next_y = 0;
+                next_dir = WEST;
             } else {
                 next_x = 0;
                 next_y = 1;
+                next_dir = NORTH;
             }
             next_x += river_x;
             next_y += river_y;
@@ -132,14 +142,12 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt) {
                 continue;
             }
 
-            if ((in_bounds(path, next_x + 1, next_y) +
-                    in_bounds(path, next_x, next_y + 1) +
-                    in_bounds(path, next_x - 1, next_y) +
-                    in_bounds(path, next_x, next_y - 1)) > 3) {
+            if (next_dir == -1 * prev_dir) {
                 continue;
             }
 
             if (!path[next_x][next_y]) {
+                prev_dir = -1 * next_dir;
                 found = true;
                 amt--;
                 river_x = next_x;
