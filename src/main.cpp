@@ -17,7 +17,6 @@ int main (int argc, char **argv) {
 
     for(auto it = cell_map.begin(); it != cell_map.end(); ++it) {
         for(auto jt = it->begin(); jt != it->end(); ++jt) {
-//          std::cout << jt->isEmpty() << std::endl;
             std::cout << jt->getTerrainType() << "  ";
             if (jt->getTerrainType() != "Tierra")
                 std::cout << "  ";
@@ -39,12 +38,12 @@ int main (int argc, char **argv) {
 //    std::cout << "Probando si mapa me dice que tiene la pocision (-11,27)"<< map.doesThisPositionExist(-11,27)<<std::endl;
 //    std::cout << "Probando si mapa me dice que tiene la pocision (-11,-27)"<< map.doesThisPositionExist(-11,-27)<<std::endl;
 
-    Size unit_size(1,1,3,3);
+    Size unit_size(4,1,3,3);
 
 
     Compass compass(map, unit_size);
 
-    Position destination(1,7);
+    Position destination(4,7);
     std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),
                                                        destination);
 
@@ -66,15 +65,6 @@ int main (int argc, char **argv) {
         std::cout <<std::endl;
     }
 
-//    auto app = Gtk::Application::create(argc, argv);
-//
-//    GameWindow game_window;
-//    Gtk::Window* window = game_window.get_window();
-//    if (window)
-//    {
-//        return app->run(*window);
-//    }
-//
-//    return 1;
+    return 0;
 }
 

@@ -88,8 +88,6 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
                 finished = true;
 
             ++i;
-//        char a;
-//        std::cin >> a;
         }
     }
     Node* closest;
