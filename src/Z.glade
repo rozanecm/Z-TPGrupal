@@ -25,10 +25,10 @@
       <object class="GtkBox" id="box2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_bottom">44</property>
-        <property name="homogeneous">True</property>
         <child>
           <object class="GtkImage" id="FactoryUnitImage">
+            <property name="width_request">100</property>
+            <property name="height_request">100</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="ypad">5</property>
@@ -42,6 +42,7 @@
         </child>
         <child>
           <object class="GtkBox" id="box3">
+            <property name="width_request">50</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -86,11 +87,17 @@
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel" id="UnitStatsLabel">
+                <property name="width_request">100</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Unit
-stats
-here</property>
+                <property name="label" translatable="yes">Grunt
+HP: xxx
+Weapon: xxx
+Speed: xxx
+Fire rate: xxx
+Range: xxx
+</property>
+                <property name="xalign">0.10000000149011612</property>
               </object>
               <packing>
                 <property name="expand">False</property>
