@@ -22,16 +22,23 @@ public:
                  float terrain_variance_pct);
     ~MapGenerator();
 
-    // Generate the map, giving it the specified name.
+    // Generate the map, saving it to "maps/<name>.xml".
     void generate(const std::string& name);
 
 private:
     void generate_blank_map(pugi::xml_node root_node);
-    void generate_rivers(pugi::xml_node root_node);
 
+    /* Generates cell_amt of cells, ordered in a river like structure, in the
+     * map given by the root node. The cells are written with a "terrain"
+     * attribute as children of the root node, with the value given by the
+     * string 'terrain'. */
+    void generate_rivers(pugi::xml_node root_node, int cell_amt,
+                             const std::string &terrain);
+
+    /* Generates river-like paths in a 'size' big square map, represented by
+     * a matrix of boolean values. You can modify the RNG seed with the 'seed'
+     * attribute. */
     std::vector<std::vector<bool>> generate_path(int amt, time_t seed);
-    bool in_bounds(std::vector<std::vector<bool>> &vec,
-                   int x, int y);
 };
 
 

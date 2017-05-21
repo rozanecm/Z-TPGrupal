@@ -4,13 +4,8 @@
 #include "MapGenerator.h"
 #include <pugixml.hpp>
 
-#define RIVER_END_PCT 10
+#define RIVER_END_PCT 5
 #define TERRAIN "terrain"
-
-#define EAST 1
-#define SOUTH 2
-#define WEST -1
-#define NORTH -2
 
 using namespace pugi;
 
@@ -50,40 +45,20 @@ void MapGenerator::generate_blank_map(xml_node root_node) {
     }
 }
 
-void MapGenerator::generate_rivers(pugi::xml_node root_node) {
-    std::vector<std::vector<bool>> water = generate_path(water_cells, time(NULL));
+void MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
+                                   const std::string &terrain) {
+    std::vector<std::vector<bool>> water = generate_path(cell_amt, time(NULL));
     int count_y = 0;
     for(xml_node& row : root_node.children()) {
         int count_x = 0;
         for(xml_node& node : row.children()) {
             if (water[count_x][count_y]) {
-                node.attribute(TERRAIN).set_value("Agua");
+                node.attribute(TERRAIN).set_value(terrain.c_str());
             }
             count_x++;
         }
         count_y++;
     }
-
-    std::vector<std::vector<bool>> lava = generate_path(lava_cells, 2*time(NULL));
-    count_y = 0;
-    for(xml_node& row : root_node.children()) {
-        int count_x = 0;
-        for(xml_node& node : row.children()) {
-            if (lava[count_x][count_y]) {
-                node.attribute(TERRAIN).set_value("Lava");
-            }
-            count_x++;
-        }
-        count_y++;
-    }
-}
-
-bool MapGenerator::in_bounds(std::vector<std::vector<bool>> &vec,
-                             int x, int y) {
-    if (x > 0 && y > 0 && x < size && y < size) {
-        return vec[x][y];
-    }
-    return false;
 }
 
 std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed) {
@@ -105,7 +80,6 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed)
 
         bool found = false;
 
-        int prev_dir = 0;
         while (!found) {
             int end = rand() % 100;
             if (end < RIVER_END_PCT) { // Start another river somewhere else
@@ -114,24 +88,19 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed)
             }
             // Grab an adjacent tile randomly to be the next water tile
             int next = rand() % 4;
-            int next_dir = 0;
             int next_x, next_y;
             if (next == 0) {
                 next_x = 1;
                 next_y = 0;
-                next_dir = EAST;
             } else if (next == 1) {
                 next_x = 0;
                 next_y = -1;
-                next_dir = SOUTH;
             } else if (next == 2) {
                 next_x = -1;
                 next_y = 0;
-                next_dir = WEST;
             } else {
                 next_x = 0;
                 next_y = 1;
-                next_dir = NORTH;
             }
             next_x += river_x;
             next_y += river_y;
@@ -142,12 +111,7 @@ std::vector<std::vector<bool>> MapGenerator::generate_path(int amt, time_t seed)
                 continue;
             }
 
-            if (next_dir == -1 * prev_dir) {
-                continue;
-            }
-
             if (!path[next_x][next_y]) {
-                prev_dir = -1 * next_dir;
                 found = true;
                 amt--;
                 river_x = next_x;
@@ -164,7 +128,8 @@ void MapGenerator::generate(const std::string& name) {
     xml_document document;
     xml_node root = document.append_child("Map");
     generate_blank_map(root);
-    generate_rivers(root);
+    generate_rivers(root, water_cells, "Agua");
+    generate_rivers(root, lava_cells, "Lava");
     print_map(root);
     document.save_file(path.c_str());
 }

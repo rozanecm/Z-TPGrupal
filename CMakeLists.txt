@@ -24,10 +24,10 @@ include_directories(
         ${SDL2_mixer_INCLUDE_DIRS})
 
 
-set(SOURCE_FILES src/GameBuilder.cpp src/GameBuilder.h
-        src/main.cpp src/GameWindow.cpp src/GameWindow.h
-        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp src/MapGenerator.cpp src/MapGenerator.h
- src/GameArea.cpp src/GameArea.h)
+set(SOURCE_FILES
+        src/main.cpp
+        libs/xml/pugixml.cpp libs/xml/pugiconfig.hpp libs/xml/pugixml.hpp
+        src/MapGenerator.cpp src/MapGenerator.h)
 
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})

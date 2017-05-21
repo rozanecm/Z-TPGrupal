@@ -2,8 +2,11 @@
 
 int main (int argc, char **argv)
 {
-
-    MapGenerator generator(100, 10, 5, 0);
+    int size = 100,
+    lava = 5,
+    water = 10,
+    variance = 0;
+    MapGenerator generator(size, lava, water, variance);
     generator.generate("map");
 
 }
