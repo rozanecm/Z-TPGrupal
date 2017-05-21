@@ -6,9 +6,11 @@ void GraphicsThread::run() {
     auto app = Gtk::Application::create(argc, argv);
 
     GameBuilder game;
-    Gtk::Window* window = game.get_window();
-    game.change_view_to_building();
+    GameWindow* window = game.get_window();
+
     if (window) {
+        window->change_view_to_building();
+
         app->run(*window);
         //todo check exit status. Couldn't find exit status codes,
         //so don't know what each number means

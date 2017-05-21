@@ -9,22 +9,14 @@ class GameBuilder {
 
     Glib::RefPtr<Gtk::Builder> refBuilder;
     Gtk::Image* portrait;
-    Gtk::Box* panel;
-    Gtk::Box* unit_panel;
-    Gtk::Box* building_panel;
-    Gtk::Box* group_panel;
-    Gtk::Button* button;
 public:
     GameBuilder();
     ~GameBuilder();
 
-    Gtk::Window* get_window();
-    bool change_view_to_unit();
-    bool change_view_to_building();
-    bool change_view_to_unit_group();
+    // returns the generated window
+    GameWindow* get_window();
 
 private:
-    void update_portrait(const std::string& img_path) const;
 };
 
 

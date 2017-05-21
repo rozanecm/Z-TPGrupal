@@ -10,13 +10,20 @@
 
 class GameWindow : public Gtk::Window {
     GameArea* gameArea;
-
+    Gtk::Box* panel;
+    Gtk::Box* unit_panel;
+    Gtk::Box* building_panel;
+    Gtk::Box* group_panel;
 public:
     GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
     virtual ~GameWindow();
 
+    // Functions to change the window's side panel
+    bool change_view_to_unit();
+    bool change_view_to_building();
+    bool change_view_to_unit_group();
+
 protected:
-    Gtk::Box mainGrid;
 
     bool onTimeout();
 

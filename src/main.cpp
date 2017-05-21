@@ -29,7 +29,7 @@ void play_sound() {
 
 int main (int argc, char **argv)
 {
-    play_sound();
+    // play_sound();
 
     GraphicsThread graphicsThread(argc, argv);
     graphicsThread.start();

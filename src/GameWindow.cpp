@@ -14,10 +14,14 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
+    builder->get_widget("SidePanel", panel);
+    builder->get_widget("BuildingView", building_panel);
+    builder->get_widget("UnitView", unit_panel);
+    builder->get_widget("GroupView", group_panel);
 
+    // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
-    show_all_children();
 
 }
 
@@ -36,3 +40,28 @@ bool GameWindow::onTimeout() {
 }
 
 
+bool GameWindow::change_view_to_unit() {
+    for(auto child : panel->get_children()) {
+        panel->remove(*child);
+    }
+
+    panel->pack_start(*unit_panel);
+    return true;
+}
+
+bool GameWindow::change_view_to_building() {
+    for(auto child : panel->get_children()) {
+        panel->remove(*child);
+    }
+    panel->pack_start(*building_panel);
+    return true;
+}
+
+bool GameWindow::change_view_to_unit_group() {
+    for(auto child : panel->get_children()) {
+        panel->remove(*child);
+    }
+
+    panel->pack_start(*group_panel);
+    return false;
+}
