@@ -38,7 +38,7 @@ set(SOURCE_FILES
         src/GraphicsThread.cpp
         src/GraphicsThread.h
         src/Thread.h
-        src/Thread.cpp)
+        src/Thread.cpp src/BuildingPanel.cpp src/BuildingPanel.h)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})

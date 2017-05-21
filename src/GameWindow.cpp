@@ -15,7 +15,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
     builder->get_widget("SidePanel", panel);
-    builder->get_widget("BuildingView", building_panel);
+    builder->get_widget_derived("BuildingView", building_panel);
     builder->get_widget("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
 

@@ -7,12 +7,13 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/box.h>
 #include "GameArea.h"
+#include "BuildingPanel.h"
 
 class GameWindow : public Gtk::Window {
     GameArea* gameArea;
     Gtk::Box* panel;
     Gtk::Box* unit_panel;
-    Gtk::Box* building_panel;
+    BuildingPanel* building_panel;
     Gtk::Box* group_panel;
 public:
     GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
