@@ -2,6 +2,11 @@
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
 #include "GraphicsThread.h"
+#include "Player.h"
+#include "Building.h"
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
+#include "ClientThread.h"
 
 #define SUCCESSRETURNCODE 0
 
@@ -29,9 +34,23 @@ int main (int argc, char **argv)
 {
     play_sound();
 
-    GraphicsThread graphicsThread(argc, argv);
+    /* create vector with players; bind with monitor */
+    std::vector<Player> players;
+    PlayersMonitor playerMonitor(players);
+    /* create vector with buildings; bind with monitor */
+    std::vector<Building> buildings;
+    BuildingsMonitor buildingsMonitor(buildings);
+
+    /* create graphics and client threads */
+    GraphicsThread graphicsThread(argc, argv, playerMonitor, buildingsMonitor);
+    ClientThread clientThread(playerMonitor, buildingsMonitor);
+
+    /* start threads */
+    clientThread.start();
     graphicsThread.start();
 
+    /* join threads */
+    clientThread.join();
     graphicsThread.join();
 
     return SUCCESSRETURNCODE;
