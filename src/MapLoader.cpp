@@ -53,11 +53,11 @@ MapLoader::MapLoader(std::string path) {
                 ocpt_id = std::stoi(structure);
             }
             ////
-            int life = 100;
-            Size size(10,10, 10, 10);
-            ////
-            Occupant* o = new Occupant(life, ocpt_id, size);
-            units.push_back(o);
+//            int life = 100;
+//            Size size(10,10, 10, 10);
+//            ////
+//            Occupant* o = new Occupant(life, ocpt_id, size);
+//            units.push_back(o);
 
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height

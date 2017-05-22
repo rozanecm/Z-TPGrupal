@@ -14,12 +14,28 @@ class Map;
 class Unit: public Occupant {
 private:
     Compass compass;
-//    Size unit_size;
+    int unit_speed;
+    // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
+    // is standing still
+    std::string state, team;
+    Size range;
+
 public:
-    Unit(int life, int id, Size size, Map& map);
+    Unit(int life, std::string type, int unit_speed, Size size, Size range,
+                                                                Map& map);
+
+    // Changes the unit team
+    void setTeam(std::string team);
 
     // Indicates the Unit it's new position
-    void setNewPosition(int x, int y);
+    void moveToPosition(int x, int y);
+
+    // Returns the current position of the unit
+    Position getCurrentPosition() const;
+
+    // Returns "atk" if is attacking, "mv" if is moving, "std" if
+    // is standing still
+    std::string getState() const;
 
 };
 

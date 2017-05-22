@@ -4,22 +4,20 @@
 #include <iostream>
 #include "size.h"
 
-// Class Cell later defined
-//class Map;
 
 // Class Occupant so any object knows where is on the map
 class Occupant {
 protected:
-    int id, life_points;
+    int life_points;
     Size occ_size;
-//    Map wordl_map;
+    std::string type;
 
 public:
     // Constructor for Occupant on a specific position saved in Size and it's id
-    Occupant(int life, int id, Size position/*, Map map*/);
+    Occupant(int life, std::string type, Size occ_size);
 
     // Returns the id of the object
-    int getId() const;
+    std::string getType() const;
 
     void reduceLifeBy(int dmg);
 

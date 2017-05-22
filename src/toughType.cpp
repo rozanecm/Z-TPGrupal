@@ -12,8 +12,8 @@ unit_speed(unit_speed), fire_rate(fire_rate), creation_time(time) {}
 Unit *ToughType::createTought(int x, int y, Map& map) {
     Size unit_size(x,y,width,height);
     Size unit_range(x,y,range,range);
-    Unit* new_tought = new Unit(life,"Tough", 4,unit_size,unit_range,map);
-    return new_tought;
+    Unit* new_tough = new Unit(life,"Tough", 4,unit_size,unit_range,map);
+    return new_tough;
 }
 
 int ToughType::getTechnologyLevel() const {
