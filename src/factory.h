@@ -2,21 +2,19 @@
 // Created by rodian on 22/05/17.
 //
 
-#ifndef Z_TPGRUPAL_ROBOTFACTORY_H
-#define Z_TPGRUPAL_ROBOTFACTORY_H
-
-
+#ifndef Z_TPGRUPAL_FACTORY_H
+#define Z_TPGRUPAL_FACTORY_H
 #include "unitMold.h"
-#include "factory.h"
 
-class RobotFactory: public Factory {
-private:
+class Factory: public Occupant, public Teamable {
+    bool running;
+    int tech_level;
     std::vector<UnitMold> units;
     std::vector<UnitMold>::iterator it;
 
 public:
-    RobotFactory(int life, std::string type, Size position,
-                                    std::vector<UnitMold> units);
+    Factory(int life, std::string type, Size position,
+                 std::vector<UnitMold> units);
 
     // starts the creation of the selected unit
     void build();
@@ -31,7 +29,9 @@ public:
     std::string nextUnit();
 
     Occupant* destroyFactory();
+
+    void setNewPlayer(std::string player, int tech_level);
 };
 
 
-#endif //Z_TPGRUPAL_ROBOTFACTORY_H
+#endif //Z_TPGRUPAL_FACTORY_H
