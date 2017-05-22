@@ -35,7 +35,7 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
         for (int j = 0; j < size; ++j) {
             row.push_back(false);
         }
-        occupied_cells.push_back(row);
+        liquid_cells.push_back(row);
     }
     water_cells = (int) (size * size * water_pct / 100);
     lava_cells = (int) (size * size * lava_pct / 100);
@@ -71,7 +71,7 @@ std::vector<std::vector<bool>> MapGenerator::generate_rivers(pugi::xml_node root
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; ++j) {
             if (map[i][j]) {
-                occupied_cells[i][j] = true;
+                liquid_cells[i][j] = true;
             }
         }
     }
@@ -138,11 +138,11 @@ void MapGenerator::generate_path(int amt, time_t seed,
     }
 }
 
-void MapGenerator::generate_structs(xml_node root) {
+void MapGenerator::generate_rocks(xml_node root) {
     root.set_name("Structures");
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
-            if (!occupied_cells[i][j]) {
+            if (!liquid_cells[i][j]) {
                 int chance = rand() % 100;
                 if (chance < ROCK_PCT) {
                     xml_node rock = root.append_child("Struct");
@@ -153,6 +153,40 @@ void MapGenerator::generate_structs(xml_node root) {
             }
         }
     }
+}
+
+void MapGenerator::populate_bridge(int x, int y)  {
+    xml_node bridge;
+    int direction = rand() % 2;
+    if (direction) { // horizontal
+        int dir = 1;
+        int offset = 0;
+        bool done = false;
+        while(!done) {
+            xml_node child = bridge.append_child("Struct");
+            child.append_attribute("Type").set_value("Bridge");
+            child.append_attribute("x").set_value(x + dir * offset);
+            child.append_attribute("y").set_value(y);
+            offset++;
+            if(x + dir * offset >= size || x + dir * offset < 0) {
+                dir = -1 * dir;
+                offset = 1;
+            }
+        }
+    }
+}
+void MapGenerator::generate_bridges() {
+    int amt = BRIDGE_AMT;
+    while (amt) {
+        int x = rand() % size;
+        int y = rand() % size;
+        if(liquid_cells[x][y]) {
+
+        }
+
+        amt--;
+    }
+
 }
 
 void MapGenerator::generate(const std::string& name) {
@@ -166,7 +200,7 @@ void MapGenerator::generate(const std::string& name) {
 
 
     xml_node structs = root.append_child("Structs");
-    generate_structs(structs);
+    generate_rocks(structs);
     print_map(terrain);
     document.save_file(path.c_str());
 }

@@ -6,12 +6,13 @@
 #include <pugixml.hpp>
 
 #define ROCK_PCT 2
+#define BRIDGE_AMT size / 20
 /* Map generator. Randomly generates a readable .xml map file basing off the
  * passed arguments on the constructor. The maps are saved to the 'maps' folder
  * in the root directory. */
 
 class MapGenerator {
-    std::vector<std::vector<bool>> occupied_cells;
+    std::vector<std::vector<bool>> liquid_cells;
     std::ofstream output;
     int size;
     float lava_pct;
@@ -44,7 +45,11 @@ private:
     generate_path(int amt, time_t seed, std::vector<std::vector<bool>>& path);
 
     /* Generates rocks */
-    void generate_structs(pugi::xml_node root);
+    void generate_rocks(pugi::xml_node root);
+
+    void generate_bridges();
+
+    void populate_bridge(int x, int y);
 };
 
 
