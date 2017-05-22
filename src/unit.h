@@ -36,6 +36,8 @@ public:
     std::string getState() const;
 
     void grab(Teamable* object, std::string type);
+
+    //void attack(Occupable)-> make check is i have explosive attack for buildings
 };
 
 
