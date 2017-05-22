@@ -1,6 +1,4 @@
-#include <gtkmm.h>
 #include <iostream>
-#include "GameWindow.h"
 #include "cell.h"
 #include "MapLoader.h"
 #include "map.h"
