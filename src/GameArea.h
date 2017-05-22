@@ -3,6 +3,9 @@
 
 
 #include <gtkmm/drawingarea.h>
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
+#include "MapMonitor.h"
 
 class GameArea : public Gtk::DrawingArea{
 public:
@@ -11,10 +14,22 @@ public:
     virtual ~GameArea();
     GameArea(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
 
+    /**
+     * initialize shared resources.
+     */
+    void
+    setResources(PlayersMonitor *playersMonitor,
+                 BuildingsMonitor *buildingsMonitor,
+                 MapMonitor *mapMonitor);
+
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
+    PlayersMonitor *playersMonitor;
+    BuildingsMonitor *buildingsMonitor;
+    MapMonitor *mapMonitor;
+
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
     /* declare vector which contains imgs composing blue flag animation */
@@ -31,6 +46,13 @@ private:
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
 
+    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr);
+
+    void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
+                    unsigned int xCoordinate, unsigned int yCoordinate,
+                    std::string terrainType);
+
+    std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
 };
 
 

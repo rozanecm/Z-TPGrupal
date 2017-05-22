@@ -4,6 +4,10 @@
 #include <gtkmm.h>
 
 #include "GameWindow.h"
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
+#include "MapMonitor.h"
+
 class GameBuilder {
     GameWindow* window;
 
@@ -14,8 +18,13 @@ class GameBuilder {
     Gtk::Box* building_panel;
     Gtk::Box* group_panel;
     Gtk::Button* button;
+
+    PlayersMonitor &playersMonitor;
+    BuildingsMonitor &buildingsMonitor;
+    MapMonitor &mapMonitor;
 public:
-    GameBuilder();
+    GameBuilder(PlayersMonitor &monitor, BuildingsMonitor &buildingsMonitor,
+                    MapMonitor &mapMonitor);
     ~GameBuilder();
 
     Gtk::Window* get_window();

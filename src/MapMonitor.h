@@ -17,6 +17,13 @@ public:
     void setCell(unsigned int xCoordinate, unsigned int yCoordinate, std::string terrainType);
 
     void initializeMap(unsigned int xSize, unsigned int ySize);
+
+    unsigned int getXSize();
+
+    unsigned int getYSize();
+
+    std::string getTerrainTypeAt(unsigned int xCoordinate,
+                                 unsigned int yCoordinate);
 };
 
 

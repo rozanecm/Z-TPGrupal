@@ -13,6 +13,8 @@ public:
     Cell(std::string &terrainType);
 
     void assignTerrainType(std::string terrainType);
+
+    std::string getTerrainType();
 };
 
 

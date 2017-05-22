@@ -9,8 +9,10 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::Window(cobject)
-{
+        Gtk::Window(cobject),
+        playersMonitor(nullptr),
+        buildingsMonitor(nullptr),
+        mapMonitor(nullptr) {
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
@@ -18,7 +20,6 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
     show_all_children();
-
 }
 
 GameWindow::~GameWindow() {
@@ -33,6 +34,16 @@ bool GameWindow::onTimeout() {
         win->invalidate_rect(r, false);
     }
     return true;
+}
+
+void GameWindow::setResources(PlayersMonitor *playersMonitor,
+                              BuildingsMonitor *buildingsMonitor,
+                              MapMonitor *mapMonitor) {
+    this->playersMonitor = playersMonitor;
+    this->buildingsMonitor = buildingsMonitor;
+    this->mapMonitor = mapMonitor;
+
+    gameArea->setResources(playersMonitor, buildingsMonitor, mapMonitor);
 }
 
 
