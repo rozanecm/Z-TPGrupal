@@ -16,6 +16,14 @@ int Map::getTerrainFactorOn(int x, int y) {
     return terrain_map[x_pos][y_pos].getMovementFactor();
 }
 
+std::string Map::getTerrainType(int x, int y) {
+    int w_cell = terrain_map[0][0].getWidthOfCell();
+    int x_pos = x / w_cell;
+    int y_pos = y / w_cell;
+
+    return terrain_map[x_pos][y_pos].getTerrainType();
+}
+
 bool Map::areThisPointsEmpty(Size size) {
 
     // Check on all Occupant vector if
@@ -75,3 +83,4 @@ bool Map::isThereLava(Size& other_size) {
 
     return false;
 }
+
