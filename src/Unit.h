@@ -24,6 +24,8 @@ private:
     std::map<std::string, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> animations;
 
     unsigned short velocity;
+
+    std::pair<int, int> position;
 };
 
 

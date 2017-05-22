@@ -3,6 +3,7 @@
 #include "GameBuilder.h"
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
+#include "MapMonitor.h"
 
 void GraphicsThread::run() {
     auto app = Gtk::Application::create(argc, argv);
@@ -17,11 +18,14 @@ void GraphicsThread::run() {
     }
 }
 
-GraphicsThread::GraphicsThread(int argc, char **argv, PlayersMonitor &monitor,
-                               BuildingsMonitor &buildingsMonitor)
+GraphicsThread::GraphicsThread(int argc, char **argv,
+                               PlayersMonitor &monitor,
+                               BuildingsMonitor &buildingsMonitor,
+                               MapMonitor &mapMonitor)
         : argc(argc),
           argv(argv),
           playerMonitor(monitor),
-          buildingsMonitor(buildingsMonitor){
+          buildingsMonitor(buildingsMonitor),
+          mapMonitor(mapMonitor){
 
 }

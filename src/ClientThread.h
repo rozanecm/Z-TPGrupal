@@ -5,11 +5,13 @@
 #include "Thread.h"
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
+#include "MapMonitor.h"
 
 class ClientThread : public Thread {
 public:
     ClientThread(PlayersMonitor &playerMonitor,
-                     BuildingsMonitor &buildingsMonitor);
+                     BuildingsMonitor &buildingsMonitor,
+                     MapMonitor &mapMonitor);
 
     virtual void run();
 
@@ -17,6 +19,8 @@ private:
     PlayersMonitor &playersMonitor;
 
     BuildingsMonitor &buildingsMonitor;
+
+    MapMonitor &mapMonitor;
 };
 
 

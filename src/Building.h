@@ -17,6 +17,8 @@ private:
     std::vector<std::pair<int, Glib::RefPtr<Gdk::Pixbuf>>> unitsThatCanBeCreated;
 
     Player* owner;
+
+    std::pair<int, int> position;
 };
 
 
