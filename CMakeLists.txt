@@ -61,8 +61,7 @@ set(SOURCE_FILES
         src/MapMonitor.h
         src/Lock.cpp
         src/Lock.h
-        src/TPException.cpp
-        src/TPException.h)
+        )
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})
