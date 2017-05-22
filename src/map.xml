@@ -1,10 +1,10 @@
 <Map>
     <Row>
         <Cell terrain="Tierra" struct="" />
-        <Cell terrain="Agua" struct="" />
+        <Cell terrain="Lava" struct="" />
         <Cell terrain="Tierra" struct="" />
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Tierra" struct="" />
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
@@ -15,8 +15,8 @@
         <Cell terrain="Tierra" struct="" />
         <Cell terrain="Lava" struct="" />
         <Cell terrain="Tierra" struct="" />
-        <!--<Cell terrain="Agua" struct="" />-->
-        <!--<Cell terrain="Agua" struct="" />-->
+        <Cell terrain="Agua" struct="" />
+        <Cell terrain="Agua" struct="" />
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
@@ -25,41 +25,41 @@
     </Row>
     <Row>
         <Cell terrain="Carretera" struct="" />
-        <Cell terrain="Agua" struct="" />
+        <Cell terrain="Tierra" struct="" />
         <Cell terrain="Carretera" struct="" />
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Tierra" struct="" />
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
     </Row>
-    <!--<Row>-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
+    <Row>
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Lava" struct="" />
+        <Cell terrain="Tierra" struct="" />
         <!--<Cell terrain="Agua" struct="" />-->
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
-    <!--</Row>-->
+    </Row>
 
-    <!--<Row>-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Tierra" struct="" />-->
-        <!--<Cell terrain="Agua" struct="" />-->
-        <!--<Cell terrain="Agua" struct="" />-->
+    <Row>
+        <Cell terrain="Tierra" struct="" />
+        <Cell terrain="Tierra" struct="" />
+        <Cell terrain="Tierra" struct="" />
+        <Cell terrain="Tierra" struct="" />
+        <Cell terrain="Agua" struct="" />
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Lava" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->
-    <!--</Row>-->
+    </Row>
     <!--<Row>-->
         <!--<Cell terrain="Tierra" struct="" />-->
         <!--<Cell terrain="Tierra" struct="" />-->

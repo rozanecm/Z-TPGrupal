@@ -5,12 +5,6 @@
 
 using pugi::xml_attribute;
 
-const std::map<std::string, int> terrain_factor {
-        {std::string("Tierra"), int(1)},
-        {std::string("Agua"), int(7/10)},
-        {std::string("Carretera"), int(15/10)},
-        {std::string("Lava"), int(1000)}
-};
 
 MapLoader::MapLoader(std::string path) {
     pugi::xml_document doc;

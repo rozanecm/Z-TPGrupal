@@ -12,7 +12,7 @@ void Node::setHValue(int h) {
 }
 
 void Node::setGValue(int g, int terrain_factor) {
-    this->g_value = (g + 4)*terrain_factor;
+    this->g_value = (g + 4)+terrain_factor*terrain_factor;
     this->was_visited = true;
 }
 
