@@ -28,8 +28,13 @@ int RobotFactory::getSelectedUnitTime() {
 }
 
 std::string RobotFactory::nextUnit() {
-    if ( ++it == units.end())
-        it = units.begin();
+    int i = 0;
+    while (i == 0 || it->getTechnologyLevel() > this->tech_level) {
+        ++it;
+        if (it == units.end())
+            it = units.begin();
+        ++i;
+    }
     return it->getTypeOfUnit();
 }
 

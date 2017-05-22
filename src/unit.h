@@ -36,7 +36,7 @@ public:
     // Returns "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
     std::string getState() const;
-    
+
     // Returns the player id who is in control of the unit
     std::string getPlayer() const;
 };

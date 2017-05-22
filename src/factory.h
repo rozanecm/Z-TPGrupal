@@ -12,6 +12,7 @@ class Factory: public Occupant {
 protected:
     bool running;
     std::string player;
+    int tech_level;
 
 public:
     Factory(int life, std::string type, Size position);
@@ -24,6 +25,8 @@ public:
 
     // Returns the id of the player who is in control of the Factory
     std::string getPlayer();
+
+    void setNewPlayer(std::string player, int tech_level);
 };
 
 

@@ -10,3 +10,8 @@ Factory::Factory(int life, std::string type, Size position) :
 std::string Factory::getPlayer() {
     return this->player;
 }
+
+void Factory::setNewPlayer(std::string player, int tech_level) {
+    this->tech_level = tech_level;
+    this->player = player;
+}
