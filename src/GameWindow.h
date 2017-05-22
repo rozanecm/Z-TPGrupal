@@ -15,7 +15,8 @@ class GameWindow : public Gtk::Window {
     GameArea* gameArea;
 
 public:
-    GameWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    GameWindow(BaseObjectType* cobject,
+               const Glib::RefPtr<Gtk::Builder>& builder);
     virtual ~GameWindow();
 
     /**

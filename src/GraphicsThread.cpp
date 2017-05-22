@@ -27,5 +27,4 @@ GraphicsThread::GraphicsThread(int argc, char **argv,
           playerMonitor(monitor),
           buildingsMonitor(buildingsMonitor),
           mapMonitor(mapMonitor){
-
 }

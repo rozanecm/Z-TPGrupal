@@ -4,6 +4,7 @@
 
 #include <mutex>
 #include "Map.h"
+#include <string>
 
 class MapMonitor {
 private:
@@ -12,9 +13,11 @@ private:
     std::mutex m;
 
 public:
-    MapMonitor(Map &map);
+    explicit MapMonitor(Map &map);
 
-    void setCell(unsigned int xCoordinate, unsigned int yCoordinate, std::string terrainType);
+    void setCell(unsigned int xCoordinate,
+                 unsigned int yCoordinate,
+                 std::string terrainType);
 
     void initializeMap(unsigned int xSize, unsigned int ySize);
 

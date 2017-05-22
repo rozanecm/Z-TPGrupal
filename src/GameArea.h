@@ -6,13 +6,17 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include <map>
+#include <string>
+#include <vector>
 
 class GameArea : public Gtk::DrawingArea{
 public:
     GameArea();
 
     virtual ~GameArea();
-    GameArea(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    GameArea(BaseObjectType* cobject,
+             const Glib::RefPtr<Gtk::Builder>& builder);
 
     /**
      * initialize shared resources.

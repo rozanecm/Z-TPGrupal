@@ -10,7 +10,7 @@ private:
 public:
     Cell();
 
-    Cell(std::string &terrainType);
+    explicit Cell(std::string &terrainType);
 
     void assignTerrainType(std::string terrainType);
 

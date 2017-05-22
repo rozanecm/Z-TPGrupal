@@ -1,11 +1,13 @@
 #include <iostream>
+#include <string>
 #include "GameBuilder.h"
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 
 
-GameBuilder::GameBuilder(PlayersMonitor &monitor, BuildingsMonitor &buildingsMonitor,
+GameBuilder::GameBuilder(PlayersMonitor &monitor,
+                         BuildingsMonitor &buildingsMonitor,
                          MapMonitor &mapMonitor) :
         playersMonitor(playersMonitor),
         buildingsMonitor(buildingsMonitor),

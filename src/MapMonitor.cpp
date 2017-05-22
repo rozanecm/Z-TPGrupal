@@ -1,8 +1,8 @@
 #include "MapMonitor.h"
+#include <string>
 #include "Lock.h"
 
 MapMonitor::MapMonitor(Map &map) : map(map){
-
 }
 
 void MapMonitor::setCell(unsigned int xCoordinate, unsigned int yCoordinate,

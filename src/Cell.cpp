@@ -1,11 +1,10 @@
 #include "Cell.h"
+#include <string>
 
 Cell::Cell() : terrainType(""){
-
 }
 
 Cell::Cell(std::string &terrainType) : terrainType(terrainType) {
-
 }
 
 void Cell::assignTerrainType(std::string terrainType) {

@@ -4,6 +4,7 @@
 
 #include <mutex>
 #include "Building.h"
+#include <vector>
 
 class BuildingsMonitor {
 private:
@@ -11,7 +12,7 @@ private:
 
     std::mutex m;
 public:
-    BuildingsMonitor(std::vector<Building> &buildings);
+    explicit BuildingsMonitor(std::vector<Building> &buildings);
 };
 
 

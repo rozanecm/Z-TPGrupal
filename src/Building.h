@@ -3,6 +3,10 @@
 
 #include <gtkmm/drawingarea.h>
 #include "Player.h"
+#include <utility>
+#include <map>
+#include <string>
+#include <vector>
 
 class Building {
 private:
@@ -14,7 +18,8 @@ private:
     /* units that can be created are stored as a pair, where the int
      * indicates time needed and the Glib::RefPtr<Gdk::Pixbuf>
      * stores an image of the unit */
-    std::vector<std::pair<int, Glib::RefPtr<Gdk::Pixbuf>>> unitsThatCanBeCreated;
+    std::vector<std::pair<int, Glib::RefPtr<Gdk::Pixbuf>>>
+            unitsThatCanBeCreated;
 
     Player* owner;
 

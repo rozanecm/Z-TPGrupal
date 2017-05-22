@@ -1,4 +1,5 @@
 #include "Map.h"
+#include <string>
 
 void Map::initializeMap(unsigned int xSize, unsigned int ySize) {
     baseMap.resize(xSize);

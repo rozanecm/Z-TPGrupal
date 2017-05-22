@@ -2,6 +2,7 @@
 #include <gdkmm.h>
 #include <iostream>
 #include "GameArea.h"
+#include <string>
 
 #define TILEWIDTH 16    //tile width in pixels
 
@@ -30,8 +31,10 @@ GameArea::GameArea(BaseObjectType *cobject,
     someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
 
     /* Load tiles */
-    tiles["Tierra"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/tierra16.png");
-    tiles["Agua"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/agua16.png");
+    tiles["Tierra"] = Gdk::Pixbuf::create_from_file
+            ("res/assets/tiles/tierra16.png");
+    tiles["Agua"] = Gdk::Pixbuf::create_from_file
+            ("res/assets/tiles/agua16.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 }
 
@@ -77,7 +80,9 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           unsigned int xCoordinate, unsigned int yCoordinate,
                           std::string terrainType) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType), xCoordinate*TILEWIDTH, yCoordinate*TILEWIDTH);
+    Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType),
+                                  xCoordinate*TILEWIDTH,
+                                  yCoordinate*TILEWIDTH);
     cr->rectangle(xCoordinate * TILEWIDTH, yCoordinate * TILEWIDTH,
                   tiles.at(terrainType)->get_width(),
                   tiles.at(terrainType)->get_height());

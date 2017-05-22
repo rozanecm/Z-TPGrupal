@@ -7,6 +7,7 @@
 #include <map>
 #include "gtkmm/drawingarea.h"
 #include "Armament.h"
+#include <utility>
 
 class Unit {
 private:

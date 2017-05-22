@@ -11,7 +11,7 @@ class PlayersMonitor {
 
     std::mutex m;
 public:
-    PlayersMonitor(std::vector<Player> &players);
+    explicit PlayersMonitor(std::vector<Player> &players);
 };
 
 

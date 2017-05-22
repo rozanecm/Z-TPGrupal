@@ -2,6 +2,7 @@
 #define Z_TPGRUPAL_GAMEBUILDER_H
 
 #include <gtkmm.h>
+#include <string>
 
 #include "GameWindow.h"
 #include "PlayersMonitor.h"
@@ -22,6 +23,7 @@ class GameBuilder {
     PlayersMonitor &playersMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
+
 public:
     GameBuilder(PlayersMonitor &monitor, BuildingsMonitor &buildingsMonitor,
                     MapMonitor &mapMonitor);
