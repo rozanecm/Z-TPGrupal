@@ -36,7 +36,8 @@ void Socket::setAddrInfo(char* argv[]) {
     if (id == "server") {
         status = getaddrinfo(NULL, argv[1], &this->addr_pointer, &this->result);
     } else if (id == "client") {
-        status = getaddrinfo(argv[1], argv[2], &this->addr_pointer, &this->result);
+        status = getaddrinfo(argv[1], argv[2], &this->addr_pointer,
+                                                                &this->result);
     }
     if (status != 0) {
         throw SocketError("Error at getaddrinfo.\n");
@@ -46,15 +47,17 @@ void Socket::setAddrInfo(char* argv[]) {
 void Socket::connectToServer() {
     struct addrinfo* possible_address;
     int status = -1;
-    for (possible_address = this->result; possible_address != NULL && status == -1;
+    for (possible_address = this->result;
+         possible_address != NULL && status == -1;
          possible_address = possible_address->ai_next) {
         createSocketTcp(possible_address);
         status = connect(this->file_descriptor,
-                         possible_address->ai_addr, possible_address->ai_addrlen);
+                      possible_address->ai_addr, possible_address->ai_addrlen);
     }
     freeaddrinfo(this->result);
     if (status == -1)
-        throw SocketError("Connection with all addresses failed\n", strerror(errno));
+        throw SocketError("Connection with all addresses failed\n",
+                                                       strerror(errno));
 }
 
 void Socket::createSocketTcp(struct addrinfo* addr_pointer) {
@@ -83,31 +86,31 @@ int Socket::socketSend(const char* buff_to_send, size_t length) {
     std::string message(buff_to_send);
 
     while ((bytes_sent < length) && (send_state)) {
-        send_state = send(this->file_descriptor,
+        send_state = (int) send(this->file_descriptor,
                           (buff_to_send + bytes_sent),
                           length - bytes_sent, MSG_NOSIGNAL);
         if (send_state < 0) {
-            return send_state;
+            return  send_state;
         } else if (send_state > 0) {
             bytes_sent += send_state;
         }
     }
-    return bytes_sent;
+    return  (int) bytes_sent;
 }
 
 int Socket::socketRecieve(char* buff_to_receive, size_t length) {
     size_t bytes_received = 0;
     int receive_state = 1;
     while ((bytes_received < length) && (receive_state)) {
-        receive_state = recv(this->file_descriptor,
-                             buff_to_receive + bytes_received,
-                             length - bytes_received, MSG_NOSIGNAL);
+        receive_state = (int) recv(this->file_descriptor,
+                                     buff_to_receive + bytes_received,
+                                     length - bytes_received, MSG_NOSIGNAL);
         if (receive_state < 0) {
             return receive_state;
         }
         bytes_received += receive_state;
     }
-    return bytes_received;
+    return (int) bytes_received;
 }
 
 void Socket::bindAndListen(struct addrinfo *addr_pointer) {
