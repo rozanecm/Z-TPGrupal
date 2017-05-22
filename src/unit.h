@@ -7,25 +7,23 @@
 
 #include "Occupant.h"
 #include "compass.h"
+#include "teamable.h"
 //#include "map.h"
 
 class Map;
 
-class Unit: public Occupant {
+class Unit: public Occupant, public Teamable {
 private:
     Compass compass;
     int unit_speed;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
-    std::string state, player;
+    std::string state;
     Size range;
 
 public:
     Unit(int life, std::string type, int unit_speed, Size size, Size range,
                                                                 Map& map);
-
-    // Changes the unit team
-    void setTeam(std::string team);
 
     // Indicates the Unit it's new position
     void moveToPosition(int x, int y);
@@ -37,8 +35,7 @@ public:
     // is standing still
     std::string getState() const;
 
-    // Returns the player id who is in control of the unit
-    std::string getPlayer() const;
+    void grab(Teamable* object, std::string type);
 };
 
 

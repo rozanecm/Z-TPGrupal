@@ -5,13 +5,15 @@
 #include "factory.h"
 
 Factory::Factory(int life, std::string type, Size position) :
-        Occupant(life,type, position), running(false), player("neutral") {}
+        Occupant(life,type, position), Teamable(position), running(false) {}
 
-std::string Factory::getPlayer() {
-    return this->player;
-}
+Factory::Factory(int life, std::string type, std::string team, Size position) :
+    Occupant(life,type, position), Teamable(team,position), running(false) {}
+
 
 void Factory::setNewPlayer(std::string player, int tech_level) {
     this->tech_level = tech_level;
-    this->player = player;
+    this->team = player;
 }
+
+

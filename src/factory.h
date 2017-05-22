@@ -7,24 +7,23 @@
 
 
 #include "Occupant.h"
+#include "teamable.h"
 
-class Factory: public Occupant {
+class Factory: public Occupant, public Teamable {
 protected:
     bool running;
-    std::string player;
     int tech_level;
 
 public:
     Factory(int life, std::string type, Size position);
+
+    Factory(int life, std::string type, std::string team, Size position);
 
     virtual void build() = 0;
 
     virtual void stopBuilding() = 0;
 
     virtual int getSelectedUnitTime() = 0;
-
-    // Returns the id of the player who is in control of the Factory
-    std::string getPlayer();
 
     void setNewPlayer(std::string player, int tech_level);
 };

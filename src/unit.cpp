@@ -5,8 +5,8 @@
 #include "unit.h"
 
 Unit::Unit(int life, std::string type, int unit_speed, Size size, Size range,
-           Map& map) : Occupant(life, type, size), compass(map,size),
-       unit_speed(unit_speed), state("std"), team("neutral"), range(range) {}
+      Map& map) : Occupant(life, type, size), Teamable(size), compass(map,size),
+       unit_speed(unit_speed), state("std"), range(range) {}
 
 void Unit::moveToPosition(int x, int y) {
     this->state = "mv";
@@ -40,10 +40,15 @@ Position Unit::getCurrentPosition() const {
     return this->occ_size.getPosition();
 }
 
-void Unit::setTeam(std::string team) {
-    this->player = team;
-}
 
-std::string Unit::getPlayer() const {
-    return this->player;
+void Unit::grab(Teamable* object, std::string u_type) {
+    // move to position
+    if (u_type == "Flag") {
+        object->changeTeam(this->team);
+    } else if (this->type == "Grunt") { // Only Grunt robots can drive
+        // If is not a flag, is a vehicle
+        // Unit disappears right before taking the vehicle
+        object->changeTeam(this->team);
+        this->life_points = 0;
+    }
 }
