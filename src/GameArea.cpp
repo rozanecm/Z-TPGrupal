@@ -13,7 +13,6 @@ GameArea::GameArea(BaseObjectType *cobject,
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr) {
-    std::cout << "Llego acá? " << std::endl;
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/other/flag_blue_0.png"));
