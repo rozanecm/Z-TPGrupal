@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h src/lock.cpp
         src/lock.h src/lock.cpp src/lock.h src/node.cpp src/node.h src/size.cpp src/size.h src/map.cpp src/map.h src/unit.cpp src/unit.h src/position.cpp
         src/position.h src/weapon.cpp src/weapon.h src/unitMold.cpp src/unitMold.h
-        src/teamable.cpp src/teamable.h src/factory.cpp src/factory.h)
+        src/teamable.cpp src/teamable.h src/factory.cpp src/factory.h src/bullet.cpp src/bullet.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 

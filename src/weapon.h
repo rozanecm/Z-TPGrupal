@@ -6,8 +6,10 @@
 #define Z_TPGRUPAL_WEAPON_H
 
 #include <iostream>
+#include <vector>
 #include "size.h"
 #include "Occupant.h"
+#include "bullet.h"
 
 class Weapon {
 private:
@@ -15,12 +17,17 @@ private:
     int damage, w_speed;
     bool explosive;
     Size w_size;
+    std::vector<Bullet> bullets;
 
 public:
     Weapon(std::string type, int damage, int w_speed, bool explosive,
                                                         Size w_size);
 
     void shotTarget(Occupant* target);
+
+    bool isTheAttackExplosive();
+
+    void checkIfBullestHit();
 };
 
 

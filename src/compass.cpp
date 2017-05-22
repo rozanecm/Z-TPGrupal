@@ -21,7 +21,6 @@ void Compass::setTerrainModifier(int unit_speed) {
     terrain_modifier.insert(std::pair<std::string,int>("Tierra",2));
     terrain_modifier.insert(std::pair<std::string,int>("Pradera",2));
     terrain_modifier.insert(std::pair<std::string,int>("Nieve",2));
-    terrain_modifier.insert(std::pair<std::string,int>("Lava",10000));
     terrain_modifier.insert(std::pair<std::string, int>("Agua", 3));
 }
 
