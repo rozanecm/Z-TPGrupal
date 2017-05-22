@@ -41,5 +41,9 @@ Position Unit::getCurrentPosition() const {
 }
 
 void Unit::setTeam(std::string team) {
-    this->team = team;
+    this->player = team;
+}
+
+std::string Unit::getPlayer() const {
+    return this->player;
 }

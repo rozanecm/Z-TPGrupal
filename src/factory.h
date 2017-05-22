@@ -11,6 +11,8 @@
 class Factory: public Occupant {
 protected:
     bool running;
+    std::string player;
+
 public:
     Factory(int life, std::string type, Size position);
 
@@ -19,6 +21,9 @@ public:
     virtual void stopBuilding() = 0;
 
     virtual int getSelectedUnitTime() = 0;
+
+    // Returns the id of the player who is in control of the Factory
+    std::string getPlayer();
 };
 
 

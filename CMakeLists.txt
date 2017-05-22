@@ -12,7 +12,7 @@ include_directories(${SDL2_INCLUDE_DIR})
 
 set(SOURCE_FILES
         src/main.cpp src/GameWindow.cpp src/GameWindow.h src/cell.cpp src/cell.h src/Terrain.cpp src/Terrain.h src/Occupant.cpp src/Occupant.h
-        src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h src/lock.cpp src/lock.h src/lock.cpp src/lock.h src/node.cpp src/node.h src/size.cpp src/size.h src/map.cpp src/map.h src/unit.cpp src/unit.h src/position.cpp src/position.h src/weapon.cpp src/weapon.h src/toughType.cpp src/toughType.h)
+        src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h src/lock.cpp src/lock.h src/lock.cpp src/lock.h src/node.cpp src/node.h src/size.cpp src/size.h src/map.cpp src/map.h src/unit.cpp src/unit.h src/position.cpp src/position.h src/weapon.cpp src/weapon.h src/toughType.cpp src/toughType.h src/factory.cpp src/factory.h src/robotFactory.cpp src/robotFactory.h src/unitMold.cpp src/unitMold.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 

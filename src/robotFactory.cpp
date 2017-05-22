@@ -34,6 +34,8 @@ std::string RobotFactory::nextUnit() {
 }
 
 Occupant *RobotFactory::destroyFactory() {
+    // capaz necesite un tipo distinto a Occupant para que no pueda ser
+    // destruido ni atacado
     Occupant* ruins = new Occupant(1000,"Ruins",this->occ_size);
     return ruins;
 }
