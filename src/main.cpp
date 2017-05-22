@@ -41,7 +41,7 @@ int main (int argc, char **argv) {
     Size unit_size(4,1,3,3);
 
 
-    Compass compass(map, unit_size);
+    Compass compass(map, unit_size, 5); // with 4 is a robot
 
     Position destination(4,7);
     std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),

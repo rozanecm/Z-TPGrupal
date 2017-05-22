@@ -38,14 +38,8 @@ MapLoader::MapLoader(std::string path) {
 
 
 //            auto it = terrain_factor.find(terrain); // TODO: actual factors
-            int factor = 2;
-            if (terrain == "Agua") {
-                factor = 3;
-            } else if (terrain == "Lava") {
-                factor = 1000;
-            } else if (terrain == "Carretera") {
-                factor = 1;
-            }
+            int factor = 1;
+
 
             // Create a real occupant if the cell's occupied
             int ocpt_id = -1;
