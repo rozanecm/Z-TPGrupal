@@ -5,8 +5,9 @@
 #include "unit.h"
 
 Unit::Unit(int life, std::string type, int unit_speed, Size size, Size range,
-      Map& map) : Occupant(life, type, size), Teamable(size), compass(map,size),
-       unit_speed(unit_speed), state("std"), range(range) {}
+      Map& map) : Occupant(life, type, size), Teamable(size),
+compass(map,size,unit_speed), unit_speed(unit_speed), state("std"),
+range(range) {}
 
 void Unit::moveToPosition(int x, int y) {
     this->state = "mv";

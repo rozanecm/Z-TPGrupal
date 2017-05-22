@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include "cell.h"
 #include "node.h"
 #include "map.h"
@@ -21,13 +22,14 @@ private:
     std::vector<Node*> closed_nodes;
     std::vector<Node*> open_nodes;
     std::vector<Position>* road;
+    std::map<std::string,int> terrain_modifier;
     int unit_speed;
     Size unit_size;
 
 public:
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
-    Compass(Map& map, Size unit_size);
+    Compass(Map& map, Size unit_size, int unit_speed);
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
@@ -38,6 +40,7 @@ public:
     ~Compass();
 
 private:
+    void setTerrainModifier(int unit_speed);
     // Writes the H value on every node of astar_map for the received position
     // It use Manhattan distance
     void setHValueForDestiny(Position to);

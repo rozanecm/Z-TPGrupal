@@ -8,9 +8,21 @@
 #define DIAGONALWALK 14
 #define HMIN 1
 
-Compass::Compass(Map &map, Size unit_size): map(map), unit_size(unit_size) {
+Compass::Compass(Map &map, Size unit_size, int unit_speed): map(map),
+                                 unit_size(unit_size), unit_speed(unit_speed) {
     this->buildNodeMap();
     this->road = new std::vector<Position>;
+    this->setTerrainModifier(unit_speed);
+}
+
+void Compass::setTerrainModifier(int unit_speed) {
+    terrain_modifier.insert(std::pair<std::string,int>("Carretera",1));
+    terrain_modifier.insert(std::pair<std::string,int>("Camino Asfaltado",1));
+    terrain_modifier.insert(std::pair<std::string,int>("Tierra",2));
+    terrain_modifier.insert(std::pair<std::string,int>("Pradera",2));
+    terrain_modifier.insert(std::pair<std::string,int>("Nieve",2));
+    terrain_modifier.insert(std::pair<std::string,int>("Lava",10000));
+    terrain_modifier.insert(std::pair<std::string, int>("Agua", 3));
 }
 
 void Compass::buildNodeMap() {
@@ -21,7 +33,7 @@ void Compass::buildNodeMap() {
         astar_map.push_back(row_vec);
         for(int jt = 0; jt <= map.getHeigth(); ++jt) {
             astar_map.back().push_back(new Node(it, jt,
-                                                unit_size.getWidth(), unit_size.getHeight()));
+                                  unit_size.getWidth(), unit_size.getHeight()));
             std::cout<< "(" <<astar_map.back().back()->getPosition().getX() << "," << astar_map.back().back()->getPosition().getY()<<")  ";
         }
         std::cout<<std::endl;
@@ -182,13 +194,19 @@ bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
     // adjacent hasn't been seen yet,
     // add new g value and change parent.
     Position pos = adj->getPosition();
-    int terrain_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
-    if ((adj->beenSeen() &&
-        (adj->getFValueIfGWere(new_g,terrain_factor) < adj->getFValue())) ||
-        (!adj->beenSeen())) {
-        adj->setGValue(new_g, terrain_factor);
-        adj->setNewParent(ref);
-        adj_change_g = true;
+    std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
+
+    // when is a vehicle and it's water, don't add it to open list
+    if (!(unit_speed != 4 && terrain_type == "Agua")) {
+        int terrain_factor = terrain_modifier[terrain_type];
+        if ((adj->beenSeen() &&
+             (adj->getFValueIfGWere(new_g, terrain_factor) <
+              adj->getFValue())) ||
+            (!adj->beenSeen())) {
+            adj->setGValue(new_g, terrain_factor);
+            adj->setNewParent(ref);
+            adj_change_g = true;
+        }
     }
     return adj_change_g;
 }
@@ -328,3 +346,5 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
         }
     }
 }
+
+
