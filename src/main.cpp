@@ -78,7 +78,7 @@ int main (int argc, char **argv) {
         }
     }
 
-    int factor = 5*1.5;
+    int factor = (int) (5*1.5);
     std::cout << factor;
 
     delete(unit);

@@ -23,15 +23,16 @@ void Unit::move() {
         Size next_pos(pos.getX(),pos.getY(),occ_size.getWidth()
                                                         ,occ_size.getHeight());
         if (map.canIWalkToThisPosition(next_pos)) {
-            int t_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
+            double t_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
             this->occ_size.moveTo(pos.getX(),pos.getY());
             road->pop_back();
 
             // increase or decrease distance til steps are more than unit speed
             if (steps <= unit_speed && unit_speed == 4) {
-                distance = t_factor * distance;
+                distance = (int) (t_factor * distance);
             } else if (steps <= unit_speed && unit_speed > 4) {
-                distance = distance * t_factor * (1-(damage_recv/life_points));
+                distance = (int) (t_factor *distance *
+                                                (1-(damage_recv/life_points)));
             }
             ++steps;
         } else {

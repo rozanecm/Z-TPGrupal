@@ -49,7 +49,8 @@ std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
     // start algorithm
         // add "from" to visited list
     Node* start_node = astar_map[from.getX()][from.getY()];
-    start_node->setGValue(0,map.getTerrainFactorOn(from.getX(),from.getY()));
+    std::string terrain_type = map.getTerrainType(from.getX(),from.getY());
+    start_node->setGValue(0,terrain_modifier[terrain_type]);
     start_node->setNewParent(start_node);
     this->closed_nodes.push_back(start_node);
 
