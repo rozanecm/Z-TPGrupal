@@ -8,7 +8,7 @@
 // Class Occupant so any object knows where is on the map
 class Occupant {
 protected:
-    int life_points;
+    int life_points, damage_recv;
     Size occ_size;
     std::string type;
 
@@ -27,6 +27,8 @@ public:
     bool areYouAlive();
 
     bool isThereACollision(Size& size);
+
+    int getLifeLeft();
 
     ~Occupant();
 };
