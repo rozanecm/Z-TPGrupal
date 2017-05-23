@@ -3,9 +3,11 @@
 
 void ClientThread::run() {
     while (true){
-        mapMonitor.initializeMap(20, 20);
-        for (int i = 0; i < 20; i++){
-            for (int j = 0; j < 20; j++){
+        /* initialize map so then can be completed with read data */
+        mapMonitor.initializeMap(200, 200);
+
+        for (int i = 0; i < 200; i++){
+            for (int j = 0; j < 200; j++){
                 if (i%2 == 0){
                     mapMonitor.setCell(i, j, "Agua");
                 } else{
