@@ -1,11 +1,14 @@
 #include <gtkmm/window.h>
 #include "GraphicsThread.h"
 #include "GameBuilder.h"
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
+#include "MapMonitor.h"
 
 void GraphicsThread::run() {
     auto app = Gtk::Application::create(argc, argv);
 
-    GameBuilder game;
+    GameBuilder game(playerMonitor, buildingsMonitor, mapMonitor);
     GameWindow* window = game.get_window();
 
     if (window) {
@@ -17,6 +20,13 @@ void GraphicsThread::run() {
     }
 }
 
-GraphicsThread::GraphicsThread(int argc, char **argv) : argc(argc), argv(argv){
-
+GraphicsThread::GraphicsThread(int argc, char **argv,
+                               PlayersMonitor &monitor,
+                               BuildingsMonitor &buildingsMonitor,
+                               MapMonitor &mapMonitor)
+        : argc(argc),
+          argv(argv),
+          playerMonitor(monitor),
+          buildingsMonitor(buildingsMonitor),
+          mapMonitor(mapMonitor){
 }

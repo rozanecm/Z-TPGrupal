@@ -38,7 +38,31 @@ set(SOURCE_FILES
         src/GraphicsThread.cpp
         src/GraphicsThread.h
         src/Thread.h
-        src/Thread.cpp src/BuildingPanel.cpp src/BuildingPanel.h)
+        src/Thread.cpp
+        src/Player.cpp
+        src/Player.h
+        src/Unit.cpp
+        src/Unit.h
+        src/Armament.cpp
+        src/Armament.h
+        src/Building.cpp
+        src/Building.h
+        src/ClientThread.cpp
+        src/ClientThread.h
+        src/PlayersMonitor.cpp
+        src/PlayersMonitor.h
+        src/BuildingsMonitor.cpp
+        src/BuildingsMonitor.h
+        src/Map.cpp
+        src/Map.h
+        src/Cell.cpp
+        src/Cell.h
+        src/MapMonitor.cpp
+        src/MapMonitor.h
+        src/Lock.cpp
+        src/Lock.h
+        src/Thread.cpp
+        src/BuildingPanel.cpp src/BuildingPanel.h)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})

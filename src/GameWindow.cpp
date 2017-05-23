@@ -9,8 +9,10 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::Window(cobject)
-{
+        Gtk::Window(cobject),
+        playersMonitor(nullptr),
+        buildingsMonitor(nullptr),
+        mapMonitor(nullptr) {
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
@@ -23,6 +25,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
 
+    show_all_children();
 }
 
 GameWindow::~GameWindow() {
@@ -36,12 +39,23 @@ bool GameWindow::onTimeout() {
                          get_allocation().get_height());
         win->invalidate_rect(r, false);
     }
+    std::cout<<"in onTimeout"<<std::endl;
     return true;
+}
+
+void GameWindow::setResources(PlayersMonitor *playersMonitor,
+                              BuildingsMonitor *buildingsMonitor,
+                              MapMonitor *mapMonitor) {
+    this->playersMonitor = playersMonitor;
+    this->buildingsMonitor = buildingsMonitor;
+    this->mapMonitor = mapMonitor;
+
+    gameArea->setResources(playersMonitor, buildingsMonitor, mapMonitor);
 }
 
 
 bool GameWindow::change_view_to_unit() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
 
@@ -50,7 +64,7 @@ bool GameWindow::change_view_to_unit() {
 }
 
 bool GameWindow::change_view_to_building() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
     panel->pack_start(*building_panel);
@@ -60,7 +74,7 @@ bool GameWindow::change_view_to_building() {
 }
 
 bool GameWindow::change_view_to_unit_group() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
 

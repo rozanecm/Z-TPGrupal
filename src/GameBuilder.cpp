@@ -1,8 +1,17 @@
 #include <iostream>
+#include <string>
 #include "GameBuilder.h"
+#include "PlayersMonitor.h"
+#include "BuildingsMonitor.h"
+#include "MapMonitor.h"
 
 
-GameBuilder::GameBuilder() {
+GameBuilder::GameBuilder(PlayersMonitor &monitor,
+                         BuildingsMonitor &buildingsMonitor,
+                         MapMonitor &mapMonitor) :
+        playersMonitor(playersMonitor),
+        buildingsMonitor(buildingsMonitor),
+        mapMonitor(mapMonitor){
     //Load the GtkBuilder file and instantiate its widgets:
     refBuilder = Gtk::Builder::create();
     try
@@ -27,6 +36,14 @@ GameBuilder::GameBuilder() {
 
     // Save the widget refs in the class attributes
     refBuilder->get_widget_derived("GameWindow", window);
+
+    window->setResources(&playersMonitor, &buildingsMonitor, &mapMonitor);
+    refBuilder->get_widget("Portrait", portrait);
+    refBuilder->get_widget("SidePanel", panel);
+    refBuilder->get_widget("BuildingView", building_panel);
+    refBuilder->get_widget("UnitView", unit_panel);
+    refBuilder->get_widget("GroupView", group_panel);
+    refBuilder->get_widget("Create", button);
 }
 
 

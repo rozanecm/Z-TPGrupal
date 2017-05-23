@@ -1,9 +1,9 @@
 #include "BuildingPanel.h"
+#include <string>
 
 BuildingPanel::BuildingPanel(BaseObjectType *cobject,
                              const Glib::RefPtr<Gtk::Builder> &builder) :
-    Gtk::Box(cobject)
-{
+    Gtk::Box(cobject) {
     builder->get_widget("FactoryImage", building);
     builder->get_widget("FactoryUnitImage", unit);
 

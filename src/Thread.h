@@ -1,5 +1,5 @@
-#ifndef PROYECTO_THREAD_H
-#define PROYECTO_THREAD_H
+#ifndef Z_TPGRUPAL_THREAD_H
+#define Z_TPGRUPAL_THREAD_H
 
 
 #include <thread>
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //PROYECTO_THREAD_H
+#endif //Z_TPGRUPAL_THREAD_H

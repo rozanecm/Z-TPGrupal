@@ -5,14 +5,15 @@
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
 #include <gtkmm/builder.h>
+#include <string>
 
 class BuildingPanel : public Gtk::Box {
-
     Gtk::Image* building;
     Gtk::Image* unit;
     const std::string label = "Factory";
 public:
-    BuildingPanel(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    BuildingPanel(BaseObjectType* cobject,
+                  const Glib::RefPtr<Gtk::Builder>& builder);
 
     const std::string& get_label();
 };
