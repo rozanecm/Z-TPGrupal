@@ -4,8 +4,8 @@
 
 #include "Occupant.h"
 
-Occupant::Occupant(int life, std::string type, Size position/*, Map map*/) : life_points(life)
-        , type(type), occ_size(position)/*, wordl_map(map)*/ {}
+Occupant::Occupant(int life, std::string type, Size position): life_points(life)
+        , type(type), occ_size(position), damage_recv(0) {}
 
 std::string Occupant::getType() const {
     return this->type;
