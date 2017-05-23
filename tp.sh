@@ -1,3 +1,5 @@
+printf "deleting old exe file\n"
+rm Z_TPGrupal
 printf "executing cmake\n"
 cmake CMakeLists.txt
 printf "executing make\n"
