@@ -16,21 +16,32 @@ void Unit::calculateRoadTo(int x, int y) {
 }
 
 void Unit::move() {
-    // different quantity of positions by TIC depending on unit_speed and
-    // terrain_factor
-    bool arrived = false;
-    while (this->state == "mv" && !road->empty()){
-        //
-        //
+    int distance = unit_speed;
+    int steps = 0;
+    while (this->state == "mv" && !road->empty() && steps <= distance){
         Position pos = road->back();
-        this->occ_size.moveTo(pos.getX(),pos.getY());
-        road->pop_back();
-        if (road->empty())
-            arrived = true;
-            //use of Tics to determine velocity
+        Size next_pos(pos.getX(),pos.getY(),occ_size.getWidth()
+                                                        ,occ_size.getHeight());
+        if (map.canIWalkToThisPosition(next_pos)) {
+            int t_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
+            this->occ_size.moveTo(pos.getX(),pos.getY());
+            road->pop_back();
+
+            // increase or decrease distance til steps are more than unit speed
+            if (steps <= unit_speed && unit_speed == 4) {
+                distance = t_factor * distance;
+            } else if (steps <= unit_speed && unit_speed > 4) {
+                distance = distance * t_factor * (1-(damage_recv/life_points));
+            }
+            ++steps;
+        } else {
+            Position destiny = road->front();
+            this->calculateRoadTo(destiny.getX(),destiny.getY());
+            this->move();
+        }
     }
 
-    if (arrived)
+    if (road->empty())
         this->state = "std";
 }
 
