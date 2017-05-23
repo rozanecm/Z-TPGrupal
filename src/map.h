@@ -32,7 +32,7 @@ public:
 
     // Recieves the coordinates (x,y) and returns the terrain factor on that
     // position on the map.
-    int getTerrainFactorOn(int x, int y);
+    double getTerrainFactorOn(int x, int y);
 
     // Returns the name of the type of Terrain
     std::string getTerrainType(int x, int y);

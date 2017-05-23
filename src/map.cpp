@@ -12,7 +12,7 @@ void Map::addOccupant(Occupant *new_occupant) {
     all_occupants.push_back(new_occupant);
 }
 
-int Map::getTerrainFactorOn(int x, int y) {
+double Map::getTerrainFactorOn(int x, int y) {
     int w_cell = terrain_map[0][0].getWidthOfCell();
     int x_pos = x / w_cell;
     int y_pos = y / w_cell;

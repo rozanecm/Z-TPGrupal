@@ -11,7 +11,7 @@ std::string Terrain::getKind() const{
     return this->kind;
 }
 
-int Terrain::getFactor() const {
+double Terrain::getFactor() const {
     return this->factor;
 }
 

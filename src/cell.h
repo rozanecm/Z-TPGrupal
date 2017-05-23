@@ -14,7 +14,6 @@ class Cell {
     private:
         Terrain terrain;
         Size size;
-//        std::mutex m;
 
     public:
         // Cell constructor on position (x,y). Builds the Terrain inside it and
@@ -27,7 +26,7 @@ class Cell {
         std::string getTerrainType() const;
 
         // Returns the movement factor of the Terrain
-        int getMovementFactor() const;
+        double getMovementFactor() const;
 
         Position getPosition() const;
 

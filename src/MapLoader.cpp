@@ -5,6 +5,12 @@
 
 using pugi::xml_attribute;
 
+const std::map<std::string, int> terrain_factor {
+        {std::string("Tierra"), int(1)},
+        {std::string("Agua"), int(7/10)},
+        {std::string("Carretera"), int(15/10)},
+        {std::string("Lava"), int(1000)}
+};
 
 MapLoader::MapLoader(std::string path) {
     pugi::xml_document doc;
@@ -32,8 +38,14 @@ MapLoader::MapLoader(std::string path) {
 
 
 //            auto it = terrain_factor.find(terrain); // TODO: actual factors
-            int factor = 1;
-
+            double factor = 1;
+            if (terrain == "Agua") {
+                factor = 0.7;
+            } else if (terrain == "Lava") {
+                factor = 1000;
+            } else if (terrain == "Carretera") {
+                factor = 1.5;
+            }
 
             // Create a real occupant if the cell's occupied
             int ocpt_id = -1;

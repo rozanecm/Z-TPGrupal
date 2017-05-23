@@ -8,12 +8,10 @@ Cell::Cell(int x, int y, int width, int lenght, std::string &kind, int factor):
             size(x, y, width, lenght), terrain(kind,factor) {}
 
 std::string Cell::getTerrainType() const{
-//    Lock l(m);
     return this->terrain.getKind();
 }
 
-int Cell::getMovementFactor() const {
-//    Lock l(m);
+double Cell::getMovementFactor() const {
     return this->terrain.getFactor();
 }
 

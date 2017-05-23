@@ -8,7 +8,7 @@
 class Terrain {
     private:
         std::string kind;
-        int factor;
+        double factor;
 
     public:
         // Terrain is of constant kind and factor for moving over it
@@ -18,7 +18,7 @@ class Terrain {
         std::string getKind() const;
 
         // Returns the moving factor
-        int getFactor() const;
+        double getFactor() const;
 
         ~Terrain();
 };

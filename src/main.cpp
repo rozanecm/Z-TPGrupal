@@ -14,7 +14,7 @@ int main (int argc, char **argv) {
 
     Map map(7,7,15,15, cell_map);
 
-    Size unit_size(7,4,3,3);
+    Size unit_size(1,4,3,3);
     Size range(-2,-2,4,4);
 
     Unit* unit = new Unit(100,"Grunt", 4,unit_size,range,map);
@@ -77,6 +77,10 @@ int main (int argc, char **argv) {
             j = 0;
         }
     }
+
+    int factor = 5*1.5;
+    std::cout << factor;
+
     delete(unit);
     return 0;
 }
