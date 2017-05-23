@@ -20,6 +20,7 @@ class GameWindow : public Gtk::Window {
     BuildingPanel* building_panel;
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;
+
 public:
     GameWindow(BaseObjectType* cobject,
                const Glib::RefPtr<Gtk::Builder>& builder);
@@ -38,7 +39,6 @@ public:
     bool change_view_to_unit_group();
 
 protected:
-
     bool onTimeout();
 
 private:

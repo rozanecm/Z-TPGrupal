@@ -44,8 +44,6 @@ GameBuilder::GameBuilder(PlayersMonitor &monitor,
     refBuilder->get_widget("UnitView", unit_panel);
     refBuilder->get_widget("GroupView", group_panel);
     refBuilder->get_widget("Create", button);
-//    update_portrait("assets/portraits/sample.png");
-
 }
 
 

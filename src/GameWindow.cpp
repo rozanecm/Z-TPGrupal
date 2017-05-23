@@ -55,7 +55,7 @@ void GameWindow::setResources(PlayersMonitor *playersMonitor,
 
 
 bool GameWindow::change_view_to_unit() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
 
@@ -64,7 +64,7 @@ bool GameWindow::change_view_to_unit() {
 }
 
 bool GameWindow::change_view_to_building() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
     panel->pack_start(*building_panel);
@@ -74,7 +74,7 @@ bool GameWindow::change_view_to_building() {
 }
 
 bool GameWindow::change_view_to_unit_group() {
-    for(auto child : panel->get_children()) {
+    for (auto child : panel->get_children()) {
         panel->remove(*child);
     }
 

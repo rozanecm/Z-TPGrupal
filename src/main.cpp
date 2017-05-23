@@ -30,8 +30,7 @@ void play_sound() {
     Mix_PlayChannel(-1, sample, -1);
 }
 
-int main (int argc, char **argv)
-{
+int main(int argc, char **argv) {
     // play_sound();
 
     /* create map; bind with monitor */

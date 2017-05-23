@@ -9,8 +9,6 @@ void GraphicsThread::run() {
     auto app = Gtk::Application::create(argc, argv);
 
     GameBuilder game(playerMonitor, buildingsMonitor, mapMonitor);
-//    Gtk::Window* window = game.get_window();
-//    game.change_view_to_building();
     GameWindow* window = game.get_window();
 
     if (window) {
