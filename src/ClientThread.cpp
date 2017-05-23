@@ -6,18 +6,8 @@
 
 using namespace pugi;
 void ClientThread::run() {
-    while (true){
-        /* initialize map so then can be completed with read data */
-        mapMonitor.initializeMap(200, 200);
-
-        for (int i = 0; i < 200; i++){
-            for (int j = 0; j < 200; j++){
-                if (i%2 == 0){
-                    mapMonitor.setCell(i, j, "Agua");
-                } else{
-                    mapMonitor.setCell(i, j, "Tierra");
-                }
-            }
+    /* initialize map so then can be completed with read data */
+    mapMonitor.initializeMap(200, 200);
 
     std::vector<std::vector<std::string>> map;
     xml_document doc;
