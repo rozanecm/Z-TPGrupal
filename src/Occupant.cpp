@@ -19,8 +19,14 @@ bool Occupant::areYouAlive() {
     return (this->life_points > 0);
 }
 
+
+
 Occupant::~Occupant() {}
 
 Position Occupant::getPosition() const{
     return occ_size.getPosition();
+}
+
+bool Occupant::isThereACollision(Size &other) {
+    return occ_size.isThereACollision(other);
 }

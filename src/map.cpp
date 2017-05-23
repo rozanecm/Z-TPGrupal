@@ -8,6 +8,10 @@ Map::Map(int x, int y, int width, int height,
    std::vector<std::vector<Cell>>& terrain_map) : map_size(x,y,width,height),
     terrain_map(terrain_map){}
 
+void Map::addOccupant(Occupant *new_occupant) {
+    all_occupants.push_back(new_occupant);
+}
+
 int Map::getTerrainFactorOn(int x, int y) {
     int w_cell = terrain_map[0][0].getWidthOfCell();
     int x_pos = x / w_cell;
@@ -24,12 +28,15 @@ std::string Map::getTerrainType(int x, int y) {
     return terrain_map[x_pos][y_pos].getTerrainType();
 }
 
-bool Map::areThisPointsEmpty(Size size) {
-
-    // Check on all Occupant vector if
-    // this size collapse width thier own
-
-    return true;
+bool Map::areThisPointsEmpty(Size& size) {
+    bool no_collision = true;
+    for(auto x: all_occupants) {
+        if(x->isThereACollision(size) && x->getType() != "Bridge") {
+            no_collision = false;
+            break;
+        }
+    }
+    return no_collision;
 }
 
 int Map::getWidth() {
@@ -47,10 +54,14 @@ bool Map::canIWalkToThisPosition(Size& other_size) {
     if (map_size.areYouHalfOutSide(other_size))
         you_can = false;
     // if the object is stepping into lava
-    if (isThereLava(other_size))
+    if (isThereLava(other_size)) {
         you_can = false;
-
-    /* this->areThisPointsEmpty(other_size)*/
+        if (thereIsABridge(other_size))
+            you_can = true;
+    }
+    if (!areThisPointsEmpty(other_size)) {
+        you_can = false;
+    }
 
     return (you_can);
 }
@@ -83,4 +94,17 @@ bool Map::isThereLava(Size& other_size) {
 
     return false;
 }
+
+bool Map::thereIsABridge(Size& other_size) {
+    bool bridge = false;
+    for(auto x: all_occupants) {
+        if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
+            bridge = true;
+            break;
+        }
+    }
+    return bridge;
+}
+
+
 

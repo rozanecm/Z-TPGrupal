@@ -20,13 +20,19 @@ private:
     // is standing still
     std::string state;
     Size range;
+    Map map;
+    std::vector<Position>* road;
 
 public:
     Unit(int life, std::string type, int unit_speed, Size size, Size range,
                                                                 Map& map);
 
-    // Indicates the Unit it's new position
-    void moveToPosition(int x, int y);
+    // Calculates the minimum road to destiny (x,y)
+    void calculateRoadTo(int x, int y);
+
+    // Indicates the Unit to make the next step on the road.
+    // Make sure of use the calculateRoadTo method before this one.
+    void move();
 
     // Returns the current position of the unit
     Position getCurrentPosition() const;

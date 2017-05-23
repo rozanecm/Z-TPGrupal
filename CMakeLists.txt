@@ -17,7 +17,7 @@ set(SOURCE_FILES
         src/position.cpp src/position.h src/weapon.cpp src/weapon.h
         src/unitMold.cpp src/unitMold.h src/teamable.cpp src/teamable.h
         src/factory.cpp src/factory.h src/bullet.cpp src/bullet.h
-        src/thread.cpp src/thread.h src/socket.cpp src/socket.h src/socketError.cpp src/socketError.h src/messenger.cpp src/messenger.h)
+        src/thread.cpp src/thread.h src/socket.cpp src/socket.h src/socketError.cpp src/socketError.h src/messenger.cpp src/messenger.h src/controUnit.cpp src/controUnit.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 

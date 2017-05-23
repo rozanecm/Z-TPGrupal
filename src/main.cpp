@@ -3,6 +3,7 @@
 #include "MapLoader.h"
 #include "map.h"
 #include "compass.h"
+#include "unit.h"
 
 
 int main (int argc, char **argv) {
@@ -11,27 +12,20 @@ int main (int argc, char **argv) {
 
     int length = 0, width = 0;
 
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-
     Map map(7,7,15,15, cell_map);
 
-//    std::cout << "Probando si mapa me dice que tiene la pocision (4,27)"<< map.doesThisPositionExist(4,27)<<std::endl;
-//    std::cout << "Probando si mapa me dice que tiene la pocision (-1,27)"<< map.doesThisPositionExist(-1,27)<<std::endl;
-//    std::cout << "Probando si mapa me dice que tiene la pocision (-2,27)"<< map.doesThisPositionExist(-2,27)<<std::endl;
-//    std::cout << "Probando si mapa me dice que tiene la pocision (-11,27)"<< map.doesThisPositionExist(-11,27)<<std::endl;
-//    std::cout << "Probando si mapa me dice que tiene la pocision (-11,-27)"<< map.doesThisPositionExist(-11,-27)<<std::endl;
+    Size unit_size(7,4,3,3);
+    Size range(-2,-2,4,4);
 
-    Size unit_size(1,1,3,3);
+    Unit* unit = new Unit(100,"Grunt", 4,unit_size,range,map);
+    map.addOccupant(unit);
 
-
-    Compass compass(map, unit_size, 4); // with 4 is a robot
+    Size other_unit_size(1,1,3,3);
+    Compass compass(map, other_unit_size, 4); // with 4 is a robot
 
     Position destination(13,1);
-    std::vector<Position>* road = compass.getFastestWay(unit_size.getPosition(),
-                                                       destination);
+    std::vector<Position>* road = compass.getFastestWay(
+                                     other_unit_size.getPosition(),destination);
 
     // cell map with terrain
     std::cout << std::endl;
@@ -83,7 +77,7 @@ int main (int argc, char **argv) {
             j = 0;
         }
     }
-
+    delete(unit);
     return 0;
 }
 

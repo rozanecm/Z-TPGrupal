@@ -7,18 +7,19 @@
 Unit::Unit(int life, std::string type, int unit_speed, Size size, Size range,
       Map& map) : Occupant(life, type, size), Teamable(size),
 compass(map,size,unit_speed), unit_speed(unit_speed), state("std"),
-range(range) {}
+range(range), map(map) {}
 
-void Unit::moveToPosition(int x, int y) {
+void Unit::calculateRoadTo(int x, int y) {
     this->state = "mv";
     Position destination(x,y);
-    std::vector<Position>* road = compass.getFastestWay(occ_size.getPosition(),
-                                                        destination);
+    road = compass.getFastestWay(occ_size.getPosition(),destination);
+}
 
+void Unit::move() {
     // different quantity of positions by TIC depending on unit_speed and
     // terrain_factor
     bool arrived = false;
-    while (this->state == "mv" && !arrived){
+    while (this->state == "mv" && !road->empty()){
         //
         //
         Position pos = road->back();
@@ -53,3 +54,5 @@ void Unit::grab(Teamable* object, std::string u_type) {
         this->life_points = 0;
     }
 }
+
+

@@ -40,7 +40,7 @@ public:
     ~Compass();
 
 private:
-    void setTerrainModifier(int unit_speed);
+    void setTerrainModifier();
     // Writes the H value on every node of astar_map for the received position
     // It use Manhattan distance
     void setHValueForDestiny(Position to);

@@ -26,6 +26,8 @@ public:
 
     bool areYouAlive();
 
+    bool isThereACollision(Size& size);
+
     ~Occupant();
 };
 

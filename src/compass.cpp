@@ -12,10 +12,10 @@ Compass::Compass(Map &map, Size unit_size, int unit_speed): map(map),
                                  unit_size(unit_size), unit_speed(unit_speed) {
     this->buildNodeMap();
     this->road = new std::vector<Position>;
-    this->setTerrainModifier(unit_speed);
+    this->setTerrainModifier();
 }
 
-void Compass::setTerrainModifier(int unit_speed) {
+void Compass::setTerrainModifier() {
     terrain_modifier.insert(std::pair<std::string,int>("Carretera",1));
     terrain_modifier.insert(std::pair<std::string,int>("Camino Asfaltado",1));
     terrain_modifier.insert(std::pair<std::string,int>("Tierra",2));
@@ -194,9 +194,10 @@ bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
     // add new g value and change parent.
     Position pos = adj->getPosition();
     std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
-
+    Size adj_size = adj->getSize();
     // when is a vehicle and it's water, don't add it to open list
-    if (!(unit_speed != 4 && terrain_type == "Agua")) {
+    if (!(unit_speed != 4 && terrain_type == "Agua" &&
+            !map.thereIsABridge(adj_size))) {
         int terrain_factor = terrain_modifier[terrain_type];
         if ((adj->beenSeen() &&
              (adj->getFValueIfGWere(new_g, terrain_factor) <
