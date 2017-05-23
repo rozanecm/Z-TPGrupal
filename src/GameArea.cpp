@@ -15,16 +15,16 @@ GameArea::GameArea(BaseObjectType *cobject,
         mapMonitor(nullptr) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_0.png"));
+            "res/assets/buildings/fort/flag_blue_n00.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_1.png"));
+            "res/assets/buildings/fort/flag_blue_n01.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_2.png"));
+            "res/assets/buildings/fort/flag_blue_n02.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_3.png"));
+            "res/assets/buildings/fort/flag_blue_n03.png"));
 
     /* load some img */
     someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
