@@ -12,8 +12,6 @@
 
 class GameArea : public Gtk::DrawingArea{
 public:
-    GameArea();
-
     virtual ~GameArea();
     GameArea(BaseObjectType* cobject,
              const Glib::RefPtr<Gtk::Builder>& builder);
@@ -41,7 +39,7 @@ private:
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
-    int flagCounter;
+    unsigned long flagCounter;
 
     /* DRAWING METHODS */
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,

@@ -29,13 +29,10 @@ public:
                     MapMonitor &mapMonitor);
     ~GameBuilder();
 
-    Gtk::Window* get_window();
-    bool change_view_to_unit();
-    bool change_view_to_building();
-    bool change_view_to_unit_group();
+    // returns the generated window
+    GameWindow* get_window();
 
 private:
-    void update_portrait(const std::string& img_path) const;
 };
 
 

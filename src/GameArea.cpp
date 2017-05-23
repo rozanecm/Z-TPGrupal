@@ -4,6 +4,7 @@
 #include "GameArea.h"
 #include <string>
 
+
 #define TILEWIDTH 16    //tile width in pixels
 
 GameArea::GameArea(BaseObjectType *cobject,
@@ -27,7 +28,7 @@ GameArea::GameArea(BaseObjectType *cobject,
             "res/assets/buildings/fort/flag_blue_n03.png"));
 
     /* load some img */
-    someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
+    someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
 
     /* Load tiles */
     tiles["Tierra"] = Gdk::Pixbuf::create_from_file
@@ -35,27 +36,6 @@ GameArea::GameArea(BaseObjectType *cobject,
     tiles["Agua"] = Gdk::Pixbuf::create_from_file
             ("res/assets/tiles/agua16.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
-}
-
-GameArea::GameArea() : flagCounter(0),
-                       playersMonitor(),
-                       buildingsMonitor(),
-                       mapMonitor(){
-    /* load blue flag imgs */
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_0.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_1.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_2.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/other/flag_blue_3.png"));
-
-    /* load some img */
-    someImg = Gdk::Pixbuf::create_from_file("res/portraits/sample.png");
 }
 
 GameArea::~GameArea() { }
@@ -125,4 +105,27 @@ void GameArea::setResources(PlayersMonitor *playersMonitor,
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
 }
+//
+//GameArea::GameArea(BaseObjectType *cobject,
+//                   const Glib::RefPtr<Gtk::Builder> &builder) :
+//    Gtk::DrawingArea(cobject),
+//    flagCounter(0)
+//{
+//    /* load blue flag imgs */
+//    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+//            "res/assets/other/flag_blue_0.png"));
+//
+//    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+//            "res/assets/other/flag_blue_1.png"));
+//
+//    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+//            "res/assets/other/flag_blue_2.png"));
+//
+//    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
+//            "res/assets/other/flag_blue_3.png"));
+//
+//    /* load some img */
+//    someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
+//
+//}
 
