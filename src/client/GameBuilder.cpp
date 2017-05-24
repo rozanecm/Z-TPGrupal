@@ -16,7 +16,7 @@ GameBuilder::GameBuilder(PlayersMonitor &monitor,
     refBuilder = Gtk::Builder::create();
     try
     {
-        refBuilder->add_from_file("src/Z.glade");
+        refBuilder->add_from_file("src/client/Z.glade");
     }
     catch(const Glib::FileError& ex)
     {
