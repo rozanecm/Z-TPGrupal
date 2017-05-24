@@ -1,4 +1,4 @@
-cd#ifndef Z_TPGRUPAL_CAMERA_H
+#ifndef Z_TPGRUPAL_CAMERA_H
 #define Z_TPGRUPAL_CAMERA_H
 
 
