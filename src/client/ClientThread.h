@@ -2,10 +2,10 @@
 #define Z_TPGRUPAL_CLIENTTREAD_H
 
 
-#include "Thread.h"
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "../Thread.h"
 
 class ClientThread : public Thread {
 public:

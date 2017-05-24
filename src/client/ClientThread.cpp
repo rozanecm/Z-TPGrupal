@@ -2,13 +2,13 @@
 #include <string>
 #include <vector>
 #include "ClientThread.h"
-#include <pugixml.hpp>
+#include "../../libs/xml/pugixml.hpp"
 
 #define MAP "maps/map.xml" // temporary
 
 void ClientThread::run() {
     /* initialize map so then can be completed with read data */
-    mapMonitor.initializeMap(200, 200);
+    mapMonitor.initializeMap(5, 5);
 
     std::vector<std::vector<std::string>> map;
     pugi::xml_document doc;
