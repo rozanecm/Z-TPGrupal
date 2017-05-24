@@ -4,20 +4,24 @@ project(Z_TPGrupal)
 set(CMAKE_CXX_STANDARD 11)
 find_package(PkgConfig)
 
+set(LIBS_DIR src)
+set(PUGI ${LIBS_DIR}/xml)
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 set(SOURCE_FILES
-        src/main.cpp src/cell.cpp
-        src/cell.h src/Terrain.cpp src/Terrain.h src/Occupant.cpp src/Occupant.h
+        src/server/main.cpp src/server/cell.cpp
+        src/server/cell.h src/server/Terrain.cpp src/server/Terrain.h src/server/Occupant.cpp src/server/Occupant.h
         src/xml/pugixml.cpp src/xml/pugiconfig.hpp src/xml/pugixml.hpp
-        src/MapLoader.cpp src/MapLoader.h src/compass.cpp src/compass.h
-        src/lock.cpp src/lock.h src/lock.cpp src/lock.h src/node.cpp src/node.h
-        src/size.cpp src/size.h src/map.cpp src/map.h src/unit.cpp src/unit.h
-        src/position.cpp src/position.h src/weapon.cpp src/weapon.h
-        src/unitMold.cpp src/unitMold.h src/teamable.cpp src/teamable.h
-        src/factory.cpp src/factory.h src/bullet.cpp src/bullet.h
-        src/thread.cpp src/thread.h src/socket.cpp src/socket.h src/socketError.cpp src/socketError.h src/messenger.cpp src/messenger.h src/controUnit.cpp src/controUnit.h)
+        src/server/MapLoader.cpp src/server/MapLoader.h src/server/compass.cpp src/server/compass.h
+        src/server/lock.cpp src/server/lock.h src/server/lock.cpp src/server/lock.h src/server/node.cpp src/server/node.h
+        src/server/size.cpp src/server/size.h src/server/map.cpp src/server/map.h src/server/unit.cpp src/server/unit.h
+        src/server/position.cpp src/server/position.h src/server/weapon.cpp src/server/weapon.h
+        src/server/unitMold.cpp src/server/unitMold.h src/server/teamable.cpp src/server/teamable.h
+        src/server/factory.cpp src/server/factory.h src/server/bullet.cpp src/server/bullet.h
+        src/server/thread.cpp src/server/thread.h src/server/socket.cpp src/server/socket.h src/server/socketError.cpp
+        src/server/socketError.h src/server/messenger.cpp src/server/messenger.h src/server/controUnit.cpp src/server/controUnit.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 
