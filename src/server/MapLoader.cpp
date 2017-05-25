@@ -1,7 +1,7 @@
 #include <map>
 #include "MapLoader.h"
 
-#include "../xml/pugixml.hpp"
+#include <pugixml.hpp>
 
 using pugi::xml_attribute;
 

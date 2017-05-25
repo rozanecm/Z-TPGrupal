@@ -1,7 +1,7 @@
 #ifndef Z_TPGRUPAL_CELL_H
 #define Z_TPGRUPAL_CELL_H
 
-#include "lock.h"
+#include <Lock.h>
 #include "Terrain.h"
 #include "size.h"
 #include <iostream>

@@ -1,7 +1,7 @@
 #ifndef Z_TPGRUPAL_GRAPHICSTHREAD_H
 #define Z_TPGRUPAL_GRAPHICSTHREAD_H
 
-#include "../Thread.h"
+#include <Thread.h>
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"

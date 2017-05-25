@@ -5,7 +5,7 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
-#include "../Thread.h"
+#include "../common/Thread.h"
 
 class ClientThread : public Thread {
 public:
