@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "ClientThread.h"
-#include "../../libs/xml/pugixml.hpp"
+#include <pugixml.hpp>
 
 #define MAP "maps/map.xml" // temporary
 
