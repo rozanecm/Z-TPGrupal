@@ -40,5 +40,6 @@ cmake*
 Makefile
 Z_Client
 Z_Server
+Z_Generator
 Z.glade~
 Z_TPGrupal.cbp

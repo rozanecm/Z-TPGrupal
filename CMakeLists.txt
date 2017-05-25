@@ -29,3 +29,4 @@ find_package(Threads REQUIRED)
 
 add_subdirectory(src/client)
 add_subdirectory(src/server)
+add_subdirectory(src/generator)
