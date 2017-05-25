@@ -3,7 +3,6 @@
 
 #include <pugixml.hpp>
 
-using pugi::xml_attribute;
 
 const std::map<std::string, int> terrain_factor {
         {std::string("Tierra"), int(1)},
@@ -14,8 +13,11 @@ const std::map<std::string, int> terrain_factor {
 
 MapLoader::MapLoader(std::string path) {
     pugi::xml_document doc;
-    doc.load_file(path.c_str());
-
+    pugi::xml_parse_result result = doc.load_file(path.c_str());
+    if (!result) {
+        std::cout << "ERROR LOADING MAP: " << path << ": " <<
+                  result.description() << std::endl;
+    }
     const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node_iterator map_node = doc.first_child();
