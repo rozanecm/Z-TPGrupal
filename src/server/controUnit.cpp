@@ -3,7 +3,7 @@
 //
 
 #include "controUnit.h"
-#define WAIT 50
+#define WAIT 0.5
 
 
 ControUnit::ControUnit() : winning(false) {}
@@ -15,7 +15,7 @@ void ControUnit::connect(Messenger *new_player) {
 
 void ControUnit::run() {
     while(!winning) {
-        milliseconds_type t3(WAIT);
+        double t3(WAIT);
 
         auto t1 = std::chrono::high_resolution_clock::now();
         // do stuff
@@ -23,14 +23,17 @@ void ControUnit::run() {
         this->checkAllLivingOccupants();
         auto t2 = std::chrono::high_resolution_clock::now();
 
-//        sleepFor(t3 - (t2 - t1));
+        std::chrono::duration<double> time_span =
+             std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+
+        sleepFor(t3 - time_span.count());
         //send update message
     }
     // send victory or defeated message
 }
 
-void ControUnit::sleepFor(milliseconds_type msec) {
-//    std::this_thread::sleep_for(std::chrono::seconds(msec));
+void ControUnit::sleepFor(double msec) {
+    std::this_thread::sleep_for(std::chrono::seconds(msec));
 }
 
 void ControUnit::unitsMakeMicroAcction() {

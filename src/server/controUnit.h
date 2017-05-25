@@ -12,8 +12,6 @@
 #include "../messenger.h"
 #include "../Lock.h"
 
-typedef std::chrono::duration<int,std::milli> milliseconds_type;
-
 class ControUnit {
 private:
     std::vector<Unit*> all_units;
@@ -29,7 +27,7 @@ public:
 
     void run();
 
-    void sleepFor(milliseconds_type sec);
+    void sleepFor(double sec);
 
     void unitsMakeMicroAcction();
 
