@@ -9,7 +9,8 @@
 #include <chrono>
 #include <thread>
 #include "unit.h"
-#include "messenger.h"
+#include "../messenger.h"
+#include "../Lock.h"
 
 typedef std::chrono::duration<int,std::milli> milliseconds_type;
 
