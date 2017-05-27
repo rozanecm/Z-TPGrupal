@@ -2,11 +2,11 @@
 // Created by rodian on 22/05/17.
 //
 
-#include "controUnit.h"
+#include "controlUnit.h"
 #define WAIT 0.5
 
 
-ControUnit::ControlUnit() : winning(false) {}
+ControlUnit::ControlUnit() : winning(false) {}
 
 void ControlUnit::connect(Messenger *new_player) {
     Lock l(m);
@@ -36,7 +36,7 @@ void ControlUnit::run() {
 }
 
 void ControlUnit::sleepFor(double msec) {
-    std::this_thread::sleep_for(std::chrono::seconds(msec));
+    std::this_thread::sleep_for(std::chrono::duration<double> (msec));
 }
 
 void ControlUnit::unitsMakeMicroAcction() {

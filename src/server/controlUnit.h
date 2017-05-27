@@ -13,6 +13,8 @@
 #include "../Lock.h"
 #include "command.h"
 
+class Command;
+
 class ControlUnit {
 private:
     std::vector<Unit*> all_units;
