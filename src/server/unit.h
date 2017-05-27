@@ -29,7 +29,7 @@ private:
     std::vector<Position>* road;
 
 public:
-    Unit(int life, std::string type, int unit_speed, Size size, Size range,
+    Unit(int id, int life, std::string type, int unit_speed, Size size, Size range,
                                                                 Map& map);
 
     void makeAction();

@@ -13,7 +13,7 @@ class Factory: public Occupant, public Teamable {
     std::vector<UnitMold>::iterator it;
 
 public:
-    Factory(int life, std::string type, Size position,
+    Factory(int id, int life, std::string type, Size position,
                  std::vector<UnitMold> units);
 
     // starts the creation of the selected unit

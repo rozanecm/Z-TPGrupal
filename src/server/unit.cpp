@@ -4,8 +4,8 @@
 
 #include "unit.h"
 
-Unit::Unit(int life, std::string type, int unit_speed, Size size, Size range,
-      Map& map) : Occupant(life, type, size), Teamable(size),
+Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
+          Size range, Map& map) : Occupant(id,life, type, size), Teamable(size),
 compass(map,size,unit_speed), unit_speed(unit_speed), state(STANDINGSTATE),
 range(range), map(map) {}
 
