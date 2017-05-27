@@ -11,12 +11,14 @@
 #include "unit.h"
 #include "../messenger.h"
 #include "../Lock.h"
+#include "command.h"
 
 class ControUnit {
 private:
     std::vector<Unit*> all_units;
     std::vector<Occupant*> all_occupants;
     std::vector<Messenger*> players;
+    std::vector<Command>* commands;
     std::mutex m;
     bool winning;
 
@@ -39,6 +41,9 @@ public:
     // Command move unit. Meant to give the order to the unit to start moving
     // to de (x,y) position
     void cmdMoveUnit(int id, int x, int y);
+
+private:
+    void executeCommands();
 };
 
 

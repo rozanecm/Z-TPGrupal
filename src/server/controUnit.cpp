@@ -18,6 +18,9 @@ void ControUnit::run() {
         double t3(WAIT);
 
         auto t1 = std::chrono::high_resolution_clock::now();
+        // execute commands
+        executeCommands();
+
         // do stuff
         this->unitsMakeMicroAcction();
         this->checkAllLivingOccupants();
@@ -66,4 +69,19 @@ void ControUnit::cmdMoveUnit(int id, int x, int y) {
 
     if (found)
         selected_unit->calculateRoadTo(x, y);
+}
+
+void ControUnit::executeCommands() {
+    std::vector<Command> commands_copy;
+    m.lock();
+    for (auto x: *commands) {
+        commands_copy.push_back(x);
+    }
+    commands->empty();
+    m.unlock();
+
+    // Execute command
+    for (auto cmd: commands_copy) {
+        cmd();
+    }
 }
