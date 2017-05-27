@@ -6,6 +6,7 @@
 #define Z_TPGRUPAL_COMMAND_H
 
 #include "controlUnit.h"
+class ControlUnit;
 
 class Command {
 private:
