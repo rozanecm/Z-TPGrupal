@@ -20,7 +20,7 @@ set(SOURCE_FILES
         src/server/unitMold.cpp src/server/unitMold.h src/server/teamable.cpp src/server/teamable.h
         src/server/factory.cpp src/server/factory.h src/server/bullet.cpp src/server/bullet.h
         src/Thread.cpp src/Thread.h src/socket.cpp src/socket.h src/socketError.cpp
-        src/socketError.h src/messenger.cpp src/messenger.h src/server/controUnit.cpp src/server/controUnit.h)
+        src/socketError.h src/messenger.cpp src/messenger.h src/server/controUnit.cpp src/server/controUnit.h src/server/command.cpp src/server/command.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 
