@@ -4,7 +4,7 @@
 
 #include "command.h"
 
-Command::Command(std::string& cmd, ControUnit* control) : cmd(cmd),
+Command::Command(std::string& cmd, ControlUnit* control) : cmd(cmd),
                                                           control(control) {}
 
 void Command::run() {

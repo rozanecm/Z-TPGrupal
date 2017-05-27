@@ -5,15 +5,15 @@
 #ifndef Z_TPGRUPAL_COMMAND_H
 #define Z_TPGRUPAL_COMMAND_H
 
-#include "controUnit.h"
+#include "controlUnit.h"
 
 class Command {
 private:
     std::string cmd;
-    ControUnit* control;
+    ControlUnit* control;
     int unit_id, other_id, x,y;
 public:
-    Command(std::string& cmd, ControUnit* control);
+    Command(std::string& cmd, ControlUnit* control);
 
     void run();
 

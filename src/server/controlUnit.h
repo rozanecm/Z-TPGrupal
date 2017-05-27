@@ -13,7 +13,7 @@
 #include "../Lock.h"
 #include "command.h"
 
-class ControUnit {
+class ControlUnit {
 private:
     std::vector<Unit*> all_units;
     std::vector<Occupant*> all_occupants;
@@ -23,7 +23,7 @@ private:
     bool winning;
 
 public:
-    ControUnit();
+    ControlUnit();
 
     void connect(Messenger* new_player);
 
@@ -43,6 +43,7 @@ public:
     void cmdMoveUnit(int id, int x, int y);
 
 private:
+    // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
 };
 

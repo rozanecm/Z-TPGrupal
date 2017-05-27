@@ -6,14 +6,14 @@
 #define WAIT 0.5
 
 
-ControUnit::ControUnit() : winning(false) {}
+ControUnit::ControlUnit() : winning(false) {}
 
-void ControUnit::connect(Messenger *new_player) {
+void ControlUnit::connect(Messenger *new_player) {
     Lock l(m);
     this->players.push_back(new_player);
 }
 
-void ControUnit::run() {
+void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
 
@@ -35,18 +35,18 @@ void ControUnit::run() {
     // send victory or defeated message
 }
 
-void ControUnit::sleepFor(double msec) {
+void ControlUnit::sleepFor(double msec) {
     std::this_thread::sleep_for(std::chrono::seconds(msec));
 }
 
-void ControUnit::unitsMakeMicroAcction() {
+void ControlUnit::unitsMakeMicroAcction() {
     for (auto x: all_units){
         x->makeAction();
     }
 }
 
 
-void ControUnit::checkAllLivingOccupants() {
+void ControlUnit::checkAllLivingOccupants() {
     for(auto x: all_occupants){
         if(!x->areYouAlive()) {
             //erase it from map
@@ -56,7 +56,7 @@ void ControUnit::checkAllLivingOccupants() {
     }
 }
 
-void ControUnit::cmdMoveUnit(int id, int x, int y) {
+void ControlUnit::cmdMoveUnit(int id, int x, int y) {
     bool found = false;
     Unit* selected_unit = all_units.front();
     for (auto x: all_units) {
@@ -71,7 +71,7 @@ void ControUnit::cmdMoveUnit(int id, int x, int y) {
         selected_unit->calculateRoadTo(x, y);
 }
 
-void ControUnit::executeCommands() {
+void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
     m.lock();
     for (auto x: *commands) {
