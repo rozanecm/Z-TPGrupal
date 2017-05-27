@@ -38,9 +38,10 @@ void ControUnit::sleepFor(double msec) {
 
 void ControUnit::unitsMakeMicroAcction() {
     for (auto x: all_units){
-        //x.do();
+        x->makeAction();
     }
 }
+
 
 void ControUnit::checkAllLivingOccupants() {
     for(auto x: all_occupants){
@@ -50,4 +51,19 @@ void ControUnit::checkAllLivingOccupants() {
         }
 
     }
+}
+
+void ControUnit::cmdMoveUnit(int id, int x, int y) {
+    bool found = false;
+    Unit* selected_unit = all_units.front();
+    for (auto x: all_units) {
+        if (x->getId() == id) {
+            selected_unit = x;
+            found = true;
+            break;
+        }
+    }
+
+    if (found)
+        selected_unit->calculateRoadTo(x, y);
 }
