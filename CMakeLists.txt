@@ -61,7 +61,9 @@ set(SOURCE_FILES
         src/Lock.cpp
         src/Lock.h
         src/Thread.cpp
-        src/Thread.h)
+        src/Thread.h
+        src/client/Camera.cpp
+        src/client/Camera.h)
 
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_TPGrupal ${SOURCE_FILES})
