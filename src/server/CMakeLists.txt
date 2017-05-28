@@ -55,6 +55,7 @@ set(SOURCE_FILES
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(Z_Server ${SOURCE_FILES})
 
 target_link_libraries(Z_Server

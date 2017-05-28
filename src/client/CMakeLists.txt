@@ -67,6 +67,7 @@ set(SOURCE_FILES
         Unit.cpp
         Unit.h)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_Client ${SOURCE_FILES})
 
