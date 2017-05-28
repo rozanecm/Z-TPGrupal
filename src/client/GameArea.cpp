@@ -5,7 +5,7 @@
 #include <string>
 
 
-#define TILEWIDTH 16    //tile width in pixels
+#define TILESIZE 16    //tile width in pixels
 
 GameArea::GameArea(BaseObjectType *cobject,
                    const Glib::RefPtr<Gtk::Builder> &builder) :
@@ -16,7 +16,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         mapMonitor(nullptr),
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
-        camera(TILEWIDTH, 0, 0) {
+        camera(TILESIZE, 0, 0) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/flag_blue_n00.png"));
@@ -63,9 +63,9 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           std::string terrainType) {
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType),
-                                  xCoordinate*TILEWIDTH,
-                                  yCoordinate*TILEWIDTH);
-    cr->rectangle(xCoordinate * TILEWIDTH, yCoordinate * TILEWIDTH,
+                                  xCoordinate*TILESIZE,
+                                  yCoordinate*TILESIZE);
+    cr->rectangle(xCoordinate * TILESIZE, yCoordinate * TILESIZE,
                   tiles.at(terrainType)->get_width(),
                   tiles.at(terrainType)->get_height());
     cr->fill();
