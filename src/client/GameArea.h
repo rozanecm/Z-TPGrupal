@@ -6,6 +6,7 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "Camera.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -31,6 +32,7 @@ private:
     PlayersMonitor *playersMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
+    Camera camera;
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 

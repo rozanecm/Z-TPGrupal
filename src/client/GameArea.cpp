@@ -13,7 +13,10 @@ GameArea::GameArea(BaseObjectType *cobject,
         flagCounter(0),
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
-        mapMonitor(nullptr) {
+        mapMonitor(nullptr),
+        /* camera is initialized with size 0,0 because we dont
+         * have this data yet */
+        camera(TILEWIDTH, 0, 0) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/flag_blue_n00.png"));
@@ -104,4 +107,6 @@ void GameArea::setResources(PlayersMonitor *playersMonitor,
     this->playersMonitor = playersMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
+    this->camera.setMapWidth(mapMonitor->getXSize());
+    this->camera.setMapHeight(mapMonitor->getYSize());
 }
