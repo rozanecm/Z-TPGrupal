@@ -16,26 +16,26 @@ GameArea::GameArea(BaseObjectType *cobject,
         mapMonitor(nullptr) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "../../res/assets/buildings/fort/flag_blue_n00.png"));
+            "res/assets/buildings/fort/flag_blue_n00.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "../../res/assets/buildings/fort/flag_blue_n01.png"));
+            "res/assets/buildings/fort/flag_blue_n01.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "../../res/assets/buildings/fort/flag_blue_n02.png"));
+            "res/assets/buildings/fort/flag_blue_n02.png"));
 
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "../../res/assets/buildings/fort/flag_blue_n03.png"));
+            "res/assets/buildings/fort/flag_blue_n03.png"));
 
     /* load some img */
-    someImg = Gdk::Pixbuf::create_from_file("../../res/portraits/grunt.png");
+    someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
 
     /* Load tiles */
     tiles["Tierra"] = Gdk::Pixbuf::create_from_file
-            ("../../res/assets/tiles/tierra16.png");
+            ("res/assets/tiles/tierra16.png");
     tiles["Agua"] = Gdk::Pixbuf::create_from_file
-            ("../../res/assets/tiles/agua16.png");
-    tiles["Lava"] = Gdk::Pixbuf::create_from_file("../../res/assets/tiles/lava.png");
+            ("res/assets/tiles/agua16.png");
+    tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 }
 
 GameArea::~GameArea() { }

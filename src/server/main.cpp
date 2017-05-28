@@ -7,7 +7,7 @@
 
 #define MAPLENGTH 15
 int main (int argc, char **argv) {
-    MapLoader map_loader("map.xml");
+    MapLoader map_loader("src/server/map.xml");
     std::vector<std::vector<Cell>> cell_map = map_loader.get_map();
 
     int length = 0, width = 0;

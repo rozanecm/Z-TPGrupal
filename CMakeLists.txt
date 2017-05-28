@@ -23,6 +23,7 @@ include_directories(
         ${SDL2_mixer_INCLUDE_DIRS}
         src/common)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
