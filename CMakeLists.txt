@@ -1,7 +1,6 @@
+set(CMAKE_CXX_STANDARD 11)
 cmake_minimum_required(VERSION 3.5)
 project(Z_TPGrupal)
-
-set(CMAKE_CXX_STANDARD 11)
 
 set(LIBS_DIR libs)
 set(PUGI ${LIBS_DIR}/xml)
@@ -21,7 +20,8 @@ include_directories(
         ${GTKMM_INCLUDE_DIRS}
         ${SDL2_LIBRARY_DIRS}
         ${SDL2_INCLUDE_DIRS}
-        ${SDL2_mixer_INCLUDE_DIRS})
+        ${SDL2_mixer_INCLUDE_DIRS}
+        src/common)
 
 set(SOURCE_FILES
         libs/xml/pugiconfig.hpp
@@ -65,14 +65,9 @@ set(SOURCE_FILES
         src/client/Camera.cpp
         src/client/Camera.h)
 
-add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
-add_executable(Z_TPGrupal ${SOURCE_FILES})
-
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(Z_TPGrupal
-        ${GTKMM_LIBRARIES}
-        ${SDL_LIBRARY}
-        ${SDL2_mixer_LIBRARIES}
-        Threads::Threads)
+add_subdirectory(src/client)
+add_subdirectory(src/server)
+add_subdirectory(src/generator)

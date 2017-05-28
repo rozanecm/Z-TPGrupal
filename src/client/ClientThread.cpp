@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include "ClientThread.h"
-#include "../../libs/xml/pugixml.hpp"
+#include <pugixml.hpp>
 
-#define MAP "maps/map.xml" // temporary
+#define MAP "../../maps/map.xml" // temporary
 
 void ClientThread::run() {
     /* initialize map so then can be completed with read data */
@@ -19,7 +19,6 @@ void ClientThread::run() {
     }
 
     pugi::xml_node terrain = doc.child("Map").child("Terrain");
-    std::cout << terrain.name();
     for (auto node_row : terrain.children()) {
         std::vector<std::string> row;
         for (auto cell : node_row.children()) {
