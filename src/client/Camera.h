@@ -6,8 +6,8 @@
 
 class Camera {
 public:
-    Camera(unsigned int tileSize, unsigned int mapWidth,
-               unsigned int mapHeight);
+    Camera(unsigned int tileSize, unsigned int mapWidth, unsigned int mapHeight,
+               unsigned int numberOfTilesToShow);
 
     std::pair<unsigned int, unsigned int> getPosition();
 
@@ -19,6 +19,8 @@ private:
     /* save tile size in pixels so calculations on max and min coord.
      * can be done */
     unsigned int tileSize;
+
+    unsigned int numberOfTilesToShow;
 
     /* position in pixels */
     std::pair<unsigned int, unsigned int> position;

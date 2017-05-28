@@ -6,6 +6,7 @@
 
 
 #define TILESIZE 16    //tile width in pixels
+#define NUMBER_OF_TILES_TO_SHOW 10
 
 GameArea::GameArea(BaseObjectType *cobject,
                    const Glib::RefPtr<Gtk::Builder> &builder) :
@@ -16,7 +17,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         mapMonitor(nullptr),
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
-        camera(TILESIZE, 0, 0) {
+        camera(TILESIZE, 0, 0, 0) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/flag_blue_n00.png"));
