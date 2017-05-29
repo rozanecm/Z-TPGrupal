@@ -9,9 +9,9 @@
 #include <chrono>
 #include <thread>
 #include "unit.h"
-#include "../messenger.h"
 #include "../Lock.h"
 #include "command.h"
+#include "player.h"
 
 class Command;
 
@@ -19,15 +19,13 @@ class ControlUnit {
 private:
     std::vector<Unit*> all_units;
     std::vector<Occupant*> all_occupants;
-    std::vector<Messenger*> players;
+    std::vector<Player> players;
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
 
 public:
-    ControlUnit();
-
-    void connect(Messenger* new_player);
+    ControlUnit(std::vector<Player>& new_players);
 
     // Method to start checking commands from players
     void run();

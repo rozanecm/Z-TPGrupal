@@ -6,12 +6,8 @@
 #define WAIT 0.5
 
 
-ControlUnit::ControlUnit() : winning(false) {}
-
-void ControlUnit::connect(Messenger *new_player) {
-    Lock l(m);
-    this->players.push_back(new_player);
-}
+ControlUnit::ControlUnit(std::vector<Player>& new_players) :
+        players(players), winning(false) {}
 
 void ControlUnit::run() {
     while(!winning) {
