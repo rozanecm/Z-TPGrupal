@@ -6,6 +6,7 @@
 
 class Camera {
 public:
+    /* camera will be initialized in (minx, miny) position */
     Camera(unsigned int tileSize, unsigned int mapWidth, unsigned int mapHeight,
                unsigned int numberOfTilesToShow);
 
