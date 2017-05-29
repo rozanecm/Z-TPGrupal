@@ -56,11 +56,11 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                            cameraPosition) {
     /* cameraPosition is given in pixels.
      * i,j indicate TILES. */
-    for (unsigned int i = cameraPosition.first/TILESIZE-
-            NUMBER_OF_TILES_TO_SHOW/2;
+    for (unsigned int i =
+            cameraPosition.first/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
          i < cameraPosition.first/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++i){
-        for (unsigned int j = cameraPosition.second/TILESIZE-
-                NUMBER_OF_TILES_TO_SHOW/2;
+        for (unsigned int j =
+                cameraPosition.second/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
              j < cameraPosition.second/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++j){
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(i, j));
         }
