@@ -33,6 +33,12 @@ set(SOURCE_FILES
         ../common/Lock.cpp
         ../common/Thread.h
         ../common/Thread.cpp
+        ../common/messenger.h
+        ../common/messenger.cpp
+        ../common/socket.h
+        ../common/socket.cpp
+        ../common/split.cpp
+        ../common/split.h
         ../../libs/xml/pugixml.hpp
         ../../libs/xml/pugixml.cpp
         Armament.cpp
@@ -65,7 +71,10 @@ set(SOURCE_FILES
         PlayersMonitor.cpp
         PlayersMonitor.h
         Unit.cpp
-        Unit.h)
+        Unit.h ServerMessenger.cpp ServerMessenger.h
+        commands/Command.h
+        commands/AddUnit.cpp
+        commands/AddUnit.h commands/RemoveUnit.cpp commands/RemoveUnit.h commands/UpdatePosition.cpp commands/UpdatePosition.h)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})

@@ -9,6 +9,9 @@
 
 #define SUCCESSRETURNCODE 0
 
+/* DEBUGGING: run 'netcat -l 8000' in a terminal to launch client w/o server' */
+#define LOCALHOST "127.0.0.1"
+#define PORT 8000
 void play_sound() {
     // Init, open the audio channel
     Mix_Init(0);
@@ -46,15 +49,19 @@ int main(int argc, char **argv) {
     /* create graphics and client threads */
     GraphicsThread graphicsThread(argc, argv, playerMonitor, buildingsMonitor,
                                   mapMonitor);
-    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor);
+    /* DEBUG: RUN 'netcat -l 8000' in terminal */
+    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
+                              LOCALHOST, PORT);
 
     /* start threads */
     clientThread.start();
     graphicsThread.start();
 
     /* join threads */
-    clientThread.join();
     graphicsThread.join();
 
+    /* once graphics join (window closes), we kill client thread */
+    clientThread.finish();
+    clientThread.join();
     return SUCCESSRETURNCODE;
 }

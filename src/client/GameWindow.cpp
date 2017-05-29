@@ -39,7 +39,6 @@ bool GameWindow::onTimeout() {
                          get_allocation().get_height());
         win->invalidate_rect(r, false);
     }
-    std::cout<<"in onTimeout"<<std::endl;
     return true;
 }
 
