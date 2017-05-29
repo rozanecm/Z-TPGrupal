@@ -50,7 +50,8 @@ private:
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
 
-    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr);
+    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
+                     std::pair<unsigned int, unsigned int> cameraPosition);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                     unsigned int xCoordinate, unsigned int yCoordinate,
