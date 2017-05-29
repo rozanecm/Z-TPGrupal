@@ -133,18 +133,22 @@ void GameArea::keyboardPressed() {
 bool GameArea::on_key_press_event(GdkEventKey *event) {
     if (event->keyval == GDK_KEY_Up) {
         camera.moveUp();
+        std::cout<<"UP"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Down){
         camera.moveDown();
+        std::cout<<"DOWN"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Left){
         camera.moveLeft();
+        std::cout<<"LEFT"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Right){
         camera.moveRight();
+        std::cout<<"RIGHT"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }
