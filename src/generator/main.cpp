@@ -2,7 +2,7 @@
 
 int main (int argc, char **argv)
 {
-    int size = 1000,
+    int size = 100,
     lava = 5,
     water = 10,
     variance = 0;
