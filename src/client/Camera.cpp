@@ -31,3 +31,27 @@ void Camera::setMapHeight(unsigned int height) {
     mapHeight = height;
     maxYCoordinate = mapHeight*tileSize-numberOfTilesToShow*tileSize/2;
 }
+
+void Camera::moveUp() {
+    if (position.second != minYCoordinate){
+        position.second --;
+    }
+}
+
+void Camera::moveDown() {
+    if (position.second != maxYCoordinate){
+        position.second ++;
+    }
+}
+
+void Camera::moveRight() {
+    if (position.first != maxXCoordinate){
+        position.first ++;
+    }
+}
+
+void Camera::moveLeft() {
+    if (position.first != minXCoordinate){
+        position.first --;
+    }
+}

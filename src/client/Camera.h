@@ -16,6 +16,14 @@ public:
 
     void setMapHeight(unsigned int height);
 
+    void moveUp();
+
+    void moveDown();
+
+    void moveLeft();
+
+    void moveRight();
+
 private:
     /* save tile size in pixels so calculations on max and min coord.
      * can be done */
