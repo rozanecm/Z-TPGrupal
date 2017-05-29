@@ -132,8 +132,23 @@ void GameArea::keyboardPressed() {
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {
     if (event->keyval == GDK_KEY_Up) {
-        std::cout<<"up pressed"<<std::endl;
+        camera.moveUp();
+        //returning true, cancels the propagation of the event
+        return true;
+    }else if (event->keyval == GDK_KEY_Down){
+        camera.moveDown();
+        //returning true, cancels the propagation of the event
+        return true;
+    }else if (event->keyval == GDK_KEY_Left){
+        camera.moveLeft();
+        //returning true, cancels the propagation of the event
+        return true;
+    }else if (event->keyval == GDK_KEY_Right){
+        camera.moveRight();
         //returning true, cancels the propagation of the event
         return true;
     }
+//
+//    //if the event has not been handled, call the base class
+//    return Gtk::Window::on_key_press_event(key_event);
 }
