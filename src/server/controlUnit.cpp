@@ -6,8 +6,8 @@
 #define WAIT 0.5
 
 
-ControlUnit::ControlUnit(std::vector<Player>& new_players) :
-        players(players), winning(false) {}
+ControlUnit::ControlUnit(std::vector<Messenger*>& new_players) :
+        players(new_players), winning(false) {}
 
 void ControlUnit::run() {
     while(!winning) {
@@ -80,4 +80,15 @@ void ControlUnit::executeCommands() {
     for (auto cmd: commands_copy) {
         cmd();
     }
+}
+
+void ControlUnit::sendUpdateMessage() {
+    std::string info = getUpdateInfo();
+    for (auto y: players) {
+        y->sendMessage(info);
+    }
+}
+
+std::string ControlUnit::getUpdateInfo() {
+    return std::__cxx11::string();
 }

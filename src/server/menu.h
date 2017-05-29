@@ -11,7 +11,7 @@
 
 class Menu {
 private:
-    std::vector<Player> players;
+    std::vector<Player*> players;
     std::mutex& m;
     // vector of lobbies
 public:
@@ -19,7 +19,7 @@ public:
 
     void addPlayer(Messenger* msgr, Menu& menu);
 
-    void createNewLobbie(Player& player);
+    void createNewLobbie(Player* player);
 
     std::string getLobbiesInfo();
 

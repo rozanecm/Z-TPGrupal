@@ -16,7 +16,6 @@ private:
     Socket socket;
     bool running;
     Menu& menu;
-    //std::vector<Player*> users;
 
 public:
     // Recieves the arguments to build the Control Unit

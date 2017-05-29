@@ -12,12 +12,12 @@
 
 class Game {
 private:
-    std::vector<Player> players;
+    std::vector<Messenger*> players;
     ControlUnit control;
     Map map;
 
 public:
-    Game(std::vector<Player> players, int x, int y, int size, int height,
+    Game(std::vector<Messenger*> players, int x, int y, int size, int height,
          std::vector<std::vector<Cell>> terrain_map);
 
     void startGame();

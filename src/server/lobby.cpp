@@ -16,7 +16,7 @@ void Lobby::ready() {
     all_ready = true;
 }
 
-bool Lobby::addPlayer(Player &player) {
+bool Lobby::addPlayer(Player* player) {
     if(players.size() < 4)
         players.push_back(player);
     return (players.size() < 4);

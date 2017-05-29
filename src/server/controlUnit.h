@@ -19,13 +19,13 @@ class ControlUnit {
 private:
     std::vector<Unit*> all_units;
     std::vector<Occupant*> all_occupants;
-    std::vector<Player> players;
+    std::vector<Messenger*> players;
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
 
 public:
-    ControlUnit(std::vector<Player>& new_players);
+    ControlUnit(std::vector<Messenger*>& new_players);
 
     // Method to start checking commands from players
     void run();
@@ -45,6 +45,10 @@ public:
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
+
+    void sendUpdateMessage();
+
+    std::string getUpdateInfo();
 };
 
 

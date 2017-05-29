@@ -12,12 +12,12 @@ class Lobby {
 private:
     int lobby_id;
     bool all_ready;
-    std::vector<Player> players;
+    std::vector<Player*> players;
 
 public:
     Lobby(int id);
 
-    bool addPlayer(Player& player);
+    bool addPlayer(Player* player);
 
     void startGame();
 
