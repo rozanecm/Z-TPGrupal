@@ -3,6 +3,7 @@
 
 
 #include <gtkmm/drawingarea.h>
+#include <utility>
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"

@@ -1,4 +1,5 @@
 #include <gtkmm/builder.h>
+#include <utility>
 #include <gdkmm.h>
 #include <iostream>
 #include "GameArea.h"
@@ -51,12 +52,15 @@ bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
 }
 
 void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
-                           std::pair<unsigned int, unsigned int> cameraPosition) {
+                           std::pair<unsigned int, unsigned int>
+                           cameraPosition) {
     /* cameraPosition is given in pixels.
      * i,j indicate TILES. */
-    for (unsigned int i = cameraPosition.first/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
+    for (unsigned int i = cameraPosition.first/TILESIZE-
+            NUMBER_OF_TILES_TO_SHOW/2;
          i < cameraPosition.first/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++i){
-        for (unsigned int j = cameraPosition.second/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
+        for (unsigned int j = cameraPosition.second/TILESIZE-
+                NUMBER_OF_TILES_TO_SHOW/2;
              j < cameraPosition.second/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++j){
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(i, j));
         }
@@ -66,14 +70,17 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
 void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           unsigned int xCoordinate, unsigned int yCoordinate,
                           std::string terrainType) {
-
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType),
-                                  xCoordinate*get_width()/NUMBER_OF_TILES_TO_SHOW,
-                                  yCoordinate*get_height()/NUMBER_OF_TILES_TO_SHOW);
+                                  xCoordinate*get_width()/
+                                  NUMBER_OF_TILES_TO_SHOW,
+                                  yCoordinate*get_height()/
+                                  NUMBER_OF_TILES_TO_SHOW);
 
-    cr->rectangle(xCoordinate * get_width()/NUMBER_OF_TILES_TO_SHOW, yCoordinate * get_height()/NUMBER_OF_TILES_TO_SHOW,
-                  get_width()/NUMBER_OF_TILES_TO_SHOW, get_height()/NUMBER_OF_TILES_TO_SHOW);
+    cr->rectangle(xCoordinate * get_width()/NUMBER_OF_TILES_TO_SHOW,
+                  yCoordinate * get_height()/NUMBER_OF_TILES_TO_SHOW,
+                  get_width()/NUMBER_OF_TILES_TO_SHOW,
+                  get_height()/NUMBER_OF_TILES_TO_SHOW);
     cr->fill();
     cr->restore();
 }
