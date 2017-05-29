@@ -41,6 +41,8 @@ GameArea::GameArea(BaseObjectType *cobject,
     tiles["Agua"] = Gdk::Pixbuf::create_from_file
             ("res/assets/tiles/agua.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
+
+    add_events(Gdk::EventMask::KEY_PRESS_MASK);
 }
 
 GameArea::~GameArea() { }
@@ -122,4 +124,16 @@ void GameArea::setResources(PlayersMonitor *playersMonitor,
     this->mapMonitor = mapMonitor;
     this->camera.setMapWidth(mapMonitor->getXSize());
     this->camera.setMapHeight(mapMonitor->getYSize());
+}
+
+void GameArea::keyboardPressed() {
+    std::cout<<"sth pressed"<<std::endl;
+}
+
+bool GameArea::on_key_press_event(GdkEventKey *event) {
+    if (event->keyval == GDK_KEY_Up) {
+        std::cout<<"up pressed"<<std::endl;
+        //returning true, cancels the propagation of the event
+        return true;
+    }
 }

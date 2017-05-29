@@ -26,6 +26,8 @@ public:
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
 
+    static void keyboardPressed();
+
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
@@ -59,6 +61,8 @@ private:
                     std::string terrainType);
 
     std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
+
+    bool on_key_press_event(GdkEventKey *event) override;
 };
 
 
