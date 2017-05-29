@@ -17,7 +17,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         mapMonitor(nullptr),
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
-        camera(TILESIZE, 0, 0, 0) {
+        camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
     /* load blue flag imgs */
     blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/flag_blue_n00.png"));
@@ -36,24 +36,28 @@ GameArea::GameArea(BaseObjectType *cobject,
 
     /* Load tiles */
     tiles["Tierra"] = Gdk::Pixbuf::create_from_file
-            ("res/assets/tiles/tierra16.png");
+            ("res/assets/tiles/tierra.png");
     tiles["Agua"] = Gdk::Pixbuf::create_from_file
-            ("res/assets/tiles/agua16.png");
+            ("res/assets/tiles/agua.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 }
 
 GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    drawBaseMap(cr);
+    drawBaseMap(cr, camera.getPosition());
     drawFlagAnimation(cr, 500, 500);
-    displaySomeStaticImg(cr, 0, 0);
     return true;
 }
 
-void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr) {
-    for (unsigned int i = 0; i < mapMonitor->getXSize(); ++i){
-        for (unsigned int j = 0; j < mapMonitor->getYSize(); ++j){
+void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
+                           std::pair<unsigned int, unsigned int> cameraPosition) {
+    /* cameraPosition is given in pixels.
+     * i,j indicate TILES. */
+    for (unsigned int i = cameraPosition.first/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
+         i < cameraPosition.first/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++i){
+        for (unsigned int j = cameraPosition.second/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
+             j < cameraPosition.second/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++j){
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(i, j));
         }
     }
@@ -62,13 +66,14 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr) {
 void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           unsigned int xCoordinate, unsigned int yCoordinate,
                           std::string terrainType) {
+
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType),
-                                  xCoordinate*TILESIZE,
-                                  yCoordinate*TILESIZE);
-    cr->rectangle(xCoordinate * TILESIZE, yCoordinate * TILESIZE,
-                  tiles.at(terrainType)->get_width(),
-                  tiles.at(terrainType)->get_height());
+                                  xCoordinate*get_width()/NUMBER_OF_TILES_TO_SHOW,
+                                  yCoordinate*get_height()/NUMBER_OF_TILES_TO_SHOW);
+
+    cr->rectangle(xCoordinate * get_width()/NUMBER_OF_TILES_TO_SHOW, yCoordinate * get_height()/NUMBER_OF_TILES_TO_SHOW,
+                  get_width()/NUMBER_OF_TILES_TO_SHOW, get_height()/NUMBER_OF_TILES_TO_SHOW);
     cr->fill();
     cr->restore();
 }
