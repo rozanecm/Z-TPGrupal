@@ -19,6 +19,8 @@ private:
 public:
     Game(std::vector<Player> players, int x, int y, int size, int height,
          std::vector<std::vector<Cell>> terrain_map);
+
+    void startGame();
 };
 
 
