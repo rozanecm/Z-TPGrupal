@@ -9,16 +9,18 @@
 #include "../socket.h"
 #include "../messenger.h"
 #include "../Thread.h"
+#include "menu.h"
 
 class Server: public Thread  {
 private:
     Socket socket;
     bool running;
+    Menu& menu;
     //std::vector<Player*> users;
 
 public:
     // Recieves the arguments to build the Control Unit
-    explicit Server(char* argv[]);
+    explicit Server(char* argv[], Menu& menu);
 
     // use to start the process of of accepting clients
     void run();

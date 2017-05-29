@@ -9,6 +9,7 @@
 #include "../messenger.h"
 #include "../Thread.h"
 #include "command.h"
+#include "menu.h"
 
 class Player: public Thread {
 private:
@@ -17,9 +18,10 @@ private:
     int color;
     bool conected, playing;
     std::vector<Command>* cmds;
+    Menu& menu;
 
 public:
-    Player(std::string id, Messenger* messenger, std::vector<Command>* cmds);
+    Player(std::string id, Messenger* messenger, Menu& menu);
 
     void run();
 };

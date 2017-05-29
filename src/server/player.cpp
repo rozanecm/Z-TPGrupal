@@ -4,8 +4,8 @@
 
 #include "player.h"
 
-Player::Player(std::string id, Messenger *msg, std::vector<Command>* cmds) :
-        id(id), messenger(msg), conected(true), playing(false), cmds(cmds) {}
+Player::Player(std::string id, Messenger *msg, Menu &menu) :
+        id(id), messenger(msg), conected(true), playing(false), menu(menu) {}
 
 void Player::run() {
     while (conected) {

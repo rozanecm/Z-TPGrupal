@@ -4,12 +4,17 @@
 #include "map.h"
 #include "compass.h"
 #include "unit.h"
+#include "server.h"
 #include "../socketError.h"
 
 #define MAPLENGTH 15
 int main (int argc, char **argv) {
     try {
-        Server server_accepter(argv);
+        std::mutex m;
+
+        Menu menu(m);
+
+        Server server_accepter(argv, menu);
 
         server_accepter.start();
 

@@ -4,21 +4,19 @@
 
 #include "server.h"
 
-Server::Server(char* argv[]) : socket(argv), running(true) {
-//    this->control = new ControlUnit(argv);
-}
+Server::Server(char* argv[], Menu& menu) : socket(argv), running(true),
+                                           menu(menu) {}
 
 void Server::run() {
-//    try {
-//        while(this->running) {
-//            Socket new_client = this->socket.socketAccept();
-//            if (new_client.isValid()) {
-//                Messenger* messenger = new Messenger(new_client);
-//
-//                std::string logIn_msg = messenger->recieveMessage();
-//                if (!processMessage(logIn_msg, messenger)) {
-//                    delete(messenger);
-//                }
+    try {
+        while(this->running) {
+            Socket new_client = this->socket.socketAccept();
+            if (new_client.isValid()) {
+                Messenger* messenger = new Messenger(new_client);
+                menu.addPlayer(messenger, menu);
+//              create player with messenger
+                std::string logIn_msg = messenger->recieveMessage();
+                processMessage(logIn_msg, messenger);
 //
 //                for (std::vector<UserOperator*>::iterator it = this->users.begin();
 //                     it != this->users.end(); ) {
@@ -28,12 +26,12 @@ void Server::run() {
 //                        it = this->users.erase(it);//erase gives me the next iterator
 //                    } else { ++it; }
 //                }
-//            }
-//        }
-//    } catch (SocketError& e) {
-//        std::string error = e.what();
-////        PrintStdErr printer(error);
-//    }
+            }
+        }
+    } catch (SocketError& e) {
+        std::string error = e.what();
+//        PrintStdErr printer(error);
+    }
 }
 
 bool Server::processMessage(std::string& logIn_msg, Messenger* msgr) {
