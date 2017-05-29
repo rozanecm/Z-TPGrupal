@@ -6,6 +6,7 @@
 #include <vector>
 #include "Map.h"
 #include "MapMonitor.h"
+#include "../common/messenger.h"
 
 #define SUCCESSRETURNCODE 0
 
@@ -46,12 +47,17 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
+
+    ServerMessenger messenger(LOCALHOST, PORT);
+
     /* create graphics and client threads */
-    GraphicsThread graphicsThread(argc, argv, playerMonitor, buildingsMonitor,
-                                  mapMonitor);
+    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
+                                  mapMonitor, messenger);
+
+
     /* DEBUG: RUN 'netcat -l 8000' in terminal */
     ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
-                              LOCALHOST, PORT);
+                              messenger);
 
     /* start threads */
     clientThread.start();

@@ -14,14 +14,13 @@ class ClientThread : public Thread {
     PlayersMonitor &playersMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
-    ServerMessenger messenger;
+    ServerMessenger& messenger;
     bool finished = false; // Flag for finishing execution
     std::map<std::string, Command*> commands;
 
 public:
-    ClientThread(PlayersMonitor &playerMonitor,
-                     BuildingsMonitor &buildingsMonitor, MapMonitor &mapMonitor,
-                     const char *addr, unsigned int port);
+    ClientThread(PlayersMonitor &playerMonitor, BuildingsMonitor &buildingsMonitor,
+                 MapMonitor &mapMonitor, ServerMessenger& messenger);
 
     virtual void run();
 

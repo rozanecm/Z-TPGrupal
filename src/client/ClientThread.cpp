@@ -53,11 +53,11 @@ void ClientThread::initMap(std::string& path) const {
 ClientThread::ClientThread(PlayersMonitor &playerMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
-                           const char *addr, unsigned int port) :
+                           ServerMessenger& messenger) :
         playersMonitor(playerMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
-        messenger(addr, port)
+        messenger(messenger)
 {
 }
 
