@@ -33,7 +33,7 @@ set(SOURCE_FILES
         src/socketError.cpp src/socketError.h
         src/messenger.cpp src/messenger.h
         src/server/controlUnit.cpp src/server/controlUnit.h
-        src/server/command.cpp src/server/command.h src/server/server.cpp src/server/server.h src/server/player.cpp src/server/player.h src/server/menu.cpp src/server/menu.h src/server/lobby.cpp src/server/lobby.h src/server/game.cpp src/server/game.h)
+        src/server/command.cpp src/server/command.h src/server/server.cpp src/server/server.h src/server/player.cpp src/server/player.h src/server/menu.cpp src/server/menu.h src/server/lobby.cpp src/server/lobby.h src/server/game.cpp src/server/game.h src/server/command_cu.cpp src/server/command_cu.h)
 
 add_executable(Z_TPGrupal ${SOURCE_FILES})
 

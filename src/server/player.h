@@ -9,6 +9,8 @@
 #include "../messenger.h"
 #include "../Thread.h"
 #include "command.h"
+#include "menu.h"
+
 class Command;
 class ControlUnit;
 
@@ -21,18 +23,20 @@ private:
     bool conected, playing;
     std::vector<Command*> cmds;
     ControlUnit* control;
-//    Menu& menu;
+    Menu& menu;
 
 public:
-    Player(std::string id, Messenger* messenger, ControlUnit* control/*, Menu& menu*/);
+    Player(std::string id, Messenger* messenger, ControlUnit* control, Menu& menu);
 
-    Player(std::string id, Messenger* messenger/*, Menu& menu*/);
+    Player(std::string id, Messenger* messenger, Menu& menu);
 
     void addControlUnit(ControlUnit* control);
 
     void run();
 
     void updateInfo(std::string& info);
+
+    Messenger* getMessenger();
 };
 
 

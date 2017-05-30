@@ -9,7 +9,7 @@ Menu::Menu(std::mutex& m) : m(m) {}
 void Menu::addPlayer(Messenger *msgr, Menu& menu) {
     Lock l(m);
     std::string player_id = msgr->recieveMessage();
-    this->players.push_back(new Player(player_id,msgr));
+    this->players.push_back(new Player(player_id,msgr,menu));
     this->players.back()->run();
 }
 
