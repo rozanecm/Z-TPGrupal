@@ -29,10 +29,6 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 set(SOURCE_FILES
-        ../common/Lock.h
-        ../common/Lock.cpp
-        ../common/Thread.h
-        ../common/Thread.cpp
         ../../libs/xml/pugixml.hpp
         ../../libs/xml/pugixml.cpp
         Armament.cpp
@@ -77,4 +73,5 @@ target_link_libraries(Z_Client
         ${GTKMM_LIBRARIES}
         ${SDL_LIBRARY}
         ${SDL2_mixer_LIBRARIES}
-        Threads::Threads)
+        Threads::Threads
+        common)
