@@ -37,7 +37,10 @@
 CMakeCache.txt
 CMakeFiles
 cmake*
-Makefile
+/Makefile
+src/client/Makefile
+src/server/Makefile
+src/generator/Makefile
 Z_Client
 Z_Server
 Z_Generator

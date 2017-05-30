@@ -12,6 +12,7 @@
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "BuildingPanel.h"
+#include "ServerMessenger.h"
 
 class GameWindow : public Gtk::Window {
     GameArea* gameArea;
@@ -21,6 +22,10 @@ class GameWindow : public Gtk::Window {
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;
 
+    PlayersMonitor *playersMonitor;
+    BuildingsMonitor *buildingsMonitor;
+    MapMonitor *mapMonitor;
+    ServerMessenger *messenger;
 public:
     GameWindow(BaseObjectType* cobject,
                const Glib::RefPtr<Gtk::Builder>& builder);
@@ -32,7 +37,7 @@ public:
     void
     setResources(PlayersMonitor *playersMonitor,
                  BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor);
+                 MapMonitor *mapMonitor, ServerMessenger* messenger);
     // Functions to change the window's side panel
     bool change_view_to_unit();
     bool change_view_to_building();
@@ -40,11 +45,6 @@ public:
 
 protected:
     bool onTimeout();
-
-private:
-    PlayersMonitor *playersMonitor;
-    BuildingsMonitor *buildingsMonitor;
-    MapMonitor *mapMonitor;
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

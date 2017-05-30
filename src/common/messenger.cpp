@@ -1,39 +1,20 @@
-//
-// Created by rodian on 22/05/17.
-//
-
+#include <netinet/in.h>
+#include <string>
+#include "socket.h"
 #include "messenger.h"
 
 Messenger::Messenger(Socket& socket) : socket(std::move(socket)),
                                        connected(true) {}
 
 std::string Messenger::recieveMessage() {
-    std::string message = "remote socket finish";
-    if ((socket.isValid()) && (this->connected)){
-        // recieve length of message
-        int status = -2;
-        uint32_t len = 0;
-        status = socket.socketRecieve((char*) &len, (size_t)sizeof(len));
-        if (status == 0)
-            this->connected = false;
-
-        int lenght = ntohl(len);
-
-        // recieve message
-        if ((lenght > 0) && (this->connected)) {
-            char *buff = new char[lenght];
-            status = 0;
-
-            status = socket.socketRecieve(buff, (size_t)lenght);
-            if (status == 0)
-                this->connected = false;
-
-            std::string received_message(buff);
-            message = std::move(received_message);
-            delete [] buff;
-        }
-    }
-    return message;
+    // Receive length first, then the message
+    uint32_t len = 0;
+    socket.receive((char*) &len, sizeof(len));
+    len = ntohl(len);
+    char buf[MSG_SIZE] = "";
+    socket.receive(buf, len);
+    std::string result(buf);
+    return result;
 }
 
 void Messenger::sendMessage(std::string& message) {
@@ -43,24 +24,16 @@ void Messenger::sendMessage(std::string& message) {
 
         int sent = this->socket.socketSend((char*) &network_len,
                                            (size_t)sizeof(network_len));
+=======
+#define MSG_SIZE 1024
+>>>>>>> origin/client-socket
 
-        if (sent <= 0){
-            this->connected = false;
-        } else {
-            // Send message
-            const char* msg = message.c_str();
-            this->socket.socketSend(msg, message.size() + 1);
-        }
-    }
+void protocol_send(Socket& s, const char* msg, unsigned int len) {
+    // Send length first, then the message
+    uint32_t network_len = htonl(len);
+    s.send((char*) &network_len, sizeof(network_len));
+    s.send(msg, len);
 }
 
-bool Messenger::isConnected() {
-    return this->connected;
+std::string protocol_receive(Socket& s) {
 }
-
-void Messenger::shutdown() {
-    this->socket.socketShutDownForRead();
-    this->socket.socketShutDownForWrite();
-}
-
-Messenger::~Messenger() {}

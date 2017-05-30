@@ -10,7 +10,12 @@
 #include <utility>
 
 class Unit {
+public:
+    int get_ID();
+    void update_position(int x, int y);
 private:
+    int id;
+
     Armament armament;
 
     unsigned short frequency;
@@ -27,6 +32,7 @@ private:
     unsigned short velocity;
 
     std::pair<int, int> position;
+    std::pair<int, int> prev_position;
 };
 
 
