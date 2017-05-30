@@ -34,24 +34,24 @@ void Camera::setMapHeight(unsigned int height) {
 
 void Camera::moveUp() {
     if (position.second != minYCoordinate){
-        position.second --;
+        position.second -= tileSize;
     }
 }
 
 void Camera::moveDown() {
     if (position.second != maxYCoordinate){
-        position.second ++;
+        position.second += tileSize;
     }
 }
 
 void Camera::moveRight() {
     if (position.first != maxXCoordinate){
-        position.first ++;
+        position.first += tileSize;
     }
 }
 
 void Camera::moveLeft() {
     if (position.first != minXCoordinate){
-        position.first --;
+        position.first -= tileSize;
     }
 }
