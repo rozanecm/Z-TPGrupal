@@ -11,6 +11,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 set(SOURCE_FILES
+        libs/xml/pugixml.hpp libs/xml/pugixml.cpp
         src/server/main.cpp
         src/server/cell.cpp src/server/cell.h
         src/server/Terrain.cpp src/server/Terrain.h
