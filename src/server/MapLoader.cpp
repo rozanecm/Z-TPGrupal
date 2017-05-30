@@ -1,6 +1,5 @@
 #include <map>
 #include "MapLoader.h"
-
 #include <pugixml.hpp>
 
 

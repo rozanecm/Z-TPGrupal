@@ -4,13 +4,27 @@
 
 #include "unit.h"
 
-Unit::Unit(int life, std::string type, int unit_speed, Size size, Size range,
-      Map& map) : Occupant(life, type, size), Teamable(size),
-compass(map,size,unit_speed), unit_speed(unit_speed), state("std"),
+Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
+          Size range, Map& map) : Occupant(id,life, type, size), Teamable(size),
+compass(map,size,unit_speed), unit_speed(unit_speed), state(STANDINGSTATE),
 range(range), map(map) {}
 
+void Unit::makeAction() {
+    if (this->state == STANDINGSTATE) {
+        // Check for enemies around you. If so, state = ATKSTATE
+        //if (enemiesOnRange())
+//            this->state = ATKSTATE;
+    }
+    if (this->state == MOVESTATE) {
+        this->move();
+    }
+    if (this->state == ATKSTATE) {
+        //attack();
+    }
+}
+
 void Unit::calculateRoadTo(int x, int y) {
-    this->state = "mv";
+    this->state = MOVESTATE;
     Position destination(x,y);
     road = compass.getFastestWay(occ_size.getPosition(),destination);
 }
@@ -18,7 +32,7 @@ void Unit::calculateRoadTo(int x, int y) {
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (this->state == "mv" && !road->empty() && steps <= distance){
+    while (this->state == MOVESTATE && !road->empty() && steps <= distance){
         Position pos = road->back();
         Size next_pos(pos.getX(),pos.getY(),occ_size.getWidth()
                                                         ,occ_size.getHeight());
@@ -43,7 +57,7 @@ void Unit::move() {
     }
 
     if (road->empty())
-        this->state = "std";
+        this->state = STANDINGSTATE;
 }
 
 std::string Unit::getState() const {
@@ -57,9 +71,9 @@ Position Unit::getCurrentPosition() const {
 
 void Unit::grab(Teamable* object, std::string u_type) {
     // move to position
-    if (u_type == "Flag") {
+    if (u_type == FLAGTYPE) {
         object->changeTeam(this->team);
-    } else if (this->type == "Grunt") { // Only Grunt robots can drive
+    } else if (this->type == GRUNTTYPE) { // Only Grunt robots can drive
         // If is not a flag, is a vehicle
         // Unit disappears right before taking the vehicle
         object->changeTeam(this->team);

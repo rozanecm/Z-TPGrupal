@@ -13,8 +13,8 @@ set(SOURCE_FILES
         cell.h
         compass.cpp
         compass.h
-        controUnit.cpp
-        controUnit.h
+        controlUnit.cpp
+        controlUnit.h
         factory.cpp
         factory.h
         main.cpp
@@ -40,7 +40,19 @@ set(SOURCE_FILES
         unitMold.cpp
         unitMold.h
         weapon.cpp
-        weapon.h)
+        weapon.h
+        command.cpp
+        command.h
+        game.cpp
+        game.h
+        lobby.cpp
+        lobby.h
+        menu.cpp
+        server.cpp
+        server.h
+        menu.h
+        player.h
+        player.cpp)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)

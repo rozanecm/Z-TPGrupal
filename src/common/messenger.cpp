@@ -12,17 +12,10 @@ std::string Messenger::recieveMessage() {
     if ((socket.isValid()) && (this->connected)){
         // recieve length of message
         int status = -2;
-        bool not_recieved = true;
         uint32_t len = 0;
-        while (((status < 0) && (status != -1)) && (not_recieved)){
-            status = socket.socketRecieve((char*) &len, (size_t)sizeof(len));
-            if (status > 0) {
-                not_recieved = false;
-            }
-
-            if (status == 0)
-                this->connected = false;
-        }
+        status = socket.socketRecieve((char*) &len, (size_t)sizeof(len));
+        if (status == 0)
+            this->connected = false;
 
         int lenght = ntohl(len);
 
@@ -30,16 +23,11 @@ std::string Messenger::recieveMessage() {
         if ((lenght > 0) && (this->connected)) {
             char *buff = new char[lenght];
             status = 0;
-            not_recieved = true;
-            while ((status == 0) && (not_recieved)) {
-                status = socket.socketRecieve(buff, (size_t)lenght);
-                if (status > 0) {
-                    not_recieved = false;
-                }
 
-                if (status == 0)
-                    this->connected = false;
-            }
+            status = socket.socketRecieve(buff, (size_t)lenght);
+            if (status == 0)
+                this->connected = false;
+
             std::string received_message(buff);
             message = std::move(received_message);
             delete [] buff;
