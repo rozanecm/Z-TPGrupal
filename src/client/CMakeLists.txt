@@ -43,6 +43,8 @@ set(SOURCE_FILES
         BuildingPanel.h
         BuildingsMonitor.cpp
         BuildingsMonitor.h
+        Camera.cpp
+        Camera.h
         Cell.cpp
         Cell.h
         ClientThread.cpp

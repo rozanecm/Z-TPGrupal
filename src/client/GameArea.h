@@ -3,9 +3,11 @@
 
 
 #include <gtkmm/drawingarea.h>
+#include <utility>
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "Camera.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -24,6 +26,8 @@ public:
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
 
+    static void keyboardPressed();
+
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
@@ -31,6 +35,7 @@ private:
     PlayersMonitor *playersMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
+    Camera camera;
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
@@ -48,13 +53,16 @@ private:
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
 
-    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr);
+    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
+                     std::pair<unsigned int, unsigned int> cameraPosition);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
 
     std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
+
+    bool on_key_press_event(GdkEventKey *event) override;
 };
 
 

@@ -8,7 +8,7 @@
 
 void ClientThread::run() {
     /* initialize map so then can be completed with read data */
-    mapMonitor.initializeMap(5, 5);
+    mapMonitor.initializeMap(100, 100);
 
     std::vector<std::vector<std::string>> map;
     pugi::xml_document doc;
