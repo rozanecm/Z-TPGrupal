@@ -7,16 +7,6 @@ set(SOURCE_FILES
         ../../libs/xml/pugiconfig.hpp
         ../../libs/xml/pugixml.cpp
         ../../libs/xml/pugixml.hpp
-        ../common/Lock.cpp
-        ../common/Lock.h
-        ../common/messenger.cpp
-        ../common/messenger.h
-        ../common/socket.cpp
-        ../common/socket.h
-        ../common/socketError.cpp
-        ../common/socketError.h
-        ../common/Thread.cpp
-        ../common/Thread.h
         bullet.cpp
         bullet.h
         cell.cpp
@@ -59,4 +49,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(Z_Server ${SOURCE_FILES})
 
 target_link_libraries(Z_Server
+        common
         Threads::Threads)
