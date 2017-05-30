@@ -9,6 +9,7 @@
 #include "map.h"
 #include "controlUnit.h"
 #include "player.h"
+class ControlUnit;
 
 class Game {
 private:

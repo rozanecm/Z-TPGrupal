@@ -7,6 +7,8 @@
 
 
 #include "player.h"
+#include "game.h"
+class Player;
 
 class Lobby {
 private:

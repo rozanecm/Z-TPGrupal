@@ -9,15 +9,16 @@
 class ControlUnit;
 
 class Command {
-private:
+protected:
     std::string cmd;
+    ControlUnit* control;
     int unit_id, other_id, x,y;
 public:
-    Command(std::string& cmd);
+    Command(std::string& cmd, ControlUnit* control);
 
-    virtual void run() = 0;
+     void run();
 
-    virtual void operator()() = 0;
+     void operator()();
 
 private:
     std::string getNextData(std::string& line);

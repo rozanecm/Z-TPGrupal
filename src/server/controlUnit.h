@@ -11,7 +11,7 @@
 #include "unit.h"
 #include "../Lock.h"
 #include "command.h"
-#include "player.h"
+#include "../messenger.h"
 
 class Command;
 

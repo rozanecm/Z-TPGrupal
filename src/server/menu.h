@@ -8,18 +8,21 @@
 
 #include <vector>
 #include "player.h"
+class Player;
+class Lobby;
 
 class Menu {
 private:
     std::vector<Player*> players;
     std::mutex& m;
-    // vector of lobbies
+    int lobby_counter;
+    std::vector<Lobby*> lobbys;
 public:
     Menu(std::mutex& m);
 
     void addPlayer(Messenger* msgr, Menu& menu);
 
-    void createNewLobbie(Player* player);
+    void createNewLobby(Player* player);
 
     std::string getLobbiesInfo();
 

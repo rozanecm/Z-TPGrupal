@@ -4,11 +4,13 @@
 
 #include "lobby.h"
 
+
 Lobby::Lobby(int id) : lobby_id(id), all_ready(false) {}
 
 void Lobby::startGame() {
     if(all_ready){
         //start game
+        Game game();
     }
 }
 
