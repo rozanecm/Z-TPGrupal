@@ -1,17 +1,15 @@
 #include <fstream>
+#include <string>
 #include <vector>
 #include <iostream>
 #include "MapGenerator.h"
 #include <pugixml.hpp>
+#include <random>
 
-#define RIVER_END_PCT 5
-#define TERRAIN "terrain"
 
-using namespace pugi;
-
-void print_map(xml_node& root_node) {
-    for(xml_node& row : root_node.children()) {
-        for (xml_node &node : row.children()) {
+void print_map(pugi::xml_node& root_node) {
+/* for (pugi::xml_node& row : root_node.children()) {
+        for (pugi::xml_node &node : row.children()) {
             char terrain = node.attribute(TERRAIN).value()[0];
             if (terrain == 'T') {
                 terrain = ' ';
@@ -19,7 +17,7 @@ void print_map(xml_node& root_node) {
             std::cout << terrain << " ";
         }
         std::cout << std::endl;
-    }
+    }*/
 }
 
 
@@ -39,27 +37,29 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     }
     water_cells = (int) (size * size * water_pct / 100);
     lava_cells = (int) (size * size * lava_pct / 100);
+    terr = 9;
 }
 
-void MapGenerator::generate_blank_map(xml_node root_node) {
+void MapGenerator::generate_blank_map(pugi::xml_node root_node) {
     for (int i = 0; i < size; ++i) {
-        xml_node row = root_node.append_child("Row");
+        pugi::xml_node row = root_node.append_child("Row");
         for (int j = 0; j < size; ++j) {
-            xml_node cell = row.append_child("Cell");
-            xml_attribute attr = cell.append_attribute(TERRAIN);
+            pugi::xml_node cell = row.append_child("Cell");
+            pugi::xml_attribute attr = cell.append_attribute(TERRAIN);
             attr.set_value("Tierra");
         }
     }
 }
 
-std::vector<std::vector<bool>> MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
+std::vector<std::vector<bool>>
+MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
                                    const std::string &terrain) {
     std::vector<std::vector<bool>> map;
     generate_path(cell_amt, time(NULL), map);
     int count_y = 0;
-    for(xml_node& row : root_node.children()) {
+    for (pugi::xml_node& row : root_node.children()) {
         int count_x = 0;
-        for(xml_node& node : row.children()) {
+        for (pugi::xml_node& node : row.children()) {
             if (map[count_x][count_y]) {
                 node.attribute(TERRAIN).set_value(terrain.c_str());
             }
@@ -89,7 +89,7 @@ void MapGenerator::generate_path(int amt, time_t seed,
         path.push_back(row);
     }
 
-    int river_x = rand() % size;
+    int river_x = rand_r(NULL) % size;
     int river_y = rand() % size;
 
     while (amt) {
@@ -138,14 +138,14 @@ void MapGenerator::generate_path(int amt, time_t seed,
     }
 }
 
-void MapGenerator::generate_rocks(xml_node root) {
+void MapGenerator::generate_rocks(pugi::xml_node root) {
     root.set_name("Structures");
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             if (!liquid_cells[i][j]) {
                 int chance = rand() % 100;
                 if (chance < ROCK_PCT) {
-                    xml_node rock = root.append_child("Struct");
+                    pugi::xml_node rock = root.append_child("Struct");
                     rock.append_attribute("Type").set_value("Rock");
                     rock.append_attribute("x").set_value(i);
                     rock.append_attribute("y").set_value(j);
@@ -155,58 +155,123 @@ void MapGenerator::generate_rocks(xml_node root) {
     }
 }
 
+/* UNFINISHED */
 void MapGenerator::populate_bridge(int x, int y)  {
-    xml_node bridge;
+    pugi::xml_node bridge;
     int direction = rand() % 2;
     if (direction) { // horizontal
         int dir = 1;
         int offset = 0;
         bool done = false;
-        while(!done) {
-            xml_node child = bridge.append_child("Struct");
+        while (!done) {
+            pugi::xml_node child = bridge.append_child("Struct");
             child.append_attribute("Type").set_value("Bridge");
             child.append_attribute("x").set_value(x + dir * offset);
             child.append_attribute("y").set_value(y);
             offset++;
-            if(x + dir * offset >= size || x + dir * offset < 0) {
+            if (x + dir * offset >= size || x + dir * offset < 0) {
                 dir = -1 * dir;
                 offset = 1;
             }
+            done = true; // idk
         }
     }
 }
+
+/* UNFINISHED */
 void MapGenerator::generate_bridges() {
     int amt = BRIDGE_AMT;
     while (amt) {
         int x = rand() % size;
         int y = rand() % size;
-        if(liquid_cells[x][y]) {
-
+        if (liquid_cells[x][y]) {
         }
 
         amt--;
     }
-
 }
 
 void MapGenerator::generate(const std::string& name) {
-    std::string path = "maps/" + name + ".xml";
-    xml_document document;
-    xml_node root = document.append_child("Map");
-    xml_node terrain = root.append_child("Terrain");
+    std::string path = "../../maps/" + name + ".xml";
+    pugi::xml_document document;
+    pugi::xml_node root = document.append_child("Map");
+    pugi::xml_node terrain = root.append_child("Terrain");
     generate_blank_map(terrain);
+
+    generate_territories(root);
     generate_rivers(terrain, water_cells, "Agua");
     generate_rivers(terrain, lava_cells, "Lava");
 
 
-    xml_node structs = root.append_child("Structs");
+    pugi::xml_node structs = root.append_child("Structs");
     generate_rocks(structs);
     print_map(terrain);
-    document.save_file(path.c_str());
+    bool saved = document.save_file(path.c_str());
+    if (!saved) {
+        std::cout << "Error saving map to " << path << std::endl;
+    }
 }
 
 MapGenerator::~MapGenerator() {
     if (output.is_open()) {
         output.close();
     }
+}
+
+void MapGenerator::generate_territories(pugi::xml_node root) {
+    srand(time(NULL) * time(NULL));
+    pugi::xml_node forts = root.append_child("Territories");
+
+    double size_sqrt =  sqrt(terr);
+    int offset = size / terr;
+    int territories_x = (int) floor(size_sqrt);
+    int territories_y = (int) ceil(size_sqrt);
+
+    int div_x = size / territories_x;
+    int div_y = size / territories_y;
+
+
+    /* Choose exactly FORTS_AMT of territories to be designed as central.
+     * There's one fort for each expected player in the map */
+    int fort_territories[FORTS_AMT];
+    for (int k = 0; k < FORTS_AMT; ++k) {
+        bool found = false;
+        while (!found) {
+            int position = rand() % terr;
+            bool repeat = false;
+            for (int i = 0; i < k; ++i) {
+                if (fort_territories[i] == position) {
+                    repeat = true;
+                }
+            }
+            if (repeat) {
+                continue;
+            }
+            fort_territories[k] = position;
+            found = true;
+        }
+    }
+
+    int count = 0;
+    for (int i = 0; i < territories_y; ++i) {
+        for (int j = 0; j < territories_x; ++j) {
+            int flag_x = div_x * j + offset + rand() % (size / (2 * terr));
+            int flag_y = div_y * i + offset + rand() % (size / (2 * terr));
+
+            std::string name = "Flag";
+            for (int k = 0; k < FORTS_AMT; ++k) {
+                if (fort_territories[k] == count) {
+                    name = "Fort";
+                }
+            }
+
+            pugi::xml_node flag = forts.append_child(name.c_str());
+            flag.append_attribute("x").set_value(flag_x);
+            flag.append_attribute("y").set_value(flag_y);
+
+            count ++;
+        }
+    }
+
+    int forts_offset = size / 4;
 }
