@@ -43,6 +43,7 @@ GameArea::GameArea(BaseObjectType *cobject,
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 
     add_events(Gdk::EventMask::KEY_PRESS_MASK);
+    set_can_focus(true);
 }
 
 GameArea::~GameArea() { }
@@ -58,13 +59,13 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                            cameraPosition) {
     /* cameraPosition is given in pixels.
      * i,j indicate TILES. */
-    for (unsigned int i =
-            cameraPosition.first/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
-         i < cameraPosition.first/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++i){
+    for (unsigned int i = 0
+            ;
+         i < NUMBER_OF_TILES_TO_SHOW; ++i){
         for (unsigned int j =
-                cameraPosition.second/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2;
-             j < cameraPosition.second/TILESIZE+NUMBER_OF_TILES_TO_SHOW/2; ++j){
-            drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(i, j));
+                0;
+             j < NUMBER_OF_TILES_TO_SHOW; ++j){
+            drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(cameraPosition.first/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2 + i, cameraPosition.second/TILESIZE-NUMBER_OF_TILES_TO_SHOW/2 + j));
         }
     }
 }
@@ -133,22 +134,18 @@ void GameArea::keyboardPressed() {
 bool GameArea::on_key_press_event(GdkEventKey *event) {
     if (event->keyval == GDK_KEY_Up) {
         camera.moveUp();
-        std::cout<<"UP"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Down){
         camera.moveDown();
-        std::cout<<"DOWN"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Left){
         camera.moveLeft();
-        std::cout<<"LEFT"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Right){
         camera.moveRight();
-        std::cout<<"RIGHT"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }
