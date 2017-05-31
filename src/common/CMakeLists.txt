@@ -13,7 +13,9 @@ set(COMMON_FILES
         socketError.cpp
         socketError.h
         Thread.cpp
-        Thread.h)
+        Thread.h
+        split.cpp
+        split.h)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_library(common ${COMMON_FILES})

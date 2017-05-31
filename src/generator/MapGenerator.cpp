@@ -89,7 +89,7 @@ void MapGenerator::generate_path(int amt, time_t seed,
         path.push_back(row);
     }
 
-    int river_x = rand_r(NULL) % size;
+    int river_x = rand() % size;
     int river_y = rand() % size;
 
     while (amt) {
@@ -192,7 +192,7 @@ void MapGenerator::generate_bridges() {
 }
 
 void MapGenerator::generate(const std::string& name) {
-    std::string path = "../../maps/" + name + ".xml";
+    std::string path = "maps/" + name + ".xml";
     pugi::xml_document document;
     pugi::xml_node root = document.append_child("Map");
     pugi::xml_node terrain = root.append_child("Terrain");

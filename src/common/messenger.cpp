@@ -6,6 +6,8 @@
 Messenger::Messenger(Socket& socket) : socket(std::move(socket)),
                                        connected(true) {}
 
+#define MSG_SIZE 1024
+
 std::string Messenger::recieveMessage() {
     // Receive length first, then the message
     uint32_t len = 0;
@@ -17,23 +19,23 @@ std::string Messenger::recieveMessage() {
     return result;
 }
 
-void Messenger::sendMessage(std::string& message) {
+void Messenger::sendMessage(const std::string &message) {
     if (this->connected) {
-        // Send length first
-        uint32_t network_len = htonl((uint32_t) (message.size() + 1));
-
-        int sent = this->socket.socketSend((char*) &network_len,
-                                           (size_t)sizeof(network_len));
-=======
-#define MSG_SIZE 1024
->>>>>>> origin/client-socket
-
-void protocol_send(Socket& s, const char* msg, unsigned int len) {
-    // Send length first, then the message
-    uint32_t network_len = htonl(len);
-    s.send((char*) &network_len, sizeof(network_len));
-    s.send(msg, len);
+        uint32_t len = (uint32_t) message.size();
+        // Send length first, then the message
+        uint32_t network_len = htonl(len);
+        socket.send((char *) &network_len, sizeof(network_len));
+        socket.send(message.c_str(), len);
+    }
 }
 
-std::string protocol_receive(Socket& s) {
+void Messenger::shutdown() {
+    socket.shutdown();
+}
+
+bool Messenger::isConnected() {
+    return socket.is_valid();
+}
+
+Messenger::~Messenger() {
 }

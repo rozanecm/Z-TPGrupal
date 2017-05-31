@@ -29,19 +29,6 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 set(SOURCE_FILES
-<<<<<<< HEAD
-=======
-        ../common/Lock.h
-        ../common/Lock.cpp
-        ../common/Thread.h
-        ../common/Thread.cpp
-        ../common/messenger.h
-        ../common/messenger.cpp
-        ../common/socket.h
-        ../common/socket.cpp
-        ../common/split.cpp
-        ../common/split.h
->>>>>>> origin/client-socket
         ../../libs/xml/pugixml.hpp
         ../../libs/xml/pugixml.cpp
         Armament.cpp

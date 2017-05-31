@@ -4,19 +4,19 @@
 
 #include "server.h"
 
-Server::Server(char* argv[], Menu& menu) : socket(argv), running(true),
-                                           menu(menu) {}
+Server::Server(unsigned int port, Menu &menu) : socket(port),
+                                                running(true),
+                                                menu(menu) {}
 
 void Server::run() {
     try {
         while(this->running) {
-            Socket new_client = this->socket.socketAccept();
-            if (new_client.isValid()) {
-                Messenger* messenger = new Messenger(new_client);
-                menu.addPlayer(messenger, menu);
+            Socket new_client = this->socket.accept_client();
+            Messenger* messenger = new Messenger(new_client);
+            menu.addPlayer(messenger, menu);
 //              create player with messenger
-                std::string logIn_msg = messenger->recieveMessage();
-                processMessage(logIn_msg, messenger);
+            std::string logIn_msg = messenger->recieveMessage();
+            processMessage(logIn_msg, messenger);
 //
 //                for (std::vector<UserOperator*>::iterator it = this->users.begin();
 //                     it != this->users.end(); ) {
@@ -26,7 +26,7 @@ void Server::run() {
 //                        it = this->users.erase(it);//erase gives me the next iterator
 //                    } else { ++it; }
 //                }
-            }
+
         }
     } catch (SocketError& e) {
         std::string error = e.what();
@@ -80,8 +80,7 @@ std::string Server::getNextData(std::string& line) {
 }
 
 void Server::stop() {
-    this->socket.socketShutDownForRead();
-    this->socket.socketShutDownForWrite();
+    this->socket.shutdown();
     this->running = false;
 }
 

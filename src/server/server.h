@@ -19,7 +19,7 @@ private:
 
 public:
     // Recieves the arguments to build the Control Unit
-    explicit Server(char* argv[], Menu& menu);
+    explicit Server(unsigned int port, Menu &menu);
 
     // use to start the process of of accepting clients
     void run();

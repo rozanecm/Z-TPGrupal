@@ -3,15 +3,16 @@
 
 #include <mutex>
 #include <string>
+#include <messenger.h>
 #include "../common/socket.h"
 
 /* Handles communication with the server */
 class ServerMessenger {
-    Socket s;
+    Messenger messenger;
     std::mutex m;
 public:
     /* Constructor: connects to the given addr/port combination */
-    ServerMessenger(const char* addr, unsigned int port);
+    ServerMessenger(Socket& s);
 
     void send(const std::string& message);
     std::string receive();

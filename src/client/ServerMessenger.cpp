@@ -5,21 +5,20 @@
 #include "../common/messenger.h"
 #include "../common/socket.h"
 
-ServerMessenger::ServerMessenger(const char *addr, unsigned int port) :
-    s(addr, port)
-{
+ServerMessenger::ServerMessenger(Socket& s) :
+    messenger(s) {
 }
 
 void ServerMessenger::send(const std::string &message) {
     Lock l(m);
-    protocol_send(s, message.c_str(), (unsigned int) message.size());
+    messenger.sendMessage(message);
 }
 
 std::string ServerMessenger::receive() {
     Lock l(m);
-    return protocol_receive(s);
+    return messenger.recieveMessage();
 }
 
 void ServerMessenger::kill() {
-    s.shutdown();
+    messenger.shutdown();
 }

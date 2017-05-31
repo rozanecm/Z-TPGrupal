@@ -2,7 +2,8 @@
 #include "cell.h"
 #include "compass.h"
 #include "server.h"
-#include "../common/socketError.h"
+
+#define PORT 8000
 
 int main (int argc, char **argv) {
 
@@ -11,7 +12,7 @@ int main (int argc, char **argv) {
 
         Menu menu(m);
 
-        Server server_accepter(argv, menu);
+        Server server_accepter(8000, menu);
 
         server_accepter.start();
 

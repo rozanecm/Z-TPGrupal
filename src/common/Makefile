@@ -260,6 +260,33 @@ socketError.cpp.s:
 	cd /home/rodian/Facultad/Taller/z-tpgrupal && $(MAKE) -f src/common/CMakeFiles/common.dir/build.make src/common/CMakeFiles/common.dir/socketError.cpp.s
 .PHONY : socketError.cpp.s
 
+split.o: split.cpp.o
+
+.PHONY : split.o
+
+# target to build an object file
+split.cpp.o:
+	cd /home/rodian/Facultad/Taller/z-tpgrupal && $(MAKE) -f src/common/CMakeFiles/common.dir/build.make src/common/CMakeFiles/common.dir/split.cpp.o
+.PHONY : split.cpp.o
+
+split.i: split.cpp.i
+
+.PHONY : split.i
+
+# target to preprocess a source file
+split.cpp.i:
+	cd /home/rodian/Facultad/Taller/z-tpgrupal && $(MAKE) -f src/common/CMakeFiles/common.dir/build.make src/common/CMakeFiles/common.dir/split.cpp.i
+.PHONY : split.cpp.i
+
+split.s: split.cpp.s
+
+.PHONY : split.s
+
+# target to generate assembly for a file
+split.cpp.s:
+	cd /home/rodian/Facultad/Taller/z-tpgrupal && $(MAKE) -f src/common/CMakeFiles/common.dir/build.make src/common/CMakeFiles/common.dir/split.cpp.s
+.PHONY : split.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -284,6 +311,9 @@ help:
 	@echo "... socketError.o"
 	@echo "... socketError.i"
 	@echo "... socketError.s"
+	@echo "... split.o"
+	@echo "... split.i"
+	@echo "... split.s"
 .PHONY : help
 
 
