@@ -209,7 +209,9 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *
      */
     if (event->button == 1) {
-        std::cout<<"clicked"<<std::endl;
+        gdouble x = event->x;
+        gdouble y = event->y;
+        std::cout<<"X: "<<x<<", y: "<<y<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }
