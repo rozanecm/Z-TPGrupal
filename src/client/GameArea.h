@@ -63,6 +63,8 @@ private:
     std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
 
     bool on_key_press_event(GdkEventKey *event) override;
+
+    bool on_button_press_event(GdkEventButton *event) override;
 };
 
 

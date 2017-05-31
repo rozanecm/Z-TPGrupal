@@ -42,6 +42,7 @@ GameArea::GameArea(BaseObjectType *cobject,
             ("res/assets/tiles/agua.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 
+    add_events(Gdk::EventMask::BUTTON_PRESS_MASK);
     add_events(Gdk::EventMask::KEY_PRESS_MASK);
     set_can_focus(true);
 }
@@ -131,8 +132,9 @@ void GameArea::keyboardPressed() {
 }
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {
-    if (event->keyval == GDK_KEY_Up) {
+    if (event->keyval == GDK_KEY_Up and event->keyval == GDK_KEY_Left) {
         camera.moveUp();
+        camera.moveLeft();
         //returning true, cancels the propagation of the event
         return true;
     }else if (event->keyval == GDK_KEY_Down){
@@ -147,8 +149,68 @@ bool GameArea::on_key_press_event(GdkEventKey *event) {
         camera.moveRight();
         //returning true, cancels the propagation of the event
         return true;
+    }else if (event->keyval == GDK_KEY_Up) {
+        camera.moveUp();
+//        camera.moveLeft();
+        //returning true, cancels the propagation of the event
+        return true;
+    }else if (event->keyval == GDK_KEY_0){
+        std::cout<<"clicked"<<std::endl;
+        //returning true, cancels the propagation of the event
+        return true;
     }
 //
 //    //if the event has not been handled, call the base class
 //    return Gtk::Window::on_key_press_event(key_event);
+}
+
+bool GameArea::on_button_press_event(GdkEventButton *event) {
+    /** From https://developer.gnome.org/gdk3/stable/gdk3-Event
+     *                          -Structures.html#GdkEventButton
+     *
+     * GdkEventType type;   the type of the event (GDK_BUTTON_PRESS,
+     *                      GDK_2BUTTON_PRESS, GDK_3BUTTON_PRESS or
+     *                      GDK_BUTTON_RELEASE).
+     *
+     * GdkWindow *window;   the window which received the event.
+     *
+     * gint8 send_event;    TRUE if the event was sent explicitly.
+     *
+     * guint32 time;        the time of the event in milliseconds.
+     *
+     * gdouble x;           the x coordinate of the pointer relative to the
+     *                      window.
+     *
+     * gdouble y;           the y coordinate of the pointer relative to the
+     *                      window.
+     * gdouble *axes;       x , y translated to the axes of device , or NULL
+     *                      if device is the mouse.
+     *
+     * guint state;         a bit-mask representing the state of the modifier
+     *                      keys (e.g. Control, Shift and Alt) and the pointer
+     *                      buttons. See GdkModifierType.
+     *
+     * guint button;        the button which was pressed or released, numbered
+     *                      from 1 to 5. Normally button 1 is the left mouse
+     *                      button, 2 is the middle button, and 3 is the right
+     *                      button. On 2-button mice, the middle button can
+     *                      often be simulated by pressing both
+     *                      mouse buttons together.
+     *
+     * GdkDevice *device;   the master device that the event originated from.
+     *                      Use gdk_event_get_source_device()
+     *                      to get the slave device.
+     *
+     * gdouble x_root;      the x coordinate of the pointer relative to
+     *                      the root of the screen.
+     *
+     * gdouble y_root;      the y coordinate of the pointer relative to
+     *                      the root of the screen.
+     *
+     */
+    if (event->button == 1) {
+        std::cout<<"clicked"<<std::endl;
+        //returning true, cancels the propagation of the event
+        return true;
+    }
 }
