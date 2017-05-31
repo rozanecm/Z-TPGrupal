@@ -151,11 +151,6 @@ bool GameArea::on_key_press_event(GdkEventKey *event) {
         return true;
     }else if (event->keyval == GDK_KEY_Up) {
         camera.moveUp();
-//        camera.moveLeft();
-        //returning true, cancels the propagation of the event
-        return true;
-    }else if (event->keyval == GDK_KEY_0){
-        std::cout<<"clicked"<<std::endl;
         //returning true, cancels the propagation of the event
         return true;
     }
