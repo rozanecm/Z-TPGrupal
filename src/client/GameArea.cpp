@@ -43,6 +43,7 @@ GameArea::GameArea(BaseObjectType *cobject,
     tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
 
     add_events(Gdk::EventMask::BUTTON_PRESS_MASK);
+    add_events(Gdk::EventMask::BUTTON_RELEASE_MASK);
     add_events(Gdk::EventMask::KEY_PRESS_MASK);
     set_can_focus(true);
 }
@@ -50,6 +51,8 @@ GameArea::GameArea(BaseObjectType *cobject,
 GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
+    if (selectionMade)
+        processSelection();
     drawBaseMap(cr, camera.getPosition());
     drawFlagAnimation(cr, 500, 500);
     return true;
@@ -178,6 +181,7 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *
      * gdouble y;           the y coordinate of the pointer relative to the
      *                      window.
+     *
      * gdouble *axes;       x , y translated to the axes of device , or NULL
      *                      if device is the mouse.
      *
@@ -204,10 +208,24 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *
      */
     if (event->button == 1) {
-        gdouble x = event->x;
-        gdouble y = event->y;
-        std::cout<<"X: "<<x<<", y: "<<y<<std::endl;
+        xStartCoordinate = event->x;
+        yStartCoordinate = event->y;
         //returning true, cancels the propagation of the event
         return true;
     }
+}
+
+bool GameArea::on_button_release_event(GdkEventButton *event) {
+    if (event->button == 1) {
+        xFinishCoordinate = event->x;
+        yFinishCoordinate = event->y;
+        selectionMade = true;
+        //returning true, cancels the propagation of the event
+        return true;
+    }
+}
+
+void GameArea::processSelection() {
+    //todo processing logic.
+    selectionMade = false;
 }

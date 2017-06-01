@@ -32,10 +32,15 @@ protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
+    /* shared resources */
     PlayersMonitor *playersMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
+
     Camera camera;
+
+    /* general resources */
+    std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
@@ -60,11 +65,21 @@ private:
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
 
-    std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
-
+    /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
 
     bool on_button_press_event(GdkEventButton *event) override;
+
+    bool on_button_release_event(GdkEventButton *event) override;
+
+    /* vars. for event handling */
+    gdouble xStartCoordinate;
+    gdouble xFinishCoordinate;
+    gdouble yStartCoordinate;
+    gdouble yFinishCoordinate;
+    bool selectionMade;
+
+    void processSelection();
 };
 
 
