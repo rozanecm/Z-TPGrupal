@@ -12,7 +12,13 @@
 class Unit {
 public:
     int get_ID();
+
     void update_position(int x, int y);
+
+    void markAsSelectedInRange(gdouble xStartCoordinate,
+                               gdouble yStartCoordinate,
+                               gdouble xFinishCoordinate,
+                               gdouble yFinishCoordinate);
 private:
     int id;
 
