@@ -31,3 +31,10 @@ std::string MapMonitor::getTerrainTypeAt(unsigned int xCoordinate,
     Lock l(m);
     return map.getTerrainTypeAt(xCoordinate, yCoordinate);
 }
+
+void MapMonitor::markAsSelectedInRange(double xStartCoordinate,
+                                       double yStartCoordinate,
+                                       double xFinishCoordinate,
+                                       double yFinishCoordinate) {
+    //todo implementar esto que falta ver el tema de accidentales sobre el mapa.
+}
