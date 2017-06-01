@@ -33,6 +33,10 @@ private:
 
     std::pair<int, int> position;
     std::pair<int, int> prev_position;
+
+    /* bool selected: indicates wether the unit has been selected
+     * with the mouse or not */
+    bool selected;
 };
 
 
