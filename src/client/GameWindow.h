@@ -26,6 +26,7 @@ class GameWindow : public Gtk::Window {
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
+
 public:
     GameWindow(BaseObjectType* cobject,
                const Glib::RefPtr<Gtk::Builder>& builder);

@@ -12,7 +12,7 @@ class ServerMessenger {
     std::mutex m;
 public:
     /* Constructor: connects to the given addr/port combination */
-    ServerMessenger(Socket& s);
+    explicit ServerMessenger(Socket& s);
 
     void send(const std::string& message);
     std::string receive();

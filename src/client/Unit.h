@@ -19,6 +19,7 @@ public:
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);
+
 private:
     int id;
 

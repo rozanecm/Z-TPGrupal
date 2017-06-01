@@ -28,6 +28,7 @@ private:
     /* bool selected: indicates wether the unit has been selected
      * with the mouse or not */
     bool selected;
+
 public:
     /**
      * This methods checks all the player's units to see if any of its units is

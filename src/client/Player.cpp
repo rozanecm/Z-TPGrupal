@@ -9,7 +9,7 @@ void Player::addUnit(Unit &unit) {
 }
 
 bool Player::removeUnit(int id) {
-    for(auto unit = units.begin(); unit != units.end(); ++unit) {
+    for (auto unit = units.begin(); unit != units.end(); ++unit) {
         if (unit->get_ID() == id) {
             units.erase(unit);
             return true;
@@ -19,7 +19,7 @@ bool Player::removeUnit(int id) {
 }
 
 bool Player::update_position(int id, int x, int y) {
-    for(auto unit = units.begin(); unit != units.end(); ++unit) {
+    for (auto unit = units.begin(); unit != units.end(); ++unit) {
         if (unit->get_ID() == id) {
             unit->update_position(x, y);
             return true;
