@@ -19,18 +19,9 @@ GameArea::GameArea(BaseObjectType *cobject,
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
-    /* load blue flag imgs */
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/buildings/fort/flag_blue_n00.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/buildings/fort/flag_blue_n01.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/buildings/fort/flag_blue_n02.png"));
-
-    blueFlagVector.emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/buildings/fort/flag_blue_n03.png"));
+    
+    /* load blue flags imgs */
+    loadFlagAnimations();
 
     /* load some img */
     someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
@@ -46,6 +37,74 @@ GameArea::GameArea(BaseObjectType *cobject,
     add_events(Gdk::EventMask::BUTTON_RELEASE_MASK);
     add_events(Gdk::EventMask::KEY_PRESS_MASK);
     set_can_focus(true);
+}
+
+void GameArea::loadFlagAnimations() const {
+    /* this methods loads all the imgs needed to draw all the flags' animations.
+     * POSSIBLE OPTIMIZATION: load only needed colors */
+    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n00.png"));
+
+    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n01.png"));
+
+    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n02.png"));
+
+    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n03.png"));
+
+    /* load red flags imgs */
+    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n00.png"));
+
+    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n01.png"));
+
+    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n02.png"));
+
+    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n03.png"));
+
+    /* load yellow flags imgs */
+    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n00.png"));
+
+    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n01.png"));
+
+    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n02.png"));
+
+    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n03.png"));
+
+    /* load green flags imgs */
+    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n00.png"));
+
+    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n01.png"));
+
+    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n02.png"));
+
+    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n03.png"));
+
+    /* load neuter flags imgs */
+    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n00.png"));
+
+    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n01.png"));
+
+    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n02.png"));
+
+    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n03.png"));
 }
 
 GameArea::~GameArea() { }
@@ -94,13 +153,13 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
 void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                                  int xCoordinate, int yCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, blueFlagVector.at(flagCounter),
+    Gdk::Cairo::set_source_pixbuf(cr, flags.at(blue).at(flagCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  blueFlagVector.at(flagCounter)->get_width(),
-                  blueFlagVector.at(flagCounter)->get_height());
+                  flags.at(blue).at(flagCounter)->get_width(),
+                  flags.at(blue).at(flagCounter)->get_height());
     cr->fill();
-    if (flagCounter == blueFlagVector.size()-1){
+    if (flagCounter == flags.at(blue).size()-1){
         flagCounter = 0;
     }else{
         flagCounter++;
@@ -237,3 +296,4 @@ void GameArea::processSelection() {
                                      xFinishCoordinate, yFinishCoordinate);
     selectionMade = false;
 }
+

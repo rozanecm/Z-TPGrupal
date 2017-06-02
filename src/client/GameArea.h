@@ -8,6 +8,7 @@
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
+#include "FlagEnum.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -44,8 +45,8 @@ private:
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
-    /* declare vector which contains imgs composing blue flag animation */
-    std::vector<Glib::RefPtr<Gdk::Pixbuf>> blueFlagVector;
+    /* vector holding all flags */
+    std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
@@ -80,6 +81,8 @@ private:
     bool selectionMade;
 
     void processSelection();
+
+    void loadFlagAnimations() const;
 };
 
 
