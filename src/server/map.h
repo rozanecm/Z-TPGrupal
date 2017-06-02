@@ -17,18 +17,21 @@ class Unit;
 
 class Map {
 private:
-    std::vector<std::vector<Cell>> terrain_map;
+    std::vector<std::vector<Cell>>& terrain_map;
     Size map_size;
-    std::vector<Occupant*> all_occupants;
-    std::vector<Unit*> all_units;
+    std::vector<Occupant>& all_occupants;
+    std::vector<Unit>& all_units;
 
 public:
     // Map receives the center position (x,y) and dimensions width and height
     Map(int x, int y, int width, int height,
-        std::vector<std::vector<Cell>>& terrain_map);
+        std::vector<std::vector<Cell>>& terrain_map,
+        std::vector<Occupant>& all_occupants,
+        std::vector<Unit>& all_units);
 
+    // I'm gonna add Occupants on Game
     // Adds a new Occupant to the list of Occupants of the map
-    void addOccupant(Occupant* new_occupant);
+//    void addOccupant(Occupant* new_occupant);
 
     // Recieves the coordinates (x,y) and returns the terrain factor on that
     // position on the map.

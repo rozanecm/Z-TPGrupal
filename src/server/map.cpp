@@ -5,12 +5,15 @@
 #include "map.h"
 
 Map::Map(int x, int y, int width, int height,
-   std::vector<std::vector<Cell>>& terrain_map) : map_size(x,y,width,height),
-    terrain_map(terrain_map){}
+   std::vector<std::vector<Cell>>& terrain_map,
+         std::vector<Occupant>& occupants,
+         std::vector<Unit>& units) : map_size(x,y,width,height),
+    terrain_map(terrain_map), all_occupants(occupants), all_units(units){}
 
-void Map::addOccupant(Occupant *new_occupant) {
-    all_occupants.push_back(new_occupant);
-}
+
+//void Map::addOccupant(Occupant *new_occupant) {
+//    all_occupants.push_back(new_occupant);
+//}
 
 double Map::getTerrainFactorOn(int x, int y) {
     int w_cell = terrain_map[0][0].getWidthOfCell();
