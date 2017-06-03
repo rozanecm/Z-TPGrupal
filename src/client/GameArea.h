@@ -9,6 +9,9 @@
 #include "MapMonitor.h"
 #include "Camera.h"
 #include "FlagEnum.h"
+#include "TeamEnum.h"
+#include "ActionsEnum.h"
+#include "UnitsEnum.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -45,8 +48,15 @@ private:
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
-    /* vector holding all flags */
+    /* map holding all flags */
     std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
+
+    /* map holding all units */
+    std::map<TeamEnum,
+            std::map<UnitsEnum,
+                    std::map<ActionsEnum,
+                            std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>
+            unitsAnimations;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
@@ -83,6 +93,8 @@ private:
     void processSelection();
 
     void loadFlagAnimations() const;
+
+    void loadUnitsResources();
 };
 
 

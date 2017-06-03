@@ -19,9 +19,10 @@ GameArea::GameArea(BaseObjectType *cobject,
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
-    
     /* load blue flags imgs */
     loadFlagAnimations();
+    /* load units resources */
+    loadUnitsResources();
 
     /* load some img */
     someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
@@ -295,5 +296,10 @@ void GameArea::processSelection() {
     mapMonitor->markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
                                      xFinishCoordinate, yFinishCoordinate);
     selectionMade = false;
+}
+
+void GameArea::loadUnitsResources() {
+    unitsAnimations.operator[](blue).operator[](tough).operator[](fire_0).emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/tough/fire_blue_r000_n00.png"));
 }
 
