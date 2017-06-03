@@ -4,9 +4,9 @@
 
 #include "factory.h"
 
-Factory::Factory(int life, std::string type, Size position,
+Factory::Factory(int id, int life, std::string type, Size position,
                            std::vector<UnitMold> units) :
-Occupant(life,type, position), Teamable(position), running(false), units(units){
+Occupant(id, life,type, position), Teamable(position), running(false), units(units){
     it = units.begin();
 }
 
@@ -42,8 +42,8 @@ std::string Factory::nextUnit() {
 Occupant *Factory::destroyFactory() {
     // capaz necesite un tipo distinto a Occupant para que no pueda ser
     // destruido ni atacado
-    Occupant* ruins = new Occupant(1000,"Ruins",this->occ_size);
-    return ruins;
+//    Occupant* ruins = new Occupant(,1000,"Ruins",this->occ_size);
+//    return ruins;
 }
 
 void Factory::setNewPlayer(std::string player, int tech_level) {

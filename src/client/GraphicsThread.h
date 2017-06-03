@@ -5,26 +5,24 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "ServerMessenger.h"
 
-class GraphicsThread : public Thread{
+class GraphicsThread : public Thread {
+
+    PlayersMonitor &playerMonitor;
+    BuildingsMonitor &buildingsMonitor;
+    MapMonitor &mapMonitor;
+    ServerMessenger &messenger;
 public:
-    GraphicsThread(int argc, char **argv,
-                       PlayersMonitor &monitor,
-                       BuildingsMonitor &buildingsMonitor,
-                       MapMonitor &mapMonitor);
+    GraphicsThread(PlayersMonitor &monitor,
+                   BuildingsMonitor &buildingsMonitor,
+                   MapMonitor &mapMonitor,
+                   ServerMessenger &messenger);
 
     virtual void run();
 
 private:
-    int argc;
 
-    char **argv;
-
-    PlayersMonitor &playerMonitor;
-
-    BuildingsMonitor &buildingsMonitor;
-
-    MapMonitor &mapMonitor;
 };
 
 

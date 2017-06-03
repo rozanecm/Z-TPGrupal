@@ -8,6 +8,7 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "ServerMessenger.h"
 
 class GameBuilder {
     GameWindow* window;
@@ -23,10 +24,11 @@ class GameBuilder {
     PlayersMonitor &playersMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
+    ServerMessenger& messenger;
 
 public:
     GameBuilder(PlayersMonitor &monitor, BuildingsMonitor &buildingsMonitor,
-                    MapMonitor &mapMonitor);
+                    MapMonitor &mapMonitor, ServerMessenger& messenger);
     ~GameBuilder();
 
     // returns the generated window

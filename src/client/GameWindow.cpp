@@ -9,10 +9,8 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::Window(cobject),
-        playersMonitor(nullptr),
-        buildingsMonitor(nullptr),
-        mapMonitor(nullptr) {
+        Gtk::Window(cobject)
+{
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
@@ -39,17 +37,17 @@ bool GameWindow::onTimeout() {
                          get_allocation().get_height());
         win->invalidate_rect(r, false);
     }
-    std::cout<<"in onTimeout"<<std::endl;
     return true;
 }
 
 void GameWindow::setResources(PlayersMonitor *playersMonitor,
                               BuildingsMonitor *buildingsMonitor,
-                              MapMonitor *mapMonitor) {
+                              MapMonitor *mapMonitor,
+                              ServerMessenger *messenger) {
     this->playersMonitor = playersMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
-
+    this->messenger = messenger;
     gameArea->setResources(playersMonitor, buildingsMonitor, mapMonitor);
 }
 

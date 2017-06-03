@@ -1,90 +1,46 @@
-//
-// Created by rodian on 22/05/17.
-//
+#ifndef TP3TALLER_COMMON_SOCKET_H
+#define TP3TALLER_COMMON_SOCKET_H
 
-#ifndef Z_TPGRUPAL_SOCKET_H
-#define Z_TPGRUPAL_SOCKET_H
-
+#include <string>
 #include "socketError.h"
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
-#include <arpa/inet.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <iostream>
 
-////////////////////////
-// Socket Class
-////////////////////////
+#define LISTEN_BACKLOG 10 // Amt. of connections to have in the accept backlog
+
+// Socket class. Wraps functionality of glibc's socket functions.
 class Socket {
-private:
-    int file_descriptor;
-    struct addrinfo* result;
-    struct addrinfo addr_pointer;
+    int fd;
 
 public:
-    // Prepares the socket to be ready for use
-    // for a client or a server
-    // by argv[] knows if the builder is a server or a client
-    explicit Socket(char* argv[]);
+    /* Server constructor. Creates a socket, binds and listens to the specified
+     * port. */
+    explicit Socket(int port);
 
-    // Uses the getaddressinfo fuction making the necesary settings
-    // for a server or a client
-    void setAddrInfo(char* argv[]);
-
-    // Conects a client socket to the a server
-    void connectToServer();
-
-    // Creates a socket saving the file descriptor
-    // On error it closes the program
-    void createSocketTcp(struct addrinfo* addr_pointer);
-
-    // Makes necesary preparations for server socket
-    void setSocket();
-
-    // Sends the batch of bytes to the previously connected
-    // socket. On Error returns the retun of send
-    // On success returns bytes sent
-    int socketSend(const char* buff_to_send, size_t length);
-
-    // Recieves the batch of bytes of the previously connected socket
-    // On Error returns the return of recv
-    // On success returns how many bytes recieved
-    int socketRecieve(char* buff_to_receive, size_t length);
-
-    // Binds and listen for a new socket
-    void bindAndListen(struct addrinfo *addr_pointer);
-
-    // Accepts the connection to a socket who wants
-    // to connect with this one
-    Socket socketAccept();
-
-    // Shuts down the capability to recieve messages of the socket
-    void socketShutDownForRead();
-
-    // Shuts down the capability to send messages of the socket
-    void socketShutDownForWrite();
-
-    // Returns true if the file descriptor is valid
-    // otherwise false
-    bool isValid();
-
-    Socket(Socket&& other);
-
-    Socket(Socket&) = delete;
-
-    void operator=(Socket&) = delete;
+    /* Client constructor. Creates a socket and attempts to connect to the
+     * specified address/port. Raises exception if the connection fails. */
+    Socket(const char *addr, int port);
 
     ~Socket();
 
+    // Returns a new client.
+    Socket accept_client();
+
+    // Sends/recieves len bytes of data
+    ssize_t send(const char *msg, unsigned int len);
+    ssize_t receive(char *dest, size_t len);
+
+    // Wrapper for socket shutdown/close
+    void shutdown();
+    void close(); // Effectively makes the socket object useless
+
+    bool is_valid();
+    // Move constructor
+    Socket(Socket&& other);
+
 private:
-    // Constructor meant to be use when a socket is accepted
-    explicit Socket(int file_d);
+    Socket();
+
+    Socket(Socket&) = delete;
+    void operator=(Socket&) = delete;
 };
 
-
-#endif //Z_TPGRUPAL_SOCKET_H
+#endif //TP3TALLER_COMMON_SOCKET_H

@@ -7,24 +7,14 @@ set(SOURCE_FILES
         ../../libs/xml/pugiconfig.hpp
         ../../libs/xml/pugixml.cpp
         ../../libs/xml/pugixml.hpp
-        ../common/Lock.cpp
-        ../common/Lock.h
-        ../common/messenger.cpp
-        ../common/messenger.h
-        ../common/socket.cpp
-        ../common/socket.h
-        ../common/socketError.cpp
-        ../common/socketError.h
-        ../common/Thread.cpp
-        ../common/Thread.h
         bullet.cpp
         bullet.h
         cell.cpp
         cell.h
         compass.cpp
         compass.h
-        controUnit.cpp
-        controUnit.h
+        controlUnit.cpp
+        controlUnit.h
         factory.cpp
         factory.h
         main.cpp
@@ -50,7 +40,19 @@ set(SOURCE_FILES
         unitMold.cpp
         unitMold.h
         weapon.cpp
-        weapon.h)
+        weapon.h
+        command.cpp
+        command.h
+        game.cpp
+        game.h
+        lobby.cpp
+        lobby.h
+        menu.cpp
+        server.cpp
+        server.h
+        menu.h
+        player.h
+        player.cpp)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -59,4 +61,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(Z_Server ${SOURCE_FILES})
 
 target_link_libraries(Z_Server
+        common
         Threads::Threads)

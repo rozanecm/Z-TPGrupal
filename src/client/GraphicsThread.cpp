@@ -4,11 +4,12 @@
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
+#include "ServerMessenger.h"
 
 void GraphicsThread::run() {
-    auto app = Gtk::Application::create(argc, argv);
+    auto app = Gtk::Application::create();
 
-    GameBuilder game(playerMonitor, buildingsMonitor, mapMonitor);
+    GameBuilder game(playerMonitor, buildingsMonitor, mapMonitor, messenger);
     GameWindow* window = game.get_window();
 
     if (window) {
@@ -20,13 +21,13 @@ void GraphicsThread::run() {
     }
 }
 
-GraphicsThread::GraphicsThread(int argc, char **argv,
-                               PlayersMonitor &monitor,
+GraphicsThread::GraphicsThread(PlayersMonitor &monitor,
                                BuildingsMonitor &buildingsMonitor,
-                               MapMonitor &mapMonitor)
-        : argc(argc),
-          argv(argv),
-          playerMonitor(monitor),
-          buildingsMonitor(buildingsMonitor),
-          mapMonitor(mapMonitor){
+                               MapMonitor &mapMonitor,
+                               ServerMessenger &messenger) :
+        playerMonitor(monitor),
+        buildingsMonitor(buildingsMonitor),
+        mapMonitor(mapMonitor),
+        messenger(messenger)
+{
 }

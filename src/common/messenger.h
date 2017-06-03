@@ -31,7 +31,7 @@ public:
 
     // Sends a message to the remote socket
     // Recieves the message on a string
-    void sendMessage(std::string& message);
+    void sendMessage(const std::string &message);
 
     // Shuts down the socket for read and write
     void shutdown();

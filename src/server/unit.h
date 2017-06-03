@@ -9,8 +9,13 @@
 #include "compass.h"
 #include "teamable.h"
 //#include "map.h"
-
+#define ATKSTATE "atk"
+#define MOVESTATE "mv"
+#define STANDINGSTATE "std"
+#define FLAGTYPE "Flag"
+#define GRUNTTYPE "Grunt"
 class Map;
+
 
 class Unit: public Occupant, public Teamable {
 private:
@@ -24,8 +29,10 @@ private:
     std::vector<Position>* road;
 
 public:
-    Unit(int life, std::string type, int unit_speed, Size size, Size range,
+    Unit(int id, int life, std::string type, int unit_speed, Size size, Size range,
                                                                 Map& map);
+
+    void makeAction();
 
     // Calculates the minimum road to destiny (x,y)
     void calculateRoadTo(int x, int y);
