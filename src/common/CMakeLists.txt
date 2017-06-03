@@ -15,4 +15,5 @@ set(COMMON_FILES
         Thread.cpp
         Thread.h)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_library(Common ${COMMON_FILES})

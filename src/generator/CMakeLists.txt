@@ -15,4 +15,5 @@ set(SOURCE_FILES
         MapGenerator.cpp
         MapGenerator.h)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(Z_Generator ${SOURCE_FILES})

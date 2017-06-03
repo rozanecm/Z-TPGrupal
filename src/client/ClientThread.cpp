@@ -4,7 +4,7 @@
 #include "ClientThread.h"
 #include <pugixml.hpp>
 
-#define MAP "../../maps/map.xml" // temporary
+#define MAP "maps/map.xml" // temporary
 
 void ClientThread::run() {
     /* initialize map so then can be completed with read data */
