@@ -13,7 +13,7 @@ set(SOURCE_FILES
         ../../libs/xml/pugiconfig.hpp
         ../../libs/xml/pugixml.hpp
         MapGenerator.cpp
-        MapGenerator.h)
+        MapGenerator.h Random.cpp Random.h)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(Z_Generator ${SOURCE_FILES})

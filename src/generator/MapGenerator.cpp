@@ -89,8 +89,8 @@ void MapGenerator::generate_path(int amt, time_t seed,
         path.push_back(row);
     }
 
-    int river_x = rand() % size;
-    int river_y = rand() % size;
+    int river_x = r.generate() % size;
+    int river_y = r.generate() % size;
 
     while (amt) {
         path[river_x][river_y] = true;
@@ -98,13 +98,13 @@ void MapGenerator::generate_path(int amt, time_t seed,
         bool found = false;
 
         while (!found) {
-            int end = rand() % 100;
+            int end = r.generate() % 100;
             if (end < RIVER_END_PCT) { // Start another river somewhere else
-                river_x = rand() % size;
-                river_y = rand() % size;
+                river_x = r.generate() % size;
+                river_y = r.generate() % size;
             }
             // Grab an adjacent tile randomly to be the next water tile
-            int next = rand() % 4;
+            int next = r.generate() % 4;
             int next_x, next_y;
             if (next == 0) {
                 next_x = 1;
@@ -143,7 +143,7 @@ void MapGenerator::generate_rocks(pugi::xml_node root) {
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             if (!liquid_cells[i][j]) {
-                int chance = rand() % 100;
+                int chance = r.generate() % 100;
                 if (chance < ROCK_PCT) {
                     pugi::xml_node rock = root.append_child("Struct");
                     rock.append_attribute("Type").set_value("Rock");
@@ -158,7 +158,7 @@ void MapGenerator::generate_rocks(pugi::xml_node root) {
 /* UNFINISHED */
 void MapGenerator::populate_bridge(int x, int y)  {
     pugi::xml_node bridge;
-    int direction = rand() % 2;
+    int direction = r.generate() % 2;
     if (direction) { // horizontal
         int dir = 1;
         int offset = 0;
@@ -182,8 +182,8 @@ void MapGenerator::populate_bridge(int x, int y)  {
 void MapGenerator::generate_bridges() {
     int amt = BRIDGE_AMT;
     while (amt) {
-        int x = rand() % size;
-        int y = rand() % size;
+        int x = r.generate() % size;
+        int y = r.generate() % size;
         if (liquid_cells[x][y]) {
         }
 
@@ -237,7 +237,7 @@ void MapGenerator::generate_territories(pugi::xml_node root) {
     for (int k = 0; k < FORTS_AMT; ++k) {
         bool found = false;
         while (!found) {
-            int position = rand() % terr;
+            int position = r.generate() % terr;
             bool repeat = false;
             for (int i = 0; i < k; ++i) {
                 if (fort_territories[i] == position) {
@@ -255,8 +255,10 @@ void MapGenerator::generate_territories(pugi::xml_node root) {
     int count = 0;
     for (int i = 0; i < territories_y; ++i) {
         for (int j = 0; j < territories_x; ++j) {
-            int flag_x = div_x * j + offset + rand() % (size / (2 * terr));
-            int flag_y = div_y * i + offset + rand() % (size / (2 * terr));
+            int flag_x = div_x * j + offset +
+                    r.generate() % (size / (2 * terr));
+            int flag_y = div_y * i + offset +
+                    r.generate() % (size / (2 * terr));
 
             std::string name = "Flag";
             for (int k = 0; k < FORTS_AMT; ++k) {

@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <pugixml.hpp>
+#include "Random.h"
 
 #define ROCK_PCT 2
 #define BRIDGE_AMT size / 20
@@ -26,6 +27,7 @@ class MapGenerator {
     int water_cells;
     int lava_cells;
     int terr;
+    Random r;
 
 public:
     MapGenerator(int size, float lava_pct, float water_pct,
