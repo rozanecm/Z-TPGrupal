@@ -2,7 +2,6 @@
 #include "Random.h"
 
 Random::Random() {
-
 }
 
 int Random::generate() {

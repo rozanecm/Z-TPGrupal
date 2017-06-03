@@ -6,6 +6,8 @@
 #include <pugixml.hpp>
 #include <random>
 
+#define UNIT 0
+#define VEHICLE 1
 
 void print_map(pugi::xml_node& root_node) {
 /* for (pugi::xml_node& row : root_node.children()) {
@@ -38,7 +40,13 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     water_cells = (int) (size * size * water_pct / 100);
     lava_cells = (int) (size * size * lava_pct / 100);
     terr = 9;
+
+    /* Adjustment to size to split territories evenly */
+    if (size % terr) {
+        this->size = size - size % terr;
+    }
 }
+
 
 void MapGenerator::generate_blank_map(pugi::xml_node root_node) {
     for (int i = 0; i < size; ++i) {
@@ -50,6 +58,7 @@ void MapGenerator::generate_blank_map(pugi::xml_node root_node) {
         }
     }
 }
+
 
 std::vector<std::vector<bool>>
 MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
@@ -77,6 +86,7 @@ MapGenerator::generate_rivers(pugi::xml_node root_node, int cell_amt,
     }
     return map;
 }
+
 
 void MapGenerator::generate_path(int amt, time_t seed,
                                  std::vector<std::vector<bool>>& path) {
@@ -138,6 +148,7 @@ void MapGenerator::generate_path(int amt, time_t seed,
     }
 }
 
+
 void MapGenerator::generate_rocks(pugi::xml_node root) {
     root.set_name("Structures");
     for (int i = 0; i < size; ++i) {
@@ -154,6 +165,7 @@ void MapGenerator::generate_rocks(pugi::xml_node root) {
         }
     }
 }
+
 
 /* UNFINISHED */
 void MapGenerator::populate_bridge(int x, int y)  {
@@ -178,6 +190,7 @@ void MapGenerator::populate_bridge(int x, int y)  {
     }
 }
 
+
 /* UNFINISHED */
 void MapGenerator::generate_bridges() {
     int amt = BRIDGE_AMT;
@@ -190,6 +203,7 @@ void MapGenerator::generate_bridges() {
         amt--;
     }
 }
+
 
 void MapGenerator::generate(const std::string& name) {
     std::string path = "maps/" + name + ".xml";
@@ -212,24 +226,9 @@ void MapGenerator::generate(const std::string& name) {
     }
 }
 
-MapGenerator::~MapGenerator() {
-    if (output.is_open()) {
-        output.close();
-    }
-}
 
 void MapGenerator::generate_territories(pugi::xml_node root) {
-    srand(time(NULL) * time(NULL));
     pugi::xml_node forts = root.append_child("Territories");
-
-    double size_sqrt =  sqrt(terr);
-    int offset = size / terr;
-    int territories_x = (int) floor(size_sqrt);
-    int territories_y = (int) ceil(size_sqrt);
-
-    int div_x = size / territories_x;
-    int div_y = size / territories_y;
-
 
     /* Choose exactly FORTS_AMT of territories to be designed as central.
      * There's one fort for each expected player in the map */
@@ -252,13 +251,24 @@ void MapGenerator::generate_territories(pugi::xml_node root) {
         }
     }
 
+    double size_sqrt =  sqrt(terr);
+    int territories_x = (int) floor(size_sqrt);
+    int territories_y = (int) ceil(size_sqrt);
+
+    int div_x = size / territories_x;
+    int div_y = size / territories_y;
     int count = 0;
     for (int i = 0; i < territories_y; ++i) {
         for (int j = 0; j < territories_x; ++j) {
-            int flag_x = div_x * j + offset +
-                    r.generate() % (size / (2 * terr));
-            int flag_y = div_y * i + offset +
-                    r.generate() % (size / (2 * terr));
+            /* Randomize positions in the territories */
+            int terr_min_x = div_x * j,
+                terr_min_y = div_y * i,
+                terr_max_x = div_x * (j + 1) - 1,
+                terr_max_y = div_y * (i + 1) - 1;
+
+            int flag_x = terr_min_x + r.generate() % (size / terr);
+            int flag_y = terr_min_y + r.generate() % (size / terr);
+
 
             std::string name = "Flag";
             for (int k = 0; k < FORTS_AMT; ++k) {
@@ -268,12 +278,70 @@ void MapGenerator::generate_territories(pugi::xml_node root) {
             }
 
             pugi::xml_node flag = forts.append_child(name.c_str());
-            flag.append_attribute("x").set_value(flag_x);
-            flag.append_attribute("y").set_value(flag_y);
+            flag.append_attribute("center_x").set_value(flag_x);
+            flag.append_attribute("center_y").set_value(flag_y);
+            flag.append_attribute("min_x").set_value(terr_min_x);
+            flag.append_attribute("min_y").set_value(terr_min_y);
+            flag.append_attribute("max_x").set_value(terr_max_x);
+            flag.append_attribute("max_y").set_value(terr_max_y);
 
+            pugi::xml_node map = root.child("Terrain");
+            generate_factories(flag, terr_min_x, terr_min_y, terr_max_x,
+                               terr_max_y, map);
             count ++;
         }
     }
+}
 
-    int forts_offset = size / 4;
+void MapGenerator::generate_factories(pugi::xml_node &territory, int min_x,
+                                      int min_y, int max_x,
+                                      int max_y, pugi::xml_node &map) {
+    int territories = 2;
+    for (int i = 0; i < territories; ++i) {
+        bool found = false;
+        while(!found) {
+            /* Randomize the position, inside the territory */
+            int fact_x = r.generate() % (max_x - min_x) + min_x;
+            int fact_y = r.generate() % (max_y - min_y) + min_y;
+
+            /* Select type: unit or vehicle */
+            int unit_or_vehicle_factory = r.generate() % 2;
+            std::string type;
+            if (unit_or_vehicle_factory == UNIT) {
+                type = "UnitFactory";
+            } else if (unit_or_vehicle_factory == VEHICLE) {
+                type = "VehicleFactory";
+            }
+
+            int count_x = 0;
+            for (pugi::xml_node row : map.children()) {
+                int count_y = 0;
+                for (pugi::xml_node cell : row.children()) {
+                    if (fact_x == count_x && fact_y == count_y) {
+                        const char* terrain = cell.attribute(TERRAIN).value();
+                        if (terrain != "Agua" && terrain != "Lava") {
+                            pugi::xml_node factory =
+                                    territory.append_child(type.c_str());
+                            factory.append_attribute("x").set_value(fact_x);
+                            factory.append_attribute("y").set_value(fact_y);
+                            found = true;
+                            break;
+                        }
+                    }
+                    count_y++;
+                }
+                if (found) {
+                    break;
+                }
+                count_x++;
+            }
+
+        }
+    }
+}
+
+MapGenerator::~MapGenerator() {
+    if (output.is_open()) {
+        output.close();
+    }
 }

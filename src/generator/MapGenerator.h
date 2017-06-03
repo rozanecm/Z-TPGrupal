@@ -64,6 +64,11 @@ private:
 
     /* Generates FORTS_AMT forts in the map, placed separate from each other */
     void generate_territories(pugi::xml_node root);
+
+    /* Generates 1 or 2 factories inside the territory delimited by the
+     * specified bounds */
+    void generate_factories(pugi::xml_node &territory, int min_x, int min_y, int max_x,
+                                int max_y, pugi::xml_node &map);
 };
 
 
