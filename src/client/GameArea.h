@@ -117,6 +117,12 @@ private:
     void loadYellowGruntFireAnimations();
 
     void loadBlueLaserFireAnimations();
+
+    void loadGreenLaserFireAnimations();
+
+    void loadRedLaserFireAnimations();
+
+    void loadYellowLaserFireAnimations();
 };
 
 
