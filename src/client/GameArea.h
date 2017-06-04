@@ -139,6 +139,14 @@ private:
     void loadRedSniperFireAnimations();
 
     void loadYellowSniperFireAnimations();
+
+    void loadBlueToughFireAnimations();
+
+    void loadGreenToughFireAnimations();
+
+    void loadRedToughFireAnimations();
+
+    void loadYellowToughFireAnimations();
 };
 
 
