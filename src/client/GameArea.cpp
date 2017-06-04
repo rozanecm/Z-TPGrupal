@@ -19,10 +19,12 @@ GameArea::GameArea(BaseObjectType *cobject,
         /* camera is initialized with size 0,0 because we dont
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
-    /* load blue flags imgs */
+    /* load flags animations */
     loadFlagAnimations();
     /* load units resources */
     loadUnitsResources();
+    /* load buildings resources */
+    loadBuildingsResources();
 
     /* load some img */
     someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
@@ -3091,4 +3093,24 @@ void GameArea::loadYellowStandingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/stand_yellow_r315.png"));
+}
+
+void GameArea::loadBuildingsResources() {
+    buildings[BuildingsEnum::FORT].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/fort/fort_jungle_front.png"));
+
+    buildings[BuildingsEnum::FORT_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/fort/fort_jungle_front_destroyed.png"));
+
+    buildings[BuildingsEnum::VEHICLE_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/vehicle/base_jungle.png"));
+
+    buildings[BuildingsEnum::VEHICLE_FABRIC_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/vehicle/base_destroyed_jungle.png"));
+
+    buildings[BuildingsEnum::ROBOT_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/robot/base_jungle.png"));
+
+    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/buildings/robot/base_destroyed_jungle.png"));
 }

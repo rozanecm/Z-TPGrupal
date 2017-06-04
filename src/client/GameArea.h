@@ -12,6 +12,7 @@
 #include "TeamEnum.h"
 #include "ActionsEnum.h"
 #include "UnitsEnum.h"
+#include "BuildingsEnum.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -64,6 +65,9 @@ private:
             std::map<ActionsEnum,
                     std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>
             unitsGeneralAnimations;
+
+    /* BUILDINGS RESOURCES */
+    std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
@@ -170,6 +174,8 @@ private:
     void loadRedStandingAnimations();
 
     void loadYellowStandingAnimations();
+
+    void loadBuildingsResources();
 };
 
 
