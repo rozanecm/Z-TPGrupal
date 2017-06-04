@@ -312,7 +312,6 @@ void GameArea::loadGruntFireAnimations()  {
     loadGreenGruntFireAnimations();
     loadRedGruntFireAnimations();
     loadYellowGruntFireAnimations();
-
 }
 
 void GameArea::loadBlueGruntFireAnimations() {
@@ -868,6 +867,11 @@ void GameArea::loadYellowGruntFireAnimations() {
 }
 
 void GameArea::loadLaserFireAnimations() {
+    loadBlueLaserFireAnimations();
+
+}
+
+void GameArea::loadBlueLaserFireAnimations() {
     /* red laser fire at 0 degrees */
     unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::LASER][
             ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
