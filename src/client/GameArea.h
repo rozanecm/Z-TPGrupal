@@ -92,7 +92,7 @@ private:
 
     void processSelection();
 
-    void loadFlagAnimations() const;
+    void loadFlagAnimations();
 
     void loadUnitsResources();
 };
