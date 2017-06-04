@@ -107,6 +107,8 @@ private:
     void loadSniperFireAnimations();
 
     void loadToughFireAnimations();
+
+    void loadBlueGruntFireAnimations();
 };
 
 

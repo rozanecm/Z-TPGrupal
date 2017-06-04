@@ -305,10 +305,14 @@ void GameArea::loadUnitsResources() {
     loadPyroFireAnimations();
     loadSniperFireAnimations();
     loadToughFireAnimations();
-
 }
 
 void GameArea::loadGruntFireAnimations()  {
+    loadBlueGruntFireAnimations();
+
+}
+
+void GameArea::loadBlueGruntFireAnimations() {
     /* blue grunt fire at 0 degrees */
     unitsAnimations.operator[](TeamEnum::BLUE)[UnitsEnum::GRUNT][
             ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
