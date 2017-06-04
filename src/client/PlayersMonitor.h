@@ -15,6 +15,11 @@ public:
     void addUnit(int player_id, Unit& unit);
     void removeUnit(int unit_id);
     void update_position(int unit_id, int x, int y);
+
+    void markAsSelectedInRange(gdouble xStartCoordinate,
+                               gdouble yStartCoordinate,
+                               gdouble xFinishCoordinate,
+                               gdouble yFinishCoordinate);
 };
 
 

@@ -24,6 +24,21 @@ private:
     Player* owner;
 
     std::pair<int, int> position;
+
+    /* bool selected: indicates wether the unit has been selected
+     * with the mouse or not */
+    bool selected;
+
+public:
+    /**
+     * This methods checks all the player's units to see if any of its units is
+     * located within the area of selection. If so, the units' attribute
+     * selected is set to TRUE.
+     */
+    void markAsSelectedInRange(gdouble xStartCoordinate,
+                               gdouble yStartCoordinate,
+                               gdouble xFinishCoordinate,
+                               gdouble yFinishCoordinate);
 };
 
 

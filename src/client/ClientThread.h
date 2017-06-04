@@ -19,7 +19,8 @@ class ClientThread : public Thread {
     std::map<std::string, Command*> commands;
 
 public:
-    ClientThread(PlayersMonitor &playerMonitor, BuildingsMonitor &buildingsMonitor,
+    ClientThread(PlayersMonitor &playerMonitor,
+                 BuildingsMonitor &buildingsMonitor,
                  MapMonitor &mapMonitor, ServerMessenger& messenger);
 
     virtual void run();

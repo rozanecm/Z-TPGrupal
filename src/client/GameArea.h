@@ -8,6 +8,11 @@
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
+#include "FlagEnum.h"
+#include "TeamEnum.h"
+#include "ActionsEnum.h"
+#include "UnitsEnum.h"
+#include "BuildingsEnum.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -32,15 +37,37 @@ protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
+    /* shared resources */
     PlayersMonitor *playersMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
+
     Camera camera;
+
+    /* general resources */
+    std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
 
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
-    /* declare vector which contains imgs composing blue flag animation */
-    std::vector<Glib::RefPtr<Gdk::Pixbuf>> blueFlagVector;
+    /* map holding all flags */
+    std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
+
+    /* map holding all units' fire animations */
+    std::map<TeamEnum,
+            std::map<UnitsEnum,
+                    std::map<ActionsEnum,
+                            std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>
+            unitsFireAnimations;
+
+    /* map holding all units' walking and standing animations.
+     * In this animations robots are not shown differently */
+    std::map<TeamEnum ,
+            std::map<ActionsEnum,
+                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>
+            unitsGeneralAnimations;
+
+    /* BUILDINGS RESOURCES */
+    std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
@@ -60,9 +87,95 @@ private:
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
 
-    std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
-
+    /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
+
+    bool on_button_press_event(GdkEventButton *event) override;
+
+    bool on_button_release_event(GdkEventButton *event) override;
+
+    /* vars. for event handling */
+    gdouble xStartCoordinate;
+    gdouble xFinishCoordinate;
+    gdouble yStartCoordinate;
+    gdouble yFinishCoordinate;
+    bool selectionMade;
+
+    void processSelection();
+
+    void loadFlagAnimations();
+
+    void loadUnitsResources();
+
+    void loadGruntFireAnimations();
+
+    void loadLaserFireAnimations();
+
+    void loadPsychoFireAnimations();
+
+    void loadPyroFireAnimations();
+
+    void loadSniperFireAnimations();
+
+    void loadToughFireAnimations();
+
+    void loadBlueGruntFireAnimations();
+
+    void loadGreenGruntFireAnimations();
+
+    void loadRedGruntFireAnimations();
+
+    void loadYellowGruntFireAnimations();
+
+    void loadBlueLaserFireAnimations();
+
+    void loadGreenLaserFireAnimations();
+
+    void loadRedLaserFireAnimations();
+
+    void loadYellowLaserFireAnimations();
+
+    void loadBluePsychoFireAnimations();
+
+    void loadGreenPsychoFireAnimations();
+
+    void loadRedPsychoFireAnimations();
+
+    void loadYellowPsychoFireAnimations();
+
+    void loadBlueSniperFireAnimations();
+
+    void loadGreenSniperFireAnimations();
+
+    void loadRedSniperFireAnimations();
+
+    void loadYellowSniperFireAnimations();
+
+    void loadBlueToughFireAnimations();
+
+    void loadGreenToughFireAnimations();
+
+    void loadRedToughFireAnimations();
+
+    void loadYellowToughFireAnimations();
+
+    void loadBlueWalkingAnimations();
+
+    void loadGreenWalkingAnimations();
+
+    void loadRedWalkingAnimations();
+
+    void loadYellowWalkingAnimations();
+
+    void loadBlueStandingAnimations();
+
+    void loadGreenStandingAnimations();
+
+    void loadRedStandingAnimations();
+
+    void loadYellowStandingAnimations();
+
+    void loadBuildingsResources();
 };
 
 

@@ -1,0 +1,8 @@
+#ifndef Z_TPGRUPAL_FLAGENUMS_H
+#define Z_TPGRUPAL_FLAGENUMS_H
+
+enum class FlagEnum {
+    BLUE, GREEN, RED, YELLOW, NEUTER
+};
+
+#endif //Z_TPGRUPAL_FLAGENUMS_H

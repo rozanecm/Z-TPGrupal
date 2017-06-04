@@ -8,11 +8,11 @@
 #include "ServerMessenger.h"
 
 class GraphicsThread : public Thread {
-
     PlayersMonitor &playerMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
+
 public:
     GraphicsThread(PlayersMonitor &monitor,
                    BuildingsMonitor &buildingsMonitor,
@@ -22,7 +22,6 @@ public:
     virtual void run();
 
 private:
-
 };
 
 
