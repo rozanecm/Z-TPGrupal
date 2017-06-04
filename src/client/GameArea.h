@@ -125,6 +125,12 @@ private:
     void loadYellowLaserFireAnimations();
 
     void loadBluePsychoFireAnimations();
+
+    void loadGreenPsychoFireAnimations();
+
+    void loadRedPsychoFireAnimations();
+
+    void loadYellowPsychoFireAnimations();
 };
 
 

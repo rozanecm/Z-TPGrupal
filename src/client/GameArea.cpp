@@ -1235,6 +1235,9 @@ void GameArea::loadYellowLaserFireAnimations() {
 
 void GameArea::loadPsychoFireAnimations() {
     loadBluePsychoFireAnimations();
+    loadGreenPsychoFireAnimations();
+    loadRedPsychoFireAnimations();
+    loadYellowPsychoFireAnimations();
 }
 
 void GameArea::loadBluePsychoFireAnimations() {
@@ -1301,6 +1304,204 @@ void GameArea::loadBluePsychoFireAnimations() {
     unitsAnimations.operator[](TeamEnum::BLUE)[UnitsEnum::PSYCHO][
             ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/psycho/fire_blue_r315_n01.png"));
+}
+
+void GameArea::loadGreenPsychoFireAnimations() {
+    /* green psycho fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r000_n01.png"));
+
+    /* green psycho fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r045_n01.png"));
+
+    /* green psycho fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r090_n01.png"));
+
+    /* green psycho fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r135_n01.png"));
+
+    /* green psycho fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r180_n01.png"));
+
+    /* green psycho fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r225_n01.png"));
+
+    /* green psycho fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r270_n01.png"));
+
+    /* green psycho fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_green_r315_n01.png"));
+}
+
+void GameArea::loadRedPsychoFireAnimations() {
+    /* red psycho fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r000_n01.png"));
+
+    /* red psycho fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r045_n01.png"));
+
+    /* red psycho fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r090_n01.png"));
+
+    /* red psycho fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r135_n01.png"));
+
+    /* red psycho fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r180_n01.png"));
+
+    /* red psycho fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r225_n01.png"));
+
+    /* red psycho fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r270_n01.png"));
+
+    /* red psycho fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_red_r315_n01.png"));
+}
+
+void GameArea::loadYellowPsychoFireAnimations() {
+    /* yellow psycho fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r000_n01.png"));
+
+    /* yellow psycho fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_45].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r045_n01.png"));
+
+    /* yellow psycho fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_90].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r090_n01.png"));
+
+    /* yellow psycho fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_135].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r135_n01.png"));
+
+    /* yellow psycho fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r180_n01.png"));
+
+    /* yellow psycho fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_225].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r225_n01.png"));
+
+    /* yellow psycho fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_270].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r270_n01.png"));
+
+    /* yellow psycho fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PSYCHO][
+            ActionsEnum::FIRE_315].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/psycho/fire_yellow_r315_n01.png"));
 }
 
 void GameArea::loadPyroFireAnimations() {
