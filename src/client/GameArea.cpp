@@ -43,68 +43,68 @@ GameArea::GameArea(BaseObjectType *cobject,
 void GameArea::loadFlagAnimations() {
     /* this methods loads all the imgs needed to draw all the flags' animations.
      * POSSIBLE OPTIMIZATION: load only needed colors */
-    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n00.png"));
 
-    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n01.png"));
 
-    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n02.png"));
 
-    flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n03.png"));
 
     /* load red flags imgs */
-    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n00.png"));
 
-    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n01.png"));
 
-    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n02.png"));
 
-    flags[red].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n03.png"));
 
     /* load yellow flags imgs */
-    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n00.png"));
 
-    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n01.png"));
 
-    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n02.png"));
 
-    flags[yellow].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n03.png"));
 
     /* load green flags imgs */
-    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n00.png"));
 
-    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n01.png"));
 
-    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n02.png"));
 
-    flags[green].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n03.png"));
 
     /* load neuter flags imgs */
-    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n00.png"));
 
-    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n01.png"));
 
-    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n02.png"));
 
-    flags[neuter].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n03.png"));
 }
 
@@ -154,13 +154,13 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
 void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                                  int xCoordinate, int yCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, flags.at(blue).at(flagCounter),
+    Gdk::Cairo::set_source_pixbuf(cr, flags.at(FlagEnum::BLUE).at(flagCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  flags.at(blue).at(flagCounter)->get_width(),
-                  flags.at(blue).at(flagCounter)->get_height());
+                  flags.at(FlagEnum::BLUE).at(flagCounter)->get_width(),
+                  flags.at(FlagEnum::BLUE).at(flagCounter)->get_height());
     cr->fill();
-    if (flagCounter == flags.at(blue).size()-1){
+    if (flagCounter == flags.at(FlagEnum::BLUE).size()-1){
         flagCounter = 0;
     }else{
         flagCounter++;
