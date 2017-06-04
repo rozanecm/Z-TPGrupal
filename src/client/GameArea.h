@@ -103,6 +103,8 @@ private:
     void loadPsychoFireAnimations();
 
     void loadPyroFireAnimations();
+
+    void loadSniperFireAnimations();
 };
 
 
