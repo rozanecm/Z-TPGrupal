@@ -101,6 +101,8 @@ private:
     void loadLaserFireAnimations();
 
     void loadPsychoFireAnimations();
+
+    void loadPyroFireAnimations();
 };
 
 
