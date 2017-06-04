@@ -1,0 +1,10 @@
+#ifndef Z_TPGRUPAL_BUILDINGSENUM_H
+#define Z_TPGRUPAL_BUILDINGSENUM_H
+
+enum class BuildingsEnum {
+    FORT,
+    VEHICLE_FABRIC,
+    ROBOT_FABRIC
+};
+
+#endif //Z_TPGRUPAL_BUILDINGSENUM_H
