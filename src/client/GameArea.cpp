@@ -312,6 +312,8 @@ void GameArea::loadUnitsResources() {
     loadGreenWalkingAnimations();
     loadRedWalkingAnimations();
     loadYellowWalkingAnimations();
+
+    /* load walking animations */
 }
 
 void GameArea::loadGruntFireAnimations()  {
@@ -2540,6 +2542,97 @@ void GameArea::loadBlueWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/walk_blue_r000_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r045_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r045_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r045_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r045_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r090_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r090_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r090_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r090_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r135_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r135_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r135_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r135_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r180_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r180_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r180_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r180_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r225_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r225_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r225_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r225_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r270_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r270_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r270_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r270_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r315_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r315_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r315_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_blue_r315_n03.png"));
 }
 
 void GameArea::loadGreenWalkingAnimations() {
@@ -2555,6 +2648,97 @@ void GameArea::loadGreenWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/walk_green_r000_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r045_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r045_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r045_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r045_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r090_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r090_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r090_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r090_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r135_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r135_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r135_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r135_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r180_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r180_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r180_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r180_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r225_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r225_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r225_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r225_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r270_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r270_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r270_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r270_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r315_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r315_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r315_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_green_r315_n03.png"));
 }
 
 void GameArea::loadRedWalkingAnimations() {
@@ -2570,6 +2754,97 @@ void GameArea::loadRedWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/walk_red_r000_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r045_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r045_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r045_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r045_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r090_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r090_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r090_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r090_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r135_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r135_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r135_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r135_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r180_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r180_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r180_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r180_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r225_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r225_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r225_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r225_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r270_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r270_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r270_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r270_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r315_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r315_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r315_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_red_r315_n03.png"));
 }
 
 void GameArea::loadYellowWalkingAnimations() {
@@ -2585,4 +2860,95 @@ void GameArea::loadYellowWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/walk_yellow_r000_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r045_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r045_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r045_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r045_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r090_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r090_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r090_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r090_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r135_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r135_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r135_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r135_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r180_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r180_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r180_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r180_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r225_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r225_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r225_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r225_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r270_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r270_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r270_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r270_n03.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r315_n00.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r315_n01.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r315_n02.png"));
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/walk_yellow_r315_n03.png"));
 }
