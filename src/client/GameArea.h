@@ -51,12 +51,19 @@ private:
     /* map holding all flags */
     std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
-    /* map holding all units */
+    /* map holding all units' fire animations */
     std::map<TeamEnum,
             std::map<UnitsEnum,
                     std::map<ActionsEnum,
                             std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>
-            unitsAnimations;
+            unitsFireAnimations;
+
+    /* map holding all units' walking and standing animations.
+     * In this animations robots are not shown differently */
+    std::map<TeamEnum ,
+            std::map<ActionsEnum,
+                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>
+            unitsGeneralAnimations;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
@@ -147,6 +154,14 @@ private:
     void loadRedToughFireAnimations();
 
     void loadYellowToughFireAnimations();
+
+    void loadBlueWalkingAnimations();
+
+    void loadGreenWalkingAnimations();
+
+    void loadRedWalkingAnimations();
+
+    void loadYellowWalkingAnimations();
 };
 
 
