@@ -162,6 +162,14 @@ private:
     void loadRedWalkingAnimations();
 
     void loadYellowWalkingAnimations();
+
+    void loadBlueStandingAnimations();
+
+    void loadGreenStandingAnimations();
+
+    void loadRedStandingAnimations();
+
+    void loadYellowStandingAnimations();
 };
 
 

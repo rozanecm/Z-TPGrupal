@@ -313,7 +313,11 @@ void GameArea::loadUnitsResources() {
     loadRedWalkingAnimations();
     loadYellowWalkingAnimations();
 
-    /* load walking animations */
+    /* load standing animations */
+    loadBlueStandingAnimations();
+    loadGreenStandingAnimations();
+    loadRedStandingAnimations();
+    loadYellowStandingAnimations();
 }
 
 void GameArea::loadGruntFireAnimations()  {
@@ -2951,4 +2955,140 @@ void GameArea::loadYellowWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::WALK_315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/robots/walk_yellow_r315_n03.png"));
+}
+
+void GameArea::loadBlueStandingAnimations() {
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_0].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r000.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r045.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r090.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r135.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r180.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r225.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r270.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_blue_r315.png"));
+}
+
+void GameArea::loadGreenStandingAnimations() {
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_0].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r000.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r045.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r090.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r135.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r180.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r225.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r270.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::GREEN)[ActionsEnum::STAND_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_green_r315.png"));
+}
+
+void GameArea::loadRedStandingAnimations() {
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_0].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r000.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r045.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r090.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r135.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r180.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r225.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r270.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::RED)[ActionsEnum::STAND_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_red_r315.png"));
+}
+
+void GameArea::loadYellowStandingAnimations() {
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_0].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r000.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_45].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r045.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_90].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r090.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r135.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r180.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r225.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r270.png"));
+
+    unitsGeneralAnimations.operator[](TeamEnum::YELLOW)[ActionsEnum::STAND_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/robots/stand_yellow_r315.png"));
 }
