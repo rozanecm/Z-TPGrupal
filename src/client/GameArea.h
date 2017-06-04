@@ -99,6 +99,8 @@ private:
     void loadGruntFireAnimations();
 
     void loadLaserFireAnimations();
+
+    void loadPsychoFireAnimations();
 };
 
 
