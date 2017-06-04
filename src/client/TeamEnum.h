@@ -1,7 +1,7 @@
 #ifndef Z_TPGRUPAL_TEAMENUM_H
 #define Z_TPGRUPAL_TEAMENUM_H
 
-enum TeamEnum {
+enum class TeamEnum {
     BLUE, GREEN, RED, YELLOW
 };
 

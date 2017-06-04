@@ -1,7 +1,7 @@
 #ifndef Z_TPGRUPAL_ACTIONSENUM_H
 #define Z_TPGRUPAL_ACTIONSENUM_H
 
-enum ActionsEnum {
+enum class ActionsEnum {
     /* the numbers indicate the angle in which the unit is facing.
      * 0:   looking to the right
      * 45:  looking to upper right corner
