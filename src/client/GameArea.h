@@ -95,6 +95,8 @@ private:
     void loadFlagAnimations();
 
     void loadUnitsResources();
+
+    void loadGruntFireAnimations();
 };
 
 
