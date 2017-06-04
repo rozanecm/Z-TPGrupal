@@ -40,7 +40,7 @@ GameArea::GameArea(BaseObjectType *cobject,
     set_can_focus(true);
 }
 
-void GameArea::loadFlagAnimations() const {
+void GameArea::loadFlagAnimations() {
     /* this methods loads all the imgs needed to draw all the flags' animations.
      * POSSIBLE OPTIMIZATION: load only needed colors */
     flags[blue].emplace_back(Gdk::Pixbuf::create_from_file(
