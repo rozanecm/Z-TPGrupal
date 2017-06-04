@@ -97,6 +97,8 @@ private:
     void loadUnitsResources();
 
     void loadGruntFireAnimations();
+
+    void loadLaserFireAnimations();
 };
 
 
