@@ -123,6 +123,8 @@ private:
     void loadRedLaserFireAnimations();
 
     void loadYellowLaserFireAnimations();
+
+    void loadBluePsychoFireAnimations();
 };
 
 

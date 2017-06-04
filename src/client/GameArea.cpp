@@ -1234,6 +1234,10 @@ void GameArea::loadYellowLaserFireAnimations() {
 }
 
 void GameArea::loadPsychoFireAnimations() {
+    loadBluePsychoFireAnimations();
+}
+
+void GameArea::loadBluePsychoFireAnimations() {
     /* blue psycho fire at 0 degrees */
     unitsAnimations.operator[](TeamEnum::BLUE)[UnitsEnum::PSYCHO][
             ActionsEnum::FIRE_0].emplace_back(Gdk::Pixbuf::create_from_file(
