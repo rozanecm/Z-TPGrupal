@@ -12,28 +12,36 @@ ControlUnit::ControlUnit(std::vector<Messenger*>& new_players,
     all_units(all_units), all_occupants(all_occupants), players(new_players),
     winning(false) {
     this->changed_units = new std::vector<Unit>;
-    this->changed_occupants = new std::vector<int>;
+    this->changed_occupants = new std::vector<Occupant>;
 }
 
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
-
+        changed_units->clear();
+        changed_occupants->clear();
+        auto it = all_occupants.begin();
+        // Copy starting state of Occupants
+        for (auto z: all_occupants) {
+            changed_occupants->push_back(z);
+        }
         auto t1 = std::chrono::high_resolution_clock::now();
+
         // execute commands
         executeCommands();
 
         // do stuff
         this->unitsMakeMicroAction();
         this->checkAllLivingOccupants();
-        auto t2 = std::chrono::high_resolution_clock::now();
 
+        //send update message
+        this->sendUpdateMessage();
+
+        auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
 
         sleepFor(t3 - time_span.count());
-        //send update message
-        this->sendUpdateMessage();
     }
     // send victory or defeated message
 }
@@ -53,7 +61,19 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant>::iterator it = all_occupants.begin();
+    std::vector<Occupant>::iterator it = (*changed_occupants).begin();
+    int i = 0;
+    for (; it != (*changed_occupants).end();) {
+        if (all_occupants[i].getLifeLeft() ==
+                (*it).getLifeLeft()) {
+            it = (*changed_occupants).erase(it);
+        } else {
+            ++it;
+            ++i;
+        }
+    }
+    // if dead erase Occupant
+    it = all_occupants.begin();
     for(;it != all_occupants.end();){
         if(!it->areYouAlive()) {
             //erase it from map
@@ -105,6 +125,10 @@ std::string ControlUnit::getUpdateInfo() {
     for (auto z: *changed_units) {
         update_msg += getInfoFromUnit(z);
     }
+
+    for (auto y: *changed_occupants) {
+        update_msg += getInfoFromOccupant(y);
+    }
     return update_msg;
 }
 
@@ -129,5 +153,14 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
     info += std::to_string(unit.getLifeLeft()) + "--";
+    return info;
+}
+
+std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
+    std::string info = "";
+    info += std::to_string(Occupant.getId()) + "-";
+    info += std::to_string(Occupant.getPosition().getX()) + "-";
+    info += std::to_string(Occupant.getPosition().getY()) + "-";
+    info += std::to_string(Occupant.getLifeLeft()) + "--";
     return info;
 }

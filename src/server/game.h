@@ -26,6 +26,7 @@ public:
          std::vector<Unit>& units);
 
     void addBuildings(std::vector<Occupant> buildings);
+
     void run();
 };
 

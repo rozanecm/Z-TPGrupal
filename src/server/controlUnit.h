@@ -24,7 +24,7 @@ private:
     std::mutex m;
     bool winning;
     std::vector<Unit>* changed_units;
-    std::vector<int>* changed_occupants;
+    std::vector<Occupant>* changed_occupants;
 
 public:
     ControlUnit(std::vector<Messenger*>& new_players,
@@ -57,6 +57,8 @@ private:
     bool differenceOnUnits(Unit& x, Unit& y);
 
     std::string getInfoFromUnit(Unit& unit);
+
+    std::string getInfoFromOccupant(Occupant& Occupant);
 };
 
 
