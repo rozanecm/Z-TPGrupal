@@ -7,7 +7,7 @@
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
           Size range, Compass& compass) : Occupant(id,life, type, size),
           compass(compass), unit_speed(unit_speed), state(STANDINGSTATE),
-            range(range) {}
+            range(range), target(*this) {}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
@@ -60,6 +60,18 @@ void Unit::move() {
         this->state = STANDINGSTATE;
 }
 
+void Unit::attack() {
+    //check if target it's on range
+    Size trg_size = target.getSize();
+    if (range.isThereACollision(trg_size)) {
+        // make a shot
+    } else {
+        road = compass.getFastestWay(obj_size.getPosition(),
+                                     target.getPosition());
+        move();
+    }
+}
+
 std::string Unit::getState() const {
     return this->state;
 }
@@ -80,5 +92,12 @@ void Unit::grab(Teamable* object, std::string u_type) {
         this->life_points = 0;
     }
 }
+
+void Unit::setTargetToAttack(Occupant &target) {
+    this->state == ATKSTATE;
+    this->target = target;
+}
+
+
 
 

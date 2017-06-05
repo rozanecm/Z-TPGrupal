@@ -186,6 +186,14 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
             } else {
                 // if unit's is form the players team
                 // look for target
+                for (auto z: all_occupants) {
+                    if (z.getId() == target) {
+                        if (z.getTeam() != attacker_team) {
+                            //attack z
+                        }
+                        break;
+                    }
+                }
             }
         }
         ++it;

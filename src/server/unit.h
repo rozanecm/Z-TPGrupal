@@ -24,6 +24,7 @@ private:
     std::string state;
     Size range;
     std::vector<Position>* road;
+    Occupant& target;
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
@@ -47,7 +48,9 @@ public:
 
     void grab(Teamable* object, std::string type);
 
-    //void attack(Occupable)-> make check is i have explosive attack for buildings
+    void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
+
+    void attack();
 };
 
 
