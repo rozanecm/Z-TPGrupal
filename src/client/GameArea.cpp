@@ -3099,18 +3099,23 @@ void GameArea::loadBuildingsResources() {
     buildings[BuildingsEnum::FORT].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/fort_jungle_front.png"));
 
-    buildings[BuildingsEnum::FORT_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::FORT_DESTROYED].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/fort_jungle_front_destroyed.png"));
 
-    buildings[BuildingsEnum::VEHICLE_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::VEHICLE_FABRIC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/vehicle/base_jungle.png"));
 
-    buildings[BuildingsEnum::VEHICLE_FABRIC_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::VEHICLE_FABRIC_DESTROYED].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/vehicle/base_destroyed_jungle.png"));
 
-    buildings[BuildingsEnum::ROBOT_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::ROBOT_FABRIC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/robot/base_jungle.png"));
 
-    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/robot/base_destroyed_jungle.png"));
 }
