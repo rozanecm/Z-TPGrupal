@@ -4,8 +4,9 @@
 
 #include "Occupant.h"
 
-Occupant::Occupant(int id, int life, std::string type, Size position): id(id),
-         life_points(life), type(type), occ_size(position), damage_recv(0) {}
+Occupant::Occupant(int id, int life, std::string type, Size position):
+       Teamable(position), id(id), life_points(life), type(type)/*,
+       occ_size(position)*/, damage_recv(0) {}
 
 std::string Occupant::getType() const {
     return this->type;
@@ -20,12 +21,12 @@ bool Occupant::areYouAlive() {
 }
 
 Position Occupant::getPosition() const{
-    return occ_size.getPosition();
+    return obj_size.getPosition();
 }
 
-bool Occupant::isThereACollision(Size &other) {
-    return occ_size.isThereACollision(other);
-}
+//bool Occupant::isThereACollision(Size &other) {
+//    return occ_size.isThereACollision(other);
+//}
 
 int Occupant::getLifeLeft() {
     return life_points - damage_recv;

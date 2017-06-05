@@ -15,7 +15,7 @@
 #define GRUNTTYPE "Grunt"
 
 
-class Unit: public Occupant, public Teamable {
+class Unit: public Occupant {
 private:
     Compass compass;
     int unit_speed;
