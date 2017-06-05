@@ -51,11 +51,20 @@ void ControlUnit::sleepFor(double msec) {
 }
 
 void ControlUnit::unitsMakeMicroAction() {
+    std::vector<Unit> alive_units;
     for (auto x: all_units){
         Unit y = x;
         x.makeAction();
-        if (differenceOnUnits(x,y))
+        if (differenceOnUnits(x,y)) {
             changed_units->push_back(x);
+        }
+        if (x.areYouAlive()) {
+            alive_units.push_back(x);
+        }
+    }
+    // Only keep alive Units
+    if (alive_units.size() != all_units.size()) {
+        all_units.swap(alive_units);
     }
 }
 
