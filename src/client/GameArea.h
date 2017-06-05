@@ -69,6 +69,13 @@ private:
     /* BUILDINGS RESOURCES */
     std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
+    /* VEHICLES RESOURCES */
+    std::map<TeamEnum ,
+            std::map<UnitsEnum ,
+                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>> vehicleBases;
+
+    std::map<UnitsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> tires;
+
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
     unsigned long flagCounter;
@@ -103,8 +110,10 @@ private:
 
     void processSelection();
 
+    /* FLAG res loading */
     void loadFlagAnimations();
 
+    /* UNIT FIRE res loading */
     void loadUnitsResources();
 
     void loadGruntFireAnimations();
@@ -159,6 +168,7 @@ private:
 
     void loadYellowToughFireAnimations();
 
+    /* UNIT WALK res loading */
     void loadBlueWalkingAnimations();
 
     void loadGreenWalkingAnimations();
@@ -167,6 +177,7 @@ private:
 
     void loadYellowWalkingAnimations();
 
+    /* UNIT STAND res loading */
     void loadBlueStandingAnimations();
 
     void loadGreenStandingAnimations();
@@ -175,7 +186,41 @@ private:
 
     void loadYellowStandingAnimations();
 
+    /* BUILDING res loading */
     void loadBuildingsResources();
+
+    /* VEHICLES res loading */
+    void loadTiresAnimations();
+
+    void loadJeepTires();
+
+    void loadNeuterVehiclesAnimations();
+
+    void loadNeuterJeepAnimations();
+
+    void loadBlueVehiclesAnimations();
+
+    void loadGreenVehiclesAnimations();
+
+    void loadRedVehiclesAnimations();
+
+    void loadYellowVehiclesAnimations();
+
+    void loadBlueJeepAnimations();
+
+    void loadBlueLightTankAnimations();
+
+    void loadGreenJeepAnimations();
+
+    void loadGreenLightTankAnimations();
+
+    void loadRedJeepAnimations();
+
+    void loadRedLightTankAnimations();
+
+    void loadYellowJeepAnimations();
+
+    void loadYellowLightTankAnimations();
 };
 
 
