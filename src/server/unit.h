@@ -8,13 +8,11 @@
 #include "Occupant.h"
 #include "compass.h"
 #include "teamable.h"
-//#include "map.h"
 #define ATKSTATE "atk"
 #define MOVESTATE "mv"
 #define STANDINGSTATE "std"
 #define FLAGTYPE "Flag"
 #define GRUNTTYPE "Grunt"
-class Map;
 
 
 class Unit: public Occupant, public Teamable {
@@ -25,12 +23,11 @@ private:
     // is standing still
     std::string state;
     Size range;
-    Map map;
     std::vector<Position>* road;
 
 public:
-    Unit(int id, int life, std::string type, int unit_speed, Size size, Size range,
-                                                                Map& map);
+    Unit(int id, int life, std::string type, int unit_speed, Size size,
+         Size range, Compass& compass);
 
     void makeAction();
 

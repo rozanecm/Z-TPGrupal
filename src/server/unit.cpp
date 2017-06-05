@@ -5,9 +5,9 @@
 #include "unit.h"
 
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
-          Size range, Map& map) : Occupant(id,life, type, size), Teamable(size),
-compass(map,size,unit_speed), unit_speed(unit_speed), state(STANDINGSTATE),
-range(range), map(map) {}
+          Size range, Compass& compass) : Occupant(id,life, type, size),
+Teamable(size), compass(compass), unit_speed(unit_speed), state(STANDINGSTATE),
+range(range) {}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
@@ -36,8 +36,8 @@ void Unit::move() {
         Position pos = road->back();
         Size next_pos(pos.getX(),pos.getY(),occ_size.getWidth()
                                                         ,occ_size.getHeight());
-        if (map.canIWalkToThisPosition(next_pos)) {
-            double t_factor = map.getTerrainFactorOn(pos.getX(),pos.getY());
+        if (compass.canIWalkToThisPosition(next_pos)) {
+            double t_factor = compass.getTerrainFactorOn(pos.getX(),pos.getY());
             this->occ_size.moveTo(pos.getX(),pos.getY());
             road->pop_back();
 

@@ -18,12 +18,12 @@ void Server::run() {
             std::string logIn_msg = messenger->recieveMessage();
             processMessage(logIn_msg, messenger);
 //
-//                for (std::vector<UserOperator*>::iterator it = this->users.begin();
+//           for (std::vector<UserOperator*>::iterator it = this->users.begin();
 //                     it != this->users.end(); ) {
 //                    if ((*it)->finished()) {
 //                        (*it)->join();
 //                        delete(*it);
-//                        it = this->users.erase(it);//erase gives me the next iterator
+//                it = this->users.erase(it);//erase gives me the next iterator
 //                    } else { ++it; }
 //                }
 
@@ -51,7 +51,7 @@ bool Server::processMessage(std::string& logIn_msg, Messenger* msgr) {
 //        std::string id_str = getNextData(logIn_msg);
 //        int id = std::stoi(id_str);
 //        if (this->checkProfessorId(id, user)) {
-//            ProfessorOperator* professor = new ProfessorOperator(id, control, msgr);
+//      ProfessorOperator* professor = new ProfessorOperator(id, control, msgr);
 //            this->users.emplace_back(professor);
 //            // Make user to start recieving commands from client
 //            this->users.back()->start();

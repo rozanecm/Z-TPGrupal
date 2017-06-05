@@ -18,7 +18,7 @@ public:
     UnitMold(int tec_level, int life, int range, int width, int height,
            int unit_speed, int fire_rate, int creation_time, std::string type);
 
-    Unit* createUnit(int id, int x, int y, Map& map);
+    Unit* createUnit(int id, int x, int y, Compass& compass);
 
     // Returns the technology level needed to create Tough unit
     int getTechnologyLevel() const;

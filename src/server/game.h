@@ -18,9 +18,12 @@ private:
     Map map;
 
 public:
-    Game(std::vector<Messenger*> players, int x, int y, int size, int height,
-         std::vector<std::vector<Cell>> terrain_map);
+    Game(std::vector<Messenger*> players, int x, int y, int width, int height,
+         std::vector<std::vector<Cell>> terrain_map,
+         std::vector<Occupant>& occupants,
+         std::vector<Unit>& units);
 
+    void addBuildings(std::vector<Occupant> buildings);
     void startGame();
 };
 

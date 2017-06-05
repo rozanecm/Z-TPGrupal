@@ -348,4 +348,12 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
     }
 }
 
+bool Compass::canIWalkToThisPosition(Size &size) {
+    return map.canIWalkToThisPosition(size);
+}
+
+double Compass::getTerrainFactorOn(int x, int y) {
+    return map.getTerrainFactorOn(x,y);
+}
+
 

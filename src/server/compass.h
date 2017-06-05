@@ -37,6 +37,12 @@ public:
 
     void buildNodeMap();
 
+    // Returns true if the position is empty
+    bool canIWalkToThisPosition(Size& size);
+
+    // Returns the Terrain factor on the (x,y) position
+    double getTerrainFactorOn(int x, int y);
+
     ~Compass();
 
 private:
