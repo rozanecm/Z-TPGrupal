@@ -210,17 +210,25 @@ private:
 
     void loadBlueLightTankAnimations();
 
+    void loadBlueMediumTankAnimations();
+
     void loadGreenJeepAnimations();
 
     void loadGreenLightTankAnimations();
+
+    void loadGreenMediumTankAnimations();
 
     void loadRedJeepAnimations();
 
     void loadRedLightTankAnimations();
 
+    void loadRedMediumTankAnimations();
+
     void loadYellowJeepAnimations();
 
     void loadYellowLightTankAnimations();
+
+    void loadYellowMediumTankAnimations();
 };
 
 
