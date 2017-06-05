@@ -212,11 +212,15 @@ private:
 
     void loadBlueMediumTankAnimations();
 
+    void loadBlueMMLAnimations();
+
     void loadGreenJeepAnimations();
 
     void loadGreenLightTankAnimations();
 
     void loadGreenMediumTankAnimations();
+
+    void loadGreenMMLAnimations();
 
     void loadRedJeepAnimations();
 
@@ -224,11 +228,15 @@ private:
 
     void loadRedMediumTankAnimations();
 
+    void loadRedMMLAnimations();
+
     void loadYellowJeepAnimations();
 
     void loadYellowLightTankAnimations();
 
     void loadYellowMediumTankAnimations();
+
+    void loadYellowMMLAnimations();
 };
 
 
