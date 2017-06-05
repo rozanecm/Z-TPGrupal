@@ -6,8 +6,11 @@
 #define WAIT 0.5
 
 
-ControlUnit::ControlUnit(std::vector<Messenger*>& new_players) :
-        players(new_players), winning(false) {}
+ControlUnit::ControlUnit(std::vector<Messenger*>& new_players,
+                         std::vector<Unit>& all_units,
+                         std::vector<Occupant>& all_occupants) :
+    all_units(all_units), all_occupants(all_occupants), players(new_players),
+    winning(false) {}
 
 void ControlUnit::run() {
     while(!winning) {
@@ -37,26 +40,25 @@ void ControlUnit::sleepFor(double msec) {
 
 void ControlUnit::unitsMakeMicroAcction() {
     for (auto x: all_units){
-        x->makeAction();
+        x.makeAction();
     }
 }
 
 
 void ControlUnit::checkAllLivingOccupants() {
     for(auto x: all_occupants){
-        if(!x->areYouAlive()) {
+        if(!x.areYouAlive()) {
             //erase it from map
             // if building put ruins
         }
-
     }
 }
 
 void ControlUnit::cmdMoveUnit(int id, int x, int y) {
     bool found = false;
-    Unit* selected_unit = all_units.front();
+    Unit selected_unit = all_units.front();
     for (auto x: all_units) {
-        if (x->getId() == id) {
+        if (x.getId() == id) {
             selected_unit = x;
             found = true;
             break;
@@ -64,7 +66,7 @@ void ControlUnit::cmdMoveUnit(int id, int x, int y) {
     }
 
     if (found)
-        selected_unit->calculateRoadTo(x, y);
+        selected_unit.calculateRoadTo(x, y);
 }
 
 void ControlUnit::executeCommands() {

@@ -9,7 +9,8 @@ Game::Game(std::vector<Messenger*> players, int x, int y, int width, int height,
            std::vector<std::vector<Cell>> terrain_map,
            std::vector<Occupant>& occupants,
            std::vector<Unit>& units) : players(players),
-           control(players), map(x,y,width,height,terrain_map,occupants){}
+           control(players,units,occupants),
+           map(x,y,width,height,terrain_map,occupants){}
 
 void Game::startGame() {
     control.run();

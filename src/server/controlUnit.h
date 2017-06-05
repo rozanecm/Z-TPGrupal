@@ -17,15 +17,17 @@ class Command;
 
 class ControlUnit {
 private:
-    std::vector<Unit*> all_units;
-    std::vector<Occupant*> all_occupants;
+    std::vector<Unit>& all_units;
+    std::vector<Occupant>& all_occupants;
     std::vector<Messenger*> players;
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
 
 public:
-    ControlUnit(std::vector<Messenger*>& new_players);
+    ControlUnit(std::vector<Messenger*>& new_players,
+                std::vector<Unit>& all_units,
+                std::vector<Occupant>& all_occupants);
 
     // Method to start checking commands from players
     void run();

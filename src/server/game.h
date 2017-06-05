@@ -16,6 +16,8 @@ private:
     std::vector<Messenger*> players;
     ControlUnit control;
     Map map;
+//    std::vector<Unit>& all_units;
+//    std::vector<Occupant>& all_occupants;
 
 public:
     Game(std::vector<Messenger*> players, int x, int y, int width, int height,
