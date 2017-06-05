@@ -173,3 +173,21 @@ std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
     info += std::to_string(Occupant.getLifeLeft()) + "--";
     return info;
 }
+
+void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
+                            int target) {
+    bool found = false;
+    Unit selected_unit = all_units.front();
+    std::vector<Unit>::iterator it = all_units.begin();
+    while (it != all_units.end() && !found) {
+        if (it->getId() == id_unit) {
+            if (it->getTeam() != attacker_team) {
+                found = true;
+            } else {
+                // if unit's is form the players team
+                // look for target
+            }
+        }
+        ++it;
+    }
+}

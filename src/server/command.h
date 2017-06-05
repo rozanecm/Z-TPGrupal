@@ -10,11 +10,11 @@ class ControlUnit;
 
 class Command {
 protected:
-    std::string cmd;
+    std::string player_id, cmd;
     ControlUnit* control;
     int unit_id, other_id, x,y;
 public:
-    Command(std::string& cmd, ControlUnit* control);
+    Command(std::string id, std::string& cmd, ControlUnit* control);
 
      void run();
 

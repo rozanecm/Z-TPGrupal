@@ -46,6 +46,8 @@ public:
     // to de (x,y) position
     void cmdMoveUnit(int id, int x, int y);
 
+    void cmdAttack(std::string attacker_team, int id_unit, int target);
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();

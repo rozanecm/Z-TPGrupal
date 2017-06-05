@@ -21,7 +21,7 @@ void Player::run() {
         }else if (on_lobby) {
             processLobbyCommands(new_cmd);
         } else if (playing) {
-            cmds.push_back(new Command(new_cmd,control));
+            cmds.push_back(new Command(this->id,new_cmd,control));
         }
     }
 }
