@@ -12,7 +12,7 @@ Game::Game(std::vector<Messenger*> players, int x, int y, int width, int height,
            control(players,units,occupants),
            map(x,y,width,height,terrain_map,occupants){}
 
-void Game::startGame() {
+void Game::run() {
     control.run();
 }
 

@@ -23,6 +23,8 @@ private:
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
+    std::vector<Unit>* changed_units;
+    std::vector<int>* changed_occupants;
 
 public:
     ControlUnit(std::vector<Messenger*>& new_players,
@@ -35,7 +37,7 @@ public:
     void sleepFor(double sec);
 
     // Meant to make every unit make a micro action on the Tic
-    void unitsMakeMicroAcction();
+    void unitsMakeMicroAction();
 
     // Checks if any Occupant is dead. If so, it will remove it from the game
     void checkAllLivingOccupants();
@@ -51,6 +53,10 @@ private:
     void sendUpdateMessage();
 
     std::string getUpdateInfo();
+
+    bool differenceOnUnits(Unit& x, Unit& y);
+
+    std::string getInfoFromUnit(Unit& unit);
 };
 
 

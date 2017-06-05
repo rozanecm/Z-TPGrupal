@@ -11,7 +11,7 @@
 #include "player.h"
 class ControlUnit;
 
-class Game {
+class Game: public Thread {
 private:
     std::vector<Messenger*> players;
     ControlUnit control;
@@ -26,7 +26,7 @@ public:
          std::vector<Unit>& units);
 
     void addBuildings(std::vector<Occupant> buildings);
-    void startGame();
+    void run();
 };
 
 
