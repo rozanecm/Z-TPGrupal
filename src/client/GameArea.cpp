@@ -42,74 +42,6 @@ GameArea::GameArea(BaseObjectType *cobject,
     set_can_focus(true);
 }
 
-void GameArea::loadFlagAnimations() {
-    /* this methods loads all the imgs needed to draw all the flags' animations.
-     * POSSIBLE OPTIMIZATION: load only needed colors */
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_blue_n00.png"));
-
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_blue_n01.png"));
-
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_blue_n02.png"));
-
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_blue_n03.png"));
-
-    /* load red flags imgs */
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_red_n00.png"));
-
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_red_n01.png"));
-
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_red_n02.png"));
-
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_red_n03.png"));
-
-    /* load yellow flags imgs */
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_yellow_n00.png"));
-
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_yellow_n01.png"));
-
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_yellow_n02.png"));
-
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_yellow_n03.png"));
-
-    /* load green flags imgs */
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_green_n00.png"));
-
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_green_n01.png"));
-
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_green_n02.png"));
-
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_green_n03.png"));
-
-    /* load neuter flags imgs */
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_null_n00.png"));
-
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_null_n01.png"));
-
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_null_n02.png"));
-
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
-            "res/assets/flags/flag_null_n03.png"));
-}
-
 GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
@@ -320,8 +252,86 @@ void GameArea::loadUnitsResources() {
     loadGreenStandingAnimations();
     loadRedStandingAnimations();
     loadYellowStandingAnimations();
+
+    /* load vehicles' animations */
+    loadTiresAnimations();
+    loadNeuterVehiclesAnimations();
+    loadBlueVehiclesAnimations();
+    loadGreenVehiclesAnimations();
+    loadRedVehiclesAnimations();
+    loadYellowVehiclesAnimations();
 }
 
+/* FLAGS animations loading */
+void GameArea::loadFlagAnimations() {
+    /* this methods loads all the imgs needed to draw all the flags' animations.
+     * POSSIBLE OPTIMIZATION: load only needed colors */
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n00.png"));
+
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n01.png"));
+
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n02.png"));
+
+    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_blue_n03.png"));
+
+    /* load red flags imgs */
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n00.png"));
+
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n01.png"));
+
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n02.png"));
+
+    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_red_n03.png"));
+
+    /* load yellow flags imgs */
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n00.png"));
+
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n01.png"));
+
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n02.png"));
+
+    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_yellow_n03.png"));
+
+    /* load green flags imgs */
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n00.png"));
+
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n01.png"));
+
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n02.png"));
+
+    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_green_n03.png"));
+
+    /* load neuter flags imgs */
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n00.png"));
+
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n01.png"));
+
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n02.png"));
+
+    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/flags/flag_null_n03.png"));
+}
+
+/* FIRE animations loading */
 void GameArea::loadGruntFireAnimations()  {
     loadBlueGruntFireAnimations();
     loadGreenGruntFireAnimations();
@@ -2535,6 +2545,7 @@ void GameArea::loadYellowToughFireAnimations() {
             "res/assets/units/robots/tough/fire_yellow_r315_n02.png"));
 }
 
+/* WALK animations loading */
 void GameArea::loadBlueWalkingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::WALK_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
@@ -2959,6 +2970,7 @@ void GameArea::loadYellowWalkingAnimations() {
             "res/assets/units/robots/walk_yellow_r315_n03.png"));
 }
 
+/* STAND animations loading */
 void GameArea::loadBlueStandingAnimations() {
     unitsGeneralAnimations.operator[](TeamEnum::BLUE)[ActionsEnum::STAND_0].
             emplace_back(Gdk::Pixbuf::create_from_file(
@@ -3095,22 +3107,1184 @@ void GameArea::loadYellowStandingAnimations() {
             "res/assets/units/robots/stand_yellow_r315.png"));
 }
 
+/* BUILDINGS' animations loading */
 void GameArea::loadBuildingsResources() {
     buildings[BuildingsEnum::FORT].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/fort_jungle_front.png"));
 
-    buildings[BuildingsEnum::FORT_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::FORT_DESTROYED].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/fort/fort_jungle_front_destroyed.png"));
 
-    buildings[BuildingsEnum::VEHICLE_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::VEHICLE_FABRIC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/vehicle/base_jungle.png"));
 
-    buildings[BuildingsEnum::VEHICLE_FABRIC_DESTROYED].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::VEHICLE_FABRIC_DESTROYED].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/vehicle/base_destroyed_jungle.png"));
 
-    buildings[BuildingsEnum::ROBOT_FABRIC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::ROBOT_FABRIC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/robot/base_jungle.png"));
 
-    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(Gdk::Pixbuf::create_from_file(
+    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(
+            Gdk::Pixbuf::create_from_file(
             "res/assets/buildings/robot/base_destroyed_jungle.png"));
 }
+
+/* VEHICLES' animations loading */
+void GameArea::loadTiresAnimations() {
+    loadJeepTires();
+}
+
+void GameArea::loadJeepTires() {
+    tires[UnitsEnum::JEEP_000].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/under_r000_n00.png"));
+
+    tires[UnitsEnum::JEEP_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/under_r000_n01.png"));
+
+    tires[UnitsEnum::JEEP_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/under_r000_n02.png"));
+
+    tires[UnitsEnum::JEEP_180].emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/under_r000_n03.png"));
+}
+
+void GameArea::loadNeuterVehiclesAnimations() {
+    loadNeuterJeepAnimations();
+}
+
+void GameArea::loadNeuterJeepAnimations() {
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r000.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r045.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r090.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r135.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r180.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r225.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r270.png"));
+
+    vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/empty_r315.png"));
+
+}
+
+void GameArea::loadBlueVehiclesAnimations() {
+    loadBlueJeepAnimations();
+    loadBlueLightTankAnimations();
+    loadBlueMediumTankAnimations();
+    loadBlueMMLAnimations();
+    loadBlueHeavyTankAnimations();
+}
+
+void GameArea::loadBlueJeepAnimations() {
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r135_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r135_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r180_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r180_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r225_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r225_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r270_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r270_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_blue_r315_n01.png"));
+}
+
+void GameArea::loadBlueLightTankAnimations() {
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_blue_r315_n02.png"));
+}
+
+void GameArea::loadBlueMediumTankAnimations() {
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_blue_r315_n02.png"));
+}
+
+void GameArea::loadBlueMMLAnimations() {
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_blue_r315_n02.png"));
+}
+
+void GameArea::loadBlueHeavyTankAnimations() {
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_blue_r315_n02.png"));
+}
+
+void GameArea::loadGreenVehiclesAnimations() {
+    loadGreenJeepAnimations();
+    loadGreenLightTankAnimations();
+    loadGreenMediumTankAnimations();
+    loadGreenMMLAnimations();
+    loadGreenHeavyTankAnimations();
+}
+
+void GameArea::loadGreenJeepAnimations() {
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r135_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r135_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r180_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r180_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r225_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r225_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r270_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r270_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_green_r315_n01.png"));
+}
+
+void GameArea::loadGreenLightTankAnimations() {
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_green_r315_n02.png"));
+}
+
+void GameArea::loadGreenMediumTankAnimations() {
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_green_r315_n02.png"));
+}
+
+void GameArea::loadGreenMMLAnimations() {
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_green_r315_n02.png"));
+}
+
+void GameArea::loadGreenHeavyTankAnimations() {
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_green_r315_n02.png"));
+}
+
+void GameArea::loadRedVehiclesAnimations() {
+    loadRedJeepAnimations();
+    loadRedLightTankAnimations();
+    loadRedMediumTankAnimations();
+    loadRedMMLAnimations();
+    loadRedHeavyTankAnimations();
+}
+
+void GameArea::loadRedJeepAnimations() {
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r135_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r135_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r180_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r180_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r225_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r225_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r270_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r270_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_red_r315_n01.png"));
+}
+
+void GameArea::loadRedLightTankAnimations() {
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r090_n02.png"));
+
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_red_r315_n02.png"));
+}
+
+void GameArea::loadRedMediumTankAnimations() {
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_red_r315_n02.png"));
+}
+
+void GameArea::loadRedMMLAnimations() {
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_red_r315_n02.png"));
+}
+
+void GameArea::loadRedHeavyTankAnimations() {
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::RED)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_red_r315_n02.png"));
+}
+
+void GameArea::loadYellowVehiclesAnimations() {
+    loadYellowJeepAnimations();
+    loadYellowLightTankAnimations();
+    loadYellowMediumTankAnimations();
+    loadYellowMMLAnimations();
+    loadYellowHeavyTankAnimations();
+}
+
+void GameArea::loadYellowJeepAnimations() {
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r135_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_135].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r135_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r180_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_180].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r180_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r225_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_225].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r225_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r270_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_270].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r270_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::JEEP_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/jeep/base_yellow_r315_n01.png"));
+}
+
+void GameArea::loadYellowLightTankAnimations() {
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/light_tank/base_yellow_r315_n02.png"));
+}
+
+void GameArea::loadYellowMediumTankAnimations() {
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/medium_tank/base_yellow_r315_n02.png"));
+}
+
+void GameArea::loadYellowMMLAnimations() {
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::MML_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/mml/base_yellow_r315_n02.png"));
+}
+
+void GameArea::loadYellowHeavyTankAnimations() {
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r000_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r000_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_000].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r000_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r045_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r045_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_045].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r045_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r090_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r090_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_090].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r090_n02.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n00.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n01.png"));
+
+    vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_315].
+            emplace_back(Gdk::Pixbuf::create_from_file(
+            "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n02.png"));
+}
+
