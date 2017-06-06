@@ -80,6 +80,7 @@ private:
     unsigned short jeepCounter;
     unsigned short tireCounter;
     unsigned short lightTankCounter;
+    unsigned short mediumTankCounter;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -296,6 +297,107 @@ private:
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     void drawYellowLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* MEDIUM TANK */
+    /* BLUE MEDIUM TANK DRAWING */
+    void drawBlueMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* GREEN MEDIUM TANK DRAWING */
+    void drawGreenMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* RED MEDIUM TANK DRAWING */
+    void drawRedMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* YELLOW MEDIUM TANK DRAWING */
+    void drawYellowMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     /* Event handling methods */

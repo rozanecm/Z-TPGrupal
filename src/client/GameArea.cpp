@@ -16,6 +16,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         jeepCounter(0),
         tireCounter(0),
         lightTankCounter(0),
+        mediumTankCounter(0),
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
@@ -6378,6 +6379,868 @@ void GameArea::drawYellowLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
     lightTankCounter ==
     vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_315).size()-1
     ? (lightTankCounter = 0) : (lightTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* BLUE MEDIUM TANK DRAWING */
+void GameArea::drawBlueMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* GREEN MEDIUM TANK DRAWING */
+void GameArea::drawGreenMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* RED MEDIUM TANK DRAWING */
+void GameArea::drawRedMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* YELLOW MEDIUM TANK DRAWING */
+void GameArea::drawYellowMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_000).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_000).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_000).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_045).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_045).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_045).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_090).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_090).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_090).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MEDIUM_TANK_315).
+                                          at(mediumTankCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::MEDIUM_TANK_315).
+                          at(mediumTankCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mediumTankCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MEDIUM_TANK_315).size()-1
+    ? (mediumTankCounter = 0) : (mediumTankCounter++);
     /* end update counter section */
 
     cr->restore();
