@@ -82,6 +82,7 @@ private:
     unsigned short lightTankCounter;
     unsigned short mediumTankCounter;
     unsigned short heavyTankCounter;
+    unsigned short mmlCounter;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -501,6 +502,107 @@ private:
 
     void drawYellowHeavyTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* MML DRAWINGS */
+    /* BLUE MML */
+    void drawBlueMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* GREEN MML */
+    void drawGreenMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* RED MML */
+    void drawRedMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xCoordinate, unsigned int yCoordinate);
+
+    /* YELLOW MML */
+    void drawYellowMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                           unsigned int xCoordinate, unsigned int yCoordinate);
 
     /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;

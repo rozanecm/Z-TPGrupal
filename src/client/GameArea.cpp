@@ -18,6 +18,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         lightTankCounter(0),
         mediumTankCounter(0),
         heavyTankCounter(0),
+        mmlCounter(0),
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
@@ -8106,6 +8107,843 @@ void GameArea::drawYellowHeavyTank315(const Cairo::RefPtr<Cairo::Context> &cr,
     heavyTankCounter ==
     vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::HEAVY_TANK_315).size()-1
     ? (heavyTankCounter = 0) : (heavyTankCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* BLUE MML */
+void GameArea::drawBlueMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_000).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_000).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_045).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_045).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_090).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_090).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_135).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_135).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_180).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_180).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_225).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_225).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_270).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_270).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawBlueMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::MML_315).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MML_315).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* GREEN MML */
+void GameArea::drawGreenMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_000).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_000).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_045).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_045).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_090).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_090).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_135).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_135).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_180).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_180).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_225).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_225).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_270).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_270).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawGreenMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                                unsigned int xCoordinate,
+                                unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::GREEN).
+                                          at(UnitsEnum::MML_315).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MML_315).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* RED MML*/
+void GameArea::drawRedMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_000).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_000).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_045).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_045).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_090).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_090).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_135).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_135).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_180).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_180).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_225).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_225).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_270).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_270).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawRedMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                              unsigned int xCoordinate,
+                              unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::RED).
+                                          at(UnitsEnum::MML_315).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::RED).at(UnitsEnum::MML_315).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+/* YELLOW MML*/
+void GameArea::drawYellowMml000(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_000).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_000).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_000).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml045(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_045).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_045).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_045).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml090(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_090).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_090).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_090).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml135(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_135).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_135).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_135).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml180(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_180).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_180).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_180).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml225(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_225).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_225).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_225).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml270(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_270).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_270).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_270).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
+    /* end update counter section */
+
+    cr->restore();
+}
+
+void GameArea::drawYellowMml315(const Cairo::RefPtr<Cairo::Context> &cr,
+                                 unsigned int xCoordinate,
+                                 unsigned int yCoordinate) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::YELLOW).
+                                          at(UnitsEnum::MML_315).
+                                          at(mmlCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_315).
+                          at(mmlCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+
+    mmlCounter ==
+    vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::MML_315).size()-1
+    ? (mmlCounter = 0) : (mmlCounter++);
     /* end update counter section */
 
     cr->restore();
