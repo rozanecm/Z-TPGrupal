@@ -79,6 +79,7 @@ private:
     unsigned long flagCounter;
     unsigned short jeepCounter;
     unsigned short tireCounter;
+    unsigned short lightTankCounter;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
