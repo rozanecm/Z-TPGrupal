@@ -97,11 +97,8 @@ void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                   flags.at(FlagEnum::BLUE).at(flagCounter)->get_width(),
                   flags.at(FlagEnum::BLUE).at(flagCounter)->get_height());
     cr->fill();
-    if (flagCounter == flags.at(FlagEnum::BLUE).size()-1){
-        flagCounter = 0;
-    }else{
-        flagCounter++;
-    }
+    flagCounter == flags.at(FlagEnum::BLUE).size()-1 ? (flagCounter = 0)
+                                                     : (flagCounter++);
     cr->restore();
 }
 
