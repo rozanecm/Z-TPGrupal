@@ -10,6 +10,7 @@
 #include "commands/AddUnit.h"
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
+#include "commands/LoadMap.h"
 
 void ClientThread::run() {
     initCommands();
@@ -56,6 +57,7 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
+    commands["loadmap"] = new LoadMap(mapMonitor);
     commands["addunit"] = new AddUnit(playersMonitor);
     commands["removeunit"] = new RemoveUnit(playersMonitor);
     commands["move"] = new UpdatePosition(playersMonitor);
