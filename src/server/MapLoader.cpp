@@ -1,6 +1,7 @@
 #include <map>
 #include "MapLoader.h"
 #include <pugixml.hpp>
+#include <sstream>
 
 
 const std::map<std::string, int> terrain_factor {
@@ -17,6 +18,9 @@ MapLoader::MapLoader(std::string path) {
         std::cout << "ERROR LOADING MAP: " << path << ": " <<
                   result.description() << std::endl;
     }
+    std::stringstream stream;
+    doc.save(stream);
+    map_string = stream.str();
     const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node_iterator map_node = doc.first_child();
@@ -77,7 +81,7 @@ Map MapLoader::get_map() {
     int height = (int) map.size();
     int x = width / 2;
     int y = height / 2;
-    return Map(x, y, width, height, map, occupants);
+    return Map(x, y, width, height, map, occupants, map_string);
 }
 
 MapLoader::~MapLoader() {

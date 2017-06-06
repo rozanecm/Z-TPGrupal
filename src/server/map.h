@@ -18,14 +18,16 @@ private:
     std::vector<std::vector<Cell>>& terrain_map;
     Size map_size;
     std::vector<Occupant>& all_occupants;
+    std::string& xml;
     /*std::vector<Unit>& all_units;*/
 
 public:
     // Map receives the center position (x,y) and dimensions width and height
     Map(int x, int y, int width, int height,
         std::vector<std::vector<Cell>>& terrain_map,
-        std::vector<Occupant>& all_occupants/*,
-        std::vector<Unit>& all_units*/);
+        std::vector<Occupant>& all_occupants,
+        std::string& xml
+    );
 
     void addOccupants(std::vector<Occupant>& all_occupants);
 

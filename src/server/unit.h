@@ -32,6 +32,10 @@ public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
          Size range, Compass& compass);
 
+    Unit(const Unit& other);
+
+//    Unit& operator=(const Unit& other);
+
     void makeAction();
 
     // Calculates the minimum road to destiny (x,y)

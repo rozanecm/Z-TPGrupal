@@ -102,5 +102,13 @@ std::vector<Bullet> Unit::collectBullets() {
 }
 
 
+Unit::Unit(const Unit &other) : compass(other.compass), unit_speed(other.unit_speed),
+state(other.state), range(other.range), road(other.road), target(other.target){}
+
+//Unit &Unit::operator=(const Unit &other) {
+//    return ;
+//}
+
+
 
 

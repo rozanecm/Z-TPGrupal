@@ -356,4 +356,13 @@ double Compass::getTerrainFactorOn(int x, int y) {
     return map.getTerrainFactorOn(x,y);
 }
 
+Compass::Compass(const Compass &other) : map(other.map),
+astar_map(other.astar_map), closed_nodes(other.closed_nodes),
+open_nodes(other.open_nodes), road(other.road), terrain_modifier(other.terrain_modifier),
+unit_speed(other.unit_speed), unit_size(other.unit_size){}
+
+//Compass &Compass::operator=(const Compass &other) {
+//    return ;
+//}
+
 

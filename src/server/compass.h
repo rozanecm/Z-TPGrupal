@@ -27,6 +27,9 @@ private:
     Size unit_size;
 
 public:
+    Compass(const Compass& other);
+
+    Compass& operator=(const Compass& other) = delete;
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
     Compass(Map& map, Size unit_size, int unit_speed);

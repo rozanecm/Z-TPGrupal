@@ -6,7 +6,9 @@
 
 Player::Player(Messenger *msg, ControlUnit* control, Menu& menu) :
         messenger(msg), conected(true),on_menu(true),on_lobby(false),
-        playing(false), control(control), menu(menu) {}
+        playing(false), control(control), menu(menu) {
+
+}
 
 Player::Player(Messenger *msg, Menu& menu) :
         messenger(msg), conected(true),on_menu(true),on_lobby(false),

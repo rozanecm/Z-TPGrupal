@@ -61,11 +61,23 @@ void ControlUnit::unitsMakeMicroAction() {
         if (x.areYouAlive()) {
             alive_units.push_back(x);
         }
+
     }
     // Only keep alive Units
     if (alive_units.size() != all_units.size()) {
         all_units.swap(alive_units);
     }
+    /////
+//    std::vector<Unit>::iterator it = all_units.begin();
+//    for(;it != all_units.end();){
+//        if(!it->areYouAlive()) {
+//            //erase it from map
+//            it = all_units.erase(it);
+//            // if building put ruins
+//        } else {
+//            ++it;
+//        }
+//    }
 }
 
 
