@@ -223,6 +223,31 @@ private:
     void drawBlueLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
+    /* GREEN LIGHT TANK DRAWING */
+    void drawGreenLightTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
     /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
 
