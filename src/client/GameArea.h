@@ -336,8 +336,6 @@ private:
 
     void loadRedGruntFireAnimations();
 
-    void loadRedGruntFireAnimations();
-
     void loadYellowGruntFireAnimations();
 
     void loadBlueLaserFireAnimations();
