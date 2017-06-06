@@ -59,6 +59,8 @@ public:
     bool isThereLava(Size& other_size);
 
     bool thereIsABridge(Size& other_size);
+
+    std::vector<Occupant>& getOccupants();
 };
 
 
