@@ -97,6 +97,21 @@ private:
     void drawBlueJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
+    void drawBlueJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawBlueJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
                            int xCoordinate, int yCoordinate);
 
