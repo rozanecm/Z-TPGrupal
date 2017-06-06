@@ -88,6 +88,12 @@ private:
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
 
+    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
+                           int xCoordinate, int yCoordinate);
+
+    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
+                              int xCoordinate, int yCoordinate);
+
     /* JEEP DRAWINGS */
     /* BLUE JEEP */
     void drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -113,12 +119,6 @@ private:
 
     void drawBlueJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
-
-    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
-                           int xCoordinate, int yCoordinate);
-
-    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
-                              int xCoordinate, int yCoordinate);
 
     /* GREEN JEEP */
     void drawGreenJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -195,6 +195,9 @@ private:
     void drawYellowJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
+    /* TANKS DRAWINGS */
+    /* LIGHT TANK */
+    /* BLUE LIGHT TANK DRAWING */
 
     /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
