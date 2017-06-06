@@ -94,6 +94,9 @@ private:
     void drawBlueJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
+    void drawBlueJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
                            int xCoordinate, int yCoordinate);
 
