@@ -88,6 +88,8 @@ private:
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
 
+    /* JEEP DRAWINGS */
+    /* BLUE JEEP */
     void drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
@@ -110,6 +112,37 @@ private:
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     void drawBlueJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
+                           int xCoordinate, int yCoordinate);
+
+    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
+                              int xCoordinate, int yCoordinate);
+
+    /* RED JEEP */
+    void drawRedJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawRedJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
