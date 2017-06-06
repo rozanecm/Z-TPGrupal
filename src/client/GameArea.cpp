@@ -13,6 +13,7 @@ GameArea::GameArea(BaseObjectType *cobject,
                    const Glib::RefPtr<Gtk::Builder> &builder) :
         Gtk::DrawingArea(cobject),
         flagCounter(0),
+        jeepCounter(0),
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
@@ -124,10 +125,6 @@ void GameArea::setResources(PlayersMonitor *playersMonitor,
     this->camera.setMapHeight(mapMonitor->getYSize());
 }
 
-void GameArea::keyboardPressed() {
-    std::cout<<"sth pressed"<<std::endl;
-}
-
 bool GameArea::on_key_press_event(GdkEventKey *event) {
     if (event->keyval == GDK_KEY_Up and event->keyval == GDK_KEY_Left) {
         camera.moveUp();
@@ -151,7 +148,7 @@ bool GameArea::on_key_press_event(GdkEventKey *event) {
         //returning true, cancels the propagation of the event
         return true;
     }
-//
+//  todo ver si el event handling se pasa arriba o no
 //    //if the event has not been handled, call the base class
 //    return Gtk::Window::on_key_press_event(key_event);
 }
@@ -204,7 +201,7 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
     if (event->button == 1) {
         xStartCoordinate = event->x;
         yStartCoordinate = event->y;
-        //returning true, cancels the propagation of the event
+        /* returning true, cancels the propagation of the event */
         return true;
     }
 }
@@ -4295,4 +4292,49 @@ void GameArea::loadYellowHeavyTankAnimations() {
     vehicleBases.operator[](TeamEnum::YELLOW)[UnitsEnum::HEAVY_TANK_315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n02.png"));
+}
+
+void GameArea::drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    /* first draw tires */
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  tires.at(UnitsEnum::JEEP_000).at(tireCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  tires.at(UnitsEnum::JEEP_000).at(jeepCounter)->get_width(),
+                  tires.at(UnitsEnum::JEEP_000).at(jeepCounter)->get_height());
+    cr->fill();
+
+    /* then draw vehicle as a whole */
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::JEEP_000).
+                                          at(jeepCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_000).
+                          at(jeepCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_000).
+                          at(jeepCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    if (tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1){
+        tireCounter = 0;
+    }else{
+        tireCounter++;
+    }
+
+    if (jeepCounter ==
+            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_000).size()-1){
+        jeepCounter = 0;
+    }else{
+        jeepCounter++;
+    }
+    /* end update counter section */
+
+    cr->restore();
 }

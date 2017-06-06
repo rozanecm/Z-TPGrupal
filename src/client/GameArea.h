@@ -31,8 +31,6 @@ public:
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
 
-    static void keyboardPressed();
-
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
@@ -79,20 +77,26 @@ private:
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
     unsigned long flagCounter;
+    unsigned short jeepCounter;
+    unsigned short tireCounter;
 
     /* DRAWING METHODS */
-    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
-                           int xCoordinate, int yCoordinate);
-
-    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
-                              int xCoordinate, int yCoordinate);
-
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                      std::pair<unsigned int, unsigned int> cameraPosition);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                     unsigned int xCoordinate, unsigned int yCoordinate,
                     std::string terrainType);
+
+    void drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
+                           int xCoordinate, int yCoordinate);
+
+    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
+                              int xCoordinate, int yCoordinate);
+
 
     /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
