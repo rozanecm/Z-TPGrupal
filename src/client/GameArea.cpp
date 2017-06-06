@@ -22,7 +22,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
-        /* camera is initialized with size 0,0 because we dont
+        /* camera is initialized with size 0,0 because we don't
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
     /* load flags animations */

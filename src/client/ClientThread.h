@@ -31,12 +31,11 @@ public:
     void finish();
 
 private:
-    /* Loads the map from XML file in path*/
-    void initMap(std::string& path) const;
 
     /* Loads commands */
     void initCommands();
-    /* Main thread loop, receives commands from the server, parses them and
+
+    /** Main thread loop, receives commands from the server, parses them and
      * executes them */
     void loop();
 

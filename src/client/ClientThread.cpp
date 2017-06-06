@@ -10,44 +10,11 @@
 #include "commands/AddUnit.h"
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
-
-#define MAP "maps/map.xml" // temporary
+#include "commands/LoadMap.h"
 
 void ClientThread::run() {
-    std::string map(MAP);
-    initMap(map);
     initCommands();
     loop();
-}
-
-void ClientThread::initMap(std::string& path) const {
-    /* initialize map so then can be completed with read data */
-    mapMonitor.initializeMap(100, 100);
-
-    std::vector<std::vector<std::__cxx11::string>> map;
-    pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(path.c_str());
-    if (!result) {
-        std::cerr << "FATAL ERROR LOADING MAP: " << result.description();
-        return;
-    }
-
-    pugi::xml_node terrain = doc.child("Map").child("Terrain");
-    for (auto node_row : terrain.children()) {
-        std::vector<std::__cxx11::string> row;
-        for (auto cell : node_row.children()) {
-            row.push_back(cell.attribute("terrain").value());
-        }
-        map.push_back(row);
-    }
-
-    unsigned long size = map.size();
-    mapMonitor.initializeMap(size, size);
-    for (int i = 0; i < size; i++){
-        for (int j = 0; j < size; j++){
-            mapMonitor.setCell(i, j, map[i][j]);
-        }
-    }
 }
 
 ClientThread::ClientThread(PlayersMonitor &playerMonitor,
@@ -64,6 +31,7 @@ ClientThread::ClientThread(PlayersMonitor &playerMonitor,
 void ClientThread::loop() {
     while (!finished) {
         std::string msg = messenger.receive();
+        std::cout<<msg<<std::endl;
         if (msg == "") {
             continue;
         }
@@ -89,6 +57,7 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
+    commands["loadmap"] = new LoadMap(mapMonitor);
     commands["addunit"] = new AddUnit(playersMonitor);
     commands["removeunit"] = new RemoveUnit(playersMonitor);
     commands["move"] = new UpdatePosition(playersMonitor);
