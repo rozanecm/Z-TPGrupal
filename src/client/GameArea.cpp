@@ -4338,3 +4338,48 @@ void GameArea::drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
 
     cr->restore();
 }
+
+void GameArea::drawBlueJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
+                               unsigned int xCoordinate,
+                               unsigned int yCoordinate) {
+    cr->save();
+    /* first draw tires */
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  tires.at(UnitsEnum::JEEP_045).at(tireCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  tires.at(UnitsEnum::JEEP_045).at(jeepCounter)->get_width(),
+                  tires.at(UnitsEnum::JEEP_045).at(jeepCounter)->get_height());
+    cr->fill();
+
+    /* then draw vehicle as a whole */
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  vehicleBases.
+                                          at(TeamEnum::BLUE).
+                                          at(UnitsEnum::JEEP_045).
+                                          at(jeepCounter),
+                                  xCoordinate, yCoordinate);
+    cr->rectangle(xCoordinate, yCoordinate,
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_045).
+                          at(jeepCounter)->get_width(),
+                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_045).
+                          at(jeepCounter)->get_height());
+    cr->fill();
+
+    /* update counters */
+    if (tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1){
+        tireCounter = 0;
+    }else{
+        tireCounter++;
+    }
+
+    if (jeepCounter ==
+            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_045).size()-1){
+        jeepCounter = 0;
+    }else{
+        jeepCounter++;
+    }
+    /* end update counter section */
+
+    cr->restore();
+}
