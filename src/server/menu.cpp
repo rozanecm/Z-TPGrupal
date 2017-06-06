@@ -8,9 +8,10 @@ Menu::Menu(std::mutex& m) : m(m),lobby_counter(0) {}
 
 void Menu::addPlayer(Messenger *msgr, Menu& menu) {
     Lock l(m);
-    std::string player_id = msgr->recieveMessage();
-    this->players.push_back(new Player(player_id,msgr,menu));
-    this->players.back()->run();
+//    std::string player_id = msgr->recieveMessage();
+    this->players.push_back(new Player(msgr,menu));
+    this->players.back()->start();
+    std::cout << "new player en menu" << std::endl;
 }
 
 void Menu::createNewLobby(Player* player) {

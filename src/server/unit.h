@@ -8,16 +8,16 @@
 #include "Occupant.h"
 #include "compass.h"
 #include "teamable.h"
-//#include "map.h"
+#include "bullet.h"
+
 #define ATKSTATE "atk"
 #define MOVESTATE "mv"
 #define STANDINGSTATE "std"
 #define FLAGTYPE "Flag"
 #define GRUNTTYPE "Grunt"
-class Map;
 
 
-class Unit: public Occupant, public Teamable {
+class Unit: public Occupant {
 private:
     Compass compass;
     int unit_speed;
@@ -25,12 +25,16 @@ private:
     // is standing still
     std::string state;
     Size range;
-    Map map;
     std::vector<Position>* road;
+    Occupant& target;
 
 public:
-    Unit(int id, int life, std::string type, int unit_speed, Size size, Size range,
-                                                                Map& map);
+    Unit(int id, int life, std::string type, int unit_speed, Size size,
+         Size range, Compass& compass);
+
+    Unit(const Unit& other);
+
+//    Unit& operator=(const Unit& other);
 
     void makeAction();
 
@@ -50,7 +54,11 @@ public:
 
     void grab(Teamable* object, std::string type);
 
-    //void attack(Occupable)-> make check is i have explosive attack for buildings
+    void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
+
+    void attack();
+
+    std::vector<Bullet> collectBullets();
 };
 
 

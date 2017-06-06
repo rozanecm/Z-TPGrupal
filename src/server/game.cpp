@@ -5,11 +5,16 @@
 #include "game.h"
 
 // get terrain map from map loader
-Game::Game(std::vector<Messenger*> players, int x, int y, int size, int height,
-           std::vector<std::vector<Cell>> terrain_map) : players(players),
-                                   control(players), map(5,5,9,9,terrain_map){}
+Game::Game(std::vector<Messenger*> players, Map& map,
+           std::vector<Unit> units) : players(players),
+           control(players,units,map.getOccupants()),
+           map(map){}
 
-void Game::startGame() {
+void Game::run() {
     control.run();
+}
+
+void Game::addBuildings(std::vector<Occupant> buildings) {
+
 }
 

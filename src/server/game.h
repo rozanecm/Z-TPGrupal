@@ -11,17 +11,21 @@
 #include "player.h"
 class ControlUnit;
 
-class Game {
+class Game: public Thread {
 private:
     std::vector<Messenger*> players;
     ControlUnit control;
     Map map;
+//    std::vector<Unit>& all_units;
+//    std::vector<Occupant>& all_occupants;
 
 public:
-    Game(std::vector<Messenger*> players, int x, int y, int size, int height,
-         std::vector<std::vector<Cell>> terrain_map);
+    Game(std::vector<Messenger*> players, Map& map,
+         std::vector<Unit> units);
 
-    void startGame();
+    void addBuildings(std::vector<Occupant> buildings);
+
+    void run();
 };
 
 

@@ -30,6 +30,8 @@ public:
 
     // Returns true if is there a collision with the object
     bool isThereACollision(Size& size);
+
+    Size getSize();
 };
 
 

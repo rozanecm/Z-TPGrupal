@@ -23,7 +23,7 @@ public:
     Weapon(std::string type, int damage, int w_speed, bool explosive,
                                                         Size w_size);
 
-    void shotTarget(Occupant* target);
+    void shotTarget(Occupant& target);
 
     bool isTheAttackExplosive();
 
