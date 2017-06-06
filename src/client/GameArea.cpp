@@ -8849,9 +8849,7 @@ void GameArea::drawYellowMml045(const Cairo::RefPtr<Cairo::Context> &cr,
                                  unsigned int xCoordinate,
                                  unsigned int yCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr,
-                                  vehicleBases.
-                                          at(TeamEnum::YELLOW).
+    Gdk::Cairo::set_source_pixbuf(cr, vehicleBases.at(TeamEnum::YELLOW).
                                           at(UnitsEnum::MML_045).
                                           at(mmlCounter),
                                   xCoordinate, yCoordinate);
