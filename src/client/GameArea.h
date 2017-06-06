@@ -270,7 +270,7 @@ private:
     void drawRedLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
-    void drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+    void drawRedLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     /* YELLOW LIGHT TANK DRAWING */
@@ -295,7 +295,7 @@ private:
     void drawYellowLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
-    void drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+    void drawYellowLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
     /* Event handling methods */
