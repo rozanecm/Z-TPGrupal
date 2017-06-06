@@ -273,6 +273,31 @@ private:
     void drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                          unsigned int xCoordinate, unsigned int yCoordinate);
 
+    /* YELLOW LIGHT TANK DRAWING */
+    void drawYellowLightTank000(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank045(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank090(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank135(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank180(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank225(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawYellowLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
+                         unsigned int xCoordinate, unsigned int yCoordinate);
+
     /* Event handling methods */
     bool on_key_press_event(GdkEventKey *event) override;
 
