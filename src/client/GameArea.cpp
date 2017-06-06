@@ -220,15 +220,24 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
 }
 
 void GameArea::processSelection() {
-    //todo processing logic, correct coordinates logic
+    //todo processing logic
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
-    playersMonitor->markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                         xFinishCoordinate, yFinishCoordinate);
-    buildingsMonitor->markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                          xFinishCoordinate, yFinishCoordinate);
-    mapMonitor->markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                     xFinishCoordinate, yFinishCoordinate);
+    playersMonitor->markAsSelectedInRange(
+            xStartCoordinate + camera.cameraOffset().first,
+            yStartCoordinate + camera.cameraOffset().second,
+            xFinishCoordinate + camera.cameraOffset().first,
+            yFinishCoordinate + camera.cameraOffset().second);
+    buildingsMonitor->markAsSelectedInRange(
+            xStartCoordinate + camera.cameraOffset().first,
+            yStartCoordinate + camera.cameraOffset().second,
+            xFinishCoordinate + camera.cameraOffset().first,
+            yFinishCoordinate + camera.cameraOffset().second);
+    mapMonitor->markAsSelectedInRange(
+            xStartCoordinate + camera.cameraOffset().first,
+            yStartCoordinate + camera.cameraOffset().second,
+            xFinishCoordinate + camera.cameraOffset().first,
+            yFinishCoordinate + camera.cameraOffset().second);
     selectionMade = false;
 }
 
@@ -4287,4 +4296,3 @@ void GameArea::loadYellowHeavyTankAnimations() {
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n02.png"));
 }
-
