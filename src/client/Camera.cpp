@@ -55,3 +55,9 @@ void Camera::moveLeft() {
         position.first -= tileSize;
     }
 }
+
+std::pair<unsigned int, unsigned int> Camera::cameraOffset() {
+    return std::pair<unsigned int, unsigned int>
+            (position.first - numberOfTilesToShow * tileSize / 2,
+             position.second - numberOfTilesToShow * tileSize / 2);
+}

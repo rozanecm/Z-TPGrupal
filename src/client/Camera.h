@@ -24,6 +24,8 @@ public:
 
     void moveRight();
 
+    std::pair<unsigned int, unsigned int> cameraOffset();
+
 private:
     /* save tile size in pixels so calculations on max and min coord.
      * can be done */
