@@ -80,7 +80,6 @@ Position Unit::getCurrentPosition() const {
     return this->obj_size.getPosition();
 }
 
-
 void Unit::grab(Teamable* object, std::string u_type) {
     // move to position
     if (u_type == FLAGTYPE) {
@@ -96,6 +95,10 @@ void Unit::grab(Teamable* object, std::string u_type) {
 void Unit::setTargetToAttack(Occupant &target) {
     this->state == ATKSTATE;
     this->target = target;
+}
+
+std::vector<Bullet> Unit::collectBullets() {
+    return std::vector<Bullet>();
 }
 
 

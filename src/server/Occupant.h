@@ -17,6 +17,9 @@ public:
     // Constructor for Occupant on a specific position saved in Size and it's id
     Occupant(int id, int life, std::string type, Size occ_size);
 
+    // Meant to create a null Occupant
+    Occupant();
+
     // Returns the id of the object
     std::string getType() const;
 

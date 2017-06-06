@@ -8,6 +8,8 @@
 #include "Occupant.h"
 #include "compass.h"
 #include "teamable.h"
+#include "bullet.h"
+
 #define ATKSTATE "atk"
 #define MOVESTATE "mv"
 #define STANDINGSTATE "std"
@@ -51,6 +53,8 @@ public:
     void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
 
     void attack();
+
+    std::vector<Bullet> collectBullets();
 };
 
 
