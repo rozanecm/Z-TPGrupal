@@ -3196,7 +3196,6 @@ void GameArea::loadNeuterJeepAnimations() {
     vehicleBases.operator[](TeamEnum::NEUTER)[UnitsEnum::JEEP_315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r315.png"));
-
 }
 
 void GameArea::loadBlueVehiclesAnimations() {
@@ -5771,9 +5770,11 @@ void GameArea::drawGreenLightTank000(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5797,9 +5798,11 @@ void GameArea::drawGreenLightTank045(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5823,9 +5826,11 @@ void GameArea::drawGreenLightTank090(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5849,9 +5854,11 @@ void GameArea::drawGreenLightTank135(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5875,9 +5882,11 @@ void GameArea::drawGreenLightTank180(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5901,9 +5910,11 @@ void GameArea::drawGreenLightTank225(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5927,9 +5938,11 @@ void GameArea::drawGreenLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -5953,9 +5966,11 @@ void GameArea::drawGreenLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6189,9 +6204,11 @@ void GameArea::drawYellowLightTank000(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6215,9 +6232,11 @@ void GameArea::drawYellowLightTank045(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6241,9 +6260,11 @@ void GameArea::drawYellowLightTank090(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6267,9 +6288,11 @@ void GameArea::drawYellowLightTank135(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6293,9 +6316,11 @@ void GameArea::drawYellowLightTank180(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_000).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_000).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6319,9 +6344,11 @@ void GameArea::drawYellowLightTank225(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_045).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_045).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6345,9 +6372,11 @@ void GameArea::drawYellowLightTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_090).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_090).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6371,9 +6400,11 @@ void GameArea::drawYellowLightTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(lightTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::LIGHT_TANK_315).
+                  vehicleBases.at(TeamEnum::YELLOW).
+                          at(UnitsEnum::LIGHT_TANK_315).
                           at(lightTankCounter)->get_height());
     cr->fill();
 
@@ -6399,9 +6430,11 @@ void GameArea::drawBlueMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6425,9 +6458,11 @@ void GameArea::drawBlueMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6451,9 +6486,11 @@ void GameArea::drawBlueMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6477,9 +6514,11 @@ void GameArea::drawBlueMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6503,9 +6542,11 @@ void GameArea::drawBlueMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6529,9 +6570,11 @@ void GameArea::drawBlueMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6555,9 +6598,11 @@ void GameArea::drawBlueMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6581,9 +6626,11 @@ void GameArea::drawBlueMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::BLUE).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6608,9 +6655,11 @@ void GameArea::drawGreenMediumTank000(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6634,9 +6683,11 @@ void GameArea::drawGreenMediumTank045(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6660,9 +6711,11 @@ void GameArea::drawGreenMediumTank090(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6686,9 +6739,11 @@ void GameArea::drawGreenMediumTank135(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6712,9 +6767,11 @@ void GameArea::drawGreenMediumTank180(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_000).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6738,9 +6795,11 @@ void GameArea::drawGreenMediumTank225(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_045).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6764,9 +6823,11 @@ void GameArea::drawGreenMediumTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_090).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -6790,9 +6851,11 @@ void GameArea::drawGreenMediumTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(mediumTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::MEDIUM_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::MEDIUM_TANK_315).
                           at(mediumTankCounter)->get_height());
     cr->fill();
 
@@ -7471,9 +7534,11 @@ void GameArea::drawGreenHeavyTank000(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_000).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_000).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7497,9 +7562,11 @@ void GameArea::drawGreenHeavyTank045(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_045).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_045).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7523,9 +7590,11 @@ void GameArea::drawGreenHeavyTank090(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_090).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_090).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7549,9 +7618,11 @@ void GameArea::drawGreenHeavyTank135(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_315).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_315).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7575,9 +7646,11 @@ void GameArea::drawGreenHeavyTank180(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_000).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_000).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_000).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7601,9 +7674,11 @@ void GameArea::drawGreenHeavyTank225(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_045).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_045).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_045).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7627,9 +7702,11 @@ void GameArea::drawGreenHeavyTank270(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_090).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_090).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_090).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
@@ -7653,9 +7730,11 @@ void GameArea::drawGreenHeavyTank315(const Cairo::RefPtr<Cairo::Context> &cr,
                                           at(heavyTankCounter),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_315).
                           at(heavyTankCounter)->get_width(),
-                  vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::HEAVY_TANK_315).
+                  vehicleBases.at(TeamEnum::GREEN).
+                          at(UnitsEnum::HEAVY_TANK_315).
                           at(heavyTankCounter)->get_height());
     cr->fill();
 
