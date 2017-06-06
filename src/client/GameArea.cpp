@@ -4322,18 +4322,12 @@ void GameArea::drawBlueJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_000).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_000).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4367,18 +4361,12 @@ void GameArea::drawBlueJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_045).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_045).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4412,18 +4400,12 @@ void GameArea::drawBlueJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_090).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_090).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4457,18 +4439,12 @@ void GameArea::drawBlueJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_135).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_135).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4502,18 +4478,12 @@ void GameArea::drawBlueJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_180).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_180).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4547,18 +4517,12 @@ void GameArea::drawBlueJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_225).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_225).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4592,18 +4556,12 @@ void GameArea::drawBlueJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_270).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_270).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4637,18 +4595,12 @@ void GameArea::drawBlueJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_315).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::BLUE).at(UnitsEnum::JEEP_315).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4683,18 +4635,12 @@ void GameArea::drawGreenJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_000).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_000).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4728,18 +4674,12 @@ void GameArea::drawGreenJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_045).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_045).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4773,18 +4713,12 @@ void GameArea::drawGreenJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_090).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_090).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4818,18 +4752,12 @@ void GameArea::drawGreenJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_135).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_135).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4863,18 +4791,12 @@ void GameArea::drawGreenJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_180).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_180).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4908,18 +4830,12 @@ void GameArea::drawGreenJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_225).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_225).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4953,18 +4869,12 @@ void GameArea::drawGreenJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_270).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_270).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -4998,18 +4908,12 @@ void GameArea::drawGreenJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_315).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::GREEN).at(UnitsEnum::JEEP_315).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5044,18 +4948,12 @@ void GameArea::drawRedJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_000).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_000).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5089,18 +4987,12 @@ void GameArea::drawRedJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_045).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_045).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5134,18 +5026,12 @@ void GameArea::drawRedJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_090).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_090).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5179,18 +5065,12 @@ void GameArea::drawRedJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_135).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_135).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5224,18 +5104,12 @@ void GameArea::drawRedJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_180).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_180).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5269,18 +5143,12 @@ void GameArea::drawRedJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_225).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_225).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5314,18 +5182,12 @@ void GameArea::drawRedJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_270).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_270).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5359,18 +5221,12 @@ void GameArea::drawRedJeep315(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_315).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_315).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::RED).at(UnitsEnum::JEEP_315).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5405,18 +5261,12 @@ void GameArea::drawYellowJeep000(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_000).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_000).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_000).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5450,18 +5300,12 @@ void GameArea::drawYellowJeep045(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_045).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_045).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_045).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5495,18 +5339,12 @@ void GameArea::drawYellowJeep090(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_090).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_090).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_090).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5540,18 +5378,12 @@ void GameArea::drawYellowJeep135(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_135).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_135).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_135).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5585,18 +5417,12 @@ void GameArea::drawYellowJeep180(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_180).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_180).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_180).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5630,18 +5456,12 @@ void GameArea::drawYellowJeep225(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_225).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_225).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_225).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
@@ -5675,18 +5495,12 @@ void GameArea::drawYellowJeep270(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->fill();
 
     /* update counters */
-    if (tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1){
-        tireCounter = 0;
-    }else{
-        tireCounter++;
-    }
+    tireCounter == tires.at(UnitsEnum::JEEP_270).size()-1 ? (tireCounter = 0)
+                                                          : (tireCounter++);
 
-    if (jeepCounter ==
-            vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_270).size()-1){
-        jeepCounter = 0;
-    }else{
-        jeepCounter++;
-    }
+    jeepCounter ==
+        vehicleBases.at(TeamEnum::YELLOW).at(UnitsEnum::JEEP_270).size()-1
+    ? (jeepCounter = 0) : (jeepCounter++);
     /* end update counter section */
 
     cr->restore();
