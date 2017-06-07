@@ -31,7 +31,6 @@ public:
     void finish();
 
 private:
-
     /* Loads commands */
     void initCommands();
 
