@@ -63,6 +63,8 @@ public:
     bool thereIsABridge(Size& other_size);
 
     std::vector<Occupant>& getOccupants();
+    
+    std::string& get_map();
 };
 
 

@@ -117,6 +117,10 @@ std::vector<Occupant> &Map::getOccupants() {
     return all_occupants;
 }
 
+std::string &Map::get_map() {
+    return xml;
+}
+
 //void Map::addUnits(std::vector<Unit> &all_units) {
 //    this->all_units = all_units;
 //}
