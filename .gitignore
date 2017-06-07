@@ -41,6 +41,7 @@ cmake*
 src/client/Makefile
 src/server/Makefile
 src/generator/Makefile
+src/common/Makefile
 Z_Client
 Z_Server
 Z_Generator
