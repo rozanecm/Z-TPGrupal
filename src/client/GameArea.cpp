@@ -63,6 +63,10 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                            cameraPosition) {
     /* cameraPosition is given in pixels.
      * i,j indicate TILES. */
+    if (mapMonitor->getXSize() == 0 and mapMonitor->getYSize() == 0){
+        return;
+    }
+    
     for (unsigned int i = 0; i < NUMBER_OF_TILES_TO_SHOW; ++i){
         for (unsigned int j = 0; j < NUMBER_OF_TILES_TO_SHOW; ++j){
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(
@@ -77,7 +81,11 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           unsigned int xCoordinate, unsigned int yCoordinate,
                           std::string terrainType) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, tiles.at(terrainType),
+    auto pixbuf = tiles.find(terrainType);
+    if(pixbuf == tiles.end()) {
+        return;
+    }
+    Gdk::Cairo::set_source_pixbuf(cr, pixbuf->second,
                                   xCoordinate*get_width()/
                                   NUMBER_OF_TILES_TO_SHOW,
                                   yCoordinate*get_height()/
