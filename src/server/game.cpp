@@ -11,6 +11,11 @@ Game::Game(std::vector<Messenger*> players, Map& map,
            map(map){}
 
 void Game::run() {
+    std::string& map_str = map.get_map();
+    for(auto& player : players) {
+        std::cout << "Sending map to players" << std::endl;
+        player->sendMessage(map_str);
+    }
     control.run();
 }
 
