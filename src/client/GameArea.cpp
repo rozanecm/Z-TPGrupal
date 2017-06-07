@@ -66,7 +66,7 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
     if (mapMonitor->getXSize() == 0 and mapMonitor->getYSize() == 0){
         return;
     }
-    
+
     for (unsigned int i = 0; i < NUMBER_OF_TILES_TO_SHOW; ++i){
         for (unsigned int j = 0; j < NUMBER_OF_TILES_TO_SHOW; ++j){
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(
