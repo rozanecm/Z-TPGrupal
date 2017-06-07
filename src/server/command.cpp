@@ -4,8 +4,8 @@
 
 #include "command.h"
 
-Command::Command(std::string& cmd, ControlUnit* control) : cmd(cmd),
-                                                           control(control) {}
+Command::Command(std::string id,std::string& cmd, ControlUnit* control) :
+        player_id(id), cmd(cmd), control(control) {}
 
 void Command::run() {
     std::string action = getNextData(cmd);
@@ -20,7 +20,10 @@ void Command::run() {
         int y = std::stoi(y_str);
         // make move
         control->cmdMoveUnit(id,x,y);
-    } else if (action == "atck") {
+    } else if (action == "atk") {
+        std::string id_str = getNextData(cmd);
+        int id = std::stoi(id_str);
+//        control
     } else if (action == "grab") {
     }
 }

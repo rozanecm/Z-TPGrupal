@@ -29,9 +29,9 @@ private:
     Menu& menu;
 
 public:
-    Player(std::string id, Messenger* messenger, ControlUnit* control, Menu& menu);
+    Player(Messenger* messenger, ControlUnit* control, Menu& menu);
 
-    Player(std::string id, Messenger* messenger, Menu& menu);
+    Player(Messenger* messenger, Menu& menu);
 
     void run();
 

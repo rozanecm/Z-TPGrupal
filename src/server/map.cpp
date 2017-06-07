@@ -5,12 +5,15 @@
 #include "map.h"
 
 Map::Map(int x, int y, int width, int height,
-   std::vector<std::vector<Cell>>& terrain_map) : map_size(x,y,width,height),
-    terrain_map(terrain_map){}
+   std::vector<std::vector<Cell>>& terrain_map,
+         std::vector<Occupant>& occupants,
+         std::string& xml) : map_size(x,y,width,height),
+    terrain_map(terrain_map), all_occupants(occupants), xml(xml)
+{}
 
-void Map::addOccupant(Occupant *new_occupant) {
-    all_occupants.push_back(new_occupant);
-}
+//void Map::addOccupant(Occupant *new_occupant) {
+//    all_occupants.push_back(new_occupant);
+//}
 
 double Map::getTerrainFactorOn(int x, int y) {
     int w_cell = terrain_map[0][0].getWidthOfCell();
@@ -31,7 +34,7 @@ std::string Map::getTerrainType(int x, int y) {
 bool Map::areThisPointsEmpty(Size& size) {
     bool no_collision = true;
     for(auto x: all_occupants) {
-        if(x->isThereACollision(size) && x->getType() != "Bridge") {
+        if(x.isThereACollision(size) && x.getType() != "Bridge") {
             no_collision = false;
             break;
         }
@@ -98,13 +101,29 @@ bool Map::isThereLava(Size& other_size) {
 bool Map::thereIsABridge(Size& other_size) {
     bool bridge = false;
     for(auto x: all_occupants) {
-        if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
+        if(x.isThereACollision(other_size) && x.getType() == "Bridge") {
             bridge = true;
             break;
         }
     }
     return bridge;
 }
+
+void Map::addOccupants(std::vector<Occupant> &all_occupants) {
+    this->all_occupants = all_occupants;
+}
+
+std::vector<Occupant> &Map::getOccupants() {
+    return all_occupants;
+}
+
+std::string &Map::get_map() {
+    return xml;
+}
+
+//void Map::addUnits(std::vector<Unit> &all_units) {
+//    this->all_units = all_units;
+//}
 
 
 

@@ -8,6 +8,7 @@
 
 #include "player.h"
 #include "game.h"
+#include "MapLoader.h"
 class Player;
 
 class Lobby {
