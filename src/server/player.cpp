@@ -46,14 +46,14 @@ void Player::addLobby(Lobby* lobby) {
 }
 
 void Player::processMenuCommands(std::string &cmd) {
-    if (cmd == "create lobby") {
+    if (cmd == "create-lobby") {
         this->menu.createNewLobby(this);
         on_menu = false;
     }
 }
 
 void Player::processLobbyCommands(std::string &cmd) {
-    if (cmd == "start game") {
+    if (cmd == "start-game") {
         this->lobby->startGame();
         on_lobby = false;
     }

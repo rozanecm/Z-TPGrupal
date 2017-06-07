@@ -7,7 +7,7 @@
 
 
 ControlUnit::ControlUnit(std::vector<Messenger*>& new_players,
-                         std::vector<Unit>& all_units,
+                         std::map<int,Unit>& all_units,
                          std::vector<Occupant>& all_occupants) :
     all_units(all_units), all_occupants(all_occupants), players(new_players),
     winning(false) {
@@ -51,33 +51,17 @@ void ControlUnit::sleepFor(double msec) {
 }
 
 void ControlUnit::unitsMakeMicroAction() {
-    std::vector<Unit> alive_units;
     for (auto x: all_units){
-        Unit y = x;
-        x.makeAction();
-        if (differenceOnUnits(x,y)) {
-            changed_units->push_back(x);
+        Unit y = x.second;
+        x.second.makeAction();
+        if (differenceOnUnits(x.second,y)) {
+            changed_units->push_back(x.second);
         }
-        if (x.areYouAlive()) {
-            alive_units.push_back(x);
+        if (!x.second.areYouAlive()) {
+            all_units.erase(x.first);
         }
 
     }
-    // Only keep alive Units
-    if (alive_units.size() != all_units.size()) {
-        all_units.swap(alive_units);
-    }
-    /////
-//    std::vector<Unit>::iterator it = all_units.begin();
-//    for(;it != all_units.end();){
-//        if(!it->areYouAlive()) {
-//            //erase it from map
-//            it = all_units.erase(it);
-//            // if building put ruins
-//        } else {
-//            ++it;
-//        }
-//    }
 }
 
 
@@ -107,16 +91,19 @@ void ControlUnit::checkAllLivingOccupants() {
 }
 
 void ControlUnit::cmdMoveUnit(int id, int x, int y) {
-    bool found = false;
-    Unit selected_unit = all_units.front();
-    std::vector<Unit>::iterator it = all_units.begin();
-    while (it != all_units.end() && !found) {
-        if (it->getId() == id) {
-            (*it).calculateRoadTo(x, y);
-            found = true;
-        }
-        ++it;
-    }
+    std::map<int,Unit>::iterator it;
+    it = all_units.find(id);
+    (*it).second.calculateRoadTo(x,y);
+//    bool found = false;
+//    Unit selected_unit = all_units.front();
+//    std::vector<Unit>::iterator it = all_units.begin();
+//    while (it != all_units.end() && !found) {
+//        if (it->getId() == id) {
+//            (*it).calculateRoadTo(x, y);
+//            found = true;
+//        }
+//        ++it;
+//    }
 }
 
 void ControlUnit::executeCommands() {
@@ -188,26 +175,40 @@ std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
 
 void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
                             int target) {
-    bool found = false;
-    Unit selected_unit = all_units.front();
-    std::vector<Unit>::iterator it = all_units.begin();
-    while (it != all_units.end() && !found) {
-        if (it->getId() == id_unit) {
-            if (it->getTeam() != attacker_team) {
-                found = true;
-            } else {
-                // if unit's is form the players team
-                // look for target
-                for (auto z: all_occupants) {
-                    if (z.getId() == target) {
-                        if (z.getTeam() != attacker_team) {
-                            //attack z
-                        }
-                        break;
-                    }
+    std::map<int,Unit>::iterator it;
+    it = all_units.find(id_unit);
+    Unit selected_unit = (*it).second;
+    if (selected_unit.getTeam() == attacker_team) {
+        for (auto z: all_occupants) {
+            if (z.getId() == target) {
+                if (z.getTeam() != attacker_team) {
+                    //attack z
+                    // }
+                    break;
                 }
             }
         }
-        ++it;
     }
+//    bool found = false;
+//    Unit selected_unit = all_units.front();
+//    std::vector<Unit>::iterator it = all_units.begin();
+//    while (it != all_units.end() && !found) {
+//        if (it->getId() == id_unit) {
+//            if (it->getTeam() != attacker_team) {
+//                found = true;
+//            } else {
+//                // if unit's is form the players team
+//                // look for target
+//                for (auto z: all_occupants) {
+//                    if (z.getId() == target) {
+//                        if (z.getTeam() != attacker_team) {
+//                            //attack z
+//                        }
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        ++it;
+//    }
 }

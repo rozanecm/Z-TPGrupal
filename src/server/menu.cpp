@@ -20,6 +20,7 @@ void Menu::createNewLobby(Player* player) {
     lobbys.emplace_back(new_lobby);
     lobbys.back()->addPlayer(player);
     player->addLobby(new_lobby);
+    player->getMessenger()->sendMessage("New Lobby created");
 }
 
 std::string Menu::getLobbiesInfo() {

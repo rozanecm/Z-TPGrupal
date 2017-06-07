@@ -21,7 +21,7 @@ private:
 
 public:
     Game(std::vector<Messenger*> players, Map& map,
-         std::vector<Unit> units);
+         std::map<int,Unit>& units);
 
     void addBuildings(std::vector<Occupant> buildings);
 

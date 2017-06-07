@@ -5,9 +5,10 @@
 #include "unit.h"
 
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
-          Size range, Compass& compass) : Occupant(id,life, type, size),
-          compass(compass), unit_speed(unit_speed), state(STANDINGSTATE),
-            range(range), target(*this) {}
+           Size range, Compass &compass, Weapon &weapon) :
+        Occupant(id, life, type, size), compass(compass), weapon(weapon),
+        unit_speed(unit_speed), state(STANDINGSTATE),
+        range(range), target(*this) {}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
@@ -102,8 +103,8 @@ std::vector<Bullet> Unit::collectBullets() {
 }
 
 
-Unit::Unit(const Unit &other) : compass(other.compass), unit_speed(other.unit_speed),
-state(other.state), range(other.range), road(other.road), target(other.target){}
+//Unit::Unit(const Unit &other) : compass(other.compass), unit_speed(other.unit_speed),
+//state(other.state), range(other.range), road(other.road), target(other.target){}
 
 //Unit &Unit::operator=(const Unit &other) {
 //    return ;
