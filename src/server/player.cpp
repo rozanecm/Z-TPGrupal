@@ -21,7 +21,6 @@ void Player::run() {
         if (on_menu) {
             processMenuCommands(new_cmd);
         }else if (on_lobby) {
-            std::cout << "Entre on lobby commands" << std::endl;
             processLobbyCommands(new_cmd);
         } else if (playing) {
             cmds.push_back(new Command(this->id,new_cmd,control));

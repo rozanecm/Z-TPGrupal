@@ -3,7 +3,7 @@
 //
 
 #include "lobby.h"
-#define PATH "map.xml"
+#define PATH "../../maps/map.xml"
 
 Lobby::Lobby(int id) : lobby_id(id), all_ready(false) {}
 
