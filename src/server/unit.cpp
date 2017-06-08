@@ -18,9 +18,23 @@ void Unit::makeAction() {
     }
     if (this->state == MOVESTATE) {
         this->move();
+        if (road->empty())
+            this->state = STANDINGSTATE;
     }
     if (this->state == ATKSTATE) {
-        //attack();
+        if (checkIfTargetIsOnRange()) {
+            if (!road->empty())
+                road->clear();
+            attack();
+        } else {
+            // If target is not on range move till it is
+            // calculate road to target
+            if (road->empty()) {
+                Position trg_pos = target.getPosition();
+                getOnRangeOf(trg_pos.getX(), trg_pos.getY());
+            }
+            move();
+        }
     }
 }
 
@@ -30,10 +44,15 @@ void Unit::calculateRoadTo(int x, int y) {
     road = compass.getFastestWay(obj_size.getPosition(),destination);
 }
 
+void Unit::getOnRangeOf(int x, int y) {
+    Position destination(x,y);
+    road = compass.getFastestWay(obj_size.getPosition(),destination);
+}
+
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (this->state == MOVESTATE && !road->empty() && steps <= distance){
+    while (!road->empty() && steps <= distance){
         Position pos = road->back();
         Size next_pos(pos.getX(),pos.getY(),obj_size.getWidth()
                                                         ,obj_size.getHeight());
@@ -56,21 +75,11 @@ void Unit::move() {
             this->move();
         }
     }
-
-    if (road->empty())
-        this->state = STANDINGSTATE;
 }
 
 void Unit::attack() {
-    //check if target it's on range
-    Size trg_size = target.getSize();
-    if (range.isThereACollision(trg_size)) {
-        // make a shot
-    } else {
-        road = compass.getFastestWay(obj_size.getPosition(),
-                                     target.getPosition());
-        move();
-    }
+    // make a shot
+    bullets.push_back(weapon.shotTarget(target));
 }
 
 std::string Unit::getState() const {
@@ -96,10 +105,38 @@ void Unit::grab(Teamable* object, std::string u_type) {
 void Unit::setTargetToAttack(Occupant &target) {
     this->state == ATKSTATE;
     this->target = target;
+    // clean bullets on weapon when a new target is set
+    this->weapon.setNewTarget(target);
 }
 
 std::vector<Bullet> Unit::collectBullets() {
     return std::vector<Bullet>();
+}
+
+bool Unit::checkIfTargetIsOnRange() {
+    bool on_range = true;
+    Size trg_size = target.getSize();
+    if (!range.isThereACollision(trg_size))
+        on_range = false;
+    else {
+        weapon.recalculateRoadToTarget();
+        std::vector<Position> * bullet_road = weapon.getBulletRoad();
+        Size b_size = weapon.getBulletSize();
+        if (!checkIfBulletWillHit(bullet_road,b_size))
+            on_range = false;
+    }
+
+    return on_range;
+}
+
+bool Unit::checkIfBulletWillHit(std::vector<Position> *b_road, Size &b_size) {
+    bool will_hit = true;
+    for (auto x: *b_road) {
+        b_size.moveTo(x.getX(),x.getY());
+        if (!compass.canBulletWalkToThisPosition(b_size,target))
+            will_hit = false;
+    }
+    return will_hit;
 }
 
 

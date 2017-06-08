@@ -64,10 +64,27 @@ Size Bullet::getSize() {
 }
 
 void Bullet::move() {
-
+    // cause target might be moving, recalculate road and then move
+    calculateRoadToTarget();
+    int distance = w_speed;
+    int steps = 0;
+    while (!road->empty() && steps <= distance){
+        Position pos = road->back();
+        this->w_size.moveTo(pos.getX(),pos.getY());
+        road->pop_back();
+        ++steps;
+    }
 }
 
 Position Bullet::calculateNextInvertPosition(double a, double b, int y) {
     double temp_x = a * y + b;
     return Position((int) temp_x, y);
+}
+
+bool Bullet::isRoadEmpty() {
+    return road->empty();
+}
+
+std::vector<Position> *Bullet::getRoad() {
+    return road;
 }

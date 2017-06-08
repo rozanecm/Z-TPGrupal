@@ -29,6 +29,7 @@ private:
     Size range;
     std::vector<Position>* road;
     Occupant& target;
+    std::vector<Bullet*> bullets;
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
@@ -61,6 +62,14 @@ public:
     void attack();
 
     std::vector<Bullet> collectBullets();
+
+    bool checkIfTargetIsOnRange();
+
+    // The bullet will hit if there is no Occupant in the middle.
+    // except for bridges
+    bool checkIfBulletWillHit(std::vector<Position> *b_road, Size& b_size);
+
+    void getOnRangeOf(int x, int y);
 };
 
 

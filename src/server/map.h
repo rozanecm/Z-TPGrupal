@@ -43,12 +43,20 @@ public:
     // Returns the name of the type of Terrain
     std::string getTerrainType(int x, int y);
 
-    // not implemented yet
+    // Returns true if the points are empty
     bool areThisPointsEmpty(Size& size);
+
+    // Returns true if points are empty or it is the Occupant
+    bool areThisPointsEmpty(Size& size, Occupant& occupant);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position
     bool canIWalkToThisPosition(Size& size);
+
+    // Recieves the size of an object on the position that wants to be walk
+    // Returns true if the object fits and can step to that position ignoring
+    // the occupant from parameter
+    bool canBulletWalkToThisPosition(Size& size, Occupant& other);
 
     // Returns the width of the map
     int getWidth();

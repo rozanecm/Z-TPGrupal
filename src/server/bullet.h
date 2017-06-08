@@ -37,6 +37,10 @@ public:
     Position calculateNextInvertPosition(double a,double b,int y);
 
     Size getSize();
+
+    bool isRoadEmpty();
+
+    std::vector<Position>* getRoad();
 };
 
 

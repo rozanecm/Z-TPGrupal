@@ -42,6 +42,18 @@ bool Map::areThisPointsEmpty(Size& size) {
     return no_collision;
 }
 
+bool Map::areThisPointsEmpty(Size &size, Occupant &occupant) {
+    bool no_collision = true;
+    for(auto x: all_occupants) {
+        if(x.getId() != occupant.getId() && x.isThereACollision(size)
+           && x.getType() != "Bridge") {
+            no_collision = false;
+            break;
+        }
+    }
+    return no_collision;
+}
+
 int Map::getWidth() {
     return map_size.getWidth();
 }
@@ -63,6 +75,20 @@ bool Map::canIWalkToThisPosition(Size& other_size) {
             you_can = true;
     }
     if (!areThisPointsEmpty(other_size)) {
+        you_can = false;
+    }
+
+    return (you_can);
+}
+
+bool Map::canBulletWalkToThisPosition(Size &other_size, Occupant &target) {
+    bool you_can = true;
+
+    // if the object is stepping out of the map
+    if (map_size.areYouHalfOutSide(other_size))
+        you_can = false;
+
+    if (!areThisPointsEmpty(other_size,target)) {
         you_can = false;
     }
 
@@ -120,6 +146,8 @@ std::vector<Occupant> &Map::getOccupants() {
 std::string &Map::get_map() {
     return xml;
 }
+
+
 
 //void Map::addUnits(std::vector<Unit> &all_units) {
 //    this->all_units = all_units;
