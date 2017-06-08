@@ -32,6 +32,7 @@ void ControlUnit::run() {
 
         // do stuff
         this->unitsMakeMicroAction();
+        this->moveAllBullets();
         this->checkAllLivingOccupants();
 
         //send update message
@@ -59,8 +60,10 @@ void ControlUnit::unitsMakeMicroAction() {
         }
         if (!x.second.areYouAlive()) {
             all_units.erase(x.first);
+        } else {
+            std::vector<Bullet*> tmp = x.second.collectBullets();
+            all_bullets.insert(all_bullets.end(),tmp.begin(),tmp.end());
         }
-
     }
 }
 
@@ -211,4 +214,10 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
 //        }
 //        ++it;
 //    }
+}
+
+void ControlUnit::moveAllBullets() {
+    for (auto b: all_bullets) {
+        b->move();
+    }
 }
