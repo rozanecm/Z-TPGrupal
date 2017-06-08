@@ -217,7 +217,13 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
 }
 
 void ControlUnit::moveAllBullets() {
-    for (auto b: all_bullets) {
-        b->move();
+    std::vector<Bullet*>::iterator it = all_bullets.begin();
+    for (; it != all_bullets.end();) {
+        (*it)->move();
+        if ((*it)->didHit()) {
+            it = all_bullets.erase(it);
+        } else {
+            ++it;
+        }
     }
 }

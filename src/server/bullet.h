@@ -41,6 +41,8 @@ public:
     bool isRoadEmpty();
 
     std::vector<Position>* getRoad();
+
+    void damageThis(Occupant& occupant);
 };
 
 

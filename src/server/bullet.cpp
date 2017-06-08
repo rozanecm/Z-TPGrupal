@@ -64,20 +64,24 @@ Size Bullet::getSize() {
 }
 
 void Bullet::move() {
-    // cause target might be moving, recalculate road and then move
-    calculateRoadToTarget();
-    int distance = w_speed;
-    int steps = 0;
-    while (!road->empty() && steps <= distance){
-        Position pos = road->back();
-        this->w_size.moveTo(pos.getX(),pos.getY());
-        road->pop_back();
-        ++steps;
+    if (!hit) {
+        // cause target might be moving, recalculate road and then move
+        calculateRoadToTarget();
+        int distance = w_speed;
+        int steps = 0;
+        while (!road->empty() && steps <= distance) {
+            Position pos = road->back();
+            this->w_size.moveTo(pos.getX(), pos.getY());
+            road->pop_back();
+            ++steps;
+        }
+        // If you get the target, inflict damage
+        Size targ_size = target.getSize();
+        if (this->w_size.isThereACollision(targ_size)) {
+            target.reduceLifeBy(damage);
+            hit = true;
+        }
     }
-    // If you get the target, inflict damage
-    Size targ_size = target.getSize();
-    if (this->w_size.isThereACollision(targ_size))
-        target.reduceLifeBy(damage);
 }
 
 Position Bullet::calculateNextInvertPosition(double a, double b, int y) {
@@ -91,4 +95,9 @@ bool Bullet::isRoadEmpty() {
 
 std::vector<Position> *Bullet::getRoad() {
     return road;
+}
+
+void Bullet::damageThis(Occupant &other_target) {
+    other_target.reduceLifeBy(damage);
+    hit = true;
 }
