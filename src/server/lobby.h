@@ -24,7 +24,7 @@ public:
 
     void startGame();
 
-    void ready();
+    void ready(Player* player);
 };
 
 

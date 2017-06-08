@@ -15,6 +15,7 @@ void Menu::addPlayer(Messenger *msgr, Menu& menu) {
 }
 
 void Menu::createNewLobby(Player* player) {
+    std::cout << "Creando Lobby" << std::endl;
     lobby_counter += 1;
     Lobby* new_lobby = new Lobby(lobby_counter);
     lobbys.emplace_back(new_lobby);

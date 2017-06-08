@@ -21,6 +21,7 @@ void Player::run() {
         if (on_menu) {
             processMenuCommands(new_cmd);
         }else if (on_lobby) {
+            std::cout << "Entre on lobby commands" << std::endl;
             processLobbyCommands(new_cmd);
         } else if (playing) {
             cmds.push_back(new Command(this->id,new_cmd,control));
@@ -54,8 +55,12 @@ void Player::processMenuCommands(std::string &cmd) {
 
 void Player::processLobbyCommands(std::string &cmd) {
     if (cmd == "start-game") {
+        std::cout << "Entre en player a start game" << std::endl;
         this->lobby->startGame();
         on_lobby = false;
+    }
+    if (cmd == "ready") {
+        this->lobby->ready(this);
     }
 }
 

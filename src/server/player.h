@@ -16,6 +16,7 @@ class Command;
 class ControlUnit;
 class Lobby;
 class Menu;
+class Game;
 
 class Player: public Thread {
 private:
