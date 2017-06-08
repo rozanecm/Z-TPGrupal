@@ -22,7 +22,7 @@ class Unit: public Occupant {
 private:
     Compass compass;
     Weapon weapon;
-    int unit_speed;
+    int unit_speed, fire_rate, fire_count;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
     std::string state;
@@ -33,11 +33,7 @@ private:
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
-             Size range, Compass &compass, Weapon &weapon);
-
-//    Unit(const Unit& other);
-
-//    Unit& operator=(const Unit& other);
+             Size range, Compass &compass, Weapon &weapon, int fire_rate);
 
     void makeAction();
 
@@ -47,6 +43,8 @@ public:
     // Indicates the Unit to make the next step on the road.
     // Make sure of use the calculateRoadTo method before this one.
     void move();
+
+    void attack();
 
     // Returns the current position of the unit
     Position getCurrentPosition() const;
@@ -59,9 +57,9 @@ public:
 
     void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
 
-    void attack();
+    bool doYouHaveAnyBullets();
 
-    std::vector<Bullet> collectBullets();
+    std::vector<Bullet*> collectBullets();
 
     bool checkIfTargetIsOnRange();
 

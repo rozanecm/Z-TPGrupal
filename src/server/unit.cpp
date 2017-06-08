@@ -5,10 +5,10 @@
 #include "unit.h"
 
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
-           Size range, Compass &compass, Weapon &weapon) :
+           Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
-        unit_speed(unit_speed), state(STANDINGSTATE),
-        range(range), target(*this) {}
+        unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
+        state(STANDINGSTATE), range(range), target(*this) {}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
@@ -78,8 +78,13 @@ void Unit::move() {
 }
 
 void Unit::attack() {
-    // make a shot
-    bullets.push_back(weapon.shotTarget(target));
+    if (fire_count == 0 || fire_count == fire_rate) {
+        fire_count = 0;
+        // make a shot
+        bullets.push_back(weapon.shotTarget(target));
+    } else {
+        fire_count += 1;
+    }
 }
 
 std::string Unit::getState() const {
@@ -109,8 +114,10 @@ void Unit::setTargetToAttack(Occupant &target) {
     this->weapon.setNewTarget(target);
 }
 
-std::vector<Bullet> Unit::collectBullets() {
-    return std::vector<Bullet>();
+std::vector<Bullet*> Unit::collectBullets() {
+    std::vector<Bullet*> tmp = bullets;
+    bullets.clear();
+    return tmp;
 }
 
 bool Unit::checkIfTargetIsOnRange() {
@@ -139,9 +146,15 @@ bool Unit::checkIfBulletWillHit(std::vector<Position> *b_road, Size &b_size) {
     return will_hit;
 }
 
+bool Unit::doYouHaveAnyBullets() {
+    return (!bullets.empty());
+}
 
-//Unit::Unit(const Unit &other) : compass(other.compass), unit_speed(other.unit_speed),
-//state(other.state), range(other.range), road(other.road), target(other.target){}
+
+//Unit::Unit(const Unit &other) : compass(other.compass),
+// unit_speed(other.unit_speed),
+//state(other.state), range(other.range), road(other.road),
+// target(other.target){}
 
 //Unit &Unit::operator=(const Unit &other) {
 //    return ;

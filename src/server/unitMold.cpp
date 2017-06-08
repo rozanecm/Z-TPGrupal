@@ -14,7 +14,7 @@ Unit *UnitMold::createUnit(int id, int x, int y, Compass &compass,
     Size unit_size(x,y,width,height);
     Size unit_range(x,y,range,range);
     Unit* new_unit = new Unit(id, life, type, unit_speed, unit_size, unit_range,
-                              compass, weapon);
+                              compass, weapon, fire_rate);
     return new_unit;
 }
 
