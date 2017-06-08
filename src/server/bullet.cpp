@@ -74,6 +74,10 @@ void Bullet::move() {
         road->pop_back();
         ++steps;
     }
+    // If you get the target, inflict damage
+    Size targ_size = target.getSize();
+    if (this->w_size.isThereACollision(targ_size))
+        target.reduceLifeBy(damage);
 }
 
 Position Bullet::calculateNextInvertPosition(double a, double b, int y) {
