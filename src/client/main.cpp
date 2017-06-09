@@ -11,7 +11,8 @@
 #define SUCCESSRETURNCODE 0
 
 /* DEBUGGING: run 'netcat -l 8000' in a terminal to launch client w/o server' */
-#define LOCALHOST "10.1.207.62"
+#define IP_MANU "10.1.207.62"
+#define LOCALHOST "127.0.0.1"
 #define PORT 8000
 void play_sound() {
     // Init, open the audio channel
@@ -47,7 +48,7 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
-    Socket s(LOCALHOST, PORT);
+    Socket s(IP_MANU, PORT);
     ServerMessenger messenger(s);
 
     /* create graphics and client threads */
