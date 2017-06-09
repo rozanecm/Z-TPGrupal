@@ -9,6 +9,7 @@
 #include "compass.h"
 #include "teamable.h"
 #include "bullet.h"
+#include "weapon.h"
 
 #define ATKSTATE "atk"
 #define MOVESTATE "mv"
@@ -20,21 +21,19 @@
 class Unit: public Occupant {
 private:
     Compass compass;
-    int unit_speed;
+    Weapon weapon;
+    int unit_speed, fire_rate, fire_count;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
     std::string state;
     Size range;
     std::vector<Position>* road;
     Occupant& target;
+    std::vector<Bullet*> bullets;
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
-         Size range, Compass& compass);
-
-    Unit(const Unit& other);
-
-//    Unit& operator=(const Unit& other);
+             Size range, Compass &compass, Weapon &weapon, int fire_rate);
 
     void makeAction();
 
@@ -44,6 +43,8 @@ public:
     // Indicates the Unit to make the next step on the road.
     // Make sure of use the calculateRoadTo method before this one.
     void move();
+
+    void attack();
 
     // Returns the current position of the unit
     Position getCurrentPosition() const;
@@ -56,9 +57,17 @@ public:
 
     void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
 
-    void attack();
+    bool doYouHaveAnyBullets();
 
-    std::vector<Bullet> collectBullets();
+    std::vector<Bullet*> collectBullets();
+
+    bool checkIfTargetIsOnRange();
+
+    // The bullet will hit if there is no Occupant in the middle.
+    // except for bridges
+    bool checkIfBulletWillHit(std::vector<Position> *b_road, Size& b_size);
+
+    void getOnRangeOf(int x, int y);
 };
 
 

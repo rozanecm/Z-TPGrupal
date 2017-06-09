@@ -16,6 +16,7 @@ class Command;
 class ControlUnit;
 class Lobby;
 class Menu;
+class Game;
 
 class Player: public Thread {
 private:
@@ -42,6 +43,10 @@ public:
     void addControlUnit(ControlUnit* control);
 
     Messenger* getMessenger();
+
+    void shutDown();
+
+    ~Player();
 
 private:
     void processMenuCommands(std::string& cmd);

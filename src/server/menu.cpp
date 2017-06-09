@@ -15,11 +15,13 @@ void Menu::addPlayer(Messenger *msgr, Menu& menu) {
 }
 
 void Menu::createNewLobby(Player* player) {
+    std::cout << "Creando Lobby" << std::endl;
     lobby_counter += 1;
     Lobby* new_lobby = new Lobby(lobby_counter);
     lobbys.emplace_back(new_lobby);
     lobbys.back()->addPlayer(player);
     player->addLobby(new_lobby);
+    player->getMessenger()->sendMessage("New Lobby created");
 }
 
 std::string Menu::getLobbiesInfo() {
@@ -31,4 +33,16 @@ std::string Menu::getLobbiesInfo() {
 
 void Menu::addToLobbie(int id_lobbie, Player &player) {
 
+}
+
+Menu::~Menu() {
+    for(auto p: players) {
+        p->shutDown();
+        p->join();
+        delete(p);
+    }
+
+    for(auto l: lobbys) {
+        delete(l);
+    }
 }

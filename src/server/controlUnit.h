@@ -17,18 +17,20 @@ class Command;
 
 class ControlUnit {
 private:
-    std::vector<Unit>& all_units;
+    std::map<int,Unit>& all_units;
+//    std::vector<Unit>& all_units;
     std::vector<Occupant>& all_occupants;
     std::vector<Messenger*> players;
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
+    std::vector<Bullet*> all_bullets;
     std::vector<Unit>* changed_units;
     std::vector<Occupant>* changed_occupants;
 
 public:
     ControlUnit(std::vector<Messenger*>& new_players,
-                std::vector<Unit>& all_units,
+                std::map<int,Unit>& all_units,
                 std::vector<Occupant>& all_occupants);
 
     // Method to start checking commands from players
@@ -41,6 +43,8 @@ public:
 
     // Checks if any Occupant is dead. If so, it will remove it from the game
     void checkAllLivingOccupants();
+
+    void moveAllBullets();
 
     // Command move unit. Meant to give the order to the unit to start moving
     // to de (x,y) position

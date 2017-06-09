@@ -43,6 +43,9 @@ public:
     // Returns true if the position is empty
     bool canIWalkToThisPosition(Size& size);
 
+    // Returns true if the position is empty except for the occupant
+    bool canBulletWalkToThisPosition(Size& size, Occupant& occupant);
+
     // Returns the Terrain factor on the (x,y) position
     double getTerrainFactorOn(int x, int y);
 

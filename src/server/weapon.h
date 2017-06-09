@@ -17,17 +17,23 @@ private:
     int damage, w_speed;
     bool explosive;
     Size w_size;
-    std::vector<Bullet> bullets;
+    std::vector<Bullet*> bullets;
 
 public:
     Weapon(std::string type, int damage, int w_speed, bool explosive,
                                                         Size w_size);
 
-    void shotTarget(Occupant& target);
+    void setNewTarget(Occupant& target);
+
+    Bullet* shotTarget(Occupant& target);
 
     bool isTheAttackExplosive();
 
-    void checkIfBullestHit();
+    std::vector<Position>* getBulletRoad();
+
+    Size getBulletSize() const;
+
+    void recalculateRoadToTarget();
 };
 
 

@@ -1,0 +1,7 @@
+Para crear una nueva partida desde un cliente enviar:
+1) "create-lobby"
+2) "ready"
+3) "start-game"
+
+Por cada mensaje el servidor contesta al cliente dando el okey de cada mensaje.
+Como respuesta al comando 3) se obtiene el xml del mapa de terreno

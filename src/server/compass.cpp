@@ -361,6 +361,10 @@ astar_map(other.astar_map), closed_nodes(other.closed_nodes),
 open_nodes(other.open_nodes), road(other.road), terrain_modifier(other.terrain_modifier),
 unit_speed(other.unit_speed), unit_size(other.unit_size){}
 
+bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
+    return map.canBulletWalkToThisPosition(size,occupant);
+}
+
 //Compass &Compass::operator=(const Compass &other) {
 //    return ;
 //}
