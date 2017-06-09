@@ -3,7 +3,7 @@
 //
 
 #include "lobby.h"
-#define PATH "../../maps/map.xml"
+#define PATH "maps/map.xml"
 
 Lobby::Lobby(int id) : lobby_id(id), all_ready(false) {}
 
@@ -13,8 +13,8 @@ void Lobby::startGame() {
         //start game
         MapLoader maploader(PATH);
         Map map = maploader.get_map();
-        Game game(players,map);
-        game.start();
+        game = std::unique_ptr<Game> (new Game(players,map));
+        game.get()->start();
         std::cout << "Game started" << std::endl;
     }
 }
@@ -29,4 +29,9 @@ bool Lobby::addPlayer(Player* player) {
     if(players.size() < 4)
         players.push_back(player);
     return (players.size() < 4);
+}
+
+Lobby::~Lobby() {
+    game.get()->shutDownGame();
+    game.get()->join();
 }

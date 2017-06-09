@@ -27,4 +27,8 @@ void Game::addBuildings(std::vector<Occupant> buildings) {
 
 }
 
+void Game::shutDownGame() {
+    /*control unit shut down */
+}
+
 

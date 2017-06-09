@@ -29,6 +29,8 @@ public:
     void addBuildings(std::vector<Occupant> buildings);
 
     void run();
+
+    void shutDownGame();
 };
 
 
