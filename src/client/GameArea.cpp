@@ -51,10 +51,10 @@ GameArea::GameArea(BaseObjectType *cobject,
 GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    if (selectionMade)
-        processSelection();
-    drawBaseMap(cr, camera.getPosition());
-    drawFlagAnimation(cr, 500, 500);
+//    if (selectionMade)
+//        processSelection();
+//    drawBaseMap(cr, camera.getPosition());
+//    drawFlagAnimation(cr, 500, 500);
     return true;
 }
 
