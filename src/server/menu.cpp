@@ -34,3 +34,10 @@ std::string Menu::getLobbiesInfo() {
 void Menu::addToLobbie(int id_lobbie, Player &player) {
 
 }
+
+Menu::~Menu() {
+    for(auto p: players) {
+        p->join();
+        delete(p);
+    }
+}
