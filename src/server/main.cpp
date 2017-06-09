@@ -6,13 +6,12 @@
 #define PORT 8000
 
 int main (int argc, char **argv) {
-
     try {
         std::mutex m;
 
         Menu menu(m);
 
-        Server server_accepter(8000, menu);
+        Server server_accepter(PORT, menu);
 
         server_accepter.start();
 

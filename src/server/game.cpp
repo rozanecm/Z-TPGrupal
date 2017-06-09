@@ -18,7 +18,7 @@ void Game::run() {
     std::string& map_str = map.get_map();
     for(auto& player : players) {
         std::cout << "Sending map to players" << std::endl;
-        player->getMessenger()->sendMessage(map_str);
+        player->getMessenger()->sendMessage("loadmap-"+map_str);
     }
     /*control.run();*/
 }
