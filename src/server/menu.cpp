@@ -37,7 +37,12 @@ void Menu::addToLobbie(int id_lobbie, Player &player) {
 
 Menu::~Menu() {
     for(auto p: players) {
+        p->shutDown();
         p->join();
         delete(p);
+    }
+
+    for(auto l: lobbys) {
+        delete(l);
     }
 }

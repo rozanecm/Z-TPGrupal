@@ -63,3 +63,10 @@ void Player::processLobbyCommands(std::string &cmd) {
     }
 }
 
+Player::~Player() {}
+
+void Player::shutDown() {
+    conected = false;
+    messenger->shutdown();
+}
+

@@ -44,6 +44,10 @@ public:
 
     Messenger* getMessenger();
 
+    void shutDown();
+
+    ~Player();
+
 private:
     void processMenuCommands(std::string& cmd);
 
