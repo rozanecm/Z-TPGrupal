@@ -8,6 +8,7 @@
 
 #include "player.h"
 #include "game.h"
+#include "MapLoader.h"
 class Player;
 
 class Lobby {
@@ -23,7 +24,7 @@ public:
 
     void startGame();
 
-    void ready();
+    void ready(Player* player);
 };
 
 

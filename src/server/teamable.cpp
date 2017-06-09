@@ -24,3 +24,7 @@ bool Teamable::isThereACollision(Size& other) {
     return obj_size.isThereACollision(other);
 }
 
+Size Teamable::getSize() {
+    return this->obj_size;
+}
+

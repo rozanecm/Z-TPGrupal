@@ -1,6 +1,7 @@
 #include <map>
 #include "MapLoader.h"
 #include <pugixml.hpp>
+#include <sstream>
 
 
 const std::map<std::string, int> terrain_factor {
@@ -17,6 +18,9 @@ MapLoader::MapLoader(std::string path) {
         std::cout << "ERROR LOADING MAP: " << path << ": " <<
                   result.description() << std::endl;
     }
+    std::stringstream stream;
+    doc.save(stream);
+    map_string = stream.str();
     const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node_iterator map_node = doc.first_child();
@@ -62,7 +66,7 @@ MapLoader::MapLoader(std::string path) {
 
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_y, coord_x,3,3, terrain, factor);
+            map.back().emplace_back(coord_y, coord_x, 3, 3, terrain, factor);
             coord_x += 3;
         }
 
@@ -72,12 +76,21 @@ MapLoader::MapLoader(std::string path) {
 }
 
 
-const std::vector<std::vector<Cell>>& MapLoader::get_map() {
-    return map;
+Map MapLoader::get_map() {
+    int width = (int) map.at(0).size();
+    int height = (int) map.size();
+    int x = width / 2;
+    int y = height / 2;
+    return Map(x, y, width, height, map, occupants, map_string);
 }
 
 MapLoader::~MapLoader() {
-    for(Occupant* o : units) {
-        delete o;
-    }
+}
+
+std::vector<Occupant> MapLoader::getOccupants() {
+    return this->occupants;
+}
+
+std::vector<Unit> MapLoader::getUnits() {
+    return this->units;
 }

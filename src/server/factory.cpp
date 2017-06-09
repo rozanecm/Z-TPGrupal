@@ -6,7 +6,7 @@
 
 Factory::Factory(int id, int life, std::string type, Size position,
                            std::vector<UnitMold> units) :
-Occupant(id, life,type, position), Teamable(position), running(false), units(units){
+Occupant(id, life,type, position), running(false), units(units){
     it = units.begin();
 }
 
