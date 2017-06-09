@@ -69,6 +69,18 @@ MapLoader::MapLoader(std::string path) {
         occupants.emplace_back(id_counter++, 10, type, Size(x, y, 3, 3));
     }
 
+    pugi::xml_node territories = root.child("Territories");
+    auto territory = territories.children().begin();
+    for(; territory != territories.children().end(); ++territory) {
+        auto factory = territory->children().begin();
+        for(; factory != territory->children().end(); ++factory) {
+            int x = std::stoi(factory->attribute("x").value());
+            int y = std::stoi(factory->attribute("y").value());
+            std::string type = factory->name();
+            occupants.emplace_back(id_counter++, 1000, type, Size(x, y, 9, 9));
+        }
+    }
+
 }
 
 
