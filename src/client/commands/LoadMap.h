@@ -5,6 +5,7 @@
 #include "../MapMonitor.h"
 #include "Command.h"
 #include <string>
+#include <vector>
 
 class LoadMap : public Command{
     MapMonitor &mapMonitor;

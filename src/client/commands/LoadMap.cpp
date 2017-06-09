@@ -1,9 +1,10 @@
 #include <pugixml.hpp>
 #include <iostream>
 #include "LoadMap.h"
+#include <string>
+#include <vector>
 
 LoadMap::LoadMap(MapMonitor &mapMonitor) : mapMonitor(mapMonitor){
-
 }
 
 void LoadMap::execute(const std::vector<std::string> &args) {
