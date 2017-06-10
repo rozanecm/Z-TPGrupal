@@ -9,9 +9,9 @@
 #include "MapMonitor.h"
 #include "Camera.h"
 #include "FlagEnum.h"
-#include "TeamEnum.h"
-#include "ActionsEnum.h"
-#include "UnitsEnum.h"
+#include "enums/TeamEnum.h"
+#include "enums/ActionsEnum.h"
+#include "enums/UnitsEnum.h"
 #include "BuildingsEnum.h"
 #include <map>
 #include <string>
