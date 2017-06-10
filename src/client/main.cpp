@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
-    Socket s(IP_MANU, PORT);
+    Socket s(LOCALHOST, PORT);
     ServerMessenger messenger(s);
 
     /* create graphics and client threads */
