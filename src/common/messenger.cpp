@@ -6,7 +6,6 @@
 Messenger::Messenger(Socket& socket) : socket(std::move(socket)),
                                        connected(true) {}
 
-#define MSG_SIZE 1024
 
 std::string Messenger::recieveMessage() {
     // Receive length first, then the message
@@ -14,14 +13,12 @@ std::string Messenger::recieveMessage() {
     socket.receive((char*) &len, sizeof(len));
     len = ntohl(len);
     char* buf = new char[len];
-//    memset(buf, 0, len);
     ssize_t sent = socket.receive(buf, len);
     if (sent <= 0) {
         throw(SocketError("Socket closed"));
     }
     std::string result(buf);
 
-//    std::string asdf = std::move(result);
     delete[] buf;
     return result;
 }

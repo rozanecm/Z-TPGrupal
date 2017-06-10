@@ -16,7 +16,6 @@ void Server::run() {
         while(this->running) {
             Socket new_client = this->socket.accept_client();
             Messenger* messenger = new Messenger(new_client);
-            std::cout << "antes de agregar el player" << std::endl;
             menu.addPlayer(messenger, menu);
             std::cout << "new player conectado" << std::endl;
 //              create player with messenger

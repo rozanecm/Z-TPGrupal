@@ -23,6 +23,11 @@ unsigned int load_port(const char* cfg_file_path) {
 }
 
 int main (int argc, char **argv) {
+    if (argc < 2) {
+        std::cout << "Usage: ./Z_Server <cfg file>" << std::endl;
+        return 1;
+    }
+    
     std::string cfg = argv[1];
     if (!cfg.size()) {
         std::cout << "Error loading cfg file" << std::endl;

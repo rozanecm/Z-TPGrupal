@@ -8,7 +8,7 @@
 
 class Factory: public Occupant {
     bool running;
-    int tech_level;
+    int tech_level,time_counter;
     std::vector<UnitMold> units;
     std::vector<UnitMold>::iterator it;
 
@@ -19,8 +19,10 @@ public:
     // starts the creation of the selected unit
     void build();
 
+    void startBuilding(std::string& player_id);
+
     // Stops the creation of units
-    void stopBuilding();
+    void stopBuilding(std::string &player_id);
 
     // Returns the creational time of the selected Unit
     int getSelectedUnitTime();
@@ -31,6 +33,8 @@ public:
     Occupant* destroyFactory();
 
     void setNewPlayer(std::string player, int tech_level);
+
+    int getCreationSpeed();
 };
 
 
