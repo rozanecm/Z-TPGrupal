@@ -3,7 +3,7 @@
 #include "compass.h"
 #include "server.h"
 
-#define PORT 8000
+#define PORT 8001
 
 int main (int argc, char **argv) {
     try {

@@ -11,10 +11,15 @@ class Factory: public Occupant {
     int tech_level,time_counter;
     std::vector<UnitMold> units;
     std::vector<UnitMold>::iterator it;
+    std::vector<Unit> new_units;
+    Map& map;
+    std::map<std::string, Weapon> weapons;
+
 
 public:
     Factory(int id, int life, std::string type, Size position,
-                 std::vector<UnitMold> units);
+                std::vector<UnitMold> units, Map &map,
+                std::map<std::string, Weapon> &weapons);
 
     // starts the creation of the selected unit
     void build();
@@ -35,6 +40,10 @@ public:
     void setNewPlayer(std::string player, int tech_level);
 
     int getCreationSpeed();
+
+    bool haveNewUnits();
+
+    std::vector<Unit> getUnits();
 };
 
 

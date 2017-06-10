@@ -5,14 +5,16 @@
 #include "factory.h"
 
 Factory::Factory(int id, int life, std::string type, Size position,
-                           std::vector<UnitMold> units) :
-Occupant(id, life,type, position), running(false),time_counter(0), units(units){
+                 std::vector<UnitMold> units, Map &map,
+                 std::map<std::string, Weapon> &weapons) :
+Occupant(id, life,type, position), running(false),time_counter(0), units(units),
+map(map), weapons(weapons){
     it = units.begin();
 }
 
 void Factory::build() {
     if (time_counter == (*it).getCreationTime()) {
-        // create several units
+//        new_units.push_back((*it).createUnit())
         time_counter = 0;
     } else if (running && time_counter < (*it).getCreationTime()) {
         time_counter += 1 + tech_level;
@@ -58,4 +60,14 @@ void Factory::startBuilding(std::string &player_id) {
 
 int Factory::getCreationSpeed() {
     return ((*it).getCreationTime() / (1 + tech_level));
+}
+
+bool Factory::haveNewUnits() {
+    return (!this->new_units.empty());
+}
+
+std::vector<Unit> Factory::getUnits() {
+    std::vector<Unit> tmp = new_units;
+    new_units.clear();
+    return tmp;
 }

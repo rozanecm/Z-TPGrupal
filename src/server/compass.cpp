@@ -365,6 +365,14 @@ bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
     return map.canBulletWalkToThisPosition(size,occupant);
 }
 
+void Compass::changeUnitSize(Size &new_size) {
+    this->unit_size = new_size;
+}
+
+void Compass::changeUnitSpeed(int speed) {
+    this->unit_speed = speed;
+}
+
 //Compass &Compass::operator=(const Compass &other) {
 //    return ;
 //}
