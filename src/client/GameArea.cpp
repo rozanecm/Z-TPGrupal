@@ -51,7 +51,8 @@ void GameArea::loadResources() {
                 "res/assets/tiles/tierra.png");
         tiles["Agua"] = Gdk::Pixbuf::create_from_file
                 ("res/assets/tiles/agua.png");
-        tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
+        tiles["Lava"] = Gdk::Pixbuf::create_from_file(
+                "res/assets/tiles/lava.png");
     }catch (Glib::FileError e) {
         std::cerr<<e.what();
     }
@@ -91,7 +92,7 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                           std::string terrainType) {
     cr->save();
     auto pixbuf = tiles.find(terrainType);
-    if(pixbuf == tiles.end()) {
+    if (pixbuf == tiles.end()) {
         return;
     }
     Gdk::Cairo::set_source_pixbuf(cr, pixbuf->second,
