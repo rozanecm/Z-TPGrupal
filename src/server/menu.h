@@ -14,11 +14,11 @@ class Lobby;
 class Menu {
 private:
     std::vector<Player*> players;
-    std::mutex& m;
+    std::mutex m;
     int lobby_counter;
     std::vector<Lobby*> lobbys;
 public:
-    Menu(std::mutex& m);
+    Menu();
 
     void addPlayer(Messenger* msgr, Menu& menu);
 

@@ -34,9 +34,8 @@ int main (int argc, char **argv) {
     }
 
     try {
-        std::mutex m;
 
-        Menu menu(m);
+        Menu menu;
 
         Server server_accepter(port, menu);
         server_accepter.start();
