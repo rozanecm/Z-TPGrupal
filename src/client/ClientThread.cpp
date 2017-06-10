@@ -29,7 +29,11 @@ ClientThread::ClientThread(PlayersMonitor &playerMonitor,
 }
 
 void ClientThread::loop() {
+    messenger.send("create-lobby");
+    std::string fisrt_recv = messenger.receive();
     messenger.send("ready");
+    std::string second_recv = messenger.receive();
+    messenger.send("start-game");
     while (!finished) {
         std::string msg = messenger.receive();
         std::cout<<msg<<std::endl;

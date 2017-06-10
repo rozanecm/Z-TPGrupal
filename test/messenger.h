@@ -1,17 +1,47 @@
-#ifndef TP3TALLER_PROTOCOL_SOCKET_H
-#define TP3TALLER_PROTOCOL_SOCKET_H
+//
+// Created by rodian on 22/05/17.
+//
 
-#include <string>
+#ifndef Z_TPGRUPAL_MESSENGER_H
+#define Z_TPGRUPAL_MESSENGER_H
+
 #include "socket.h"
+#include <iostream>
+#include <string>
+////////////////////////
+// Messenger Class meant to use sockets
+// to send messages between Client and
+// Server using a specific protocol.
+// Send lenght of message first, then the message.
+////////////////////////
+class Messenger{
+private:
+    Socket socket;
+    bool connected;
+
+public:
+    // Recieves a unique socket to send
+    // and recieves messages from
+    explicit Messenger(Socket& socket);
+
+    // Recieves a Message from the remote
+    // connected socket.
+    // Returns the message on a string
+    std::string recieveMessage();
+
+    // Sends a message to the remote socket
+    // Recieves the message on a string
+    void sendMessage(const std::string &message);
+
+    // Shuts down the socket for read and write
+    void shutdown();
+
+    // If the sockets are still connected returns true
+    // otherwise false.
+    bool isConnected();
+
+    ~Messenger();
+};
 
 
-/* Sends 'len' bytes of data through Socket 's', taken from he buffer 'msg'.
- * Complies with the assignment protocol of sending the message length through
- * the socket first, then the actual message. */
-void protocol_send(Socket& s, const char* msg, unsigned int len);
-
-/* Endpoint to receive the data passed from the function protocol_send. Parses
- * the result into a std::string type and returns it. */
-std::string protocol_receive(Socket& s);
-
-#endif //TP3TALLER_PROTOCOL_SOCKET_H
+#endif //Z_TPGRUPAL_MESSENGER_H

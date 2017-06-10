@@ -2,6 +2,7 @@
 #define TP3TALLER_COMMON_SOCKET_H
 
 #include <string>
+#include "socketError.h"
 
 #define LISTEN_BACKLOG 10 // Amt. of connections to have in the accept backlog
 
@@ -30,6 +31,8 @@ public:
     // Wrapper for socket shutdown/close
     void shutdown();
     void close(); // Effectively makes the socket object useless
+
+    bool is_valid();
     // Move constructor
     Socket(Socket&& other);
 
@@ -38,16 +41,6 @@ private:
 
     Socket(Socket&) = delete;
     void operator=(Socket&) = delete;
-};
-
-
-class SocketError : public std::exception {
-    char buf[256];
-
-public:
-    explicit SocketError(const char* msg, ...) noexcept;
-
-    virtual const char* what() const noexcept;
 };
 
 #endif //TP3TALLER_COMMON_SOCKET_H
