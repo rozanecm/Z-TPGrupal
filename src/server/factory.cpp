@@ -48,9 +48,8 @@ Occupant *Factory::destroyFactory() {
 //    return ruins;
 }
 
-void Factory::setNewPlayer(std::string player, int tech_level) {
+void Factory::changeTechLevel(int tech_level) {
     this->tech_level = tech_level;
-    this->team = player;
 }
 
 void Factory::startBuilding(std::string &player_id) {

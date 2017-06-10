@@ -37,7 +37,7 @@ public:
 
     Occupant* destroyFactory();
 
-    void setNewPlayer(std::string player, int tech_level);
+    void changeTechLevel(int tech_level);
 
     int getCreationSpeed();
 
