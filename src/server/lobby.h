@@ -18,9 +18,9 @@ private:
     bool all_ready;
     std::vector<Player*> players;
     std::unique_ptr<Game> game;
-
+    std::string& config;
 public:
-    Lobby(int id);
+    Lobby(int id, std::string& config);
 
     bool addPlayer(Player* player);
 

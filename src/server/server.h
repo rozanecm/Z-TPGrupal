@@ -13,6 +13,7 @@
 
 class Server: public Thread  {
 private:
+    int port;
     Socket socket;
     bool running;
     Menu& menu;
