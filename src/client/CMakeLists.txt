@@ -66,7 +66,7 @@ set(SOURCE_FILES
         Unit.h ServerMessenger.cpp ServerMessenger.h
         commands/Command.h
         commands/AddUnit.cpp
-        commands/AddUnit.h commands/RemoveUnit.cpp commands/RemoveUnit.h commands/UpdatePosition.cpp commands/UpdatePosition.h FlagEnum.h TeamEnum.h ActionsEnum.h UnitsEnum.h BuildingsEnum.h commands/LoadMap.cpp commands/LoadMap.h)
+        commands/AddUnit.h commands/RemoveUnit.cpp commands/RemoveUnit.h commands/UpdatePosition.cpp commands/UpdatePosition.h FlagEnum.h enums/TeamEnum.h enums/ActionsEnum.h enums/UnitsEnum.h BuildingsEnum.h commands/LoadMap.cpp commands/LoadMap.h)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
