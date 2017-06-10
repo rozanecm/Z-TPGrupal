@@ -55,6 +55,8 @@ void Player::processMenuCommands(std::string &cmd) {
     if (cmd == "create-lobby") {
         this->menu.createNewLobby(this);
         on_menu = false;
+    } else {
+        messenger->sendMessage("Invalid cmd");
     }
 }
 
@@ -66,6 +68,8 @@ void Player::processLobbyCommands(std::string &cmd) {
     }
     if (cmd == "ready") {
         this->lobby->ready(this);
+    } else {
+        messenger->sendMessage("Invalid cmd");
     }
 }
 
