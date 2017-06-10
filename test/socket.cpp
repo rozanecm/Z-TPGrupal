@@ -111,6 +111,7 @@ Socket::~Socket() {
 
 void Socket::shutdown() {
     ::shutdown(fd, SHUT_RDWR);
+    fd = -1;
 }
 
 void Socket::close() {
@@ -118,10 +119,6 @@ void Socket::close() {
     fd = -1;
 }
 
-SocketError::SocketError(const char *msg, ...) noexcept {
-    strncpy(buf, msg, strlen(msg));
-}
-
-const char *SocketError::what() const noexcept {
-    return buf;
+bool Socket::is_valid() {
+    return fd > 0;
 }
