@@ -21,7 +21,6 @@ MapLoader::MapLoader(std::string path) {
     std::stringstream stream;
     doc.save(stream);
     map_string = stream.str();
-    const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node root = doc.child("Map");
     pugi::xml_node map_node = root.child("Terrain");
@@ -41,13 +40,7 @@ MapLoader::MapLoader(std::string path) {
             std::string structure = cell->attribute("struct").value();
 
             int factor = terrain_factor.find(terrain)->second;
-
-//            int life = 100;
-//            Size size(10,10, 10, 10);
-//            ////
-//            Occupant* o = new Occupant(life, ocpt_id, size);
-//            units.push_back(o);
-
+            
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
             map.back().emplace_back(coord_y, coord_x, 3, 3, terrain, factor);
