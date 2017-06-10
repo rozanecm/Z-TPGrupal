@@ -21,6 +21,7 @@ MapLoader::MapLoader(std::string path) {
     std::stringstream stream;
     doc.save(stream);
     map_string = stream.str();
+    std::cout << map_string.size();
     const std::map<std::string, int> terrain_factor;
     // Get root node
     pugi::xml_node root = doc.child("Map");

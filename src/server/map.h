@@ -18,7 +18,7 @@ private:
     std::vector<std::vector<Cell>>& terrain_map;
     Size map_size;
     std::vector<Occupant>& all_occupants;
-    std::string& xml;
+    std::string xml;
     /*std::vector<Unit>& all_units;*/
 
 public:
