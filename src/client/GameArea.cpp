@@ -4,6 +4,7 @@
 #include <iostream>
 #include "GameArea.h"
 #include <string>
+#include <giomm.h>
 
 
 #define TILESIZE 16    //tile width in pixels
@@ -25,22 +26,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         /* camera is initialized with size 0,0 because we don't
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
-    /* load flags animations */
-    loadFlagAnimations();
-    /* load units resources */
-    loadUnitsResources();
-    /* load buildings resources */
-    loadBuildingsResources();
-
-    /* load some img */
-    someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
-
-    /* Load tiles */
-    tiles["Tierra"] = Gdk::Pixbuf::create_from_file
-            ("res/assets/tiles/tierra.png");
-    tiles["Agua"] = Gdk::Pixbuf::create_from_file
-            ("res/assets/tiles/agua.png");
-    tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
+    loadResources();
 
     add_events(Gdk::EventMask::BUTTON_PRESS_MASK);
     add_events(Gdk::EventMask::BUTTON_RELEASE_MASK);
@@ -48,13 +34,36 @@ GameArea::GameArea(BaseObjectType *cobject,
     set_can_focus(true);
 }
 
+void GameArea::loadResources() {
+    try {
+        /* load flags animations */
+        loadFlagAnimations();
+        /* load units resources */
+        loadUnitsResources();
+        /* load buildings resources */
+        loadBuildingsResources();
+
+        /* load some img */
+        someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
+
+        /* Load tiles */
+        tiles["Tierra"] = Gdk::Pixbuf::create_from_file(
+                "res/assets/tiles/tierra.png");
+        tiles["Agua"] = Gdk::Pixbuf::create_from_file
+                ("res/assets/tiles/agua.png");
+        tiles["Lava"] = Gdk::Pixbuf::create_from_file("res/assets/tiles/lava.png");
+    }catch (Glib::FileError e) {
+        std::cerr<<e.what();
+    }
+}
+
 GameArea::~GameArea() { }
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-//    if (selectionMade)
-//        processSelection();
-//    drawBaseMap(cr, camera.getPosition());
-//    drawFlagAnimation(cr, 500, 500);
+    if (selectionMade)
+        processSelection();
+    drawBaseMap(cr, camera.getPosition());
+    drawFlagAnimation(cr, 500, 500);
     return true;
 }
 

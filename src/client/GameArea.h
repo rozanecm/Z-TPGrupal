@@ -260,6 +260,8 @@ private:
                   unsigned short &tankCounter,
                   const Cairo::RefPtr<Cairo::Context> &cr,
                   unsigned int xCoordinate, unsigned int yCoordinate);
+
+    void loadResources();
 };
 
 
