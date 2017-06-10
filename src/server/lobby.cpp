@@ -14,7 +14,7 @@ void Lobby::startGame() {
     if(all_ready){
         //start game
         MapLoader maploader(PATH, config);
-        Map map = maploader.get_map();
+        std::shared_ptr<Map> map = maploader.get_map();
         game = std::unique_ptr<Game> (new Game(players,map));
         game.get()->start();
         std::cout << "Game started" << std::endl;
