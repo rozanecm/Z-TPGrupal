@@ -1,4 +1,11 @@
 <Config>
     <Port port="8000"/>
-
+    <Units>
+    </Units>
+    <Vehicles>
+    </Vehicles>
+    <Structs>
+        <Struct type="Rock" size_x="3" size_y="3" hp="10"/>
+        <Struct type="Factory" size_x="9" size_y="9" hp="1000"/>
+    </Structs>
 </Config>

@@ -11,7 +11,7 @@ const std::map<std::string, int> terrain_factor {
         {std::string("Lava"), int(1000)}
 };
 
-MapLoader::MapLoader(std::string path) {
+MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(path.c_str());
     if (!result) {
@@ -51,29 +51,48 @@ MapLoader::MapLoader(std::string path) {
         coord_y += 3;
     }
 
+    load_structs(root);
+}
+
+void MapLoader::load_structs(const pugi::xml_node &root) {
+    pugi::xml_document cfg;
+    cfg.load_file(config.c_str());
+    pugi::xml_node structs_cfg = cfg.child("Config").child("Structs");
+
     int id_counter = 0;
     pugi::xml_node structs = root.child("Structures");
     auto rock = structs.children().begin();
-    // Todo: read values from cfg file
+
     for(; rock != structs.children().end(); ++rock) {
-        int x = std::stoi(rock->attribute("x").value());
-        int y = std::stoi(rock->attribute("y").value());
-        std::string type = rock->attribute("Type").value();
-        occupants.emplace_back(id_counter++, 10, type, Size(x, y, 3, 3));
+        load_struct(structs_cfg, id_counter++, rock);
     }
 
     pugi::xml_node territories = root.child("Territories");
-    auto territory = territories.children().begin();
-    for(; territory != territories.children().end(); ++territory) {
-        auto factory = territory->children().begin();
-        for(; factory != territory->children().end(); ++factory) {
-            int x = std::stoi(factory->attribute("x").value());
-            int y = std::stoi(factory->attribute("y").value());
-            std::string type = factory->name();
-            occupants.emplace_back(id_counter++, 1000, type, Size(x, y, 9, 9));
+    for(auto& territory : territories.children()) {
+        for(auto& factory : territory.children()) {
+            load_struct(structs_cfg, id_counter++, factory);
         }
     }
+}
 
+void MapLoader::load_struct(const pugi::xml_node &structs_cfg, int id_counter,
+                      const pugi::xml_node_iterator &structure) {
+    int x = std::stoi(structure->attribute("x").value());
+    int y = std::stoi(structure->attribute("y").value());
+    std::string type = structure->attribute("Type").value();
+
+    /* Search the config file for the appropiate struct row to read
+     * the struct's stats from */
+    for(auto& child : structs_cfg.children()) {
+        if (child.attribute("type").value() == type) {
+            int hp = std::stoi(child.attribute("hp").value());
+            int size_x = std::stoi(child.attribute("size_x").value());
+            int size_y = std::stoi(child.attribute("size_y").value());
+            occupants.emplace_back(id_counter, hp, type,
+                                   Size(x, y, size_x, size_y));
+            break;
+        }
+    }
 }
 
 

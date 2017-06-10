@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <pugixml.hpp>
 #include "map.h"
 #include "Occupant.h"
 #include "cell.h"
@@ -13,8 +14,9 @@ class MapLoader {
     std::vector<Occupant> occupants;
     std::vector<Unit> units;
     std::string map_string;
+    std::string& config;
 public:
-    MapLoader(std::string path);
+    MapLoader(std::string path, std::string& config);
 
     ~MapLoader();
 
@@ -23,6 +25,12 @@ public:
     std::vector<Occupant> getOccupants();
 
     std::vector<Unit> getUnits();
+
+private:
+    void load_structs(const pugi::xml_node &root);
+
+    void load_struct(const pugi::xml_node &structs_cfg, int id_counter,
+               const pugi::xml_node_iterator &structure);
 };
 
 

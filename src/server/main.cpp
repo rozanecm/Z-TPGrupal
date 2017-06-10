@@ -34,8 +34,7 @@ int main (int argc, char **argv) {
     }
 
     try {
-
-        Menu menu;
+        Menu menu(cfg);
 
         Server server_accepter(port, menu);
         server_accepter.start();

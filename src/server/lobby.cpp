@@ -5,13 +5,15 @@
 #include "lobby.h"
 #define PATH "maps/map.xml"
 
-Lobby::Lobby(int id) : lobby_id(id), all_ready(false) {}
+Lobby::Lobby(int id, std::string& config) : lobby_id(id),
+                                            config(config),
+                                            all_ready(false) {}
 
 void Lobby::startGame() {
     std::cout << "Beginning game" << std::endl;
     if(all_ready){
         //start game
-        MapLoader maploader(PATH);
+        MapLoader maploader(PATH, config);
         Map map = maploader.get_map();
         game = std::unique_ptr<Game> (new Game(players,map));
         game.get()->start();

@@ -4,7 +4,7 @@
 
 #include "menu.h"
 
-Menu::Menu() : lobby_counter(0) {}
+Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
 void Menu::addPlayer(Messenger *msgr, Menu& menu) {
     Lock l(m);
@@ -14,9 +14,9 @@ void Menu::addPlayer(Messenger *msgr, Menu& menu) {
 
 void Menu::createNewLobby(Player* player) {
     lobby_counter += 1;
-    Lobby* new_lobby = new Lobby(lobby_counter);
-    lobbys.emplace_back(new_lobby);
-    lobbys.back()->addPlayer(player);
+    Lobby* new_lobby = new Lobby(lobby_counter, config);
+    lobbies.emplace_back(new_lobby);
+    lobbies.back()->addPlayer(player);
     player->addLobby(new_lobby);
     player->getMessenger()->sendMessage("New Lobby created");
 }
@@ -28,7 +28,7 @@ std::string Menu::getLobbiesInfo() {
     return info;
 }
 
-void Menu::addToLobbie(int id_lobbie, Player &player) {
+void Menu::addToLobby(int id_lobbie, Player &player) {
 
 }
 
@@ -39,7 +39,7 @@ Menu::~Menu() {
         delete(p);
     }
 
-    for(auto l: lobbys) {
+    for(auto l: lobbies) {
         delete(l);
     }
 }
