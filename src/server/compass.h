@@ -49,6 +49,10 @@ public:
     // Returns the Terrain factor on the (x,y) position
     double getTerrainFactorOn(int x, int y);
 
+    void changeUnitSize(Size& unit_size);
+
+    void changeUnitSpeed(int speed);
+
     ~Compass();
 
 private:
