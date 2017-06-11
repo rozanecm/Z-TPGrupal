@@ -49,8 +49,16 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
-    Socket s(LOCALHOST, PORT);
-    ServerMessenger messenger(s);
+//    graphicsThread.start();
+    auto app = Gtk::Application::create();
+
+    GameBuilder builder;
+    InitialWindow* window = builder.get_initial_window();
+    app->run(*window);
+
+
+//    Socket s(LOCALHOST, PORT);
+//    ServerMessenger messenger(s);
 
     /* create graphics and client threads */
 //    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
@@ -58,20 +66,14 @@ int main(int argc, char **argv) {
 
 
     /* DEBUG: RUN 'netcat -l 8000' in terminal */
-    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
-                              messenger);
-    clientThread.start();
-//    graphicsThread.start();
-    auto app = Gtk::Application::create();
-
-    GameBuilder builder(playerMonitor, buildingsMonitor, mapMonitor, messenger);
-    InitialWindow* window = builder.get_initial_window();
-    app->run(*window);
-    /* join threads */
+//    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
+//                              messenger);
+//    clientThread.start();
+//    /* join threads */
 //    graphicsThread.join();
-
-    /* once graphics join (window closes), we kill client thread */
-    clientThread.finish();
-    clientThread.join();
+//
+//    /* once graphics join (window closes), we kill client thread */
+//    clientThread.finish();
+//    clientThread.join();
     return SUCCESSRETURNCODE;
 }

@@ -22,14 +22,8 @@ class GameBuilder {
     Gtk::Box* group_panel;
     Gtk::Button* button;
 
-    PlayersMonitor &playersMonitor;
-    BuildingsMonitor &buildingsMonitor;
-    MapMonitor &mapMonitor;
-    ServerMessenger& messenger;
-
 public:
-    GameBuilder(PlayersMonitor &monitor, BuildingsMonitor &buildingsMonitor,
-                    MapMonitor &mapMonitor, ServerMessenger& messenger);
+    GameBuilder();
     ~GameBuilder();
 
     // returns the generated window
