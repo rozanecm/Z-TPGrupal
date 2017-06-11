@@ -24,7 +24,6 @@ public:
 private:
 
     void on_click();
-    void on_hide();
 };
 
 

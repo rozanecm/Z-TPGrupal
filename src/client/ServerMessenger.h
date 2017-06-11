@@ -9,7 +9,7 @@
 /* Handles communication with the server */
 class ServerMessenger {
     Messenger messenger;
-    std::mutex m;
+    std::mutex send_m, recv_m;
 public:
     /* Constructor: connects to the given addr/port combination */
     explicit ServerMessenger(Socket& s);

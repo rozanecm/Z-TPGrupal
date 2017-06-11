@@ -8,7 +8,6 @@
 #include "MapMonitor.h"
 #include "../common/messenger.h"
 #include "GameBuilder.h"
-#include "windows/GameApplication.h"
 
 #define SUCCESSRETURNCODE 0
 
@@ -52,7 +51,6 @@ int main(int argc, char **argv) {
     InitialWindow* window = builder.get_initial_window();
     app->run(*window);
     // Once the window closes, we fetch the socket
-
     std::shared_ptr<Socket> s = window->get_socket();
     if (s) {
         ServerMessenger messenger(*s.get());
@@ -63,12 +61,15 @@ int main(int argc, char **argv) {
 
         GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
                                       mapMonitor, messenger);
+
+        // HARDCODED DEBUG MESSAGES TO START A GAME
         messenger.send("create-lobby");
         messenger.send("ready");
         messenger.send("start-game");
 
         graphicsThread.start();
         graphicsThread.join();
+
         /* once graphics join (window closes), we kill client thread */
         clientThread.finish();
         clientThread.join();

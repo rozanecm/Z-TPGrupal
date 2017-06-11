@@ -29,10 +29,6 @@ void InitialWindow::on_click() {
     this->hide();
 }
 
-void InitialWindow::on_hide() {
-    std::cout << "It is hidden" << std::endl;
-}
-
 std::shared_ptr<Socket> InitialWindow::get_socket() {
     return s;
 }
