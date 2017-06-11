@@ -32,7 +32,6 @@ void ClientThread::loop() {
     try {
         while (!finished) {
             std::string msg = messenger.receive();
-            std::cout<<msg<<std::endl;
             parse(msg);
         }
     } catch(SocketError& e) {
@@ -49,6 +48,7 @@ void ClientThread::parse(std::string &s) {
         return;
     }
     std::vector<std::string> args(++params.begin(), params.end());
+    std::cout << "Executing " << params[cmd] << std::endl;
     result->second->execute(args);
 }
 
