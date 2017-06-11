@@ -3,7 +3,7 @@
 //
 
 #include "factory.h"
-
+#define ID 3
 Factory::Factory(int id, int life, std::string type, Size position,
                  std::vector<UnitMold> units, Map &map,
                  std::map<std::string, Weapon> &weapons) :
@@ -14,7 +14,10 @@ map(map), weapons(weapons){
 
 void Factory::build() {
     if (time_counter == (*it).getCreationTime()) {
-//        new_units.push_back((*it).createUnit())
+        Size u_size = (*it).getUnitSize();
+        Position factory_pos = this->obj_size.getPosition();
+        u_size.moveTo(factory_pos.getX(),factory_pos.getY());
+        (*it).createUnit(ID,u_size,map,weapons[(*it).getTypeOfUnit()]);
         time_counter = 0;
     } else if (running && time_counter < (*it).getCreationTime()) {
         time_counter += 1 + tech_level;

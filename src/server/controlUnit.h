@@ -12,12 +12,15 @@
 #include "../common/Lock.h"
 #include "command.h"
 #include "../common/messenger.h"
+#include "factory.h"
+#include "territory.h"
 
 class Command;
 
 class ControlUnit {
 private:
     std::map<int,Unit>& all_units;
+    std::vector<Territory> territories;
 //    std::vector<Unit>& all_units;
     std::vector<Occupant>& all_occupants;
     std::vector<Messenger*> players;
@@ -29,9 +32,10 @@ private:
     std::vector<Occupant>* changed_occupants;
 
 public:
-    ControlUnit(std::vector<Messenger*>& new_players,
-                std::map<int,Unit>& all_units,
-                std::vector<Occupant>& all_occupants);
+    ControlUnit(std::vector<Messenger *> &new_players,
+                    std::map<int, Unit> &all_units,
+                    std::vector<Occupant> &all_occupants,
+                    std::vector<Territory> &territories);
 
     // Method to start checking commands from players
     void run();

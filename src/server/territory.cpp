@@ -25,3 +25,7 @@ void Territory::changeFactoriesTechLevel(int tech_level) {
         fac.second.changeTechLevel(tech_level);
     }
 }
+
+Position Territory::getFlagPOsition() {
+    return flag_position;
+}

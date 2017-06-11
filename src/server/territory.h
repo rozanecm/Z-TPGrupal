@@ -15,6 +15,7 @@ private:
     std::map<int,Factory>& factories;
     Position flag_position;
     Size territory_size;
+
 public:
     Territory(std::map<int,Factory>& factories, std::string team,
               Position flag_position, Size territory_size);
@@ -24,6 +25,8 @@ public:
     int getTechLevel();
 
     void changeFactoriesTechLevel(int tech_level);
+
+    Position getFlagPOsition();
 };
 
 

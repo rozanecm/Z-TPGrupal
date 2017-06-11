@@ -9,12 +9,12 @@ UnitMold::UnitMold(int tec_level, int life, int range, int width, int height,
 tec_level(tec_level), life(life), range(range), width(width), height(height),
 unit_speed(unit_speed), fire_rate(fire_rate), creation_time(time), type(type) {}
 
-Unit *UnitMold::createUnit(int id, int x, int y, Map& map,
+Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
                            Weapon &weapon) {
-    Size unit_size(x,y,width,height);
-    Size unit_range(x,y,range,range);
-    Compass compass(map,unit_size,unit_speed);
-    Unit* new_unit = new Unit(id, life, type, unit_speed, unit_size, unit_range,
+    Position u_pos = u_size.getPosition();
+    Size unit_range(u_pos.getX(),u_pos.getY(),range,range);
+    Compass compass(map,u_size,unit_speed);
+    Unit* new_unit = new Unit(id, life, type, unit_speed, u_size, unit_range,
                               compass, weapon, fire_rate);
     return new_unit;
 }
@@ -29,4 +29,8 @@ int UnitMold::getCreationTime() {
 
 std::string UnitMold::getTypeOfUnit() const {
     return type;
+}
+
+Size UnitMold::getUnitSize() {
+    return Size(0, 0, width, height);
 }

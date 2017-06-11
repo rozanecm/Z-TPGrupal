@@ -6,10 +6,12 @@
 #define WAIT 0.5
 
 
-ControlUnit::ControlUnit(std::vector<Messenger*>& new_players,
-                         std::map<int,Unit>& all_units,
-                         std::vector<Occupant>& all_occupants) :
-    all_units(all_units), all_occupants(all_occupants), players(new_players),
+ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
+                         std::map<int, Unit> &all_units,
+                         std::vector<Occupant> &all_occupants,
+                         std::vector<Territory> &territories) :
+    all_units(all_units), territories(territories),
+    all_occupants(all_occupants), players(new_players),
     winning(false) {
     this->changed_units = new std::vector<Unit>;
     this->changed_occupants = new std::vector<Occupant>;
