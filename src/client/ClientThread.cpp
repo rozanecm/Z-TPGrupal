@@ -29,18 +29,14 @@ ClientThread::ClientThread(PlayersMonitor &playerMonitor,
 }
 
 void ClientThread::loop() {
-    messenger.send("create-lobby");
-    std::string fisrt_recv = messenger.receive();
-    messenger.send("ready");
-    std::string second_recv = messenger.receive();
-    messenger.send("start-game");
-    while (!finished) {
-        std::string msg = messenger.receive();
-        std::cout<<msg<<std::endl;
-        if (msg == "") {
-            continue;
+    try {
+        while (!finished) {
+            std::string msg = messenger.receive();
+            std::cout<<msg<<std::endl;
+            parse(msg);
         }
-        parse(msg);
+    } catch(SocketError& e) {
+        return;
     }
 }
 

@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "MapMonitor.h"
 #include "../common/messenger.h"
+#include "GameBuilder.h"
 
 #define SUCCESSRETURNCODE 0
 
@@ -48,27 +49,29 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
-    Socket s(IP_MANU, PORT);
+    Socket s(LOCALHOST, PORT);
     ServerMessenger messenger(s);
 
     /* create graphics and client threads */
-    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
-                                  mapMonitor, messenger);
+//    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
+//                                  mapMonitor, messenger);
 
 
     /* DEBUG: RUN 'netcat -l 8000' in terminal */
     ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
                               messenger);
-
-    /* start threads */
     clientThread.start();
 //    graphicsThread.start();
+    auto app = Gtk::Application::create();
 
+    GameBuilder builder(playerMonitor, buildingsMonitor, mapMonitor, messenger);
+    InitialWindow* window = builder.get_initial_window();
+    app->run(*window);
     /* join threads */
 //    graphicsThread.join();
 
     /* once graphics join (window closes), we kill client thread */
-//    clientThread.finish();
+    clientThread.finish();
     clientThread.join();
     return SUCCESSRETURNCODE;
 }

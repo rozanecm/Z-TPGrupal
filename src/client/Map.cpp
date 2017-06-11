@@ -18,6 +18,9 @@ unsigned int Map::getXSize() {
 }
 
 unsigned int Map::getYSize() {
+    if (!baseMap.size()) {
+        return 0;
+    }
     return baseMap[0].size();
 }
 

@@ -43,10 +43,8 @@ GameBuilder::GameBuilder(PlayersMonitor &monitor,
                          &messenger);
     refBuilder->get_widget("Portrait", portrait);
     refBuilder->get_widget("SidePanel", panel);
-    refBuilder->get_widget("BuildingView", building_panel);
-    refBuilder->get_widget("UnitView", unit_panel);
-    refBuilder->get_widget("GroupView", group_panel);
     refBuilder->get_widget("Create", button);
+    refBuilder->get_widget_derived("InitialWindow", init_window);
 }
 
 
@@ -58,6 +56,10 @@ GameBuilder::~GameBuilder() {
 
 GameWindow *GameBuilder::get_window() {
     return window;
+}
+
+InitialWindow *GameBuilder::get_initial_window() {
+    return init_window;
 }
 
 
