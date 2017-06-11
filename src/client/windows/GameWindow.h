@@ -7,14 +7,15 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/box.h>
 #include <gtkmm/label.h>
-#include "GameArea.h"
-#include "PlayersMonitor.h"
-#include "BuildingsMonitor.h"
-#include "MapMonitor.h"
-#include "BuildingPanel.h"
-#include "ServerMessenger.h"
+#include <gtkmm/applicationwindow.h>
+#include "../GameArea.h"
+#include "../PlayersMonitor.h"
+#include "../BuildingsMonitor.h"
+#include "../MapMonitor.h"
+#include "../BuildingPanel.h"
+#include "../ServerMessenger.h"
 
-class GameWindow : public Gtk::Window {
+class GameWindow : public Gtk::ApplicationWindow {
     GameArea* gameArea;
     Gtk::Box* panel;
     Gtk::Box* unit_panel;

@@ -31,6 +31,10 @@ find_package(Threads REQUIRED)
 set(SOURCE_FILES
         ../../libs/xml/pugixml.hpp
         ../../libs/xml/pugixml.cpp
+        windows/GameWindow.cpp
+        windows/GameWindow.h
+        windows/InitialWindow.cpp
+        windows/InitialWindow.h
         Armament.cpp
         Armament.h
         Building.cpp
@@ -49,8 +53,6 @@ set(SOURCE_FILES
         GameArea.h
         GameBuilder.cpp
         GameBuilder.h
-        GameWindow.cpp
-        GameWindow.h
         GraphicsThread.cpp
         GraphicsThread.h
         main.cpp

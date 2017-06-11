@@ -19,9 +19,12 @@ class InitialWindow : public Gtk::Window {
 public:
     InitialWindow(BaseObjectType* cobject,
         const Glib::RefPtr<Gtk::Builder>& builder);
+
+    std::shared_ptr<Socket> get_socket();
 private:
 
     void on_click();
+    void on_hide();
 };
 
 

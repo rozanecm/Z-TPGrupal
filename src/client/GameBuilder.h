@@ -4,7 +4,7 @@
 #include <gtkmm.h>
 #include <string>
 
-#include "GameWindow.h"
+#include "windows/GameWindow.h"
 #include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"

@@ -26,7 +26,15 @@ void InitialWindow::on_click() {
         std::cout << "Could not connect to specified addr/port" << std::endl;
         return;
     }
-    std::cout << "Hola" << addr_str << port << name << std::endl;
+    this->hide();
+}
+
+void InitialWindow::on_hide() {
+    std::cout << "It is hidden" << std::endl;
+}
+
+std::shared_ptr<Socket> InitialWindow::get_socket() {
+    return s;
 }
 
 

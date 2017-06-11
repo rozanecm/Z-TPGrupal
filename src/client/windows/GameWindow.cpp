@@ -9,7 +9,7 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::Window(cobject)
+        Gtk::ApplicationWindow(cobject)
 {
     builder->get_widget_derived("GameArea", gameArea);
 
