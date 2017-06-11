@@ -58,7 +58,11 @@ void Unit::move() {
                                                         ,obj_size.getHeight());
         if (compass.canIWalkToThisPosition(next_pos)) {
             double t_factor = compass.getTerrainFactorOn(pos.getX(),pos.getY());
+            // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
+            this->range.moveTo(pos.getX(),pos.getY());
+            this->weapon.movePosition(pos.getX(),pos.getY());
+
             road->pop_back();
 
             // increase or decrease distance til steps are more than unit speed
