@@ -14,14 +14,14 @@ void Map::setCell(unsigned int xCoordinate, unsigned int yCoordinate,
 }
 
 unsigned int Map::getXSize() {
-    return baseMap.size();
+    return (unsigned int) baseMap.size();
 }
 
 unsigned int Map::getYSize() {
     if (!baseMap.size()) {
         return 0;
     }
-    return baseMap[0].size();
+    return (unsigned int) baseMap[0].size();
 }
 
 std::string
