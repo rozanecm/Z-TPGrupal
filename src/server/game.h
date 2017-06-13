@@ -14,17 +14,18 @@ class Player;
 
 class Game: public Thread {
 private:
-    std::vector<Player*> players;
-//    ControlUnit control;
+    std::vector<Messenger*> players;
+    ControlUnit control;
     std::shared_ptr<Map> map;
 //    std::vector<Unit>& all_units;
 //    std::vector<Occupant>& all_occupants;
 
 public:
-    Game(std::vector<Player*> players, std::shared_ptr<Map> map,
-         std::map<int,Unit>& units);
+    Game(std::vector<Messenger *> players, std::shared_ptr<Map> map,
+             std::map<int, Unit> &units, std::vector<Team>& teams_info,
+             std::vector<Occupant*>& occupants);
 
-    Game(std::vector<Player*> players, std::shared_ptr<Map> map);
+//    Game(std::vector<Player*> players, std::shared_ptr<Map> map);
 
     void addBuildings(std::vector<Occupant> buildings);
 

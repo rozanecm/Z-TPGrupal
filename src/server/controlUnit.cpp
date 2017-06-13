@@ -8,14 +8,14 @@
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit> &all_units,
-                         std::vector<Occupant> &all_occupants,/*
+                         std::vector<Occupant*> &all_occupants,/*
                          std::vector<Territory> &territories,*/
                          std::vector<Team>& teams) :
     all_units(all_units), /*territories(territories),*/
     all_occupants(all_occupants), players(new_players),
     winning(false), teams(teams) {
     this->changed_units = new std::vector<Unit>;
-    this->changed_occupants = new std::vector<Occupant>;
+    this->changed_occupants = new std::vector<Occupant*>;
 }
 
 void ControlUnit::run() {
@@ -77,11 +77,11 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant>::iterator it = (*changed_occupants).begin();
+    std::vector<Occupant*>::iterator it = (changed_occupants)->begin();
     int i = 0;
-    for (; it != (*changed_occupants).end();) {
-        if (all_occupants[i].getLifeLeft() ==
-                (*it).getLifeLeft()) {
+    for (; it != (changed_occupants)->end();) {
+        if (all_occupants[i]->getLifeLeft() ==
+                (*it)->getLifeLeft()) {
             it = (*changed_occupants).erase(it);
         } else {
             ++it;
@@ -91,7 +91,7 @@ void ControlUnit::checkAllLivingOccupants() {
     // if dead erase Occupant
     it = all_occupants.begin();
     for(;it != all_occupants.end();){
-        if(!it->areYouAlive()) {
+        if(!(*it)->areYouAlive()) {
             //erase it from map
             it = all_occupants.erase(it);
             // if building put ruins
@@ -172,12 +172,12 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     return info;
 }
 
-std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
+std::string ControlUnit::getInfoFromOccupant(Occupant* Occupant) {
     std::string info = "";
-    info += std::to_string(Occupant.getId()) + "-";
-    info += std::to_string(Occupant.getPosition().getX()) + "-";
-    info += std::to_string(Occupant.getPosition().getY()) + "-";
-    info += std::to_string(Occupant.getLifeLeft()) + "--";
+    info += std::to_string(Occupant->getId()) + "-";
+    info += std::to_string(Occupant->getPosition().getX()) + "-";
+    info += std::to_string(Occupant->getPosition().getY()) + "-";
+    info += std::to_string(Occupant->getLifeLeft()) + "--";
     return info;
 }
 
@@ -197,9 +197,9 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
     Unit selected_unit = (*it).second;
     if (selected_unit.getTeam() == attacker_team) {
         for (auto z: all_occupants) {
-            if (z.getId() == target) {
-                if (z.getTeam() != attacker_team) {
-                    selected_unit.setTargetToAttack(z);
+            if (z->getId() == target) {
+                if (z->getTeam() != attacker_team) {
+//                    selected_unit.setTargetToAttack(z);
                     break;
                 }
             }

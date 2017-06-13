@@ -20,7 +20,7 @@ class MapLoader {
     std::vector<UnitMold> unit_mold;
     std::map<std::string, Weapon> weapons;
     std::shared_ptr<Map> game_map;
-
+    std::vector<Factory*> forts;
 public:
     MapLoader(std::string path, std::string& config);
 
@@ -32,6 +32,7 @@ public:
     std::vector<Unit> getUnits();
 
     std::shared_ptr<Map> get_map();
+    std::vector<Factory*> get_forts();
 private:
     void load_structs(const pugi::xml_node &root, const pugi::xml_node &cfg);
 

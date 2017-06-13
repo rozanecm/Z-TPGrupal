@@ -71,6 +71,8 @@ public:
     std::string& get_map();
 
     void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
+
+    std::vector<Occupant*>& getOccupants();
 };
 
 

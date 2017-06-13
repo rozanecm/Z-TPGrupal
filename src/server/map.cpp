@@ -186,6 +186,10 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
     }
 }
 
+std::vector<Occupant *> &Map::getOccupants() {
+    return this->all_occupants;
+}
+
 
 
 

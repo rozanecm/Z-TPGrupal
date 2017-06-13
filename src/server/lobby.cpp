@@ -15,7 +15,33 @@ void Lobby::startGame() {
         //start game
         MapLoader maploader(PATH, config);
         std::shared_ptr<Map> map = maploader.get_map();
-        game = std::unique_ptr<Game> (new Game(players,map));
+
+        // build teams
+        std::vector<Factory*> forts = maploader.get_forts();
+        std::vector<Team> teams_info;
+        for (int i = 0; i <= 3; ++i) {
+            std::vector<PlayerInfo> players;
+            for (int j = 0; j <= teams[i].size(); ++j) {
+                Factory* fortress = forts.back();
+                PlayerInfo new_player(teams[i][j],*fortress);
+                forts.pop_back();
+                players.push_back(new_player);
+            }
+            Team new_team(players,i);
+            teams_info.push_back(new_team);
+        }
+
+        // get messengers
+        std::vector<Messenger *> messengers;
+        for (auto p: players) {
+            messengers.push_back(p->getMessenger());
+        }
+
+        std::vector<Occupant*>& occupants = map->getOccupants();
+        std::map<int, Unit> units;
+        game = std::unique_ptr<Game> (new Game(messengers, map, units,
+                                               teams_info,
+                                               occupants));
         game.get()->start();
         std::cout << "Game started" << std::endl;
     }
