@@ -1,0 +1,8 @@
+#ifndef Z_TPGRUPAL_ROTATIONSENUM_H
+#define Z_TPGRUPAL_ROTATIONSENUM_H
+
+enum class RotationsEnum {
+    r000, r045, r090, r135, r180, r225, r270, r315
+};
+
+#endif //Z_TPGRUPAL_ROTATIONSENUM_H
