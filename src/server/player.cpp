@@ -10,7 +10,7 @@ Player::Player(Messenger *msg, ControlUnit* control, Menu& menu) :
 
 }
 
-Player::Player(Messenger *msg, Menu& menu) :
+Player::Player(Messenger *msg, Menu &menu, std::string id) :
         messenger(msg), conected(true),on_menu(true),on_lobby(false),
         playing(false),menu(menu) {}
 

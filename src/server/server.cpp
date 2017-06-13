@@ -10,10 +10,12 @@ Server::Server(unsigned int port, Menu &menu) : socket(port),
 
 void Server::run() {
     try {
+        int i = 0;
         while(this->running) {
             Socket new_client = this->socket.accept_client();
             Messenger* messenger = new Messenger(new_client);
-            menu.addPlayer(messenger, menu);
+            std::string id_new_player = "Player" + std::to_string(i);
+            menu.addPlayer(messenger, menu,id_new_player);
             std::cout << "new player conectado" << std::endl;
 //              create player with messenger
 //            std::string logIn_msg = messenger->recieveMessage();

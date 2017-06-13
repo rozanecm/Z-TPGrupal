@@ -32,7 +32,7 @@ private:
 public:
     Player(Messenger* messenger, ControlUnit* control, Menu& menu);
 
-    Player(Messenger* messenger, Menu& menu);
+    Player(Messenger *messenger, Menu &menu, std::string id);
 
     void run();
 

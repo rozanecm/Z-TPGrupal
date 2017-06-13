@@ -8,16 +8,14 @@
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit> &all_units,
-                         std::vector<Occupant> &all_occupants,
-                         std::vector<Territory> &territories,
-                         std::vector<Team>& teams)
-        :
-    all_units(all_units), territories(territories),
+                         std::vector<Occupant> &all_occupants,/*
+                         std::vector<Territory> &territories,*/
+                         std::vector<Team>& teams) :
+    all_units(all_units), /*territories(territories),*/
     all_occupants(all_occupants), players(new_players),
     winning(false), teams(teams) {
     this->changed_units = new std::vector<Unit>;
     this->changed_occupants = new std::vector<Occupant>;
-    this->changed_territories = new std::vector<Territory>;
 }
 
 void ControlUnit::run() {
@@ -29,10 +27,6 @@ void ControlUnit::run() {
         // Copy starting state of Occupants
         for (auto z: all_occupants) {
             changed_occupants->push_back(z);
-        }
-
-        for (auto t: territories) {
-            changed_territories->push_back(t);
         }
 
         auto t1 = std::chrono::high_resolution_clock::now();
@@ -145,11 +139,11 @@ std::string ControlUnit::getUpdateInfo() {
         update_msg += getInfoFromOccupant(y);
     }
 
-    for(auto t: territories) {
-       if (t.doesTerritorysOwnerChanged()) {
-           update_msg += getInfoFromTerritory(t);
-       }
-    }
+//    for(auto t: territories) {
+//       if (t.doesTerritorysOwnerChanged()) {
+//           update_msg += getInfoFromTerritory(t);
+//       }
+//    }
 
     return update_msg;
 }
@@ -226,12 +220,12 @@ void ControlUnit::moveAllBullets() {
 }
 
 void ControlUnit::makeTerritoriesChecks() {
-    for (auto t: territories) {
-        std::map<int,Factory>& fac = t.getFactories();
-        for (auto f: fac) {
-            f.second.build();
-        }
-    }
+//    for (auto t: territories) {
+//        std::map<int,Factory>& fac = t.getFactories();
+//        for (auto f: fac) {
+//            f.second.build();
+//        }
+//    }
 }
 
 void ControlUnit::checkForWinner() {

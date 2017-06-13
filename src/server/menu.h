@@ -20,7 +20,7 @@ private:
 public:
     Menu(std::mutex& m);
 
-    void addPlayer(Messenger* msgr, Menu& menu);
+    void addPlayer(Messenger* msgr, Menu& menu, std::string player_id);
 
     void createNewLobby(Player* player);
 
