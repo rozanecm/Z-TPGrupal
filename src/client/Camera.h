@@ -26,6 +26,10 @@ public:
 
     std::pair<unsigned int, unsigned int> cameraOffset();
 
+    unsigned int mapToCameraXCoordinate(unsigned int globalXPosition);
+
+    unsigned int mapToCameraYCoordinate(unsigned int globalYPosition);
+
 private:
     /* save tile size in pixels so calculations on max and min coord.
      * can be done */
