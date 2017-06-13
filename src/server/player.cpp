@@ -80,3 +80,7 @@ void Player::shutDown() {
     messenger->shutdown();
 }
 
+std::string Player::getId() const {
+    return id;
+}
+

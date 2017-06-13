@@ -28,7 +28,7 @@ void Lobby::ready(Player* player) {
 bool Lobby::addPlayer(Player* player) {
     if(players.size() < 4)
         players.push_back(player);
-        player.ge
+        teams[players.size()][0] = player->getId();
     return (players.size() < 4);
 }
 

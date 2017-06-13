@@ -46,6 +46,8 @@ public:
 
     void shutDown();
 
+    std::string getId() const;
+
     ~Player();
 
 private:
