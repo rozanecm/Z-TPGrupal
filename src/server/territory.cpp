@@ -29,3 +29,15 @@ void Territory::changeFactoriesTechLevel(int tech_level) {
 Position Territory::getFlagPOsition() {
     return flag_position;
 }
+
+void Territory::build() {
+    for (auto f: factories) {
+        f.second.build();
+    }
+}
+
+std::map<int, Factory> &Territory::getFactories() {
+    return factories;
+}
+
+

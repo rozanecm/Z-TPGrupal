@@ -27,6 +27,10 @@ public:
     void changeFactoriesTechLevel(int tech_level);
 
     Position getFlagPOsition();
+
+    void build();
+
+    std::map<int,Factory>& getFactories();
 };
 
 

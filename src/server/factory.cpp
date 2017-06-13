@@ -17,7 +17,8 @@ void Factory::build() {
         Size u_size = (*it).getUnitSize();
         Position factory_pos = this->obj_size.getPosition();
         u_size.moveTo(factory_pos.getX(),factory_pos.getY());
-        (*it).createUnit(ID,u_size,map,weapons[(*it).getTypeOfUnit()]);
+//        Weapon u_weapon = weapons[(*it).getTypeOfUnit()];
+//        (*it).createUnit(ID,u_size,map,u_weapon);
         time_counter = 0;
     } else if (running && time_counter < (*it).getCreationTime()) {
         time_counter += 1 + tech_level;

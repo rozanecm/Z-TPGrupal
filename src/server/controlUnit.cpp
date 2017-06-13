@@ -9,12 +9,15 @@
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit> &all_units,
                          std::vector<Occupant> &all_occupants,
-                         std::vector<Territory> &territories) :
+                         std::vector<Territory> &territories,
+                         std::vector<Team>& teams)
+        :
     all_units(all_units), territories(territories),
     all_occupants(all_occupants), players(new_players),
-    winning(false) {
+    winning(false), teams(teams) {
     this->changed_units = new std::vector<Unit>;
     this->changed_occupants = new std::vector<Occupant>;
+    this->changed_territories = new std::vector<Territory>;
 }
 
 void ControlUnit::run() {
@@ -27,6 +30,11 @@ void ControlUnit::run() {
         for (auto z: all_occupants) {
             changed_occupants->push_back(z);
         }
+
+        for (auto t: territories) {
+            changed_territories->push_back(t);
+        }
+
         auto t1 = std::chrono::high_resolution_clock::now();
 
         // execute commands
@@ -40,6 +48,8 @@ void ControlUnit::run() {
         //send update message
         this->sendUpdateMessage();
 
+        this->checkForWinner();
+
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
@@ -47,6 +57,7 @@ void ControlUnit::run() {
         sleepFor(t3 - time_span.count());
     }
     // send victory or defeated message
+    this->sendFinnalMessage();
 }
 
 void ControlUnit::sleepFor(double msec) {
@@ -99,16 +110,6 @@ void ControlUnit::cmdMoveUnit(int id, int x, int y) {
     std::map<int,Unit>::iterator it;
     it = all_units.find(id);
     (*it).second.calculateRoadTo(x,y);
-//    bool found = false;
-//    Unit selected_unit = all_units.front();
-//    std::vector<Unit>::iterator it = all_units.begin();
-//    while (it != all_units.end() && !found) {
-//        if (it->getId() == id) {
-//            (*it).calculateRoadTo(x, y);
-//            found = true;
-//        }
-//        ++it;
-//    }
 }
 
 void ControlUnit::executeCommands() {
@@ -187,35 +188,12 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
         for (auto z: all_occupants) {
             if (z.getId() == target) {
                 if (z.getTeam() != attacker_team) {
-                    //attack z
-                    // }
+                    selected_unit.setTargetToAttack(z);
                     break;
                 }
             }
         }
     }
-//    bool found = false;
-//    Unit selected_unit = all_units.front();
-//    std::vector<Unit>::iterator it = all_units.begin();
-//    while (it != all_units.end() && !found) {
-//        if (it->getId() == id_unit) {
-//            if (it->getTeam() != attacker_team) {
-//                found = true;
-//            } else {
-//                // if unit's is form the players team
-//                // look for target
-//                for (auto z: all_occupants) {
-//                    if (z.getId() == target) {
-//                        if (z.getTeam() != attacker_team) {
-//                            //attack z
-//                        }
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        ++it;
-//    }
 }
 
 void ControlUnit::moveAllBullets() {
@@ -227,5 +205,43 @@ void ControlUnit::moveAllBullets() {
         } else {
             ++it;
         }
+    }
+}
+
+void ControlUnit::makeTerritoriesChecks() {
+    for (auto t: territories) {
+        std::map<int,Factory>& fac = t.getFactories();
+        for (auto f: fac) {
+            f.second.build();
+        }
+    }
+}
+
+void ControlUnit::checkForWinner() {
+    int teams_alive = 0;
+    for (auto t: teams) {
+        if (!t.doesTeamLose()) {
+            teams_alive += 1;
+        }
+    }
+
+    if (teams_alive == 1) {
+        winning = true;
+    }
+}
+
+void ControlUnit::sendFinnalMessage() {
+    std::string winner = "winner-";
+    for (auto t: teams) {
+        if (!t.doesTeamLose()) {
+            std::vector<PlayerInfo>& winners = t.getPlayersInfo();
+            for (auto w: winners) {
+                winner += w.getPlayerId();
+            }
+
+        }
+    }
+    for (auto y: players) {
+        y->sendMessage(winner);
     }
 }

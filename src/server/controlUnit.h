@@ -14,6 +14,7 @@
 #include "../common/messenger.h"
 #include "factory.h"
 #include "territory.h"
+#include "team.h"
 
 class Command;
 
@@ -21,21 +22,23 @@ class ControlUnit {
 private:
     std::map<int,Unit>& all_units;
     std::vector<Territory> territories;
-//    std::vector<Unit>& all_units;
     std::vector<Occupant>& all_occupants;
     std::vector<Messenger*> players;
     std::vector<Command>* commands;
     std::mutex m;
     bool winning;
+    std::vector<Team>& teams;
     std::vector<Bullet*> all_bullets;
     std::vector<Unit>* changed_units;
     std::vector<Occupant>* changed_occupants;
+    std::vector<Territory>* changed_territories;
 
 public:
     ControlUnit(std::vector<Messenger *> &new_players,
                     std::map<int, Unit> &all_units,
                     std::vector<Occupant> &all_occupants,
-                    std::vector<Territory> &territories);
+                    std::vector<Territory> &territories,
+                    std::vector<Team>& teams);
 
     // Method to start checking commands from players
     void run();
@@ -69,6 +72,12 @@ private:
     std::string getInfoFromUnit(Unit& unit);
 
     std::string getInfoFromOccupant(Occupant& Occupant);
+
+    void makeTerritoriesChecks();
+
+    void checkForWinner();
+
+    void sendFinnalMessage();
 };
 
 
