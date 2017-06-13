@@ -15,6 +15,8 @@ private:
     std::map<int,Factory>& factories;
     Position flag_position;
     Size territory_size;
+    bool changed;
+
 public:
     Territory(std::map<int,Factory>& factories, std::string team,
               Position flag_position, Size territory_size);
@@ -24,6 +26,14 @@ public:
     int getTechLevel();
 
     void changeFactoriesTechLevel(int tech_level);
+
+    Position getFlagPosition();
+
+    void build();
+
+    std::map<int,Factory>& getFactories();
+
+    bool doesTerritorysOwnerChanged();
 };
 
 

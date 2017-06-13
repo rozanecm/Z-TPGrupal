@@ -34,6 +34,8 @@ public:
     Size getBulletSize() const;
 
     void recalculateRoadToTarget();
+
+    void movePosition(int x,int y);
 };
 
 

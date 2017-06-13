@@ -52,7 +52,7 @@ set(SOURCE_FILES
         server.h
         menu.h
         player.h
-        player.cpp territory.cpp territory.h)
+        player.cpp territory.cpp territory.h team.cpp team.h playerInfo.cpp playerInfo.h)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)

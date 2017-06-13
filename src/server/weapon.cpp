@@ -31,3 +31,7 @@ Size Weapon::getBulletSize() const {
 void Weapon::recalculateRoadToTarget() {
     bullets.back()->calculateRoadToTarget();
 }
+
+void Weapon::movePosition(int x, int y) {
+    w_size.moveTo(x,y);
+}

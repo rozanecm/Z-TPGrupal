@@ -69,6 +69,8 @@ public:
     bool thereIsABridge(Size& other_size);
 
     std::string& get_map();
+
+    void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
 };
 
 
