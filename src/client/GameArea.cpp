@@ -4412,10 +4412,10 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         /* rotations 090 and 270 dont have shadow */
         drawJeepTires(cr, xCoordinate, yCoordinate, rotation);
     }
-    if (unitType == UnitsEnum::HEAVY_TANK or
-            unitType == UnitsEnum::LIGHT_TANK or
-            unitType == UnitsEnum::MEDIUM_TANK or
-            unitType == UnitsEnum::MML){
+    if (unitType == UnitsEnum::HEAVY_TANK
+        or unitType == UnitsEnum::LIGHT_TANK
+        or unitType == UnitsEnum::MEDIUM_TANK
+        or unitType == UnitsEnum::MML){
         /* same assets are used for given rotations;
          * e.g.: 135 and 315 are drawn with same img */
         if (rotation == RotationsEnum::r135){
@@ -4427,6 +4427,15 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         } else if (rotation == RotationsEnum::r270){
             rotation = RotationsEnum::r090;
         }
+    } else if ((unitType == UnitsEnum::GRUNT
+               or unitType == UnitsEnum::LASER
+               or unitType == UnitsEnum::PSYCHO
+               or unitType == UnitsEnum::PYRO
+               or unitType == UnitsEnum::SNIPER
+               or unitType == UnitsEnum::TOUGH)
+               and (actionType == ActionsEnum::MOVE
+                    or actionType == ActionsEnum::STAND)) {
+        unitType = UnitsEnum::GENERIC_ROBOT;
     }
 
     Gdk::Cairo::set_source_pixbuf(cr, unitsAnimations.at(team).at(unitType).
