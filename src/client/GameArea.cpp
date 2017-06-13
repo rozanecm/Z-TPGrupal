@@ -275,6 +275,8 @@ void GameArea::processSelection() {
         /* case if user clicked */
         if (unitsSelected){
             processClickWithUnitsSelected();
+        } else {
+            processClick();
         }
     }
     /* at the end of the selection processing, reset unitsSelection bool */
@@ -286,6 +288,12 @@ void GameArea::processClickWithUnitsSelected() {
 //      get clicked unit/building. if clicked building is of own team, select
 // it, otherwise atack. If nothing was selected, move selected units to
 // clicked position.
+}
+
+void GameArea::processClick() {
+    if (unitsSelected){
+
+    }
 }
 
 void GameArea::loadUnitsResources() {

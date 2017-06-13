@@ -4,6 +4,8 @@
 #include <utility>
 #include <Lock.h>
 
+#define IMG_SIZE_IN_PX 16
+
 int Unit::get_ID() {
     return id;
 }
@@ -20,10 +22,10 @@ Unit::markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                             gdouble yStartCoordinate,
                             gdouble xFinishCoordinate,
                             gdouble yFinishCoordinate) {
-    if (position.first >= xStartCoordinate &&
-            position.first <= xFinishCoordinate &&
-            position.second >= yStartCoordinate &&
-            position.second <= yFinishCoordinate){
+    if (position.first >= xStartCoordinate - IMG_SIZE_IN_PX &&
+            position.first <= xFinishCoordinate + IMG_SIZE_IN_PX &&
+            position.second >= yStartCoordinate - IMG_SIZE_IN_PX &&
+            position.second <= yFinishCoordinate + IMG_SIZE_IN_PX){
         selected = true;
         unitsSelected = true;
     }

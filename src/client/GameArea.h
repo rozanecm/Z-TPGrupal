@@ -274,6 +274,8 @@ public:
     void processSelection();
 
     void processClickWithUnitsSelected();
+
+    void processClick();
 };
 
 
