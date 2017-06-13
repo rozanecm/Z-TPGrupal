@@ -10,12 +10,12 @@ ServerMessenger::ServerMessenger(Socket& s) :
 }
 
 void ServerMessenger::send(const std::string &message) {
-    Lock l(m);
+    Lock l(send_m);
     messenger.sendMessage(message);
 }
 
 std::string ServerMessenger::receive() {
-    Lock l(m);
+    Lock l(recv_m);
     return messenger.recieveMessage();
 }
 

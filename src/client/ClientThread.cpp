@@ -29,14 +29,13 @@ ClientThread::ClientThread(PlayersMonitor &playerMonitor,
 }
 
 void ClientThread::loop() {
-    messenger.send("ready");
-    while (!finished) {
-        std::string msg = messenger.receive();
-        std::cout<<msg<<std::endl;
-        if (msg == "") {
-            continue;
+    try {
+        while (!finished) {
+            std::string msg = messenger.receive();
+            parse(msg);
         }
-        parse(msg);
+    } catch(SocketError& e) {
+        return;
     }
 }
 
@@ -49,6 +48,7 @@ void ClientThread::parse(std::string &s) {
         return;
     }
     std::vector<std::string> args(++params.begin(), params.end());
+    std::cout << "Executing " << params[cmd] << std::endl;
     result->second->execute(args);
 }
 

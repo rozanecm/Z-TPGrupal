@@ -6,14 +6,16 @@
 
 Server::Server(unsigned int port, Menu &menu) : socket(port),
                                                 running(true),
-                                                menu(menu) {}
+                                                menu(menu),
+                                                port(port)
+{}
 
 void Server::run() {
+    std::cout << "Server started on port " << port << std::endl;
     try {
         while(this->running) {
             Socket new_client = this->socket.accept_client();
             Messenger* messenger = new Messenger(new_client);
-            std::cout << "antes de agregar el player" << std::endl;
             menu.addPlayer(messenger, menu);
             std::cout << "new player conectado" << std::endl;
 //              create player with messenger

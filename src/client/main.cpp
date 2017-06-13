@@ -7,13 +7,10 @@
 #include "Map.h"
 #include "MapMonitor.h"
 #include "../common/messenger.h"
+#include "GameBuilder.h"
 
 #define SUCCESSRETURNCODE 0
 
-/* DEBUGGING: run 'netcat -l 8000' in a terminal to launch client w/o server' */
-#define IP_MANU "10.1.207.62"
-#define LOCALHOST "127.0.0.1"
-#define PORT 8000
 void play_sound() {
     // Init, open the audio channel
     Mix_Init(0);
@@ -48,27 +45,35 @@ int main(int argc, char **argv) {
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
 
-    Socket s(LOCALHOST, PORT);
-    ServerMessenger messenger(s);
+    auto app = Gtk::Application::create();
 
-    /* create graphics and client threads */
-    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
-                                  mapMonitor, messenger);
+    GameBuilder builder;
+    InitialWindow* window = builder.get_initial_window();
+    app->run(*window);
+    // Once the window closes, we fetch the socket
+    std::shared_ptr<Socket> s = window->get_socket();
+    if (s) {
+        ServerMessenger messenger(*s.get());
 
+        ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
+                                  messenger);
+        clientThread.start();
 
-    /* DEBUG: RUN 'netcat -l 8000' in terminal */
-    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
-                              messenger);
+        GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
+                                      mapMonitor, messenger);
 
-    /* start threads */
-    clientThread.start();
-//    graphicsThread.start();
+        // HARDCODED DEBUG MESSAGES TO START A GAME
+        messenger.send("create-lobby");
+        messenger.send("ready");
+        messenger.send("start-game");
 
-    /* join threads */
-//    graphicsThread.join();
+        graphicsThread.start();
+        graphicsThread.join();
 
-    /* once graphics join (window closes), we kill client thread */
-//    clientThread.finish();
-    clientThread.join();
+        /* once graphics join (window closes), we kill client thread */
+        clientThread.finish();
+        clientThread.join();
+    }
+
     return SUCCESSRETURNCODE;
 }

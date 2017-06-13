@@ -6,14 +6,7 @@
 #include "MapMonitor.h"
 
 
-GameBuilder::GameBuilder(PlayersMonitor &monitor,
-                         BuildingsMonitor &buildingsMonitor,
-                         MapMonitor &mapMonitor,
-                         ServerMessenger& messenger) :
-        playersMonitor(monitor),
-        buildingsMonitor(buildingsMonitor),
-        mapMonitor(mapMonitor),
-        messenger(messenger){
+GameBuilder::GameBuilder() {
     //Load the GtkBuilder file and instantiate its widgets:
     refBuilder = Gtk::Builder::create();
     try
@@ -39,14 +32,10 @@ GameBuilder::GameBuilder(PlayersMonitor &monitor,
     // Save the widget refs in the class attributes
     refBuilder->get_widget_derived("GameWindow", window);
 
-    window->setResources(&playersMonitor, &buildingsMonitor, &mapMonitor,
-                         &messenger);
     refBuilder->get_widget("Portrait", portrait);
     refBuilder->get_widget("SidePanel", panel);
-    refBuilder->get_widget("BuildingView", building_panel);
-    refBuilder->get_widget("UnitView", unit_panel);
-    refBuilder->get_widget("GroupView", group_panel);
     refBuilder->get_widget("Create", button);
+    refBuilder->get_widget_derived("InitialWindow", init_window);
 }
 
 
@@ -58,6 +47,10 @@ GameBuilder::~GameBuilder() {
 
 GameWindow *GameBuilder::get_window() {
     return window;
+}
+
+InitialWindow *GameBuilder::get_initial_window() {
+    return init_window;
 }
 
 
