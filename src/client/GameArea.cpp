@@ -5838,7 +5838,7 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
     if (unitType == UnitsEnum::JEEP &&
         rotation != RotationsEnum::r090 &&
         rotation != RotationsEnum::r270) {
-        /* rotations 090 and 270 dont have shadow */
+        /* rotations 090 and 270 dont have tires */
         drawJeepTires(cr, xCoordinate, yCoordinate, rotation);
     }
     if (unitType == UnitsEnum::HEAVY_TANK
@@ -5864,9 +5864,13 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
                 or unitType == UnitsEnum::TOUGH)
                and(actionType == ActionsEnum::MOVE
                     or actionType == ActionsEnum::STAND)) {
+        /* because same imgs are used to draw all different types of robots
+         * when these are moving or standing still, if this is the case, we
+         * set the unit type to generic robot */
         unitType = UnitsEnum::GENERIC_ROBOT;
     }
 
+    /* perform actual drawing */
     Gdk::Cairo::set_source_pixbuf(cr, unitsAnimations.at(team).at(unitType).
                                           at(actionType).at(rotation).
                                           at(unitCounter),
@@ -5893,6 +5897,7 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
             camera.getPosition().second + NUMBER_OF_TILES_TO_SHOW * TILESIZE);
 
     for (auto &unit : unitsToDraw) {
+        /* check what is being drawn, and choose the counter approprately. */
         unsigned short counter;
         if (unit.getType() == UnitsEnum::JEEP) {
             counter = jeepCounter;
@@ -5907,6 +5912,8 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
         } else {
             counter = standingRobotCounter;
         }
+
+        /* call actual drawing method */
         drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
                  unit.getRotation(),
                  counter, cr,

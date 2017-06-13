@@ -51,7 +51,7 @@ private:
     unsigned short shootingDrawingCounter;
     unsigned short standingDrawingCounter;
     unsigned short walkingDrawingCounter;
-    
+
 public:
     int get_ID();
 

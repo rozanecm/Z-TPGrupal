@@ -239,8 +239,17 @@ private:
 
     void loadResources();
 
+    /**
+     *
+     * @param cr receive smart pointer to cairo context
+     */
     void drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr);
 
+    /**
+     * counters used to know whic img of each animation should be drawn are
+     * updated. This method should get called once per frame, otherwise it is
+     * not guaranteed that animations will be correctly drawn.
+     */
     void updateCounters();
 
 protected:
