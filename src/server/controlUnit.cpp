@@ -43,6 +43,7 @@ void ControlUnit::run() {
         // do stuff
         this->unitsMakeMicroAction();
         this->moveAllBullets();
+        this->makeTerritoriesChecks();
         this->checkAllLivingOccupants();
 
         //send update message
@@ -143,6 +144,13 @@ std::string ControlUnit::getUpdateInfo() {
     for (auto y: *changed_occupants) {
         update_msg += getInfoFromOccupant(y);
     }
+
+    for(auto t: territories) {
+       if (t.doesTerritorysOwnerChanged()) {
+           update_msg += getInfoFromTerritory(t);
+       }
+    }
+
     return update_msg;
 }
 
@@ -176,6 +184,15 @@ std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
     info += std::to_string(Occupant.getPosition().getX()) + "-";
     info += std::to_string(Occupant.getPosition().getY()) + "-";
     info += std::to_string(Occupant.getLifeLeft()) + "--";
+    return info;
+}
+
+std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
+    Position flag_pos = territory.getFlagPosition();
+    std::string info = "flagOn-";
+    info += std::to_string(flag_pos.getX()) + "-";
+    info += std::to_string(flag_pos.getY()) + "-";
+    info += territory.getTeam() + "--";
     return info;
 }
 
@@ -245,3 +262,5 @@ void ControlUnit::sendFinnalMessage() {
         y->sendMessage(winner);
     }
 }
+
+

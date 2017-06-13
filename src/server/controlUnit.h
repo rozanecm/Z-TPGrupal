@@ -73,6 +73,8 @@ private:
 
     std::string getInfoFromOccupant(Occupant& Occupant);
 
+    std::string getInfoFromTerritory(Territory& territory);
+
     void makeTerritoriesChecks();
 
     void checkForWinner();
