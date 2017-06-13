@@ -12,7 +12,7 @@
 #include "enums/TeamEnum.h"
 #include "enums/ActionsEnum.h"
 #include "enums/UnitsEnum.h"
-#include "BuildingsEnum.h"
+#include "enums/BuildingsEnum.h"
 #include "enums/RotationsEnum.h"
 #include <map>
 #include <string>
