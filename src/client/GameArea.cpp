@@ -242,7 +242,6 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
 }
 
 void GameArea::processSelection() {
-    //todo processing logic
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
     playersMonitor->markAsSelectedInRange(

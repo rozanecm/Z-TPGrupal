@@ -55,12 +55,6 @@ private:
 
     unsigned int totalLife;
 
-    //todo this probably shouldn't exist.
-    /* animations are stored in a map where the key indicates the kind
-     * of animations being stored and the value stores the images needed
-     * to draw mentioned animation. */
-    std::map<std::string, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> animations;
-
     unsigned short velocity;
 
     std::pair<unsigned int, unsigned int> position;

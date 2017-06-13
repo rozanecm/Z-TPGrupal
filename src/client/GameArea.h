@@ -65,8 +65,9 @@ private:
     std::map<RotationsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> jeepTires;
 
     /* declare counter used to know which of the flag imgs
-     * which compose the flag's animation should be showed */
-    //todo counters shouldn't be shared. Each item should have its own.
+     * which compose the flag's animation should be showed. This counters are
+     * updaated every time on_draw() is called.
+     * */
     unsigned long flagCounter;
     unsigned short standingRobotCounter;
     unsigned short walkingRobotCounter;
