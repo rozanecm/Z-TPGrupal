@@ -13,6 +13,7 @@
 #include "enums/ActionsEnum.h"
 #include "enums/UnitsEnum.h"
 #include "BuildingsEnum.h"
+#include "enums/RotationsEnum.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -50,38 +51,29 @@ private:
     /* map holding all flags */
     std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
-    /* map holding all units' fire animations */
+    /* map holding all units imgs */
     std::map<TeamEnum,
             std::map<UnitsEnum,
                     std::map<ActionsEnum,
-                            std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>
-            unitsFireAnimations;
-
-    /* map holding all units' walking and standing animations.
-     * In this animations robots are not shown differently */
-    std::map<TeamEnum ,
-            std::map<ActionsEnum,
-                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>
-            unitsGeneralAnimations;
+                            std::map<RotationsEnum,
+                                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>>
+            unitsAnimations;
 
     /* BUILDINGS RESOURCES */
     std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
-    /* VEHICLES RESOURCES */
-    std::map<TeamEnum ,
-            std::map<UnitsEnum ,
-                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>> vehicleBases;
-
-    std::map<UnitsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> tires;
+    std::map<RotationsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> jeepTires;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed */
+    //todo counters shouldn't be shared. Each item should have its own.
     unsigned long flagCounter;
+    unsigned short standingRobotCounter;
+    unsigned short walkingRobotCounter;
+    unsigned short shootingRobotCounter;
     unsigned short jeepCounter;
     unsigned short tireCounter;
-    unsigned short lightTankCounter;
-    unsigned short mediumTankCounter;
-    unsigned short heavyTankCounter;
+    unsigned short tankCounter;
     unsigned short mmlCounter;
 
     /* DRAWING METHODS */
@@ -251,17 +243,20 @@ private:
 
     void loadYellowHeavyTankAnimations();
 
-    void drawVehicle(TeamEnum team, UnitsEnum vehicle,
-                     unsigned short &vehicleCounter,
-                     const Cairo::RefPtr<Cairo::Context> &cr,
-                     unsigned int xCoordinate, unsigned int yCoordinate);
+    void drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
+                       unsigned int xCoordinate, unsigned int yCoordinate,
+                       RotationsEnum rotation);
 
-    void drawTank(TeamEnum team, UnitsEnum tankType,
-                  unsigned short &tankCounter,
+    void drawUnit(TeamEnum team, UnitsEnum unitType, ActionsEnum actionType,
+                  RotationsEnum rotation, unsigned short unitCounter,
                   const Cairo::RefPtr<Cairo::Context> &cr,
                   unsigned int xCoordinate, unsigned int yCoordinate);
 
     void loadResources();
+
+    void drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr);
+
+    void updateCounters();
 };
 
 

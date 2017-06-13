@@ -53,3 +53,19 @@ void PlayersMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
                                      xFinishCoordinate, yFinishCoordinate);
     }
 }
+
+std::vector<Unit> PlayersMonitor::getUnitsToDraw(unsigned int minX,
+                                                         unsigned int maxX,
+                                                         unsigned int minY,
+                                                         unsigned int maxY) {
+    Lock l(m);
+    std::vector<Unit> returnVector;
+    for (Player& player : players){
+        /* each player has to selects its units in range */
+        std::vector <Unit> currentPlayersVector = player.
+                getUnitsToDraw(minX, maxX, minY, maxY);
+        returnVector.insert(returnVector.end(), currentPlayersVector.begin(),
+                            currentPlayersVector.end());
+    }
+    return returnVector;
+}

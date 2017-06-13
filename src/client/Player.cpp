@@ -37,3 +37,19 @@ void Player::markAsSelectedInRange(gdouble xStartCoordinate,
                                    xFinishCoordinate, yFinishCoordinate);
     }
 }
+
+std::vector<Unit>
+Player::getUnitsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
+                       unsigned int maxY) {
+    std::vector <Unit> returnVector;
+    for (Unit& unit : units){
+        //todo check if this is correct
+        if (unit.getXCoordinate() >= minX &&
+                unit.getXCoordinate() <= maxX &&
+                unit.getYCoordinate() >= minY &&
+                unit.getYCoordinate() <= maxY){
+            returnVector.emplace_back(unit);
+        }
+    }
+    return returnVector;
+}

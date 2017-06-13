@@ -20,6 +20,11 @@ public:
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);
+
+    std::vector <Unit> getUnitsToDraw(unsigned int minX,
+                                              unsigned int maxX,
+                                              unsigned int minY,
+                                              unsigned int maxY);
 };
 
 
