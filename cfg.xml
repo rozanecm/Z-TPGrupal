@@ -1,0 +1,15 @@
+<Config>
+    <Port port="8000"/>
+    <Units>
+        <Unit type="Grunt" fire_rate="2" range="7" hp="60" tech_level="3" time="100" speed="4" size_x="3" size_y="5"/>
+    </Units>
+    <Vehicles>
+    </Vehicles>
+    <Structs>
+        <Struct type="Rock" size_x="3" size_y="3" hp="10"/>
+        <Struct type="Factory" size_x="9" size_y="9" hp="1000"/>
+    </Structs>
+    <Weapons>
+        <Weapon type="bullet" damage="2" size_x="1" size_y="1" speed="100" explosive="no"/>
+    </Weapons>
+</Config>

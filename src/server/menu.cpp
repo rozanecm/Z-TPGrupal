@@ -4,22 +4,20 @@
 
 #include "menu.h"
 
-Menu::Menu(std::mutex& m) : m(m),lobby_counter(0) {}
+Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
 void Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
     Lock l(m);
 //    std::string player_id = msgr->recieveMessage();
     this->players.push_back(new Player(msgr, menu, player_id));
     this->players.back()->start();
-    std::cout << "new player en menu" << std::endl;
 }
 
 void Menu::createNewLobby(Player* player) {
-    std::cout << "Creando Lobby" << std::endl;
     lobby_counter += 1;
-    Lobby* new_lobby = new Lobby(lobby_counter);
-    lobbys.emplace_back(new_lobby);
-    lobbys.back()->addPlayer(player);
+    Lobby* new_lobby = new Lobby(lobby_counter, config);
+    lobbies.emplace_back(new_lobby);
+    lobbies.back()->addPlayer(player);
     player->addLobby(new_lobby);
     player->getMessenger()->sendMessage("New Lobby created");
 }
@@ -31,7 +29,7 @@ std::string Menu::getLobbiesInfo() {
     return info;
 }
 
-void Menu::addToLobbie(int id_lobbie, Player &player) {
+void Menu::addToLobby(int id_lobbie, Player &player) {
 
 }
 
@@ -42,7 +40,7 @@ Menu::~Menu() {
         delete(p);
     }
 
-    for(auto l: lobbys) {
+    for(auto l: lobbies) {
         delete(l);
     }
 }

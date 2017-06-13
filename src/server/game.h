@@ -16,15 +16,15 @@ class Game: public Thread {
 private:
     std::vector<Player*> players;
 //    ControlUnit control;
-    Map map;
+    std::shared_ptr<Map> map;
 //    std::vector<Unit>& all_units;
 //    std::vector<Occupant>& all_occupants;
 
 public:
-    Game(std::vector<Player*> players, Map& map,
+    Game(std::vector<Player*> players, std::shared_ptr<Map> map,
          std::map<int,Unit>& units);
 
-    Game(std::vector<Player*> players, Map& map);
+    Game(std::vector<Player*> players, std::shared_ptr<Map> map);
 
     void addBuildings(std::vector<Occupant> buildings);
 
