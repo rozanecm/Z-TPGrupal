@@ -57,10 +57,10 @@ public:
 
     void update_position(int x, int y);
 
-    void markAsSelectedInRange(gdouble xStartCoordinate,
-                               gdouble yStartCoordinate,
-                               gdouble xFinishCoordinate,
-                               gdouble yFinishCoordinate);
+    void markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
+                                   gdouble yStartCoordinate,
+                                   gdouble xFinishCoordinate,
+                                   gdouble yFinishCoordinate);
 
     bool isShooting();
 

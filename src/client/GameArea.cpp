@@ -25,6 +25,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         playersMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
+        unitsSelected(false),
         /* camera is initialized with size 0,0 because we don't
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
@@ -63,8 +64,10 @@ void GameArea::loadResources() {
 GameArea::~GameArea() {}
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    if (selectionMade)
+    if (selectionMade){
+        makeSelection();
         processSelection();
+    }
     drawBaseMap(cr, camera.getPosition());
     drawFlagAnimation(cr, 500, 500);
     //todo implement building drawing
@@ -242,10 +245,12 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
     }
 }
 
-void GameArea::processSelection() {
+void GameArea::makeSelection() {
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
+    //todo filter out other players' units.
     playersMonitor->markAsSelectedInRange(
+            unitsSelected,
             xStartCoordinate + camera.cameraOffset().first,
             yStartCoordinate + camera.cameraOffset().second,
             xFinishCoordinate + camera.cameraOffset().first,
@@ -261,6 +266,26 @@ void GameArea::processSelection() {
             xFinishCoordinate + camera.cameraOffset().first,
             yFinishCoordinate + camera.cameraOffset().second);
     selectionMade = false;
+}
+
+void GameArea::processSelection() {
+    //todo complete this method. It should
+    if (xStartCoordinate == xFinishCoordinate and yStartCoordinate ==
+                                                          yFinishCoordinate) {
+        /* case if user clicked */
+        if (unitsSelected){
+            processClickWithUnitsSelected();
+        }
+    }
+    /* at the end of the selection processing, reset unitsSelection bool */
+    unitsSelected = false;
+}
+
+void GameArea::processClickWithUnitsSelected() {
+//    pseudo code:
+//      get clicked unit/building. if clicked building is of own team, select
+// it, otherwise atack. If nothing was selected, move selected units to
+// clicked position.
 }
 
 void GameArea::loadUnitsResources() {

@@ -42,15 +42,17 @@ void PlayersMonitor::update_position(int unit_id, int x, int y) {
     std::cerr << "update_position: Invalid unit ID: " << unit_id << std::endl;
 }
 
-void PlayersMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
+void PlayersMonitor::markAsSelectedInRange(bool &unitsSelected,
+                                           gdouble xStartCoordinate,
                                            gdouble yStartCoordinate,
                                            gdouble xFinishCoordinate,
                                            gdouble yFinishCoordinate) {
     Lock l(m);
     for (Player& player : players){
         /* each player has to selects its units in range */
-        player.markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                     xFinishCoordinate, yFinishCoordinate);
+        player.markAsSelectedInRange(unitsSelected, xStartCoordinate,
+                                     yStartCoordinate, xFinishCoordinate,
+                                     yFinishCoordinate);
     }
 }
 

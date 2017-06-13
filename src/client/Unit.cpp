@@ -16,7 +16,7 @@ void Unit::update_position(int x, int y) {
 }
 
 void
-Unit::markAsSelectedInRange(gdouble xStartCoordinate,
+Unit::markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                             gdouble yStartCoordinate,
                             gdouble xFinishCoordinate,
                             gdouble yFinishCoordinate) {
@@ -25,6 +25,7 @@ Unit::markAsSelectedInRange(gdouble xStartCoordinate,
             position.second >= yStartCoordinate &&
             position.second <= yFinishCoordinate){
         selected = true;
+        unitsSelected = true;
     }
 }
 

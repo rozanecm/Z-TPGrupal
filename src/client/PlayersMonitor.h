@@ -16,10 +16,11 @@ public:
     void removeUnit(int unit_id);
     void update_position(int unit_id, int x, int y);
 
-    void markAsSelectedInRange(gdouble xStartCoordinate,
-                               gdouble yStartCoordinate,
-                               gdouble xFinishCoordinate,
-                               gdouble yFinishCoordinate);
+    void markAsSelectedInRange(bool &unitsSelected,
+                                   gdouble xStartCoordinate,
+                                   gdouble yStartCoordinate,
+                                   gdouble xFinishCoordinate,
+                                   gdouble yFinishCoordinate);
 
     std::vector <Unit> getUnitsToDraw(unsigned int minX,
                                               unsigned int maxX,

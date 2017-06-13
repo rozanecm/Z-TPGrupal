@@ -50,7 +50,7 @@ private:
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed. This counters are
-     * updaated every time on_draw() is called.
+     * updated every time on_draw() is called.
      * */
     unsigned long flagCounter;
     unsigned short standingRobotCounter;
@@ -89,8 +89,11 @@ private:
     gdouble yStartCoordinate;
     gdouble yFinishCoordinate;
     bool selectionMade;
+    /* unitsSelected is true if the players' units are selected. This is used
+     * to manage user clicks. */
+    bool unitsSelected;
 
-    void processSelection();
+    void makeSelection();
 
     /* FLAG res loading */
     void loadFlagAnimations();
@@ -240,7 +243,7 @@ private:
     void loadResources();
 
     /**
-     *
+     * draws all units that are in camera's scope
      * @param cr receive smart pointer to cairo context
      */
     void drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr);
@@ -267,6 +270,10 @@ public:
     setResources(PlayersMonitor *playersMonitor,
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
+
+    void processSelection();
+
+    void processClickWithUnitsSelected();
 };
 
 
