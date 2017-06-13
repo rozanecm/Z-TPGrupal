@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <vector>
 
 int Player::getID() {
     return id;
@@ -28,12 +29,29 @@ bool Player::update_position(int id, int x, int y) {
     return false;
 }
 
-void Player::markAsSelectedInRange(gdouble xStartCoordinate,
+void Player::markAsSelectedInRange(bool &unitsSelected,
+                                   gdouble xStartCoordinate,
                                    gdouble yStartCoordinate,
                                    gdouble xFinishCoordinate,
                                    gdouble yFinishCoordinate) {
     for (Unit& unit : units){
-        unit.markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                   xFinishCoordinate, yFinishCoordinate);
+        unit.markAsSelectedInRange(unitsSelected, xStartCoordinate,
+                                   yStartCoordinate, xFinishCoordinate,
+                                   yFinishCoordinate);
     }
+}
+
+std::vector<Unit>
+Player::getUnitsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
+                       unsigned int maxY) {
+    std::vector <Unit> returnVector;
+    for (Unit& unit : units){
+        if (unit.getXCoordinate() >= minX and
+                unit.getXCoordinate() <= maxX and
+                unit.getYCoordinate() >= minY and
+                unit.getYCoordinate() <= maxY){
+            returnVector.emplace_back(unit);
+        }
+    }
+    return returnVector;
 }

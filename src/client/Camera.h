@@ -5,6 +5,20 @@
 #include <utility>
 
 class Camera {
+private:
+    /* save tile size in pixels so calculations on max and min coord.
+     * can be done */
+    unsigned int tileSize;
+
+    unsigned int numberOfTilesToShow;
+
+    /* position in pixels */
+    std::pair<unsigned int, unsigned int> position;
+
+    unsigned int minXCoordinate, minYCoordinate, maxXCoordinate, maxYCoordinate;
+
+    unsigned int mapWidth, mapHeight;
+
 public:
     /* camera will be initialized in (minx, miny) position */
     Camera(unsigned int tileSize, unsigned int mapWidth, unsigned int mapHeight,
@@ -26,19 +40,9 @@ public:
 
     std::pair<unsigned int, unsigned int> cameraOffset();
 
-private:
-    /* save tile size in pixels so calculations on max and min coord.
-     * can be done */
-    unsigned int tileSize;
+    unsigned int mapToCameraXCoordinate(unsigned int globalXPosition);
 
-    unsigned int numberOfTilesToShow;
-
-    /* position in pixels */
-    std::pair<unsigned int, unsigned int> position;
-
-    unsigned int minXCoordinate, minYCoordinate, maxXCoordinate, maxYCoordinate;
-
-    unsigned int mapWidth, mapHeight;
+    unsigned int mapToCameraYCoordinate(unsigned int globalYPosition);
 };
 
 

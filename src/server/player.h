@@ -16,6 +16,7 @@ class Command;
 class ControlUnit;
 class Lobby;
 class Menu;
+class Game;
 
 class Player: public Thread {
 private:
@@ -29,9 +30,9 @@ private:
     Menu& menu;
 
 public:
-    Player(std::string id, Messenger* messenger, ControlUnit* control, Menu& menu);
+    Player(Messenger* messenger, ControlUnit* control, Menu& menu);
 
-    Player(std::string id, Messenger* messenger, Menu& menu);
+    Player(Messenger* messenger, Menu& menu);
 
     void run();
 
@@ -42,6 +43,10 @@ public:
     void addControlUnit(ControlUnit* control);
 
     Messenger* getMessenger();
+
+    void shutDown();
+
+    ~Player();
 
 private:
     void processMenuCommands(std::string& cmd);

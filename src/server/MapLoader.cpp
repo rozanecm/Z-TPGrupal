@@ -1,6 +1,7 @@
 #include <map>
 #include "MapLoader.h"
 #include <pugixml.hpp>
+#include <sstream>
 
 
 const std::map<std::string, int> terrain_factor {
@@ -17,43 +18,30 @@ MapLoader::MapLoader(std::string path) {
         std::cout << "ERROR LOADING MAP: " << path << ": " <<
                   result.description() << std::endl;
     }
+    std::stringstream stream;
+    doc.save(stream);
+    map_string = stream.str();
     const std::map<std::string, int> terrain_factor;
     // Get root node
-    pugi::xml_node_iterator map_node = doc.first_child();
+    pugi::xml_node root = doc.child("Map");
+    pugi::xml_node map_node = root.child("Terrain");
 
     int coord_y = 1; // Y coordinate counter, each row is different Y coord
     // Iterate over every row
-    auto row = map_node->children().begin();
-    for (; row != map_node->children().end(); ++row) {
+    auto row = map_node.children().begin();
+    for (; row != map_node.children().end(); ++row) {
         int coord_x = 1; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
         map.push_back(row_vec);
-
         // Iterate over every row creating cells
         auto cell = row->children().begin();
         for (; cell != row->children().end(); ++cell) {
             std::string terrain = cell->attribute("terrain").value();
             std::string structure = cell->attribute("struct").value();
 
+            int factor = terrain_factor.find(terrain)->second;
 
-
-//            auto it = terrain_factor.find(terrain); // TODO: actual factors
-            double factor = 1;
-            if (terrain == "Agua") {
-                factor = 0.7;
-            } else if (terrain == "Lava") {
-                factor = 1000;
-            } else if (terrain == "Carretera") {
-                factor = 1.5;
-            }
-
-            // Create a real occupant if the cell's occupied
-            int ocpt_id = -1;
-            if (structure != "") {
-                ocpt_id = std::stoi(structure);
-            }
-            ////
 //            int life = 100;
 //            Size size(10,10, 10, 10);
 //            ////
@@ -62,22 +50,55 @@ MapLoader::MapLoader(std::string path) {
 
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_y, coord_x,3,3, terrain, factor);
+            map.back().emplace_back(coord_y, coord_x, 3, 3, terrain, factor);
             coord_x += 3;
         }
 
         // Push the whole row to the map
         coord_y += 3;
     }
+
+    int id_counter = 0;
+    pugi::xml_node structs = root.child("Structures");
+    auto rock = structs.children().begin();
+    // Todo: read values from cfg file
+    for(; rock != structs.children().end(); ++rock) {
+        int x = std::stoi(rock->attribute("x").value());
+        int y = std::stoi(rock->attribute("y").value());
+        std::string type = rock->attribute("Type").value();
+        occupants.emplace_back(id_counter++, 10, type, Size(x, y, 3, 3));
+    }
+
+    pugi::xml_node territories = root.child("Territories");
+    auto territory = territories.children().begin();
+    for(; territory != territories.children().end(); ++territory) {
+        auto factory = territory->children().begin();
+        for(; factory != territory->children().end(); ++factory) {
+            int x = std::stoi(factory->attribute("x").value());
+            int y = std::stoi(factory->attribute("y").value());
+            std::string type = factory->name();
+            occupants.emplace_back(id_counter++, 1000, type, Size(x, y, 9, 9));
+        }
+    }
+
 }
 
 
-const std::vector<std::vector<Cell>>& MapLoader::get_map() {
-    return map;
+Map MapLoader::get_map() {
+    int width = (int) map.at(0).size();
+    int height = (int) map.size();
+    int x = width / 2;
+    int y = height / 2;
+    return Map(x, y, width, height, map, occupants, map_string);
 }
 
 MapLoader::~MapLoader() {
-    for(Occupant* o : units) {
-        delete o;
-    }
+}
+
+std::vector<Occupant> MapLoader::getOccupants() {
+    return this->occupants;
+}
+
+std::vector<Unit> MapLoader::getUnits() {
+    return this->units;
 }

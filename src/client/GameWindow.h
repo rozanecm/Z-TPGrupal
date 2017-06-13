@@ -27,6 +27,9 @@ class GameWindow : public Gtk::Window {
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
 
+protected:
+    bool onTimeout();
+
 public:
     GameWindow(BaseObjectType* cobject,
                const Glib::RefPtr<Gtk::Builder>& builder);
@@ -43,9 +46,6 @@ public:
     bool change_view_to_unit();
     bool change_view_to_building();
     bool change_view_to_unit_group();
-
-protected:
-    bool onTimeout();
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

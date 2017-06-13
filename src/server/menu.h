@@ -27,6 +27,8 @@ public:
     std::string getLobbiesInfo();
 
     void addToLobbie(int id_lobbie, Player& player);
+
+    ~Menu();
 };
 
 

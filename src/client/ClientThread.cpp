@@ -29,6 +29,7 @@ ClientThread::ClientThread(PlayersMonitor &playerMonitor,
 }
 
 void ClientThread::loop() {
+    messenger.send("ready");
     while (!finished) {
         std::string msg = messenger.receive();
         std::cout<<msg<<std::endl;

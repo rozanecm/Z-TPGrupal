@@ -20,8 +20,6 @@ public:
                    ServerMessenger &messenger);
 
     virtual void run();
-
-private:
 };
 
 

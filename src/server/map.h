@@ -9,26 +9,32 @@
 #include <vector>
 #include "cell.h"
 #include "Occupant.h"
-
 // later written
-class Unit;
 //class Compass;
-
+class Unit;
 
 class Map {
 private:
-    std::vector<std::vector<Cell>> terrain_map;
+    std::vector<std::vector<Cell>>& terrain_map;
     Size map_size;
-    std::vector<Occupant*> all_occupants;
-    std::vector<Unit*> all_units;
+    std::vector<Occupant>& all_occupants;
+    std::string& xml;
+    /*std::vector<Unit>& all_units;*/
 
 public:
     // Map receives the center position (x,y) and dimensions width and height
     Map(int x, int y, int width, int height,
-        std::vector<std::vector<Cell>>& terrain_map);
+        std::vector<std::vector<Cell>>& terrain_map,
+        std::vector<Occupant>& all_occupants,
+        std::string& xml
+    );
 
+    void addOccupants(std::vector<Occupant>& all_occupants);
+
+//    void addUnits(std::vector<Unit>& all_units);
+    // I'm gonna add Occupants on Game
     // Adds a new Occupant to the list of Occupants of the map
-    void addOccupant(Occupant* new_occupant);
+//    void addOccupant(Occupant* new_occupant);
 
     // Recieves the coordinates (x,y) and returns the terrain factor on that
     // position on the map.
@@ -37,12 +43,20 @@ public:
     // Returns the name of the type of Terrain
     std::string getTerrainType(int x, int y);
 
-    // not implemented yet
+    // Returns true if the points are empty
     bool areThisPointsEmpty(Size& size);
+
+    // Returns true if points are empty or it is the Occupant
+    bool areThisPointsEmpty(Size& size, Occupant& occupant);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position
     bool canIWalkToThisPosition(Size& size);
+
+    // Recieves the size of an object on the position that wants to be walk
+    // Returns true if the object fits and can step to that position ignoring
+    // the occupant from parameter
+    bool canBulletWalkToThisPosition(Size& size, Occupant& other);
 
     // Returns the width of the map
     int getWidth();
@@ -55,6 +69,10 @@ public:
     bool isThereLava(Size& other_size);
 
     bool thereIsABridge(Size& other_size);
+
+    std::vector<Occupant>& getOccupants();
+    
+    std::string& get_map();
 };
 
 

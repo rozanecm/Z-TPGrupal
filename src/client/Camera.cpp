@@ -61,3 +61,11 @@ std::pair<unsigned int, unsigned int> Camera::cameraOffset() {
             (position.first - numberOfTilesToShow * tileSize / 2,
              position.second - numberOfTilesToShow * tileSize / 2);
 }
+
+unsigned int Camera::mapToCameraXCoordinate(unsigned int globalXPosition) {
+    return globalXPosition - cameraOffset().first;
+}
+
+unsigned int Camera::mapToCameraYCoordinate(unsigned int globalYPosition) {
+    return globalYPosition - cameraOffset().second;
+}

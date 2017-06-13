@@ -33,8 +33,6 @@ public:
 
     // returns the generated window
     GameWindow* get_window();
-
-private:
 };
 
 

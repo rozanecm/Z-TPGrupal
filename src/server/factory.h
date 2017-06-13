@@ -6,7 +6,7 @@
 #define Z_TPGRUPAL_FACTORY_H
 #include "unitMold.h"
 
-class Factory: public Occupant, public Teamable {
+class Factory: public Occupant {
     bool running;
     int tech_level;
     std::vector<UnitMold> units;

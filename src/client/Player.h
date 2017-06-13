@@ -16,14 +16,18 @@ public:
     bool update_position(int id, int x, int y);
 
     /**
-     * This methods checks all the player's units to see if any of its units is
+     * This methods check all the player's units to see if any of its units is
      * located within the area of selection. If so, the units' attribute
      * selected is set to TRUE.
      */
-    void markAsSelectedInRange(gdouble xStartCoordinate,
-                               gdouble yStartCoordinate,
-                               gdouble xFinishCoordinate,
-                               gdouble yFinishCoordinate);
+    void markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
+                                   gdouble yStartCoordinate,
+                                   gdouble xFinishCoordinate,
+                                   gdouble yFinishCoordinate);
+
+    std::vector<Unit>
+    getUnitsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
+                   unsigned int maxY);
 };
 
 

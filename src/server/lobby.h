@@ -8,6 +8,8 @@
 
 #include "player.h"
 #include "game.h"
+#include "MapLoader.h"
+class Game;
 class Player;
 
 class Lobby {
@@ -15,6 +17,7 @@ private:
     int lobby_id;
     bool all_ready;
     std::vector<Player*> players;
+    std::unique_ptr<Game> game;
 
 public:
     Lobby(int id);
@@ -23,7 +26,9 @@ public:
 
     void startGame();
 
-    void ready();
+    void ready(Player* player);
+
+    ~Lobby();
 };
 
 
