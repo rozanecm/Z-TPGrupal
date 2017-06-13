@@ -8,3 +8,7 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - move-[id]-[x]-[y]
 - addunit-[id]-[x]-[y]
 - removeunit-[id]
+
+
+## Server
+- ready
