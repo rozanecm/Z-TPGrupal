@@ -8,7 +8,7 @@
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
-#include "FlagEnum.h"
+#include "enums/FlagEnum.h"
 #include "enums/TeamEnum.h"
 #include "enums/ActionsEnum.h"
 #include "enums/UnitsEnum.h"
@@ -19,22 +19,6 @@
 #include <vector>
 
 class GameArea : public Gtk::DrawingArea{
-public:
-    virtual ~GameArea();
-    GameArea(BaseObjectType* cobject,
-             const Glib::RefPtr<Gtk::Builder>& builder);
-
-    /**
-     * initialize shared resources.
-     */
-    void
-    setResources(PlayersMonitor *playersMonitor,
-                 BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor);
-
-protected:
-    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
-
 private:
     /* shared resources */
     PlayersMonitor *playersMonitor;
@@ -258,6 +242,22 @@ private:
     void drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr);
 
     void updateCounters();
+
+protected:
+    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+
+public:
+    virtual ~GameArea();
+    GameArea(BaseObjectType* cobject,
+             const Glib::RefPtr<Gtk::Builder>& builder);
+
+    /**
+     * initialize shared resources.
+     */
+    void
+    setResources(PlayersMonitor *playersMonitor,
+                 BuildingsMonitor *buildingsMonitor,
+                 MapMonitor *mapMonitor);
 };
 
 

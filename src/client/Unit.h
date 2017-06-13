@@ -15,30 +15,6 @@
 #include <mutex>
 
 class Unit {
-public:
-    int get_ID();
-
-    void update_position(int x, int y);
-
-    void markAsSelectedInRange(gdouble xStartCoordinate,
-                               gdouble yStartCoordinate,
-                               gdouble xFinishCoordinate,
-                               gdouble yFinishCoordinate);
-
-    bool isShooting();
-
-    TeamEnum getTeam();
-
-    RotationsEnum getRotation();
-
-    UnitsEnum getType();
-
-    ActionsEnum getAction();
-
-    unsigned int getXCoordinate();
-
-    unsigned int getYCoordinate();
-
 private:
     int id;
 
@@ -75,6 +51,30 @@ private:
     unsigned short shootingDrawingCounter;
     unsigned short standingDrawingCounter;
     unsigned short walkingDrawingCounter;
+    
+public:
+    int get_ID();
+
+    void update_position(int x, int y);
+
+    void markAsSelectedInRange(gdouble xStartCoordinate,
+                               gdouble yStartCoordinate,
+                               gdouble xFinishCoordinate,
+                               gdouble yFinishCoordinate);
+
+    bool isShooting();
+
+    TeamEnum getTeam();
+
+    RotationsEnum getRotation();
+
+    UnitsEnum getType();
+
+    ActionsEnum getAction();
+
+    unsigned int getXCoordinate();
+
+    unsigned int getYCoordinate();
 };
 
 
