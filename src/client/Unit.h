@@ -25,6 +25,7 @@ private:
 
     Armament armament;
 
+    /* freq. with which the unit shoots */
     unsigned short frequency;
 
     unsigned int lifeLeft;
@@ -36,11 +37,11 @@ private:
     std::pair<unsigned int, unsigned int> position;
     std::pair<unsigned int, unsigned int> prev_position;
 
-    /* bool selected: indicates wether the unit has been selected
+    /* bool selected: indicates weather the unit has been selected
      * with the mouse or not */
     bool selected;
 
-    /* bool that indicates wheter the unit is shooting or not */
+    /* bool that indicates whether the unit is shooting or not */
     bool shooting;
 
     /* indicates to which getTeam the unit belongs */
@@ -53,6 +54,9 @@ private:
     unsigned short walkingDrawingCounter;
 
 public:
+    Unit(int id, std::pair<unsigned int, unsigned int> position,
+         UnitsEnum unitType, RotationsEnum rotation);
+
     int get_ID();
 
     void update_position(int x, int y);

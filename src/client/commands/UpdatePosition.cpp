@@ -1,4 +1,5 @@
 #include "UpdatePosition.h"
+#include "../UnitsMonitor.h"
 #include <string>
 #include <vector>
 
@@ -6,7 +7,7 @@
 #define POS_X 1
 #define POS_Y 2
 
-UpdatePosition::UpdatePosition(PlayersMonitor &monitor) : monitor(monitor)
+UpdatePosition::UpdatePosition(UnitsMonitor &monitor) : monitor(monitor)
 {
 }
 

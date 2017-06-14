@@ -9,7 +9,6 @@
 #include <gtkmm/label.h>
 #include <gtkmm/applicationwindow.h>
 #include "../GameArea.h"
-#include "../PlayersMonitor.h"
 #include "../BuildingsMonitor.h"
 #include "../MapMonitor.h"
 #include "../BuildingPanel.h"
@@ -23,7 +22,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;
 
-    PlayersMonitor *playersMonitor;
+    UnitsMonitor *unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
@@ -40,9 +39,9 @@ public:
      * Saves resources' monitors and passes them to the gameArea.
      */
     void
-    setResources(PlayersMonitor *playersMonitor,
+    setResources(UnitsMonitor *unitsMonitor,
                  BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor, ServerMessenger* messenger);
+                 MapMonitor *mapMonitor, ServerMessenger *messenger);
     // Functions to change the window's side panel
     bool change_view_to_unit();
     bool change_view_to_building();

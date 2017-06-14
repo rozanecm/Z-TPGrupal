@@ -6,6 +6,12 @@
 
 #define IMG_SIZE_IN_PX 16
 
+Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
+           UnitsEnum unitType, RotationsEnum rotation)
+        : id(id), position(position), unitType(unitType){
+    //todo check what else should be initialized
+}
+
 int Unit::get_ID() {
     return id;
 }

@@ -2,19 +2,19 @@
 #define Z_TPGRUPAL_GRAPHICSTHREAD_H
 
 #include <Thread.h>
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "ServerMessenger.h"
+#include "UnitsMonitor.h"
 
 class GraphicsThread : public Thread {
-    PlayersMonitor &playerMonitor;
+    UnitsMonitor &unitsMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
 
 public:
-    GraphicsThread(PlayersMonitor &monitor,
+    GraphicsThread(UnitsMonitor &monitor,
                    BuildingsMonitor &buildingsMonitor,
                    MapMonitor &mapMonitor,
                    ServerMessenger &messenger);

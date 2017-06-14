@@ -4,7 +4,6 @@
 
 #include <gtkmm/drawingarea.h>
 #include <utility>
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
@@ -14,6 +13,8 @@
 #include "enums/UnitsEnum.h"
 #include "enums/BuildingsEnum.h"
 #include "enums/RotationsEnum.h"
+#include "Counter.h"
+#include "UnitsMonitor.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -22,6 +23,7 @@ class GameArea : public Gtk::DrawingArea{
 private:
     /* shared resources */
     PlayersMonitor *playersMonitor;
+    UnitsMonitor* unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
 
@@ -52,14 +54,14 @@ private:
      * which compose the flag's animation should be showed. This counters are
      * updated every time on_draw() is called.
      * */
-    unsigned long flagCounter;
-    unsigned short standingRobotCounter;
-    unsigned short walkingRobotCounter;
-    unsigned short shootingRobotCounter;
-    unsigned short jeepCounter;
-    unsigned short tireCounter;
-    unsigned short tankCounter;
-    unsigned short mmlCounter;
+    Counter flagCounter;
+    Counter standingRobotCounter;
+    Counter walkingRobotCounter;
+    Counter shootingRobotCounter;
+    Counter jeepCounter;
+    Counter tireCounter;
+    Counter tankCounter;
+    Counter mmlCounter;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -267,7 +269,7 @@ public:
      * initialize shared resources.
      */
     void
-    setResources(PlayersMonitor *playersMonitor,
+    setResources(UnitsMonitor *playersMonitor,
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
 
@@ -276,6 +278,8 @@ public:
     void processClickWithUnitsSelected();
 
     void processClick();
+
+    void initializeCounters();
 };
 
 

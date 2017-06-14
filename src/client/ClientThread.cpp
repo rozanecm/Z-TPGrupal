@@ -17,11 +17,11 @@ void ClientThread::run() {
     loop();
 }
 
-ClientThread::ClientThread(PlayersMonitor &playerMonitor,
+ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
-                           ServerMessenger& messenger) :
-        playersMonitor(playerMonitor),
+                           ServerMessenger &messenger) :
+        unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger)
@@ -59,9 +59,9 @@ void ClientThread::finish() {
 
 void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor);
-    commands["addunit"] = new AddUnit(playersMonitor);
-    commands["removeunit"] = new RemoveUnit(playersMonitor);
-    commands["move"] = new UpdatePosition(playersMonitor);
+    commands["addunit"] = new AddUnit(unitsMonitor);
+    commands["removeunit"] = new RemoveUnit(unitsMonitor);
+    commands["move"] = new UpdatePosition(unitsMonitor);
 }
 
 ClientThread::~ClientThread() {

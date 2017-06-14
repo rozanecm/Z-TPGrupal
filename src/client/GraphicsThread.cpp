@@ -1,7 +1,6 @@
 #include <gtkmm/window.h>
 #include "GraphicsThread.h"
 #include "GameBuilder.h"
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "ServerMessenger.h"
@@ -14,7 +13,7 @@ void GraphicsThread::run() {
 
     if (window) {
         window->change_view_to_building();
-        window->setResources(&playerMonitor,
+        window->setResources(&unitsMonitor,
                              &buildingsMonitor,
                              &mapMonitor,
                              &messenger);
@@ -24,11 +23,11 @@ void GraphicsThread::run() {
     }
 }
 
-GraphicsThread::GraphicsThread(PlayersMonitor &monitor,
+GraphicsThread::GraphicsThread(UnitsMonitor &monitor,
                                BuildingsMonitor &buildingsMonitor,
                                MapMonitor &mapMonitor,
                                ServerMessenger &messenger) :
-        playerMonitor(monitor),
+        unitsMonitor(monitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger)

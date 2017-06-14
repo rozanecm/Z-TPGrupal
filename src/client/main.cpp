@@ -39,8 +39,15 @@ int main(int argc, char **argv) {
     Map map;
     MapMonitor mapMonitor(map);
     /* create vector with players; bind with monitor */
-    std::vector<Player> players;
-    PlayersMonitor playerMonitor(players);
+    std::vector<Unit> units;
+    UnitsMonitor unitsrMonitor(units);
+
+    /* CREATE UNIT TO TEST GFIACION DE UNITS */
+    Unit unit(1, std::pair<unsigned int, unsigned int>(20, 20),
+              UnitsEnum::HEAVY_TANK, RotationsEnum::r225);
+    unitsrMonitor.addUnit(unit);
+
+
     /* create vector with buildings; bind with monitor */
     std::vector<Building> buildings;
     BuildingsMonitor buildingsMonitor(buildings);
@@ -55,11 +62,11 @@ int main(int argc, char **argv) {
     if (s) {
         ServerMessenger messenger(*s.get());
 
-        ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
+        ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
                                   messenger);
         clientThread.start();
 
-        GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
+        GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
                                       mapMonitor, messenger);
 
         // HARDCODED DEBUG MESSAGES TO START A GAME

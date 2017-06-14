@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 #include "Command.h"
-#include "../PlayersMonitor.h"
+#include "../UnitsMonitor.h"
 
 class UpdatePosition : public Command {
-    PlayersMonitor& monitor;
+    UnitsMonitor& monitor;
 public:
-    explicit UpdatePosition(PlayersMonitor& monitor);
+    explicit UpdatePosition(UnitsMonitor &monitor);
     void execute(const std::vector<std::string>& args);
 };
 

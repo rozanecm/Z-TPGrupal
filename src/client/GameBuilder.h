@@ -5,7 +5,6 @@
 #include <string>
 
 #include "windows/GameWindow.h"
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "ServerMessenger.h"

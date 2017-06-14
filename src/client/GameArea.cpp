@@ -14,15 +14,7 @@
 GameArea::GameArea(BaseObjectType *cobject,
                    const Glib::RefPtr<Gtk::Builder> &builder) :
         Gtk::DrawingArea(cobject),
-        flagCounter(0),
-        jeepCounter(0),
-        tireCounter(0),
-        standingRobotCounter(0),
-        walkingRobotCounter(0),
-        shootingRobotCounter(0),
-        tankCounter(0),
-        mmlCounter(0),
-        playersMonitor(nullptr),
+        unitsMonitor(nullptr),
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
         unitsSelected(false),
@@ -30,6 +22,7 @@ GameArea::GameArea(BaseObjectType *cobject,
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
     loadResources();
+    initializeCounters();
 
     add_events(Gdk::EventMask::BUTTON_PRESS_MASK);
     add_events(Gdk::EventMask::BUTTON_RELEASE_MASK);
@@ -123,11 +116,14 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
 void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                                  int xCoordinate, int yCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, flags.at(FlagEnum::BLUE).at(flagCounter),
+    Gdk::Cairo::set_source_pixbuf(cr, flags.at(FlagEnum::BLUE).
+                                          at(flagCounter.getCounter()),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  flags.at(FlagEnum::BLUE).at(flagCounter)->get_width(),
-                  flags.at(FlagEnum::BLUE).at(flagCounter)->get_height());
+                  flags.at(FlagEnum::BLUE).
+                          at(flagCounter.getCounter())->get_width(),
+                  flags.at(FlagEnum::BLUE).
+                          at(flagCounter.getCounter())->get_height());
     cr->fill();
     cr->restore();
 }
@@ -144,10 +140,10 @@ GameArea::displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->restore();
 }
 
-void GameArea::setResources(PlayersMonitor *playersMonitor,
+void GameArea::setResources(UnitsMonitor *unitsMonitor,
                             BuildingsMonitor *buildingsMonitor,
                             MapMonitor *mapMonitor) {
-    this->playersMonitor = playersMonitor;
+    this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
     this->camera.setMapWidth(mapMonitor->getXSize());
@@ -249,7 +245,7 @@ void GameArea::makeSelection() {
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
     //todo filter out other players' units.
-    playersMonitor->markAsSelectedInRange(
+    unitsMonitor->markAsSelectedInRange(
             unitsSelected,
             xStartCoordinate + camera.cameraOffset().first,
             yStartCoordinate + camera.cameraOffset().second,
@@ -5847,16 +5843,15 @@ void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
                              RotationsEnum rotation) {
     cr->save();
     /* first draw jeepTires */
-    Gdk::Cairo::set_source_pixbuf(cr, jeepTires.at(rotation).at(tireCounter),
+    Gdk::Cairo::set_source_pixbuf(cr, jeepTires.at(rotation).
+                                          at(tireCounter.getCounter()),
                                   xCoordinate, yCoordinate);
     cr->rectangle(xCoordinate, yCoordinate,
-                  jeepTires.at(rotation).at(tireCounter)->get_width(),
-                  jeepTires.at(rotation).at(tireCounter)->get_height());
+                  jeepTires.at(rotation).
+                          at(tireCounter.getCounter())->get_width(),
+                  jeepTires.at(rotation).
+                          at(tireCounter.getCounter())->get_height());
     cr->fill();
-
-    /* update counter */
-    tireCounter == jeepTires.size() - 1 ? (tireCounter = 0) : (tireCounter++);
-    /* end update counter section */
 
     cr->restore();
 }
@@ -5923,27 +5918,29 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
     /* pointers (Unit*) are not used here because we are working with a shared
      * resource. This way, we copy the units we want to draw in a protected way,
      * and then we can draw without blocking other code. */
-    std::vector<Unit> unitsToDraw = playersMonitor->getUnitsToDraw(
-            camera.getPosition().first - NUMBER_OF_TILES_TO_SHOW * TILESIZE,
-            camera.getPosition().first + NUMBER_OF_TILES_TO_SHOW * TILESIZE,
-            camera.getPosition().second - NUMBER_OF_TILES_TO_SHOW * TILESIZE,
-            camera.getPosition().second + NUMBER_OF_TILES_TO_SHOW * TILESIZE);
+    std::vector<Unit> unitsToDraw = unitsMonitor->getUnitsToDraw(
+            camera.getPosition().first - (NUMBER_OF_TILES_TO_SHOW * TILESIZE)/2,
+            camera.getPosition().first + (NUMBER_OF_TILES_TO_SHOW * TILESIZE)/2,
+            camera.getPosition().second - (NUMBER_OF_TILES_TO_SHOW *
+                                           TILESIZE)/2,
+            camera.getPosition().second + (NUMBER_OF_TILES_TO_SHOW * TILESIZE)
+    /2);
 
     for (auto &unit : unitsToDraw) {
         /* check what is being drawn, and choose the counter approprately. */
         unsigned short counter;
         if (unit.getType() == UnitsEnum::JEEP) {
-            counter = jeepCounter;
+            counter = jeepCounter.getCounter();
         } else if (unit.getType() == UnitsEnum::LIGHT_TANK or
                    unit.getType() == UnitsEnum::MEDIUM_TANK or
                    unit.getType() == UnitsEnum::HEAVY_TANK) {
-            counter = tankCounter;
+            counter = tankCounter.getCounter();
         } else if (unit.getAction() == ActionsEnum::FIRE) {
-            counter = shootingRobotCounter;
+            counter = shootingRobotCounter.getCounter();
         } else if (unit.getAction() == ActionsEnum::MOVE) {
-            counter = walkingRobotCounter;
+            counter = walkingRobotCounter.getCounter();
         } else {
-            counter = standingRobotCounter;
+            counter = standingRobotCounter.getCounter();
         }
 
         /* call actual drawing method */
@@ -5958,41 +5955,54 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
 
 void GameArea::updateCounters() {
     /* update units counters */
-    flagCounter == flags.at(FlagEnum::BLUE).size() - 1 ? (flagCounter = 0)
-                                                       : (flagCounter++);
 
-    shootingRobotCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::PSYCHO).
-            at(ActionsEnum::FIRE).size() - 1
-    ? (shootingRobotCounter = 0) : (shootingRobotCounter++);
+    flagCounter.updateCounter();
 
-    walkingRobotCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::PSYCHO).
-            at(ActionsEnum::MOVE).size() - 1
-    ? (walkingRobotCounter = 0) : (walkingRobotCounter++);
+    shootingRobotCounter.updateCounter();
 
-    standingRobotCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::PSYCHO).
-            at(ActionsEnum::STAND).size() - 1
-    ? (standingRobotCounter = 0) : (standingRobotCounter++);
+    walkingRobotCounter.updateCounter();
 
-    jeepCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::JEEP).
-            at(ActionsEnum::STAND).size() - 1
-    ? (jeepCounter = 0) : (jeepCounter++);
+    standingRobotCounter.updateCounter();
 
-    tireCounter ==
-    jeepTires.at(RotationsEnum::r000).size() - 1
-    ? (tireCounter = 0) : (tireCounter++);
+    jeepCounter.updateCounter();
 
-    tankCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::LIGHT_TANK).
-            at(ActionsEnum::STAND).size() - 1
-    ? (tankCounter = 0) : (tankCounter++);
+    tireCounter.updateCounter();
 
-    mmlCounter ==
-    unitsAnimations.at(TeamEnum::BLUE).at(UnitsEnum::HEAVY_TANK).
-            at(ActionsEnum::STAND).size() - 1
-    ? (mmlCounter = 0) : (mmlCounter++);
+    tankCounter.updateCounter();
+
+    mmlCounter.updateCounter();
     /* end update counter section */
+}
+
+void GameArea::initializeCounters() {
+//
+//    operator[](TeamEnum::BLUE)[UnitsEnum::GRUNT][
+//            ActionsEnum::FIRE][RotationsEnum::r000].
+//
+
+    flagCounter.initialize(flags.at(FlagEnum::BLUE).size());
+
+    jeepCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+    [UnitsEnum::JEEP][ActionsEnum::STAND][RotationsEnum::r000].size());
+
+    tireCounter.initialize(jeepTires.at(RotationsEnum::r000).size());
+
+    standingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+                                    [UnitsEnum::PSYCHO][ActionsEnum::STAND]
+                                    [RotationsEnum::r000].size());
+
+    walkingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+                                   [UnitsEnum::PSYCHO][ActionsEnum::MOVE]
+                                   [RotationsEnum::r000].size());
+
+    shootingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+                                    [UnitsEnum::PSYCHO][ActionsEnum::FIRE]
+                                    [RotationsEnum::r000].size());
+
+    tankCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+    [UnitsEnum::LIGHT_TANK][ActionsEnum::STAND][RotationsEnum::r000].size());
+
+    mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
+                          [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND
+                          ][RotationsEnum::r000].size());
 }

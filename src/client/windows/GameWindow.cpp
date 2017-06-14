@@ -40,15 +40,15 @@ bool GameWindow::onTimeout() {
     return true;
 }
 
-void GameWindow::setResources(PlayersMonitor *playersMonitor,
+void GameWindow::setResources(UnitsMonitor *unitsMonitor,
                               BuildingsMonitor *buildingsMonitor,
                               MapMonitor *mapMonitor,
                               ServerMessenger *messenger) {
-    this->playersMonitor = playersMonitor;
+    this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
     this->messenger = messenger;
-    gameArea->setResources(playersMonitor, buildingsMonitor, mapMonitor);
+    gameArea->setResources(unitsMonitor, buildingsMonitor, mapMonitor);
 }
 
 

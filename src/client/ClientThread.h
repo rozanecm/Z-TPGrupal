@@ -3,15 +3,15 @@
 
 #include <map>
 #include <string>
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "ServerMessenger.h"
 #include "commands/Command.h"
+#include "UnitsMonitor.h"
 #include <Thread.h>
 
 class ClientThread : public Thread {
-    PlayersMonitor &playersMonitor;
+    UnitsMonitor &unitsMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
     ServerMessenger& messenger;
@@ -29,9 +29,9 @@ class ClientThread : public Thread {
     void parse(std::string& s);
 
 public:
-    ClientThread(PlayersMonitor &playerMonitor,
+    ClientThread(UnitsMonitor &unitsMonitor,
                  BuildingsMonitor &buildingsMonitor,
-                 MapMonitor &mapMonitor, ServerMessenger& messenger);
+                 MapMonitor &mapMonitor, ServerMessenger &messenger);
 
     virtual void run();
 
