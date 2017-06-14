@@ -15,20 +15,16 @@ ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
     all_occupants(all_occupants), players(new_players),
     winning(false), teams(teams) {
     this->changed_units = new std::vector<Unit>;
-    this->changed_occupants = new std::vector<Occupant*>;
 }
 
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
         changed_units->clear();
-        changed_occupants->clear();
+        changed_occupants.clear();
         auto it = all_occupants.begin();
         // Copy starting state of Occupants
-        for (auto z: all_occupants) {
-            changed_occupants->push_back(z);
-        }
-
+        changed_occupants = all_occupants;
         auto t1 = std::chrono::high_resolution_clock::now();
 
         // execute commands
@@ -43,12 +39,12 @@ void ControlUnit::run() {
         //send update message
         this->sendUpdateMessage();
 
-        this->checkForWinner();
+//        this->checkForWinner();
 
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
-
+        std::cout << t3 - time_span.count() << std::endl;
         sleepFor(t3 - time_span.count());
     }
     // send victory or defeated message
@@ -77,17 +73,19 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant*>::iterator it = (changed_occupants)->begin();
+    std::vector<Occupant*>::iterator it = changed_occupants.begin();
+    std::cout<< changed_occupants.size() << std::endl;
     int i = 0;
-    for (; it != (changed_occupants)->end();) {
+    for (; it != changed_occupants.end();) {
         if (all_occupants[i]->getLifeLeft() ==
                 (*it)->getLifeLeft()) {
-            it = (*changed_occupants).erase(it);
+            it = changed_occupants.erase(it);
         } else {
             ++it;
-            ++i;
         }
+        ++i;
     }
+    std::cout<< changed_occupants.size() << std::endl;
     // if dead erase Occupant
     it = all_occupants.begin();
     for(;it != all_occupants.end();){
@@ -130,12 +128,12 @@ void ControlUnit::sendUpdateMessage() {
 }
 
 std::string ControlUnit::getUpdateInfo() {
-    std::string  update_msg = "";
+    std::string  update_msg = "update-";
     for (auto z: *changed_units) {
         update_msg += getInfoFromUnit(z);
     }
 
-    for (auto y: *changed_occupants) {
+    for (auto y: changed_occupants) {
         update_msg += getInfoFromOccupant(y);
     }
 
@@ -249,7 +247,6 @@ void ControlUnit::sendFinnalMessage() {
             for (auto w: winners) {
                 winner += w.getPlayerId();
             }
-
         }
     }
     for (auto y: players) {

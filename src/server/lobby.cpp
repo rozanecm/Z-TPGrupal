@@ -41,6 +41,14 @@ void Lobby::startGame() {
 
         std::vector<Occupant*>& occupants = map->getOccupants();
         std::map<int, Unit> units;
+        ///
+        Size r_size(3,3,3,3);
+        Size range(3,3,6,6);
+        Compass compass(*map,r_size,4);
+        Weapon weapon("Laser",25,20,false,r_size);
+        Unit robot(204,400,"Grunt",4,r_size,range,compass,weapon,2);
+        units.insert(std::pair<int,Unit> (204,robot));
+        ///
         game = std::unique_ptr<Game> (new Game(messengers, map, units,
                                                teams_info,
                                                occupants));
