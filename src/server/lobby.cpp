@@ -7,7 +7,9 @@
 
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
-                                            all_ready(false) {}
+                                            all_ready(false) {
+    this->players = new std::vector<Player*>;
+}
 
 void Lobby::startGame() {
     std::cout << "Beginning game" << std::endl;
@@ -19,9 +21,9 @@ void Lobby::startGame() {
         // build teams
         std::vector<Factory*> forts = maploader.get_forts();
         std::vector<Team> teams_info;
-        for (int i = 0; i <= 3; ++i) {
+        for (int i = 0; i < teams.size(); ++i) {
             std::vector<PlayerInfo> players;
-            for (int j = 0; j <= teams[i].size(); ++j) {
+            for (int j = 0; j < teams[i].size(); ++j) {
                 Factory* fortress = forts.back();
                 PlayerInfo new_player(teams[i][j],*fortress);
                 forts.pop_back();
@@ -33,7 +35,7 @@ void Lobby::startGame() {
 
         // get messengers
         std::vector<Messenger *> messengers;
-        for (auto p: players) {
+        for (auto p: *players) {
             messengers.push_back(p->getMessenger());
         }
 
@@ -54,10 +56,13 @@ void Lobby::ready(Player* player) {
 }
 
 bool Lobby::addPlayer(Player* player) {
-    if(players.size() < 4)
-        players.push_back(player);
-        teams[players.size()][0] = player->getId();
-    return (players.size() < 4);
+    if(players->size() < 4)
+        players->push_back(player);
+    if (teams.size() == 0) {
+        teams.push_back(std::vector<std::string>());
+    }
+    teams.back().push_back(player->getId());
+    return (players->size() < 4);
 }
 
 Lobby::~Lobby() {

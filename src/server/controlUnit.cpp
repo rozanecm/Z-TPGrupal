@@ -110,10 +110,10 @@ void ControlUnit::cmdMoveUnit(int id, int x, int y) {
 void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
     m.lock();
-    for (auto x: *commands) {
+    for (Command x: commands) {
         commands_copy.push_back(x);
     }
-    commands->empty();
+    commands.clear();
     m.unlock();
 
     // Execute command

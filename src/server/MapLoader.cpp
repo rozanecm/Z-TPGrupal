@@ -154,8 +154,8 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
     for(auto& territory : root.children()) {
         std::string name = territory.name();
         if (name == "Fort") {
-            int x = std::stoi(territory.attribute("x").value());
-            int y = std::stoi(territory.attribute("y").value());
+            int x = std::stoi(territory.attribute("center_x").value());
+            int y = std::stoi(territory.attribute("center_y").value());
             forts.push_back(create_factory(id_counter++, hp, name,
                                            Size(x, y, 20, 20)));
         }

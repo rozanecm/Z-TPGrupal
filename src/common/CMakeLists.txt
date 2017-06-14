@@ -17,5 +17,6 @@ set(COMMON_FILES
         split.cpp
         split.h)
 
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_library(common ${COMMON_FILES})
