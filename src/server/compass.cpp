@@ -11,7 +11,6 @@
 Compass::Compass(Map &map, Size unit_size, int unit_speed): map(map),
                                  unit_size(unit_size), unit_speed(unit_speed) {
     this->buildNodeMap();
-    this->road = new std::vector<Position>;
     this->setTerrainModifier();
 }
 
@@ -42,7 +41,7 @@ void Compass::buildNodeMap() {
     std::cout<<std::endl;
 }
 
-std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
+std::vector<Position> Compass::getFastestWay(Position from, Position to) {
     // set H value for destiny
     this->setHValueForDestiny(to);
 
@@ -261,7 +260,7 @@ void Compass::insertNodeOnOpen(Node *new_node) {
 }
 
 void Compass::getRoad(Position from,Node *destiny) {
-    road->push_back(destiny->getPosition());
+    road.push_back(destiny->getPosition());
     Node* next_node = destiny->getParent();
 
     std::cout<< "From"<<std::endl;
@@ -275,7 +274,7 @@ void Compass::getRoad(Position from,Node *destiny) {
     Position current_pos = next_node->getPosition();
     while ((current_pos.getX() != from.getX()) ||
             (current_pos.getY() != from.getY())) {
-        road->push_back(current_pos);
+        road.push_back(current_pos);
         next_node = next_node->getParent();
 
         std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :  ";
@@ -283,7 +282,7 @@ void Compass::getRoad(Position from,Node *destiny) {
 
         current_pos = next_node->getPosition();
     }
-    std::cout<< "road size: " << (*road).size() <<std::endl;
+    std::cout<< "road size: " << road.size() <<std::endl;
 }
 
 Node *Compass::searchForClosestNode() {
@@ -319,8 +318,6 @@ Compass::~Compass() {
             ++j;
         }
     }
-    if (!road->empty())
-        delete(road);
 }
 
 void Compass::checkIfIsDestinyNeighbor(Node* node) {

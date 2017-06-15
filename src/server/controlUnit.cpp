@@ -13,13 +13,12 @@ ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
     all_units(all_units), /*territories(territories),*/
     all_occupants(all_occupants), players(new_players), commands(commands),
     winning(false), teams(teams) {
-    this->changed_units = new std::vector<Unit>;
 }
 
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
-        changed_units->clear();
+        changed_units.clear();
         changed_occupants.clear();
         auto it = all_occupants.begin();
         // Copy starting state of Occupants
@@ -61,7 +60,7 @@ void ControlUnit::unitsMakeMicroAction() {
         Unit y = *x.second;
         (*x.second).makeAction();
         if (differenceOnUnits((*x.second),y)) {
-            changed_units->push_back((*x.second));
+            changed_units.push_back((*x.second));
         }
         if (!(*x.second).areYouAlive()) {
             all_units.erase(x.first);
@@ -125,7 +124,7 @@ void ControlUnit::sendUpdateMessage() {
 
 std::string ControlUnit::getUpdateInfo() {
     std::string  update_msg = "update-";
-    for (auto z: *changed_units) {
+    for (auto z: changed_units) {
         update_msg += getInfoFromUnit(z);
     }
 

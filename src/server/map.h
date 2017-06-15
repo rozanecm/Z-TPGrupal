@@ -15,7 +15,7 @@ class Unit;
 
 class Map {
 private:
-    std::vector<std::vector<Cell>>& terrain_map;
+    std::vector<std::vector<Cell>> terrain_map;
     Size map_size;
     std::vector<Occupant*>& all_occupants;
     std::string xml;

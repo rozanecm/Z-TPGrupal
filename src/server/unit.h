@@ -27,7 +27,7 @@ private:
     // is standing still
     std::string state;
     Size range;
-    std::vector<Position>* road;
+    std::vector<Position> road;
     Occupant& target;
     std::vector<Bullet*> bullets;
 

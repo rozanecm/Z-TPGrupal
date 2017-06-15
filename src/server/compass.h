@@ -21,7 +21,7 @@ private:
     std::vector<std::vector<Node*>> astar_map;
     std::vector<Node*> closed_nodes;
     std::vector<Node*> open_nodes;
-    std::vector<Position>* road;
+    std::vector<Position> road;
     std::map<std::string,int> terrain_modifier;
     int unit_speed;
     Size unit_size;
@@ -36,7 +36,7 @@ public:
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position>* getFastestWay(Position from, Position to);
+    std::vector<Position> getFastestWay(Position from, Position to);
 
     void buildNodeMap();
 

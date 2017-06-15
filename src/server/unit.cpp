@@ -18,18 +18,18 @@ void Unit::makeAction() {
     }
     if (this->state == MOVESTATE) {
         this->move();
-        if (road->empty())
+        if (road.empty())
             this->state = STANDINGSTATE;
     }
     if (this->state == ATKSTATE) {
         if (checkIfTargetIsOnRange()) {
-            if (!road->empty())
-                road->clear();
+            if (!road.empty())
+                road.clear();
             attack();
         } else {
             // If target is not on range move till it is
             // calculate road to target
-            if (road->empty()) {
+            if (road.empty()) {
                 Position trg_pos = target.getPosition();
                 getOnRangeOf(trg_pos.getX(), trg_pos.getY());
             }
@@ -52,8 +52,8 @@ void Unit::getOnRangeOf(int x, int y) {
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (!road->empty() && steps <= distance){
-        Position pos = road->back();
+    while (!road.empty() && steps <= distance){
+        Position pos = road.back();
         Size next_pos(pos.getX(),pos.getY(),obj_size.getWidth()
                                                         ,obj_size.getHeight());
         if (compass.canIWalkToThisPosition(next_pos)) {
@@ -63,7 +63,7 @@ void Unit::move() {
             this->range.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
 
-            road->pop_back();
+            road.pop_back();
 
             // increase or decrease distance til steps are more than unit speed
             if (steps <= unit_speed && unit_speed == 4) {
@@ -74,7 +74,7 @@ void Unit::move() {
             }
             ++steps;
         } else {
-            Position destiny = road->front();
+            Position destiny = road.front();
             this->calculateRoadTo(destiny.getX(),destiny.getY());
             this->move();
         }
