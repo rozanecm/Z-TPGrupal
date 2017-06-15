@@ -6,9 +6,9 @@
 
 #define SIDEWALK 10
 #define DIAGONALWALK 14
-#define HMIN 1
+#define HMIN 100
 
-Compass::Compass(Map &map, Size unit_size, int unit_speed): map(map),
+Compass::Compass(Map &map, Size& unit_size, int unit_speed): map(map),
                                  unit_size(unit_size), unit_speed(unit_speed) {
     this->buildNodeMap();
     this->setTerrainModifier();
@@ -32,7 +32,7 @@ void Compass::buildNodeMap() {
         for(int jt = 0; jt < map.getHeigth(); ++jt) {
             astar_map.back().push_back(new Node(it, jt,
                                   unit_size.getWidth(), unit_size.getHeight()));
-            std::cout<< "(" <<astar_map.back().back()->getPosition().getX() << "," << astar_map.back().back()->getPosition().getY()<<")  ";
+//            std::cout<< "(" <<astar_map.back().back().getPosition().getX() << "," << astar_map.back().back().getPosition().getY()<<")  ";
         }
         std::cout<<std::endl;
     }
@@ -41,7 +41,9 @@ void Compass::buildNodeMap() {
     std::cout<<std::endl;
 }
 
-std::vector<Position> Compass::getFastestWay(Position from, Position to) {
+std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
+    this->road.clear();
+
     // set H value for destiny
     this->setHValueForDestiny(to);
 
@@ -56,7 +58,7 @@ std::vector<Position> Compass::getFastestWay(Position from, Position to) {
     std::cout<< "posicion de salida: (" <<  from.getX() << "," << from.getY()<<"): G :"<< start_node->getGValue()<<std::endl;
     std::cout<< "posicion de llegada: (" <<  to.getX() << "," << to.getY()<<")"<<std::endl;
 
-    Node *closer_node = start_node;
+    Node* closer_node = start_node;
     // While haven't reach destiny node or open_nodes has nodes to visit.
     bool finished = false;
     bool open_nodes_empty = false;
@@ -113,7 +115,7 @@ std::vector<Position> Compass::getFastestWay(Position from, Position to) {
     return road;
 }
 
-void Compass::setHValueForDestiny(Position to) {
+void Compass::setHValueForDestiny(Position& to) {
     astar_map[to.getX()][to.getY()]->setHValue(0);
 
     for (auto x: astar_map) {
@@ -133,8 +135,8 @@ void Compass::getAdjacents(Node *node) {
     int y_min = node->getPosition().getY() - 1;
     int y_max = node->getPosition().getY() + 1;
 
-    Node *adj;
     bool adj_new_g;
+    Node* adj;
     for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
         for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
@@ -171,13 +173,13 @@ bool Compass::isThisNodeOnDiagonal(Node* ref, Node* other) {
     return ((diff_x > 0) && (diff_y > 0));
 }
 
-bool Compass::isNotMe(Node *node, Node* other) {
+bool Compass::isNotMe(Node* node, Node* other) {
     Position ref = node->getPosition();
     Position ady = other->getPosition();
     return !((ref.getX() == ady.getX()) && (ref.getY() == ady.getY()));
 }
 
-void Compass::addToOpenInOrder(Node *new_node) {
+void Compass::addToOpenInOrder(Node* new_node) {
     // Only add to the vector those that haven't been seen
     if (!new_node->beenSeen()){
         this->insertNodeOnOpen(new_node);
@@ -186,7 +188,7 @@ void Compass::addToOpenInOrder(Node *new_node) {
     }
 }
 
-bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
+bool Compass::writeGandSetParent(Node* ref, Node* adj, int walk) {
     int new_g = walk + ref->getGValue();
     bool adj_change_g = false;
     // if F value from node is lower than previous or this
@@ -259,7 +261,7 @@ void Compass::insertNodeOnOpen(Node *new_node) {
     this->checkIfIsDestinyNeighbor(new_node);
 }
 
-void Compass::getRoad(Position from,Node *destiny) {
+void Compass::getRoad(Position& from,Node *destiny) {
     road.push_back(destiny->getPosition());
     Node* next_node = destiny->getParent();
 
@@ -338,15 +340,18 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
                     if (adj->getHvalue() == 0) {
                         // G value differs when the node is diagonal
                         // or next to it
-                        if (this->isThisNodeOnDiagonal(node, adj)) {
-                            adj_new_g = this->writeGandSetParent(node, adj,
+                        if ((map.canIWalkToThisPosition(size)) &&
+                            this->isNotMe(node, adj)) {
+                            if (this->isThisNodeOnDiagonal(node, adj)) {
+                                adj_new_g = this->writeGandSetParent(node, adj,
                                                                  DIAGONALWALK);
-                        } else {
-                            adj_new_g = this->writeGandSetParent(node, adj,
+                            } else {
+                                adj_new_g = this->writeGandSetParent(node, adj,
                                                                      SIDEWALK);
+                            }
+                            if (adj_new_g)
+                                this->addToOpenInOrder(adj);
                         }
-                        if (adj_new_g)
-                            this->addToOpenInOrder(adj);
                     }
                 }
             }

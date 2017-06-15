@@ -8,8 +8,9 @@
 Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
            std::shared_ptr<Map> map, std::map<int, Unit*> units,
            std::vector<Team> teams_info, std::vector<Occupant*> occupants) :
-           commands(m), players(players), all_units(units),
-           control(msgr, all_units, occupants, teams_info,commands),
+           commands(m), players(players),all_occupants(occupants),
+           all_units(units),
+           control(msgr, all_units, all_occupants, teams_info,commands),
            map(map){}
 
 
@@ -17,6 +18,7 @@ Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
 //map(map){}
 
 void Game::run() {
+    map->updateOccupants(&all_occupants);
     std::string& map_str = map.get()->get_map();
     for(auto& player : players) {
         std::cout << "Sending map to players" << std::endl;

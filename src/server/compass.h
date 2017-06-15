@@ -32,11 +32,11 @@ public:
     Compass& operator=(const Compass& other) = delete;
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
-    Compass(Map& map, Size unit_size, int unit_speed);
+    Compass(Map& map, Size& unit_size, int unit_speed);
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position> getFastestWay(Position from, Position to);
+    std::vector<Position> getFastestWay(Position& from, Position& to);
 
     void buildNodeMap();
 
@@ -59,7 +59,7 @@ private:
     void setTerrainModifier();
     // Writes the H value on every node of astar_map for the received position
     // It use Manhattan distance
-    void setHValueForDestiny(Position to);
+    void setHValueForDestiny(Position& to);
 
     // Only valid for Manhattan distance.
     // Returns true if other is a diagonal node of reference
@@ -86,7 +86,7 @@ private:
     // Inserts the node on the correct position
     void insertNodeOnOpen(Node* node);
 
-    void getRoad(Position from, Node* destiny);
+    void getRoad(Position& from, Node* destiny);
 
     Node* searchForClosestNode();
 

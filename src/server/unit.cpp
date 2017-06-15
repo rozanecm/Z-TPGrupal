@@ -41,12 +41,14 @@ void Unit::makeAction() {
 void Unit::calculateRoadTo(int x, int y) {
     this->state = MOVESTATE;
     Position destination(x,y);
-    road = compass.getFastestWay(obj_size.getPosition(),destination);
+    Position actual = obj_size.getPosition();
+    road = compass.getFastestWay(actual,destination);
 }
 
 void Unit::getOnRangeOf(int x, int y) {
     Position destination(x,y);
-    road = compass.getFastestWay(obj_size.getPosition(),destination);
+    Position actual = obj_size.getPosition();
+    road = compass.getFastestWay(actual,destination);
 }
 
 void Unit::move() {
@@ -76,7 +78,7 @@ void Unit::move() {
         } else {
             Position destiny = road.front();
             this->calculateRoadTo(destiny.getX(),destiny.getY());
-            this->move();
+//            this->move();
         }
     }
 }

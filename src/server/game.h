@@ -20,9 +20,10 @@ private:
     CommandMonitor commands;
     std::map<int,Unit*> all_units;
     std::vector<Player*> players;
+    std::vector<Occupant*> all_occupants;
     ControlUnit control;
     std::shared_ptr<Map> map;
-//    std::vector<Occupant>& all_occupants;
+
 
 public:
     Game(std::vector<Player *> players, std::vector<Messenger *> msgr,

@@ -6,7 +6,7 @@
 
 Map::Map(int x, int y, int width, int height,
    std::vector<std::vector<Cell>>& terrain_map,
-         std::vector<Occupant*>& occupants,
+         std::vector<Occupant*>* occupants,
          std::string& xml) : map_size(x,y,width,height),
     terrain_map(terrain_map), all_occupants(occupants), xml(xml)
 {}
@@ -33,7 +33,7 @@ std::string Map::getTerrainType(int x, int y) {
 
 bool Map::areThisPointsEmpty(Size& size) {
     bool no_collision = true;
-    for(auto x: all_occupants) {
+    for(auto x: *all_occupants) {
         if(x->isThereACollision(size) && x->getType() != "Bridge") {
             no_collision = false;
             break;
@@ -44,7 +44,7 @@ bool Map::areThisPointsEmpty(Size& size) {
 
 bool Map::areThisPointsEmpty(Size &size, Occupant &occupant) {
     bool no_collision = true;
-    for(auto x: all_occupants) {
+    for(auto x: *all_occupants) {
         if(x->getId() != occupant.getId() && x->isThereACollision(size)
            && x->getType() != "Bridge") {
             no_collision = false;
@@ -126,7 +126,7 @@ bool Map::isThereLava(Size& other_size) {
 
 bool Map::thereIsABridge(Size& other_size) {
     bool bridge = false;
-    for(auto x: all_occupants) {
+    for(auto x: *all_occupants) {
         if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
             bridge = true;
             break;
@@ -187,7 +187,11 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
 }
 
 std::vector<Occupant *> &Map::getOccupants() {
-    return this->all_occupants;
+    return *this->all_occupants;
+}
+
+void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
+    this->all_occupants = all_occupants;
 }
 
 

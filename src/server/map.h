@@ -17,7 +17,7 @@ class Map {
 private:
     std::vector<std::vector<Cell>> terrain_map;
     Size map_size;
-    std::vector<Occupant*>& all_occupants;
+    std::vector<Occupant*>* all_occupants;
     std::string xml;
     /*std::vector<Unit>& all_units;*/
 
@@ -25,7 +25,7 @@ public:
     // Map receives the center position (x,y) and dimensions width and height
     Map(int x, int y, int width, int height,
         std::vector<std::vector<Cell>>& terrain_map,
-        std::vector<Occupant*>& all_occupants,
+        std::vector<Occupant*>* all_occupants,
         std::string& xml
     );
 
@@ -73,6 +73,8 @@ public:
     void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
 
     std::vector<Occupant*>& getOccupants();
+
+    void updateOccupants(std::vector<Occupant*>* all_occupants);
 };
 
 

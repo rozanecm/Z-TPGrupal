@@ -43,7 +43,7 @@ bool Size::areYouHalfOutSide(Size &other) {
             !this->areYouOnThisPoint(x_min, y_min));
 }
 
-bool Size::areYouOnThisPoint(int x_pos, int y_pos) {
+bool Size::areYouOnThisPoint(int& x_pos, int& y_pos) {
     int x_max, x_min, y_max, y_min;
     this->calculateMaxAndMinForX(x_max, x_min);
     this->calculateMaxAndMinForY(y_max, y_min);
