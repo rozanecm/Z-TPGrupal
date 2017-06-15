@@ -10,13 +10,15 @@
 #include <thread>
 #include "unit.h"
 #include "../common/Lock.h"
-#include "command.h"
 #include "../common/messenger.h"
 #include "factory.h"
 #include "territory.h"
 #include "team.h"
+#include "command.h"
+#include "commandMonitor.h"
 
 class Command;
+class CommandMonitor;
 
 class ControlUnit {
 private:
@@ -24,7 +26,7 @@ private:
 //    std::vector<Territory> territories;
     std::vector<Occupant*> all_occupants;
     std::vector<Messenger*> players;
-    std::vector<Command> commands;
+    CommandMonitor &commands;
     std::mutex m;
     bool winning;
     std::vector<Team> teams;
@@ -34,10 +36,9 @@ private:
 
 public:
     ControlUnit(std::vector<Messenger *> &new_players,
-                    std::map<int, Unit*> &all_units,
-                    std::vector<Occupant*> &all_occupants,/*
-                    std::vector<Territory> &territories,*/
-                    std::vector<Team>& teams);
+                    std::map<int, Unit *> &all_units,
+                    std::vector<Occupant *> &all_occupants,
+                    std::vector<Team> &teams, CommandMonitor &commands);
 
     // Method to start checking commands from players
     void run();

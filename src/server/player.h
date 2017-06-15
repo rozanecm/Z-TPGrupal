@@ -8,11 +8,10 @@
 #include <iostream>
 #include "../common/messenger.h"
 #include "../common/Thread.h"
-#include "command.h"
 #include "menu.h"
 #include "lobby.h"
 
-class Command;
+class CommandMonitor;
 class ControlUnit;
 class Lobby;
 class Menu;
@@ -24,7 +23,7 @@ private:
     std::string id;
     int color;
     bool conected,on_menu,on_lobby ,playing;
-    std::vector<Command*> cmds;
+    CommandMonitor* commands;
     ControlUnit* control;
     Lobby* lobby;
     Menu& menu;
@@ -40,7 +39,7 @@ public:
 
     void addLobby(Lobby* lobby);
 
-    void addControlUnit(ControlUnit* control);
+    void addControlUnit(ControlUnit* control, CommandMonitor* commands);
 
     Messenger* getMessenger();
 

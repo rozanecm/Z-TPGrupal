@@ -7,12 +7,11 @@
 
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
-                         std::map<int, Unit*> &all_units,
-                         std::vector<Occupant*> &all_occupants,/*
-                         std::vector<Territory> &territories,*/
-                         std::vector<Team>& teams) :
+                         std::map<int, Unit *> &all_units,
+                         std::vector<Occupant *> &all_occupants,
+                         std::vector<Team> &teams, CommandMonitor &commands) :
     all_units(all_units), /*territories(territories),*/
-    all_occupants(all_occupants), players(new_players),
+    all_occupants(all_occupants), players(new_players), commands(commands),
     winning(false), teams(teams) {
     this->changed_units = new std::vector<Unit>;
 }
@@ -109,12 +108,7 @@ void ControlUnit::cmdMoveUnit(int id, int x, int y) {
 
 void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
-    m.lock();
-    for (Command x: commands) {
-        commands_copy.push_back(x);
-    }
-    commands.clear();
-    m.unlock();
+    commands.copyCommands(commands_copy);
 
     // Execute command
     for (auto cmd: commands_copy) {

@@ -7,9 +7,7 @@
 
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
-                                            all_ready(false) {
-    this->players = new std::vector<Player*>;
-}
+                                            all_ready(false) {}
 
 void Lobby::startGame() {
     std::cout << "Beginning game" << std::endl;
@@ -35,7 +33,7 @@ void Lobby::startGame() {
 
         // get messengers
         std::vector<Messenger *> messengers;
-        for (auto p: *players) {
+        for (auto p: players) {
             messengers.push_back(p->getMessenger());
         }
 
@@ -50,7 +48,7 @@ void Lobby::startGame() {
         units.insert(std::pair<int,Unit*>(204,robot));
 //        units.insert(std::pair<int,Unit> (204,robot));
         ///
-        game = std::unique_ptr<Game> (new Game(messengers, map, units,
+        game = std::unique_ptr<Game> (new Game(players,messengers, map, units,
                                                teams_info,
                                                occupants));
         game.get()->start();
@@ -65,13 +63,13 @@ void Lobby::ready(Player* player) {
 }
 
 bool Lobby::addPlayer(Player* player) {
-    if(players->size() < 4)
-        players->push_back(player);
+    if(players.size() < 4)
+        players.push_back(player);
     if (teams.size() == 0) {
         teams.push_back(std::vector<std::string>());
     }
     teams.back().push_back(player->getId());
-    return (players->size() < 4);
+    return (players.size() < 4);
 }
 
 Lobby::~Lobby() {
