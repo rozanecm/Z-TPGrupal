@@ -6,8 +6,8 @@
 
 // get terrain map from map loader
 Game::Game(std::vector<Messenger *> players, std::shared_ptr<Map> map,
-           std::map<int, Unit> &units, std::vector<Team>& teams_info,
-           std::vector<Occupant*>& occupants) :
+           std::map<int, Unit*> units, std::vector<Team> teams_info,
+           std::vector<Occupant*> occupants) :
         players(players),
            control(players,units,occupants, teams_info),
            map(map){}

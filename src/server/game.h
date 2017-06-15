@@ -22,8 +22,8 @@ private:
 
 public:
     Game(std::vector<Messenger *> players, std::shared_ptr<Map> map,
-             std::map<int, Unit> &units, std::vector<Team>& teams_info,
-             std::vector<Occupant*>& occupants);
+             std::map<int, Unit*> units, std::vector<Team> teams_info,
+             std::vector<Occupant*> occupants);
 
 //    Game(std::vector<Player*> players, std::shared_ptr<Map> map);
 

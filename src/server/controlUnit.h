@@ -20,7 +20,7 @@ class Command;
 
 class ControlUnit {
 private:
-    std::map<int,Unit>& all_units;
+    std::map<int,Unit*>& all_units;
 //    std::vector<Territory> territories;
     std::vector<Occupant*> all_occupants;
     std::vector<Messenger*> players;
@@ -30,11 +30,11 @@ private:
     std::vector<Team> teams;
     std::vector<Bullet*> all_bullets;
     std::vector<Unit>* changed_units;
-    std::vector<Occupant*> changed_occupants;
+    std::vector<Occupant> changed_occupants;
 
 public:
     ControlUnit(std::vector<Messenger *> &new_players,
-                    std::map<int, Unit> &all_units,
+                    std::map<int, Unit*> &all_units,
                     std::vector<Occupant*> &all_occupants,/*
                     std::vector<Territory> &territories,*/
                     std::vector<Team>& teams);
@@ -70,7 +70,7 @@ private:
 
     std::string getInfoFromUnit(Unit& unit);
 
-    std::string getInfoFromOccupant(Occupant* Occupant);
+    std::string getInfoFromOccupant(Occupant& Occupant);
 
     std::string getInfoFromTerritory(Territory& territory);
 

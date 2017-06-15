@@ -306,12 +306,21 @@ int Compass::getModuleOfSubtraction(int x, int y) {
 }
 
 Compass::~Compass() {
-    for(auto x: astar_map) {
-        for (auto y: x) {
-            delete(y);
+    if (!astar_map.empty()) {
+        int j = 0;
+        for (auto x: astar_map) {
+            int i = 0;
+            for (auto y: x) {
+//                std::cout<<"size x: " << x.size()<<std::endl;
+                delete (y);
+                ++i;
+            }
+//            std::cout<<"contador de i: " << i<<std::endl;
+            ++j;
         }
     }
-    delete(road);
+    if (!road->empty())
+        delete(road);
 }
 
 void Compass::checkIfIsDestinyNeighbor(Node* node) {

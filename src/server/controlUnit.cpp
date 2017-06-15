@@ -7,7 +7,7 @@
 
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
-                         std::map<int, Unit> &all_units,
+                         std::map<int, Unit*> &all_units,
                          std::vector<Occupant*> &all_occupants,/*
                          std::vector<Territory> &territories,*/
                          std::vector<Team>& teams) :
@@ -24,7 +24,9 @@ void ControlUnit::run() {
         changed_occupants.clear();
         auto it = all_occupants.begin();
         // Copy starting state of Occupants
-        changed_occupants = all_occupants;
+        for (auto o: all_occupants) {
+            changed_occupants.push_back(*o);
+        }
         auto t1 = std::chrono::high_resolution_clock::now();
 
         // execute commands
@@ -57,15 +59,15 @@ void ControlUnit::sleepFor(double msec) {
 
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
-        Unit y = x.second;
-        x.second.makeAction();
-        if (differenceOnUnits(x.second,y)) {
-            changed_units->push_back(x.second);
+        Unit y = *x.second;
+        (*x.second).makeAction();
+        if (differenceOnUnits((*x.second),y)) {
+            changed_units->push_back((*x.second));
         }
-        if (!x.second.areYouAlive()) {
+        if (!(*x.second).areYouAlive()) {
             all_units.erase(x.first);
         } else {
-            std::vector<Bullet*> tmp = x.second.collectBullets();
+            std::vector<Bullet*> tmp = (*x.second).collectBullets();
             all_bullets.insert(all_bullets.end(),tmp.begin(),tmp.end());
         }
     }
@@ -73,12 +75,12 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant*>::iterator it = changed_occupants.begin();
+    std::vector<Occupant>::iterator it = changed_occupants.begin();
     std::cout<< changed_occupants.size() << std::endl;
     int i = 0;
     for (; it != changed_occupants.end();) {
         if (all_occupants[i]->getLifeLeft() ==
-                (*it)->getLifeLeft()) {
+                (it)->getLifeLeft()) {
             it = changed_occupants.erase(it);
         } else {
             ++it;
@@ -87,22 +89,22 @@ void ControlUnit::checkAllLivingOccupants() {
     }
     std::cout<< changed_occupants.size() << std::endl;
     // if dead erase Occupant
-    it = all_occupants.begin();
-    for(;it != all_occupants.end();){
-        if(!(*it)->areYouAlive()) {
+    std::vector<Occupant*>::iterator ito = all_occupants.begin();
+    for(;ito != all_occupants.end();){
+        if(!(*ito)->areYouAlive()) {
             //erase it from map
-            it = all_occupants.erase(it);
+            ito = all_occupants.erase(ito);
             // if building put ruins
         } else {
-            ++it;
+            ++ito;
         }
     }
 }
 
 void ControlUnit::cmdMoveUnit(int id, int x, int y) {
-    std::map<int,Unit>::iterator it;
+    std::map<int,Unit*>::iterator it;
     it = all_units.find(id);
-    (*it).second.calculateRoadTo(x,y);
+    (*it->second).calculateRoadTo(x,y);
 }
 
 void ControlUnit::executeCommands() {
@@ -170,12 +172,12 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     return info;
 }
 
-std::string ControlUnit::getInfoFromOccupant(Occupant* Occupant) {
+std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
     std::string info = "";
-    info += std::to_string(Occupant->getId()) + "-";
-    info += std::to_string(Occupant->getPosition().getX()) + "-";
-    info += std::to_string(Occupant->getPosition().getY()) + "-";
-    info += std::to_string(Occupant->getLifeLeft()) + "--";
+    info += std::to_string(Occupant.getId()) + "-";
+    info += std::to_string(Occupant.getPosition().getX()) + "-";
+    info += std::to_string(Occupant.getPosition().getY()) + "-";
+    info += std::to_string(Occupant.getLifeLeft()) + "--";
     return info;
 }
 
@@ -190,9 +192,9 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
 
 void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
                             int target) {
-    std::map<int,Unit>::iterator it;
+    std::map<int,Unit*>::iterator it;
     it = all_units.find(id_unit);
-    Unit selected_unit = (*it).second;
+    Unit selected_unit = (*it->second);
     if (selected_unit.getTeam() == attacker_team) {
         for (auto z: all_occupants) {
             if (z->getId() == target) {
