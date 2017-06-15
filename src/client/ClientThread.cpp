@@ -11,6 +11,7 @@
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
+#include "windows/GameWindow.h"
 
 void ClientThread::run() {
     initCommands();
@@ -20,11 +21,14 @@ void ClientThread::run() {
 ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
-                           ServerMessenger &messenger) :
+                           ServerMessenger &messenger,
+                           GameWindow& window
+) :
         unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
-        messenger(messenger)
+        messenger(messenger),
+        window(window)
 {
 }
 

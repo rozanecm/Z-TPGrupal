@@ -11,13 +11,14 @@
 #include "../GameArea.h"
 #include "../BuildingsMonitor.h"
 #include "../MapMonitor.h"
-#include "../BuildingPanel.h"
 #include "../ServerMessenger.h"
+#include "../panels/UnitPanel.h"
+#include "../panels/BuildingPanel.h"
 
 class GameWindow : public Gtk::ApplicationWindow {
     GameArea* gameArea;
     Gtk::Box* panel;
-    Gtk::Box* unit_panel;
+    UnitPanel* unit_panel;
     BuildingPanel* building_panel;
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;

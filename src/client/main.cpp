@@ -62,12 +62,13 @@ int main(int argc, char **argv) {
     if (s) {
         ServerMessenger messenger(*s.get());
 
-        ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
-                                  messenger);
-        clientThread.start();
-
+        GameWindow* gwindow = builder.get_window();
         GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
-                                      mapMonitor, messenger);
+                                      mapMonitor, messenger, *gwindow);
+
+        ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
+                                  messenger, *gwindow);
+        clientThread.start();
 
         // HARDCODED DEBUG MESSAGES TO START A GAME
         messenger.send("create-lobby");

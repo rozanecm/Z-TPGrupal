@@ -22,7 +22,6 @@
 class GameArea : public Gtk::DrawingArea{
 private:
     /* shared resources */
-    PlayersMonitor *playersMonitor;
     UnitsMonitor* unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
