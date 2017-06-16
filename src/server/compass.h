@@ -21,24 +21,19 @@ private:
     std::vector<std::vector<Node*>> astar_map;
     std::vector<Node*> closed_nodes;
     std::vector<Node*> open_nodes;
-    std::vector<Position>* road;
+    std::vector<Position> road;
     std::map<std::string,int> terrain_modifier;
-    int unit_speed;
+    int unit_id, unit_speed;
     Size unit_size;
 
 public:
-    Compass(const Compass& other);
-
-    Compass& operator=(const Compass& other) = delete;
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
-    Compass(Map& map, Size unit_size, int unit_speed);
+    Compass(Map &map, Size &unit_size, int unit_id, int unit_speed);
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position>* getFastestWay(Position from, Position to);
-
-    void buildNodeMap();
+    std::vector<Position> getFastestWay(Position& from, Position& to);
 
     // Returns true if the position is empty
     bool canIWalkToThisPosition(Size& size);
@@ -53,13 +48,18 @@ public:
 
     void changeUnitSpeed(int speed);
 
+    void changeUnitId(int id);
+
     ~Compass();
 
 private:
+    // Builds a Node map with the size of the original map
+    void buildNodeMap();
+
     void setTerrainModifier();
     // Writes the H value on every node of astar_map for the received position
     // It use Manhattan distance
-    void setHValueForDestiny(Position to);
+    void setHValueForDestiny(Position& to);
 
     // Only valid for Manhattan distance.
     // Returns true if other is a diagonal node of reference
@@ -86,14 +86,23 @@ private:
     // Inserts the node on the correct position
     void insertNodeOnOpen(Node* node);
 
-    void getRoad(Position from, Node* destiny);
+    void getRoad(Position& from, Node* destiny);
 
+    // Returns the closest node on the closed_nodes vector
     Node* searchForClosestNode();
 
     // Returns a positive value of the result of x - y.
     int getModuleOfSubtraction(int x, int y);
 
+    // checks the Neighbor nodes to see if destiny is among them
     void checkIfIsDestinyNeighbor(Node* new_node);
+
+    // Returns the position of destiny. If destiny is not a valid position
+    // it returns the closest valid position
+    Position getAValidPositionForDestiny(Position& destiny);
+
+    // Returns the closest valid position to pos
+    Position getClosestValidPosition(Position& pos);
 };
 
 

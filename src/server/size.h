@@ -42,7 +42,7 @@ public:
     bool areYouHalfOutSide(Size& other);
 
     // Returns true if the position (x,y) received is inside this Size
-    bool areYouOnThisPoint(int x, int y);
+    bool areYouOnThisPoint(int& x, int& y);
 
     ~Size();
 

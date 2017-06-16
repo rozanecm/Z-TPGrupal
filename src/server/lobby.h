@@ -18,6 +18,7 @@ private:
     bool all_ready;
     std::vector<Player*> players;
     std::unique_ptr<Game> game;
+    std::vector<std::vector<std::string>> teams;
     std::string& config;
 public:
     Lobby(int id, std::string& config);

@@ -7,6 +7,8 @@
 
 
 #include <vector>
+#include <iostream>
+#include <mutex>
 #include "player.h"
 class Player;
 class Lobby;
@@ -21,7 +23,7 @@ private:
 public:
     Menu(std::string& config);
 
-    void addPlayer(Messenger* msgr, Menu& menu);
+    void addPlayer(Messenger* msgr, Menu& menu, std::string player_id);
 
     void createNewLobby(Player* player);
 

@@ -84,12 +84,12 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 }
 
 void MapLoader::create_map() {
-    int width = (int) map.at(0).size();
-    int height = (int) map.size();
+    int width = (int) map.at(0).size() * 3;
+    int height = (int) map.size() * 3;
     int x = width / 2;
     int y = height / 2;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
-                                            occupants, map_string));
+                                            &occupants, map_string));
 }
 
 MapLoader::~MapLoader() {
@@ -152,6 +152,13 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
     int hp = std::stoi(factory_cfg.attribute("hp").value());
     std::string type = factory_cfg.attribute("type").value();
     for(auto& territory : root.children()) {
+        std::string name = territory.name();
+        if (name == "Fort") {
+            int x = std::stoi(territory.attribute("center_x").value());
+            int y = std::stoi(territory.attribute("center_y").value());
+            forts.push_back(create_factory(id_counter++, hp, name,
+                                           Size(x, y, 20, 20)));
+        }
         for(auto& factory : territory.children()) {
             int x = std::stoi(factory.attribute("x").value());
             int y = std::stoi(factory.attribute("y").value());
@@ -159,6 +166,10 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
             occupants.push_back(create_factory(id_counter++, hp, type, s));
         }
     }
+}
+
+std::vector<Factory *> MapLoader::get_forts() {
+    return forts;
 }
 
 

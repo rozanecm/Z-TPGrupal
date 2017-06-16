@@ -6,12 +6,12 @@
 
 #define SIDEWALK 10
 #define DIAGONALWALK 14
-#define HMIN 1
+#define HMIN 100
 
-Compass::Compass(Map &map, Size unit_size, int unit_speed): map(map),
-                                 unit_size(unit_size), unit_speed(unit_speed) {
+Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
+        : map(map),
+          unit_size(unit_size), unit_id(unit_id) ,unit_speed(unit_speed) {
     this->buildNodeMap();
-    this->road = new std::vector<Position>;
     this->setTerrainModifier();
 }
 
@@ -26,95 +26,75 @@ void Compass::setTerrainModifier() {
 
 void Compass::buildNodeMap() {
     // the nodes has the size of the unit that is using this compass
-    std::cout<< "Muestro mapa de nodos"<<std::endl;
     for(int it = 0; it < map.getWidth(); ++it) {
         std::vector<Node*> row_vec;
         astar_map.push_back(row_vec);
         for(int jt = 0; jt < map.getHeigth(); ++jt) {
             astar_map.back().push_back(new Node(it, jt,
                                   unit_size.getWidth(), unit_size.getHeight()));
-            std::cout<< "(" <<astar_map.back().back()->getPosition().getX() << "," << astar_map.back().back()->getPosition().getY()<<")  ";
         }
-        std::cout<<std::endl;
     }
-    std::cout<<std::endl;
-    std::cout<<std::endl;
-    std::cout<<std::endl;
 }
 
-std::vector<Position>* Compass::getFastestWay(Position from, Position to) {
-    // set H value for destiny
-    this->setHValueForDestiny(to);
+std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
+    this->road.clear();
 
-    // start algorithm
-        // add "from" to visited list
-    Node* start_node = astar_map[from.getX()][from.getY()];
-    std::string terrain_type = map.getTerrainType(from.getX(),from.getY());
-    start_node->setGValue(0,terrain_modifier[terrain_type]);
-    start_node->setNewParent(start_node);
-    this->closed_nodes.push_back(start_node);
-
-    std::cout<< "posicion de salida: (" <<  from.getX() << "," << from.getY()<<"): G :"<< start_node->getGValue()<<std::endl;
-    std::cout<< "posicion de llegada: (" <<  to.getX() << "," << to.getY()<<")"<<std::endl;
-
-    Node *closer_node = start_node;
-    // While haven't reach destiny node or open_nodes has nodes to visit.
-    bool finished = false;
-    bool open_nodes_empty = false;
-
-    std::cout<< "finished: "<<finished << std::endl;
-    int i = 0;
-
-
-    while (!finished && (!open_nodes_empty)) {
-        // get adjacent's and add them to looking list in order of F value.
-        // On tie use H value.
-
-        this->getAdjacents(closer_node);
-
-        // if there are no adjacent's and open_node is empty, end search
-        if (open_nodes.empty()) {
-            open_nodes_empty = true;
-        } else {
-            // get the minimum F and add it to visit list (remove from looking list)
-            closer_node = open_nodes.back();
-            open_nodes.pop_back();
-            this->closed_nodes.push_back(closer_node);
-
-//            ///////////////////////////////////////
-//            for(auto x: astar_map) {
-//                for (auto y: x) {
-//                    std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
-//                }
-//                std::cout<<std::endl;
-//            }
-//            std::cout<<std::endl;
-//            std::cout<<std::endl;
-//            std::cout<<std::endl;
-///////////////////////////////////////////
-//            std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
-//            std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
-
-            // check if destiny is between them
-            if (closed_nodes.back()->getHvalue() == 0)
-                finished = true;
-
-            ++i;
-        }
-    }
-    Node* closest;
-    std::cout<< "finished: "<<finished << std::endl;
-    std::cout<< "counter: "<<i << std::endl;
-    if (finished) {
-        this->getRoad(from,closer_node);
+    // check if it's a possible position
+    Position destiny = getAValidPositionForDestiny(to);
+    // if I'm already on the closest position return it
+    if (from.getX() == destiny.getX() && from.getY() == destiny.getY()) {
+        this->road.push_back(destiny);
+        return road;
     } else {
-        closest = this->searchForClosestNode();
-        this->getRoad(from,closest);
+        // set H value for destiny
+        this->setHValueForDestiny(destiny);
+
+        // start algorithm
+        // add "from" to visited list
+        Node *start_node = astar_map[from.getX()][from.getY()];
+        std::string terrain_type = map.getTerrainType(from.getX(), from.getY());
+        start_node->setGValue(0, terrain_modifier[terrain_type]);
+        start_node->setNewParent(start_node);
+        this->closed_nodes.push_back(start_node);
+
+        Node *closer_node = start_node;
+        // While haven't reach destiny node or open_nodes has nodes to visit.
+        bool finished = false;
+        bool open_nodes_empty = false;
+
+        while (!finished && (!open_nodes_empty)) {
+            // get adjacent's and add them to looking list in order of F value.
+            // On tie use H value.
+
+            this->getAdjacents(closer_node);
+
+            // if there are no adjacent's and open_node is empty, end search
+            if (open_nodes.empty()) {
+                open_nodes_empty = true;
+            } else {
+                // get the minimum F and add it to visit list
+                // (remove from looking list)
+                closer_node = open_nodes.back();
+                open_nodes.pop_back();
+                this->closed_nodes.push_back(closer_node);
+
+                // check if destiny is between them
+                if (closed_nodes.back()->getHvalue() == 0)
+                    finished = true;
+            }
+        }
+        Node *closest;
+        if (finished) {
+            this->getRoad(from, closer_node);
+        } else {
+            closest = this->searchForClosestNode();
+            this->getRoad(from, closest);
+        }
+        return road;
     }
-    return road;
 }
 
-void Compass::setHValueForDestiny(Position to) {
+void Compass::setHValueForDestiny(Position& to) {
     astar_map[to.getX()][to.getY()]->setHValue(0);
 
     for (auto x: astar_map) {
@@ -134,8 +114,8 @@ void Compass::getAdjacents(Node *node) {
     int y_min = node->getPosition().getY() - 1;
     int y_max = node->getPosition().getY() + 1;
 
-    Node *adj;
     bool adj_new_g;
+    Node* adj;
     for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
         for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
@@ -144,7 +124,7 @@ void Compass::getAdjacents(Node *node) {
 
                 // Check if whether node fit or the position is not available.
                 // Also discard the node looking for his adjacent
-                if ((map.canIWalkToThisPosition(size)) &&
+                if ((map.canIWalkToThisPosition(size, unit_id)) &&
                     this->isNotMe(node, adj)) {
 
                     // G value differs when the node is diagonal or next to it
@@ -172,13 +152,13 @@ bool Compass::isThisNodeOnDiagonal(Node* ref, Node* other) {
     return ((diff_x > 0) && (diff_y > 0));
 }
 
-bool Compass::isNotMe(Node *node, Node* other) {
+bool Compass::isNotMe(Node* node, Node* other) {
     Position ref = node->getPosition();
     Position ady = other->getPosition();
     return !((ref.getX() == ady.getX()) && (ref.getY() == ady.getY()));
 }
 
-void Compass::addToOpenInOrder(Node *new_node) {
+void Compass::addToOpenInOrder(Node* new_node) {
     // Only add to the vector those that haven't been seen
     if (!new_node->beenSeen()){
         this->insertNodeOnOpen(new_node);
@@ -187,7 +167,7 @@ void Compass::addToOpenInOrder(Node *new_node) {
     }
 }
 
-bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk) {
+bool Compass::writeGandSetParent(Node* ref, Node* adj, int walk) {
     int new_g = walk + ref->getGValue();
     bool adj_change_g = false;
     // if F value from node is lower than previous or this
@@ -236,7 +216,6 @@ void Compass::insertNodeOnOpen(Node *new_node) {
         open_nodes.push_back(new_node);
     } else {
         bool inserted = false;
-
         // Save nodes by F value. The lowest on the back.
         // If two nodes have same F value, the one with the lowest H value
         // will be closer to the back.
@@ -260,30 +239,17 @@ void Compass::insertNodeOnOpen(Node *new_node) {
     this->checkIfIsDestinyNeighbor(new_node);
 }
 
-void Compass::getRoad(Position from,Node *destiny) {
-    road->push_back(destiny->getPosition());
+void Compass::getRoad(Position& from,Node *destiny) {
+    road.push_back(destiny->getPosition());
     Node* next_node = destiny->getParent();
 
-    std::cout<< "From"<<std::endl;
-    std::cout<< "(" <<  from.getX() << "," << from.getY()<<") :";
-    std::cout<< "Road"<<std::endl;
-    std::cout<< "(" <<  destiny->getPosition().getX() << "," << destiny->getPosition().getY()<<") :";
-    std::cout<< "  ( H:" << destiny->getHvalue() <<" , G: " <<destiny->getGValue()  <<" , F:" << destiny->getFValue()<<")  "<<std::endl;
-
-    std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :";
-    std::cout<< "  ( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
     Position current_pos = next_node->getPosition();
     while ((current_pos.getX() != from.getX()) ||
             (current_pos.getY() != from.getY())) {
-        road->push_back(current_pos);
+        road.push_back(current_pos);
         next_node = next_node->getParent();
-
-        std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :  ";
-        std::cout<< "( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
-
         current_pos = next_node->getPosition();
     }
-    std::cout<< "road size: " << (*road).size() <<std::endl;
 }
 
 Node *Compass::searchForClosestNode() {
@@ -293,7 +259,6 @@ Node *Compass::searchForClosestNode() {
          ((x->getHvalue() == closest->getGValue()) &&
           (x->getFValue() < closest->getFValue()))) {
             closest = x;
-            std::cout<< "closest node: (" <<  closest->getPosition().getX() << "," << closest->getPosition().getY()<<") :  ";
         }
     }
     return closest;
@@ -306,12 +271,17 @@ int Compass::getModuleOfSubtraction(int x, int y) {
 }
 
 Compass::~Compass() {
-    for(auto x: astar_map) {
-        for (auto y: x) {
-            delete(y);
+    if (!astar_map.empty()) {
+        int j = 0;
+        for (auto x: astar_map) {
+            int i = 0;
+            for (auto y: x) {
+                delete (y);
+                ++i;
+            }
+            ++j;
         }
     }
-    delete(road);
 }
 
 void Compass::checkIfIsDestinyNeighbor(Node* node) {
@@ -332,15 +302,18 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
                     if (adj->getHvalue() == 0) {
                         // G value differs when the node is diagonal
                         // or next to it
-                        if (this->isThisNodeOnDiagonal(node, adj)) {
-                            adj_new_g = this->writeGandSetParent(node, adj,
+                        if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                            this->isNotMe(node, adj)) {
+                            if (this->isThisNodeOnDiagonal(node, adj)) {
+                                adj_new_g = this->writeGandSetParent(node, adj,
                                                                  DIAGONALWALK);
-                        } else {
-                            adj_new_g = this->writeGandSetParent(node, adj,
+                            } else {
+                                adj_new_g = this->writeGandSetParent(node, adj,
                                                                      SIDEWALK);
+                            }
+                            if (adj_new_g)
+                                this->addToOpenInOrder(adj);
                         }
-                        if (adj_new_g)
-                            this->addToOpenInOrder(adj);
                     }
                 }
             }
@@ -349,17 +322,12 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
 }
 
 bool Compass::canIWalkToThisPosition(Size &size) {
-    return map.canIWalkToThisPosition(size);
+    return map.canIWalkToThisPosition(size, unit_id);
 }
 
 double Compass::getTerrainFactorOn(int x, int y) {
     return map.getTerrainFactorOn(x,y);
 }
-
-Compass::Compass(const Compass &other) : map(other.map),
-astar_map(other.astar_map), closed_nodes(other.closed_nodes),
-open_nodes(other.open_nodes), road(other.road), terrain_modifier(other.terrain_modifier),
-unit_speed(other.unit_speed), unit_size(other.unit_size){}
 
 bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
     return map.canBulletWalkToThisPosition(size,occupant);
@@ -373,8 +341,105 @@ void Compass::changeUnitSpeed(int speed) {
     this->unit_speed = speed;
 }
 
-//Compass &Compass::operator=(const Compass &other) {
-//    return ;
-//}
+Position Compass::getAValidPositionForDestiny(Position &destiny) {
+    Node *dest = astar_map[destiny.getX()][destiny.getY()];
+    Size size = dest->getSize();
+    if (map.canIWalkToThisPosition(size, unit_id)) {
+        return destiny;
+    } else {
+        return getClosestValidPosition(destiny);
+    }
+}
 
+Position Compass::getClosestValidPosition(Position &pos) {
+    bool found = false;
+    int i = 1;
+    Node* closest_node = astar_map[pos.getX()][pos.getY()];
+    while (!found) {
+        int x_min = pos.getX() - i;
+        int x_max = pos.getX() + i;
+        int y_min = pos.getY() - i;
+        int y_max = pos.getY() + i;
 
+        for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
+            if (map.doesThisPositionExist(x_pos, y_max)) {
+                Node *tmp = astar_map[x_pos][y_max];
+                Size size = tmp->getSize();
+                std::string terrain_type = map.getTerrainType(x_pos,y_max);
+                // if you fit on the position. When it's a vehicule check
+                // if it's different to water.
+                if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                    (!(unit_speed != 4 && terrain_type == "Agua" &&
+                   !map.thereIsABridge(size)))) {
+                    found = true;
+                    closest_node = tmp;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
+                if (map.doesThisPositionExist(x_pos, y_min)) {
+                    Node *tmp = astar_map[x_pos][y_min];
+                    Size size = tmp->getSize();
+                    std::string terrain_type = map.getTerrainType(x_pos,y_min);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size,unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!found) {
+            for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
+                if (map.doesThisPositionExist(x_max, y_pos)) {
+                    Node *tmp = astar_map[x_max][y_pos];
+                    Size size = tmp->getSize();
+                    std::string terrain_type = map.getTerrainType(x_max,y_pos);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!found) {
+            for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
+                if (map.doesThisPositionExist(x_min, y_pos)) {
+                    Node *tmp = astar_map[x_min][y_pos];
+                    Size size = tmp->getSize();
+                    std::string terrain_type = map.getTerrainType(x_min,y_pos);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        ++i;
+    }
+    return closest_node->getSize().getPosition();
+}
+
+void Compass::changeUnitId(int id) {
+    this->unit_id = id;
+}

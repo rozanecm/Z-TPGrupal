@@ -8,7 +8,9 @@ Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE), range(range), target(*this) {}
+        state(STANDINGSTATE), range(range), target(*this) {
+    compass.changeUnitId(id);
+}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
@@ -18,18 +20,18 @@ void Unit::makeAction() {
     }
     if (this->state == MOVESTATE) {
         this->move();
-        if (road->empty())
+        if (road.empty())
             this->state = STANDINGSTATE;
     }
     if (this->state == ATKSTATE) {
         if (checkIfTargetIsOnRange()) {
-            if (!road->empty())
-                road->clear();
+            if (!road.empty())
+                road.clear();
             attack();
         } else {
             // If target is not on range move till it is
             // calculate road to target
-            if (road->empty()) {
+            if (road.empty()) {
                 Position trg_pos = target.getPosition();
                 getOnRangeOf(trg_pos.getX(), trg_pos.getY());
             }
@@ -41,19 +43,21 @@ void Unit::makeAction() {
 void Unit::calculateRoadTo(int x, int y) {
     this->state = MOVESTATE;
     Position destination(x,y);
-    road = compass.getFastestWay(obj_size.getPosition(),destination);
+    Position actual = obj_size.getPosition();
+    road = compass.getFastestWay(actual,destination);
 }
 
 void Unit::getOnRangeOf(int x, int y) {
     Position destination(x,y);
-    road = compass.getFastestWay(obj_size.getPosition(),destination);
+    Position actual = obj_size.getPosition();
+    road = compass.getFastestWay(actual,destination);
 }
 
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (!road->empty() && steps <= distance){
-        Position pos = road->back();
+    while (!road.empty() && steps <= distance){
+        Position pos = road.back();
         Size next_pos(pos.getX(),pos.getY(),obj_size.getWidth()
                                                         ,obj_size.getHeight());
         if (compass.canIWalkToThisPosition(next_pos)) {
@@ -63,7 +67,7 @@ void Unit::move() {
             this->range.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
 
-            road->pop_back();
+            road.pop_back();
 
             // increase or decrease distance til steps are more than unit speed
             if (steps <= unit_speed && unit_speed == 4) {
@@ -74,9 +78,8 @@ void Unit::move() {
             }
             ++steps;
         } else {
-            Position destiny = road->front();
+            Position destiny = road.front();
             this->calculateRoadTo(destiny.getX(),destiny.getY());
-            this->move();
         }
     }
 }
@@ -153,17 +156,3 @@ bool Unit::checkIfBulletWillHit(std::vector<Position> *b_road, Size &b_size) {
 bool Unit::doYouHaveAnyBullets() {
     return (!bullets.empty());
 }
-
-
-//Unit::Unit(const Unit &other) : compass(other.compass),
-// unit_speed(other.unit_speed),
-//state(other.state), range(other.range), road(other.road),
-// target(other.target){}
-
-//Unit &Unit::operator=(const Unit &other) {
-//    return ;
-//}
-
-
-
-

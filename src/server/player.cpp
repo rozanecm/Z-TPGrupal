@@ -10,8 +10,8 @@ Player::Player(Messenger *msg, ControlUnit* control, Menu& menu) :
 
 }
 
-Player::Player(Messenger *msg, Menu& menu) :
-        messenger(msg), conected(true),on_menu(true),on_lobby(false),
+Player::Player(Messenger *msg, Menu &menu, std::string& id) :
+        messenger(msg),id(id), conected(true),on_menu(true),on_lobby(false),
         playing(false),menu(menu) {}
 
 void Player::run() {
@@ -25,7 +25,7 @@ void Player::run() {
             } else if (on_lobby) {
                 processLobbyCommands(new_cmd);
             } else if (playing) {
-                cmds.push_back(new Command(this->id, new_cmd, control));
+                commands->addCommand(this->id, new_cmd, control);
             }
         }
     } catch(SocketError e) {
@@ -38,8 +38,10 @@ void Player::updateInfo(std::string &info) {
     messenger->sendMessage(info);
 }
 
-void Player::addControlUnit(ControlUnit *control) {
+void Player::addControlUnit(ControlUnit *control, CommandMonitor* commands) {
+    this->playing = true;
     this->control = control;
+    this->commands = commands;
 }
 
 Messenger *Player::getMessenger() {
@@ -65,8 +67,7 @@ void Player::processLobbyCommands(std::string &cmd) {
         std::cout << "Entre en player a start game" << std::endl;
         this->lobby->startGame();
         on_lobby = false;
-    }
-    if (cmd == "ready") {
+    }else if (cmd == "ready") {
         this->lobby->ready(this);
     } else {
         messenger->sendMessage("Invalid cmd");
@@ -78,5 +79,9 @@ Player::~Player() {}
 void Player::shutDown() {
     conected = false;
     messenger->shutdown();
+}
+
+std::string Player::getId() const {
+    return id;
 }
 

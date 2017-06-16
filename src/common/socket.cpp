@@ -20,6 +20,10 @@ Socket::Socket(int port) {
     srv.sin_addr.s_addr = htonl(INADDR_ANY);
     srv.sin_port = htons((uint16_t) port);
 
+    int yes = 1;
+    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) < 0)
+        throw SocketError("setsockopt(SO_REUSEADDR) failed");
+
     int error = bind(fd, (struct sockaddr *) &srv, sizeof(srv));
     if (error) {
         throw SocketError("Error binding socket on creation! "

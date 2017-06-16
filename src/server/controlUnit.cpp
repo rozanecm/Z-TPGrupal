@@ -7,34 +7,24 @@
 
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
-                         std::map<int, Unit> &all_units,
-                         std::vector<Occupant> &all_occupants,
-                         std::vector<Territory> &territories,
-                         std::vector<Team>& teams)
-        :
-    all_units(all_units), territories(territories),
-    all_occupants(all_occupants), players(new_players),
+                         std::map<int, Unit *> &all_units,
+                         std::vector<Occupant *> &all_occupants,
+                         std::vector<Team> &teams, CommandMonitor &commands) :
+    all_units(all_units), /*territories(territories),*/
+    all_occupants(all_occupants), players(new_players), commands(commands),
     winning(false), teams(teams) {
-    this->changed_units = new std::vector<Unit>;
-    this->changed_occupants = new std::vector<Occupant>;
-    this->changed_territories = new std::vector<Territory>;
 }
 
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
-        changed_units->clear();
-        changed_occupants->clear();
+        changed_units.clear();
+        changed_occupants.clear();
         auto it = all_occupants.begin();
         // Copy starting state of Occupants
-        for (auto z: all_occupants) {
-            changed_occupants->push_back(z);
+        for (auto o: all_occupants) {
+            changed_occupants.push_back(*o);
         }
-
-        for (auto t: territories) {
-            changed_territories->push_back(t);
-        }
-
         auto t1 = std::chrono::high_resolution_clock::now();
 
         // execute commands
@@ -49,12 +39,11 @@ void ControlUnit::run() {
         //send update message
         this->sendUpdateMessage();
 
-        this->checkForWinner();
+//        this->checkForWinner();
 
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
-
         sleepFor(t3 - time_span.count());
     }
     // send victory or defeated message
@@ -67,15 +56,15 @@ void ControlUnit::sleepFor(double msec) {
 
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
-        Unit y = x.second;
-        x.second.makeAction();
-        if (differenceOnUnits(x.second,y)) {
-            changed_units->push_back(x.second);
+        Unit y = *x.second;
+        (*x.second).makeAction();
+        if (differenceOnUnits((*x.second),y)) {
+            changed_units.push_back((*x.second));
         }
-        if (!x.second.areYouAlive()) {
+        if (!(*x.second).areYouAlive()) {
             all_units.erase(x.first);
         } else {
-            std::vector<Bullet*> tmp = x.second.collectBullets();
+            std::vector<Bullet*> tmp = (*x.second).collectBullets();
             all_bullets.insert(all_bullets.end(),tmp.begin(),tmp.end());
         }
     }
@@ -83,44 +72,39 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant>::iterator it = (*changed_occupants).begin();
+    std::vector<Occupant>::iterator it = changed_occupants.begin();
     int i = 0;
-    for (; it != (*changed_occupants).end();) {
-        if (all_occupants[i].getLifeLeft() ==
-                (*it).getLifeLeft()) {
-            it = (*changed_occupants).erase(it);
+    for (; it != changed_occupants.end();) {
+        if (all_occupants[i]->getLifeLeft() ==
+                (it)->getLifeLeft()) {
+            it = changed_occupants.erase(it);
         } else {
             ++it;
-            ++i;
         }
+        ++i;
     }
     // if dead erase Occupant
-    it = all_occupants.begin();
-    for(;it != all_occupants.end();){
-        if(!it->areYouAlive()) {
+    std::vector<Occupant*>::iterator ito = all_occupants.begin();
+    for(;ito != all_occupants.end();){
+        if(!(*ito)->areYouAlive()) {
             //erase it from map
-            it = all_occupants.erase(it);
+            ito = all_occupants.erase(ito);
             // if building put ruins
         } else {
-            ++it;
+            ++ito;
         }
     }
 }
 
 void ControlUnit::cmdMoveUnit(int id, int x, int y) {
-    std::map<int,Unit>::iterator it;
+    std::map<int,Unit*>::iterator it;
     it = all_units.find(id);
-    (*it).second.calculateRoadTo(x,y);
+    (*it->second).calculateRoadTo(x,y);
 }
 
 void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
-    m.lock();
-    for (auto x: *commands) {
-        commands_copy.push_back(x);
-    }
-    commands->empty();
-    m.unlock();
+    commands.copyCommands(commands_copy);
 
     // Execute command
     for (auto cmd: commands_copy) {
@@ -136,20 +120,20 @@ void ControlUnit::sendUpdateMessage() {
 }
 
 std::string ControlUnit::getUpdateInfo() {
-    std::string  update_msg = "";
-    for (auto z: *changed_units) {
+    std::string  update_msg = "update-";
+    for (auto z: changed_units) {
         update_msg += getInfoFromUnit(z);
     }
 
-    for (auto y: *changed_occupants) {
+    for (auto y: changed_occupants) {
         update_msg += getInfoFromOccupant(y);
     }
 
-    for(auto t: territories) {
-       if (t.doesTerritorysOwnerChanged()) {
-           update_msg += getInfoFromTerritory(t);
-       }
-    }
+//    for(auto t: territories) {
+//       if (t.doesTerritorysOwnerChanged()) {
+//           update_msg += getInfoFromTerritory(t);
+//       }
+//    }
 
     return update_msg;
 }
@@ -178,7 +162,7 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     return info;
 }
 
-std::string ControlUnit::getInfoFromOccupant(Occupant &Occupant) {
+std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
     std::string info = "";
     info += std::to_string(Occupant.getId()) + "-";
     info += std::to_string(Occupant.getPosition().getX()) + "-";
@@ -198,14 +182,14 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
 
 void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
                             int target) {
-    std::map<int,Unit>::iterator it;
+    std::map<int,Unit*>::iterator it;
     it = all_units.find(id_unit);
-    Unit selected_unit = (*it).second;
+    Unit selected_unit = (*it->second);
     if (selected_unit.getTeam() == attacker_team) {
         for (auto z: all_occupants) {
-            if (z.getId() == target) {
-                if (z.getTeam() != attacker_team) {
-                    selected_unit.setTargetToAttack(z);
+            if (z->getId() == target) {
+                if (z->getTeam() != attacker_team) {
+//                    selected_unit.setTargetToAttack(z);
                     break;
                 }
             }
@@ -226,12 +210,12 @@ void ControlUnit::moveAllBullets() {
 }
 
 void ControlUnit::makeTerritoriesChecks() {
-    for (auto t: territories) {
-        std::map<int,Factory>& fac = t.getFactories();
-        for (auto f: fac) {
-            f.second.build();
-        }
-    }
+//    for (auto t: territories) {
+//        std::map<int,Factory>& fac = t.getFactories();
+//        for (auto f: fac) {
+//            f.second.build();
+//        }
+//    }
 }
 
 void ControlUnit::checkForWinner() {
@@ -255,7 +239,6 @@ void ControlUnit::sendFinnalMessage() {
             for (auto w: winners) {
                 winner += w.getPlayerId();
             }
-
         }
     }
     for (auto y: players) {

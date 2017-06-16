@@ -13,7 +13,7 @@ Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
                            Weapon &weapon) {
     Position u_pos = u_size.getPosition();
     Size unit_range(u_pos.getX(),u_pos.getY(),range,range);
-    Compass compass(map,u_size,unit_speed);
+    Compass compass(map, u_size,id,unit_speed);
     Unit* new_unit = new Unit(id, life, type, unit_speed, u_size, unit_range,
                               compass, weapon, fire_rate);
     return new_unit;

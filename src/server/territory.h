@@ -18,7 +18,7 @@ private:
     bool changed;
 
 public:
-    Territory(std::map<int,Factory>& factories, std::string team,
+    Territory(std::map<int,Factory>& factories,
               Position flag_position, Size territory_size);
 
     void grabFlag(std::string& new_team);

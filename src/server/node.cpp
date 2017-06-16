@@ -32,7 +32,7 @@ void Node::setNewParent(Node *parent) {
     this->parent = parent;
 }
 
-Node *Node::getParent() const {
+Node* Node::getParent() const {
     return this->parent;
 }
 

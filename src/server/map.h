@@ -15,9 +15,9 @@ class Unit;
 
 class Map {
 private:
-    std::vector<std::vector<Cell>>& terrain_map;
+    std::vector<std::vector<Cell>> terrain_map;
     Size map_size;
-    std::vector<Occupant*>& all_occupants;
+    std::vector<Occupant*>* all_occupants;
     std::string xml;
     /*std::vector<Unit>& all_units;*/
 
@@ -25,7 +25,7 @@ public:
     // Map receives the center position (x,y) and dimensions width and height
     Map(int x, int y, int width, int height,
         std::vector<std::vector<Cell>>& terrain_map,
-        std::vector<Occupant*>& all_occupants,
+        std::vector<Occupant*>* all_occupants,
         std::string& xml
     );
 
@@ -42,14 +42,14 @@ public:
     std::string getTerrainType(int x, int y);
 
     // Returns true if the points are empty
-    bool areThisPointsEmpty(Size& size);
+    bool areThisPointsEmpty(Size &size, int id);
 
     // Returns true if points are empty or it is the Occupant
     bool areThisPointsEmpty(Size& size, Occupant& occupant);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position
-    bool canIWalkToThisPosition(Size& size);
+    bool canIWalkToThisPosition(Size &size, int id);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position ignoring
@@ -71,6 +71,10 @@ public:
     std::string& get_map();
 
     void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
+
+    std::vector<Occupant*>& getOccupants();
+
+    void updateOccupants(std::vector<Occupant*>* all_occupants);
 };
 
 

@@ -6,7 +6,7 @@
 
 Map::Map(int x, int y, int width, int height,
    std::vector<std::vector<Cell>>& terrain_map,
-         std::vector<Occupant*>& occupants,
+         std::vector<Occupant*>* occupants,
          std::string& xml) : map_size(x,y,width,height),
     terrain_map(terrain_map), all_occupants(occupants), xml(xml)
 {}
@@ -31,10 +31,11 @@ std::string Map::getTerrainType(int x, int y) {
     return terrain_map[x_pos][y_pos].getTerrainType();
 }
 
-bool Map::areThisPointsEmpty(Size& size) {
+bool Map::areThisPointsEmpty(Size &size, int id) {
     bool no_collision = true;
-    for(auto x: all_occupants) {
-        if(x->isThereACollision(size) && x->getType() != "Bridge") {
+    for(auto x: *all_occupants) {
+        if(x->getId() != id
+           && x->isThereACollision(size) && x->getType() != "Bridge") {
             no_collision = false;
             break;
         }
@@ -44,7 +45,7 @@ bool Map::areThisPointsEmpty(Size& size) {
 
 bool Map::areThisPointsEmpty(Size &size, Occupant &occupant) {
     bool no_collision = true;
-    for(auto x: all_occupants) {
+    for(auto x: *all_occupants) {
         if(x->getId() != occupant.getId() && x->isThereACollision(size)
            && x->getType() != "Bridge") {
             no_collision = false;
@@ -62,7 +63,7 @@ int Map::getHeigth() {
     return map_size.getHeight();
 }
 
-bool Map::canIWalkToThisPosition(Size& other_size) {
+bool Map::canIWalkToThisPosition(Size &other_size, int id) {
     bool you_can = true;
 
     // if the object is stepping out of the map
@@ -74,7 +75,7 @@ bool Map::canIWalkToThisPosition(Size& other_size) {
         if (thereIsABridge(other_size))
             you_can = true;
     }
-    if (!areThisPointsEmpty(other_size)) {
+    if (!areThisPointsEmpty(other_size, id)) {
         you_can = false;
     }
 
@@ -126,7 +127,7 @@ bool Map::isThereLava(Size& other_size) {
 
 bool Map::thereIsABridge(Size& other_size) {
     bool bridge = false;
-    for(auto x: all_occupants) {
+    for(auto x: *all_occupants) {
         if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
             bridge = true;
             break;
@@ -149,7 +150,7 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
         int tmp_y = u_size.getHeight() + fac_size.getHeight() + fac_pos.getY()
                     + i;
         u_size.moveTo(tmp_x,tmp_y);
-        if (this->canIWalkToThisPosition(u_size)) {
+        if (this->canIWalkToThisPosition(u_size, 0)) {
             have_position = true;
         }
         if (!have_position) {
@@ -158,7 +159,7 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
             tmp_y = fac_pos.getY() - u_size.getHeight() - fac_size.getHeight()
                     - i;
             u_size.moveTo(tmp_x, tmp_y);
-            if (this->canIWalkToThisPosition(u_size)) {
+            if (this->canIWalkToThisPosition(u_size, 0)) {
                 have_position = true;
             }
         }
@@ -168,7 +169,7 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
             tmp_y = fac_pos.getY() + u_size.getHeight() + fac_size.getHeight()
                     + i;
             u_size.moveTo(tmp_x, tmp_y);
-            if (this->canIWalkToThisPosition(u_size)) {
+            if (this->canIWalkToThisPosition(u_size, 0)) {
                 have_position = true;
             }
         }
@@ -178,7 +179,7 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
             tmp_y = fac_pos.getY() - u_size.getHeight() - fac_size.getHeight()
                     - i;
             u_size.moveTo(tmp_x, tmp_y);
-            if (this->canIWalkToThisPosition(u_size)) {
+            if (this->canIWalkToThisPosition(u_size, 0)) {
                 have_position = true;
             }
         }
@@ -186,12 +187,14 @@ void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
     }
 }
 
+std::vector<Occupant *> &Map::getOccupants() {
+    return *this->all_occupants;
+}
 
+void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
+    this->all_occupants = all_occupants;
+}
 
-
-//void Map::addUnits(std::vector<Unit> &all_units) {
-//    this->all_units = all_units;
-//}
 
 
 

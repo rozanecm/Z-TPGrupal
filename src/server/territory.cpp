@@ -4,9 +4,9 @@
 
 #include "territory.h"
 
-Territory::Territory(std::map<int, Factory>& factories, std::string team,
+Territory::Territory(std::map<int, Factory>& factories,
                      Position flag, Size size) :
-Teamable(team,territory_size),factories(factories) , flag_position(flag),
+Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
 territory_size(size), changed(false){}
 
 void Territory::grabFlag(std::string& new_team) {
