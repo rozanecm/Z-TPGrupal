@@ -8,7 +8,9 @@ Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE), range(range), target(*this) {}
+        state(STANDINGSTATE), range(range), target(*this) {
+    compass.changeUnitId(id);
+}
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {

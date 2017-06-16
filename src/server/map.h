@@ -42,14 +42,14 @@ public:
     std::string getTerrainType(int x, int y);
 
     // Returns true if the points are empty
-    bool areThisPointsEmpty(Size& size);
+    bool areThisPointsEmpty(Size &size, int id);
 
     // Returns true if points are empty or it is the Occupant
     bool areThisPointsEmpty(Size& size, Occupant& occupant);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position
-    bool canIWalkToThisPosition(Size& size);
+    bool canIWalkToThisPosition(Size &size, int id);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position ignoring

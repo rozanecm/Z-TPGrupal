@@ -23,16 +23,16 @@ private:
     std::vector<Node*> open_nodes;
     std::vector<Position> road;
     std::map<std::string,int> terrain_modifier;
-    int unit_speed;
+    int unit_id, unit_speed;
     Size unit_size;
 
 public:
-    Compass(const Compass& other);
-
-    Compass& operator=(const Compass& other) = delete;
+//    Compass(const Compass& other);
+//
+//    Compass& operator=(const Compass& other) = delete;
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
-    Compass(Map& map, Size& unit_size, int unit_speed);
+    Compass(Map &map, Size &unit_size, int unit_id, int unit_speed);
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
@@ -52,6 +52,8 @@ public:
     void changeUnitSize(Size& unit_size);
 
     void changeUnitSpeed(int speed);
+
+    void changeUnitId(int id);
 
     ~Compass();
 

@@ -42,11 +42,18 @@ void Lobby::startGame() {
         ///
         Size r_size(3,3,3,3);
         Size range(3,3,6,6);
-        Compass* compass = new Compass(*map,r_size,4);
+
+        Size j_size(10,10,3,3);
+        Size j_range(10,10,6,6);
+        Compass* r_compass = new Compass(*map, r_size,204, 4);
+        Compass* j_compass = new Compass(*map, j_size,208, 4);
         Weapon weapon("Laser",25,20,false,r_size);
-        Unit* robot = new Unit(204,400,"Grunt",4,r_size,range,*compass,weapon,2);
+        Unit* robot = new Unit(204,400,"Grunt",4,r_size,range,*r_compass,weapon,2);
+        Unit* jeep = new Unit(208,400,"Jeep",5,j_size,j_range,*j_compass,weapon,2);
         units.insert(std::pair<int,Unit*>(204,robot));
-//        units.insert(std::pair<int,Unit> (204,robot));
+        units.insert(std::pair<int,Unit*>(208,jeep));
+        occupants.push_back((Occupant*) robot);
+        occupants.push_back((Occupant*) jeep);
         ///
         game = std::unique_ptr<Game> (new Game(players,messengers, map, units,
                                                teams_info,

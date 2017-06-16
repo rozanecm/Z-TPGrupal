@@ -8,8 +8,9 @@
 #define DIAGONALWALK 14
 #define HMIN 100
 
-Compass::Compass(Map &map, Size& unit_size, int unit_speed): map(map),
-                                 unit_size(unit_size), unit_speed(unit_speed) {
+Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
+        : map(map),
+          unit_size(unit_size), unit_id(unit_id) ,unit_speed(unit_speed) {
     this->buildNodeMap();
     this->setTerrainModifier();
 }
@@ -32,7 +33,6 @@ void Compass::buildNodeMap() {
         for(int jt = 0; jt < map.getHeigth(); ++jt) {
             astar_map.back().push_back(new Node(it, jt,
                                   unit_size.getWidth(), unit_size.getHeight()));
-//            std::cout<< "(" <<astar_map.back().back().getPosition().getX() << "," << astar_map.back().back().getPosition().getY()<<")  ";
         }
         std::cout<<std::endl;
     }
@@ -85,20 +85,6 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
             open_nodes.pop_back();
             this->closed_nodes.push_back(closer_node);
 
-//            ///////////////////////////////////////
-//            for(auto x: astar_map) {
-//                for (auto y: x) {
-//                    std::cout<< "(" << y->getHvalue() <<" , " << y->getGValue()  <<" , " << y->getFValue()<<")  ";
-//                }
-//                std::cout<<std::endl;
-//            }
-//            std::cout<<std::endl;
-//            std::cout<<std::endl;
-//            std::cout<<std::endl;
-///////////////////////////////////////////
-//            std::cout<< "posicion de current node: (" <<  closer_node->getPosition().getX() << "," << closer_node->getPosition().getY()<<")"<<std::endl;
-//            std::cout<< "( H:" << closer_node->getHvalue() <<" , G: " <<closer_node->getGValue()  <<" , F:" << closer_node->getFValue()<<")  "<<std::endl;
-
             // check if destiny is between them
             if (closed_nodes.back()->getHvalue() == 0)
                 finished = true;
@@ -148,7 +134,7 @@ void Compass::getAdjacents(Node *node) {
 
                 // Check if whether node fit or the position is not available.
                 // Also discard the node looking for his adjacent
-                if ((map.canIWalkToThisPosition(size)) &&
+                if ((map.canIWalkToThisPosition(size, unit_id)) &&
                     this->isNotMe(node, adj)) {
 
                     // G value differs when the node is diagonal or next to it
@@ -315,11 +301,9 @@ Compass::~Compass() {
         for (auto x: astar_map) {
             int i = 0;
             for (auto y: x) {
-//                std::cout<<"size x: " << x.size()<<std::endl;
                 delete (y);
                 ++i;
             }
-//            std::cout<<"contador de i: " << i<<std::endl;
             ++j;
         }
     }
@@ -343,7 +327,7 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
                     if (adj->getHvalue() == 0) {
                         // G value differs when the node is diagonal
                         // or next to it
-                        if ((map.canIWalkToThisPosition(size)) &&
+                        if ((map.canIWalkToThisPosition(size, unit_id)) &&
                             this->isNotMe(node, adj)) {
                             if (this->isThisNodeOnDiagonal(node, adj)) {
                                 adj_new_g = this->writeGandSetParent(node, adj,
@@ -363,17 +347,18 @@ void Compass::checkIfIsDestinyNeighbor(Node* node) {
 }
 
 bool Compass::canIWalkToThisPosition(Size &size) {
-    return map.canIWalkToThisPosition(size);
+    return map.canIWalkToThisPosition(size, unit_id);
 }
 
 double Compass::getTerrainFactorOn(int x, int y) {
     return map.getTerrainFactorOn(x,y);
 }
 
-Compass::Compass(const Compass &other) : map(other.map),
-astar_map(other.astar_map), closed_nodes(other.closed_nodes),
-open_nodes(other.open_nodes), road(other.road), terrain_modifier(other.terrain_modifier),
-unit_speed(other.unit_speed), unit_size(other.unit_size){}
+//Compass::Compass(const Compass &other) : map(other.map),
+//astar_map(other.astar_map), closed_nodes(other.closed_nodes),
+//open_nodes(other.open_nodes), road(other.road),
+//terrain_modifier(other.terrain_modifier),
+//unit_id(unit_id), unit_speed(other.unit_speed), unit_size(other.unit_size){}
 
 bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
     return map.canBulletWalkToThisPosition(size,occupant);
@@ -390,7 +375,7 @@ void Compass::changeUnitSpeed(int speed) {
 Position Compass::getAValidPositionForDestiny(Position &destiny) {
     Node *dest = astar_map[destiny.getX()][destiny.getY()];
     Size size = dest->getSize();
-    if (map.canIWalkToThisPosition(size)) {
+    if (map.canIWalkToThisPosition(size, unit_id)) {
         return destiny;
     } else {
         return getClosestValidPosition(destiny);
@@ -411,7 +396,12 @@ Position Compass::getClosestValidPosition(Position &pos) {
             if (map.doesThisPositionExist(x_pos, y_max)) {
                 Node *tmp = astar_map[x_pos][y_max];
                 Size size = tmp->getSize();
-                if (map.canIWalkToThisPosition(size)) {
+                std::string terrain_type = map.getTerrainType(x_pos,y_max);
+                // if you fit on the position. When it's a vehicule check
+                // if it's different to water.
+                if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                    (!(unit_speed != 4 && terrain_type == "Agua" &&
+                   !map.thereIsABridge(size)))) {
                     found = true;
                     closest_node = tmp;
                     break;
@@ -422,9 +412,14 @@ Position Compass::getClosestValidPosition(Position &pos) {
         if (!found) {
             for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
                 if (map.doesThisPositionExist(x_pos, y_min)) {
-                    Node *tmp = astar_map[x_pos][y_max];
+                    Node *tmp = astar_map[x_pos][y_min];
                     Size size = tmp->getSize();
-                    if (map.canIWalkToThisPosition(size)) {
+                    std::string terrain_type = map.getTerrainType(x_pos,y_min);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size,unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
                         break;
@@ -435,10 +430,15 @@ Position Compass::getClosestValidPosition(Position &pos) {
 
         if (!found) {
             for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
-                if (map.doesThisPositionExist(y_pos, y_min)) {
+                if (map.doesThisPositionExist(x_max, y_pos)) {
                     Node *tmp = astar_map[x_max][y_pos];
                     Size size = tmp->getSize();
-                    if (map.canIWalkToThisPosition(size)) {
+                    std::string terrain_type = map.getTerrainType(x_max,y_pos);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
                         break;
@@ -449,10 +449,15 @@ Position Compass::getClosestValidPosition(Position &pos) {
 
         if (!found) {
             for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
-                if (map.doesThisPositionExist(y_pos, y_min)) {
+                if (map.doesThisPositionExist(x_min, y_pos)) {
                     Node *tmp = astar_map[x_min][y_pos];
                     Size size = tmp->getSize();
-                    if (map.canIWalkToThisPosition(size)) {
+                    std::string terrain_type = map.getTerrainType(x_min,y_pos);
+                    // if you fit on the position. When it's a vehicule check
+                    // if it's different to water.
+                    if ((map.canIWalkToThisPosition(size, unit_id)) &&
+                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                           !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
                         break;
@@ -464,6 +469,10 @@ Position Compass::getClosestValidPosition(Position &pos) {
         ++i;
     }
     return closest_node->getSize().getPosition();
+}
+
+void Compass::changeUnitId(int id) {
+    this->unit_id = id;
 }
 
 //Compass &Compass::operator=(const Compass &other) {
