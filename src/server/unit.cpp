@@ -80,7 +80,6 @@ void Unit::move() {
         } else {
             Position destiny = road.front();
             this->calculateRoadTo(destiny.getX(),destiny.getY());
-//            this->move();
         }
     }
 }
@@ -157,17 +156,3 @@ bool Unit::checkIfBulletWillHit(std::vector<Position> *b_road, Size &b_size) {
 bool Unit::doYouHaveAnyBullets() {
     return (!bullets.empty());
 }
-
-
-//Unit::Unit(const Unit &other) : compass(other.compass),
-// unit_speed(other.unit_speed),
-//state(other.state), range(other.range), road(other.road),
-// target(other.target){}
-
-//Unit &Unit::operator=(const Unit &other) {
-//    return ;
-//}
-
-
-
-
