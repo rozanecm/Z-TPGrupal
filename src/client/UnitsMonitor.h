@@ -26,6 +26,8 @@ public:
     markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                           gdouble yStartCoordinate, gdouble xFinishCoordinate,
                           gdouble yFinishCoordinate);
+
+    std::vector<Unit> getSelectedUnits();
 };
 
 

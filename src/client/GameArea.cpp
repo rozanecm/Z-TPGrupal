@@ -236,8 +236,10 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
         xFinishCoordinate = event->x;
         yFinishCoordinate = event->y;
         selectionMade = true;
-        //returning true, cancels the propagation of the event
-        return true;
+        /* returning true, cancels the propagation of the event. We return
+         * false, so the event can be handled by the game window
+         * */
+        return false;
     }
 }
 
@@ -6096,18 +6098,15 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         unitType = UnitsEnum::GENERIC_ROBOT;
     }
 
+    Glib::RefPtr<Gdk::Pixbuf> next = unitsAnimations.at(team).at
+            (unitType).
+            at(actionType).at(rotation).
+            at(unitCounter);
     /* perform actual drawing */
-    Gdk::Cairo::set_source_pixbuf(cr, unitsAnimations.at(team).at(unitType).
-                                          at(actionType).at(rotation).
-                                          at(unitCounter),
+    Gdk::Cairo::set_source_pixbuf(cr, next,
                                   xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate, unitsAnimations.at(team).
-                          at(unitType).
-                          at(actionType).at(rotation).
-                          at(unitCounter)->get_width(),
-                  unitsAnimations.at(team).at(unitType).at(actionType).
-                          at(rotation).
-                          at(unitCounter)->get_height());
+    cr->rectangle(xCoordinate, yCoordinate, next->get_width(),
+                  next->get_height());
     cr->fill();
     cr->restore();
 }

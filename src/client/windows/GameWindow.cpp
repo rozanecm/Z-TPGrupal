@@ -19,6 +19,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     builder->get_widget("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
     builder->get_widget("PanelDisplayLabel", panelLabel);
+    builder->get_widget("Portrait", portrait);
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
@@ -78,4 +79,25 @@ bool GameWindow::change_view_to_unit_group() {
 
     panel->pack_start(*group_panel);
     return false;
+}
+
+
+const std::map<UnitsEnum, std::string> portraits = {
+        {UnitsEnum::GRUNT, std::string("grunt")}
+};
+
+bool GameWindow::on_button_release_event(GdkEventButton *event) {
+    std::vector<Unit> units = unitsMonitor->getSelectedUnits();
+    if (units.size()) {
+        change_view_to_unit();
+        Unit u = units.at(0);
+        std::string name = "grunt";
+        if(portraits.find(u.getType()) != portraits.end()) {
+            name = portraits.find(u.getType())->second;
+
+        }
+        std::string path = "res/portraits/" + name + ".png";
+        portrait->set(path);
+    }
+    return true;
 }

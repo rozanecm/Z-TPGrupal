@@ -20,7 +20,6 @@ set(SOURCE_FILES
         main.cpp
         map.cpp
         map.h
-        map.xml
         MapLoader.cpp
         MapLoader.h
         node.cpp

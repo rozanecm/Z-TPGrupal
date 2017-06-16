@@ -3,6 +3,7 @@
 #include "UnitsMonitor.h"
 #include <vector>
 
+
 UnitsMonitor::UnitsMonitor(std::vector<Unit> &units) : units(units) {
 }
 
@@ -37,8 +38,6 @@ UnitsMonitor::getUnitsToDraw(unsigned int minX, unsigned int maxX,
     Lock l(m);
     std::vector <Unit> returnVector;
 
-    //todo DEBUG
-    std::cout<<"in getUnitsto draw in unitsMonitor"<<std::endl;
     for (Unit &unit : units){
         if (unit.getXCoordinate() >= minX and
             unit.getXCoordinate() <= maxX and
@@ -62,4 +61,14 @@ UnitsMonitor::markAsSelectedInRange(bool &unitsSelected,
                                    yStartCoordinate, xFinishCoordinate,
                                    yFinishCoordinate);
     }
+}
+
+std::vector<Unit> UnitsMonitor::getSelectedUnits() {
+    std::vector<Unit> units;
+    for (Unit& unit : this->units) {
+        if (unit.is_selected()) {
+            units.push_back(unit);
+        }
+    }
+    return units;
 }

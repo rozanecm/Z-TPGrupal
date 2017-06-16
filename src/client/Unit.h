@@ -79,6 +79,8 @@ public:
     unsigned int getXCoordinate();
 
     unsigned int getYCoordinate();
+
+    bool is_selected();
 };
 
 

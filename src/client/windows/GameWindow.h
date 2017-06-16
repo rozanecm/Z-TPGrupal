@@ -22,6 +22,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;
 
+    Gtk::Image* portrait;
     UnitsMonitor *unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
@@ -46,6 +47,8 @@ public:
     bool change_view_to_unit();
     bool change_view_to_building();
     bool change_view_to_unit_group();
+
+    bool on_button_release_event(GdkEventButton *event);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

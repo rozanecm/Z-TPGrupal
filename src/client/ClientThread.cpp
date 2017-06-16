@@ -11,6 +11,7 @@
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
+#include "commands/Update.h"
 
 void ClientThread::run() {
     initCommands();
@@ -62,6 +63,7 @@ void ClientThread::initCommands() {
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
+    commands["update"] = new Update();
 }
 
 ClientThread::~ClientThread() {
