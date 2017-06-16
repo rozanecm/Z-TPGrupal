@@ -44,8 +44,11 @@ void Compass::buildNodeMap() {
 std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
     this->road.clear();
 
+    // check if it's a possible position
+    Position destiny = getAValidPositionForDestiny(to);
+
     // set H value for destiny
-    this->setHValueForDestiny(to);
+    this->setHValueForDestiny(destiny);
 
     // start algorithm
         // add "from" to visited list
@@ -382,6 +385,85 @@ void Compass::changeUnitSize(Size &new_size) {
 
 void Compass::changeUnitSpeed(int speed) {
     this->unit_speed = speed;
+}
+
+Position Compass::getAValidPositionForDestiny(Position &destiny) {
+    Node *dest = astar_map[destiny.getX()][destiny.getY()];
+    Size size = dest->getSize();
+    if (map.canIWalkToThisPosition(size)) {
+        return destiny;
+    } else {
+        return getClosestValidPosition(destiny);
+    }
+}
+
+Position Compass::getClosestValidPosition(Position &pos) {
+    bool found = false;
+    int i = 1;
+    Node* closest_node = astar_map[pos.getX()][pos.getY()];
+    while (!found) {
+        int x_min = pos.getX() - i;
+        int x_max = pos.getX() + i;
+        int y_min = pos.getY() - i;
+        int y_max = pos.getY() + i;
+
+        for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
+            if (map.doesThisPositionExist(x_pos, y_max)) {
+                Node *tmp = astar_map[x_pos][y_max];
+                Size size = tmp->getSize();
+                if (map.canIWalkToThisPosition(size)) {
+                    found = true;
+                    closest_node = tmp;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            for (int x_pos = x_min; x_pos <= x_max; ++x_pos) {
+                if (map.doesThisPositionExist(x_pos, y_min)) {
+                    Node *tmp = astar_map[x_pos][y_max];
+                    Size size = tmp->getSize();
+                    if (map.canIWalkToThisPosition(size)) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!found) {
+            for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
+                if (map.doesThisPositionExist(y_pos, y_min)) {
+                    Node *tmp = astar_map[x_max][y_pos];
+                    Size size = tmp->getSize();
+                    if (map.canIWalkToThisPosition(size)) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!found) {
+            for (int y_pos = y_min; y_pos <= y_max; ++y_pos) {
+                if (map.doesThisPositionExist(y_pos, y_min)) {
+                    Node *tmp = astar_map[x_min][y_pos];
+                    Size size = tmp->getSize();
+                    if (map.canIWalkToThisPosition(size)) {
+                        found = true;
+                        closest_node = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        ++i;
+    }
+    return closest_node->getSize().getPosition();
 }
 
 //Compass &Compass::operator=(const Compass &other) {

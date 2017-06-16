@@ -94,6 +94,10 @@ private:
     int getModuleOfSubtraction(int x, int y);
 
     void checkIfIsDestinyNeighbor(Node* new_node);
+
+    Position getAValidPositionForDestiny(Position& destiny);
+
+    Position getClosestValidPosition(Position& pos);
 };
 
 
