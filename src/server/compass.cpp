@@ -46,62 +46,70 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
 
     // check if it's a possible position
     Position destiny = getAValidPositionForDestiny(to);
-
-    // set H value for destiny
-    this->setHValueForDestiny(destiny);
-
-    // start algorithm
-        // add "from" to visited list
-    Node* start_node = astar_map[from.getX()][from.getY()];
-    std::string terrain_type = map.getTerrainType(from.getX(),from.getY());
-    start_node->setGValue(0,terrain_modifier[terrain_type]);
-    start_node->setNewParent(start_node);
-    this->closed_nodes.push_back(start_node);
-
-    std::cout<< "posicion de salida: (" <<  from.getX() << "," << from.getY()<<"): G :"<< start_node->getGValue()<<std::endl;
-    std::cout<< "posicion de llegada: (" <<  to.getX() << "," << to.getY()<<")"<<std::endl;
-
-    Node* closer_node = start_node;
-    // While haven't reach destiny node or open_nodes has nodes to visit.
-    bool finished = false;
-    bool open_nodes_empty = false;
-
-    std::cout<< "finished: "<<finished << std::endl;
-    int i = 0;
-
-
-    while (!finished && (!open_nodes_empty)) {
-        // get adjacent's and add them to looking list in order of F value.
-        // On tie use H value.
-
-        this->getAdjacents(closer_node);
-
-        // if there are no adjacent's and open_node is empty, end search
-        if (open_nodes.empty()) {
-            open_nodes_empty = true;
-        } else {
-            // get the minimum F and add it to visit list (remove from looking list)
-            closer_node = open_nodes.back();
-            open_nodes.pop_back();
-            this->closed_nodes.push_back(closer_node);
-
-            // check if destiny is between them
-            if (closed_nodes.back()->getHvalue() == 0)
-                finished = true;
-
-            ++i;
-        }
-    }
-    Node* closest;
-    std::cout<< "finished: "<<finished << std::endl;
-    std::cout<< "counter: "<<i << std::endl;
-    if (finished) {
-        this->getRoad(from,closer_node);
+    // if I'm already on the closest position return it
+    if (from.getX() == destiny.getX() && from.getY() == destiny.getY()) {
+        this->road.push_back(destiny);
+        return road;
     } else {
-        closest = this->searchForClosestNode();
-        this->getRoad(from,closest);
+        // set H value for destiny
+        this->setHValueForDestiny(destiny);
+
+        // start algorithm
+        // add "from" to visited list
+        Node *start_node = astar_map[from.getX()][from.getY()];
+        std::string terrain_type = map.getTerrainType(from.getX(), from.getY());
+        start_node->setGValue(0, terrain_modifier[terrain_type]);
+        start_node->setNewParent(start_node);
+        this->closed_nodes.push_back(start_node);
+
+        std::cout << "posicion de salida: (" << from.getX() << ","
+                  << from.getY() << "): G :" << start_node->getGValue()
+                  << std::endl;
+        std::cout << "posicion de llegada: (" << to.getX() << "," << to.getY()
+                  << ")" << std::endl;
+
+        Node *closer_node = start_node;
+        // While haven't reach destiny node or open_nodes has nodes to visit.
+        bool finished = false;
+        bool open_nodes_empty = false;
+
+        std::cout << "finished: " << finished << std::endl;
+        int i = 0;
+
+
+        while (!finished && (!open_nodes_empty)) {
+            // get adjacent's and add them to looking list in order of F value.
+            // On tie use H value.
+
+            this->getAdjacents(closer_node);
+
+            // if there are no adjacent's and open_node is empty, end search
+            if (open_nodes.empty()) {
+                open_nodes_empty = true;
+            } else {
+                // get the minimum F and add it to visit list (remove from looking list)
+                closer_node = open_nodes.back();
+                open_nodes.pop_back();
+                this->closed_nodes.push_back(closer_node);
+
+                // check if destiny is between them
+                if (closed_nodes.back()->getHvalue() == 0)
+                    finished = true;
+
+                ++i;
+            }
+        }
+        Node *closest;
+        std::cout << "finished: " << finished << std::endl;
+        std::cout << "counter: " << i << std::endl;
+        if (finished) {
+            this->getRoad(from, closer_node);
+        } else {
+            closest = this->searchForClosestNode();
+            this->getRoad(from, closest);
+        }
+        return road;
     }
-    return road;
 }
 
 void Compass::setHValueForDestiny(Position& to) {

@@ -34,7 +34,6 @@ std::string Map::getTerrainType(int x, int y) {
 bool Map::areThisPointsEmpty(Size &size, int id) {
     bool no_collision = true;
     for(auto x: *all_occupants) {
-        Position x_pos = x->getPosition();
         if(x->getId() != id
            && x->isThereACollision(size) && x->getType() != "Bridge") {
             no_collision = false;
