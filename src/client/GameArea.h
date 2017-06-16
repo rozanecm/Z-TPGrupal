@@ -22,7 +22,6 @@
 class GameArea : public Gtk::DrawingArea{
 private:
     /* shared resources */
-    PlayersMonitor *playersMonitor;
     UnitsMonitor* unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
@@ -138,6 +137,14 @@ private:
     void loadRedPsychoFireAnimations();
 
     void loadYellowPsychoFireAnimations();
+
+    void loadBluePyroFireAnimation();
+
+    void loadGreenPyroFireAnimation();
+
+    void loadRedPyroFireAnimation();
+
+    void loadYellowPyroFireAnimation();
 
     void loadBlueSniperFireAnimations();
 
@@ -280,6 +287,8 @@ public:
     void processClick();
 
     void initializeCounters();
+
+    unsigned short getCounter(Unit &unit) const;
 };
 
 

@@ -1910,6 +1910,13 @@ void GameArea::loadYellowPsychoFireAnimations() {
 }
 
 void GameArea::loadPyroFireAnimations() {
+    loadBluePyroFireAnimation();
+    loadRedPyroFireAnimation();
+    loadGreenPyroFireAnimation();
+    loadYellowPyroFireAnimation();
+}
+
+void GameArea::loadBluePyroFireAnimation() {
     /* blue pyro fire at 0 degrees */
     unitsAnimations.operator[](TeamEnum::BLUE)[UnitsEnum::PYRO][
             ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
@@ -2021,6 +2028,348 @@ void GameArea::loadPyroFireAnimations() {
             ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
             Gdk::Pixbuf::create_from_file(
                     "res/assets/units/robots/pyro/fire_blue_r315_n02.png"));
+}
+
+void GameArea::loadGreenPyroFireAnimation() {
+    /* green pyro fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r000_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r000_n02.png"));
+
+    /* green pyro fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r045_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r045_n02.png"));
+
+    /* green pyro fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r090_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r090_n02.png"));
+
+    /* green pyro fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r135_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r135_n02.png"));
+
+    /* green pyro fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r180_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r180_n02.png"));
+
+    /* green pyro fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r225_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r225_n02.png"));
+
+    /* green pyro fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r270_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r270_n02.png"));
+
+    /* green pyro fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r315_n01.png"));
+    unitsAnimations.operator[](TeamEnum::GREEN)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_green_r315_n02.png"));
+}
+
+void GameArea::loadRedPyroFireAnimation() {
+    /* red pyro fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r000_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r000_n02.png"));
+
+    /* red pyro fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r045_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r045_n02.png"));
+
+    /* red pyro fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r090_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r090_n02.png"));
+
+    /* red pyro fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r135_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r135_n02.png"));
+
+    /* red pyro fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r180_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r180_n02.png"));
+
+    /* red pyro fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r225_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r225_n02.png"));
+
+    /* red pyro fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r270_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r270_n02.png"));
+
+    /* red pyro fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r315_n01.png"));
+    unitsAnimations.operator[](TeamEnum::RED)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_red_r315_n02.png"));
+}
+
+void GameArea::loadYellowPyroFireAnimation() {
+    /* yellow pyro fire at 0 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r000_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r000_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r000].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r000_n02.png"));
+
+    /* yellow pyro fire at 45 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r045_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r045_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r045].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r045_n02.png"));
+
+    /* yellow pyro fire at 90 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r090_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r090_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r090].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r090_n02.png"));
+
+    /* yellow pyro fire at 135 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r135_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r135_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r135].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r135_n02.png"));
+
+    /* yellow pyro fire at 180 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r180_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r180_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r180].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r180_n02.png"));
+
+    /* yellow pyro fire at 225 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r225_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r225_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r225].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r225_n02.png"));
+
+    /* yellow pyro fire at 270 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r270_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r270_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r270].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r270_n02.png"));
+
+    /* yellow pyro fire at 315 degrees */
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r315_n00.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r315_n01.png"));
+    unitsAnimations.operator[](TeamEnum::YELLOW)[UnitsEnum::PYRO][
+            ActionsEnum::FIRE][RotationsEnum::r315].emplace_back(
+            Gdk::Pixbuf::create_from_file(
+                    "res/assets/units/robots/pyro/fire_yellow_r315_n02.png"));
 }
 
 void GameArea::loadSniperFireAnimations() {
@@ -4260,7 +4609,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4272,7 +4620,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4284,7 +4631,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4296,7 +4642,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r135].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r135_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].
@@ -4308,7 +4653,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r180].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r180_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].
@@ -4320,7 +4664,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r225].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r225_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].
@@ -4332,7 +4675,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r270].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r270_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].
@@ -4344,7 +4686,6 @@ void GameArea::loadBlueJeepAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_blue_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4358,13 +4699,11 @@ void GameArea::loadBlueLightTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4376,13 +4715,11 @@ void GameArea::loadBlueLightTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4394,13 +4731,11 @@ void GameArea::loadBlueLightTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4412,13 +4747,11 @@ void GameArea::loadBlueLightTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_blue_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4432,13 +4765,11 @@ void GameArea::loadBlueMediumTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4450,13 +4781,11 @@ void GameArea::loadBlueMediumTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4468,13 +4797,11 @@ void GameArea::loadBlueMediumTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4486,13 +4813,11 @@ void GameArea::loadBlueMediumTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_blue_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4506,13 +4831,11 @@ void GameArea::loadBlueMMLAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4524,13 +4847,11 @@ void GameArea::loadBlueMMLAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4542,13 +4863,11 @@ void GameArea::loadBlueMMLAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4560,13 +4879,11 @@ void GameArea::loadBlueMMLAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_blue_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4580,13 +4897,11 @@ void GameArea::loadBlueHeavyTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4598,13 +4913,11 @@ void GameArea::loadBlueHeavyTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4616,13 +4929,11 @@ void GameArea::loadBlueHeavyTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4634,13 +4945,11 @@ void GameArea::loadBlueHeavyTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_blue_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::BLUE)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4662,7 +4971,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4674,7 +4982,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4686,7 +4993,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4698,7 +5004,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r135].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r135_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].
@@ -4710,7 +5015,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r180].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r180_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].
@@ -4722,7 +5026,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r225].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r225_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].
@@ -4734,7 +5037,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r270].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r270_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].
@@ -4746,7 +5048,6 @@ void GameArea::loadGreenJeepAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_green_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4760,13 +5061,11 @@ void GameArea::loadGreenLightTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4778,13 +5077,11 @@ void GameArea::loadGreenLightTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4796,13 +5093,11 @@ void GameArea::loadGreenLightTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4814,13 +5109,11 @@ void GameArea::loadGreenLightTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_green_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4834,13 +5127,11 @@ void GameArea::loadGreenMediumTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4852,13 +5143,11 @@ void GameArea::loadGreenMediumTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4870,13 +5159,11 @@ void GameArea::loadGreenMediumTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4888,13 +5175,11 @@ void GameArea::loadGreenMediumTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_green_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4908,13 +5193,11 @@ void GameArea::loadGreenMMLAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -4926,13 +5209,11 @@ void GameArea::loadGreenMMLAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -4944,13 +5225,11 @@ void GameArea::loadGreenMMLAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -4962,13 +5241,11 @@ void GameArea::loadGreenMMLAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_green_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -4982,13 +5259,11 @@ void GameArea::loadGreenHeavyTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5000,13 +5275,11 @@ void GameArea::loadGreenHeavyTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5018,13 +5291,11 @@ void GameArea::loadGreenHeavyTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5036,13 +5307,11 @@ void GameArea::loadGreenHeavyTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_green_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::GREEN)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5064,7 +5333,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5076,7 +5344,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5088,7 +5355,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5100,7 +5366,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r135].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r135_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].
@@ -5112,7 +5377,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r180].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r180_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].
@@ -5124,7 +5388,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r225].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r225_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].
@@ -5136,7 +5399,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r270].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r270_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].
@@ -5148,7 +5410,6 @@ void GameArea::loadRedJeepAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_red_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5162,13 +5423,11 @@ void GameArea::loadRedLightTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5180,13 +5439,11 @@ void GameArea::loadRedLightTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5198,13 +5455,11 @@ void GameArea::loadRedLightTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5216,13 +5471,11 @@ void GameArea::loadRedLightTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_red_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5236,13 +5489,11 @@ void GameArea::loadRedMediumTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5254,13 +5505,11 @@ void GameArea::loadRedMediumTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5272,13 +5521,11 @@ void GameArea::loadRedMediumTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5290,13 +5537,11 @@ void GameArea::loadRedMediumTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_red_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5310,13 +5555,11 @@ void GameArea::loadRedMMLAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5328,13 +5571,11 @@ void GameArea::loadRedMMLAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5346,13 +5587,11 @@ void GameArea::loadRedMMLAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5364,13 +5603,11 @@ void GameArea::loadRedMMLAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_red_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5384,13 +5621,11 @@ void GameArea::loadRedHeavyTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5402,13 +5637,11 @@ void GameArea::loadRedHeavyTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5420,13 +5653,11 @@ void GameArea::loadRedHeavyTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5438,13 +5669,11 @@ void GameArea::loadRedHeavyTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/heavy_tank/base_red_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::RED)[UnitsEnum::HEAVY_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5465,7 +5694,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5475,7 +5703,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5485,7 +5712,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5495,7 +5721,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r135_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5505,7 +5730,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r180_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5515,7 +5739,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r225_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5525,7 +5748,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r270_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5535,7 +5757,6 @@ void GameArea::loadYellowJeepAnimations() {
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/base_yellow_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].emplace_back(Gdk::Pixbuf::create_from_file(
@@ -5548,13 +5769,11 @@ void GameArea::loadYellowLightTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5566,13 +5785,11 @@ void GameArea::loadYellowLightTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5584,13 +5801,11 @@ void GameArea::loadYellowLightTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5602,13 +5817,11 @@ void GameArea::loadYellowLightTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/light_tank/base_yellow_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5622,13 +5835,11 @@ void GameArea::loadYellowMediumTankAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5640,13 +5851,11 @@ void GameArea::loadYellowMediumTankAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5658,13 +5867,11 @@ void GameArea::loadYellowMediumTankAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5676,13 +5883,11 @@ void GameArea::loadYellowMediumTankAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/medium_tank/base_yellow_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MEDIUM_TANK][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5696,13 +5901,11 @@ void GameArea::loadYellowMMLAnimations() {
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r000_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r000_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r000].
@@ -5714,13 +5917,11 @@ void GameArea::loadYellowMMLAnimations() {
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r045_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r045_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r045].
@@ -5732,13 +5933,11 @@ void GameArea::loadYellowMMLAnimations() {
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r090_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r090_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r090].
@@ -5750,13 +5949,11 @@ void GameArea::loadYellowMMLAnimations() {
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r315_n00.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/mml/base_yellow_r315_n01.png"));
-
     unitsAnimations.operator[](
             TeamEnum::YELLOW)[UnitsEnum::MML][ActionsEnum::STAND]
     [RotationsEnum::r315].
@@ -5873,6 +6070,7 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         or unitType == UnitsEnum::LIGHT_TANK
         or unitType == UnitsEnum::MEDIUM_TANK
         or unitType == UnitsEnum::MML) {
+        actionType = ActionsEnum::STAND;
         /* same assets are used for given rotations;
          * e.g.: 135 and 315 are drawn with same img */
         if (rotation == RotationsEnum::r135) {
@@ -5929,7 +6127,21 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
     for (auto &unit : unitsToDraw) {
         /* check what is being drawn, and choose the counter approprately. */
         unsigned short counter;
-        if (unit.getType() == UnitsEnum::JEEP) {
+        counter = getCounter(unit);
+
+        /* call actual drawing method */
+        drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
+                 unit.getRotation(),
+                 counter, cr,
+                 camera.mapToCameraYCoordinate(unit.getYCoordinate()),
+                 camera.mapToCameraXCoordinate(unit.getXCoordinate()));
+    }
+    unitsToDraw.clear();
+}
+
+unsigned short GameArea::getCounter(Unit &unit) const {
+    unsigned short counter;
+    if (unit.getType() == UnitsEnum::JEEP) {
             counter = jeepCounter.getCounter();
         } else if (unit.getType() == UnitsEnum::LIGHT_TANK or
                    unit.getType() == UnitsEnum::MEDIUM_TANK or
@@ -5942,20 +6154,11 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
         } else {
             counter = standingRobotCounter.getCounter();
         }
-
-        /* call actual drawing method */
-        drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
-                 unit.getRotation(),
-                 counter, cr,
-                 camera.mapToCameraYCoordinate(unit.getYCoordinate()),
-                 camera.mapToCameraXCoordinate(unit.getXCoordinate()));
-    }
-    unitsToDraw.clear();
+    return counter;
 }
 
 void GameArea::updateCounters() {
     /* update units counters */
-
     flagCounter.updateCounter();
 
     shootingRobotCounter.updateCounter();
@@ -5975,15 +6178,11 @@ void GameArea::updateCounters() {
 }
 
 void GameArea::initializeCounters() {
-//
-//    operator[](TeamEnum::BLUE)[UnitsEnum::GRUNT][
-//            ActionsEnum::FIRE][RotationsEnum::r000].
-//
-
     flagCounter.initialize(flags.at(FlagEnum::BLUE).size());
 
     jeepCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-    [UnitsEnum::JEEP][ActionsEnum::STAND][RotationsEnum::r000].size());
+                           [UnitsEnum::JEEP][ActionsEnum::STAND]
+                           [RotationsEnum::r000].size());
 
     tireCounter.initialize(jeepTires.at(RotationsEnum::r000).size());
 
