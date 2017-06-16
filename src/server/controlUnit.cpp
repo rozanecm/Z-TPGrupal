@@ -44,7 +44,6 @@ void ControlUnit::run() {
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
-        std::cout << t3 - time_span.count() << std::endl;
         sleepFor(t3 - time_span.count());
     }
     // send victory or defeated message
@@ -74,7 +73,6 @@ void ControlUnit::unitsMakeMicroAction() {
 
 void ControlUnit::checkAllLivingOccupants() {
     std::vector<Occupant>::iterator it = changed_occupants.begin();
-    std::cout<< changed_occupants.size() << std::endl;
     int i = 0;
     for (; it != changed_occupants.end();) {
         if (all_occupants[i]->getLifeLeft() ==
@@ -85,7 +83,6 @@ void ControlUnit::checkAllLivingOccupants() {
         }
         ++i;
     }
-    std::cout<< changed_occupants.size() << std::endl;
     // if dead erase Occupant
     std::vector<Occupant*>::iterator ito = all_occupants.begin();
     for(;ito != all_occupants.end();){
