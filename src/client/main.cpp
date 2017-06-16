@@ -33,54 +33,60 @@ void play_sound() {
 }
 
 int main(int argc, char **argv) {
-    // play_sound();
+    try {
+        // play_sound();
 
-    /* create map; bind with monitor */
-    Map map;
-    MapMonitor mapMonitor(map);
-    /* create vector with players; bind with monitor */
-    std::vector<Unit> units;
-    UnitsMonitor unitsrMonitor(units);
+        /* create map; bind with monitor */
+        Map map;
+        MapMonitor mapMonitor(map);
+        /* create vector with players; bind with monitor */
+        std::vector<Unit> units;
+        UnitsMonitor unitsrMonitor(units);
 
-    /* CREATE UNIT TO TEST GFIACION DE UNITS */
-    Unit unit(1, std::pair<unsigned int, unsigned int>(20, 20),
-              UnitsEnum::HEAVY_TANK, RotationsEnum::r225);
-    unitsrMonitor.addUnit(unit);
+        /* CREATE UNIT TO TEST GFIACION DE UNITS */
+        Unit unit(1, std::pair<unsigned int, unsigned int>(20, 20),
+                  UnitsEnum::HEAVY_TANK, RotationsEnum::r225);
+        unitsrMonitor.addUnit(unit);
 
 
-    /* create vector with buildings; bind with monitor */
-    std::vector<Building> buildings;
-    BuildingsMonitor buildingsMonitor(buildings);
+        /* create vector with buildings; bind with monitor */
+        std::vector<Building> buildings;
+        BuildingsMonitor buildingsMonitor(buildings);
 
-    auto app = Gtk::Application::create();
+        auto app = Gtk::Application::create();
 
-    GameBuilder builder;
-    InitialWindow* window = builder.get_initial_window();
-    app->run(*window);
-    // Once the window closes, we fetch the socket
-    std::shared_ptr<Socket> s = window->get_socket();
-    if (s) {
-        ServerMessenger messenger(*s.get());
+        GameBuilder builder;
+        InitialWindow* window = builder.get_initial_window();
+        app->run(*window);
+        // Once the window closes, we fetch the socket
+        std::shared_ptr<Socket> s = window->get_socket();
+        if (s) {
+            ServerMessenger messenger(*s.get());
 
-        ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
-                                  messenger);
-        clientThread.start();
-
-        GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
+            ClientThread clientThread(unitsrMonitor, buildingsMonitor,
                                       mapMonitor, messenger);
+            clientThread.start();
 
-        // HARDCODED DEBUG MESSAGES TO START A GAME
-        messenger.send("create-lobby");
-        messenger.send("ready");
-        messenger.send("start-game");
+            GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
+                                          mapMonitor, messenger);
 
-        graphicsThread.start();
-        graphicsThread.join();
+            //todo remove hardcoded debug messages
+            // HARDCODED DEBUG MESSAGES TO START A GAME
+            messenger.send("create-lobby");
+            messenger.send("ready");
+            messenger.send("start-game");
 
-        /* once graphics join (window closes), we kill client thread */
-        clientThread.finish();
-        clientThread.join();
+            graphicsThread.start();
+            graphicsThread.join();
+
+            /* once graphics join (window closes), we kill client thread */
+            clientThread.finish();
+            clientThread.join();
+        }
+
+        return SUCCESSRETURNCODE;
+    } catch (std::exception const & ex) {
+        std::cerr<<ex.what()<<std::endl;
+        return SUCCESSRETURNCODE;
     }
-
-    return SUCCESSRETURNCODE;
 }

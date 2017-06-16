@@ -1,9 +1,9 @@
 #include <Lock.h>
 #include <iostream>
 #include "UnitsMonitor.h"
+#include <vector>
 
 UnitsMonitor::UnitsMonitor(std::vector<Unit> &units) : units(units) {
-
 }
 
 void UnitsMonitor::addUnit(Unit &unit) {

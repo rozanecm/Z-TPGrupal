@@ -8,6 +8,6 @@ void Counter::updateCounter() {
     counter == maxSize - 1 ? (counter = 0) : (counter++);
 }
 
-unsigned short Counter::getCounter() {
+unsigned short Counter::getCounter() const {
     return counter;
 }

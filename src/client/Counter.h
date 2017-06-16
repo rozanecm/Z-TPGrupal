@@ -10,7 +10,7 @@ public:
 
     void updateCounter();
 
-    unsigned short getCounter();
+    unsigned short getCounter() const;
 };
 
 
