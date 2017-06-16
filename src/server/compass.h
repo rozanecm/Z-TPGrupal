@@ -27,9 +27,6 @@ private:
     Size unit_size;
 
 public:
-//    Compass(const Compass& other);
-//
-//    Compass& operator=(const Compass& other) = delete;
     // The Compass receives the map of Cells for calculations and the
     // basic unit speed
     Compass(Map &map, Size &unit_size, int unit_id, int unit_speed);
@@ -37,8 +34,6 @@ public:
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
     std::vector<Position> getFastestWay(Position& from, Position& to);
-
-    void buildNodeMap();
 
     // Returns true if the position is empty
     bool canIWalkToThisPosition(Size& size);
@@ -58,6 +53,9 @@ public:
     ~Compass();
 
 private:
+    // Builds a Node map with the size of the original map
+    void buildNodeMap();
+
     void setTerrainModifier();
     // Writes the H value on every node of astar_map for the received position
     // It use Manhattan distance
@@ -90,15 +88,20 @@ private:
 
     void getRoad(Position& from, Node* destiny);
 
+    // Returns the closest node on the closed_nodes vector
     Node* searchForClosestNode();
 
     // Returns a positive value of the result of x - y.
     int getModuleOfSubtraction(int x, int y);
 
+    // checks the Neighbor nodes to see if destiny is among them
     void checkIfIsDestinyNeighbor(Node* new_node);
 
+    // Returns the position of destiny. If destiny is not a valid position
+    // it returns the closest valid position
     Position getAValidPositionForDestiny(Position& destiny);
 
+    // Returns the closest valid position to pos
     Position getClosestValidPosition(Position& pos);
 };
 

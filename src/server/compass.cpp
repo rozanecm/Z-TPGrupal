@@ -26,7 +26,6 @@ void Compass::setTerrainModifier() {
 
 void Compass::buildNodeMap() {
     // the nodes has the size of the unit that is using this compass
-    std::cout<< "Muestro mapa de nodos"<<std::endl;
     for(int it = 0; it < map.getWidth(); ++it) {
         std::vector<Node*> row_vec;
         astar_map.push_back(row_vec);
@@ -34,11 +33,7 @@ void Compass::buildNodeMap() {
             astar_map.back().push_back(new Node(it, jt,
                                   unit_size.getWidth(), unit_size.getHeight()));
         }
-        std::cout<<std::endl;
     }
-    std::cout<<std::endl;
-    std::cout<<std::endl;
-    std::cout<<std::endl;
 }
 
 std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
@@ -62,20 +57,10 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
         start_node->setNewParent(start_node);
         this->closed_nodes.push_back(start_node);
 
-        std::cout << "posicion de salida: (" << from.getX() << ","
-                  << from.getY() << "): G :" << start_node->getGValue()
-                  << std::endl;
-        std::cout << "posicion de llegada: (" << to.getX() << "," << to.getY()
-                  << ")" << std::endl;
-
         Node *closer_node = start_node;
         // While haven't reach destiny node or open_nodes has nodes to visit.
         bool finished = false;
         bool open_nodes_empty = false;
-
-        std::cout << "finished: " << finished << std::endl;
-        int i = 0;
-
 
         while (!finished && (!open_nodes_empty)) {
             // get adjacent's and add them to looking list in order of F value.
@@ -87,7 +72,8 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
             if (open_nodes.empty()) {
                 open_nodes_empty = true;
             } else {
-                // get the minimum F and add it to visit list (remove from looking list)
+                // get the minimum F and add it to visit list
+                // (remove from looking list)
                 closer_node = open_nodes.back();
                 open_nodes.pop_back();
                 this->closed_nodes.push_back(closer_node);
@@ -95,13 +81,9 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
                 // check if destiny is between them
                 if (closed_nodes.back()->getHvalue() == 0)
                     finished = true;
-
-                ++i;
             }
         }
         Node *closest;
-        std::cout << "finished: " << finished << std::endl;
-        std::cout << "counter: " << i << std::endl;
         if (finished) {
             this->getRoad(from, closer_node);
         } else {
@@ -234,7 +216,6 @@ void Compass::insertNodeOnOpen(Node *new_node) {
         open_nodes.push_back(new_node);
     } else {
         bool inserted = false;
-
         // Save nodes by F value. The lowest on the back.
         // If two nodes have same F value, the one with the lowest H value
         // will be closer to the back.
@@ -262,26 +243,13 @@ void Compass::getRoad(Position& from,Node *destiny) {
     road.push_back(destiny->getPosition());
     Node* next_node = destiny->getParent();
 
-    std::cout<< "From"<<std::endl;
-    std::cout<< "(" <<  from.getX() << "," << from.getY()<<") :";
-    std::cout<< "Road"<<std::endl;
-    std::cout<< "(" <<  destiny->getPosition().getX() << "," << destiny->getPosition().getY()<<") :";
-    std::cout<< "  ( H:" << destiny->getHvalue() <<" , G: " <<destiny->getGValue()  <<" , F:" << destiny->getFValue()<<")  "<<std::endl;
-
-    std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :";
-    std::cout<< "  ( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
     Position current_pos = next_node->getPosition();
     while ((current_pos.getX() != from.getX()) ||
             (current_pos.getY() != from.getY())) {
         road.push_back(current_pos);
         next_node = next_node->getParent();
-
-        std::cout<< "(" <<  next_node->getPosition().getX() << "," << next_node->getPosition().getY()<<") :  ";
-        std::cout<< "( H:" << next_node->getHvalue() <<" , G: " <<next_node->getGValue()  <<" , F:" << next_node->getFValue()<<")  "<<std::endl;
-
         current_pos = next_node->getPosition();
     }
-    std::cout<< "road size: " << road.size() <<std::endl;
 }
 
 Node *Compass::searchForClosestNode() {
@@ -291,7 +259,6 @@ Node *Compass::searchForClosestNode() {
          ((x->getHvalue() == closest->getGValue()) &&
           (x->getFValue() < closest->getFValue()))) {
             closest = x;
-            std::cout<< "closest node: (" <<  closest->getPosition().getX() << "," << closest->getPosition().getY()<<") :  ";
         }
     }
     return closest;
@@ -361,12 +328,6 @@ bool Compass::canIWalkToThisPosition(Size &size) {
 double Compass::getTerrainFactorOn(int x, int y) {
     return map.getTerrainFactorOn(x,y);
 }
-
-//Compass::Compass(const Compass &other) : map(other.map),
-//astar_map(other.astar_map), closed_nodes(other.closed_nodes),
-//open_nodes(other.open_nodes), road(other.road),
-//terrain_modifier(other.terrain_modifier),
-//unit_id(unit_id), unit_speed(other.unit_speed), unit_size(other.unit_size){}
 
 bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
     return map.canBulletWalkToThisPosition(size,occupant);
@@ -482,9 +443,3 @@ Position Compass::getClosestValidPosition(Position &pos) {
 void Compass::changeUnitId(int id) {
     this->unit_id = id;
 }
-
-//Compass &Compass::operator=(const Compass &other) {
-//    return ;
-//}
-
-
