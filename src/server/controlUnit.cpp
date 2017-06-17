@@ -104,10 +104,27 @@ void ControlUnit::checkAllLivingOccupants() {
     }
 }
 
-void ControlUnit::cmdMoveUnit(int id, int x, int y) {
+void ControlUnit::cmdMoveUnit(std::string& id_player,int id, int x, int y) {
     std::map<int,Unit*>::iterator it;
     it = all_units.find(id);
-    (*it->second).calculateRoadTo(x,y);
+    if ((*it->second).getTeam() == id_player)
+        (*it->second).calculateRoadTo(x,y);
+}
+
+void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
+                            int target) {
+    std::map<int,Unit*>::iterator it;
+    it = all_units.find(id_unit);
+    if ((*it->second).getTeam() == attacker_team) {
+        for (auto z: all_occupants) {
+            if (z->getId() == target) {
+                if (z->getTeam() != attacker_team) {
+//                    (*it->second).setTargetToAttack(z);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void ControlUnit::executeCommands() {
@@ -188,23 +205,6 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
     info += std::to_string(flag_pos.getY()) + "-";
     info += territory.getTeam() + "--";
     return info;
-}
-
-void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
-                            int target) {
-    std::map<int,Unit*>::iterator it;
-    it = all_units.find(id_unit);
-    Unit selected_unit = (*it->second);
-    if (selected_unit.getTeam() == attacker_team) {
-        for (auto z: all_occupants) {
-            if (z->getId() == target) {
-                if (z->getTeam() != attacker_team) {
-//                    selected_unit.setTargetToAttack(z);
-                    break;
-                }
-            }
-        }
-    }
 }
 
 void ControlUnit::moveAllBullets() {

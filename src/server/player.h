@@ -22,15 +22,13 @@ private:
     Messenger* messenger;
     std::string id;
     int color;
-    bool conected,on_menu,on_lobby ,playing;
+    bool conected,on_menu,on_lobby ,playing,ready;
     CommandMonitor* commands;
     ControlUnit* control;
     Lobby* lobby;
     Menu& menu;
 
 public:
-    Player(Messenger* messenger, ControlUnit* control, Menu& menu);
-
     Player(Messenger *messenger, Menu &menu, std::string& id);
 
     void run();
@@ -47,12 +45,18 @@ public:
 
     std::string getId() const;
 
+    void getInGame();
+
+    bool areYouReady();
+
     ~Player();
 
 private:
     void processMenuCommands(std::string& cmd);
 
     void processLobbyCommands(std::string& cmd);
+
+    std::string getNextData(std::string& line);
 };
 
 

@@ -55,7 +55,7 @@ public:
 
     // Command move unit. Meant to give the order to the unit to start moving
     // to de (x,y) position
-    void cmdMoveUnit(int id, int x, int y);
+    void cmdMoveUnit(std::string& id_player, int id, int x, int y);
 
     void cmdAttack(std::string attacker_team, int id_unit, int target);
 
