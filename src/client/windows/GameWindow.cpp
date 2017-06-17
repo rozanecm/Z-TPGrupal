@@ -128,3 +128,7 @@ void GameWindow::factory_change_unit(std::string &path) {
 void GameWindow::factory_create_unit() {
     messenger->send("createunit-" + selection_id);
 }
+
+void GameWindow::setMapData() {
+    gameArea->setMapData();
+}

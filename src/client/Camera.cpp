@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include <utility>
+#include <iostream>
 
 Camera::Camera(unsigned int tileSize, unsigned int mapWidth,
                unsigned int mapHeight,
@@ -46,6 +47,7 @@ void Camera::moveDown() {
 
 void Camera::moveRight() {
     if (position.first != maxXCoordinate){
+        std::cout<<position.first<<std::endl;
         position.first += tileSize;
     }
 }

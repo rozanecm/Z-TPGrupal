@@ -45,6 +45,7 @@ public:
     setResources(UnitsMonitor *unitsMonitor,
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor, ServerMessenger *messenger);
+    void setMapData();
     // Functions to change the window's side panel
     bool change_view_to_unit();
     bool change_view_to_building();

@@ -65,11 +65,12 @@ int main(int argc, char **argv) {
 
 
             GameWindow* gwindow = builder.get_window();
+            ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
+                                      messenger, *gwindow);
+
             GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
                                           mapMonitor, messenger, *gwindow);
 
-            ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
-                                      messenger, *gwindow);
             clientThread.start();
 
             // HARDCODED DEBUG MESSAGES TO START A GAME

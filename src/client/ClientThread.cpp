@@ -15,7 +15,7 @@
 #include "windows/GameWindow.h"
 #include "commands/FactoryNextUnit.h"
 
-void ClientThread::run() {
+void ClientThread:: run() {
     initCommands();
     loop();
 }
@@ -64,7 +64,7 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
-    commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor);
+    commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);

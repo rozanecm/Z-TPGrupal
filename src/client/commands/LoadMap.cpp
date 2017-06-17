@@ -16,9 +16,9 @@ const std::map<std::string, BuildingsEnum> buildings {
         {std::string("Fort"), BuildingsEnum::FORT}
 };
 
-LoadMap::LoadMap(MapMonitor &mapMonitor, BuildingsMonitor& buildings) :
-        mapMonitor(mapMonitor),
-        buildingsMonitor(buildings)
+LoadMap::LoadMap(MapMonitor &mapMonitor, BuildingsMonitor& buildings,
+                 GameWindow &window) :
+        mapMonitor(mapMonitor), buildingsMonitor(buildings), window(window)
 {
 }
 
@@ -76,4 +76,5 @@ void LoadMap::execute(const std::vector<std::string> &args) {
             buildingsMonitor.addBuilding(b);
         }
     }
+    window.setMapData();
 }

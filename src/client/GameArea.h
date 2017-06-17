@@ -303,6 +303,11 @@ public:
     unsigned int cameraToRealMap(unsigned int coordinate);
 
     unsigned int realMapToCamera(gdouble coordinate);
+
+    void drawBuildings(const Cairo::RefPtr<Cairo::Context> &cr,
+                       std::pair<unsigned int, unsigned int> cameraPosition);
+
+    void setMapData();
 };
 
 

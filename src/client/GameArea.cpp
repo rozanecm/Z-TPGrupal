@@ -150,8 +150,6 @@ void GameArea::setResources(UnitsMonitor *unitsMonitor,
     this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
-    this->camera.setMapWidth(mapMonitor->getXSize());
-    this->camera.setMapHeight(mapMonitor->getYSize());
 }
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {
@@ -257,15 +255,15 @@ void GameArea::makeSelection() {
             camera.cameraToMapYCoordinate(realMapToCamera(yStartCoordinate)),
             camera.cameraToMapXCoordinate(realMapToCamera(xFinishCoordinate)),
             camera.cameraToMapYCoordinate(realMapToCamera(yFinishCoordinate)));
-//            realMapToCamera(xStartCoordinate) + camera.cameraOffset().first,
-//            realMapToCamera(yStartCoordinate) + camera.cameraOffset().second,
-//            realMapToCamera(xFinishCoordinate) + camera.cameraOffset().first,
-//            realMapToCamera(yFinishCoordinate) + camera.cameraOffset().second);
     buildingsMonitor->markAsSelectedInRange(
             xStartCoordinate + camera.cameraOffset().first,
             yStartCoordinate + camera.cameraOffset().second,
             xFinishCoordinate + camera.cameraOffset().first,
             yFinishCoordinate + camera.cameraOffset().second);
+//            xStartCoordinate + camera.cameraOffset().first,
+//            yStartCoordinate + camera.cameraOffset().second,
+//            xFinishCoordinate + camera.cameraOffset().first,
+//            yFinishCoordinate + camera.cameraOffset().second);
     mapMonitor->markAsSelectedInRange(
             xStartCoordinate + camera.cameraOffset().first,
             yStartCoordinate + camera.cameraOffset().second,
@@ -6225,6 +6223,16 @@ unsigned int GameArea::cameraToRealMap(unsigned int coordinate) {
 }
 
 unsigned int GameArea::realMapToCamera(gdouble coordinate) {
-    std::cout<<(NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width())<<std::endl;
     return (NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width());
+}
+
+void GameArea::drawBuildings(const Cairo::RefPtr<Cairo::Context> &cr,
+                             std::pair<unsigned int, unsigned int>
+                             cameraPosition) {
+
+}
+
+void GameArea::setMapData() {
+    this->camera.setMapWidth(mapMonitor->getXSize());
+    this->camera.setMapHeight(mapMonitor->getYSize());
 }
