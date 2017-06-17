@@ -114,13 +114,17 @@ void ControlUnit::executeCommands() {
 
 void ControlUnit::sendUpdateMessage() {
     std::string info = getUpdateInfo();
+    if (!info.size()) {
+        return;
+    }
+    info = "update-" + info;
     for (auto y: players) {
         y->sendMessage(info);
     }
 }
 
 std::string ControlUnit::getUpdateInfo() {
-    std::string  update_msg = "update-";
+    std::string  update_msg = "";
     for (auto z: changed_units) {
         update_msg += getInfoFromUnit(z);
     }

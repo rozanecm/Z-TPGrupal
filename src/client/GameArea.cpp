@@ -151,6 +151,7 @@ void GameArea::setResources(UnitsMonitor *unitsMonitor,
 }
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {
+    unitsMonitor->wipeSelected();
     if (event->keyval == GDK_KEY_Up and event->keyval == GDK_KEY_Left) {
         camera.moveUp();
         camera.moveLeft();

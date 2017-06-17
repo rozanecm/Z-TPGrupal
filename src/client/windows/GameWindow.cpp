@@ -69,6 +69,8 @@ bool GameWindow::change_view_to_unit() {
     }
 
     panel->pack_start(*unit_panel);
+    panelLabel->set_text(unit_panel->get_label());
+
     return true;
 }
 
@@ -105,6 +107,7 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
             name = portraits.find(u.getType())->second;
 
         }
+        unit_panel->set_name(name);
         std::string path = "res/portraits/" + name + ".png";
         portrait->set(path);
     }

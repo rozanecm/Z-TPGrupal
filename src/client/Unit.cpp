@@ -87,3 +87,7 @@ ActionsEnum Unit::getAction() {
 bool Unit::is_selected() {
     return selected;
 }
+
+void Unit::unselect() {
+    selected = false;
+}
