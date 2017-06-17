@@ -33,8 +33,7 @@ void UnitsMonitor::update_position(int unit_id, int x, int y) {
 
 std::vector<Unit>
 UnitsMonitor::getUnitsToDraw(unsigned int minX, unsigned int maxX,
-                             unsigned int minY,
-                             unsigned int maxY) {
+                             unsigned int minY, unsigned int maxY) {
     Lock l(m);
     std::vector <Unit> returnVector;
 

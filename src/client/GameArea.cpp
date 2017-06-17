@@ -85,28 +85,29 @@ void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                     cameraPosition.first / TILESIZE -
                     NUMBER_OF_TILES_TO_SHOW / 2 + i,
                     cameraPosition.second / TILESIZE -
-                    NUMBER_OF_TILES_TO_SHOW / 2 +
-                    j));
+                    NUMBER_OF_TILES_TO_SHOW / 2 + j));
         }
     }
 }
 
 void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
-                          unsigned int xCoordinate, unsigned int yCoordinate,
+                          unsigned int xTileCoordinate,
+                          unsigned int yTileCoordinate,
                           std::string terrainType) {
     cr->save();
     auto pixbuf = tiles.find(terrainType);
     if (pixbuf == tiles.end()) {
         return;
     }
+    const unsigned int xGraphicCoordinate = xTileCoordinate * get_width() /
+                                            NUMBER_OF_TILES_TO_SHOW;
+    const unsigned int yGraphicCoordinate = yTileCoordinate * get_height() /
+                                            NUMBER_OF_TILES_TO_SHOW;
     Gdk::Cairo::set_source_pixbuf(cr, pixbuf->second,
-                                  xCoordinate * get_width() /
-                                  NUMBER_OF_TILES_TO_SHOW,
-                                  yCoordinate * get_height() /
-                                  NUMBER_OF_TILES_TO_SHOW);
+                                  xGraphicCoordinate,
+                                  yGraphicCoordinate);
 
-    cr->rectangle(xCoordinate * get_width() / NUMBER_OF_TILES_TO_SHOW,
-                  yCoordinate * get_height() / NUMBER_OF_TILES_TO_SHOW,
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
                   get_width() / NUMBER_OF_TILES_TO_SHOW,
                   get_height() / NUMBER_OF_TILES_TO_SHOW);
     cr->fill();
@@ -114,12 +115,14 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
 }
 
 void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
-                                 int xCoordinate, int yCoordinate) {
+                                 int xGraphicCoordinate,
+                                 int yGraphicCoordinate) {
     cr->save();
     Gdk::Cairo::set_source_pixbuf(cr, flags.at(FlagEnum::BLUE).
                                           at(flagCounter.getCounter()),
-                                  xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
                   flags.at(FlagEnum::BLUE).
                           at(flagCounter.getCounter())->get_width(),
                   flags.at(FlagEnum::BLUE).
@@ -6039,14 +6042,15 @@ void GameArea::loadYellowHeavyTankAnimations() {
 }
 
 void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
-                             unsigned int xCoordinate, unsigned int yCoordinate,
+                             unsigned int xGraphicCoordinate,
+                             unsigned int yGraphicCoordinate,
                              RotationsEnum rotation) {
     cr->save();
     /* first draw jeepTires */
     Gdk::Cairo::set_source_pixbuf(cr, jeepTires.at(rotation).
                                           at(tireCounter.getCounter()),
-                                  xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
                   jeepTires.at(rotation).
                           at(tireCounter.getCounter())->get_width(),
                   jeepTires.at(rotation).
@@ -6060,15 +6064,34 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
                         ActionsEnum actionType,
                         RotationsEnum rotation, unsigned short unitCounter,
                         const Cairo::RefPtr<Cairo::Context> &cr,
-                        unsigned int xCoordinate, unsigned int yCoordinate) {
+                        unsigned int xGraphicCoordinate,
+                        unsigned int yGraphicCoordinate) {
     cr->save();
     /* adapt given data to savd imgs. Applies to vehicles */
     if (unitType == UnitsEnum::JEEP &&
         rotation != RotationsEnum::r090 &&
         rotation != RotationsEnum::r270) {
         /* rotations 090 and 270 dont have tires */
-        drawJeepTires(cr, xCoordinate, yCoordinate, rotation);
+        drawJeepTires(cr, xGraphicCoordinate, yGraphicCoordinate, rotation);
     }
+    processUnitToDrawEnums(unitType, actionType, rotation);
+
+    Glib::RefPtr<Gdk::Pixbuf> next = unitsAnimations.at(team).at
+            (unitType).at(actionType).at(rotation).at(unitCounter);
+
+    /* perform actual drawing */
+    Gdk::Cairo::set_source_pixbuf(cr, next,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
+                  next->get_height());
+    cr->fill();
+    cr->restore();
+}
+
+void
+GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
+                                 RotationsEnum &rotation) const {
     if (unitType == UnitsEnum::HEAVY_TANK
         or unitType == UnitsEnum::LIGHT_TANK
         or unitType == UnitsEnum::MEDIUM_TANK
@@ -6098,18 +6121,6 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
          * set the unit type to generic robot */
         unitType = UnitsEnum::GENERIC_ROBOT;
     }
-
-    Glib::RefPtr<Gdk::Pixbuf> next = unitsAnimations.at(team).at
-            (unitType).
-            at(actionType).at(rotation).
-            at(unitCounter);
-    /* perform actual drawing */
-    Gdk::Cairo::set_source_pixbuf(cr, next,
-                                  xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate, next->get_width(),
-                  next->get_height());
-    cr->fill();
-    cr->restore();
 }
 
 void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
@@ -6125,7 +6136,7 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
     /2);
 
     for (auto &unit : unitsToDraw) {
-        /* check what is being drawn, and choose the counter approprately. */
+        /* check what is being drawn, and choose the counter appropriately. */
         unsigned short counter;
         counter = getCounter(unit);
 
@@ -6133,10 +6144,9 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
         drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
                  unit.getRotation(),
                  counter, cr,
-                 camera.mapToCameraYCoordinate(unit.getYCoordinate()),
-                 camera.mapToCameraXCoordinate(unit.getXCoordinate()));
+                 cameraToRealMap(camera.mapToCameraXCoordinate(unit.getXCoordinate())),
+                 cameraToRealMap(camera.mapToCameraYCoordinate(unit.getYCoordinate())));
     }
-    unitsToDraw.clear();
 }
 
 unsigned short GameArea::getCounter(Unit &unit) const {
@@ -6204,4 +6214,9 @@ void GameArea::initializeCounters() {
     mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
                           [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND
                           ][RotationsEnum::r000].size());
+}
+
+unsigned int GameArea::cameraToRealMap(unsigned int coordinate) {
+    std::cout<<get_width() * coordinate / (NUMBER_OF_TILES_TO_SHOW * TILESIZE)<<std::endl;
+    return get_width() * coordinate / (NUMBER_OF_TILES_TO_SHOW * TILESIZE);
 }
