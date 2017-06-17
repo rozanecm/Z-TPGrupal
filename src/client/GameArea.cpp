@@ -65,7 +65,7 @@ bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     drawFlagAnimation(cr, 500, 500);
     //todo implement building drawing
 //    drawBuildings();
-    drawUnitsInMap(cr);
+//    drawUnitsInMap(cr);
     updateCounters();
     return true;
 }

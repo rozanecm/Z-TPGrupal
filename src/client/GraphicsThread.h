@@ -6,18 +6,21 @@
 #include "MapMonitor.h"
 #include "ServerMessenger.h"
 #include "UnitsMonitor.h"
+#include "windows/GameWindow.h"
 
 class GraphicsThread : public Thread {
     UnitsMonitor &unitsMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
-
+    GameWindow& window;
 public:
     GraphicsThread(UnitsMonitor &monitor,
                    BuildingsMonitor &buildingsMonitor,
                    MapMonitor &mapMonitor,
-                   ServerMessenger &messenger);
+                   ServerMessenger &messenger,
+                   GameWindow& window
+    );
 
     virtual void run();
 };

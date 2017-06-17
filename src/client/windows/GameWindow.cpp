@@ -16,10 +16,20 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
     builder->get_widget("SidePanel", panel);
     builder->get_widget_derived("BuildingView", building_panel);
-    builder->get_widget("UnitView", unit_panel);
+    builder->get_widget_derived("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
     builder->get_widget("PanelDisplayLabel", panelLabel);
     builder->get_widget("Portrait", portrait);
+
+
+    building_panel->next_button()->
+            signal_clicked().connect(
+            sigc::mem_fun(*this, &GameWindow::factory_next));
+
+    building_panel->create_button()->
+            signal_clicked().connect(
+            sigc::mem_fun(*this, &GameWindow::factory_create_unit));
+
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
@@ -67,7 +77,6 @@ bool GameWindow::change_view_to_building() {
         panel->remove(*child);
     }
     panel->pack_start(*building_panel);
-
     panelLabel->set_text(building_panel->get_label());
     return true;
 }
@@ -92,7 +101,7 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
         change_view_to_unit();
         Unit u = units.at(0);
         std::string name = "grunt";
-        if(portraits.find(u.getType()) != portraits.end()) {
+        if (portraits.find(u.getType()) != portraits.end()) {
             name = portraits.find(u.getType())->second;
 
         }
@@ -100,4 +109,22 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
         portrait->set(path);
     }
     return true;
+}
+
+void GameWindow::factory_next() {
+    messenger->send("nextunit-" + selection_id);
+    std::string path = "res/portraits/psycho.png";
+    factory_change_unit(path);
+}
+
+void GameWindow::update_selection(int id) {
+    selection_id = id;
+}
+
+void GameWindow::factory_change_unit(std::string &path) {
+    building_panel->change_unit(path);
+}
+
+void GameWindow::factory_create_unit() {
+    messenger->send("createunit-" + selection_id);
 }

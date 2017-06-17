@@ -33,7 +33,6 @@ GameBuilder::GameBuilder() {
 
     refBuilder->get_widget("Portrait", portrait);
     refBuilder->get_widget("SidePanel", panel);
-    refBuilder->get_widget("Create", button);
     refBuilder->get_widget_derived("InitialWindow", init_window);
 }
 

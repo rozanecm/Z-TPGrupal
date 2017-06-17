@@ -8,28 +8,26 @@
 void GraphicsThread::run() {
     auto app = Gtk::Application::create();
 
-    GameBuilder game;
-    GameWindow* window = game.get_window();
+    window.change_view_to_building();
+    window.setResources(&unitsMonitor,
+                         &buildingsMonitor,
+                         &mapMonitor,
+                         &messenger);
+    app->run(window);
+    //todo check exit status. Couldn't find exit status codes,
+    //so don't know what each number means
 
-    if (window) {
-        window->change_view_to_building();
-        window->setResources(&unitsMonitor,
-                             &buildingsMonitor,
-                             &mapMonitor,
-                             &messenger);
-        app->run(*window);
-        //todo check exit status. Couldn't find exit status codes,
-        //so don't know what each number means
-    }
 }
 
 GraphicsThread::GraphicsThread(UnitsMonitor &monitor,
                                BuildingsMonitor &buildingsMonitor,
                                MapMonitor &mapMonitor,
-                               ServerMessenger &messenger) :
+                               ServerMessenger &messenger,
+                               GameWindow& window) :
         unitsMonitor(monitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
-        messenger(messenger)
+        messenger(messenger),
+        window(window)
 {
 }

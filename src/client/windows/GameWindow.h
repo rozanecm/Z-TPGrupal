@@ -11,13 +11,14 @@
 #include "../GameArea.h"
 #include "../BuildingsMonitor.h"
 #include "../MapMonitor.h"
-#include "../BuildingPanel.h"
 #include "../ServerMessenger.h"
+#include "../panels/UnitPanel.h"
+#include "../panels/BuildingPanel.h"
 
 class GameWindow : public Gtk::ApplicationWindow {
     GameArea* gameArea;
     Gtk::Box* panel;
-    Gtk::Box* unit_panel;
+    UnitPanel* unit_panel;
     BuildingPanel* building_panel;
     Gtk::Box* group_panel;
     Gtk::Label* panelLabel;
@@ -28,6 +29,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
 
+    int selection_id = 0;
 protected:
     bool onTimeout();
 
@@ -49,6 +51,11 @@ public:
     bool change_view_to_unit_group();
 
     bool on_button_release_event(GdkEventButton *event);
+    void factory_next();
+    void factory_change_unit(std::string& path);
+
+    void factory_create_unit();
+    void update_selection(int id);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H
