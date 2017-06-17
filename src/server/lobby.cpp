@@ -38,6 +38,7 @@ void Lobby::startGame() {
         std::vector<Messenger *> messengers;
         for (auto p: players) {
             messengers.push_back(p->getMessenger());
+            p->getInGame();
         }
 
         std::vector<Occupant*>& occupants = map->getOccupants();
@@ -53,6 +54,11 @@ void Lobby::startGame() {
         Weapon weapon("Laser",25,20,false,r_size);
         Unit* robot = new Unit(204,400,"Grunt",4,r_size,range,*r_compass,weapon,2);
         Unit* jeep = new Unit(208,400,"Jeep",5,j_size,j_range,*j_compass,weapon,2);
+
+        robot->changeTeam(players[0]->getId());
+        if (players.size() >= 2)
+            jeep->changeTeam(players[1]->getId());
+
         units.insert(std::pair<int,Unit*>(204,robot));
         units.insert(std::pair<int,Unit*>(208,jeep));
         occupants.push_back((Occupant*) robot);
@@ -67,8 +73,14 @@ void Lobby::startGame() {
 }
 
 void Lobby::ready(Player* player) {
-    std::cout << "all ready" << std::endl;
-    all_ready = true;
+    bool any_not_ready = false;
+    for (auto p: players) {
+        if (!p->areYouReady()) {
+            any_not_ready = true;
+        }
+    }
+    if (!any_not_ready)
+        all_ready = true;
     player->getMessenger()->sendMessage("ready-to-go");
 }
 

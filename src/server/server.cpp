@@ -19,6 +19,7 @@ void Server::run() {
             Messenger* messenger = new Messenger(new_client);
             std::string id_new_player = "Player" + std::to_string(i);
             menu.addPlayer(messenger, menu,id_new_player);
+            ++i;
             std::cout << "new player conectado" << std::endl;
 //              create player with messenger
 //            std::string logIn_msg = messenger->recieveMessage();
