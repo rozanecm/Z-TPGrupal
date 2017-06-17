@@ -18,6 +18,8 @@ public:
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);
+
+    void addBuilding(Building& b);
 };
 
 

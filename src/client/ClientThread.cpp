@@ -12,6 +12,8 @@
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
 #include "commands/Update.h"
+#include "windows/GameWindow.h"
+#include "commands/FactoryNextUnit.h"
 
 void ClientThread::run() {
     initCommands();
@@ -21,11 +23,14 @@ void ClientThread::run() {
 ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
-                           ServerMessenger &messenger) :
+                           ServerMessenger &messenger,
+                           GameWindow& window
+) :
         unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
-        messenger(messenger)
+        messenger(messenger),
+        window(window)
 {
 }
 
@@ -59,11 +64,12 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
-    commands["loadmap"] = new LoadMap(mapMonitor);
+    commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor);
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
     commands["update"] = new Update();
+    commands["nextunit"] = new FactoryNextUnit(window);
 }
 
 ClientThread::~ClientThread() {
