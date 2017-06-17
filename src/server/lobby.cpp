@@ -7,13 +7,16 @@
 
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
-                                            all_ready(false) {}
+                                            all_ready(false) {
+
+}
 
 void Lobby::startGame() {
     std::cout << "Beginning game" << std::endl;
     if(all_ready){
         //start game
-        MapLoader maploader(PATH, config);
+        std::string path = PATH;
+        MapLoader maploader(path, config);
         std::shared_ptr<Map> map = maploader.get_map();
 
         // build teams

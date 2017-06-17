@@ -64,7 +64,7 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
-    commands["loadmap"] = new LoadMap(mapMonitor);
+    commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor);
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);

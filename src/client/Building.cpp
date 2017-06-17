@@ -11,3 +11,10 @@ void Building::markAsSelectedInRange(gdouble xStartCoordinate,
         selected = true;
     }
 }
+
+Building::Building(BuildingsEnum type, int x, int y) :
+    buildingType(type),
+    position(x, y),
+    selected(false)
+{
+}

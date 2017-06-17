@@ -17,3 +17,8 @@ void BuildingsMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
                                      xFinishCoordinate, yFinishCoordinate);
     }
 }
+
+void BuildingsMonitor::addBuilding(Building &b) {
+    Lock l(m);
+    buildings.push_back(b);
+}
