@@ -67,11 +67,11 @@ private:
                      std::pair<unsigned int, unsigned int> cameraPosition);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
-                    unsigned int xCoordinate, unsigned int yCoordinate,
+                    unsigned int xTileCoordinate, unsigned int yTileCoordinate,
                     std::string terrainType);
 
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
-                           int xCoordinate, int yCoordinate);
+                           int xGraphicCoordinate, int yGraphicCoordinate);
 
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
@@ -85,13 +85,18 @@ private:
     bool on_button_release_event(GdkEventButton *event) override;
 
     /* vars. for event handling */
+    /* this coordinates are sytem coordinatess */
     gdouble xStartCoordinate;
     gdouble xFinishCoordinate;
     gdouble yStartCoordinate;
     gdouble yFinishCoordinate;
     bool selectionMade;
     /* unitsSelected is true if the players' units are selected. This is used
-     * to manage user clicks. */
+     * to manage user clicks.
+     * Turns true in Unit::markAsSelectedInRange, when some unit has been
+     * selected.
+     * Turns to false at the end of GameArea::processSelection(), when the
+     * selection has already been processed. */
     bool unitsSelected;
 
     void makeSelection();
@@ -241,13 +246,15 @@ private:
     void loadYellowHeavyTankAnimations();
 
     void drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
-                       unsigned int xCoordinate, unsigned int yCoordinate,
+                       unsigned int xGraphicCoordinate,
+                       unsigned int yGraphicCoordinate,
                        RotationsEnum rotation);
 
     void drawUnit(TeamEnum team, UnitsEnum unitType, ActionsEnum actionType,
                   RotationsEnum rotation, unsigned short unitCounter,
                   const Cairo::RefPtr<Cairo::Context> &cr,
-                  unsigned int xCoordinate, unsigned int yCoordinate);
+                  unsigned int xGraphicCoordinate,
+                  unsigned int yGraphicCoordinate);
 
     void loadResources();
 
@@ -289,6 +296,11 @@ public:
     void initializeCounters();
 
     unsigned short getCounter(Unit &unit) const;
+
+    void processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
+                                RotationsEnum &rotation) const;
+
+    unsigned int cameraToRealMap(unsigned int coordinate);
 };
 
 
