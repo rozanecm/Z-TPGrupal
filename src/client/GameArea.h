@@ -305,6 +305,8 @@ public:
 
     unsigned int cameraToRealMap(unsigned int coordinate);
     std::pair<int, int> get_coords();
+
+    unsigned int realMapToCamera(gdouble coordinate);
 };
 
 

@@ -53,6 +53,7 @@ void GameArea::loadResources() {
     } catch (Glib::FileError e) {
         std::cerr << e.what();
     }
+    std::cerr<<"resources succesfully loaded"<<std::endl;
 }
 
 GameArea::~GameArea() {}
@@ -260,10 +261,14 @@ void GameArea::makeSelection() {
     //todo filter out other players' units.
     unitsMonitor->markAsSelectedInRange(
             unitsSelected,
-            xStartCoordinate + camera.cameraOffset().first,
-            yStartCoordinate + camera.cameraOffset().second,
-            xFinishCoordinate + camera.cameraOffset().first,
-            yFinishCoordinate + camera.cameraOffset().second);
+            camera.cameraToMapXCoordinate(realMapToCamera(xStartCoordinate)),
+            camera.cameraToMapYCoordinate(realMapToCamera(yStartCoordinate)),
+            camera.cameraToMapXCoordinate(realMapToCamera(xFinishCoordinate)),
+            camera.cameraToMapYCoordinate(realMapToCamera(yFinishCoordinate)));
+//            realMapToCamera(xStartCoordinate) + camera.cameraOffset().first,
+//            realMapToCamera(yStartCoordinate) + camera.cameraOffset().second,
+//            realMapToCamera(xFinishCoordinate) + camera.cameraOffset().first,
+//            realMapToCamera(yFinishCoordinate) + camera.cameraOffset().second);
     buildingsMonitor->markAsSelectedInRange(
             xStartCoordinate + camera.cameraOffset().first,
             yStartCoordinate + camera.cameraOffset().second,
@@ -6249,3 +6254,7 @@ std::pair<int, int> GameArea::get_coords() {
     return coords;
 }
 
+unsigned int GameArea::realMapToCamera(gdouble coordinate) {
+    std::cout<<(NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width())<<std::endl;
+    return (NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width());
+}
