@@ -73,9 +73,9 @@ int main(int argc, char **argv) {
             clientThread.start();
 
             // HARDCODED DEBUG MESSAGES TO START A GAME
-            messenger.send("create-lobby");
+            messenger.send("createlobby");
             messenger.send("ready");
-            messenger.send("start-game");
+            messenger.send("startgame");
 
 
             graphicsThread.start();
