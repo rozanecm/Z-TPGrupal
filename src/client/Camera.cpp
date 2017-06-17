@@ -69,3 +69,11 @@ unsigned int Camera::mapToCameraXCoordinate(unsigned int globalXPosition) {
 unsigned int Camera::mapToCameraYCoordinate(unsigned int globalYPosition) {
     return globalYPosition - cameraOffset().second;
 }
+
+unsigned int Camera::cameraToMapXCoordinate(unsigned int coordinate) {
+    return coordinate + cameraOffset().first;
+}
+
+unsigned int Camera::cameraToMapYCoordinate(unsigned int coordinate) {
+    return coordinate + cameraOffset().second;
+}

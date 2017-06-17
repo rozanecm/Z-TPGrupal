@@ -43,6 +43,10 @@ public:
     unsigned int mapToCameraXCoordinate(unsigned int globalXPosition);
 
     unsigned int mapToCameraYCoordinate(unsigned int globalYPosition);
+
+    unsigned int cameraToMapXCoordinate(unsigned int coordinate);
+
+    unsigned int cameraToMapYCoordinate(unsigned int coordinate);
 };
 
 

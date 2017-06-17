@@ -301,6 +301,8 @@ public:
                                 RotationsEnum &rotation) const;
 
     unsigned int cameraToRealMap(unsigned int coordinate);
+
+    unsigned int realMapToCamera(gdouble coordinate);
 };
 
 
