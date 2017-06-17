@@ -19,6 +19,16 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     builder->get_widget_derived("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
     builder->get_widget("PanelDisplayLabel", panelLabel);
+
+
+    building_panel->next_button()->
+            signal_clicked().connect(
+            sigc::mem_fun(*this, &GameWindow::factory_next));
+
+    building_panel->create_button()->
+            signal_clicked().connect(
+            sigc::mem_fun(*this, &GameWindow::factory_create_unit));
+
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
@@ -66,7 +76,6 @@ bool GameWindow::change_view_to_building() {
         panel->remove(*child);
     }
     panel->pack_start(*building_panel);
-
     panelLabel->set_text(building_panel->get_label());
     return true;
 }
@@ -78,4 +87,22 @@ bool GameWindow::change_view_to_unit_group() {
 
     panel->pack_start(*group_panel);
     return false;
+}
+
+void GameWindow::factory_next() {
+    messenger->send("nextunit-" + selection_id);
+    std::string path = "res/portraits/psycho.png";
+    factory_change_unit(path);
+}
+
+void GameWindow::update_selection(int id) {
+    selection_id = id;
+}
+
+void GameWindow::factory_change_unit(std::string &path) {
+    building_panel->change_unit(path);
+}
+
+void GameWindow::factory_create_unit() {
+    messenger->send("createunit-" + selection_id);
 }

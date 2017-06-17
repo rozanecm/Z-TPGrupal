@@ -8,7 +8,7 @@
 void GraphicsThread::run() {
     auto app = Gtk::Application::create();
 
-    window.change_view_to_unit();
+    window.change_view_to_building();
     window.setResources(&unitsMonitor,
                          &buildingsMonitor,
                          &mapMonitor,

@@ -132,7 +132,17 @@ Range: xxx
       </packing>
     </child>
     <child>
-      <placeholder/>
+      <object class="GtkButton" id="FactoryCreateButton">
+        <property name="label" translatable="yes">CREATE</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
     </child>
   </object>
   <object class="GtkApplicationWindow" id="GameWindow">

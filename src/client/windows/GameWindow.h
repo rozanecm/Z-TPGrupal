@@ -28,6 +28,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
 
+    int selection_id = 0;
 protected:
     bool onTimeout();
 
@@ -47,6 +48,12 @@ public:
     bool change_view_to_unit();
     bool change_view_to_building();
     bool change_view_to_unit_group();
+
+    void factory_next();
+    void factory_change_unit(std::string& path);
+
+    void factory_create_unit();
+    void update_selection(int id);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

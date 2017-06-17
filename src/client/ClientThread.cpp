@@ -12,6 +12,7 @@
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
 #include "windows/GameWindow.h"
+#include "commands/FactoryNextUnit.h"
 
 void ClientThread::run() {
     initCommands();
@@ -66,6 +67,7 @@ void ClientThread::initCommands() {
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
+    commands["nextunit"] = new FactoryNextUnit(window);
 }
 
 ClientThread::~ClientThread() {
