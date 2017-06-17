@@ -44,6 +44,7 @@ void ControlUnit::run() {
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span =
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+        std::cout << t3 - time_span.count() << std::endl;
         sleepFor(t3 - time_span.count());
     }
     // send victory or defeated message
@@ -56,9 +57,14 @@ void ControlUnit::sleepFor(double msec) {
 
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
-        Unit y = *x.second;
+        // Save previous state
+        std::string state = (*x.second).getState();
+        std::string team = (*x.second).getTeam();
+        int life = (*x.second).getLifeLeft();
+        Position pos = (*x.second).getPosition();
+
         (*x.second).makeAction();
-        if (differenceOnUnits((*x.second),y)) {
+        if (differenceOnUnits((*x.second),state,team,life,pos)) {
             changed_units.push_back((*x.second));
         }
         if (!(*x.second).areYouAlive()) {
@@ -73,6 +79,7 @@ void ControlUnit::unitsMakeMicroAction() {
 
 void ControlUnit::checkAllLivingOccupants() {
     std::vector<Occupant>::iterator it = changed_occupants.begin();
+    std::cout<< changed_occupants.size() << std::endl;
     int i = 0;
     for (; it != changed_occupants.end();) {
         if (all_occupants[i]->getLifeLeft() ==
@@ -83,6 +90,7 @@ void ControlUnit::checkAllLivingOccupants() {
         }
         ++i;
     }
+    std::cout<< changed_occupants.size() << std::endl;
     // if dead erase Occupant
     std::vector<Occupant*>::iterator ito = all_occupants.begin();
     for(;ito != all_occupants.end();){
@@ -138,16 +146,18 @@ std::string ControlUnit::getUpdateInfo() {
     return update_msg;
 }
 
-bool ControlUnit::differenceOnUnits(Unit &x, Unit &y) {
+bool ControlUnit::differenceOnUnits(Unit &x,std::string& state,
+                                    std::string& team,
+                                    int life, Position& pos) {
     bool differ = false;
-    if (x.getState() != y.getState())
+    if (x.getState() != state)
         differ = true;
-    if (x.getTeam() != y.getTeam()) // For neutral vehicules
+    if (x.getTeam() != team) // For neutral vehicules
         differ = true;
-    if (x.getLifeLeft() != y.getLifeLeft())
+    if (x.getLifeLeft() != life)
         differ = true;
-    if ((x.getCurrentPosition().getX() != y.getCurrentPosition().getX()) ||
-            (x.getCurrentPosition().getY() != y.getCurrentPosition().getY()))
+    if ((x.getCurrentPosition().getX() != pos.getX()) ||
+            (x.getCurrentPosition().getY() != pos.getY()))
         differ = true;
     return differ;
 }
