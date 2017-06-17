@@ -9,7 +9,7 @@
 
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, RotationsEnum rotation)
-        : id(id), position(position), unitType(unitType){
+        : id(id), position(position), unitType(unitType), rotation(rotation){
     //todo check what else should be initialized
 }
 
