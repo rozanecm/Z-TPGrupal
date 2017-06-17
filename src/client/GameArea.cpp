@@ -156,7 +156,6 @@ void GameArea::setResources(UnitsMonitor *unitsMonitor,
 }
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {
-    unitsMonitor->wipeSelected();
     if (event->keyval == GDK_KEY_Up and event->keyval == GDK_KEY_Left) {
         camera.moveUp();
         camera.moveLeft();
@@ -230,7 +229,6 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *
      */
     if (event->button == 1) {
-        selectionMade = false;
         xStartCoordinate = event->x;
         yStartCoordinate = event->y;
         /* returning true, cancels the propagation of the event */
@@ -240,14 +238,17 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
 
 bool GameArea::on_button_release_event(GdkEventButton *event) {
     if (event->button == 1) {
-        if (!selectionMade) {
+        if (!unitsMonitor->getSelectedUnits().size()) {
             xFinishCoordinate = event->x;
             yFinishCoordinate = event->y;
             selectionMade = true;
+            coords = {-1, -1};
             return false;
         }
+
         move_cmd = true;
-        coords = {event->x, event->y};
+        coords = {camera.cameraToMapXCoordinate(event->x),
+                  camera.cameraToMapXCoordinate(event->y)};
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
