@@ -25,11 +25,11 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_node root = doc.child("Map");
     pugi::xml_node map_node = root.child("Terrain");
 
-    int coord_y = 1; // Y coordinate counter, each row is different Y coord
+    int coord_y = 8; // Y coordinate counter, each row is different Y coord
     // Iterate over every row
     auto row = map_node.children().begin();
     for (; row != map_node.children().end(); ++row) {
-        int coord_x = 1; // Each Cell has a different X coord
+        int coord_x = 8; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
         map.push_back(row_vec);
@@ -43,12 +43,12 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
             
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_y, coord_x, 3, 3, terrain, factor);
-            coord_x += 3;
+            map.back().emplace_back(coord_y, coord_x, 17, 17, terrain, factor);
+            coord_x += 17;
         }
 
         // Push the whole row to the map
-        coord_y += 3;
+        coord_y += 17;
     }
 
     pugi::xml_document cfg;
@@ -84,8 +84,8 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 }
 
 void MapLoader::create_map() {
-    int width = (int) map.at(0).size() * 3;
-    int height = (int) map.size() * 3;
+    int width = (int) map.at(0).size() * 17;
+    int height = (int) map.size() * 17;
     int x = width / 2;
     int y = height / 2;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
