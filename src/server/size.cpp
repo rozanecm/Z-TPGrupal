@@ -53,13 +53,13 @@ bool Size::areYouOnThisPoint(int& x_pos, int& y_pos) {
 }
 
 void Size::calculateMaxAndMinForX(int &max, int &min) {
-    max = position.getX() + (width/2);
-    min = position.getX() - (width/2);
+    max = position.getX() + width;
+    min = position.getX();
 }
 
 void Size::calculateMaxAndMinForY(int &max, int &min) {
-    max = position.getY() + (height/2);
-    min = position.getY() - (height/2);
+    max = position.getY();
+    min = position.getY() - height;
 }
 
 void Size::moveTo(int x, int y) {

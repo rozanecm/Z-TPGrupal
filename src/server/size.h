@@ -10,7 +10,7 @@
 //Class Size to represent the space on the map that an Occupant is standing on
 class Size {
 private:
-    // (x,y) are the coordinates of the center o the object
+    // (x,y) are the coordinates of the top-left corner of the object
     // all Occupants on game are Four-sided
     Position position;
     int width, height;
