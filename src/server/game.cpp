@@ -72,7 +72,7 @@ void Game::analyseOccupantsInfo(std::string& info) {
         info += std::to_string(pos.getX()) + "-";
         info += std::to_string(pos.getY()) + "-";
         info += o->getType() + "-";
-        info += o->getTeam() + "||";
+        info += o->getTeam() + "|";
     }
 }
 
@@ -83,14 +83,14 @@ void Game::buildTypeMap() {
     types.insert(std::pair<std::string,std::string>("robotFactory","Building"));
     types.insert(std::pair<std::string,std::string>("Factory","Building"));
     types.insert(std::pair<std::string,std::string>("Rock","Nature"));
-    types.insert(std::pair<std::string,std::string>("IceBlock","Nature"));
-    types.insert(std::pair<std::string,std::string>("Grunt","Unit"));
+    types.insert(std::pair<std::string,std::string>("iceblock","Nature"));
+    types.insert(std::pair<std::string,std::string>("grunt","Unit"));
     types.insert(std::pair<std::string,std::string>("Psycho","Unit"));
     types.insert(std::pair<std::string,std::string>("Tough","Unit"));
     types.insert(std::pair<std::string,std::string>("Pyro","Unit"));
     types.insert(std::pair<std::string,std::string>("Sniper","Unit"));
-    types.insert(std::pair<std::string,std::string>("Laser","Unit"));
-    types.insert(std::pair<std::string,std::string>("Jeep","Unit"));
+    types.insert(std::pair<std::string,std::string>("laser","Unit"));
+    types.insert(std::pair<std::string,std::string>("jeep","Unit"));
     types.insert(std::pair<std::string,std::string>("MediumTank","Unit"));
     types.insert(std::pair<std::string,std::string>("LightTank","Unit"));
     types.insert(std::pair<std::string,std::string>("HeavyTank","Unit"));
