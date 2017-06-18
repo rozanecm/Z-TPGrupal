@@ -12,11 +12,12 @@ void Building::markAsSelectedInRange(gdouble xStartCoordinate,
     }
 }
 
-Building::Building(BuildingsEnum type, int x, int y, int id) :
+Building::Building(BuildingsEnum type, int x, int y, int id, TeamEnum team) :
         buildingType(type),
         position(x, y),
         id(id),
-        selected(false) {
+        selected(false),
+        team (team) {
 }
 
 unsigned int Building::getXCoordinate() {
@@ -29,4 +30,8 @@ unsigned int Building::getYCoordinate() {
 
 BuildingsEnum Building::getBuildingType() {
     return buildingType;
+}
+
+TeamEnum Building::getTeam() {
+    return team;
 }

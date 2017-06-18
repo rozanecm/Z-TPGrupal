@@ -12,6 +12,7 @@
 class Building {
 private:
     BuildingsEnum buildingType;
+    TeamEnum team;
     std::pair<unsigned int, unsigned int> position;
 
     /* bool selected: indicates wether the unit has been selected
@@ -20,7 +21,7 @@ private:
     int id;
 
 public:
-    Building(BuildingsEnum type, int x, int y, int id);
+    Building(BuildingsEnum type, int x, int y, int id, TeamEnum team);
 
     /**
      * This methods checks all the player's units to see if any of its units is
@@ -37,6 +38,8 @@ public:
     unsigned int getYCoordinate();
 
     BuildingsEnum getBuildingType();
+
+    TeamEnum getTeam();
 };
 
 

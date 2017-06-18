@@ -7,7 +7,6 @@
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
-#include "enums/FlagEnum.h"
 #include "enums/TeamEnum.h"
 #include "enums/ActionsEnum.h"
 #include "enums/UnitsEnum.h"
@@ -34,7 +33,7 @@ private:
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
     /* map holding all flags */
-    std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
+    std::map<TeamEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
     /* map holding all units imgs */
     std::map<TeamEnum,
@@ -316,11 +315,15 @@ public:
     void setMapData();
 
     void drawBuilding(BuildingsEnum buildingType, unsigned short counter,
-                      const Cairo::RefPtr<Cairo::Context> &cr,
-                      unsigned int xGraphicCoordinate,
-                      unsigned int yGraphicCoordinate);
+                          TeamEnum team,
+                          const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xGraphicCoordinate,
+                          unsigned int yGraphicCoordinate);
 
     bool unitIsRobot(UnitsEnum unitType);
+
+    void drawFlag(const TeamEnum &team, const Cairo::RefPtr<Cairo::Context> &cr,
+                  unsigned int xGraphicCoordinate, unsigned int yGraphicCoordinate) const;
 };
 
 

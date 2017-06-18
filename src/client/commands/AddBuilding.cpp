@@ -13,7 +13,8 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     int id = std::stoi(args[ID]);
     int x = std::stoi(args[X]);
     int y = std::stoi(args[Y]);
+    TeamEnum team = (TeamEnum) std::stoi(args[TEAM]);
 
-    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id);
+    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, team);
     buildings.addBuilding(b);
 }

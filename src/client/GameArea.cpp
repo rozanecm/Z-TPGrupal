@@ -112,14 +112,14 @@ void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                                  int xGraphicCoordinate,
                                  int yGraphicCoordinate) {
     cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, flags.at(FlagEnum::BLUE).
+    Gdk::Cairo::set_source_pixbuf(cr, flags.at(TeamEnum::BLUE).
                                           at(flagCounter.getCounter()),
                                   xGraphicCoordinate, yGraphicCoordinate);
 
     cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
-                  flags.at(FlagEnum::BLUE).
+                  flags.at(TeamEnum::BLUE).
                           at(flagCounter.getCounter())->get_width(),
-                  flags.at(FlagEnum::BLUE).
+                  flags.at(TeamEnum::BLUE).
                           at(flagCounter.getCounter())->get_height());
     cr->fill();
     cr->restore();
@@ -145,13 +145,52 @@ void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
         unsigned short counter;
 
         /* call actual drawing method */
-        drawBuilding(building.getBuildingType(),
-                     buildingsCounter.getCounter(), cr,
+        drawBuilding(building.getBuildingType(), buildingsCounter.getCounter(),
+                     building.getTeam(), cr,
                      cameraToRealMap(camera.mapToCameraXCoordinate(building.
-                             getXCoordinate())),
+                                     getXCoordinate())),
                      cameraToRealMap(camera.mapToCameraYCoordinate(building.
-                             getYCoordinate())));
+                                     getYCoordinate())));
     }
+}
+
+void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
+                            TeamEnum team,
+                            const Cairo::RefPtr<Cairo::Context> &cr,
+                            unsigned int xGraphicCoordinate,
+                            unsigned int yGraphicCoordinate) {
+    cr->save();
+    Glib::RefPtr<Gdk::Pixbuf> next = buildings.at(buildingType).at(counter);
+
+    /* perform actual drawing */
+    Gdk::Cairo::set_source_pixbuf(cr, next,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
+                  next->get_height());
+
+    cr->fill();
+    cr->restore();
+    /* draw flag */
+    drawFlag(team, cr, xGraphicCoordinate, yGraphicCoordinate);
+
+}
+
+void GameArea::drawFlag(const TeamEnum &team,
+                        const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xGraphicCoordinate,
+                        unsigned int yGraphicCoordinate) const {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr,
+                                  flags.at(team).at(flagCounter.getCounter()),
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate,
+                  yGraphicCoordinate,
+                  flags.at(team).at(flagCounter.getCounter())->get_width(),
+                  flags.at(team).at(flagCounter.getCounter())->get_height());
+    cr->fill();
+    cr->restore();
 }
 
 void
@@ -366,68 +405,68 @@ void GameArea::loadUnitsResources() {
 void GameArea::loadFlagAnimations() {
     /* this methods loads all the imgs needed to draw all the flags' animations.
      * POSSIBLE OPTIMIZATION: load only needed colors */
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n00.png"));
 
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n01.png"));
 
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n02.png"));
 
-    flags[FlagEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::BLUE].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_blue_n03.png"));
 
     /* load red flags imgs */
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n00.png"));
 
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n01.png"));
 
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n02.png"));
 
-    flags[FlagEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::RED].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_red_n03.png"));
 
     /* load yellow flags imgs */
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n00.png"));
 
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n01.png"));
 
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n02.png"));
 
-    flags[FlagEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::YELLOW].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_yellow_n03.png"));
 
     /* load green flags imgs */
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n00.png"));
 
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n01.png"));
 
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n02.png"));
 
-    flags[FlagEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::GREEN].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_green_n03.png"));
 
     /* load neuter flags imgs */
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n00.png"));
 
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n01.png"));
 
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n02.png"));
 
-    flags[FlagEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n03.png"));
 }
 
@@ -6252,7 +6291,7 @@ void GameArea::initializeCounters() {
     /* one of the vectors of each category is accessed to get the size of the
      * vectors of all the category. This is possible because all vectors of
      * the same category share the same size */
-    flagCounter.initialize(flags.at(FlagEnum::BLUE).size());
+    flagCounter.initialize(flags.at(TeamEnum::BLUE).size());
 
     jeepCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
                            [UnitsEnum::JEEP][ActionsEnum::STAND]
@@ -6298,23 +6337,6 @@ unsigned int GameArea::realMapToCamera(gdouble coordinate) {
 void GameArea::setMapData() {
     this->camera.setMapWidth(mapMonitor->getXSize());
     this->camera.setMapHeight(mapMonitor->getYSize());
-}
-
-void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
-                            const Cairo::RefPtr<Cairo::Context> &cr,
-                            unsigned int xGraphicCoordinate,
-                            unsigned int yGraphicCoordinate) {
-    cr->save();
-    Glib::RefPtr<Gdk::Pixbuf> next = buildings.at(buildingType).at(counter);
-
-    /* perform actual drawing */
-    Gdk::Cairo::set_source_pixbuf(cr, next,
-                                  xGraphicCoordinate, yGraphicCoordinate);
-
-    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
-                  next->get_height());
-    cr->fill();
-    cr->restore();
 }
 
 bool GameArea::unitIsRobot(UnitsEnum unitType) {
