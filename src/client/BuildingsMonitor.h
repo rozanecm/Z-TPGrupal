@@ -14,10 +14,11 @@ private:
 public:
     explicit BuildingsMonitor(std::vector<Building> &buildings);
 
-    void markAsSelectedInRange(gdouble xStartCoordinate,
-                               gdouble yStartCoordinate,
-                               gdouble xFinishCoordinate,
-                               gdouble yFinishCoordinate);
+    void markAsSelectedInRange(bool &buildingSelected,
+                                   gdouble xStartCoordinate,
+                                   gdouble yStartCoordinate,
+                                   gdouble xFinishCoordinate,
+                                   gdouble yFinishCoordinate);
 
     void addBuilding(Building &b);
 

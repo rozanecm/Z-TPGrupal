@@ -103,6 +103,8 @@ private:
      * Turns to false at the end of GameArea::processSelection(), when the
      * selection has already been processed. */
     bool unitsSelected;
+    bool buildingSelected;
+    bool terrainSelected;
 
     void makeSelection();
 

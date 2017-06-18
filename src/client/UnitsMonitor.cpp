@@ -58,6 +58,9 @@ UnitsMonitor::markAsSelectedInRange(bool &unitsSelected,
         unit.markAsSelectedInRange(unitsSelected, xStartCoordinate,
                                    yStartCoordinate, xFinishCoordinate,
                                    yFinishCoordinate);
+        /* if unit selected, break because we only want to select one unit */
+        if (unitsSelected)
+            break;
     }
 }
 

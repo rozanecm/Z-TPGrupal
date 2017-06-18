@@ -28,7 +28,8 @@ public:
      * located within the area of selection. If so, the units' attribute
      * selected is set to TRUE.
      */
-    void markAsSelectedInRange(gdouble xStartCoordinate,
+    void markAsSelectedInRange(bool &buildingSelected,
+                               gdouble xStartCoordinate,
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);

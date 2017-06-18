@@ -5,15 +5,20 @@ BuildingsMonitor::BuildingsMonitor(std::vector<Building> &buildings) :
         buildings(buildings) {
 }
 
-void BuildingsMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
+void BuildingsMonitor::markAsSelectedInRange(bool &buildingSelected,
+                                             gdouble xStartCoordinate,
                                              gdouble yStartCoordinate,
                                              gdouble xFinishCoordinate,
                                              gdouble yFinishCoordinate) {
     Lock l(m);
     for (Building &building : buildings) {
         /* each player has to selects its units in range */
-        building.markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                       xFinishCoordinate, yFinishCoordinate);
+        building.markAsSelectedInRange(buildingSelected, xStartCoordinate,
+                                       yStartCoordinate, xFinishCoordinate,
+                                       yFinishCoordinate);
+        if (buildingSelected){
+            break;
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 #include "Building.h"
 
-void Building::markAsSelectedInRange(gdouble xStartCoordinate,
+void Building::markAsSelectedInRange(bool &buildingSelected,
+                                     gdouble xStartCoordinate,
                                      gdouble yStartCoordinate,
                                      gdouble xFinishCoordinate,
                                      gdouble yFinishCoordinate) {
@@ -9,6 +10,7 @@ void Building::markAsSelectedInRange(gdouble xStartCoordinate,
         position.second >= yStartCoordinate &&
         position.second <= yFinishCoordinate) {
         selected = true;
+        buildingSelected = true;
     }
 }
 

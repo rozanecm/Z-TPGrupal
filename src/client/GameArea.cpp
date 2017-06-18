@@ -15,6 +15,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
         unitsSelected(false),
+        buildingSelected(false),
         coords({-1, -1}),
         /* camera is initialized with size 0,0 because we don't
          * have this data yet */
@@ -320,26 +321,34 @@ void GameArea::makeSelection() {
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
     //todo filter out other players' units.
-    unitsMonitor->markAsSelectedInRange(
-            unitsSelected,
+    unitsMonitor->markAsSelectedInRange(unitsSelected,
             camera.cameraToMapXCoordinate(realMapToCamera(xStartCoordinate)),
             camera.cameraToMapYCoordinate(realMapToCamera(yStartCoordinate)),
             camera.cameraToMapXCoordinate(realMapToCamera(xFinishCoordinate)),
             camera.cameraToMapYCoordinate(realMapToCamera(yFinishCoordinate)));
-    buildingsMonitor->markAsSelectedInRange(
-            xStartCoordinate + camera.cameraOffset().first,
-            yStartCoordinate + camera.cameraOffset().second,
-            xFinishCoordinate + camera.cameraOffset().first,
-            yFinishCoordinate + camera.cameraOffset().second);
-//            xStartCoordinate + camera.cameraOffset().first,
-//            yStartCoordinate + camera.cameraOffset().second,
-//            xFinishCoordinate + camera.cameraOffset().first,
-//            yFinishCoordinate + camera.cameraOffset().second);
-    mapMonitor->markAsSelectedInRange(
-            xStartCoordinate + camera.cameraOffset().first,
-            yStartCoordinate + camera.cameraOffset().second,
-            xFinishCoordinate + camera.cameraOffset().first,
-            yFinishCoordinate + camera.cameraOffset().second);
+    if (!unitsSelected) {
+        buildingsMonitor->markAsSelectedInRange(
+                buildingSelected,
+                camera.cameraToMapXCoordinate(
+                        realMapToCamera(xStartCoordinate)),
+                camera.cameraToMapYCoordinate(
+                        realMapToCamera(yStartCoordinate)),
+                camera.cameraToMapXCoordinate(
+                        realMapToCamera(xFinishCoordinate)),
+                camera.cameraToMapYCoordinate(
+                        realMapToCamera(yFinishCoordinate)));
+    } else {
+        mapMonitor->markAsSelectedInRange(
+                terrainSelected,
+                camera.cameraToMapXCoordinate(
+                        realMapToCamera(xStartCoordinate)),
+                camera.cameraToMapYCoordinate(
+                        realMapToCamera(yStartCoordinate)),
+                camera.cameraToMapXCoordinate(
+                        realMapToCamera(xFinishCoordinate)),
+                camera.cameraToMapYCoordinate(
+                        realMapToCamera(yFinishCoordinate)));
+    }
     selectionMade = false;
 }
 
