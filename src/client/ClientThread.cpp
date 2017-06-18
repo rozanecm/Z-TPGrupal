@@ -14,6 +14,8 @@
 #include "commands/Update.h"
 #include "windows/GameWindow.h"
 #include "commands/FactoryNextUnit.h"
+#include "commands/AddBuilding.h"
+#include "commands/AddNature.h"
 
 void ClientThread:: run() {
     initCommands();
@@ -38,7 +40,10 @@ void ClientThread::loop() {
     try {
         while (!finished) {
             std::string msg = messenger.receive();
-            parse(msg);
+            std::vector<std::string> commands = split(msg, '|');
+            for(std::string& cmd : commands) {
+                parse(cmd);
+            }
         }
     } catch(SocketError& e) {
         return;
@@ -70,6 +75,8 @@ void ClientThread::initCommands() {
     commands["move"] = new UpdatePosition(unitsMonitor);
     commands["update"] = new Update();
     commands["nextunit"] = new FactoryNextUnit(window);
+    commands["addbuilding"] = new AddBuilding(buildingsMonitor);
+    commands["addnature"] = new AddNature();
 }
 
 ClientThread::~ClientThread() {

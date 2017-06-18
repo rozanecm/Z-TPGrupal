@@ -9,8 +9,9 @@
 
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, RotationsEnum rotation)
-        : id(id), position(position), unitType(unitType), rotation
-        (RotationsEnum::r000){
+        : id(id), position(position), unitType(unitType), rotation(rotation),
+          team(TeamEnum::GREEN), selected(false)
+{
     //todo check what else should be initialized
 }
 
@@ -87,4 +88,8 @@ ActionsEnum Unit::getAction() {
 
 bool Unit::is_selected() {
     return selected;
+}
+
+void Unit::unselect() {
+    selected = false;
 }

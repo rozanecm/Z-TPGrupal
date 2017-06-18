@@ -6,16 +6,26 @@
 #include "../enums/RotationsEnum.h"
 #include "../UnitsMonitor.h"
 
-#define PLAYER_ID 0
-#define UNIT_ID 1
+#define UNIT_ID 0
+#define X 1
+#define Y 2
+#define UNIT_TYPE 3
+const std::map<std::string, UnitsEnum> units = {
+        {std::string("grunt"), UnitsEnum::GRUNT}
+};
+
 void AddUnit::execute(const std::vector<std::string> &args) {
-    for (const std::string& arg : args) {
-        std::cout << arg << std::endl;
+    int x = std::stoi(args[X]);
+    int y = std::stoi(args[Y]);
+    int id = std::stoi(args[UNIT_ID]);
+    auto type = units.find(args[UNIT_TYPE]);
+    if(type == units.end()) {
+        std::cerr << "Error adding unit: received type " << args[UNIT_TYPE] <<
+                  std::endl;
+        return;
     }
-    int x = std::stoi(args[0]);
-    int y = std::stoi(args[1]);
-    Unit unit(std::stoi(args[PLAYER_ID]), std::pair<unsigned int, unsigned
-    int>(), UnitsEnum::HEAVY_TANK, RotationsEnum::r000);
+
+    Unit unit(id, {x, y}, type->second, RotationsEnum::r000);
     unitsMonitor.addUnit(unit);
 }
 

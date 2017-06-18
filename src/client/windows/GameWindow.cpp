@@ -69,6 +69,8 @@ bool GameWindow::change_view_to_unit() {
     }
 
     panel->pack_start(*unit_panel);
+    panelLabel->set_text(unit_panel->get_label());
+
     return true;
 }
 
@@ -98,6 +100,18 @@ const std::map<UnitsEnum, std::string> portraits = {
 bool GameWindow::on_button_release_event(GdkEventButton *event) {
     std::vector<Unit> units = unitsMonitor->getSelectedUnits();
     if (units.size()) {
+        std::pair<int, int> coords = gameArea->get_coords();
+        if(coords != std::pair<int, int>(-1, -1)) {
+            std::cout << gameArea->get_coords().first << ", " <<
+                      gameArea->get_coords().second << std::endl;
+
+            int id = units.at(0).get_ID();
+            std::stringstream s;
+            s << "mv-" << id << "-" << coords.first << "-" << coords.second;
+            messenger->send(s.str());
+            return true;
+
+        }
         change_view_to_unit();
         Unit u = units.at(0);
         std::string name = "grunt";
@@ -105,6 +119,7 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
             name = portraits.find(u.getType())->second;
 
         }
+        unit_panel->set_name(name);
         std::string path = "res/portraits/" + name + ".png";
         portrait->set(path);
     }

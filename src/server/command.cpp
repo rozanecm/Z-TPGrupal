@@ -19,7 +19,7 @@ void Command::run() {
         std::string y_str = getNextData(cmd);
         int y = std::stoi(y_str);
         // make move
-        control->cmdMoveUnit(id,x,y);
+        control->cmdMoveUnit(player_id,id,x,y);
     } else if (action == "atk") {
         std::string id_str = getNextData(cmd);
         int id = std::stoi(id_str);

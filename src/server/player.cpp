@@ -4,15 +4,10 @@
 
 #include "player.h"
 
-Player::Player(Messenger *msg, ControlUnit* control, Menu& menu) :
-        messenger(msg), conected(true),on_menu(true),on_lobby(false),
-        playing(false), control(control), menu(menu) {
-
-}
 
 Player::Player(Messenger *msg, Menu &menu, std::string& id) :
         messenger(msg),id(id), conected(true),on_menu(true),on_lobby(false),
-        playing(false),menu(menu) {}
+        playing(false),menu(menu),ready(false) {}
 
 void Player::run() {
     try {
@@ -53,23 +48,29 @@ void Player::addLobby(Lobby* lobby) {
     on_lobby = true;
 }
 
-void Player::processMenuCommands(std::string &cmd) {
-    if (cmd == "create-lobby") {
+void Player::processMenuCommands(std::string &full_cmd) {
+    std::string cmd = getNextData(full_cmd);
+    if (cmd == "createlobby") {
         this->menu.createNewLobby(this);
         on_menu = false;
-    } else {
+    }  else if (cmd == "getinlobby") {
+        std::string lobby_id = getNextData(full_cmd);
+        int id = std::stoi(lobby_id);
+        this->menu.addToLobby(id,this);
+        on_menu = false;
+    }  else {
         messenger->sendMessage("Invalid cmd");
     }
 }
 
 void Player::processLobbyCommands(std::string &cmd) {
-    if (cmd == "start-game") {
+    if (cmd == "startgame") {
         std::cout << "Entre en player a start game" << std::endl;
         this->lobby->startGame();
-        on_lobby = false;
-    }else if (cmd == "ready") {
+    } else if (cmd == "ready") {
+        this->ready = true;
         this->lobby->ready(this);
-    } else {
+    }  else {
         messenger->sendMessage("Invalid cmd");
     }
 }
@@ -83,5 +84,21 @@ void Player::shutDown() {
 
 std::string Player::getId() const {
     return id;
+}
+
+std::string Player::getNextData(std::string& line) {
+    std::size_t found = line.find('-');
+    std::string data = line.substr(0,found);
+    line.erase(0,found+1);
+    return data;
+}
+
+void Player::getInGame() {
+    this->on_lobby = false;
+    this->playing = true;
+}
+
+bool Player::areYouReady() {
+    return this->ready;
 }
 

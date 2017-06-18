@@ -63,6 +63,9 @@ private:
     Counter mmlCounter;
     Counter buildingsCounter;
 
+    bool move_cmd = false;
+    std::pair<int, int> coords;
+
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                      std::pair<unsigned int, unsigned int> cameraPosition);
@@ -304,6 +307,7 @@ public:
                                 RotationsEnum &rotation) const;
 
     unsigned int cameraToRealMap(unsigned int coordinate);
+    std::pair<int, int> get_coords();
 
     unsigned int realMapToCamera(gdouble coordinate);
 

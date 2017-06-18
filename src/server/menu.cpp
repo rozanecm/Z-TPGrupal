@@ -19,13 +19,9 @@ void Menu::createNewLobby(Player* player) {
     Lobby* new_lobby = new Lobby(lobby_counter, config);
     std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
-    std::cout << "lo pongo en el vector"<< std::endl;
     lobbies.back()->addPlayer(player);
-    std::cout << "agrego player"<< std::endl;
     player->addLobby(new_lobby);
-    std::cout << "agregoel lobby en el player"<< std::endl;
     player->getMessenger()->sendMessage("New Lobby created");
-
 }
 
 std::string Menu::getLobbiesInfo() {
@@ -35,8 +31,9 @@ std::string Menu::getLobbiesInfo() {
     return info;
 }
 
-void Menu::addToLobby(int id_lobbie, Player &player) {
-
+void Menu::addToLobby(int id_lobbie, Player* player) {
+    lobbies[id_lobbie-1]->addPlayer(player);
+    player->addLobby(lobbies[id_lobbie-1]);
 }
 
 Menu::~Menu() {

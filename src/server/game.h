@@ -23,20 +23,27 @@ private:
     std::vector<Occupant*> all_occupants;
     ControlUnit control;
     std::shared_ptr<Map> map;
-
+    std::map<std::string,std::string> types;
 
 public:
     Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
          std::shared_ptr<Map> map, std::map<int, Unit*> units,
          std::vector<Team> teams_info, std::vector<Occupant*> occupants);
 
-//    Game(std::vector<Player*> players, std::shared_ptr<Map> map);
-
     void addBuildings(std::vector<Occupant> buildings);
 
     void run();
 
     void shutDownGame();
+
+    void sendMapInfo();
+
+    void sendOccupantsInfo();
+
+private:
+    void analyseOccupantsInfo(std::string& info);
+
+    void buildTypeMap();
 };
 
 

@@ -18,6 +18,7 @@ GameArea::GameArea(BaseObjectType *cobject,
         buildingsMonitor(nullptr),
         mapMonitor(nullptr),
         unitsSelected(false),
+        coords({-1, -1}),
         /* camera is initialized with size 0,0 because we don't
          * have this data yet */
         camera(TILESIZE, 0, 0, NUMBER_OF_TILES_TO_SHOW) {
@@ -58,12 +59,7 @@ void GameArea::loadResources() {
 GameArea::~GameArea() {}
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    if (selectionMade){
-        makeSelection();
-        processSelection();
-    }
     drawBaseMap(cr, camera.getPosition());
-    drawFlagAnimation(cr, 500, 500);
     //todo implement building drawing
     drawBuildingsInView(cr);
     drawUnitsInMap(cr);
@@ -264,9 +260,19 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
 
 bool GameArea::on_button_release_event(GdkEventButton *event) {
     if (event->button == 1) {
-        xFinishCoordinate = event->x;
-        yFinishCoordinate = event->y;
-        selectionMade = true;
+        if (!unitsMonitor->getSelectedUnits().size()) {
+            xFinishCoordinate = event->x;
+            yFinishCoordinate = event->y;
+            selectionMade = true;
+            coords = {-1, -1};
+            makeSelection();
+            processSelection();
+            return false;
+        }
+
+        move_cmd = true;
+        coords = {camera.cameraToMapXCoordinate(event->x),
+                  camera.cameraToMapXCoordinate(event->y)};
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
@@ -6107,9 +6113,27 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
     }
     processUnitToDrawEnums(unitType, actionType, rotation);
 
-    Glib::RefPtr<Gdk::Pixbuf> next = unitsAnimations.at(team).at
-            (unitType).at(actionType).at(rotation).at(unitCounter);
+    auto team_map = unitsAnimations.find(team);
+    if (team_map == unitsAnimations.end()) {
+        std::cout << "Drawing failed at finding valid team" << std::endl;
+    }
 
+    auto unit_map = team_map->second.find(unitType);
+    if (unit_map == team_map->second.end()) {
+        std::cout << "Drawing failed at finding valid unitType" << std::endl;
+    }
+
+    auto actions_map = unit_map->second.find(actionType);
+    if(actions_map == unit_map->second.end()) {
+        std::cout << "Drawing failed at finding valid actionType" << std::endl;
+    }
+
+    auto rotations_map = actions_map->second.find(rotation);
+    if(rotations_map == actions_map->second.end()) {
+        std::cout << "Drawing failed at finding valid rotation" << std::endl;
+    }
+
+    auto next = rotations_map->second.at(unitCounter);
     /* perform actual drawing */
     Gdk::Cairo::set_source_pixbuf(cr, next,
                                   xGraphicCoordinate, yGraphicCoordinate);
@@ -6254,6 +6278,10 @@ void GameArea::initializeCounters() {
 
 unsigned int GameArea::cameraToRealMap(unsigned int coordinate) {
     return get_width() * coordinate / (NUMBER_OF_TILES_TO_SHOW * TILESIZE);
+}
+
+std::pair<int, int> GameArea::get_coords() {
+    return coords;
 }
 
 unsigned int GameArea::realMapToCamera(gdouble coordinate) {

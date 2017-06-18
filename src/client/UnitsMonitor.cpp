@@ -71,3 +71,10 @@ std::vector<Unit> UnitsMonitor::getSelectedUnits() {
     }
     return units;
 }
+
+void UnitsMonitor::wipeSelected() {
+    for (Unit& unit : units) {
+        unit.unselect();
+    }
+}
+

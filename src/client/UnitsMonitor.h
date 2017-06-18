@@ -27,6 +27,7 @@ public:
                           gdouble yStartCoordinate, gdouble xFinishCoordinate,
                           gdouble yFinishCoordinate);
 
+    void wipeSelected();
     std::vector<Unit> getSelectedUnits();
 };
 

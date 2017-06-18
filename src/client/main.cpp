@@ -43,12 +43,6 @@ int main(int argc, char **argv) {
         std::vector<Unit> units;
         UnitsMonitor unitsrMonitor(units);
 
-        /* CREATE UNIT TO TEST GFIACION DE UNITS */
-        Unit unit(1, std::pair<unsigned int, unsigned int>(20, 20),
-                  UnitsEnum::HEAVY_TANK, RotationsEnum::r225);
-        unitsrMonitor.addUnit(unit);
-
-
         /* create vector with buildings; bind with monitor */
         std::vector<Building> buildings;
         BuildingsMonitor buildingsMonitor(buildings);
@@ -74,9 +68,9 @@ int main(int argc, char **argv) {
             clientThread.start();
 
             // HARDCODED DEBUG MESSAGES TO START A GAME
-            messenger.send("create-lobby");
+            messenger.send("createlobby");
             messenger.send("ready");
-            messenger.send("start-game");
+            messenger.send("startgame");
 
 
             graphicsThread.start();

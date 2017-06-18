@@ -53,28 +53,5 @@ void LoadMap::execute(const std::vector<std::string> &args) {
             mapMonitor.setCell(i, j, map[i][j]);
         }
     }
-
-    pugi::xml_node territories = root.child("Territories");
-    for(auto& territory : territories) {
-        for (auto& factory : territory) {
-            int x = std::stoi(factory.attribute("x").value());
-            int y = std::stoi(factory.attribute("y").value());
-            std::string name = factory.name();
-            if (buildings.find(name) != buildings.end()) {
-                Building b(buildings.find(name)->second, x, y);
-                buildingsMonitor.addBuilding(b);
-            } else {
-                std::cerr << "Invalid building found: " << name << std::endl;
-            }
-        }
-
-        std::string name = territory.name();
-        if (buildings.find(name) != buildings.end()) {
-            int x = std::stoi(territory.attribute("center_x").value());
-            int y = std::stoi(territory.attribute("center_y").value());
-            Building b(buildings.find(name)->second, x, y);
-            buildingsMonitor.addBuilding(b);
-        }
-    }
     window.setMapData();
 }

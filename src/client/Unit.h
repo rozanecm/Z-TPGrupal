@@ -81,6 +81,8 @@ public:
     unsigned int getYCoordinate();
 
     bool is_selected();
+
+    void unselect();
 };
 
 
