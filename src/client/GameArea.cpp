@@ -59,10 +59,6 @@ void GameArea::loadResources() {
 GameArea::~GameArea() {}
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    if (selectionMade){
-        makeSelection();
-        processSelection();
-    }
     drawBaseMap(cr, camera.getPosition());
     //todo implement building drawing
 //    drawBuildings();
@@ -242,6 +238,8 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
             yFinishCoordinate = event->y;
             selectionMade = true;
             coords = {-1, -1};
+            makeSelection();
+            processSelection();
             return false;
         }
 
