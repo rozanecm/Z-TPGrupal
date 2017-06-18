@@ -25,6 +25,9 @@ public:
     std::vector<Building>
     getBuildingsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
                        unsigned int maxY);
+
+    std::vector<Building> get_selected();
+    void wipe_selected();
 };
 
 

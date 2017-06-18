@@ -43,3 +43,19 @@ BuildingsMonitor::getBuildingsToDraw(unsigned int minX, unsigned int maxX,
     }
     return returnVector;
 }
+
+std::vector<Building> BuildingsMonitor::get_selected() {
+    std::vector<Building> selected_buildings;
+    for(Building& building : buildings) {
+        if(building.is_selected()) {
+            selected_buildings.push_back(building);
+        }
+    }
+    return selected_buildings;
+}
+
+void BuildingsMonitor::wipe_selected() {
+    for(Building& b: buildings) {
+        b.unselect();
+    }
+}

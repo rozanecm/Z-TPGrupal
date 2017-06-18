@@ -29,6 +29,8 @@ class GameWindow : public Gtk::ApplicationWindow {
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
 
+    Unit* selected_unit = nullptr;
+    Building* selected_building = nullptr;
     int selection_id = 0;
 protected:
     bool onTimeout();
@@ -65,6 +67,8 @@ public:
     void factory_create_unit();
 
     void update_selection(int id);
+
+    void process_selected_unit_action();
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

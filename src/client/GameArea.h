@@ -295,10 +295,6 @@ public:
                  BuildingsMonitor *buildingsMonitor,
                  MapMonitor *mapMonitor);
 
-    void processSelection();
-
-    void processClickWithUnitsSelected();
-
     void processClick();
 
     void initializeCounters();
@@ -326,6 +322,9 @@ public:
 
     void drawFlag(const TeamEnum &team, const Cairo::RefPtr<Cairo::Context> &cr,
                   unsigned int xGraphicCoordinate, unsigned int yGraphicCoordinate) const;
+
+    bool unit_selected();
+    bool buildings_selected();
 };
 
 

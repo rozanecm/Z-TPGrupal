@@ -37,3 +37,11 @@ BuildingsEnum Building::getBuildingType() {
 TeamEnum Building::getTeam() {
     return team;
 }
+
+bool Building::is_selected() {
+    return selected;
+}
+
+void Building::unselect() {
+    selected = false;
+}

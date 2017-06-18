@@ -288,33 +288,30 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *
      */
     if (event->button == 1) {
+        unitsMonitor->wipeSelected();
+        buildingsMonitor->wipe_selected();
+        unitsSelected = false;
+        buildingSelected = false;
         xStartCoordinate = event->x;
         yStartCoordinate = event->y;
         /* returning true, cancels the propagation of the event */
-        return true;
     }
+    return true;
+
 }
 
 bool GameArea::on_button_release_event(GdkEventButton *event) {
     if (event->button == 1) {
-        if (!unitsMonitor->getSelectedUnits().size()) {
-            xFinishCoordinate = event->x;
-            yFinishCoordinate = event->y;
-            selectionMade = true;
-            coords = {-1, -1};
-            makeSelection();
-            processSelection();
-            return false;
-        }
-
-        move_cmd = true;
+        xFinishCoordinate = event->x;
+        yFinishCoordinate = event->y;
+        makeSelection();
         coords = {camera.cameraToMapXCoordinate(event->x),
                   camera.cameraToMapXCoordinate(event->y)};
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
-        return false;
     }
+    return false;
 }
 
 void GameArea::makeSelection() {
@@ -352,27 +349,6 @@ void GameArea::makeSelection() {
     selectionMade = false;
 }
 
-void GameArea::processSelection() {
-    //todo complete this method. It should
-    if (xStartCoordinate == xFinishCoordinate and yStartCoordinate ==
-                                                  yFinishCoordinate) {
-        /* case if user clicked */
-        if (unitsSelected) {
-            processClickWithUnitsSelected();
-        } else {
-            processClick();
-        }
-    }
-    /* at the end of the selection processing, reset unitsSelection bool */
-    unitsSelected = false;
-}
-
-void GameArea::processClickWithUnitsSelected() {
-//    pseudo code:
-//      get clicked unit/building. if clicked building is of own team, select
-// it, otherwise atack. If nothing was selected, move selected units to
-// clicked position.
-}
 
 void GameArea::processClick() {
     //todo complete method processClick
@@ -6353,4 +6329,12 @@ bool GameArea::unitIsRobot(UnitsEnum unitType) {
             unitType == UnitsEnum::GRUNT or unitType == UnitsEnum::LASER or
             unitType == UnitsEnum::PSYCHO or unitType == UnitsEnum::PYRO or
             unitType == UnitsEnum::SNIPER or unitType == UnitsEnum::TOUGH);
+}
+
+bool GameArea::unit_selected() {
+    return unitsSelected;
+}
+
+bool GameArea::buildings_selected() {
+    return buildingSelected;
 }
