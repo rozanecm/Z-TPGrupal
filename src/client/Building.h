@@ -17,9 +17,9 @@ private:
     /* bool selected: indicates wether the unit has been selected
      * with the mouse or not */
     bool selected;
-
+    int id;
 public:
-    Building(BuildingsEnum type, int x, int y);
+    Building(BuildingsEnum type, int x, int y, int id);
     /**
      * This methods checks all the player's units to see if any of its units is
      * located within the area of selection. If so, the units' attribute
