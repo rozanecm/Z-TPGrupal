@@ -185,7 +185,7 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     info += unit.getState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
-    info += std::to_string(unit.getLifeLeft()) + "||";
+    info += std::to_string(unit.getLifeLeft()) + "|";
     return info;
 }
 
@@ -194,7 +194,7 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
     info += std::to_string(Occupant.getId()) + "-";
     info += std::to_string(Occupant.getPosition().getX()) + "-";
     info += std::to_string(Occupant.getPosition().getY()) + "-";
-    info += std::to_string(Occupant.getLifeLeft()) + "||";
+    info += std::to_string(Occupant.getLifeLeft()) + "|";
     return info;
 }
 
@@ -203,7 +203,7 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
     std::string info = "flagOn-";
     info += std::to_string(flag_pos.getX()) + "-";
     info += std::to_string(flag_pos.getY()) + "-";
-    info += territory.getTeam() + "||";
+    info += territory.getTeam() + "|";
     return info;
 }
 
