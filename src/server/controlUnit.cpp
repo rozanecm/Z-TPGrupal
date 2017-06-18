@@ -189,11 +189,7 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     info += unit.getState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
-<<<<<<< HEAD
-    info += std::to_string(unit.getLifeLeft()) + "||";
-=======
     info += std::to_string(unit.getLifeLeft()) + "|";
->>>>>>> origin/server
     return info;
 }
 

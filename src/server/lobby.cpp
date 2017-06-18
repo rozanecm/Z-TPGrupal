@@ -47,19 +47,13 @@ void Lobby::startGame() {
         Size r_size(3,3,3,3);
         Size range(3,3,6,6);
 
-        Size j_size(10,10,3,3);
+        Size j_size(200,200,3,3);
         Size j_range(10,10,6,6);
         Compass* r_compass = new Compass(*map, r_size,204, 4);
         Compass* j_compass = new Compass(*map, j_size,208, 4);
-<<<<<<< HEAD
-        Weapon weapon("Laser",25,20,false,r_size);
-        Unit* robot = new Unit(204,400,"Grunt",4,r_size,range,*r_compass,weapon,2);
-        Unit* jeep = new Unit(208,400,"Jeep",5,j_size,j_range,*j_compass,weapon,2);
-=======
         Weapon weapon("laser",25,20,false,r_size);
         Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
-        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,weapon,2);
->>>>>>> origin/server
+        Unit* jeep = new Unit(208,400,"grunt",5,j_size,j_range,*j_compass,weapon,2);
 
         robot->changeTeam(players[0]->getId());
         if (players.size() >= 2)
