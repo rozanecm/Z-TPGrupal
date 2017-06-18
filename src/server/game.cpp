@@ -72,7 +72,15 @@ void Game::analyseOccupantsInfo(std::string& info) {
         info += std::to_string(pos.getX()) + "-";
         info += std::to_string(pos.getY()) + "-";
         info += o->getType() + "-";
-        info += o->getTeam() + "|";
+
+        int id = -1;
+        std::string player_id = o->getTeam();
+        for (unsigned int i = 0; i < players.size(); ++i) {
+            if (players.at(i)->getId() == player_id) {
+                id = i;
+            }
+        }
+        info += std::to_string(id) + "|";
     }
 }
 
