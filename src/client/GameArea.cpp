@@ -64,7 +64,6 @@ bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
         processSelection();
     }
     drawBaseMap(cr, camera.getPosition());
-    drawFlagAnimation(cr, 500, 500);
     //todo implement building drawing
 //    drawBuildings();
     drawUnitsInMap(cr);

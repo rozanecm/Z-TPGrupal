@@ -43,12 +43,6 @@ int main(int argc, char **argv) {
         std::vector<Unit> units;
         UnitsMonitor unitsrMonitor(units);
 
-        /* CREATE UNIT TO TEST GFIACION DE UNITS */
-        Unit unit(1, std::pair<unsigned int, unsigned int>(20, 20),
-                  UnitsEnum::HEAVY_TANK, RotationsEnum::r225);
-        unitsrMonitor.addUnit(unit);
-
-
         /* create vector with buildings; bind with monitor */
         std::vector<Building> buildings;
         BuildingsMonitor buildingsMonitor(buildings);
