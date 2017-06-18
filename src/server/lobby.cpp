@@ -53,7 +53,8 @@ void Lobby::startGame() {
         Compass* j_compass = new Compass(*map, j_size,208, 4);
         Weapon weapon("laser",25,20,false,r_size);
         Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
-        Unit* jeep = new Unit(208,400,"grunt",5,j_size,j_range,*j_compass,weapon,2);
+        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,
+                              weapon,2);
 
         robot->changeTeam(players[0]->getId());
         if (players.size() >= 2)

@@ -21,6 +21,8 @@ private:
     /* unitType can be: robot, vehicle, tank */
     UnitsEnum unitType;
 
+    ActionsEnum actionType;
+
     RotationsEnum rotation;
 
     Armament armament;
@@ -55,7 +57,7 @@ private:
 
 public:
     Unit(int id, std::pair<unsigned int, unsigned int> position,
-         UnitsEnum unitType, RotationsEnum rotation);
+             UnitsEnum unitType, TeamEnum team);
 
     int get_ID();
 

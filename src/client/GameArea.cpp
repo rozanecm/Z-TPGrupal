@@ -6101,7 +6101,7 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
                         unsigned int xGraphicCoordinate,
                         unsigned int yGraphicCoordinate) {
     cr->save();
-    /* adapt given data to savd imgs. Applies to vehicles */
+    /* adapt given data to saved imgs. Applies to vehicles */
     if (unitType == UnitsEnum::JEEP &&
         rotation != RotationsEnum::r090 &&
         rotation != RotationsEnum::r270) {
@@ -6112,22 +6112,26 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
 
     auto team_map = unitsAnimations.find(team);
     if (team_map == unitsAnimations.end()) {
-        std::cout << "Drawing failed at finding valid team" << std::endl;
+        std::cerr << "Drawing failed at finding valid team" << std::endl;
     }
 
     auto unit_map = team_map->second.find(unitType);
     if (unit_map == team_map->second.end()) {
-        std::cout << "Drawing failed at finding valid unitType" << std::endl;
+        std::cerr << "Drawing failed at finding valid unitType" << std::endl;
     }
 
     auto actions_map = unit_map->second.find(actionType);
     if (actions_map == unit_map->second.end()) {
-        std::cout << "Drawing failed at finding valid actionType" << std::endl;
+        std::cerr << "Drawing failed at finding valid actionType" << std::endl;
     }
 
     auto rotations_map = actions_map->second.find(rotation);
     if (rotations_map == actions_map->second.end()) {
-        std::cout << "Drawing failed at finding valid rotation" << std::endl;
+        std::cerr << "Drawing failed at finding valid rotation" << std::endl;
+    }
+
+    if (unitIsRobot(unitType)){
+        cr->scale(1.5, 1.5);
     }
 
     auto next = rotations_map->second.at(unitCounter);
@@ -6206,21 +6210,22 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
 }
 
 unsigned short GameArea::getCounter(Unit &unit) const {
-    unsigned short counter;
     if (unit.getType() == UnitsEnum::JEEP) {
-        counter = jeepCounter.getCounter();
+        if (unit.getTeam() == TeamEnum::NEUTER){
+            return 0;
+        }
+        return jeepCounter.getCounter();
     } else if (unit.getType() == UnitsEnum::LIGHT_TANK or
                unit.getType() == UnitsEnum::MEDIUM_TANK or
                unit.getType() == UnitsEnum::HEAVY_TANK) {
-        counter = tankCounter.getCounter();
+        return tankCounter.getCounter();
     } else if (unit.getAction() == ActionsEnum::FIRE) {
-        counter = shootingRobotCounter.getCounter();
+        return shootingRobotCounter.getCounter();
     } else if (unit.getAction() == ActionsEnum::MOVE) {
-        counter = walkingRobotCounter.getCounter();
+        return walkingRobotCounter.getCounter();
     } else {
-        counter = standingRobotCounter.getCounter();
+        return standingRobotCounter.getCounter();
     }
-    return counter;
 }
 
 void GameArea::updateCounters() {
@@ -6256,11 +6261,12 @@ void GameArea::initializeCounters() {
     tireCounter.initialize(jeepTires.at(RotationsEnum::r000).size());
 
     standingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-                                    [UnitsEnum::PSYCHO][ActionsEnum::STAND]
+                                    [UnitsEnum::GENERIC_ROBOT]
+                                    [ActionsEnum::STAND]
                                     [RotationsEnum::r000].size());
 
     walkingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-                                   [UnitsEnum::PSYCHO][ActionsEnum::MOVE]
+                                   [UnitsEnum::GENERIC_ROBOT][ActionsEnum::MOVE]
                                    [RotationsEnum::r000].size());
 
     shootingRobotCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
@@ -6309,4 +6315,11 @@ void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
                   next->get_height());
     cr->fill();
     cr->restore();
+}
+
+bool GameArea::unitIsRobot(UnitsEnum unitType) {
+    return (unitType == UnitsEnum::GENERIC_ROBOT or
+            unitType == UnitsEnum::GRUNT or unitType == UnitsEnum::LASER or
+            unitType == UnitsEnum::PSYCHO or unitType == UnitsEnum::PYRO or
+            unitType == UnitsEnum::SNIPER or unitType == UnitsEnum::TOUGH);
 }

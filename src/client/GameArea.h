@@ -319,6 +319,8 @@ public:
                       const Cairo::RefPtr<Cairo::Context> &cr,
                       unsigned int xGraphicCoordinate,
                       unsigned int yGraphicCoordinate);
+
+    bool unitIsRobot(UnitsEnum unitType);
 };
 
 

@@ -4,9 +4,11 @@
 #define IMG_SIZE_IN_PX 16
 
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
-           UnitsEnum unitType, RotationsEnum rotation)
-        : id(id), position(position), unitType(unitType), rotation(rotation),
-          team(TeamEnum::GREEN), selected(false) {
+           UnitsEnum unitType, TeamEnum team)
+        : id(id), position(position), unitType(unitType),
+          rotation (RotationsEnum::r090), team(team),
+          selected(false), actionType(ActionsEnum::STAND) {
+    /* units initial rotation is facing 'to the player'; action: standing. */
     //todo check what else should be initialized
 }
 
@@ -62,23 +64,7 @@ UnitsEnum Unit::getType() {
 }
 
 ActionsEnum Unit::getAction() {
-    /* since vehicles don't have moving animations... */
-    //todo possible refactor. Check this outside (just one option listed here)
-    if (unitType == UnitsEnum::HEAVY_TANK or
-        unitType == UnitsEnum::JEEP or
-        unitType == UnitsEnum::MML or
-        unitType == UnitsEnum::LIGHT_TANK or
-        unitType == UnitsEnum::MEDIUM_TANK) {
-        return ActionsEnum::STAND;
-    }
-
-    if (shooting) {
-        return ActionsEnum::FIRE;
-    } else if (position == prev_position) {
-        return ActionsEnum::STAND;
-    } else {
-        return ActionsEnum::MOVE;
-    }
+    return actionType;
 }
 
 bool Unit::is_selected() {
