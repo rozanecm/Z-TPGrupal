@@ -22,3 +22,20 @@ void BuildingsMonitor::addBuilding(Building &b) {
     Lock l(m);
     buildings.push_back(b);
 }
+
+std::vector<Building>
+BuildingsMonitor::getBuildingsToDraw(unsigned int minX, unsigned int maxX,
+                                     unsigned int minY, unsigned int maxY) {
+    Lock l(m);
+    std::vector <Building> returnVector;
+
+    for (Building& building : buildings){
+        if (building.getXCoordinate() >= minX and
+            building.getXCoordinate() <= maxX and
+            building.getYCoordinate() >= minY and
+            building.getYCoordinate() <= maxY){
+            returnVector.emplace_back(building);
+        }
+    }
+    return returnVector;
+}

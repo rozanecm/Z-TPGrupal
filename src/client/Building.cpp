@@ -18,3 +18,15 @@ Building::Building(BuildingsEnum type, int x, int y) :
     selected(false)
 {
 }
+
+unsigned int Building::getXCoordinate() {
+    return position.first;
+}
+
+unsigned int Building::getYCoordinate() {
+    return position.second;
+}
+
+BuildingsEnum Building::getBuildingType() {
+    return buildingType;
+}

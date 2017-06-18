@@ -61,6 +61,7 @@ private:
     Counter tireCounter;
     Counter tankCounter;
     Counter mmlCounter;
+    Counter buildingsCounter;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -72,6 +73,8 @@ private:
 
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
                            int xGraphicCoordinate, int yGraphicCoordinate);
+
+    void drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr);
 
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
@@ -304,10 +307,12 @@ public:
 
     unsigned int realMapToCamera(gdouble coordinate);
 
-    void drawBuildings(const Cairo::RefPtr<Cairo::Context> &cr,
-                       std::pair<unsigned int, unsigned int> cameraPosition);
-
     void setMapData();
+
+    void drawBuilding(BuildingsEnum buildingType, unsigned short counter,
+                      const Cairo::RefPtr<Cairo::Context> &cr,
+                      unsigned int xGraphicCoordinate,
+                      unsigned int yGraphicCoordinate);
 };
 
 

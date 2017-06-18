@@ -65,7 +65,7 @@ bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     drawBaseMap(cr, camera.getPosition());
     drawFlagAnimation(cr, 500, 500);
     //todo implement building drawing
-//    drawBuildings();
+    drawBuildingsInView(cr);
     drawUnitsInMap(cr);
     updateCounters();
     return true;
@@ -130,6 +130,35 @@ void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
                           at(flagCounter.getCounter())->get_height());
     cr->fill();
     cr->restore();
+}
+
+void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
+    /* pointers (Unit*) are not used here because we are working with a shared
+     * resource. This way, we copy the units we want to draw in a protected way,
+     * and then we can draw without blocking other code. */
+    std::vector<Building> buildingsToDraw =
+            buildingsMonitor->getBuildingsToDraw(
+                    camera.getPosition().first - (NUMBER_OF_TILES_TO_SHOW *
+                                                  TILESIZE) / 2,
+                    camera.getPosition().first + (NUMBER_OF_TILES_TO_SHOW *
+                                                  TILESIZE) / 2,
+                    camera.getPosition().second - (NUMBER_OF_TILES_TO_SHOW *
+                                                  TILESIZE) / 2,
+                    camera.getPosition().second + (NUMBER_OF_TILES_TO_SHOW *
+                                                  TILESIZE) / 2);
+
+    for (auto &building : buildingsToDraw) {
+        /* check what is being drawn, and choose the counter appropriately. */
+        unsigned short counter;
+
+        /* call actual drawing method */
+        drawBuilding(building.getBuildingType(),
+                     buildingsCounter.getCounter(), cr,
+                 cameraToRealMap(camera.mapToCameraXCoordinate(building.
+                         getXCoordinate())),
+                 cameraToRealMap(camera.mapToCameraYCoordinate(building.
+                         getYCoordinate())));
+    }
 }
 
 void
@@ -6190,6 +6219,9 @@ void GameArea::updateCounters() {
 }
 
 void GameArea::initializeCounters() {
+    /* one of the vectors of each category is accessed to get the size of the
+     * vectors of all the category. This is possible because all vectors of
+     * the same category share the same size */
     flagCounter.initialize(flags.at(FlagEnum::BLUE).size());
 
     jeepCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
@@ -6216,6 +6248,8 @@ void GameArea::initializeCounters() {
     mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
                           [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND
                           ][RotationsEnum::r000].size());
+
+    buildingsCounter.initialize(buildings.at(BuildingsEnum::FORT).size());
 }
 
 unsigned int GameArea::cameraToRealMap(unsigned int coordinate) {
@@ -6226,13 +6260,24 @@ unsigned int GameArea::realMapToCamera(gdouble coordinate) {
     return (NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width());
 }
 
-void GameArea::drawBuildings(const Cairo::RefPtr<Cairo::Context> &cr,
-                             std::pair<unsigned int, unsigned int>
-                             cameraPosition) {
-
-}
-
 void GameArea::setMapData() {
     this->camera.setMapWidth(mapMonitor->getXSize());
     this->camera.setMapHeight(mapMonitor->getYSize());
+}
+
+void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
+                            const Cairo::RefPtr<Cairo::Context> &cr,
+                            unsigned int xGraphicCoordinate,
+                            unsigned int yGraphicCoordinate) {
+    cr->save();
+    Glib::RefPtr<Gdk::Pixbuf> next = buildings.at(buildingType).at(counter);
+
+    /* perform actual drawing */
+    Gdk::Cairo::set_source_pixbuf(cr, next,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
+                  next->get_height());
+    cr->fill();
+    cr->restore();
 }

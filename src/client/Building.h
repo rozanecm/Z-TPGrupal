@@ -12,7 +12,7 @@
 class Building {
 private:
     BuildingsEnum buildingType;
-    std::pair<int, int> position;
+    std::pair<unsigned int, unsigned int> position;
 
     /* bool selected: indicates wether the unit has been selected
      * with the mouse or not */
@@ -29,6 +29,12 @@ public:
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);
+
+    unsigned int getXCoordinate();
+
+    unsigned int getYCoordinate();
+
+    BuildingsEnum getBuildingType();
 };
 
 
