@@ -3,8 +3,7 @@
 
 InitialWindow::InitialWindow(BaseObjectType *cobject,
                              const Glib::RefPtr<Gtk::Builder> &builder) :
-    Gtk::Window(cobject)
-{
+        Gtk::Window(cobject) {
     builder->get_widget("AddressEntry", address_entry);
     builder->get_widget("PortEntry", port_entry);
     builder->get_widget("NameEntry", name_entry);
@@ -22,7 +21,7 @@ void InitialWindow::on_click() {
     try {
         port = std::stoi(port_str);
         s = std::shared_ptr<Socket>(new Socket(addr_str.c_str(), port));
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
         std::cout << "Could not connect to specified addr/port" << std::endl;
         return;
     }

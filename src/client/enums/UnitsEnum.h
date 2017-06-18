@@ -7,7 +7,7 @@ enum class UnitsEnum {
      * animations don't differ */
             GRUNT, PSYCHO, TOUGH, PYRO, SNIPER, LASER, GENERIC_ROBOT,
     /* vehicles */
-    JEEP, MEDIUM_TANK, LIGHT_TANK, HEAVY_TANK, MML
+            JEEP, MEDIUM_TANK, LIGHT_TANK, HEAVY_TANK, MML
 };
 
 #endif //Z_TPGRUPAL_UNITSENUM_H

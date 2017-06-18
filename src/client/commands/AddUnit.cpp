@@ -1,10 +1,6 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include "AddUnit.h"
-#include "../enums/UnitsEnum.h"
-#include "../enums/RotationsEnum.h"
-#include "../UnitsMonitor.h"
 
 #define UNIT_ID 0
 #define X 1
@@ -19,7 +15,7 @@ void AddUnit::execute(const std::vector<std::string> &args) {
     int y = std::stoi(args[Y]);
     int id = std::stoi(args[UNIT_ID]);
     auto type = units.find(args[UNIT_TYPE]);
-    if(type == units.end()) {
+    if (type == units.end()) {
         std::cerr << "Error adding unit: received type " << args[UNIT_TYPE] <<
                   std::endl;
         return;

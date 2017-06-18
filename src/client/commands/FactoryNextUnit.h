@@ -6,11 +6,11 @@
 #include "../windows/GameWindow.h"
 
 class FactoryNextUnit : public Command {
-
-    GameWindow& window;
+    GameWindow &window;
 public:
-    FactoryNextUnit(GameWindow &window);
-    void execute(const std::vector<std::string>& args);
+    explicit FactoryNextUnit(GameWindow &window);
+
+    void execute(const std::vector<std::string> &args);
 };
 
 

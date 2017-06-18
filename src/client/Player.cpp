@@ -44,13 +44,15 @@
 //}
 //
 //std::vector<Unit>
-//Player::getUnitsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
+//Player::getUnitsToDraw(unsigned int minX, unsigned int maxX,
+// unsigned int minY,
 //                       unsigned int maxY) {
 //        std::vector <Unit> returnVector;
 //
 //        //todo DEBUG
 //        std::cout<<"in getUnitsto draw in player"<<std::endl;
-////        for (Unit &unit(0, std::pair<unsigned int, unsigned int>(), HEAVY_TANK,
+////        for (Unit &unit(0, std::pair<unsigned int, unsigned int>(),
+/// HEAVY_TANK,
 ////                        r225) : units){
 //            if (unit.getXCoordinate() >= minX and
 //                    unit.getXCoordinate() <= maxX and

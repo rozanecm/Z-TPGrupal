@@ -9,8 +9,7 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::ApplicationWindow(cobject)
-{
+        Gtk::ApplicationWindow(cobject) {
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
@@ -32,7 +31,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
 
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
-    Glib::signal_timeout().connect(mySlot, 1000/FRAMERATE);
+    Glib::signal_timeout().connect(mySlot, 1000 / FRAMERATE);
 
     show_all_children();
 }
@@ -101,7 +100,7 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
     std::vector<Unit> units = unitsMonitor->getSelectedUnits();
     if (units.size()) {
         std::pair<int, int> coords = gameArea->get_coords();
-        if(coords != std::pair<int, int>(-1, -1)) {
+        if (coords != std::pair<int, int>(-1, -1)) {
             std::cout << gameArea->get_coords().first << ", " <<
                       gameArea->get_coords().second << std::endl;
 

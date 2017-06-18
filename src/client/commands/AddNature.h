@@ -7,8 +7,8 @@
 class AddNature : public Command {
 public:
     AddNature();
-    void execute(const std::vector<std::string>& args);
 
+    void execute(const std::vector<std::string> &args);
 };
 
 

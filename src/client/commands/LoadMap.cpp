@@ -1,25 +1,20 @@
 #include <pugixml.hpp>
 #include <iostream>
 #include "LoadMap.h"
-#include "../enums/BuildingsEnum.h"
-#include <string>
-#include <vector>
-#include <map>
 
 
 #define ROBOT_FACTORY "res/assets/buildings/robot/base_jungle.png"
 #define VEHICLE_FACTORY "res/assets/buildings/vehicle/base_jungle.png"
 
-const std::map<std::string, BuildingsEnum> buildings {
+const std::map<std::string, BuildingsEnum> buildings{
         {std::string("VehicleFactory"), BuildingsEnum::VEHICLE_FABRIC},
-        {std::string("UnitFactory"), BuildingsEnum::ROBOT_FABRIC},
-        {std::string("Fort"), BuildingsEnum::FORT}
+        {std::string("UnitFactory"),    BuildingsEnum::ROBOT_FABRIC},
+        {std::string("Fort"),           BuildingsEnum::FORT}
 };
 
-LoadMap::LoadMap(MapMonitor &mapMonitor, BuildingsMonitor& buildings,
+LoadMap::LoadMap(MapMonitor &mapMonitor, BuildingsMonitor &buildings,
                  GameWindow &window) :
-        mapMonitor(mapMonitor), buildingsMonitor(buildings), window(window)
-{
+        mapMonitor(mapMonitor), buildingsMonitor(buildings), window(window) {
 }
 
 void LoadMap::execute(const std::vector<std::string> &args) {
@@ -48,8 +43,8 @@ void LoadMap::execute(const std::vector<std::string> &args) {
 
     unsigned long size = map.size();
     mapMonitor.initializeMap(size, size);
-    for (int i = 0; i < size; i++){
-        for (int j = 0; j < size; j++){
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             mapMonitor.setCell(i, j, map[i][j]);
         }
     }

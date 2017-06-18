@@ -1,9 +1,8 @@
 #include "Map.h"
-#include <string>
 
 void Map::initializeMap(unsigned int xSize, unsigned int ySize) {
     baseMap.resize(xSize);
-    for (int i = 0; i < xSize; ++i){
+    for (int i = 0; i < xSize; ++i) {
         baseMap[i].resize(ySize);
     }
 }

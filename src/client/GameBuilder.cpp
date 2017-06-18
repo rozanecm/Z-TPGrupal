@@ -1,29 +1,22 @@
 #include <iostream>
-#include <string>
 #include "GameBuilder.h"
-#include "BuildingsMonitor.h"
-#include "MapMonitor.h"
 
 
 GameBuilder::GameBuilder() {
     //Load the GtkBuilder file and instantiate its widgets:
     refBuilder = Gtk::Builder::create();
-    try
-    {
+    try {
         refBuilder->add_from_file("Z.glade");
     }
-    catch(const Glib::FileError& ex)
-    {
+    catch (const Glib::FileError &ex) {
         std::cerr << "FileError: " << ex.what() << std::endl;
         return;
     }
-    catch(const Glib::MarkupError& ex)
-    {
+    catch (const Glib::MarkupError &ex) {
         std::cerr << "MarkupError: " << ex.what() << std::endl;
         return;
     }
-    catch(const Gtk::BuilderError& ex)
-    {
+    catch (const Gtk::BuilderError &ex) {
         std::cerr << "BuilderError: " << ex.what() << std::endl;
         return;
     }

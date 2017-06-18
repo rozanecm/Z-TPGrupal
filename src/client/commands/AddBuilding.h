@@ -6,11 +6,11 @@
 #include "Command.h"
 
 class AddBuilding : public Command {
-    BuildingsMonitor& buildings;
+    BuildingsMonitor &buildings;
 public:
-    AddBuilding(BuildingsMonitor& buildings);
-    void execute(const std::vector<std::string>& args);
+    AddBuilding(BuildingsMonitor &buildings);
 
+    void execute(const std::vector<std::string> &args);
 };
 
 

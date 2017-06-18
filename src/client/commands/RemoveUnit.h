@@ -7,11 +7,11 @@
 #include "../UnitsMonitor.h"
 
 class RemoveUnit : public Command {
-    UnitsMonitor& monitor;
+    UnitsMonitor &monitor;
 public:
     explicit RemoveUnit(UnitsMonitor &monitor);
 
-    void execute(const std::vector<std::string>& args);
+    void execute(const std::vector<std::string> &args);
 };
 
 

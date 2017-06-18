@@ -3,10 +3,6 @@
 #include <SDL2/SDL_mixer.h>
 #include "GraphicsThread.h"
 #include "ClientThread.h"
-#include <vector>
-#include "Map.h"
-#include "MapMonitor.h"
-#include "../common/messenger.h"
 #include "GameBuilder.h"
 
 #define SUCCESSRETURNCODE 0
@@ -14,17 +10,18 @@
 void play_sound() {
     // Init, open the audio channel
     Mix_Init(0);
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
         std::cout << "ERROR ON OPENING AUDIO" << Mix_GetError() << std::endl;
         return;
     }
 
 
     Mix_AllocateChannels(16);
-    Mix_Chunk* sample = Mix_LoadWAV("test.wav");
+    Mix_Chunk *sample = Mix_LoadWAV("test.wav");
     if (!sample) {
         //todo throw exception
-        std::cout <<"ERROR ON PLAYING TEST.WAV " << Mix_GetError() << std::endl;
+        std::cout << "ERROR ON PLAYING TEST.WAV " << Mix_GetError()
+                  << std::endl;
         return;
     }
 
@@ -50,7 +47,7 @@ int main(int argc, char **argv) {
         auto app = Gtk::Application::create();
 
         GameBuilder builder;
-        InitialWindow* window = builder.get_initial_window();
+        InitialWindow *window = builder.get_initial_window();
         app->run(*window);
         // Once the window closes, we fetch the socket
         std::shared_ptr<Socket> s = window->get_socket();
@@ -58,8 +55,9 @@ int main(int argc, char **argv) {
             ServerMessenger messenger(*s.get());
 
 
-            GameWindow* gwindow = builder.get_window();
-            ClientThread clientThread(unitsrMonitor, buildingsMonitor, mapMonitor,
+            GameWindow *gwindow = builder.get_window();
+            ClientThread clientThread(unitsrMonitor, buildingsMonitor,
+                                      mapMonitor,
                                       messenger, *gwindow);
 
             GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
@@ -82,8 +80,8 @@ int main(int argc, char **argv) {
         }
 
         return SUCCESSRETURNCODE;
-    } catch (std::exception const & ex) {
-        std::cerr<<ex.what()<<std::endl;
+    } catch (std::exception const &ex) {
+        std::cerr << ex.what() << std::endl;
         return SUCCESSRETURNCODE;
     }
 }

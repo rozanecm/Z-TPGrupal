@@ -19,7 +19,7 @@ public:
                                gdouble xFinishCoordinate,
                                gdouble yFinishCoordinate);
 
-    void addBuilding(Building& b);
+    void addBuilding(Building &b);
 
     std::vector<Building>
     getBuildingsToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,

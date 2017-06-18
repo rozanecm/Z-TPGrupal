@@ -1,9 +1,8 @@
 #include "BuildingsMonitor.h"
-#include <vector>
 #include <Lock.h>
 
 BuildingsMonitor::BuildingsMonitor(std::vector<Building> &buildings) :
-        buildings(buildings){
+        buildings(buildings) {
 }
 
 void BuildingsMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
@@ -11,10 +10,10 @@ void BuildingsMonitor::markAsSelectedInRange(gdouble xStartCoordinate,
                                              gdouble xFinishCoordinate,
                                              gdouble yFinishCoordinate) {
     Lock l(m);
-    for (Building& building : buildings){
+    for (Building &building : buildings) {
         /* each player has to selects its units in range */
         building.markAsSelectedInRange(xStartCoordinate, yStartCoordinate,
-                                     xFinishCoordinate, yFinishCoordinate);
+                                       xFinishCoordinate, yFinishCoordinate);
     }
 }
 
@@ -27,13 +26,13 @@ std::vector<Building>
 BuildingsMonitor::getBuildingsToDraw(unsigned int minX, unsigned int maxX,
                                      unsigned int minY, unsigned int maxY) {
     Lock l(m);
-    std::vector <Building> returnVector;
+    std::vector<Building> returnVector;
 
-    for (Building& building : buildings){
+    for (Building &building : buildings) {
         if (building.getXCoordinate() >= minX and
             building.getXCoordinate() <= maxX and
             building.getYCoordinate() >= minY and
-            building.getYCoordinate() <= maxY){
+            building.getYCoordinate() <= maxY) {
             returnVector.emplace_back(building);
         }
     }

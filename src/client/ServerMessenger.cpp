@@ -2,11 +2,9 @@
 #include <string>
 #include "ServerMessenger.h"
 #include "../common/Lock.h"
-#include "../common/messenger.h"
-#include "../common/socket.h"
 
-ServerMessenger::ServerMessenger(Socket& s) :
-    messenger(s) {
+ServerMessenger::ServerMessenger(Socket &s) :
+        messenger(s) {
 }
 
 void ServerMessenger::send(const std::string &message) {

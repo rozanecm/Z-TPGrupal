@@ -11,23 +11,25 @@
 #include "windows/InitialWindow.h"
 
 class GameBuilder {
-    GameWindow* window;
-    InitialWindow* init_window;
+    GameWindow *window;
+    InitialWindow *init_window;
     Glib::RefPtr<Gtk::Builder> refBuilder;
-    Gtk::Image* portrait;
-    Gtk::Box* panel;
-    Gtk::Box* unit_panel;
-    Gtk::Box* building_panel;
-    Gtk::Box* group_panel;
-    Gtk::Button* button;
+    Gtk::Image *portrait;
+    Gtk::Box *panel;
+    Gtk::Box *unit_panel;
+    Gtk::Box *building_panel;
+    Gtk::Box *group_panel;
+    Gtk::Button *button;
 
 public:
     GameBuilder();
+
     ~GameBuilder();
 
     // returns the generated window
-    GameWindow* get_window();
-    InitialWindow* get_initial_window();
+    GameWindow *get_window();
+
+    InitialWindow *get_initial_window();
 };
 
 

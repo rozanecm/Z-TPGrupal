@@ -19,10 +19,10 @@
 #include <string>
 #include <vector>
 
-class GameArea : public Gtk::DrawingArea{
+class GameArea : public Gtk::DrawingArea {
 private:
     /* shared resources */
-    UnitsMonitor* unitsMonitor;
+    UnitsMonitor *unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
 
@@ -278,12 +278,13 @@ private:
     void updateCounters();
 
 protected:
-    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+    bool on_draw(const Cairo::RefPtr<Cairo::Context> &cr) override;
 
 public:
     virtual ~GameArea();
-    GameArea(BaseObjectType* cobject,
-             const Glib::RefPtr<Gtk::Builder>& builder);
+
+    GameArea(BaseObjectType *cobject,
+             const Glib::RefPtr<Gtk::Builder> &builder);
 
     /**
      * initialize shared resources.
@@ -307,6 +308,7 @@ public:
                                 RotationsEnum &rotation) const;
 
     unsigned int cameraToRealMap(unsigned int coordinate);
+
     std::pair<int, int> get_coords();
 
     unsigned int realMapToCamera(gdouble coordinate);

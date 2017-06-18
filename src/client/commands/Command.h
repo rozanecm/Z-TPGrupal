@@ -6,7 +6,7 @@
 
 class Command {
 public:
-    virtual void execute(const std::vector<std::string>& args) = 0;
+    virtual void execute(const std::vector<std::string> &args) = 0;
 };
 
 #endif //Z_TPGRUPAL_COMMAND_H

@@ -7,10 +7,11 @@
 #include "../UnitsMonitor.h"
 
 class UpdatePosition : public Command {
-    UnitsMonitor& monitor;
+    UnitsMonitor &monitor;
 public:
     explicit UpdatePosition(UnitsMonitor &monitor);
-    void execute(const std::vector<std::string>& args);
+
+    void execute(const std::vector<std::string> &args);
 };
 
 #endif //Z_TPGRUPAL_UPDATEPOSITION_H

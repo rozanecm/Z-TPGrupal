@@ -13,7 +13,7 @@ enum class RotationsEnum {
      * 315: looking to bottom right corner
      * */
 
-    r000, r045, r090, r135, r180, r225, r270, r315
+            r000, r045, r090, r135, r180, r225, r270, r315
 };
 
 #endif //Z_TPGRUPAL_ROTATIONSENUM_H

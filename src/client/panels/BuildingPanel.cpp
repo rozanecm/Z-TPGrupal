@@ -13,7 +13,6 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("FactoryCreateButton", create);
     building->set("res/buildings/base_city.png");
     unit->set("res/portraits/grunt.png");
-
 }
 
 const std::string &BuildingPanel::get_label() {

@@ -1,8 +1,4 @@
 #include "Unit.h"
-#include "enums/UnitsEnum.h"
-#include "enums/RotationsEnum.h"
-#include <utility>
-#include <Lock.h>
 #include <iostream>
 
 #define IMG_SIZE_IN_PX 16
@@ -10,8 +6,7 @@
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, RotationsEnum rotation)
         : id(id), position(position), unitType(unitType), rotation(rotation),
-          team(TeamEnum::GREEN), selected(false)
-{
+          team(TeamEnum::GREEN), selected(false) {
     //todo check what else should be initialized
 }
 
@@ -32,13 +27,13 @@ Unit::markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                             gdouble xFinishCoordinate,
                             gdouble yFinishCoordinate) {
     if (position.first >= xStartCoordinate - IMG_SIZE_IN_PX &&
-            position.first <= xFinishCoordinate + IMG_SIZE_IN_PX &&
-            position.second >= yStartCoordinate - IMG_SIZE_IN_PX &&
-            position.second <= yFinishCoordinate + IMG_SIZE_IN_PX){
+        position.first <= xFinishCoordinate + IMG_SIZE_IN_PX &&
+        position.second >= yStartCoordinate - IMG_SIZE_IN_PX &&
+        position.second <= yFinishCoordinate + IMG_SIZE_IN_PX) {
         selected = true;
         unitsSelected = true;
         //todo debug cerr
-        std::cerr<<"unit selected"<<std::endl;
+        std::cerr << "unit selected" << std::endl;
     }
 }
 
@@ -70,10 +65,10 @@ ActionsEnum Unit::getAction() {
     /* since vehicles don't have moving animations... */
     //todo possible refactor. Check this outside (just one option listed here)
     if (unitType == UnitsEnum::HEAVY_TANK or
-            unitType == UnitsEnum::JEEP or
-            unitType == UnitsEnum::MML or
-            unitType == UnitsEnum::LIGHT_TANK or
-            unitType == UnitsEnum::MEDIUM_TANK){
+        unitType == UnitsEnum::JEEP or
+        unitType == UnitsEnum::MML or
+        unitType == UnitsEnum::LIGHT_TANK or
+        unitType == UnitsEnum::MEDIUM_TANK) {
         return ActionsEnum::STAND;
     }
 

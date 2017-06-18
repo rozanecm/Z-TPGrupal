@@ -13,14 +13,13 @@ class GraphicsThread : public Thread {
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
-    GameWindow& window;
+    GameWindow &window;
 public:
     GraphicsThread(UnitsMonitor &monitor,
                    BuildingsMonitor &buildingsMonitor,
                    MapMonitor &mapMonitor,
                    ServerMessenger &messenger,
-                   GameWindow& window
-    );
+                   GameWindow &window);
 
     virtual void run();
 };

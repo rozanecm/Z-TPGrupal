@@ -1,7 +1,5 @@
 #include "RemoveUnit.h"
-#include "../UnitsMonitor.h"
-#include <string>
-#include <vector>
+
 #define UNIT_ID 0
 
 RemoveUnit::RemoveUnit(UnitsMonitor &monitor) : monitor(monitor) {

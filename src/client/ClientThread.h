@@ -15,10 +15,10 @@ class ClientThread : public Thread {
     UnitsMonitor &unitsMonitor;
     BuildingsMonitor &buildingsMonitor;
     MapMonitor &mapMonitor;
-    ServerMessenger& messenger;
-    GameWindow& window;
+    ServerMessenger &messenger;
+    GameWindow &window;
     bool finished = false; // Flag for finishing execution
-    std::map<std::string, Command*> commands;
+    std::map<std::string, Command *> commands;
 
     /* Loads commands */
     void initCommands();
@@ -28,13 +28,13 @@ class ClientThread : public Thread {
     void loop();
 
     /* Parses a command string and executes it */
-    void parse(std::string& s);
+    void parse(std::string &s);
 
 public:
     ClientThread(UnitsMonitor &unitsMonitor,
                  BuildingsMonitor &buildingsMonitor,
                  MapMonitor &mapMonitor, ServerMessenger &messenger,
-                 GameWindow& window);
+                 GameWindow &window);
 
     virtual void run();
 

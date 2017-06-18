@@ -62,9 +62,9 @@ public:
     void update_position(int x, int y);
 
     void markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
-                                   gdouble yStartCoordinate,
-                                   gdouble xFinishCoordinate,
-                                   gdouble yFinishCoordinate);
+                               gdouble yStartCoordinate,
+                               gdouble xFinishCoordinate,
+                               gdouble yFinishCoordinate);
 
     bool isShooting();
 

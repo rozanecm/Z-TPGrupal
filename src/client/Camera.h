@@ -22,7 +22,7 @@ private:
 public:
     /* camera will be initialized in (minx, miny) position */
     Camera(unsigned int tileSize, unsigned int mapWidth, unsigned int mapHeight,
-               unsigned int numberOfTilesToShow);
+           unsigned int numberOfTilesToShow);
 
     std::pair<unsigned int, unsigned int> getPosition();
 

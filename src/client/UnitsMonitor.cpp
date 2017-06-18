@@ -1,7 +1,6 @@
 #include <Lock.h>
 #include <iostream>
 #include "UnitsMonitor.h"
-#include <vector>
 
 
 UnitsMonitor::UnitsMonitor(std::vector<Unit> &units) : units(units) {
@@ -35,13 +34,13 @@ std::vector<Unit>
 UnitsMonitor::getUnitsToDraw(unsigned int minX, unsigned int maxX,
                              unsigned int minY, unsigned int maxY) {
     Lock l(m);
-    std::vector <Unit> returnVector;
+    std::vector<Unit> returnVector;
 
-    for (Unit &unit : units){
+    for (Unit &unit : units) {
         if (unit.getXCoordinate() >= minX and
             unit.getXCoordinate() <= maxX and
             unit.getYCoordinate() >= minY and
-            unit.getYCoordinate() <= maxY){
+            unit.getYCoordinate() <= maxY) {
             returnVector.emplace_back(unit);
         }
     }
@@ -55,7 +54,7 @@ UnitsMonitor::markAsSelectedInRange(bool &unitsSelected,
                                     gdouble xFinishCoordinate,
                                     gdouble yFinishCoordinate) {
     Lock l(m);
-    for (Unit &unit : units){
+    for (Unit &unit : units) {
         unit.markAsSelectedInRange(unitsSelected, xStartCoordinate,
                                    yStartCoordinate, xFinishCoordinate,
                                    yFinishCoordinate);
@@ -64,7 +63,7 @@ UnitsMonitor::markAsSelectedInRange(bool &unitsSelected,
 
 std::vector<Unit> UnitsMonitor::getSelectedUnits() {
     std::vector<Unit> units;
-    for (Unit& unit : this->units) {
+    for (Unit &unit : this->units) {
         if (unit.is_selected()) {
             units.push_back(unit);
         }
@@ -73,7 +72,7 @@ std::vector<Unit> UnitsMonitor::getSelectedUnits() {
 }
 
 void UnitsMonitor::wipeSelected() {
-    for (Unit& unit : units) {
+    for (Unit &unit : units) {
         unit.unselect();
     }
 }

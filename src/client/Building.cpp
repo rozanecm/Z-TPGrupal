@@ -7,16 +7,16 @@ void Building::markAsSelectedInRange(gdouble xStartCoordinate,
     if (position.first >= xStartCoordinate &&
         position.first <= xFinishCoordinate &&
         position.second >= yStartCoordinate &&
-        position.second <= yFinishCoordinate){
+        position.second <= yFinishCoordinate) {
         selected = true;
     }
 }
 
 Building::Building(BuildingsEnum type, int x, int y, int id) :
-    buildingType(type),
-    position(x, y),
-    id(id),
-    selected(false) {
+        buildingType(type),
+        position(x, y),
+        id(id),
+        selected(false) {
 }
 
 unsigned int Building::getXCoordinate() {

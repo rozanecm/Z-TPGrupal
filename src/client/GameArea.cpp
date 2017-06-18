@@ -1,11 +1,8 @@
 #include <gtkmm/builder.h>
-#include <utility>
 #include <gdkmm.h>
 #include <iostream>
 #include "GameArea.h"
-#include <string>
 #include <giomm.h>
-#include <vector>
 
 
 #define TILESIZE 16    //tile width in pixels
@@ -53,7 +50,7 @@ void GameArea::loadResources() {
     } catch (Glib::FileError e) {
         std::cerr << e.what();
     }
-    std::cerr<<"resources succesfully loaded"<<std::endl;
+    std::cerr << "resources succesfully loaded" << std::endl;
 }
 
 GameArea::~GameArea() {}
@@ -139,9 +136,9 @@ void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
                     camera.getPosition().first + (NUMBER_OF_TILES_TO_SHOW *
                                                   TILESIZE) / 2,
                     camera.getPosition().second - (NUMBER_OF_TILES_TO_SHOW *
-                                                  TILESIZE) / 2,
+                                                   TILESIZE) / 2,
                     camera.getPosition().second + (NUMBER_OF_TILES_TO_SHOW *
-                                                  TILESIZE) / 2);
+                                                   TILESIZE) / 2);
 
     for (auto &building : buildingsToDraw) {
         /* check what is being drawn, and choose the counter appropriately. */
@@ -150,10 +147,10 @@ void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
         /* call actual drawing method */
         drawBuilding(building.getBuildingType(),
                      buildingsCounter.getCounter(), cr,
-                 cameraToRealMap(camera.mapToCameraXCoordinate(building.
-                         getXCoordinate())),
-                 cameraToRealMap(camera.mapToCameraYCoordinate(building.
-                         getYCoordinate())));
+                     cameraToRealMap(camera.mapToCameraXCoordinate(building.
+                             getXCoordinate())),
+                     cameraToRealMap(camera.mapToCameraYCoordinate(building.
+                             getYCoordinate())));
     }
 }
 
@@ -310,9 +307,9 @@ void GameArea::makeSelection() {
 void GameArea::processSelection() {
     //todo complete this method. It should
     if (xStartCoordinate == xFinishCoordinate and yStartCoordinate ==
-                                                          yFinishCoordinate) {
+                                                  yFinishCoordinate) {
         /* case if user clicked */
-        if (unitsSelected){
+        if (unitsSelected) {
             processClickWithUnitsSelected();
         } else {
             processClick();
@@ -330,8 +327,8 @@ void GameArea::processClickWithUnitsSelected() {
 }
 
 void GameArea::processClick() {
-    if (unitsSelected){
-
+    //todo complete method processClick
+    if (unitsSelected) {
     }
 }
 
@@ -6124,12 +6121,12 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
     }
 
     auto actions_map = unit_map->second.find(actionType);
-    if(actions_map == unit_map->second.end()) {
+    if (actions_map == unit_map->second.end()) {
         std::cout << "Drawing failed at finding valid actionType" << std::endl;
     }
 
     auto rotations_map = actions_map->second.find(rotation);
-    if(rotations_map == actions_map->second.end()) {
+    if (rotations_map == actions_map->second.end()) {
         std::cout << "Drawing failed at finding valid rotation" << std::endl;
     }
 
@@ -6169,7 +6166,7 @@ GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
                 or unitType == UnitsEnum::PYRO
                 or unitType == UnitsEnum::SNIPER
                 or unitType == UnitsEnum::TOUGH)
-               and(actionType == ActionsEnum::MOVE
+               and (actionType == ActionsEnum::MOVE
                     or actionType == ActionsEnum::STAND)) {
         /* because same imgs are used to draw all different types of robots
          * when these are moving or standing still, if this is the case, we
@@ -6183,12 +6180,14 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
      * resource. This way, we copy the units we want to draw in a protected way,
      * and then we can draw without blocking other code. */
     std::vector<Unit> unitsToDraw = unitsMonitor->getUnitsToDraw(
-            camera.getPosition().first - (NUMBER_OF_TILES_TO_SHOW * TILESIZE)/2,
-            camera.getPosition().first + (NUMBER_OF_TILES_TO_SHOW * TILESIZE)/2,
+            camera.getPosition().first -
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().first +
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
             camera.getPosition().second - (NUMBER_OF_TILES_TO_SHOW *
-                                           TILESIZE)/2,
+                                           TILESIZE) / 2,
             camera.getPosition().second + (NUMBER_OF_TILES_TO_SHOW * TILESIZE)
-    /2);
+                                          / 2);
 
     for (auto &unit : unitsToDraw) {
         /* check what is being drawn, and choose the counter appropriately. */
@@ -6199,26 +6198,28 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
         drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
                  unit.getRotation(),
                  counter, cr,
-                 cameraToRealMap(camera.mapToCameraXCoordinate(unit.getXCoordinate())),
-                 cameraToRealMap(camera.mapToCameraYCoordinate(unit.getYCoordinate())));
+                 cameraToRealMap(
+                         camera.mapToCameraXCoordinate(unit.getXCoordinate())),
+                 cameraToRealMap(
+                         camera.mapToCameraYCoordinate(unit.getYCoordinate())));
     }
 }
 
 unsigned short GameArea::getCounter(Unit &unit) const {
     unsigned short counter;
     if (unit.getType() == UnitsEnum::JEEP) {
-            counter = jeepCounter.getCounter();
-        } else if (unit.getType() == UnitsEnum::LIGHT_TANK or
-                   unit.getType() == UnitsEnum::MEDIUM_TANK or
-                   unit.getType() == UnitsEnum::HEAVY_TANK) {
-            counter = tankCounter.getCounter();
-        } else if (unit.getAction() == ActionsEnum::FIRE) {
-            counter = shootingRobotCounter.getCounter();
-        } else if (unit.getAction() == ActionsEnum::MOVE) {
-            counter = walkingRobotCounter.getCounter();
-        } else {
-            counter = standingRobotCounter.getCounter();
-        }
+        counter = jeepCounter.getCounter();
+    } else if (unit.getType() == UnitsEnum::LIGHT_TANK or
+               unit.getType() == UnitsEnum::MEDIUM_TANK or
+               unit.getType() == UnitsEnum::HEAVY_TANK) {
+        counter = tankCounter.getCounter();
+    } else if (unit.getAction() == ActionsEnum::FIRE) {
+        counter = shootingRobotCounter.getCounter();
+    } else if (unit.getAction() == ActionsEnum::MOVE) {
+        counter = walkingRobotCounter.getCounter();
+    } else {
+        counter = standingRobotCounter.getCounter();
+    }
     return counter;
 }
 
@@ -6267,7 +6268,7 @@ void GameArea::initializeCounters() {
                                     [RotationsEnum::r000].size());
 
     tankCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-    [UnitsEnum::LIGHT_TANK][ActionsEnum::STAND][RotationsEnum::r000].size());
+                           [UnitsEnum::LIGHT_TANK][ActionsEnum::STAND][RotationsEnum::r000].size());
 
     mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
                           [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND

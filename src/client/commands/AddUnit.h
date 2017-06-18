@@ -10,7 +10,8 @@ class AddUnit : public Command {
     UnitsMonitor &unitsMonitor;
 public:
     explicit AddUnit(UnitsMonitor &unitsMonitor);
-    void execute(const std::vector<std::string>& args);
+
+    void execute(const std::vector<std::string> &args);
 };
 
 

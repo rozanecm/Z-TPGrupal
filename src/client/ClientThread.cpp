@@ -1,23 +1,19 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <pugixml.hpp>
 #include <split.h>
 #include <utility>
 #include "ClientThread.h"
-#include "ServerMessenger.h"
-#include "commands/Command.h"
 #include "commands/AddUnit.h"
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
 #include "commands/Update.h"
-#include "windows/GameWindow.h"
 #include "commands/FactoryNextUnit.h"
 #include "commands/AddBuilding.h"
 #include "commands/AddNature.h"
 
-void ClientThread:: run() {
+void ClientThread::run() {
     initCommands();
     loop();
 }
@@ -26,14 +22,13 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
                            ServerMessenger &messenger,
-                           GameWindow& window
+                           GameWindow &window
 ) :
         unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger),
-        window(window)
-{
+        window(window) {
 }
 
 void ClientThread::loop() {
@@ -41,11 +36,11 @@ void ClientThread::loop() {
         while (!finished) {
             std::string msg = messenger.receive();
             std::vector<std::string> commands = split(msg, '|');
-            for(std::string& cmd : commands) {
+            for (std::string &cmd : commands) {
                 parse(cmd);
             }
         }
-    } catch(SocketError& e) {
+    } catch (SocketError &e) {
         return;
     }
 }
@@ -80,7 +75,7 @@ void ClientThread::initCommands() {
 }
 
 ClientThread::~ClientThread() {
-    for (std::pair<std::string, Command*> c : commands) {
+    for (std::pair<std::string, Command *> c : commands) {
         delete c.second;
     }
 }
