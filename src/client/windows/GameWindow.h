@@ -29,8 +29,11 @@ class GameWindow : public Gtk::ApplicationWindow {
     MapMonitor *mapMonitor;
     ServerMessenger *messenger;
 
-    Unit* selected_unit = nullptr;
-    Building* selected_building = nullptr;
+    Unit selected_unit;
+    Building selected_building;
+
+    bool unit_selection;
+    bool building_selection;
     int selection_id = 0;
 protected:
     bool onTimeout();

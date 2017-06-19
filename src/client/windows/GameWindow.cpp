@@ -9,7 +9,10 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::ApplicationWindow(cobject) {
+        Gtk::ApplicationWindow(cobject),
+        selected_unit(-1, {0, 0}, (UnitsEnum) 0, (TeamEnum) 0),
+        selected_building((BuildingsEnum) 0, -1, 0, 0, (TeamEnum) 0)
+{
     builder->get_widget_derived("GameArea", gameArea);
 
     gameArea->set_size_request(SCREENWIDTH * 6 / 7, SCREENHEIGHT);
@@ -98,34 +101,40 @@ const std::map<UnitsEnum, std::string> portraits = {
 
 bool GameWindow::on_button_release_event(GdkEventButton *event) {
     if (gameArea->buildings_selected()) { // Change view to building
-        selected_building = &buildingsMonitor->get_selected().at(0);
-        selected_unit = nullptr;
+        selected_building = buildingsMonitor->get_selected().at(0);
+
+        // Change selection status
+        unit_selection = false;
+        building_selection = true;
         change_view_to_building();
         return true;
     }
 
     if (gameArea->unit_selected()) { // New unit selected
-        selected_building = nullptr;
-        if (selected_unit) { // We already are selecting an unit, process attack
+
+        if (unit_selection) { // We already are selecting an unit, process attack
             process_selected_unit_action();
         } else { // Select unit
-            selected_unit = &unitsMonitor->getSelectedUnits().at(0);
+            selected_unit = unitsMonitor->getSelectedUnits().at(0);
 
             std::string name = "grunt";
-            if (portraits.find(selected_unit->getType()) != portraits.end()) {
-                name = portraits.find(selected_unit->getType())->second;
+            if (portraits.find(selected_unit.getType()) != portraits.end()) {
+                name = portraits.find(selected_unit.getType())->second;
             }
             unit_panel->set_name(name);
             std::string path = "res/portraits/" + name + ".png";
             portrait->set(path);
             change_view_to_unit();
         }
+        // Change selection status
+        building_selection = false;
+        unit_selection = true;
         return true;
     }
 
     // Click on empty place
-    if (selected_unit) { // Movement
-        int id = selected_unit->get_ID();
+    if (unit_selection) { // Movement
+        int id = selected_unit.get_ID();
         std::pair<int, int> coords = gameArea->get_coords();
         std::cout << gameArea->get_coords().first << ", " <<
                   gameArea->get_coords().second << std::endl;
@@ -162,10 +171,9 @@ void GameWindow::setMapData() {
 void GameWindow::process_selected_unit_action() {
     std::vector<Unit> units = unitsMonitor->getSelectedUnits();
     if (units.size()) { // other unit selected
-        if (selected_unit) {
-
+        if (unit_selection) {
             Unit other = units.at(0);
-            if (selected_unit->getTeam() != other.getTeam()) {
+            if (selected_unit.getTeam() != other.getTeam()) {
                 // attack
             }
             return;
