@@ -96,6 +96,7 @@ private:
     gdouble yStartCoordinate;
     gdouble yFinishCoordinate;
     bool selectionMade;
+
     /* unitsSelected is true if the players' units are selected. This is used
      * to manage user clicks.
      * Turns true in Unit::markAsSelectedInRange, when some unit has been

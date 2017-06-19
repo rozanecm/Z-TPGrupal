@@ -58,7 +58,6 @@ GameArea::~GameArea() {}
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     drawBaseMap(cr, camera.getPosition());
-    //todo implement building drawing
     drawBuildingsInView(cr);
     drawUnitsInMap(cr);
     updateCounters();
