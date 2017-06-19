@@ -25,6 +25,8 @@ private:
     std::map<std::string,int> terrain_modifier;
     int unit_id, unit_speed;
     Size unit_size;
+    bool finished;
+    Position destiny;
 
 public:
     // The Compass receives the map of Cells for calculations and the
@@ -33,7 +35,7 @@ public:
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position> getFastestWay(Position& from, Position& to);
+    std::vector<Position>& getFastestWay(Position& from, Position& to);
 
     // Returns true if the position is empty
     bool canIWalkToThisPosition(Size& size);
@@ -110,6 +112,8 @@ private:
 
     void manageSteps(int& step,Position& start,
                      Position& current_pos, Position& to);
+
+    void setHValueOnNode(Node* node);
 };
 
 

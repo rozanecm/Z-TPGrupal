@@ -9,10 +9,12 @@
 #define HMIN 1000
 #define STEP 2
 #define CLOSERAREA 32
+#define MIDDLEAREA 128
 
 Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
         : map(map),
-          unit_size(unit_size), unit_id(unit_id) ,unit_speed(unit_speed) {
+          unit_size(unit_size), unit_id(unit_id) ,unit_speed(unit_speed),
+        destiny(0,0){
     this->buildNodeMap();
     this->setTerrainModifier();
 }
@@ -39,19 +41,19 @@ void Compass::buildNodeMap() {
     std::cout << "node map size: " << astar_map[0].size() << std::endl;
 }
 
-std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
+std::vector<Position>& Compass::getFastestWay(Position& from, Position& to) {
     this->road.clear();
     this->closed_nodes.clear();
     this->open_nodes.clear();
     // check if it's a possible position
-    Position destiny = getAValidPositionForDestiny(to);
+    destiny = getAValidPositionForDestiny(to);
     // if I'm already on the closest position return it
     if (from.getX() == destiny.getX() && from.getY() == destiny.getY()) {
         this->road.push_back(destiny);
         return road;
     } else {
         // set H value for destiny
-        this->setHValueForDestiny(destiny);
+//        this->setHValueForDestiny(destiny);
 
         // start algorithm
         // add "from" to visited list
@@ -73,7 +75,7 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
 
         Node *closer_node = start_node;
         // While haven't reach destiny node or open_nodes has nodes to visit.
-        bool finished = false;
+        finished = false;
         bool open_nodes_empty = false;
 
         int step = 1;
@@ -95,11 +97,13 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
                 this->closed_nodes.push_back(closer_node);
                 Position cls_pos = closer_node->getPosition();
                 // check if destiny is between them
-                manageSteps(step,start_pos ,cls_pos,
-                            destiny);
 
                 if (closed_nodes.back()->getHvalue() == 0)
                     finished = true;
+
+                if (!finished)
+                    manageSteps(step,start_pos ,cls_pos,
+                            destiny);
             }
         }
         Node *closest;
@@ -109,6 +113,7 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
             closest = this->searchForClosestNode();
             this->getRoad(from, closest);
         }
+        finished = false;
         return road;
     }
 }
@@ -135,7 +140,7 @@ void Compass::getAdjacents(Node *node, int step) {
 
     bool adj_new_g;
     Node* adj;
-    for (int x_pos = x_min; x_pos <= x_max; x_pos += step) {
+    for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
         for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
                 adj = astar_map[x_pos][y_pos];
@@ -145,7 +150,7 @@ void Compass::getAdjacents(Node *node, int step) {
                 // Also discard the node looking for his adjacent
                 if ((map.canIWalkToThisPosition(size, unit_id)) &&
                     this->isNotMe(node, adj)) {
-
+                    this->setHValueOnNode(adj);
                     // G value differs when the node is diagonal or next to it
                     if (this->isThisNodeOnDiagonal(node, adj)) {
                         adj_new_g = this->writeGandSetParent(node, adj,
@@ -159,7 +164,11 @@ void Compass::getAdjacents(Node *node, int step) {
                         this->addToOpenInOrder(adj);
                 }
             }
+            if (finished)
+                break;
         }
+        if (finished)
+            break;
     }
 }
 
@@ -233,6 +242,7 @@ void Compass::changeNodePosition(Node *node) {
 void Compass::insertNodeOnOpen(Node *new_node) {
     if (new_node->getHvalue() == 0) {
         open_nodes.push_back(new_node);
+        finished = true;
     } else {
         bool inserted = false;
         // Save nodes by F value. The lowest on the back.
@@ -255,7 +265,8 @@ void Compass::insertNodeOnOpen(Node *new_node) {
             open_nodes.push_back(new_node);
         }
     }
-    this->checkIfIsDestinyNeighbor(new_node, STEP);
+    if (!finished)
+        this->checkIfIsDestinyNeighbor(new_node, STEP);
 }
 
 void Compass::getRoad(Position& from,Node *destiny) {
@@ -314,11 +325,12 @@ void Compass::checkIfIsDestinyNeighbor(Node *node, int step) {
 
         Node *adj;
         bool adj_new_g;
-        for (int x_pos = x_min; x_pos <= x_max; x_pos += step) {
+        for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
             for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
                 if (map.doesThisPositionExist(x_pos, y_pos)) {
                     adj = astar_map[x_pos][y_pos];
                     Size size = adj->getSize();
+                    this->setHValueOnNode(adj);
                     if (adj->getHvalue() == 0) {
                         // G value differs when the node is diagonal
                         // or next to it
@@ -518,32 +530,49 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
             (to.getX() + CLOSERAREA, to.getX()) +
             this->getModuleOfSubtraction(to.getY() + CLOSERAREA,to.getY()));
     //Get smaller H depending on where start and destiny are
-    int sum_x = 0, sum_y = 0;
+    int close_x = 0, close_y = 0, mid_x = 0, mid_y = 0;
     if (start.getX() <=  to.getX()) {
-        sum_x = this->getModuleOfSubtraction
+        close_x = this->getModuleOfSubtraction
                 (start.getX() + CLOSERAREA, to.getX());
+        mid_x = this->getModuleOfSubtraction
+                (start.getX() + MIDDLEAREA, to.getX());
     } else if (start.getX() >  to.getX()) {
-        sum_x = this->getModuleOfSubtraction
+        close_x = this->getModuleOfSubtraction
                 (start.getX() - CLOSERAREA, to.getX());
+        mid_x = this->getModuleOfSubtraction
+                (start.getX() - MIDDLEAREA, to.getX());
     }
     if (start.getY() <= to.getY()) {
-        sum_y = this->getModuleOfSubtraction
+        mid_y = this->getModuleOfSubtraction
+                (start.getY() + MIDDLEAREA,to.getY());
+        close_y = this->getModuleOfSubtraction
                 (start.getY() + CLOSERAREA,to.getY());
     } else if (start.getY() > to.getY()) {
-        sum_y = this->getModuleOfSubtraction
+        close_y = this->getModuleOfSubtraction
                 (start.getY() - CLOSERAREA,to.getY());
+        mid_y = this->getModuleOfSubtraction
+                (start.getY() - MIDDLEAREA,to.getY());
     }
-    int start_h =  HMIN * (sum_x  + sum_y);
-
+    int start_h =  HMIN * (close_x  + close_y);
+    int mid_h = HMIN * (mid_x + mid_y);
     // select step
     if (tmp_h < closer_h || tmp_h > start_h) {
         step = 1;
-    } else {
+    } else if ((tmp_h > closer_h || tmp_h < start_h) && tmp_h > mid_h) {
         if (unit_size.getWidth() > unit_size.getHeight()) {
-            step = unit_size.getHeight();
+            step = (int) (unit_size.getHeight() * 2);
         } else {
-            step = unit_size.getWidth();
+            step = (int) (unit_size.getWidth() * 2);
         }
+    } else {
+        step = (int) (unit_size.getHeight() * 15);
     }
+}
+
+void Compass::setHValueOnNode(Node *node) {
+    Position tmp = node->getPosition();
+    int h_value = HMIN * (this->getModuleOfSubtraction(tmp.getX(),
+    destiny.getX()) + this->getModuleOfSubtraction(tmp.getY(),destiny.getY()));
+    node->setHValue(h_value);
 }
 
