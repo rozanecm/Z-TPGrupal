@@ -11,16 +11,16 @@ int main() {
     clientReceiverTest client(m,mutex);
     client.start();
 
-//    std::string msg1 = "createlobby";
-//    m.sendMessage(msg1);
-//
-//
-//    msg1 = "ready";
-//    m.sendMessage(msg1);
+    std::string msg1 = "createlobby";
+    m.sendMessage(msg1);
 
 
-//    msg1 = "startgame";
-//    m.sendMessage(msg1);
+    msg1 = "ready";
+    m.sendMessage(msg1);
+
+
+    msg1 = "startgame";
+    m.sendMessage(msg1);
 
     while(true) {
         std::cout << "Enter message: " << std::endl << ">> ";

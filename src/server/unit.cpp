@@ -41,10 +41,12 @@ void Unit::makeAction() {
 }
 
 void Unit::calculateRoadTo(int x, int y) {
-    this->state = MOVESTATE;
-    Position destination(x,y);
-    Position actual = obj_size.getPosition();
-    road = compass.getFastestWay(actual,destination);
+    if (!checkIfAlreadyOnMyWay(x,y)) {
+        this->state = MOVESTATE;
+        Position destination(x, y);
+        Position actual = obj_size.getPosition();
+        road = compass.getFastestWay(actual, destination);
+    }
 }
 
 void Unit::getOnRangeOf(int x, int y) {
@@ -56,31 +58,59 @@ void Unit::getOnRangeOf(int x, int y) {
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (!road.empty() && steps <= distance){
-        Position pos = road.back();
-        Size next_pos(pos.getX(),pos.getY(),obj_size.getWidth()
-                                                        ,obj_size.getHeight());
+    bool crash = false;
+    compass.clearCompass();
+    if (!road.empty()) {
+        Position actual = obj_size.getPosition();
+        double t_factor = compass.getTerrainFactorOn(
+                                                 actual.getX(),actual.getY());
+        // increase or decrease distance til steps are more than unit speed
+        if (unit_speed == 4) {
+            distance = (int) (t_factor * unit_speed);
+        } else if (unit_speed > 4) {
+            distance = (int) (t_factor * unit_speed *
+                              (1-(damage_recv/life_points)));
+        }
+        Size next_pos = getNextPosition(distance);
+        Position pos = next_pos.getPosition();
         if (compass.canIWalkToThisPosition(next_pos)) {
-            double t_factor = compass.getTerrainFactorOn(pos.getX(),pos.getY());
             // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
             this->range.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
-
-            road.pop_back();
-
-            // increase or decrease distance til steps are more than unit speed
-            if (steps <= unit_speed && unit_speed == 4) {
-                distance = (int) (t_factor * distance);
-            } else if (steps <= unit_speed && unit_speed > 4) {
-                distance = (int) (t_factor *distance *
-                                                (1-(damage_recv/life_points)));
-            }
-            ++steps;
         } else {
-            Position destiny = road.front();
-            this->calculateRoadTo(destiny.getX(),destiny.getY());
+            crash = true;
         }
+    }
+
+//    while (!road.empty() && steps <= distance && !crash){
+//
+//        Size next_pos = getNextPosition(steps);
+//        Position pos = next_pos.getPosition();
+//        if (compass.canIWalkToThisPosition(next_pos)) {
+//            double t_factor = compass.getTerrainFactorOn(pos.getX(),pos.getY());
+//            // move unit position, range and weapon
+//            this->obj_size.moveTo(pos.getX(),pos.getY());
+//            this->range.moveTo(pos.getX(),pos.getY());
+//            this->weapon.movePosition(pos.getX(),pos.getY());
+//
+//
+//
+//            // increase or decrease distance til steps are more than unit speed
+//            if (steps <= unit_speed && unit_speed == 4) {
+//                distance = (int) (t_factor * distance);
+//            } else if (steps <= unit_speed && unit_speed > 4) {
+//                distance = (int) (t_factor *distance *
+//                                                (1-(damage_recv/life_points)));
+//            }
+//        } else {
+//            crash = true;
+//        }
+//    }
+    if (crash) {
+        Position destiny = road.front();
+        Position actual = obj_size.getPosition();
+        road = compass.getFastestWay(actual,destiny);
     }
 }
 
@@ -155,4 +185,28 @@ bool Unit::checkIfBulletWillHit(std::vector<Position> *b_road, Size &b_size) {
 
 bool Unit::doYouHaveAnyBullets() {
     return (!bullets.empty());
+}
+
+bool Unit::checkIfAlreadyOnMyWay(int x, int y) {
+    bool on_my_way = false;
+    if (state == MOVESTATE) {
+        Position destiny = road.front();
+        if (destiny.getX() == x && destiny.getY() == y)
+            on_my_way = true;
+    }
+    return on_my_way;
+}
+
+Size Unit::getNextPosition(int steps) {
+    Position dest = road.front();
+    Position pos = road.back();
+
+    while ((dest.getX() != pos.getX() || dest.getY() != pos.getY())
+           && steps != 0) {
+        road.pop_back();
+        pos = road.back();
+        --steps;
+    }
+
+    return Size(pos.getX(),pos.getY(),obj_size.getWidth(),obj_size.getHeight());
 }

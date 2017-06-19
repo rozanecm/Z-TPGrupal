@@ -25,6 +25,8 @@ private:
     std::map<std::string,int> terrain_modifier;
     int unit_id, unit_speed;
     Size unit_size;
+    bool finished, clear;
+    Position destiny;
 
 public:
     // The Compass receives the map of Cells for calculations and the
@@ -50,6 +52,8 @@ public:
 
     void changeUnitId(int id);
 
+    void clearCompass();
+
     ~Compass();
 
 private:
@@ -67,7 +71,7 @@ private:
     bool isThisNodeOnDiagonal(Node* reference, Node* other);
 
     // Put the adyacents nodes that can be walk to on the open_nodes vector
-    void getAdjacents(Node* node);
+    void getAdjacents(Node* node, int step);
 
     // Returns true if node and other are different nodes. Else, false
     bool isNotMe(Node* node, Node* other);
@@ -95,7 +99,7 @@ private:
     int getModuleOfSubtraction(int x, int y);
 
     // checks the Neighbor nodes to see if destiny is among them
-    void checkIfIsDestinyNeighbor(Node* new_node);
+    void checkIfIsDestinyNeighbor(Node *new_node, int step);
 
     // Returns the position of destiny. If destiny is not a valid position
     // it returns the closest valid position
@@ -103,6 +107,16 @@ private:
 
     // Returns the closest valid position to pos
     Position getClosestValidPosition(Position& pos);
+
+    void addPositions(Position& position);
+
+    void manageSteps(int& step,Position& start,
+                     Position& current_pos, Position& to);
+
+    void setHValueOnNode(Node* node);
+
+    void addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
+                             int x_min, int y_max, int y_min);
 };
 
 

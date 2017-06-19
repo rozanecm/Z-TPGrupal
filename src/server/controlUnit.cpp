@@ -18,8 +18,6 @@ ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
-        changed_units.clear();
-        changed_occupants.clear();
         auto it = all_occupants.begin();
         // Copy starting state of Occupants
         for (auto o: all_occupants) {
@@ -46,6 +44,8 @@ void ControlUnit::run() {
              std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
         std::cout << t3 - time_span.count() << std::endl;
         sleepFor(t3 - time_span.count());
+        changed_units.clear();
+        changed_occupants.clear();
     }
     // send victory or defeated message
     this->sendFinnalMessage();
