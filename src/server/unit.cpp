@@ -56,7 +56,8 @@ void Unit::getOnRangeOf(int x, int y) {
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
-    while (!road.empty() && steps <= distance){
+    bool crash = false;
+    while (!road.empty() && steps <= distance && !crash){
         Position pos = road.back();
         Size next_pos(pos.getX(),pos.getY(),obj_size.getWidth()
                                                         ,obj_size.getHeight());
@@ -78,9 +79,14 @@ void Unit::move() {
             }
             ++steps;
         } else {
-            Position destiny = road.front();
-            this->calculateRoadTo(destiny.getX(),destiny.getY());
+            crash = true;
         }
+    }
+    if (crash) {
+        Position destiny = road.front();
+//            this->calculateRoadTo(destiny.getX(),destiny.getY());
+        Position actual = obj_size.getPosition();
+        road = compass.getFastestWay(actual,destiny);
     }
 }
 

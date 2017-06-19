@@ -43,12 +43,11 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
             
             // Create a new cell and push it to the row
             // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_y, coord_x, 17, 17, terrain, factor);
-            coord_x += 17;
+            map.back().emplace_back(coord_y, coord_x, 16, 16, terrain, factor);
+            coord_x += 16;
         }
-
         // Push the whole row to the map
-        coord_y += 17;
+        coord_y += 16;
     }
 
     pugi::xml_document cfg;
@@ -84,10 +83,10 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 }
 
 void MapLoader::create_map() {
-    int width = (int) map.at(0).size() * 17;
-    int height = (int) map.size() * 17;
-    int x = width / 2;
-    int y = height / 2;
+    int width = (int) map.at(0).size() * 16;
+    int height = (int) map.size() * 16;
+    int x = 0;
+    int y = height;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
                                             &occupants, map_string));
 }
