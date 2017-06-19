@@ -14,7 +14,7 @@
 Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
         : map(map),
           unit_size(unit_size), unit_id(unit_id) ,unit_speed(unit_speed),
-        destiny(0,0){
+        destiny(0,0), clear(true){
     this->buildNodeMap();
     this->setTerrainModifier();
 }
@@ -41,10 +41,9 @@ void Compass::buildNodeMap() {
     std::cout << "node map size: " << astar_map[0].size() << std::endl;
 }
 
-std::vector<Position>& Compass::getFastestWay(Position& from, Position& to) {
-    this->road.clear();
-    this->closed_nodes.clear();
-    this->open_nodes.clear();
+std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
+    if (!clear)
+        clearCompass();
     // check if it's a possible position
     destiny = getAValidPositionForDestiny(to);
     // if I'm already on the closest position return it
@@ -52,9 +51,6 @@ std::vector<Position>& Compass::getFastestWay(Position& from, Position& to) {
         this->road.push_back(destiny);
         return road;
     } else {
-        // set H value for destiny
-//        this->setHValueForDestiny(destiny);
-
         // start algorithm
         // add "from" to visited list
         Node *start_node = astar_map[from.getX()][from.getY()];
@@ -63,7 +59,7 @@ std::vector<Position>& Compass::getFastestWay(Position& from, Position& to) {
         start_node->setNewParent(start_node);
         Position start_pos = start_node->getPosition();
         this->closed_nodes.push_back(start_node);
-
+        clear = false;
         ////
         Size start_size = start_node->getSize();
         if (map.canIWalkToThisPosition(start_size, unit_id)) {
@@ -478,48 +474,35 @@ void Compass::changeUnitId(int id) {
 
 void Compass::addPositions(Position& next_pos) {
     Position pos = road.back();
+    bool increase_x = false, increase_y = false;
     int x_max = 0, x_min = 0, y_max = 0, y_min = 0;
     if (next_pos.getX() > pos.getX()) {
         x_max = next_pos.getX();
         x_min = pos.getX();
-
+        increase_x = true;
     } else if (next_pos.getX() < pos.getX()) {
         x_max = pos.getX();
         x_min = next_pos.getX();
     } else if (next_pos.getX() == pos.getX()){
         x_max = pos.getX();
         x_min = x_max;
+        increase_x = true;
     }
 
     if (next_pos.getY() > pos.getY()) {
         y_max = next_pos.getY();
         y_min = pos.getY();
+        increase_y = true;
     } else if (next_pos.getY() < pos.getY()) {
         y_max = pos.getY();
         y_min = next_pos.getY();
     } else if (next_pos.getY() == pos.getY()) {
+        increase_y = true;
         y_max = pos.getY();
         y_min = y_max;
     }
 
-    int i = x_min;
-    int j = y_min;
-    while (i < x_max || j < y_max) {
-        if (i < x_max)
-            ++i;
-        if (j < y_max)
-            ++j;
-        road.push_back(Position(i,j));
-    }
-}
-
-bool Compass::isSearchGettingCloser(Position& current_pos, Position& to) {
-    int tmp_h = HMIN * (this->getModuleOfSubtraction(current_pos.getX(),
-     to.getX()) + this->getModuleOfSubtraction(current_pos.getY(),to.getY()));
-    int closer_h =  HMIN * (this->getModuleOfSubtraction
-    (to.getX() + CLOSERAREA, to.getX()) +
-    this->getModuleOfSubtraction(to.getX() + CLOSERAREA,to.getY()));
-    return tmp_h <= closer_h;
+    addPositionsInOrder(increase_x,increase_y,x_max,x_min,y_max,y_min);
 }
 
 void Compass::manageSteps(int &step, Position &start, Position &current_pos,
@@ -574,5 +557,57 @@ void Compass::setHValueOnNode(Node *node) {
     int h_value = HMIN * (this->getModuleOfSubtraction(tmp.getX(),
     destiny.getX()) + this->getModuleOfSubtraction(tmp.getY(),destiny.getY()));
     node->setHValue(h_value);
+}
+
+void Compass::clearCompass() {
+    if (!clear) {
+        this->road.clear();
+        this->closed_nodes.clear();
+        this->open_nodes.clear();
+        clear = true;
+    }
+}
+
+void Compass::addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
+                                  int x_min, int y_max, int y_min) {
+    int i = x_min;
+    int j = y_min;
+    if (increase_x && increase_y) {
+        while (i < x_max || j < y_max) {
+            if (i < x_max)
+                ++i;
+            if (j < y_max)
+                ++j;
+            road.push_back(Position(i, j));
+        }
+    } else if (increase_x && !increase_y) {
+        j = y_max;
+        while (i < x_max || j > y_min) {
+            if (i < x_max)
+                ++i;
+            if (j > y_min)
+                --j;
+            road.push_back(Position(i, j));
+        }
+    } else if (!increase_x && increase_y) {
+        i = x_max;
+        while (i > x_min || j < y_max) {
+            if (i > x_min)
+                --i;
+            if (j < y_max)
+                ++j;
+            road.push_back(Position(i, j));
+        }
+    } else {
+        i = x_max;
+        j = y_max;
+        while (i > x_min || j > y_min) {
+            if (i > x_min)
+                --i;
+            if (j > y_min)
+                --j;
+            road.push_back(Position(i, j));
+        }
+    }
 }
 

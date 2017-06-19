@@ -25,7 +25,7 @@ private:
     std::map<std::string,int> terrain_modifier;
     int unit_id, unit_speed;
     Size unit_size;
-    bool finished;
+    bool finished, clear;
     Position destiny;
 
 public:
@@ -35,7 +35,7 @@ public:
 
     // Receives the current position of the unit and the destiny
     // Returns a vector of Cells with the fastest way
-    std::vector<Position>& getFastestWay(Position& from, Position& to);
+    std::vector<Position> getFastestWay(Position& from, Position& to);
 
     // Returns true if the position is empty
     bool canIWalkToThisPosition(Size& size);
@@ -51,6 +51,8 @@ public:
     void changeUnitSpeed(int speed);
 
     void changeUnitId(int id);
+
+    void clearCompass();
 
     ~Compass();
 
@@ -108,12 +110,13 @@ private:
 
     void addPositions(Position& position);
 
-    bool isSearchGettingCloser(Position& current_pos, Position& to);
-
     void manageSteps(int& step,Position& start,
                      Position& current_pos, Position& to);
 
     void setHValueOnNode(Node* node);
+
+    void addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
+                             int x_min, int y_max, int y_min);
 };
 
 

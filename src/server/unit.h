@@ -55,7 +55,8 @@ public:
 
     void grab(Teamable* object, std::string type);
 
-    void setTargetToAttack(Occupant& target);//-> make check is i have explosive attack for buildings
+    void setTargetToAttack(Occupant& target);
+    //-> make check is i have explosive attack for buildings
 
     bool doYouHaveAnyBullets();
 
@@ -68,6 +69,10 @@ public:
     bool checkIfBulletWillHit(std::vector<Position> *b_road, Size& b_size);
 
     void getOnRangeOf(int x, int y);
+
+    bool checkIfAlreadyOnMyWay(int x, int y);
+
+    Size getNextPosition(int& steps);
 };
 
 
