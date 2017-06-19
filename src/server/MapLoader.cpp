@@ -86,7 +86,7 @@ void MapLoader::create_map() {
     int width = (int) map.at(0).size() * 16;
     int height = (int) map.size() * 16;
     int x = 0;
-    int y = height;
+    int y = 0;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
                                             &occupants, map_string));
 }

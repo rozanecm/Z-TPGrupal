@@ -58,8 +58,8 @@ void Size::calculateMaxAndMinForX(int &max, int &min) {
 }
 
 void Size::calculateMaxAndMinForY(int &max, int &min) {
-    max = position.getY();
-    min = position.getY() - height;
+    max = position.getY() + height;
+    min = position.getY();
 }
 
 void Size::moveTo(int x, int y) {
