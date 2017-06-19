@@ -1,14 +1,17 @@
 #include "Building.h"
 
+#define LENIENCY 8
 void Building::markAsSelectedInRange(bool &buildingSelected,
                                      gdouble xStartCoordinate,
                                      gdouble yStartCoordinate,
                                      gdouble xFinishCoordinate,
                                      gdouble yFinishCoordinate) {
-    if (position.first >= xStartCoordinate &&
-        position.first <= xFinishCoordinate &&
-        position.second >= yStartCoordinate &&
-        position.second <= yFinishCoordinate) {
+    int x = (int) xFinishCoordinate;
+    int y = (int) yFinishCoordinate;
+    int x_abs = abs(position.first - x);
+    int y_abs = abs(position.second - y);
+
+    if (x_abs <= LENIENCY && y_abs <= LENIENCY) {
         selected = true;
         buildingSelected = true;
     }
@@ -36,4 +39,12 @@ BuildingsEnum Building::getBuildingType() {
 
 TeamEnum Building::getTeam() {
     return team;
+}
+
+bool Building::is_selected() {
+    return selected;
+}
+
+void Building::unselect() {
+    selected = false;
 }

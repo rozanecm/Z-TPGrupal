@@ -41,6 +41,8 @@ public:
     BuildingsEnum getBuildingType();
 
     TeamEnum getTeam();
+    bool is_selected();
+    void unselect();
 };
 
 

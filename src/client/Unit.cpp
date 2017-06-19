@@ -34,8 +34,6 @@ Unit::markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
         position.second <= yFinishCoordinate + IMG_SIZE_IN_PX) {
         selected = true;
         unitsSelected = true;
-        //todo debug cerr
-        std::cerr << "unit selected" << std::endl;
     }
 }
 
