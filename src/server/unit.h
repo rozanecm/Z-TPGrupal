@@ -72,7 +72,7 @@ public:
 
     bool checkIfAlreadyOnMyWay(int x, int y);
 
-    Size getNextPosition(int& steps);
+    Size getNextPosition(int steps);
 };
 
 

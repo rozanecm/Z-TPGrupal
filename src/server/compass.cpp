@@ -548,7 +548,7 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
             step = (int) (unit_size.getWidth() * 2);
         }
     } else {
-        step = (int) (unit_size.getHeight() * 15);
+        step = (int) (unit_size.getHeight() * 20);
     }
 }
 
