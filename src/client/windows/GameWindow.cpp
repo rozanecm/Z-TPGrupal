@@ -99,11 +99,13 @@ const std::map<UnitsEnum, std::string> portraits = {
 bool GameWindow::on_button_release_event(GdkEventButton *event) {
     if (gameArea->buildings_selected()) { // Change view to building
         selected_building = &buildingsMonitor->get_selected().at(0);
+        selected_unit = nullptr;
         change_view_to_building();
         return true;
     }
 
     if (gameArea->unit_selected()) { // New unit selected
+        selected_building = nullptr;
         if (selected_unit) { // We already are selecting an unit, process attack
             process_selected_unit_action();
         } else { // Select unit
