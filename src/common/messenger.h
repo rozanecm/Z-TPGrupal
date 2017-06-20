@@ -41,6 +41,8 @@ public:
     bool isConnected();
 
     ~Messenger();
+
+    Messenger(Messenger& other);
 };
 
 

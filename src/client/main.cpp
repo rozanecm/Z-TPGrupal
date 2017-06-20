@@ -64,10 +64,9 @@ int main(int argc, char **argv) {
         app->run(*window);
 
         // Once the window closes, we fetch the socket
-        std::shared_ptr<Socket> s = window->get_socket();
-        if (s) {
-            ServerMessenger messenger(*s.get());
-
+        std::shared_ptr<ServerMessenger> m = window->get_socket();
+        if (m) {
+            ServerMessenger messenger = *m.get();
 
             GameWindow *gwindow = builder.get_window();
 

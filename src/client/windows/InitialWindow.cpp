@@ -20,7 +20,9 @@ void InitialWindow::on_click() {
     int port = 0;
     try {
         port = std::stoi(port_str);
-        s = std::shared_ptr<Socket>(new Socket(addr_str.c_str(), port));
+        Socket s(addr_str.c_str(), port);
+        messenger = std::shared_ptr<ServerMessenger>(new ServerMessenger(s));
+        messenger.get()->send(name);
     } catch (std::exception &e) {
         std::cout << "Could not connect to specified addr/port" << std::endl;
         return;
@@ -28,8 +30,8 @@ void InitialWindow::on_click() {
     this->hide();
 }
 
-std::shared_ptr<Socket> InitialWindow::get_socket() {
-    return s;
+std::shared_ptr<ServerMessenger> InitialWindow::get_socket() {
+    return messenger;
 }
 
 

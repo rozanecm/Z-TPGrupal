@@ -14,7 +14,7 @@ void Player::run() {
         while (messenger->isConnected()) {
             std::string new_cmd = messenger->recieveMessage();
 
-            std::cout << "Player " << id << "ejecuta " << new_cmd << std::endl;
+            std::cout << "Player " << id << " ejecuta " << new_cmd << std::endl;
             if (on_menu) {
                 processMenuCommands(new_cmd);
             } else if (on_lobby) {
