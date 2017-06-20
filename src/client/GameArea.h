@@ -326,15 +326,18 @@ public:
     bool unitIsRobot(UnitsEnum unitType);
 
     void drawFlag(const TeamEnum &team, const Cairo::RefPtr<Cairo::Context> &cr,
-                  unsigned int xGraphicCoordinate, unsigned int yGraphicCoordinate) const;
+                  unsigned int xGraphicCoordinate,
+                  unsigned int yGraphicCoordinate) const;
 
     bool unit_selected();
+
     bool buildings_selected();
 
     void drawNatureInView(const Cairo::RefPtr<Cairo::Context> &cr);
 
-    void drawNature(NatureEnum natureType, const Cairo::RefPtr<Cairo::Context> &cr,
-                    unsigned int x, unsigned int y);
+    void
+    drawNature(NatureEnum natureType, const Cairo::RefPtr<Cairo::Context> &cr,
+               unsigned int x, unsigned int y);
 
     void loadMapResources();
 };

@@ -111,8 +111,8 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
     }
 
     if (gameArea->unit_selected()) { // New unit selected
-
-        if (unit_selection) { // We already are selecting an unit, process attack
+        if (unit_selection) { // We already are selecting an unit, process
+                                // attack
             process_selected_unit_action();
         } else { // Select unit
             selected_unit = unitsMonitor->getSelectedUnits().at(0);

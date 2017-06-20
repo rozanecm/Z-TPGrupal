@@ -35,6 +35,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     bool unit_selection;
     bool building_selection;
     int selection_id = 0;
+
 protected:
     bool onTimeout();
 

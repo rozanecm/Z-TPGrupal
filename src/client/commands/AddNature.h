@@ -8,7 +8,7 @@
 class AddNature : public Command {
     MapMonitor &mapMonitor;
 public:
-    AddNature(MapMonitor &mapMonitor);
+    explicit AddNature(MapMonitor &mapMonitor);
 
     void execute(const std::vector<std::string> &args);
 };

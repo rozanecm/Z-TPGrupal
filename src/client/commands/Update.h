@@ -8,7 +8,7 @@
 class Update : public Command {
     UnitsMonitor& units;
 public:
-    Update(UnitsMonitor& units);
+    explicit Update(UnitsMonitor& units);
 
     void execute(const std::vector<std::string> &args);
 };

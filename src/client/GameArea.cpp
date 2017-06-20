@@ -40,7 +40,6 @@ void GameArea::loadResources() {
         /* load some img */
         someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
         loadMapResources();
-
     } catch (Glib::FileError e) {
         std::cerr << e.what();
     }
@@ -50,11 +49,11 @@ void GameArea::loadResources() {
 void GameArea::loadMapResources() {
     /* Load tiles */
     tiles["Tierra"] = Gdk::Pixbuf::create_from_file(
-                "res/assets/tiles/tierra.png");
+            "res/assets/tiles/tierra.png");
     tiles["Agua"] = Gdk::Pixbuf::create_from_file
-                ("res/assets/tiles/agua.png");
+            ("res/assets/tiles/agua.png");
     tiles["Lava"] = Gdk::Pixbuf::create_from_file(
-                "res/assets/tiles/lava.png");
+            "res/assets/tiles/lava.png");
     /* Load nature items */
     nature[NatureEnum::ROCK] = Gdk::Pixbuf::create_from_file
             ("res/assets/nature/rock.png");
@@ -190,13 +189,13 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
      * and then we can draw without blocking other code. */
     std::vector<Unit> unitsToDraw = unitsMonitor->getUnitsToDraw(
             camera.getPosition().first -
-                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
             camera.getPosition().first +
-                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
             camera.getPosition().second -
-                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
             camera.getPosition().second +
-                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2);
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2);
 
     for (auto &unit : unitsToDraw) {
         /* check what is being drawn, and choose the counter appropriately. */
@@ -292,7 +291,7 @@ GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
                 or unitType == UnitsEnum::PYRO
                 or unitType == UnitsEnum::SNIPER
                 or unitType == UnitsEnum::TOUGH)
-               and (actionType == ActionsEnum::MOVE
+               and(actionType == ActionsEnum::MOVE
                     or actionType == ActionsEnum::STAND)) {
         /* because same imgs are used to draw all different types of robots
          * when these are moving or standing still, if this is the case, we
@@ -468,7 +467,6 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
         /* returning true, cancels the propagation of the event */
     }
     return true;
-
 }
 
 bool GameArea::on_button_release_event(GdkEventButton *event) {
@@ -490,11 +488,18 @@ void GameArea::makeSelection() {
      * selected the items which are within the mouse selection */
     //todo filter out other players' units.
     unitsMonitor->markAsSelectedInRange(unitsSelected,
-            camera.cameraToMapXCoordinate(screenMapToCameraX(xStartCoordinate)),
-            camera.cameraToMapYCoordinate(screenMapToCameraY(yStartCoordinate)),
-            camera.cameraToMapXCoordinate(screenMapToCameraX(xFinishCoordinate)),
-            camera.cameraToMapYCoordinate(screenMapToCameraY
-                                                  (yFinishCoordinate)));
+                                        camera.cameraToMapXCoordinate(
+                                                screenMapToCameraX(
+                                                        xStartCoordinate)),
+                                        camera.cameraToMapYCoordinate(
+                                                screenMapToCameraY(
+                                                        yStartCoordinate)),
+                                        camera.cameraToMapXCoordinate(
+                                                screenMapToCameraX(
+                                                        xFinishCoordinate)),
+                                        camera.cameraToMapYCoordinate(
+                                                screenMapToCameraY
+                                                        (yFinishCoordinate)));
     if (!unitsSelected) {
         buildingsMonitor->markAsSelectedInRange(
                 buildingSelected,
@@ -6273,7 +6278,7 @@ void GameArea::loadYellowHeavyTankAnimations() {
 
 unsigned short GameArea::getCounter(Unit &unit) const {
     if (unit.getType() == UnitsEnum::JEEP) {
-        if (unit.getTeam() == TeamEnum::NEUTER){
+        if (unit.getTeam() == TeamEnum::NEUTER) {
             return 0;
         }
         return jeepCounter.getCounter();

@@ -9,13 +9,13 @@
 #include <socket.h>
 
 class InitialWindow : public Gtk::Window {
-
     Gtk::Entry *address_entry;
     Gtk::Entry *port_entry;
     Gtk::Entry *name_entry;
     Gtk::Button *connect;
     std::shared_ptr<Socket> s;
     std::string name;
+
 public:
     InitialWindow(BaseObjectType *cobject,
                   const Glib::RefPtr<Gtk::Builder> &builder);
@@ -23,7 +23,6 @@ public:
     std::shared_ptr<Socket> get_socket();
 
 private:
-
     void on_click();
 };
 

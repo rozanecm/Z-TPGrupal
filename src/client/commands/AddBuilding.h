@@ -8,7 +8,7 @@
 class AddBuilding : public Command {
     BuildingsMonitor &buildings;
 public:
-    AddBuilding(BuildingsMonitor &buildings);
+    explicit AddBuilding(BuildingsMonitor &buildings);
 
     void execute(const std::vector<std::string> &args);
 };
