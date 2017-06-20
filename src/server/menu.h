@@ -23,7 +23,7 @@ private:
 public:
     Menu(std::string& config);
 
-    void addPlayer(Messenger* msgr, Menu& menu, std::string player_id);
+    bool addPlayer(Messenger* msgr, Menu& menu, std::string player_id);
 
     void createNewLobby(Player* player);
 

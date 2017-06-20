@@ -1,5 +1,4 @@
 <Config>
-    <Cells internal_positions="16"/>
     <Port port="8000"/>
     <Cells internal_positions="16"/>
     <Units>

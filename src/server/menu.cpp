@@ -6,11 +6,17 @@
 
 Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
-void Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
+bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
     Lock l(m);
 //    std::string player_id = msgr->recieveMessage();
+    for(Player* p : players) {
+        if (p->getId() == player_id) {
+            return false;
+        }
+    }
     this->players.push_back(new Player(msgr, menu, player_id));
     this->players.back()->start();
+    return true;
 }
 
 void Menu::createNewLobby(Player* player) {
