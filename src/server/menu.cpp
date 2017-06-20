@@ -25,15 +25,19 @@ void Menu::createNewLobby(Player* player) {
 }
 
 std::string Menu::getLobbiesInfo() {
-    std::string info = "No lobbies";
-    // if (there are lobbies)
-    // ....
+    std::string info = "lobbyinfo-";
+    for (int i = 0; i < lobbies.size(); ++i) {
+        info += std::to_string(i) + "-";
+    }
     return info;
 }
 
-void Menu::addToLobby(int id_lobbie, Player* player) {
-    lobbies[id_lobbie-1]->addPlayer(player);
-    player->addLobby(lobbies[id_lobbie-1]);
+void Menu::addToLobby(int id_lobby, Player* player) {
+    if(lobbies.size() < id_lobby) {
+        return;
+    }
+    lobbies[id_lobby]->addPlayer(player);
+    player->addLobby(lobbies[id_lobby]);
 }
 
 Menu::~Menu() {

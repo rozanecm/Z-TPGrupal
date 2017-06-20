@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LobbyWindow.h"
+#include "../ServerMessenger.h"
 
 LobbyWindow::LobbyWindow(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder) :
@@ -17,7 +18,10 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
 }
 
 void LobbyWindow::on_click() {
-    std::cout << "Start game !!!" << std::endl;
-    this->hide();
+    m->send("startgame");
+}
+
+void LobbyWindow::set_messenger(ServerMessenger &m) {
+    this->m = &m;
 }
 

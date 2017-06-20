@@ -12,6 +12,7 @@
 #include "commands/FactoryNextUnit.h"
 #include "commands/AddBuilding.h"
 #include "commands/AddNature.h"
+#include "commands/StartGame.h"
 
 void ClientThread::run() {
     initCommands();
@@ -22,12 +23,14 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
                            ServerMessenger &messenger,
+                           LobbyWindow& lobby,
                            GameWindow &window
 ) :
         unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger),
+        lobby(lobby),
         window(window) {
 }
 
@@ -72,6 +75,7 @@ void ClientThread::initCommands() {
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor);
     commands["addnature"] = new AddNature();
+    commands["startgame"] = new StartGame(messenger, lobby, window);
 }
 
 ClientThread::~ClientThread() {

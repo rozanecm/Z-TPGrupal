@@ -58,7 +58,9 @@ void Player::processMenuCommands(std::string &full_cmd) {
         int id = std::stoi(lobby_id);
         this->menu.addToLobby(id,this);
         on_menu = false;
-    }  else {
+    }  else if (cmd == "lobbyinfo") {
+        messenger->sendMessage(this->menu.getLobbiesInfo());
+    } else {
         messenger->sendMessage("Invalid cmd");
     }
 }
@@ -94,6 +96,7 @@ std::string Player::getNextData(std::string& line) {
 }
 
 void Player::getInGame() {
+    messenger->sendMessage("startgame");
     this->on_lobby = false;
     this->playing = true;
 }

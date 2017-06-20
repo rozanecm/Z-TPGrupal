@@ -85,7 +85,7 @@ void Lobby::ready(Player* player) {
     }
     if (!any_not_ready)
         all_ready = true;
-    player->getMessenger()->sendMessage("ready-to-go");
+//    player->getMessenger()->sendMessage("ready-to-go");
 }
 
 bool Lobby::addPlayer(Player* player) {

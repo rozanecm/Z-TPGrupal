@@ -29,7 +29,7 @@ public:
 
     std::string getLobbiesInfo();
 
-    void addToLobby(int id_lobbie, Player *player);
+    void addToLobby(int id_lobby, Player *player);
 
     ~Menu();
 };
