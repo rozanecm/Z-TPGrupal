@@ -53,6 +53,10 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_document cfg;
     cfg.load_file(config.c_str());
     pugi::xml_node cfg_node = cfg.child("Config");
+
+    internal_positions = std::stoi(cfg_node.child("Cells").
+            attribute("internal_positions").value());
+
     create_map();
     load_structs(root, cfg_node.child("Structs"));
     load_unit_molds(cfg_node.child("Units"));
@@ -71,8 +75,10 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 
     std::string type = structure_cfg.attribute("type").value();
     for(auto& rock : structs) {
-        int size_x = std::stoi(rock.attribute("x").value());
-        int size_y = std::stoi(rock.attribute("y").value());
+        int size_x = std::stoi(rock.attribute("x").value()) *
+            internal_positions;
+        int size_y = std::stoi(rock.attribute("y").value()) *
+            internal_positions;
         Occupant* f = new Occupant(id_counter++, hp, type,
                                    Size(x, y, size_x, size_y));
         occupants.push_back(f);
@@ -83,8 +89,8 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 }
 
 void MapLoader::create_map() {
-    int width = (int) map.at(0).size() * 16;
-    int height = (int) map.size() * 16;
+    int width = (int) map.at(0).size() * internal_positions;
+    int height = (int) map.size() * internal_positions;
     int x = 0;
     int y = 0;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
@@ -153,14 +159,18 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
     for(auto& territory : root.children()) {
         std::string name = territory.name();
         if (name == "Fort") {
-            int x = std::stoi(territory.attribute("center_x").value());
-            int y = std::stoi(territory.attribute("center_y").value());
+            int x = std::stoi(territory.attribute("center_x").value()) *
+                internal_positions;
+            int y = std::stoi(territory.attribute("center_y").value()) *
+                internal_positions;
             forts.push_back(create_factory(id_counter++, hp, name,
                                            Size(x, y, 20, 20)));
         }
         for(auto& factory : territory.children()) {
-            int x = std::stoi(factory.attribute("x").value());
-            int y = std::stoi(factory.attribute("y").value());
+            int x = std::stoi(factory.attribute("x").value()) *
+                internal_positions;
+            int y = std::stoi(factory.attribute("y").value()) *
+                internal_positions;
             Size s(x, y, size_x, size_y);
             occupants.push_back(create_factory(id_counter++, hp, type, s));
         }
