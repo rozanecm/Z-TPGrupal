@@ -564,6 +564,11 @@ void Compass::clearCompass() {
         this->road.clear();
         this->closed_nodes.clear();
         this->open_nodes.clear();
+        for (auto x: astar_map) {
+            for (auto y: x) {
+                y->clean();
+            }
+        }
         clear = true;
     }
 }

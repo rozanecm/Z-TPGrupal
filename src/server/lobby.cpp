@@ -44,8 +44,8 @@ void Lobby::startGame() {
         std::vector<Occupant*>& occupants = map->getOccupants();
         std::map<int, Unit*> units;
         /// estas unidades creadas son para realizar tests
-        Size r_size(32,32,6,6);
-        Size range(32,32,12,12);
+        Size r_size(0,0,3,3);
+        Size range(0,0,12,12);
 
 //        Size r_size(415,431,6,6);
 //        Size range(415,431,12,12);
