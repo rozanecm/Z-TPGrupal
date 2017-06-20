@@ -69,6 +69,7 @@ set(SOURCE_FILES
         commands/AddUnit.h commands/RemoveUnit.cpp commands/RemoveUnit.h commands/Update.cpp commands/Update.h
         commands/UpdatePosition.cpp commands/UpdatePosition.h enums/TeamEnum.h enums/ActionsEnum.h enums/UnitsEnum.h enums/BuildingsEnum.h commands/LoadMap.cpp commands/LoadMap.h enums/RotationsEnum.h  windows/InitialWindow.cpp windows/InitialWindow.h Counter.cpp Counter.h UnitsMonitor.cpp UnitsMonitor.h panels/UnitPanel.cpp panels/UnitPanel.h commands/FactoryNextUnit.cpp commands/FactoryNextUnit.cpp commands/FactoryNextUnit.h commands/AddBuilding.cpp commands/AddBuilding.h commands/AddNature.cpp commands/AddNature.h windows/LobbyWindow.cpp windows/LobbyWindow.h Nature.cpp Nature.h enums/NatureEnum.h commands/StartGame.cpp commands/StartGame.h commands/PlayerNames.cpp commands/PlayerNames.h)
 
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_compile_options(${SDL2_mixer_LDFLAGS} ${SDL2_mixer_CFLAGS})
 add_executable(Z_Client ${SOURCE_FILES})
