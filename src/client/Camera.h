@@ -40,9 +40,9 @@ public:
 
     std::pair<unsigned int, unsigned int> cameraOffset();
 
-    unsigned int mapToCameraXCoordinate(unsigned int globalXPosition);
+    unsigned int idealMapToCameraXCoordinate(unsigned int globalXPosition);
 
-    unsigned int mapToCameraYCoordinate(unsigned int globalYPosition);
+    unsigned int idealMapToCameraYCoordinate(unsigned int globalYPosition);
 
     unsigned int cameraToMapXCoordinate(unsigned int coordinate);
 

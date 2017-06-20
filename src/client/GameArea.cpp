@@ -140,17 +140,13 @@ void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
                                                    TILESIZE) / 2);
 
     for (auto &building : buildingsToDraw) {
-        /* check what is being drawn, and choose the counter appropriately. */
-        unsigned short counter;
-
         /* call actual drawing method */
         drawBuilding(building.getBuildingType(), buildingsCounter.getCounter(),
                      building.getTeam(), cr,
-                     cameraToRealMap(camera.mapToCameraXCoordinate
-                (building.
-                                     getXCoordinate())),
-                     cameraToRealMap(camera.mapToCameraYCoordinate(building.
-                                     getYCoordinate())));
+                     cameraToRealMapX(camera.idealMapToCameraXCoordinate
+                             (building.getXCoordinate())),
+                     cameraToRealMapY(camera.idealMapToCameraYCoordinate
+                             (building.getYCoordinate())));
     }
 }
 
@@ -173,7 +169,6 @@ void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
     cr->restore();
     /* draw flag */
     drawFlag(team, cr, xGraphicCoordinate, yGraphicCoordinate);
-
 }
 
 void GameArea::drawFlag(const TeamEnum &team,
@@ -6225,10 +6220,12 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
         drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
                  unit.getRotation(),
                  counter, cr,
-                 cameraToRealMap(
-                         camera.mapToCameraXCoordinate(unit.getXCoordinate())),
-                 cameraToRealMap(
-                         camera.mapToCameraYCoordinate(unit.getYCoordinate())));
+                 cameraToRealMapX(
+                         camera.idealMapToCameraXCoordinate(
+                                 unit.getXCoordinate())),
+                 cameraToRealMapY(
+                         camera.idealMapToCameraYCoordinate(
+                                 unit.getYCoordinate())));
     }
 }
 
@@ -6307,8 +6304,12 @@ void GameArea::initializeCounters() {
     buildingsCounter.initialize(buildings.at(BuildingsEnum::FORT).size());
 }
 
-unsigned int GameArea::cameraToRealMap(unsigned int coordinate) {
+unsigned int GameArea::cameraToRealMapX(unsigned int coordinate) {
     return get_width() * coordinate / (NUMBER_OF_TILES_TO_SHOW * TILESIZE);
+}
+
+unsigned int GameArea::cameraToRealMapY(unsigned int coordinate) {
+    return get_height() * coordinate / (NUMBER_OF_TILES_TO_SHOW * TILESIZE);
 }
 
 std::pair<int, int> GameArea::get_coords() {
