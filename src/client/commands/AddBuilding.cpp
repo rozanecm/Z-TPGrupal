@@ -1,5 +1,6 @@
 #include "AddBuilding.h"
 
+#define TILESIZE 16    //tile width in pixels.
 #define ID 0
 #define X 1
 #define Y 2
@@ -15,6 +16,6 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     int y = std::stoi(args[Y]);
     TeamEnum team = (TeamEnum) std::stoi(args[TEAM]);
 
-    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, team);
+    Building b(BuildingsEnum::ROBOT_FABRIC, x * TILESIZE, y * TILESIZE, id, team);
     buildings.addBuilding(b);
 }

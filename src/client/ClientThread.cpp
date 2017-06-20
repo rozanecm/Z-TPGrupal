@@ -68,7 +68,7 @@ void ClientThread::initCommands() {
     commands["addunit"] = new AddUnit(unitsMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
-    commands["update"] = new Update();
+    commands["update"] = new Update(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor);
     commands["addnature"] = new AddNature();

@@ -4,8 +4,7 @@
 #include "GameArea.h"
 #include <giomm.h>
 
-
-#define TILESIZE 16    //tile width in pixels
+#define TILESIZE 16    //tile width in pixels.
 #define NUMBER_OF_TILES_TO_SHOW 10
 
 GameArea::GameArea(BaseObjectType *cobject,
@@ -147,7 +146,8 @@ void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
         /* call actual drawing method */
         drawBuilding(building.getBuildingType(), buildingsCounter.getCounter(),
                      building.getTeam(), cr,
-                     cameraToRealMap(camera.mapToCameraXCoordinate(building.
+                     cameraToRealMap(camera.mapToCameraXCoordinate
+                (building.
                                      getXCoordinate())),
                      cameraToRealMap(camera.mapToCameraYCoordinate(building.
                                      getYCoordinate())));
@@ -304,8 +304,8 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
         xFinishCoordinate = event->x;
         yFinishCoordinate = event->y;
         makeSelection();
-        coords = {camera.cameraToMapXCoordinate(event->x),
-                  camera.cameraToMapXCoordinate(event->y)};
+        coords = {camera.cameraToMapXCoordinate(realMapToCamera(event->x)),
+                  camera.cameraToMapYCoordinate(realMapToCamera(event->y))};
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
@@ -6153,9 +6153,9 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         std::cerr << "Drawing failed at finding valid rotation" << std::endl;
     }
 
-    if (unitIsRobot(unitType)){
-        cr->scale(1.5, 1.5);
-    }
+//    if (unitIsRobot(unitType)){
+//        cr->scale(1.5, 1.5);
+//    }
 
     auto next = rotations_map->second.at(unitCounter);
     /* perform actual drawing */
@@ -6297,7 +6297,8 @@ void GameArea::initializeCounters() {
                                     [RotationsEnum::r000].size());
 
     tankCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-                           [UnitsEnum::LIGHT_TANK][ActionsEnum::STAND][RotationsEnum::r000].size());
+                           [UnitsEnum::LIGHT_TANK][ActionsEnum::STAND]
+                           [RotationsEnum::r000].size());
 
     mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
                           [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND

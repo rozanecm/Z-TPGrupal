@@ -3,10 +3,12 @@
 
 
 #include "Command.h"
+#include "../UnitsMonitor.h"
 
 class Update : public Command {
+    UnitsMonitor& units;
 public:
-    Update();
+    Update(UnitsMonitor& units);
 
     void execute(const std::vector<std::string> &args);
 };
