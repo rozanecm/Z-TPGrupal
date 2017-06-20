@@ -17,9 +17,15 @@ void Server::run() {
         while(this->running) {
             Socket new_client = this->socket.accept_client();
             Messenger* messenger = new Messenger(new_client);
-            std::string id_new_player = "Player" + std::to_string(i);
-            menu.addPlayer(messenger, menu,id_new_player);
+            std::string id_new_player =  messenger->recieveMessage();
+
+            bool added = menu.addPlayer(messenger, menu,id_new_player);
+            if (!added) {
+                messenger->sendMessage("error");
+                messenger->shutdown();
+            }
             ++i;
+            messenger->sendMessage("ok");
             std::cout << "new player conectado" << std::endl;
 //              create player with messenger
 //            std::string logIn_msg = messenger->recieveMessage();

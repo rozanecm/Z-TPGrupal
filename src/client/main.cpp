@@ -4,6 +4,7 @@
 #include "GraphicsThread.h"
 #include "ClientThread.h"
 #include "GameBuilder.h"
+#include <split.h>
 
 #define SUCCESSRETURNCODE 0
 
@@ -29,6 +30,18 @@ void play_sound() {
     Mix_PlayChannel(-1, sample, -1);
 }
 
+void setup_lobby(ServerMessenger& m) {
+    m.send("lobbyinfo");
+    std::string response = m.receive();
+    std::vector<std::string> args = split(response, '-');
+    if (args.size() > 1) {
+        m.send("getinlobby-0");
+    } else {
+        m.send("createlobby");
+    }
+    m.send("ready");
+}
+
 int main(int argc, char **argv) {
     try {
         // play_sound();
@@ -51,30 +64,29 @@ int main(int argc, char **argv) {
         app->run(*window);
 
         // Once the window closes, we fetch the socket
-        std::shared_ptr<Socket> s = window->get_socket();
-        if (s) {
-            ServerMessenger messenger(*s.get());
-
+        std::shared_ptr<ServerMessenger> m = window->get_socket();
+        if (m) {
+            ServerMessenger messenger = *m.get();
 
             GameWindow *gwindow = builder.get_window();
-            ClientThread clientThread(unitsrMonitor, buildingsMonitor,
-                                      mapMonitor,
-                                      messenger, *gwindow);
 
-            GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
-                                          mapMonitor, messenger, *gwindow);
-
-            clientThread.start();
 
             LobbyWindow* lobby = builder.get_lobby_window();
+            lobby->set_messenger(messenger);
             app.clear();
             app = Gtk::Application::create();
+            setup_lobby(messenger);
+            ClientThread clientThread(unitsrMonitor, buildingsMonitor,
+                                      mapMonitor,
+                                      messenger, *lobby, *gwindow);
+            clientThread.start();
 
             app->run(*lobby);
             // HARDCODED DEBUG MESSAGES TO START A GAME
-            messenger.send("createlobby");
-            messenger.send("ready");
-            messenger.send("startgame");
+
+
+            GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
+                                          mapMonitor, messenger, *gwindow);
 
 
             graphicsThread.start();

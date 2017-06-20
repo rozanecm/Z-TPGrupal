@@ -43,3 +43,6 @@ bool Messenger::isConnected() {
 
 Messenger::~Messenger() {
 }
+
+Messenger::Messenger(Messenger &other) : socket(std::move(other.socket)){
+}

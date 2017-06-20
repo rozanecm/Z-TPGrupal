@@ -19,6 +19,8 @@ public:
     std::string receive();
 
     void kill();
+
+    ServerMessenger(ServerMessenger& other);
 };
 
 
