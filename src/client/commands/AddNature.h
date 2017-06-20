@@ -3,10 +3,12 @@
 
 
 #include "Command.h"
+#include "../MapMonitor.h"
 
 class AddNature : public Command {
+    MapMonitor &mapMonitor;
 public:
-    AddNature();
+    AddNature(MapMonitor &mapMonitor);
 
     void execute(const std::vector<std::string> &args);
 };

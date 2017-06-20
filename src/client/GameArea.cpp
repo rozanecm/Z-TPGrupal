@@ -39,48 +39,90 @@ void GameArea::loadResources() {
 
         /* load some img */
         someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
+        loadMapResources();
 
-        /* Load tiles */
-        tiles["Tierra"] = Gdk::Pixbuf::create_from_file(
-                "res/assets/tiles/tierra.png");
-        tiles["Agua"] = Gdk::Pixbuf::create_from_file
-                ("res/assets/tiles/agua.png");
-        tiles["Lava"] = Gdk::Pixbuf::create_from_file(
-                "res/assets/tiles/lava.png");
     } catch (Glib::FileError e) {
         std::cerr << e.what();
     }
     std::cerr << "resources succesfully loaded" << std::endl;
 }
 
+void GameArea::loadMapResources() {
+    /* Load tiles */
+    tiles["Tierra"] = Gdk::Pixbuf::create_from_file(
+                "res/assets/tiles/tierra.png");
+    tiles["Agua"] = Gdk::Pixbuf::create_from_file
+                ("res/assets/tiles/agua.png");
+    tiles["Lava"] = Gdk::Pixbuf::create_from_file(
+                "res/assets/tiles/lava.png");
+    /* Load nature items */
+    nature[NatureEnum::ROCK] = Gdk::Pixbuf::create_from_file
+            ("res/assets/nature/rock.png");
+}
+
 GameArea::~GameArea() {}
 
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
-    drawBaseMap(cr, camera.getPosition());
+    drawBaseMap(cr);
     drawBuildingsInView(cr);
     drawUnitsInMap(cr);
     updateCounters();
     return true;
 }
 
-void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
-                           std::pair<unsigned int, unsigned int>
-                           cameraPosition) {
-    /* cameraPosition is given in pixels.
-     * i,j indicate TILES. */
+void GameArea::drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr) {
+    /* check if map is emtpy*/
     if (mapMonitor->getXSize() == 0 and mapMonitor->getYSize() == 0) {
         return;
     }
 
+    /* cameraPosition is given in pixels.
+     * i,j indicate TILES. */
     for (unsigned int i = 0; i < NUMBER_OF_TILES_TO_SHOW; ++i) {
         for (unsigned int j = 0; j < NUMBER_OF_TILES_TO_SHOW; ++j) {
             drawTileAt(cr, i, j, mapMonitor->getTerrainTypeAt(
-                    cameraPosition.first / TILESIZE -
+                    camera.getPosition().first / TILESIZE -
                     NUMBER_OF_TILES_TO_SHOW / 2 + i,
-                    cameraPosition.second / TILESIZE -
+                    camera.getPosition().second / TILESIZE -
                     NUMBER_OF_TILES_TO_SHOW / 2 + j));
         }
     }
+    drawNatureInView(cr);
+}
+
+void GameArea::drawNatureInView(const Cairo::RefPtr<Cairo::Context> &cr) {
+    /* pointers (Nature*) are not used here because we are working with a shared
+     * resource. This way, we copy the units we want to draw in a protected way,
+     * and then we can draw without blocking other code. */
+    std::vector<Nature> natureToDraw = mapMonitor->getNatureToDraw(
+            camera.getPosition().first -
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().first +
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().second -
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().second +
+            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2);
+
+    for (auto &nature : natureToDraw) {
+        /* call actual drawing method */
+        drawNature(nature.getType(), cr,
+                   cameraToRealMapX(camera.idealMapToCameraXCoordinate(
+                           nature.getPosition().first)),
+                   cameraToRealMapY(camera.idealMapToCameraYCoordinate(
+                           nature.getPosition().second)));
+    }
+}
+
+void GameArea::drawNature(NatureEnum natureType,
+                          const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int x, unsigned int y) {
+    cr->save();
+    Gdk::Cairo::set_source_pixbuf(cr, nature[natureType], x, y);
+    cr->rectangle(x, y, nature[natureType]->get_width(),
+                  nature[natureType]->get_height());
+    cr->fill();
+    cr->restore();
 }
 
 void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
@@ -139,7 +181,6 @@ void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
                   jeepTires.at(rotation).
                           at(tireCounter.getCounter())->get_height());
     cr->fill();
-
     cr->restore();
 }
 
@@ -173,9 +214,6 @@ void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
                          camera.idealMapToCameraYCoordinate(
                                  unit.getYCoordinate())));
     }
-    //    cameraToRealMapX(
-    //                     camera.idealMapToCameraXCoordinate
-    //                  (building.getXCoordinate()))
 }
 
 void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
@@ -438,12 +476,8 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
         xFinishCoordinate = event->x;
         yFinishCoordinate = event->y;
         makeSelection();
-//        coords = {cameraToRealMapX(event->x),
-//                  cameraToRealMapY(event->y)};
-//        std::cout<<cameraToRealMapX(event->x)<<std::endl;
         coords = {camera.cameraToMapXCoordinate(screenMapToCameraX(event->x)),
                   camera.cameraToMapYCoordinate(screenMapToCameraY(event->y))};
-        std::cout<<camera.cameraToMapXCoordinate(screenMapToCameraX(event->x))<<std::endl;
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
@@ -455,26 +489,6 @@ void GameArea::makeSelection() {
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
     //todo filter out other players' units.
-//    unitsMonitor->markAsSelectedInRange(unitsSelected,
-//            cameraToRealMapX(xStartCoordinate),
-//            cameraToRealMapY(yStartCoordinate),
-//            cameraToRealMapX(xFinishCoordinate),
-//            cameraToRealMapY(yFinishCoordinate));
-//    if (!unitsSelected) {
-//        buildingsMonitor->markAsSelectedInRange(
-//                buildingSelected,
-//                cameraToRealMapX(xStartCoordinate),
-//                cameraToRealMapY(yStartCoordinate),
-//                cameraToRealMapX(xFinishCoordinate),
-//                cameraToRealMapY(yFinishCoordinate));
-//    } else {
-//        mapMonitor->markAsSelectedInRange(
-//                terrainSelected,
-//                cameraToRealMapX(xStartCoordinate),
-//                cameraToRealMapY(yStartCoordinate),
-//                cameraToRealMapX(xFinishCoordinate),
-//                cameraToRealMapY(yFinishCoordinate));
-//    }
     unitsMonitor->markAsSelectedInRange(unitsSelected,
             camera.cameraToMapXCoordinate(screenMapToCameraX(xStartCoordinate)),
             camera.cameraToMapYCoordinate(screenMapToCameraY(yStartCoordinate)),

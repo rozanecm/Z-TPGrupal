@@ -38,3 +38,25 @@ void MapMonitor::markAsSelectedInRange(bool& terrainSelected, double
                                        double yFinishCoordinate) {
     //todo implementar esto que falta ver el tema de accidentales sobre el mapa.
 }
+
+void MapMonitor::addNature(Nature nature) {
+    Lock l(m);
+    map.addNature(nature);
+}
+
+std::vector<Nature>
+MapMonitor::getNatureToDraw(unsigned int minX, unsigned int maxX,
+                            unsigned int minY, unsigned int maxY) {
+    Lock l(m);
+    std::vector<Nature> returnVector;
+
+    for (Nature &nature : map.getNature()) {
+        if (nature.getPosition().first >= minX and
+            nature.getPosition().first <= maxX and
+            nature.getPosition().second >= minY and
+            nature.getPosition().second <= maxY) {
+            returnVector.emplace_back(nature);
+        }
+    }
+    return returnVector;
+}

@@ -71,7 +71,7 @@ void ClientThread::initCommands() {
     commands["update"] = new Update(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor);
-    commands["addnature"] = new AddNature();
+    commands["addnature"] = new AddNature(mapMonitor);
 }
 
 ClientThread::~ClientThread() {
