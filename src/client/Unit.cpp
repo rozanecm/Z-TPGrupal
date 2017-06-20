@@ -23,6 +23,10 @@ void Unit::update_position(int x, int y) {
     position = new_pos;
 }
 
+void Unit::update_state(ActionsEnum state) {
+    this->actionType = state;
+}
+
 void
 Unit::markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                             gdouble yStartCoordinate,

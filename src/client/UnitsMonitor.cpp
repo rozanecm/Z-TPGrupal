@@ -30,6 +30,16 @@ void UnitsMonitor::update_position(int unit_id, int x, int y) {
 //    std::cerr << "update_position: Invalid unit ID: " << unit_id << std::endl;
 }
 
+void UnitsMonitor::update_position(int id, ActionsEnum state, int x, int y) {
+    Lock l(m);
+    for (auto unit = units.begin(); unit != units.end(); ++unit) {
+        if (unit->get_ID() == id) {
+            unit->update_position(x, y);
+            unit->update_state(state);
+        }
+    }
+}
+
 std::vector<Unit>
 UnitsMonitor::getUnitsToDraw(unsigned int minX, unsigned int maxX,
                              unsigned int minY, unsigned int maxY) {
@@ -79,4 +89,3 @@ void UnitsMonitor::wipeSelected() {
         unit.unselect();
     }
 }
-
