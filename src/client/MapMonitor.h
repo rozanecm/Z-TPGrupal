@@ -28,7 +28,7 @@ public:
     std::string getTerrainTypeAt(unsigned int xCoordinate,
                                  unsigned int yCoordinate);
 
-    void markAsSelectedInRange(double xStartCoordinate,
+    void markAsSelectedInRange(bool& terrainSelected, double xStartCoordinate,
                                double yStartCoordinate,
                                double xFinishCoordinate,
                                double yFinishCoordinate);

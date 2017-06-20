@@ -1,9 +1,8 @@
 #include "RemoveUnit.h"
-#include <string>
-#include <vector>
+
 #define UNIT_ID 0
 
-RemoveUnit::RemoveUnit(PlayersMonitor &monitor) : monitor(monitor) {
+RemoveUnit::RemoveUnit(UnitsMonitor &monitor) : monitor(monitor) {
 }
 
 void RemoveUnit::execute(const std::vector<std::string> &args) {

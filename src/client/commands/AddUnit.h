@@ -4,13 +4,14 @@
 #include <vector>
 #include <string>
 #include "Command.h"
-#include "../PlayersMonitor.h"
+#include "../UnitsMonitor.h"
 
 class AddUnit : public Command {
-    PlayersMonitor& playerMonitor;
+    UnitsMonitor &unitsMonitor;
 public:
-    explicit AddUnit(PlayersMonitor& monitor);
-    void execute(const std::vector<std::string>& args);
+    explicit AddUnit(UnitsMonitor &unitsMonitor);
+
+    void execute(const std::vector<std::string> &args);
 };
 
 

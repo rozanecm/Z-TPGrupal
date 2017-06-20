@@ -1,8 +1,7 @@
 #include "MapMonitor.h"
-#include <string>
 #include <Lock.h>
 
-MapMonitor::MapMonitor(Map &map) : map(map){
+MapMonitor::MapMonitor(Map &map) : map(map) {
 }
 
 void MapMonitor::setCell(unsigned int xCoordinate, unsigned int yCoordinate,
@@ -32,7 +31,8 @@ std::string MapMonitor::getTerrainTypeAt(unsigned int xCoordinate,
     return map.getTerrainTypeAt(xCoordinate, yCoordinate);
 }
 
-void MapMonitor::markAsSelectedInRange(double xStartCoordinate,
+void MapMonitor::markAsSelectedInRange(bool& terrainSelected, double
+                                       xStartCoordinate,
                                        double yStartCoordinate,
                                        double xFinishCoordinate,
                                        double yFinishCoordinate) {

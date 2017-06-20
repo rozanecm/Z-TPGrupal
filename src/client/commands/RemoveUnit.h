@@ -4,14 +4,14 @@
 #include <string>
 #include <vector>
 #include "Command.h"
-#include "../PlayersMonitor.h"
+#include "../UnitsMonitor.h"
 
 class RemoveUnit : public Command {
-    PlayersMonitor& monitor;
+    UnitsMonitor &monitor;
 public:
-    explicit RemoveUnit(PlayersMonitor& monitor);
+    explicit RemoveUnit(UnitsMonitor &monitor);
 
-    void execute(const std::vector<std::string>& args);
+    void execute(const std::vector<std::string> &args);
 };
 
 

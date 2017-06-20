@@ -7,13 +7,16 @@
 
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
-                                            all_ready(false) {}
+                                            all_ready(false) {
+
+}
 
 void Lobby::startGame() {
     std::cout << "Beginning game" << std::endl;
     if(all_ready){
         //start game
-        MapLoader maploader(PATH, config);
+        std::string path = PATH;
+        MapLoader maploader(path, config);
         std::shared_ptr<Map> map = maploader.get_map();
 
         // build teams
@@ -47,13 +50,14 @@ void Lobby::startGame() {
 //        Size r_size(415,431,6,6);
 //        Size range(415,431,12,12);
 
-        Size j_size(10,10,3,3);
+        Size j_size(200,200,3,3);
         Size j_range(10,10,6,6);
         Compass* r_compass = new Compass(*map, r_size,204, 4);
         Compass* j_compass = new Compass(*map, j_size,208, 4);
         Weapon weapon("laser",25,20,false,r_size);
         Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
-        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,weapon,2);
+        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,
+                              weapon,2);
 
         robot->changeTeam(players[0]->getId());
         if (players.size() >= 2)

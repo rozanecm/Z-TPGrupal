@@ -1,10 +1,20 @@
 #include <pugixml.hpp>
 #include <iostream>
 #include "LoadMap.h"
-#include <string>
-#include <vector>
 
-LoadMap::LoadMap(MapMonitor &mapMonitor) : mapMonitor(mapMonitor){
+
+#define ROBOT_FACTORY "res/assets/buildings/robot/base_jungle.png"
+#define VEHICLE_FACTORY "res/assets/buildings/vehicle/base_jungle.png"
+
+const std::map<std::string, BuildingsEnum> buildings{
+        {std::string("VehicleFactory"), BuildingsEnum::VEHICLE_FABRIC},
+        {std::string("UnitFactory"),    BuildingsEnum::ROBOT_FABRIC},
+        {std::string("Fort"),           BuildingsEnum::FORT}
+};
+
+LoadMap::LoadMap(MapMonitor &mapMonitor, BuildingsMonitor &buildings,
+                 GameWindow &window) :
+        mapMonitor(mapMonitor), buildingsMonitor(buildings), window(window) {
 }
 
 void LoadMap::execute(const std::vector<std::string> &args) {
@@ -21,7 +31,8 @@ void LoadMap::execute(const std::vector<std::string> &args) {
         return;
     }
 
-    pugi::xml_node terrain = doc.child("Map").child("Terrain");
+    pugi::xml_node root = doc.child("Map");
+    pugi::xml_node terrain = root.child("Terrain");
     for (auto node_row : terrain.children()) {
         std::vector<std::__cxx11::string> row;
         for (auto cell : node_row.children()) {
@@ -32,9 +43,10 @@ void LoadMap::execute(const std::vector<std::string> &args) {
 
     unsigned long size = map.size();
     mapMonitor.initializeMap(size, size);
-    for (int i = 0; i < size; i++){
-        for (int j = 0; j < size; j++){
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             mapMonitor.setCell(i, j, map[i][j]);
         }
     }
+    window.setMapData();
 }

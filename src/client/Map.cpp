@@ -1,9 +1,8 @@
 #include "Map.h"
-#include <string>
 
 void Map::initializeMap(unsigned int xSize, unsigned int ySize) {
     baseMap.resize(xSize);
-    for (int i = 0; i < xSize; ++i){
+    for (int i = 0; i < xSize; ++i) {
         baseMap[i].resize(ySize);
     }
 }
@@ -14,11 +13,14 @@ void Map::setCell(unsigned int xCoordinate, unsigned int yCoordinate,
 }
 
 unsigned int Map::getXSize() {
-    return baseMap.size();
+    return (unsigned int) baseMap.size();
 }
 
 unsigned int Map::getYSize() {
-    return baseMap[0].size();
+    if (!baseMap.size()) {
+        return 0;
+    }
+    return (unsigned int) baseMap[0].size();
 }
 
 std::string

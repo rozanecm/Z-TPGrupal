@@ -1,46 +1,47 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <pugixml.hpp>
 #include <split.h>
 #include <utility>
 #include "ClientThread.h"
-#include "ServerMessenger.h"
-#include "commands/Command.h"
 #include "commands/AddUnit.h"
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
+#include "commands/Update.h"
+#include "commands/FactoryNextUnit.h"
+#include "commands/AddBuilding.h"
+#include "commands/AddNature.h"
 
 void ClientThread::run() {
     initCommands();
     loop();
 }
 
-ClientThread::ClientThread(PlayersMonitor &playerMonitor,
+ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
-                           ServerMessenger& messenger) :
-        playersMonitor(playerMonitor),
+                           ServerMessenger &messenger,
+                           GameWindow &window
+) :
+        unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
-        messenger(messenger)
-{
+        messenger(messenger),
+        window(window) {
 }
 
 void ClientThread::loop() {
-    messenger.send("create-lobby");
-    std::string fisrt_recv = messenger.receive();
-    messenger.send("ready");
-    std::string second_recv = messenger.receive();
-    messenger.send("start-game");
-    while (!finished) {
-        std::string msg = messenger.receive();
-        std::cout<<msg<<std::endl;
-        if (msg == "") {
-            continue;
+    try {
+        while (!finished) {
+            std::string msg = messenger.receive();
+            std::vector<std::string> commands = split(msg, '|');
+            for (std::string &cmd : commands) {
+                parse(cmd);
+            }
         }
-        parse(msg);
+    } catch (SocketError &e) {
+        return;
     }
 }
 
@@ -53,6 +54,7 @@ void ClientThread::parse(std::string &s) {
         return;
     }
     std::vector<std::string> args(++params.begin(), params.end());
+    std::cout << "Executing " << params[cmd] << std::endl;
     result->second->execute(args);
 }
 
@@ -62,14 +64,18 @@ void ClientThread::finish() {
 }
 
 void ClientThread::initCommands() {
-    commands["loadmap"] = new LoadMap(mapMonitor);
-    commands["addunit"] = new AddUnit(playersMonitor);
-    commands["removeunit"] = new RemoveUnit(playersMonitor);
-    commands["move"] = new UpdatePosition(playersMonitor);
+    commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
+    commands["addunit"] = new AddUnit(unitsMonitor);
+    commands["removeunit"] = new RemoveUnit(unitsMonitor);
+    commands["move"] = new UpdatePosition(unitsMonitor);
+    commands["update"] = new Update();
+    commands["nextunit"] = new FactoryNextUnit(window);
+    commands["addbuilding"] = new AddBuilding(buildingsMonitor);
+    commands["addnature"] = new AddNature();
 }
 
 ClientThread::~ClientThread() {
-    for (std::pair<std::string, Command*> c : commands) {
+    for (std::pair<std::string, Command *> c : commands) {
         delete c.second;
     }
 }

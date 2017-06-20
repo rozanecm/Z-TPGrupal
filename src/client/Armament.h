@@ -11,7 +11,7 @@
 class Armament {
 private:
     /* sound used when shot */
-    Mix_Chunk* sound;
+    Mix_Chunk *sound;
 
     /* animation is stored as a series of images needed
      * to draw the animation. */

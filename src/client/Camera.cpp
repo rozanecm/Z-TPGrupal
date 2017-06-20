@@ -1,17 +1,19 @@
 #include "Camera.h"
-#include <utility>
+#include <iostream>
 
 Camera::Camera(unsigned int tileSize, unsigned int mapWidth,
                unsigned int mapHeight,
                unsigned int numberOfTilesToShow) :
         tileSize(tileSize),
         numberOfTilesToShow(numberOfTilesToShow),
-        minXCoordinate(numberOfTilesToShow*tileSize/2),
-        minYCoordinate(numberOfTilesToShow*tileSize/2),
-        maxXCoordinate(mapWidth*tileSize-numberOfTilesToShow*tileSize/2),
-        maxYCoordinate(mapHeight*tileSize-numberOfTilesToShow*tileSize/2),
-        position(numberOfTilesToShow*tileSize/2,
-                 numberOfTilesToShow*tileSize/2){
+        minXCoordinate(numberOfTilesToShow * tileSize / 2),
+        minYCoordinate(numberOfTilesToShow * tileSize / 2),
+        maxXCoordinate(
+                mapWidth * tileSize - numberOfTilesToShow * tileSize / 2),
+        maxYCoordinate(
+                mapHeight * tileSize - numberOfTilesToShow * tileSize / 2),
+        position(numberOfTilesToShow * tileSize / 2,
+                 numberOfTilesToShow * tileSize / 2) {
 }
 
 /**
@@ -24,34 +26,35 @@ std::pair<unsigned int, unsigned int> Camera::getPosition() {
 
 void Camera::setMapWidth(unsigned int width) {
     mapWidth = width;
-    maxXCoordinate = mapWidth*tileSize-numberOfTilesToShow*tileSize/2;
+    maxXCoordinate = mapWidth * tileSize - numberOfTilesToShow * tileSize / 2;
 }
 
 void Camera::setMapHeight(unsigned int height) {
     mapHeight = height;
-    maxYCoordinate = mapHeight*tileSize-numberOfTilesToShow*tileSize/2;
+    maxYCoordinate = mapHeight * tileSize - numberOfTilesToShow * tileSize / 2;
 }
 
 void Camera::moveUp() {
-    if (position.second != minYCoordinate){
+    if (position.second != minYCoordinate) {
         position.second -= tileSize;
     }
 }
 
 void Camera::moveDown() {
-    if (position.second != maxYCoordinate){
+    if (position.second != maxYCoordinate) {
         position.second += tileSize;
     }
 }
 
 void Camera::moveRight() {
-    if (position.first != maxXCoordinate){
+    if (position.first != maxXCoordinate) {
+        std::cout << position.first << std::endl;
         position.first += tileSize;
     }
 }
 
 void Camera::moveLeft() {
-    if (position.first != minXCoordinate){
+    if (position.first != minXCoordinate) {
         position.first -= tileSize;
     }
 }
@@ -60,4 +63,20 @@ std::pair<unsigned int, unsigned int> Camera::cameraOffset() {
     return std::pair<unsigned int, unsigned int>
             (position.first - numberOfTilesToShow * tileSize / 2,
              position.second - numberOfTilesToShow * tileSize / 2);
+}
+
+unsigned int Camera::mapToCameraXCoordinate(unsigned int globalXPosition) {
+    return globalXPosition - cameraOffset().first;
+}
+
+unsigned int Camera::mapToCameraYCoordinate(unsigned int globalYPosition) {
+    return globalYPosition - cameraOffset().second;
+}
+
+unsigned int Camera::cameraToMapXCoordinate(unsigned int coordinate) {
+    return coordinate + cameraOffset().first;
+}
+
+unsigned int Camera::cameraToMapYCoordinate(unsigned int coordinate) {
+    return coordinate + cameraOffset().second;
 }

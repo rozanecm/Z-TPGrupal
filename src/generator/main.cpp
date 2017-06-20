@@ -2,7 +2,7 @@
 #include "MapGenerator.h"
 
 int main(int argc, char **argv) {
-    int size = 10,
+    int size = 99,
     lava = 5,
     water = 10,
     variance = 0;

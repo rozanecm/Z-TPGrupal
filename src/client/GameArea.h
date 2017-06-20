@@ -4,39 +4,24 @@
 
 #include <gtkmm/drawingarea.h>
 #include <utility>
-#include "PlayersMonitor.h"
 #include "BuildingsMonitor.h"
 #include "MapMonitor.h"
 #include "Camera.h"
-#include "FlagEnum.h"
-#include "TeamEnum.h"
-#include "ActionsEnum.h"
-#include "UnitsEnum.h"
-#include "BuildingsEnum.h"
+#include "enums/TeamEnum.h"
+#include "enums/ActionsEnum.h"
+#include "enums/UnitsEnum.h"
+#include "enums/BuildingsEnum.h"
+#include "enums/RotationsEnum.h"
+#include "Counter.h"
+#include "UnitsMonitor.h"
 #include <map>
 #include <string>
 #include <vector>
 
-class GameArea : public Gtk::DrawingArea{
-public:
-    virtual ~GameArea();
-    GameArea(BaseObjectType* cobject,
-             const Glib::RefPtr<Gtk::Builder>& builder);
-
-    /**
-     * initialize shared resources.
-     */
-    void
-    setResources(PlayersMonitor *playersMonitor,
-                 BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor);
-
-protected:
-    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
-
+class GameArea : public Gtk::DrawingArea {
 private:
     /* shared resources */
-    PlayersMonitor *playersMonitor;
+    UnitsMonitor *unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
 
@@ -48,52 +33,50 @@ private:
     Glib::RefPtr<Gdk::Pixbuf> someImg;
 
     /* map holding all flags */
-    std::map<FlagEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
+    std::map<TeamEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
-    /* map holding all units' fire animations */
+    /* map holding all units imgs */
     std::map<TeamEnum,
             std::map<UnitsEnum,
                     std::map<ActionsEnum,
-                            std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>
-            unitsFireAnimations;
-
-    /* map holding all units' walking and standing animations.
-     * In this animations robots are not shown differently */
-    std::map<TeamEnum ,
-            std::map<ActionsEnum,
-                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>
-            unitsGeneralAnimations;
+                            std::map<RotationsEnum,
+                                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>>
+            unitsAnimations;
 
     /* BUILDINGS RESOURCES */
     std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
-    /* VEHICLES RESOURCES */
-    std::map<TeamEnum ,
-            std::map<UnitsEnum ,
-                    std::vector<Glib::RefPtr<Gdk::Pixbuf>>>> vehicleBases;
-
-    std::map<UnitsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> tires;
+    std::map<RotationsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> jeepTires;
 
     /* declare counter used to know which of the flag imgs
-     * which compose the flag's animation should be showed */
-    unsigned long flagCounter;
-    unsigned short jeepCounter;
-    unsigned short tireCounter;
-    unsigned short lightTankCounter;
-    unsigned short mediumTankCounter;
-    unsigned short heavyTankCounter;
-    unsigned short mmlCounter;
+     * which compose the flag's animation should be showed. This counters are
+     * updated every time on_draw() is called.
+     * */
+    Counter flagCounter;
+    Counter standingRobotCounter;
+    Counter walkingRobotCounter;
+    Counter shootingRobotCounter;
+    Counter jeepCounter;
+    Counter tireCounter;
+    Counter tankCounter;
+    Counter mmlCounter;
+    Counter buildingsCounter;
+
+    bool move_cmd = false;
+    std::pair<int, int> coords;
 
     /* DRAWING METHODS */
     void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
                      std::pair<unsigned int, unsigned int> cameraPosition);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
-                    unsigned int xCoordinate, unsigned int yCoordinate,
+                    unsigned int xTileCoordinate, unsigned int yTileCoordinate,
                     std::string terrainType);
 
     void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
-                           int xCoordinate, int yCoordinate);
+                           int xGraphicCoordinate, int yGraphicCoordinate);
+
+    void drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr);
 
     void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
                               int xCoordinate, int yCoordinate);
@@ -107,13 +90,24 @@ private:
     bool on_button_release_event(GdkEventButton *event) override;
 
     /* vars. for event handling */
+    /* this coordinates are sytem coordinatess */
     gdouble xStartCoordinate;
     gdouble xFinishCoordinate;
     gdouble yStartCoordinate;
     gdouble yFinishCoordinate;
     bool selectionMade;
 
-    void processSelection();
+    /* unitsSelected is true if the players' units are selected. This is used
+     * to manage user clicks.
+     * Turns true in Unit::markAsSelectedInRange, when some unit has been
+     * selected.
+     * Turns to false at the end of GameArea::processSelection(), when the
+     * selection has already been processed. */
+    bool unitsSelected;
+    bool buildingSelected;
+    bool terrainSelected;
+
+    void makeSelection();
 
     /* FLAG res loading */
     void loadFlagAnimations();
@@ -156,6 +150,14 @@ private:
     void loadRedPsychoFireAnimations();
 
     void loadYellowPsychoFireAnimations();
+
+    void loadBluePyroFireAnimation();
+
+    void loadGreenPyroFireAnimation();
+
+    void loadRedPyroFireAnimation();
+
+    void loadYellowPyroFireAnimation();
 
     void loadBlueSniperFireAnimations();
 
@@ -251,15 +253,79 @@ private:
 
     void loadYellowHeavyTankAnimations();
 
-    void drawVehicle(TeamEnum team, UnitsEnum vehicle,
-                     unsigned short &vehicleCounter,
-                     const Cairo::RefPtr<Cairo::Context> &cr,
-                     unsigned int xCoordinate, unsigned int yCoordinate);
+    void drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
+                       unsigned int xGraphicCoordinate,
+                       unsigned int yGraphicCoordinate,
+                       RotationsEnum rotation);
 
-    void drawTank(TeamEnum team, UnitsEnum tankType,
-                  unsigned short &tankCounter,
+    void drawUnit(TeamEnum team, UnitsEnum unitType, ActionsEnum actionType,
+                  RotationsEnum rotation, unsigned short unitCounter,
                   const Cairo::RefPtr<Cairo::Context> &cr,
-                  unsigned int xCoordinate, unsigned int yCoordinate);
+                  unsigned int xGraphicCoordinate,
+                  unsigned int yGraphicCoordinate);
+
+    void loadResources();
+
+    /**
+     * draws all units that are in camera's scope
+     * @param cr receive smart pointer to cairo context
+     */
+    void drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr);
+
+    /**
+     * counters used to know whic img of each animation should be drawn are
+     * updated. This method should get called once per frame, otherwise it is
+     * not guaranteed that animations will be correctly drawn.
+     */
+    void updateCounters();
+
+protected:
+    bool on_draw(const Cairo::RefPtr<Cairo::Context> &cr) override;
+
+public:
+    virtual ~GameArea();
+
+    GameArea(BaseObjectType *cobject,
+             const Glib::RefPtr<Gtk::Builder> &builder);
+
+    /**
+     * initialize shared resources.
+     */
+    void
+    setResources(UnitsMonitor *playersMonitor,
+                 BuildingsMonitor *buildingsMonitor,
+                 MapMonitor *mapMonitor);
+
+    void processClick();
+
+    void initializeCounters();
+
+    unsigned short getCounter(Unit &unit) const;
+
+    void processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
+                                RotationsEnum &rotation) const;
+
+    unsigned int cameraToRealMap(unsigned int coordinate);
+
+    std::pair<int, int> get_coords();
+
+    unsigned int realMapToCamera(gdouble coordinate);
+
+    void setMapData();
+
+    void drawBuilding(BuildingsEnum buildingType, unsigned short counter,
+                          TeamEnum team,
+                          const Cairo::RefPtr<Cairo::Context> &cr,
+                          unsigned int xGraphicCoordinate,
+                          unsigned int yGraphicCoordinate);
+
+    bool unitIsRobot(UnitsEnum unitType);
+
+    void drawFlag(const TeamEnum &team, const Cairo::RefPtr<Cairo::Context> &cr,
+                  unsigned int xGraphicCoordinate, unsigned int yGraphicCoordinate) const;
+
+    bool unit_selected();
+    bool buildings_selected();
 };
 
 

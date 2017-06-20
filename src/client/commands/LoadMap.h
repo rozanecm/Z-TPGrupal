@@ -4,16 +4,21 @@
 
 #include "../MapMonitor.h"
 #include "Command.h"
+#include "../BuildingsMonitor.h"
+#include "../windows/GameWindow.h"
 #include <string>
 #include <vector>
 
-class LoadMap : public Command{
+class LoadMap : public Command {
     MapMonitor &mapMonitor;
+    BuildingsMonitor &buildingsMonitor;
+    GameWindow &window;
 
 public:
-    explicit LoadMap(MapMonitor &mapMonitor);
+    LoadMap(MapMonitor &monitor, BuildingsMonitor &buildingsMonitor,
+            GameWindow &window);
 
-    void execute(const std::vector<std::string>& args);
+    void execute(const std::vector<std::string> &args);
 };
 
 

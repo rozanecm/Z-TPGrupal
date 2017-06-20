@@ -4,13 +4,14 @@
 #include <string>
 #include <vector>
 #include "Command.h"
-#include "../PlayersMonitor.h"
+#include "../UnitsMonitor.h"
 
 class UpdatePosition : public Command {
-    PlayersMonitor& monitor;
+    UnitsMonitor &monitor;
 public:
-    explicit UpdatePosition(PlayersMonitor& monitor);
-    void execute(const std::vector<std::string>& args);
+    explicit UpdatePosition(UnitsMonitor &monitor);
+
+    void execute(const std::vector<std::string> &args);
 };
 
 #endif //Z_TPGRUPAL_UPDATEPOSITION_H

@@ -303,7 +303,7 @@ Compass::~Compass() {
         for (auto x: astar_map) {
             int i = 0;
             for (auto y: x) {
-                delete (y);
+//                delete (y);
                 ++i;
             }
             ++j;

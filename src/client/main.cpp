@@ -3,31 +3,25 @@
 #include <SDL2/SDL_mixer.h>
 #include "GraphicsThread.h"
 #include "ClientThread.h"
-#include <vector>
-#include "Map.h"
-#include "MapMonitor.h"
-#include "../common/messenger.h"
+#include "GameBuilder.h"
 
 #define SUCCESSRETURNCODE 0
 
-/* DEBUGGING: run 'netcat -l 8000' in a terminal to launch client w/o server' */
-#define IP_MANU "10.1.207.62"
-#define LOCALHOST "127.0.0.1"
-#define PORT 8000
 void play_sound() {
     // Init, open the audio channel
     Mix_Init(0);
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
         std::cout << "ERROR ON OPENING AUDIO" << Mix_GetError() << std::endl;
         return;
     }
 
 
     Mix_AllocateChannels(16);
-    Mix_Chunk* sample = Mix_LoadWAV("test.wav");
+    Mix_Chunk *sample = Mix_LoadWAV("test.wav");
     if (!sample) {
         //todo throw exception
-        std::cout <<"ERROR ON PLAYING TEST.WAV " << Mix_GetError() << std::endl;
+        std::cout << "ERROR ON PLAYING TEST.WAV " << Mix_GetError()
+                  << std::endl;
         return;
     }
 
@@ -36,39 +30,58 @@ void play_sound() {
 }
 
 int main(int argc, char **argv) {
-    // play_sound();
+    try {
+        // play_sound();
 
-    /* create map; bind with monitor */
-    Map map;
-    MapMonitor mapMonitor(map);
-    /* create vector with players; bind with monitor */
-    std::vector<Player> players;
-    PlayersMonitor playerMonitor(players);
-    /* create vector with buildings; bind with monitor */
-    std::vector<Building> buildings;
-    BuildingsMonitor buildingsMonitor(buildings);
+        /* create map; bind with monitor */
+        Map map;
+        MapMonitor mapMonitor(map);
+        /* create vector with players; bind with monitor */
+        std::vector<Unit> units;
+        UnitsMonitor unitsrMonitor(units);
 
-    Socket s(IP_MANU, PORT);
-    ServerMessenger messenger(s);
+        /* create vector with buildings; bind with monitor */
+        std::vector<Building> buildings;
+        BuildingsMonitor buildingsMonitor(buildings);
 
-    /* create graphics and client threads */
-    GraphicsThread graphicsThread(playerMonitor, buildingsMonitor,
-                                  mapMonitor, messenger);
+        auto app = Gtk::Application::create();
+
+        GameBuilder builder;
+        InitialWindow *window = builder.get_initial_window();
+        app->run(*window);
+        // Once the window closes, we fetch the socket
+        std::shared_ptr<Socket> s = window->get_socket();
+        if (s) {
+            ServerMessenger messenger(*s.get());
 
 
-    /* DEBUG: RUN 'netcat -l 8000' in terminal */
-    ClientThread clientThread(playerMonitor, buildingsMonitor, mapMonitor,
-                              messenger);
+            GameWindow *gwindow = builder.get_window();
+            ClientThread clientThread(unitsrMonitor, buildingsMonitor,
+                                      mapMonitor,
+                                      messenger, *gwindow);
 
-    /* start threads */
-    clientThread.start();
-//    graphicsThread.start();
+            GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
+                                          mapMonitor, messenger, *gwindow);
 
-    /* join threads */
-//    graphicsThread.join();
+            clientThread.start();
 
-    /* once graphics join (window closes), we kill client thread */
-//    clientThread.finish();
-    clientThread.join();
-    return SUCCESSRETURNCODE;
+            // HARDCODED DEBUG MESSAGES TO START A GAME
+            messenger.send("createlobby");
+            messenger.send("ready");
+            messenger.send("startgame");
+
+
+            graphicsThread.start();
+            graphicsThread.join();
+
+            /* once graphics join (window closes), we kill client thread */
+            clientThread.finish();
+            clientThread.join();
+        }
+
+        return SUCCESSRETURNCODE;
+    } catch (std::exception const &ex) {
+        std::cerr << ex.what() << std::endl;
+        return SUCCESSRETURNCODE;
+    }
 }
