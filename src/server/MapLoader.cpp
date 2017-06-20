@@ -65,14 +65,14 @@ void MapLoader::load_structs(const pugi::xml_node &root,
     int id_counter = 0;
     pugi::xml_node structs = root.child("Structures");
     pugi::xml_node structure_cfg = cfg.find_child_by_attribute("type", "Rock");
-    int x = std::stoi(structure_cfg.attribute("size_x").value());
-    int y = std::stoi(structure_cfg.attribute("size_y").value());
+    int size_x = std::stoi(structure_cfg.attribute("size_x").value());
+    int size_y = std::stoi(structure_cfg.attribute("size_y").value());
     int hp = std::stoi(structure_cfg.attribute("hp").value());
 
     std::string type = structure_cfg.attribute("type").value();
     for(auto& rock : structs) {
-        int size_x = std::stoi(rock.attribute("x").value());
-        int size_y = std::stoi(rock.attribute("y").value());
+        int x = std::stoi(rock.attribute("x").value());
+        int y = std::stoi(rock.attribute("y").value());
         Occupant* f = new Occupant(id_counter++, hp, type,
                                    Size(x, y, size_x, size_y));
         occupants.push_back(f);
