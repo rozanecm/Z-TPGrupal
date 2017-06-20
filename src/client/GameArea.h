@@ -305,7 +305,9 @@ public:
     void processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
                                 RotationsEnum &rotation) const;
 
-    unsigned int cameraToRealMap(unsigned int coordinate);
+    unsigned int cameraToRealMapX(unsigned int coordinate);
+
+    unsigned int cameraToRealMapY(unsigned int coordinate);
 
     std::pair<int, int> get_coords();
 

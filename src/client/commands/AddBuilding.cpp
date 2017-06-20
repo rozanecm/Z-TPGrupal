@@ -16,6 +16,6 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     int y = std::stoi(args[Y]);
     TeamEnum team = (TeamEnum) std::stoi(args[TEAM]);
 
-    Building b(BuildingsEnum::ROBOT_FABRIC, x * TILESIZE, y * TILESIZE, id, team);
+    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, team);
     buildings.addBuilding(b);
 }

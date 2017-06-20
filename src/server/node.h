@@ -43,6 +43,8 @@ public:
 
     int getFValueIfGWere(int g, int terrain_factor);
 
+    void clean();
+
     ~Node();
 };
 

@@ -25,11 +25,11 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_node root = doc.child("Map");
     pugi::xml_node map_node = root.child("Terrain");
 
-    int coord_y = 8; // Y coordinate counter, each row is different Y coord
+    int coord_y = 0; // Y coordinate counter, each row is different Y coord
     // Iterate over every row
     auto row = map_node.children().begin();
     for (; row != map_node.children().end(); ++row) {
-        int coord_x = 8; // Each Cell has a different X coord
+        int coord_x = 0; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
         map.push_back(row_vec);
@@ -53,6 +53,10 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_document cfg;
     cfg.load_file(config.c_str());
     pugi::xml_node cfg_node = cfg.child("Config");
+
+    internal_positions = std::stoi(cfg_node.child("Cells").
+            attribute("internal_positions").value());
+
     create_map();
     load_structs(root, cfg_node.child("Structs"));
     load_unit_molds(cfg_node.child("Units"));
@@ -65,14 +69,16 @@ void MapLoader::load_structs(const pugi::xml_node &root,
     int id_counter = 0;
     pugi::xml_node structs = root.child("Structures");
     pugi::xml_node structure_cfg = cfg.find_child_by_attribute("type", "Rock");
-    int x = std::stoi(structure_cfg.attribute("size_x").value());
-    int y = std::stoi(structure_cfg.attribute("size_y").value());
+    int size_x = std::stoi(structure_cfg.attribute("size_x").value());
+    int size_y = std::stoi(structure_cfg.attribute("size_y").value());
     int hp = std::stoi(structure_cfg.attribute("hp").value());
 
     std::string type = structure_cfg.attribute("type").value();
     for(auto& rock : structs) {
-        int size_x = std::stoi(rock.attribute("x").value());
-        int size_y = std::stoi(rock.attribute("y").value());
+        int x = std::stoi(rock.attribute("x").value()) *
+            internal_positions;
+        int y = std::stoi(rock.attribute("y").value()) *
+            internal_positions;
         Occupant* f = new Occupant(id_counter++, hp, type,
                                    Size(x, y, size_x, size_y));
         occupants.push_back(f);
@@ -83,8 +89,8 @@ void MapLoader::load_structs(const pugi::xml_node &root,
 }
 
 void MapLoader::create_map() {
-    int width = (int) map.at(0).size() * 16;
-    int height = (int) map.size() * 16;
+    int width = (int) map.at(0).size() * internal_positions;
+    int height = (int) map.size() * internal_positions;
     int x = 0;
     int y = 0;
     game_map = std::shared_ptr<Map>(new Map(x, y, width, height, map,
@@ -153,14 +159,18 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
     for(auto& territory : root.children()) {
         std::string name = territory.name();
         if (name == "Fort") {
-            int x = std::stoi(territory.attribute("center_x").value());
-            int y = std::stoi(territory.attribute("center_y").value());
+            int x = std::stoi(territory.attribute("center_x").value()) *
+                internal_positions;
+            int y = std::stoi(territory.attribute("center_y").value()) *
+                internal_positions;
             forts.push_back(create_factory(id_counter++, hp, name,
                                            Size(x, y, 20, 20)));
         }
         for(auto& factory : territory.children()) {
-            int x = std::stoi(factory.attribute("x").value());
-            int y = std::stoi(factory.attribute("y").value());
+            int x = std::stoi(factory.attribute("x").value()) *
+                internal_positions;
+            int y = std::stoi(factory.attribute("y").value()) *
+                internal_positions;
             Size s(x, y, size_x, size_y);
             occupants.push_back(create_factory(id_counter++, hp, type, s));
         }
