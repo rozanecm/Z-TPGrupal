@@ -87,6 +87,8 @@ public:
     bool is_selected();
 
     void unselect();
+
+    void update_rotation();
 };
 
 
