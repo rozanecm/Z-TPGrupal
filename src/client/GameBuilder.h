@@ -9,10 +9,12 @@
 #include "MapMonitor.h"
 #include "ServerMessenger.h"
 #include "windows/InitialWindow.h"
+#include "windows/LobbyWindow.h"
 
 class GameBuilder {
     GameWindow *window;
     InitialWindow *init_window;
+    LobbyWindow* lobby_window;
     Glib::RefPtr<Gtk::Builder> refBuilder;
     Gtk::Image *portrait;
     Gtk::Box *panel;
@@ -30,6 +32,7 @@ public:
     GameWindow *get_window();
 
     InitialWindow *get_initial_window();
+    LobbyWindow* get_lobby_window();
 };
 
 

@@ -27,6 +27,7 @@ GameBuilder::GameBuilder() {
     refBuilder->get_widget("Portrait", portrait);
     refBuilder->get_widget("SidePanel", panel);
     refBuilder->get_widget_derived("InitialWindow", init_window);
+    refBuilder->get_widget_derived("LobbyWindow", lobby_window);
 }
 
 
@@ -42,6 +43,10 @@ GameWindow *GameBuilder::get_window() {
 
 InitialWindow *GameBuilder::get_initial_window() {
     return init_window;
+}
+
+LobbyWindow *GameBuilder::get_lobby_window() {
+    return lobby_window;
 }
 
 

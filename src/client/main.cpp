@@ -49,6 +49,7 @@ int main(int argc, char **argv) {
         GameBuilder builder;
         InitialWindow *window = builder.get_initial_window();
         app->run(*window);
+
         // Once the window closes, we fetch the socket
         std::shared_ptr<Socket> s = window->get_socket();
         if (s) {
@@ -65,6 +66,11 @@ int main(int argc, char **argv) {
 
             clientThread.start();
 
+            LobbyWindow* lobby = builder.get_lobby_window();
+            app.clear();
+            app = Gtk::Application::create();
+
+            app->run(*lobby);
             // HARDCODED DEBUG MESSAGES TO START A GAME
             messenger.send("createlobby");
             messenger.send("ready");
