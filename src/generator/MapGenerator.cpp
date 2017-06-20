@@ -42,8 +42,9 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     terr = 9;
 
     /* Adjustment to size to split territories evenly */
-    if (size % terr) {
-        this->size = size - size % terr;
+    int territories_per_row =  (int) floor(sqrt(terr));
+    if (size % territories_per_row) {
+        this->size = size - territories_per_row;
     }
 }
 
