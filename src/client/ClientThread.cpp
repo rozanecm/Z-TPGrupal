@@ -13,6 +13,7 @@
 #include "commands/AddBuilding.h"
 #include "commands/AddNature.h"
 #include "commands/StartGame.h"
+#include "commands/PlayerNames.h"
 
 void ClientThread::run() {
     initCommands();
@@ -76,6 +77,7 @@ void ClientThread::initCommands() {
     commands["addbuilding"] = new AddBuilding(buildingsMonitor);
     commands["addnature"] = new AddNature();
     commands["startgame"] = new StartGame(messenger, lobby, window);
+    commands["names"] = new PlayerNames(lobby);
 }
 
 ClientThread::~ClientThread() {

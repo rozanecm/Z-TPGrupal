@@ -7,19 +7,18 @@
 #include <gtkmm/label.h>
 #include <gtkmm/builder.h>
 
+#define PLAYERS_AMT 4
 #include "../ServerMessenger.h"
 class LobbyWindow : public Gtk::Window {
     Gtk::Button* start;
-    Gtk::Label* player1;
-    Gtk::Label* player2;
-    Gtk::Label* player3;
-    Gtk::Label* player4;
+    Gtk::Label* players[PLAYERS_AMT];
     ServerMessenger* m;
 public:
     LobbyWindow(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
     void set_messenger(ServerMessenger& m);
+    void update_player_name(int at, const std::string& name);
 private:
     void on_click();
 };

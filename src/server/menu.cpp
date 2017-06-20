@@ -42,7 +42,9 @@ void Menu::addToLobby(int id_lobby, Player* player) {
     if(lobbies.size() < id_lobby) {
         return;
     }
-    lobbies[id_lobby]->addPlayer(player);
+    Lobby* lobby = lobbies[id_lobby];
+
+    lobby->addPlayer(player);
     player->addLobby(lobbies[id_lobby]);
 }
 

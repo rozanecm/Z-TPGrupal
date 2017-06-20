@@ -5,11 +5,11 @@
 void GraphicsThread::run() {
     auto app = Gtk::Application::create();
 
-    window.change_view_to_building();
     window.setResources(&unitsMonitor,
                         &buildingsMonitor,
                         &mapMonitor,
                         &messenger);
+    
     app->run(window);
     //todo check exit status. Couldn't find exit status codes,
     //so don't know what each number means

@@ -96,6 +96,7 @@ std::string Player::getNextData(std::string& line) {
 }
 
 void Player::getInGame() {
+    // Notify the client the game is starting
     messenger->sendMessage("startgame");
     this->on_lobby = false;
     this->playing = true;

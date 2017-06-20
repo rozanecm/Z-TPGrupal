@@ -89,10 +89,20 @@ void Lobby::ready(Player* player) {
 }
 
 bool Lobby::addPlayer(Player* player) {
-    if(players.size() < 4)
+    if (players.size() < 4)
         players.push_back(player);
     if (teams.size() == 0) {
         teams.push_back(std::vector<std::string>());
+    }
+
+    std::string names_cmd = "names-";
+    for (std::string name : get_player_names()) {
+        names_cmd += name + "-";
+    }
+
+    for(Player* p : players) {
+        p->getMessenger()->sendMessage(names_cmd);
+
     }
     teams.back().push_back(player->getId());
     return (players.size() < 4);
@@ -101,4 +111,12 @@ bool Lobby::addPlayer(Player* player) {
 Lobby::~Lobby() {
     game.get()->shutDownGame();
     game.get()->join();
+}
+
+std::vector<std::string> Lobby::get_player_names() {
+    std::vector<std::string> names;
+    for (Player* p : players) {
+        names.push_back(p->getId());
+    }
+    return names;
 }
