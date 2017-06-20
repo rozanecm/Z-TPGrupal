@@ -124,6 +124,145 @@ void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->restore();
 }
 
+void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
+                             unsigned int xGraphicCoordinate,
+                             unsigned int yGraphicCoordinate,
+                             RotationsEnum rotation) {
+    cr->save();
+    /* first draw jeepTires */
+    Gdk::Cairo::set_source_pixbuf(cr, jeepTires.at(rotation).
+                                          at(tireCounter.getCounter()),
+                                  xGraphicCoordinate, yGraphicCoordinate);
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
+                  jeepTires.at(rotation).
+                          at(tireCounter.getCounter())->get_width(),
+                  jeepTires.at(rotation).
+                          at(tireCounter.getCounter())->get_height());
+    cr->fill();
+
+    cr->restore();
+}
+
+void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
+    /* pointers (Unit*) are not used here because we are working with a shared
+     * resource. This way, we copy the units we want to draw in a protected way,
+     * and then we can draw without blocking other code. */
+    std::vector<Unit> unitsToDraw = unitsMonitor->getUnitsToDraw(
+            camera.getPosition().first -
+                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().first +
+                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().second -
+                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
+            camera.getPosition().second +
+                    (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2);
+
+    for (auto &unit : unitsToDraw) {
+        /* check what is being drawn, and choose the counter appropriately. */
+        unsigned short counter;
+        counter = getCounter(unit);
+
+        /* call actual drawing method */
+        drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
+                 unit.getRotation(),
+                 counter, cr,
+                 cameraToRealMapX(
+                         camera.idealMapToCameraXCoordinate(
+                                 unit.getXCoordinate())),
+                 cameraToRealMapY(
+                         camera.idealMapToCameraYCoordinate(
+                                 unit.getYCoordinate())));
+    }
+    //    cameraToRealMapX(
+    //                     camera.idealMapToCameraXCoordinate
+    //                  (building.getXCoordinate()))
+}
+
+void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
+                        ActionsEnum actionType,
+                        RotationsEnum rotation, unsigned short unitCounter,
+                        const Cairo::RefPtr<Cairo::Context> &cr,
+                        unsigned int xGraphicCoordinate,
+                        unsigned int yGraphicCoordinate) {
+    cr->save();
+    /* adapt given data to saved imgs. Applies to vehicles */
+    if (unitType == UnitsEnum::JEEP &&
+        rotation != RotationsEnum::r090 &&
+        rotation != RotationsEnum::r270) {
+        /* rotations 090 and 270 dont have tires */
+        drawJeepTires(cr, xGraphicCoordinate, yGraphicCoordinate, rotation);
+    }
+    processUnitToDrawEnums(unitType, actionType, rotation);
+
+    auto team_map = unitsAnimations.find(team);
+    if (team_map == unitsAnimations.end()) {
+        std::cerr << "Drawing failed at finding valid team" << std::endl;
+    }
+
+    auto unit_map = team_map->second.find(unitType);
+    if (unit_map == team_map->second.end()) {
+        std::cerr << "Drawing failed at finding valid unitType" << std::endl;
+    }
+
+    auto actions_map = unit_map->second.find(actionType);
+    if (actions_map == unit_map->second.end()) {
+        std::cerr << "Drawing failed at finding valid actionType" << std::endl;
+    }
+
+    auto rotations_map = actions_map->second.find(rotation);
+    if (rotations_map == actions_map->second.end()) {
+        std::cerr << "Drawing failed at finding valid rotation" << std::endl;
+    }
+
+//    if (unitIsRobot(unitType)){
+//        cr->scale(1.5, 1.5);
+//    }
+
+    auto next = rotations_map->second.at(unitCounter);
+    /* perform actual drawing */
+    Gdk::Cairo::set_source_pixbuf(cr, next,
+                                  xGraphicCoordinate, yGraphicCoordinate);
+
+    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
+                  next->get_height());
+    cr->fill();
+    cr->restore();
+}
+
+void
+GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
+                                 RotationsEnum &rotation) const {
+    if (unitType == UnitsEnum::HEAVY_TANK
+        or unitType == UnitsEnum::LIGHT_TANK
+        or unitType == UnitsEnum::MEDIUM_TANK
+        or unitType == UnitsEnum::MML) {
+        actionType = ActionsEnum::STAND;
+        /* same assets are used for given rotations;
+         * e.g.: 135 and 315 are drawn with same img */
+        if (rotation == RotationsEnum::r135) {
+            rotation = RotationsEnum::r315;
+        } else if (rotation == RotationsEnum::r180) {
+            rotation = RotationsEnum::r000;
+        } else if (rotation == RotationsEnum::r225) {
+            rotation = RotationsEnum::r045;
+        } else if (rotation == RotationsEnum::r270) {
+            rotation = RotationsEnum::r090;
+        }
+    } else if ((unitType == UnitsEnum::GRUNT
+                or unitType == UnitsEnum::LASER
+                or unitType == UnitsEnum::PSYCHO
+                or unitType == UnitsEnum::PYRO
+                or unitType == UnitsEnum::SNIPER
+                or unitType == UnitsEnum::TOUGH)
+               and (actionType == ActionsEnum::MOVE
+                    or actionType == ActionsEnum::STAND)) {
+        /* because same imgs are used to draw all different types of robots
+         * when these are moving or standing still, if this is the case, we
+         * set the unit type to generic robot */
+        unitType = UnitsEnum::GENERIC_ROBOT;
+    }
+}
+
 void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
     /* pointers (Unit*) are not used here because we are working with a shared
      * resource. This way, we copy the units we want to draw in a protected way,
@@ -299,8 +438,12 @@ bool GameArea::on_button_release_event(GdkEventButton *event) {
         xFinishCoordinate = event->x;
         yFinishCoordinate = event->y;
         makeSelection();
-        coords = {camera.cameraToMapXCoordinate(realMapToCamera(event->x)),
-                  camera.cameraToMapYCoordinate(realMapToCamera(event->y))};
+//        coords = {cameraToRealMapX(event->x),
+//                  cameraToRealMapY(event->y)};
+//        std::cout<<cameraToRealMapX(event->x)<<std::endl;
+        coords = {camera.cameraToMapXCoordinate(screenMapToCameraX(event->x)),
+                  camera.cameraToMapYCoordinate(screenMapToCameraY(event->y))};
+        std::cout<<camera.cameraToMapXCoordinate(screenMapToCameraX(event->x))<<std::endl;
         /* returning true, cancels the propagation of the event. We return
          * false, so the event can be handled by the game window
          * */
@@ -312,33 +455,54 @@ void GameArea::makeSelection() {
     /* tell each of the structures storing objects in the map to mark as
      * selected the items which are within the mouse selection */
     //todo filter out other players' units.
+//    unitsMonitor->markAsSelectedInRange(unitsSelected,
+//            cameraToRealMapX(xStartCoordinate),
+//            cameraToRealMapY(yStartCoordinate),
+//            cameraToRealMapX(xFinishCoordinate),
+//            cameraToRealMapY(yFinishCoordinate));
+//    if (!unitsSelected) {
+//        buildingsMonitor->markAsSelectedInRange(
+//                buildingSelected,
+//                cameraToRealMapX(xStartCoordinate),
+//                cameraToRealMapY(yStartCoordinate),
+//                cameraToRealMapX(xFinishCoordinate),
+//                cameraToRealMapY(yFinishCoordinate));
+//    } else {
+//        mapMonitor->markAsSelectedInRange(
+//                terrainSelected,
+//                cameraToRealMapX(xStartCoordinate),
+//                cameraToRealMapY(yStartCoordinate),
+//                cameraToRealMapX(xFinishCoordinate),
+//                cameraToRealMapY(yFinishCoordinate));
+//    }
     unitsMonitor->markAsSelectedInRange(unitsSelected,
-            camera.cameraToMapXCoordinate(realMapToCamera(xStartCoordinate)),
-            camera.cameraToMapYCoordinate(realMapToCamera(yStartCoordinate)),
-            camera.cameraToMapXCoordinate(realMapToCamera(xFinishCoordinate)),
-            camera.cameraToMapYCoordinate(realMapToCamera(yFinishCoordinate)));
+            camera.cameraToMapXCoordinate(screenMapToCameraX(xStartCoordinate)),
+            camera.cameraToMapYCoordinate(screenMapToCameraY(yStartCoordinate)),
+            camera.cameraToMapXCoordinate(screenMapToCameraX(xFinishCoordinate)),
+            camera.cameraToMapYCoordinate(screenMapToCameraY
+                                                  (yFinishCoordinate)));
     if (!unitsSelected) {
         buildingsMonitor->markAsSelectedInRange(
                 buildingSelected,
                 camera.cameraToMapXCoordinate(
-                        realMapToCamera(xStartCoordinate)),
+                        screenMapToCameraX(xStartCoordinate)),
                 camera.cameraToMapYCoordinate(
-                        realMapToCamera(yStartCoordinate)),
+                        screenMapToCameraY(yStartCoordinate)),
                 camera.cameraToMapXCoordinate(
-                        realMapToCamera(xFinishCoordinate)),
+                        screenMapToCameraX(xFinishCoordinate)),
                 camera.cameraToMapYCoordinate(
-                        realMapToCamera(yFinishCoordinate)));
+                        screenMapToCameraY(yFinishCoordinate)));
     } else {
         mapMonitor->markAsSelectedInRange(
                 terrainSelected,
                 camera.cameraToMapXCoordinate(
-                        realMapToCamera(xStartCoordinate)),
+                        screenMapToCameraX(xStartCoordinate)),
                 camera.cameraToMapYCoordinate(
-                        realMapToCamera(yStartCoordinate)),
+                        screenMapToCameraY(yStartCoordinate)),
                 camera.cameraToMapXCoordinate(
-                        realMapToCamera(xFinishCoordinate)),
+                        screenMapToCameraX(xFinishCoordinate)),
                 camera.cameraToMapYCoordinate(
-                        realMapToCamera(yFinishCoordinate)));
+                        screenMapToCameraY(yFinishCoordinate)));
     }
     selectionMade = false;
 }
@@ -6093,142 +6257,6 @@ void GameArea::loadYellowHeavyTankAnimations() {
             "res/assets/units/vehicles/heavy_tank/base_yellow_r315_n02.png"));
 }
 
-void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
-                             unsigned int xGraphicCoordinate,
-                             unsigned int yGraphicCoordinate,
-                             RotationsEnum rotation) {
-    cr->save();
-    /* first draw jeepTires */
-    Gdk::Cairo::set_source_pixbuf(cr, jeepTires.at(rotation).
-                                          at(tireCounter.getCounter()),
-                                  xGraphicCoordinate, yGraphicCoordinate);
-    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
-                  jeepTires.at(rotation).
-                          at(tireCounter.getCounter())->get_width(),
-                  jeepTires.at(rotation).
-                          at(tireCounter.getCounter())->get_height());
-    cr->fill();
-
-    cr->restore();
-}
-
-void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
-                        ActionsEnum actionType,
-                        RotationsEnum rotation, unsigned short unitCounter,
-                        const Cairo::RefPtr<Cairo::Context> &cr,
-                        unsigned int xGraphicCoordinate,
-                        unsigned int yGraphicCoordinate) {
-    cr->save();
-    /* adapt given data to saved imgs. Applies to vehicles */
-    if (unitType == UnitsEnum::JEEP &&
-        rotation != RotationsEnum::r090 &&
-        rotation != RotationsEnum::r270) {
-        /* rotations 090 and 270 dont have tires */
-        drawJeepTires(cr, xGraphicCoordinate, yGraphicCoordinate, rotation);
-    }
-    processUnitToDrawEnums(unitType, actionType, rotation);
-
-    auto team_map = unitsAnimations.find(team);
-    if (team_map == unitsAnimations.end()) {
-        std::cerr << "Drawing failed at finding valid team" << std::endl;
-    }
-
-    auto unit_map = team_map->second.find(unitType);
-    if (unit_map == team_map->second.end()) {
-        std::cerr << "Drawing failed at finding valid unitType" << std::endl;
-    }
-
-    auto actions_map = unit_map->second.find(actionType);
-    if (actions_map == unit_map->second.end()) {
-        std::cerr << "Drawing failed at finding valid actionType" << std::endl;
-    }
-
-    auto rotations_map = actions_map->second.find(rotation);
-    if (rotations_map == actions_map->second.end()) {
-        std::cerr << "Drawing failed at finding valid rotation" << std::endl;
-    }
-
-//    if (unitIsRobot(unitType)){
-//        cr->scale(1.5, 1.5);
-//    }
-
-    auto next = rotations_map->second.at(unitCounter);
-    /* perform actual drawing */
-    Gdk::Cairo::set_source_pixbuf(cr, next,
-                                  xGraphicCoordinate, yGraphicCoordinate);
-
-    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate, next->get_width(),
-                  next->get_height());
-    cr->fill();
-    cr->restore();
-}
-
-void
-GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
-                                 RotationsEnum &rotation) const {
-    if (unitType == UnitsEnum::HEAVY_TANK
-        or unitType == UnitsEnum::LIGHT_TANK
-        or unitType == UnitsEnum::MEDIUM_TANK
-        or unitType == UnitsEnum::MML) {
-        actionType = ActionsEnum::STAND;
-        /* same assets are used for given rotations;
-         * e.g.: 135 and 315 are drawn with same img */
-        if (rotation == RotationsEnum::r135) {
-            rotation = RotationsEnum::r315;
-        } else if (rotation == RotationsEnum::r180) {
-            rotation = RotationsEnum::r000;
-        } else if (rotation == RotationsEnum::r225) {
-            rotation = RotationsEnum::r045;
-        } else if (rotation == RotationsEnum::r270) {
-            rotation = RotationsEnum::r090;
-        }
-    } else if ((unitType == UnitsEnum::GRUNT
-                or unitType == UnitsEnum::LASER
-                or unitType == UnitsEnum::PSYCHO
-                or unitType == UnitsEnum::PYRO
-                or unitType == UnitsEnum::SNIPER
-                or unitType == UnitsEnum::TOUGH)
-               and (actionType == ActionsEnum::MOVE
-                    or actionType == ActionsEnum::STAND)) {
-        /* because same imgs are used to draw all different types of robots
-         * when these are moving or standing still, if this is the case, we
-         * set the unit type to generic robot */
-        unitType = UnitsEnum::GENERIC_ROBOT;
-    }
-}
-
-void GameArea::drawUnitsInMap(const Cairo::RefPtr<Cairo::Context> &cr) {
-    /* pointers (Unit*) are not used here because we are working with a shared
-     * resource. This way, we copy the units we want to draw in a protected way,
-     * and then we can draw without blocking other code. */
-    std::vector<Unit> unitsToDraw = unitsMonitor->getUnitsToDraw(
-            camera.getPosition().first -
-            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
-            camera.getPosition().first +
-            (NUMBER_OF_TILES_TO_SHOW * TILESIZE) / 2,
-            camera.getPosition().second - (NUMBER_OF_TILES_TO_SHOW *
-                                           TILESIZE) / 2,
-            camera.getPosition().second + (NUMBER_OF_TILES_TO_SHOW * TILESIZE)
-                                          / 2);
-
-    for (auto &unit : unitsToDraw) {
-        /* check what is being drawn, and choose the counter appropriately. */
-        unsigned short counter;
-        counter = getCounter(unit);
-
-        /* call actual drawing method */
-        drawUnit(unit.getTeam(), unit.getType(), unit.getAction(),
-                 unit.getRotation(),
-                 counter, cr,
-                 cameraToRealMapX(
-                         camera.idealMapToCameraXCoordinate(
-                                 unit.getXCoordinate())),
-                 cameraToRealMapY(
-                         camera.idealMapToCameraYCoordinate(
-                                 unit.getYCoordinate())));
-    }
-}
-
 unsigned short GameArea::getCounter(Unit &unit) const {
     if (unit.getType() == UnitsEnum::JEEP) {
         if (unit.getTeam() == TeamEnum::NEUTER){
@@ -6316,8 +6344,12 @@ std::pair<int, int> GameArea::get_coords() {
     return coords;
 }
 
-unsigned int GameArea::realMapToCamera(gdouble coordinate) {
+unsigned int GameArea::screenMapToCameraX(gdouble coordinate) {
     return (NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_width());
+}
+
+unsigned int GameArea::screenMapToCameraY(gdouble coordinate) {
+    return (NUMBER_OF_TILES_TO_SHOW * TILESIZE * coordinate) / (get_height());
 }
 
 void GameArea::setMapData() {

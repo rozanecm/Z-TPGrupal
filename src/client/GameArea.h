@@ -311,7 +311,9 @@ public:
 
     std::pair<int, int> get_coords();
 
-    unsigned int realMapToCamera(gdouble coordinate);
+    unsigned int screenMapToCameraX(gdouble coordinate);
+
+    unsigned int screenMapToCameraY(gdouble coordinate);
 
     void setMapData();
 
