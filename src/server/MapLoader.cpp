@@ -25,11 +25,11 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_node root = doc.child("Map");
     pugi::xml_node map_node = root.child("Terrain");
 
-    int coord_y = 8; // Y coordinate counter, each row is different Y coord
+    int coord_y = 0; // Y coordinate counter, each row is different Y coord
     // Iterate over every row
     auto row = map_node.children().begin();
     for (; row != map_node.children().end(); ++row) {
-        int coord_x = 8; // Each Cell has a different X coord
+        int coord_x = 0; // Each Cell has a different X coord
 
         std::vector<Cell> row_vec;
         map.push_back(row_vec);
