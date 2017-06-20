@@ -21,13 +21,27 @@ int Size::getHeight() const {
 
 bool Size::isThereACollision(Size &other) {
     int x_max, x_min, y_max, y_min;
+    bool collision = false;
     this->calculateMaxAndMinForX(x_max, x_min);
     this->calculateMaxAndMinForY(y_max, y_min);
 
-   return (other.areYouOnThisPoint(x_max, y_max) ||
-           other.areYouOnThisPoint(x_max, y_min) ||
-           other.areYouOnThisPoint(x_min, y_max) ||
-           other.areYouOnThisPoint(x_min, y_min));
+    if (other.areYouOnThisPoint(x_max, y_max) ||
+        other.areYouOnThisPoint(x_max, y_min) ||
+        other.areYouOnThisPoint(x_min, y_max) ||
+        other.areYouOnThisPoint(x_min, y_min)) {
+        collision = true;
+    }
+
+    other.calculateMaxAndMinForX(x_max, x_min);
+    other.calculateMaxAndMinForY(y_max, y_min);
+    if (this->areYouOnThisPoint(x_max, y_max) ||
+            this->areYouOnThisPoint(x_max, y_min) ||
+            this->areYouOnThisPoint(x_min, y_max) ||
+            this->areYouOnThisPoint(x_min, y_min)) {
+        collision = true;
+    }
+
+   return collision;
 }
 
 
