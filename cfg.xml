@@ -1,5 +1,6 @@
 <Config>
     <Port port="8000"/>
+    <Cells internal_positions="16"/>
     <Units>
         <Unit type="Grunt" fire_rate="2" range="7" hp="60" tech_level="3" time="100" speed="4" size_x="3" size_y="5"/>
     </Units>

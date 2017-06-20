@@ -54,3 +54,9 @@ int Node::getFValueIfGWere(int g, int terrain_factor) {
     return (h_value + (g + 4)*terrain_factor);
 }
 
+void Node::clean() {
+    this->h_value = 0;
+    this->g_value = 0;
+    this->was_visited = false;
+}
+
