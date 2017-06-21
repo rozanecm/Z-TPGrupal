@@ -6,11 +6,12 @@
 
 Bullet::Bullet(std::string type, int dmg, int w_speed, Size& w_size,
                Occupant* target) : type(type), damage(dmg), w_speed(w_speed),
-                          w_size(w_size), hit(false), target(target), id(0) {}
+                          w_size(w_size), hit(false), must_disapear(false)
+                            , target(target), id(0) {}
 
 Bullet::Bullet(std::string type, int damage, int w_speed, Size& w_size) :
         type(type), damage(damage), w_speed(w_speed),
-        w_size(w_size), hit(false), id(0) {}
+        w_size(w_size), hit(false), must_disapear(false), id(0) {}
 
 
 void Bullet::shotTarget(Occupant* target) {
@@ -121,5 +122,13 @@ int Bullet::getId() const {
 
 Position Bullet::getPosition() const {
     return this->w_size.getPosition();
+}
+
+bool Bullet::doYouHaveToDisapear() {
+    return must_disapear;
+}
+
+void Bullet::disapear() {
+    must_disapear = true;
 }
 

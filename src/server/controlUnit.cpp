@@ -221,9 +221,11 @@ void ControlUnit::moveAllBullets() {
     std::vector<Bullet*>::iterator it = all_bullets.begin();
     for (; it != all_bullets.end();) {
         (*it)->move();
-        if ((*it)->didHit()) {
+        if ((*it)->doYouHaveToDisapear()) {
             it = all_bullets.erase(it);
         } else {
+            if ((*it)->didHit())
+                (*it)->disapear();
             ++it;
         }
     }

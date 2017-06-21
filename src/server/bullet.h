@@ -15,7 +15,7 @@ private:
     std::string type;
     int damage, w_speed;
     Size w_size;
-    bool hit;
+    bool hit, must_disapear;
     Occupant* target;
     std::vector<Position> road;
     int id;
@@ -54,6 +54,10 @@ public:
     int getId() const;
 
     Position getPosition() const;
+
+    void disapear();
+
+    bool doYouHaveToDisapear();
 };
 
 
