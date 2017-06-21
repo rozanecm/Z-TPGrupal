@@ -63,9 +63,12 @@ void ControlUnit::unitsMakeMicroAction() {
         if ((*x.second).haveYouChanged()) {
             changed_units.push_back((*x.second));
         }
-        if (!(*x.second).areYouAlive()) {
+        if ((*x.second).doYouNeedToDisappear()) {
             all_units.erase(x.first);
         } else {
+            if (!(*x.second).areYouAlive()) {
+                (*x.second).mustDisappear();
+            }
             if ((*x.second).doYouHaveAnyBullets()) {
                 std::vector<Bullet *> tmp = (*x.second).collectBullets();
                 for (auto b: tmp) {
@@ -88,11 +91,14 @@ void ControlUnit::checkAllLivingOccupants() {
     // if dead erase Occupant
     std::vector<Occupant*>::iterator it = all_occupants.begin();
     for(;it != all_occupants.end();){
-        if(!(*it)->areYouAlive()) {
+        if((*it)->doYouNeedToDisappear()) {
             //erase it from map
             it = all_occupants.erase(it);
             // if building put ruins
         } else {
+            if(!(*it)->areYouAlive()) {
+                (*it)->mustDisappear();
+            }
             ++it;
         }
     }

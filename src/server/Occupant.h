@@ -12,6 +12,7 @@ protected:
     int id, life_points, damage_recv;
 //    Size occ_size;
     std::string type;
+    bool disappear;
 
 public:
     // Constructor for Occupant on a specific position saved in Size and it's id
@@ -32,6 +33,10 @@ public:
     int getLifeLeft();
 
     int getId();
+
+    void mustDisappear();
+
+    bool doYouNeedToDisappear();
 
     ~Occupant();
 };

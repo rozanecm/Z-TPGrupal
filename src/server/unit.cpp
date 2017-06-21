@@ -24,18 +24,22 @@ void Unit::makeAction() {
             this->state = STANDINGSTATE;
     }
     if (this->state == ATKSTATE) {
-        if (checkIfTargetIsOnRange()) {
-            if (!road.empty())
-                road.clear();
-            attack();
-        } else {
-            // If target is not on range move till it is
-            // calculate road to target
-            if (road.empty()) {
-                Position trg_pos = target->getPosition();
-                getOnRangeOf(trg_pos.getX(), trg_pos.getY());
+        if (target->areYouAlive()) {
+            if (checkIfTargetIsOnRange()) {
+                if (!road.empty())
+                    road.clear();
+                attack();
+            } else {
+                // If target is not on range move till it is
+                // calculate road to target
+                if (road.empty()) {
+                    Position trg_pos = target->getPosition();
+                    getOnRangeOf(trg_pos.getX(), trg_pos.getY());
+                }
+                move();
             }
-            move();
+        } else {
+            this->state = STANDINGSTATE;
         }
     }
 }
