@@ -3,7 +3,7 @@
 //
 
 #include "controlUnit.h"
-#define WAIT 0.5
+#define WAIT 0.2
 #define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,

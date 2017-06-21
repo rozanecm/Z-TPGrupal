@@ -118,6 +118,8 @@ private:
 
     void addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
                              int x_min, int y_max, int y_min);
+
+    int getModule(int x, int y);
 };
 
 

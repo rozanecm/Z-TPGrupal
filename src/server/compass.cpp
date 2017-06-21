@@ -8,8 +8,8 @@
 #define DIAGONALWALK 14
 #define HMIN 1000
 #define STEP 2
-#define CLOSERAREA 32
-#define MIDDLEAREA 128
+#define CLOSERAREA 16
+#define MIDDLEAREA 120
 
 Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
         : map(map),
@@ -510,9 +510,7 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
                           Position &to) {
     int tmp_h = HMIN * (this->getModuleOfSubtraction(current_pos.getX(),
     to.getX()) + this->getModuleOfSubtraction(current_pos.getY(),to.getY()));
-    int closer_h =  HMIN * (this->getModuleOfSubtraction
-            (to.getX() + CLOSERAREA, to.getX()) +
-            this->getModuleOfSubtraction(to.getY() + CLOSERAREA,to.getY()));
+    int closer_h =  HMIN * CLOSERAREA * 2;
     //Get smaller H depending on where start and destiny are
     int close_x = 0, close_y = 0, mid_x = 0, mid_y = 0;
     if (start.getX() <=  to.getX()) {
@@ -540,16 +538,17 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
     int start_h =  HMIN * (close_x  + close_y);
     int mid_h = HMIN * (mid_x + mid_y);
     // select step
-    if (tmp_h < closer_h || tmp_h > start_h) {
+    if (tmp_h < closer_h || getModule(start_h, tmp_h) < CLOSERAREA) {
         step = 1;
-    } else if ((tmp_h > closer_h || tmp_h < start_h) && tmp_h > mid_h) {
+    } else if ((tmp_h > closer_h || getModule(start_h, tmp_h) > CLOSERAREA)
+               && tmp_h < mid_h) {
         if (unit_size.getWidth() > unit_size.getHeight()) {
             step = (int) (unit_size.getHeight() * 2);
         } else {
             step = (int) (unit_size.getWidth() * 2);
         }
     } else {
-        step = (int) (unit_size.getHeight() * 20);
+        step = (int) (unit_size.getHeight() * 15);
     }
 }
 
@@ -614,6 +613,14 @@ void Compass::addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
                 --j;
             road.push_back(Position(i, j));
         }
+    }
+}
+
+int Compass::getModule(int x, int y) {
+    if (x - y > 0) {
+        return x - y;
+    } else {
+        return y - x;
     }
 }
 
