@@ -133,3 +133,7 @@ void Bullet::disapear() {
     must_disapear = true;
 }
 
+std::string Bullet::getType() {
+    return this->type;
+}
+

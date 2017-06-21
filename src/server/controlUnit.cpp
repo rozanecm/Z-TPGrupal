@@ -198,7 +198,8 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
 
 std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
     std::string info = BULLET;
-    info +=  "-" + std::to_string(bullet.getId()) + "-";
+    info +=  "-" + bullet.getType() + "-";
+    info += std::to_string(bullet.getId()) + "-";
     info += std::to_string(bullet.getPosition().getX()) + "-";
     info += std::to_string(bullet.getPosition().getY()) + "|";
     return info;
