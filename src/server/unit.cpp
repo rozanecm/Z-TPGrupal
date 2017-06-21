@@ -8,7 +8,7 @@ Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE), range(range), target(this) {
+        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this) {
     compass.changeUnitId(id);
 }
 
@@ -20,8 +20,11 @@ void Unit::makeAction() {
     }
     if (this->state == MOVESTATE) {
         this->move();
-        if (road.empty())
+        if (road.empty()) {
             this->state = STANDINGSTATE;
+            this->action = STANDINGSTATE;
+            this->changed = true;
+        }
     }
     if (this->state == ATKSTATE) {
         if (target->areYouAlive()) {
@@ -40,6 +43,8 @@ void Unit::makeAction() {
             }
         } else {
             this->state = STANDINGSTATE;
+            this->action = STANDINGSTATE;
+            this->changed = true;
         }
     }
 }
@@ -47,7 +52,6 @@ void Unit::makeAction() {
 void Unit::calculateRoadTo(int x, int y) {
     if (!checkIfAlreadyOnMyWay(x,y)) {
         this->state = MOVESTATE;
-        this->changed = true;
         Position destination(x, y);
         Position actual = obj_size.getPosition();
         road = compass.getFastestWay(actual, destination);
@@ -99,6 +103,7 @@ void Unit::move() {
             this->range.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
             this->changed = true;
+            this->action = MOVESTATE;
             road.pop_back();
 
             // increase or decrease distance til steps are more than unit speed
@@ -117,6 +122,8 @@ void Unit::move() {
         Position destiny = road.front();
         Position actual = obj_size.getPosition();
         road = compass.getFastestWay(actual,destiny);
+        this->action = STANDINGSTATE;
+        this->changed = true;
     }
 }
 
@@ -125,13 +132,18 @@ void Unit::attack() {
         fire_count = 0;
         // make a shot
         bullets.push_back(weapon.shotTarget(target));
+        this->action = ATKSTATE;
+        this->changed = true;
+        fire_count = 0;
     } else {
-        fire_count += 1;
+        this->action = STANDINGSTATE;
+        this->changed = true;
     }
+    fire_count += 1;
 }
 
-std::string Unit::getState() const {
-    return this->state;
+std::string Unit::getActionState() const {
+    return this->action;
 }
 
 Position Unit::getCurrentPosition() const {
@@ -152,7 +164,6 @@ void Unit::grab(Teamable* object, std::string u_type) {
 
 void Unit::setTargetToAttack(Occupant* target) {
     this->state = ATKSTATE;
-    this->changed = true;
     this->target = target;
     // clean bullets on weapon when a new target is set
     this->weapon.setNewTarget(target);

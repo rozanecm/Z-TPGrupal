@@ -25,7 +25,7 @@ private:
     int unit_speed, fire_rate, fire_count;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
-    std::string state;
+    std::string state,action;
     Size range;
     std::vector<Position> road;
     Occupant* target;
@@ -51,7 +51,7 @@ public:
 
     // Returns "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
-    std::string getState() const;
+    std::string getActionState() const;
 
     void grab(Teamable* object, std::string type);
 

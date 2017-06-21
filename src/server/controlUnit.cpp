@@ -54,18 +54,18 @@ void ControlUnit::sleepFor(double msec) {
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
         // Save previous state
-//        std::string state = (*x.second).getState();
+//        std::string state = (*x.second).getActionState();
 //        std::string team = (*x.second).getTeam();
 //        int life = (*x.second).getLifeLeft();
 //        Position pos = (*x.second).getPosition();
 
-        (*x.second).makeAction();
-        if ((*x.second).haveYouChanged()) {
-            changed_units.push_back((*x.second));
-        }
         if ((*x.second).doYouNeedToDisappear()) {
             all_units.erase(x.first);
         } else {
+            (*x.second).makeAction();
+            if ((*x.second).haveYouChanged()) {
+                changed_units.push_back((*x.second));
+            }
             if (!(*x.second).areYouAlive()) {
                 (*x.second).mustDisappear();
             }
@@ -83,12 +83,6 @@ void ControlUnit::unitsMakeMicroAction() {
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    for (auto o: all_occupants) {
-        if(o->haveYouChanged())
-            changed_occupants.push_back(*o);
-    }
-
-    // if dead erase Occupant
     std::vector<Occupant*>::iterator it = all_occupants.begin();
     for(;it != all_occupants.end();){
         if((*it)->doYouNeedToDisappear()) {
@@ -96,6 +90,8 @@ void ControlUnit::checkAllLivingOccupants() {
             it = all_occupants.erase(it);
             // if building put ruins
         } else {
+            if((*it)->haveYouChanged())
+                changed_occupants.push_back(*(*it));
             if(!(*it)->areYouAlive()) {
                 (*it)->mustDisappear();
             }
@@ -175,7 +171,7 @@ std::string ControlUnit::getUpdateInfo() {
 //                                    std::string& team,
 //                                    int life, Position& pos) {
 //    bool differ = false;
-//    if (x.getState() != state)
+//    if (x.getActionState() != state)
 //        differ = true;
 //    if (x.getTeam() != team) // For neutral vehicules
 //        differ = true;
@@ -190,7 +186,7 @@ std::string ControlUnit::getUpdateInfo() {
 std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     std::string info = "";
     info += std::to_string(unit.getId()) + "-";
-    info += unit.getState() + "-";
+    info += unit.getActionState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
     info += std::to_string(unit.getLifeLeft()) + "|";
