@@ -30,6 +30,7 @@ private:
     std::vector<Position> road;
     Occupant* target;
     std::vector<Bullet*> bullets;
+    bool got_target;
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,

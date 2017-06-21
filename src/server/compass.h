@@ -27,6 +27,7 @@ private:
     Size unit_size;
     bool finished, clear;
     Position destiny;
+    Occupant enemy;
 
 public:
     // The Compass receives the map of Cells for calculations and the
@@ -54,6 +55,10 @@ public:
     void changeUnitId(int id);
 
     void clearCompass();
+
+//    Occupant* getFoundEnemy();
+
+    Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
 
     ~Compass();
 

@@ -3,20 +3,38 @@
 //
 
 #include "unit.h"
-
+#define NEUTRAL "Neutral"
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this) {
+        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this)
+        ,got_target(false){
     compass.changeUnitId(id);
 }
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
-        // Check for enemies around you. If so, state = ATKSTATE
-        //if (enemiesOnRange())
-//            this->state = ATKSTATE;
+        if (this->team != NEUTRAL) {
+            if (!got_target) {
+                // Check for enemies around you. If so, state = ATKSTATE
+                this->changed = false;
+                target = compass.checkForEnemiesOnRange
+                                                    (*(Occupant *) this, range);
+                if (target->getId() != this->id) {
+                    got_target = true;
+                }
+            } else {
+                if (target->areYouAlive()) {
+                    attack();
+                    this->action = ATKSTATE;
+                } else {
+                    got_target = false;
+                    this->action = STANDINGSTATE;
+                    this->changed = true;
+                }
+            }
+        }
     }
     if (this->state == MOVESTATE) {
         this->move();

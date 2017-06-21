@@ -624,3 +624,11 @@ int Compass::getModule(int x, int y) {
     }
 }
 
+Occupant* Compass::checkForEnemiesOnRange(Occupant& unit, Size &range) {
+    return map.checkForEnemiesOn(range,unit,enemy);
+}
+
+//Occupant* Compass::getFoundEnemy() {
+//    return &enemy;
+//}
+

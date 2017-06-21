@@ -8,8 +8,9 @@ Map::Map(int x, int y, int width, int height,
    std::vector<std::vector<Cell>>& terrain_map,
          std::vector<Occupant*>* occupants,
          std::string& xml) : map_size(x,y,width,height),
-    terrain_map(terrain_map), all_occupants(occupants), xml(xml)
-{}
+    terrain_map(terrain_map), all_occupants(occupants), xml(xml) {
+    this->buildTypeMap();
+}
 
 //void Map::addOccupant(Occupant *new_occupant) {
 //    all_occupants.push_back(new_occupant);
@@ -33,11 +34,21 @@ std::string Map::getTerrainType(int x, int y) {
 
 bool Map::areThisPointsEmpty(Size &size, int id) {
     bool no_collision = true;
-    for(auto x: *all_occupants) {
-        if(x->getId() != id
-           && x->isThereACollision(size) && x->getType() != "Bridge") {
-            no_collision = false;
-            break;
+    std::vector<Occupant*>::iterator it = all_occupants->begin();
+    for(;it != all_occupants->end();){
+        // if Occupant is dead remove it from vector
+        if(!(*it)->areYouAlive()) {
+            //erase it from map
+            it = all_occupants->erase(it);
+        } else {
+            //make checks
+            if((*it)->getId() != id
+               && (*it)->isThereACollision(size) &&
+                    (*it)->getType() != "Bridge") {
+                no_collision = false;
+                break;
+            }
+            ++it;
         }
     }
     return no_collision;
@@ -45,11 +56,22 @@ bool Map::areThisPointsEmpty(Size &size, int id) {
 
 bool Map::areThisPointsEmpty(Size &size, Occupant &shooter, Occupant &occupant) {
     bool no_collision = true;
-    for(auto x: *all_occupants) {
-        if(x->getId() != occupant.getId() && x->isThereACollision(size)
-           && x->getType() != "Bridge"  && x->getId() != shooter.getId()) {
-            no_collision = false;
-            break;
+    std::vector<Occupant*>::iterator it = all_occupants->begin();
+    for(;it != all_occupants->end();){
+        // if Occupant is dead remove it from vector
+        if(!(*it)->areYouAlive()) {
+            //erase it from map
+            it = all_occupants->erase(it);
+        } else {
+            //make checks
+            if((*it)->getId() != occupant.getId() &&
+                    (*it)->isThereACollision(size)
+                    && (*it)->getType() != "Bridge"  &&
+                    (*it)->getId() != shooter.getId()) {
+                no_collision = false;
+                break;
+            }
+            ++it;
         }
     }
     return no_collision;
@@ -128,10 +150,20 @@ bool Map::isThereLava(Size& other_size) {
 
 bool Map::thereIsABridge(Size& other_size) {
     bool bridge = false;
-    for(auto x: *all_occupants) {
-        if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
-            bridge = true;
-            break;
+    std::vector<Occupant*>::iterator it = all_occupants->begin();
+    for(;it != all_occupants->end();){
+        // if Occupant is dead remove it from vector
+        if(!(*it)->areYouAlive()) {
+            //erase it from map
+            it = all_occupants->erase(it);
+        } else {
+            //make checks
+            if((*it)->isThereACollision(other_size) &&
+                    (*it)->getType() == "Bridge") {
+                bridge = true;
+                break;
+            }
+            ++it;
         }
     }
     return bridge;
@@ -194,6 +226,48 @@ std::vector<Occupant *> &Map::getOccupants() {
 
 void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
     this->all_occupants = all_occupants;
+}
+
+Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit, Occupant& enemy) {
+    std::vector<Occupant*>::iterator it = all_occupants->begin();
+    for(;it != all_occupants->end();){
+        // if Unit is dead remove it from vector
+        if(!(*it)->areYouAlive()) {
+            //erase it from map
+            it = all_occupants->erase(it);
+        } else {
+            //make checks
+            if((*it)->getId() != unit.getId() && (*it)->isThereACollision(range)
+               && types[(*it)->getType()] == "Unit" &&
+                    (*it)->getTeam() != "Neutral"
+               && unit.getTeam() != (*it)->getTeam()) {
+                return (*it);
+            }
+            ++it;
+        }
+    }
+    return &unit;
+}
+
+void Map::buildTypeMap() {
+    types.insert(std::pair<std::string,std::string>("Fort","Building"));
+    types.insert(std::pair<std::string,std::string>
+                         ("vehiculeFactory","Building"));
+    types.insert(std::pair<std::string,std::string>("robotFactory","Building"));
+    types.insert(std::pair<std::string,std::string>("Factory","Building"));
+    types.insert(std::pair<std::string,std::string>("Rock","Nature"));
+    types.insert(std::pair<std::string,std::string>("iceblock","Nature"));
+    types.insert(std::pair<std::string,std::string>("grunt","Unit"));
+    types.insert(std::pair<std::string,std::string>("Psycho","Unit"));
+    types.insert(std::pair<std::string,std::string>("Tough","Unit"));
+    types.insert(std::pair<std::string,std::string>("Pyro","Unit"));
+    types.insert(std::pair<std::string,std::string>("Sniper","Unit"));
+    types.insert(std::pair<std::string,std::string>("laser","Unit"));
+    types.insert(std::pair<std::string,std::string>("jeep","Unit"));
+    types.insert(std::pair<std::string,std::string>("MediumTank","Unit"));
+    types.insert(std::pair<std::string,std::string>("LightTank","Unit"));
+    types.insert(std::pair<std::string,std::string>("HeavyTank","Unit"));
+    types.insert(std::pair<std::string,std::string>("MML","Unit"));
 }
 
 

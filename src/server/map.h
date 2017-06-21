@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <map>
 #include "cell.h"
 #include "Occupant.h"
 // later written
@@ -19,6 +20,7 @@ private:
     Size map_size;
     std::vector<Occupant*>* all_occupants;
     std::string xml;
+    std::map<std::string,std::string> types;
     /*std::vector<Unit>& all_units;*/
 
 public:
@@ -76,6 +78,11 @@ public:
     std::vector<Occupant*>& getOccupants();
 
     void updateOccupants(std::vector<Occupant*>* all_occupants);
+
+    Occupant* checkForEnemiesOn(Size& range, Occupant& unit, Occupant& enemy);
+
+private:
+    void buildTypeMap();
 };
 
 
