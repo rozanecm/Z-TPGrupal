@@ -43,11 +43,11 @@ bool Map::areThisPointsEmpty(Size &size, int id) {
     return no_collision;
 }
 
-bool Map::areThisPointsEmpty(Size &size, Occupant &occupant) {
+bool Map::areThisPointsEmpty(Size &size, Occupant &shooter, Occupant &occupant) {
     bool no_collision = true;
     for(auto x: *all_occupants) {
         if(x->getId() != occupant.getId() && x->isThereACollision(size)
-           && x->getType() != "Bridge") {
+           && x->getType() != "Bridge"  && x->getId() != shooter.getId()) {
             no_collision = false;
             break;
         }
@@ -82,14 +82,15 @@ bool Map::canIWalkToThisPosition(Size &other_size, int id) {
     return (you_can);
 }
 
-bool Map::canBulletWalkToThisPosition(Size &other_size, Occupant &target) {
+bool Map::canBulletWalkToThisPosition(Size &other_size, Occupant &shooter,
+                                                        Occupant &target) {
     bool you_can = true;
 
     // if the object is stepping out of the map
     if (map_size.areYouHalfOutSide(other_size))
         you_can = false;
 
-    if (!areThisPointsEmpty(other_size,target)) {
+    if (!areThisPointsEmpty(other_size,shooter,target)) {
         you_can = false;
     }
 

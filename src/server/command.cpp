@@ -21,9 +21,11 @@ void Command::run() {
         // make move
         control->cmdMoveUnit(player_id,id,x,y);
     } else if (action == "atk") {
-        std::string id_str = getNextData(cmd);
-        int id = std::stoi(id_str);
-//        control
+        std::string id_unit_str = getNextData(cmd);
+        int id_unit = std::stoi(id_unit_str);
+        std::string target_str = getNextData(cmd);
+        int target = std::stoi(target_str);
+        control->cmdAttack(player_id,id_unit,target);
     } else if (action == "grab") {
     }
 }

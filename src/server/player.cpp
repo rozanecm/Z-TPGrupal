@@ -53,7 +53,7 @@ void Player::processMenuCommands(std::string &full_cmd) {
     if (cmd == "createlobby") {
         this->menu.createNewLobby(this);
         on_menu = false;
-    }  else if (cmd == "getinlobby") {
+    }  else if (cmd == "joinlobby") {
         std::string lobby_id = getNextData(full_cmd);
         int id = std::stoi(lobby_id);
         this->menu.addToLobby(id,this);

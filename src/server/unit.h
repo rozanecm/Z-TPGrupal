@@ -25,10 +25,10 @@ private:
     int unit_speed, fire_rate, fire_count;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
-    std::string state;
+    std::string state,action;
     Size range;
     std::vector<Position> road;
-    Occupant& target;
+    Occupant* target;
     std::vector<Bullet*> bullets;
 
 public:
@@ -51,11 +51,11 @@ public:
 
     // Returns "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
-    std::string getState() const;
+    std::string getActionState() const;
 
     void grab(Teamable* object, std::string type);
 
-    void setTargetToAttack(Occupant& target);
+    void setTargetToAttack(Occupant* target);
     //-> make check is i have explosive attack for buildings
 
     bool doYouHaveAnyBullets();
@@ -66,7 +66,7 @@ public:
 
     // The bullet will hit if there is no Occupant in the middle.
     // except for bridges
-    bool checkIfBulletWillHit(std::vector<Position> *b_road, Size& b_size);
+    bool checkIfBulletWillHit(std::vector<Position>& b_road, Size& b_size);
 
     void getOnRangeOf(int x, int y);
 

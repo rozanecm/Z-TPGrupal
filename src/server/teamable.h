@@ -12,6 +12,7 @@ class Teamable {
 protected:
     std::string team;
     Size obj_size;
+    bool changed;
 
 public:
     Teamable(std::string team, Size obj_size);
@@ -26,12 +27,14 @@ public:
     std::string getTeam() const;
 
     // Returns the central position of the object
-    Position getPosition();
+    Position getPosition() const;
 
     // Returns true if is there a collision with the object
     bool isThereACollision(Size& size);
 
-    Size getSize();
+    Size getSize() const;
+
+    bool haveYouChanged();
 };
 
 
