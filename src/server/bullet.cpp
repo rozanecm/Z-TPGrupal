@@ -24,6 +24,7 @@ bool Bullet::didHit() {
 }
 
 void Bullet::calculateRoadToTarget() {
+    road.clear();
     Position target_pos = target->getPosition();
     Position bullet_pos = w_size.getPosition();
 
