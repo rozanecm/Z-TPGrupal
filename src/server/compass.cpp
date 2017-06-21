@@ -357,8 +357,9 @@ double Compass::getTerrainFactorOn(int x, int y) {
     return map.getTerrainFactorOn(x,y);
 }
 
-bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &occupant) {
-    return map.canBulletWalkToThisPosition(size,occupant);
+bool Compass::canBulletWalkToThisPosition(Size &size, Occupant &shooter,
+                                          Occupant &target) {
+    return map.canBulletWalkToThisPosition(size,shooter,target);
 }
 
 void Compass::changeUnitSize(Size &new_size) {

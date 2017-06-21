@@ -25,9 +25,6 @@ public:
 
     void reduceLifeBy(int dmg);
 
-    // Returns the
-    Position getPosition() const;
-
     bool areYouAlive();
 
 //    bool isThereACollision(Size& size);

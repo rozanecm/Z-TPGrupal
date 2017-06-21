@@ -33,6 +33,7 @@ private:
     std::vector<Bullet*> all_bullets;
     std::vector<Unit> changed_units;
     std::vector<Occupant> changed_occupants;
+    int objects_counter;
 
 public:
     ControlUnit(std::vector<Messenger *> &new_players,
@@ -67,14 +68,16 @@ private:
 
     std::string getUpdateInfo();
 
-    bool differenceOnUnits(Unit& x, std::string& state,std::string& team,
-                           int life, Position& pos);
+//    bool differenceOnUnits(Unit& x, std::string& state,std::string& team,
+//                           int life, Position& pos);
 
     std::string getInfoFromUnit(Unit& unit);
 
     std::string getInfoFromOccupant(Occupant& Occupant);
 
     std::string getInfoFromTerritory(Territory& territory);
+
+    std::string getInfoFromBullets(Bullet& bullet);
 
     void makeTerritoriesChecks();
 

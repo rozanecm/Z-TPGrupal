@@ -16,15 +16,18 @@ private:
     int damage, w_speed;
     Size w_size;
     bool hit;
-    Occupant& target;
-    std::vector<Position>* road;
+    Occupant* target;
+    std::vector<Position> road;
+    int id;
 
 public:
-    Bullet(std::string type, int damage, int w_speed, Size w_size,
-           Occupant target);
+    Bullet(std::string type, int damage, int w_speed, Size& w_size,
+           Occupant* target);
+
+    Bullet(std::string type, int damage, int w_speed, Size& w_size);
 
     // Pursues the Target in straight line on each TIC til hits
-    void shotTarget(Occupant& target);
+    void shotTarget(Occupant* target);
 
     void calculateRoadToTarget();
 
@@ -36,13 +39,21 @@ public:
 
     Position calculateNextInvertPosition(double a,double b,int y);
 
-    Size getSize();
+    Size getSize() const;
 
     bool isRoadEmpty();
 
-    std::vector<Position>* getRoad();
+    std::vector<Position>& getRoad();
 
-    void damageThis(Occupant& occupant);
+    void damageThis(Occupant* occupant);
+
+    void setStartLocation(int x, int y);
+
+    void setCorrectId(int id);
+
+    int getId() const;
+
+    Position getPosition() const;
 };
 
 

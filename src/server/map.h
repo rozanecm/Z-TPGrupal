@@ -45,7 +45,7 @@ public:
     bool areThisPointsEmpty(Size &size, int id);
 
     // Returns true if points are empty or it is the Occupant
-    bool areThisPointsEmpty(Size& size, Occupant& occupant);
+    bool areThisPointsEmpty(Size& size, Occupant &shooter, Occupant& occupant);
 
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position
@@ -54,7 +54,8 @@ public:
     // Recieves the size of an object on the position that wants to be walk
     // Returns true if the object fits and can step to that position ignoring
     // the occupant from parameter
-    bool canBulletWalkToThisPosition(Size& size, Occupant& other);
+    bool canBulletWalkToThisPosition(Size& size, Occupant &shooter,
+                                                Occupant& target);
 
     // Returns the width of the map
     int getWidth();

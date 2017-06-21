@@ -18,14 +18,11 @@ std::string Occupant::getType() const {
 
 void Occupant::reduceLifeBy(int dmg) {
     this->damage_recv += dmg;
+    this->changed = true;
 }
 
 bool Occupant::areYouAlive() {
     return ((life_points - damage_recv) > 0);
-}
-
-Position Occupant::getPosition() const{
-    return obj_size.getPosition();
 }
 
 //bool Occupant::isThereACollision(Size &other) {
