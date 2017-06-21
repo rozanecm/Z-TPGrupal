@@ -4,7 +4,7 @@
 
 #include "controlUnit.h"
 #define WAIT 0.5
-
+#define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -25,8 +25,8 @@ void ControlUnit::run() {
         executeCommands();
 
         // do stuff
-        this->unitsMakeMicroAction();
         this->moveAllBullets();
+        this->unitsMakeMicroAction();
         this->makeTerritoriesChecks();
         this->checkAllLivingOccupants();
 
@@ -53,12 +53,6 @@ void ControlUnit::sleepFor(double msec) {
 
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
-        // Save previous state
-//        std::string state = (*x.second).getActionState();
-//        std::string team = (*x.second).getTeam();
-//        int life = (*x.second).getLifeLeft();
-//        Position pos = (*x.second).getPosition();
-
         if ((*x.second).doYouNeedToDisappear()) {
             all_units.erase(x.first);
         } else {
@@ -203,8 +197,8 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
 }
 
 std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
-    std::string info = "";
-    info += std::to_string(bullet.getId()) + "-";
+    std::string info = BULLET;
+    info +=  "-" + std::to_string(bullet.getId()) + "-";
     info += std::to_string(bullet.getPosition().getX()) + "-";
     info += std::to_string(bullet.getPosition().getY()) + "|";
     return info;

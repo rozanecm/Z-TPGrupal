@@ -17,7 +17,7 @@ private:
     int damage, w_speed;
     bool explosive;
     Size w_size;
-    Bullet* bullet;
+    Bullet bullet;
 
 public:
     Weapon(std::string& type, int damage, int w_speed, bool explosive,
