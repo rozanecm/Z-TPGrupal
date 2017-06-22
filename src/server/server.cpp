@@ -21,18 +21,6 @@ void Server::run() {
             menu.addPlayer(messenger, menu,id_new_player);
             ++i;
             std::cout << "new player conectado" << std::endl;
-//              create player with messenger
-//            std::string logIn_msg = messenger->recieveMessage();
-//            processMessage(logIn_msg, messenger);
-//
-//           for (std::vector<UserOperator*>::iterator it = this->users.begin();
-//                     it != this->users.end(); ) {
-//                    if ((*it)->finished()) {
-//                        (*it)->join();
-//                        delete(*it);
-//                it = this->users.erase(it);//erase gives me the next iterator
-//                    } else { ++it; }
-//                }
 
         }
     } catch (SocketError& e) {
@@ -41,64 +29,9 @@ void Server::run() {
     }
 }
 
-bool Server::processMessage(std::string& logIn_msg, Messenger* msgr) {
-    std::string user = getNextData(logIn_msg);
-    bool no_problem = true;
-    if (user == "alumno") {
-//        std::string id_str = getNextData(logIn_msg);
-//        int id = std::stoi(id_str);
-//        if (this->checkStudentId(id, user)) {
-//            StudentOperator* student = new StudentOperator(id, control, msgr);
-//            this->users.emplace_back(student);
-//            // Make user to start recieving commands from client
-//            this->users.back()->start();
-//
-//        } else { no_problem = false;}
-//    } else if (user == "docente") {
-//        std::string id_str = getNextData(logIn_msg);
-//        int id = std::stoi(id_str);
-//        if (this->checkProfessorId(id, user)) {
-//      ProfessorOperator* professor = new ProfessorOperator(id, control, msgr);
-//            this->users.emplace_back(professor);
-//            // Make user to start recieving commands from client
-//            this->users.back()->start();
-//
-//        } else { no_problem = false;}
-//    } else if (user == "admin") {
-//        Admin* admin = new Admin(this->control, msgr);
-//        this->users.emplace_back(admin);
-//        // Make user to start recieving commands from client
-//        this->users.back()->start();
-
-    } else {
-        std::string msg_error = user;
-        msg_error += " es un tipo de usuario inválido.\n";
-//        PrintStdErr printer(msg_error);
-        no_problem = false;
-    }
-    return no_problem;
-}
-
-std::string Server::getNextData(std::string& line) {
-    std::size_t found = line.find('-');
-    std::string data = line.substr(0,found);
-    line.erase(0,found+1);
-    return data;
-}
-
 void Server::stop() {
-    this->socket.shutdown();
     this->running = false;
+    this->socket.shutdown();
 }
 
-Server::~Server() {
-//    delete(this->control);
-
-//    for (std::vector<Player*>::iterator it = this->users.begin();
-//         it != this->users.end(); ) {
-//        (*it)->stop();
-//        (*it)->join();
-//        delete(*it);
-//        it = this->users.erase(it);//erase gives me the next iterator
-//    }
-}
+Server::~Server() {}
