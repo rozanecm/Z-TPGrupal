@@ -123,9 +123,10 @@ void MapLoader::load_unit_molds(pugi::xml_node units) {
         int range = std::stoi(unit.attribute("range").value());
         int speed = std::stoi(unit.attribute("speed").value());
         int time = std::stoi(unit.attribute("time").value());
+        int quantity = std::stoi(unit.attribute("quantity").value());
         int tech_level = std::stoi(unit.attribute("tech_level").value());
         unit_mold.emplace_back(tech_level, hp, range, width, height,
-                speed, fire_rate, time, type);
+                speed, fire_rate, time, quantity, type);
     }
 }
 
@@ -156,29 +157,57 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
     int size_y = std::stoi(factory_cfg.attribute("size_y").value());
     int hp = std::stoi(factory_cfg.attribute("hp").value());
     std::string type = factory_cfg.attribute("type").value();
+
     for(auto& territory : root.children()) {
-        std::string name = territory.name();
-        if (name == "Fort") {
-            int x = std::stoi(territory.attribute("center_x").value()) *
-                internal_positions;
-            int y = std::stoi(territory.attribute("center_y").value()) *
-                internal_positions;
-            forts.push_back(create_factory(id_counter++, hp, name,
-                                           Size(x, y, 20, 20)));
-        }
+        std::map<int, Factory*> factories_in_territory;
         for(auto& factory : territory.children()) {
             int x = std::stoi(factory.attribute("x").value()) *
                 internal_positions;
             int y = std::stoi(factory.attribute("y").value()) *
                 internal_positions;
             Size s(x, y, size_x, size_y);
-            occupants.push_back(create_factory(id_counter++, hp, type, s));
+            Factory* f = create_factory(id_counter++, hp, type, s);
+            occupants.push_back((Occupant*) f);
+            factories_in_territory[id_counter] = f;
         }
+        create_territory(hp, territory, id_counter, factories_in_territory);
     }
+}
+
+void MapLoader::create_territory(int hp, const pugi::xml_node &territory,
+                                 int &id_counter,
+                                 std::map<int, Factory *> &factories_in_territory) {
+    std::string name = territory.name();
+    int x = std::stoi(territory.attribute("center_x").value()) *
+            internal_positions;
+    int y = std::stoi(territory.attribute("center_y").value()) *
+            internal_positions;
+    int min_x = std::stoi(territory.attribute("min_x").value());
+    int min_y = std::stoi(territory.attribute("min_y").value());
+    int max_x = std::stoi(territory.attribute("max_x").value());
+    int max_y = std::stoi(territory.attribute("max_y").value());
+    int width =  (min_x + max_x) / 2;
+    int height = (min_y + max_y) / 2;
+    Size flag(x, y, width, height);
+    Position flag_position(x, y);
+    Territory* t = new Territory(factories_in_territory, flag_position, flag);
+    territories.emplace_back(t);
+
+    /* If it's a fort we also create a factory */
+    if (name == "Fort") {
+            Factory* f = create_factory(id_counter++, hp, name,
+                                        Size(x, y, 20, 20));
+            occupants.push_back((Occupant*) f);
+            forts.push_back(f);
+        }
 }
 
 std::vector<Factory *> MapLoader::get_forts() {
     return forts;
+}
+
+std::vector<Territory *> MapLoader::get_territories() {
+    return territories;
 }
 
 

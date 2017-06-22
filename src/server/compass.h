@@ -27,6 +27,7 @@ private:
     Size unit_size;
     bool finished, clear;
     Position destiny;
+    Occupant enemy;
 
 public:
     // The Compass receives the map of Cells for calculations and the
@@ -54,6 +55,14 @@ public:
     void changeUnitId(int id);
 
     void clearCompass();
+
+    bool checkIfItIsGrabbable(std::string& type) const;
+
+    Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
+
+    // Returns the position of destiny. If destiny is not a valid position
+    // it returns the closest valid position
+    Position getAValidPositionForDestiny(Position& destiny);
 
     ~Compass();
 
@@ -102,10 +111,6 @@ private:
     // checks the Neighbor nodes to see if destiny is among them
     void checkIfIsDestinyNeighbor(Node *new_node, int step);
 
-    // Returns the position of destiny. If destiny is not a valid position
-    // it returns the closest valid position
-    Position getAValidPositionForDestiny(Position& destiny);
-
     // Returns the closest valid position to pos
     Position getClosestValidPosition(Position& pos);
 
@@ -118,6 +123,8 @@ private:
 
     void addPositionsInOrder(bool increase_x, bool increase_y, int x_max,
                              int x_min, int y_max, int y_min);
+
+    int getModule(int x, int y);
 };
 
 

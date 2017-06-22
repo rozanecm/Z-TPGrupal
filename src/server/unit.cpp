@@ -3,20 +3,38 @@
 //
 
 #include "unit.h"
-
+#define NEUTRAL "Neutral"
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass &compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this) {
+        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this)
+        ,grab_target(this),got_target(false),mount_vehicule(false){
     compass.changeUnitId(id);
 }
 
 void Unit::makeAction() {
     if (this->state == STANDINGSTATE) {
-        // Check for enemies around you. If so, state = ATKSTATE
-        //if (enemiesOnRange())
-//            this->state = ATKSTATE;
+        if (this->team != NEUTRAL) {
+            if (!got_target) {
+                // Check for enemies around you. If so, state = ATKSTATE
+                this->changed = false;
+                target = compass.checkForEnemiesOnRange
+                                                    (*(Occupant *) this, range);
+                if (target->getId() != this->id) {
+                    got_target = true;
+                }
+            } else {
+                if (target->areYouAlive() && checkIfTargetIsOnRange()) {
+                    attack();
+                    this->action = ATKSTATE;
+                } else {
+                    got_target = false;
+                    this->action = STANDINGSTATE;
+                    this->changed = true;
+                }
+            }
+        }
     }
     if (this->state == MOVESTATE) {
         this->move();
@@ -45,6 +63,27 @@ void Unit::makeAction() {
             this->state = STANDINGSTATE;
             this->action = STANDINGSTATE;
             this->changed = true;
+        }
+    }
+    if (this->state == GRABBINGSTATE) {
+        if (this->action != MOVESTATE) {
+            Position target_pos = grab_target->getPosition();
+            if (!road.empty())
+                road.clear();
+            Position actual = obj_size.getPosition();
+            road = compass.getFastestWay(actual, target_pos);
+            this->action = MOVESTATE;
+        } else {
+            if (onRangeToGrabTarget()) {
+                grab();
+            } else if (road.empty()) {
+                this->state = STANDINGSTATE;
+                this->action = STANDINGSTATE;
+                this->changed = true;
+                mount_vehicule = true;
+            } else if (!road.empty()) {
+                move();
+            }
         }
     }
 }
@@ -150,15 +189,28 @@ Position Unit::getCurrentPosition() const {
     return this->obj_size.getPosition();
 }
 
-void Unit::grab(Teamable* object, std::string u_type) {
-    // move to position
-    if (u_type == FLAGTYPE) {
-        object->changeTeam(this->team);
-    } else if (this->type == GRUNTTYPE) { // Only Grunt robots can drive
+void Unit::setTargetToGrab(Teamable *object, std::string type) {
+    // if its a flag any unit can grab it
+    if (type == FLAGTYPE) {
+        grab_target = object;
+        this->state = GRABBINGSTATE;
+    } else if (this->type == GRUNTTYPE && object->getTeam() == NEUTRAL
+            && compass.checkIfItIsGrabbable(type)) {
+        // Only Grunt robots can drive
         // If is not a flag, is a vehicle
-        // Unit disappears right before taking the vehicle
-        object->changeTeam(this->team);
-        this->life_points = 0;
+        grab_target = object;
+        this->state = GRABBINGSTATE;
+        mount_vehicule = true;
+    }
+}
+
+void Unit::grab() {
+    this->state = STANDINGSTATE;
+    this->action = STANDINGSTATE;
+    this->changed = true;
+    grab_target->changeTeam(this->team);
+    if (mount_vehicule) {
+        this->damage_recv = this->life_points;
     }
 }
 
@@ -228,3 +280,9 @@ Size Unit::getNextPosition(int steps) {
 
     return Size(pos.getX(),pos.getY(),obj_size.getWidth(),obj_size.getHeight());
 }
+
+bool Unit::onRangeToGrabTarget() {
+    Size trg_size = grab_target->getSize();
+    return range.isThereACollision(trg_size);
+}
+

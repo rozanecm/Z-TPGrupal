@@ -58,6 +58,8 @@ public:
     void disapear();
 
     bool doYouHaveToDisapear();
+
+    std::string getType();
 };
 
 

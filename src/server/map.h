@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <map>
 #include "cell.h"
 #include "Occupant.h"
 // later written
@@ -19,6 +20,7 @@ private:
     Size map_size;
     std::vector<Occupant*>* all_occupants;
     std::string xml;
+    std::map<std::string,std::string> types;
     /*std::vector<Unit>& all_units;*/
 
 public:
@@ -26,13 +28,7 @@ public:
     Map(int x, int y, int width, int height,
         std::vector<std::vector<Cell>>& terrain_map,
         std::vector<Occupant*>* all_occupants,
-        std::string& xml
-    );
-
-//    void addUnits(std::vector<Unit>& all_units);
-    // I'm gonna add Occupants on Game
-    // Adds a new Occupant to the list of Occupants of the map
-//    void addOccupant(Occupant* new_occupant);
+        std::string& xml);
 
     // Recieves the coordinates (x,y) and returns the terrain factor on that
     // position on the map.
@@ -71,11 +67,18 @@ public:
 
     std::string& get_map();
 
-    void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
+//    void getAClosePlaceNextTo(Size& u_size, Size& fac_size);
 
     std::vector<Occupant*>& getOccupants();
 
     void updateOccupants(std::vector<Occupant*>* all_occupants);
+
+    Occupant* checkForEnemiesOn(Size& range, Occupant& unit, Occupant& enemy);
+
+    bool tellIfItIsGrabbable(std::string& type);
+
+private:
+    void buildTypeMap();
 };
 
 

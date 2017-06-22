@@ -29,16 +29,6 @@ public:
     void stop();
 
     ~Server();
-
-private:
-    // Process the logIn message to know which kind
-    // of user is logIn
-    bool processMessage(std::string& message,  Messenger* msgr);
-
-    // Returns the next word of the command received
-    // reducing the size of the string with the command given
-    std::string getNextData(std::string& line);
-
 };
 
 

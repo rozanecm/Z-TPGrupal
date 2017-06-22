@@ -11,8 +11,8 @@ Teamable::Teamable(Size size) : team("Neutral"), obj_size(size),
                                 changed(false) {}
 
 void Teamable::changeTeam(std::string team) {
-    this->team = team;
     this->changed = true;
+    this->team = team;
 }
 
 std::string Teamable::getTeam() const {
@@ -33,7 +33,7 @@ Size Teamable::getSize() const {
 
 bool Teamable::haveYouChanged() {
     bool tmp = changed;
-    changed =false;
+    changed = false;
     return tmp;
 }
 

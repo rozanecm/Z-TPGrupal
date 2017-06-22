@@ -2,7 +2,6 @@
 #include <pugixml.hpp>
 #include "server.h"
 
-#define PORT 8001
 
 unsigned int load_port(const char* cfg_file_path) {
     pugi::xml_document doc;

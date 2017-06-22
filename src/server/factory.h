@@ -10,8 +10,8 @@ class Factory: public Occupant {
     bool running;
     int tech_level,time_counter;
     std::vector<UnitMold> units;
-    std::vector<UnitMold>::iterator it;
-    std::vector<Unit> new_units;
+    std::vector<UnitMold>::iterator mold;
+    std::vector<Unit*> new_units;
     std::shared_ptr<Map> map;
     std::map<std::string, Weapon> weapons;
 
@@ -27,7 +27,7 @@ public:
     void startBuilding(std::string& player_id);
 
     // Stops the creation of units
-    void stopBuilding(std::string &player_id);
+//    void stopBuilding(std::string &player_id);
 
     // Returns the creational time of the selected Unit
     int getSelectedUnitTime();
@@ -43,7 +43,7 @@ public:
 
     bool haveNewUnits();
 
-    std::vector<Unit> getUnits();
+    std::vector<Unit*> getUnits();
 };
 
 

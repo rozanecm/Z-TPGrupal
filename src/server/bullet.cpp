@@ -24,6 +24,7 @@ bool Bullet::didHit() {
 }
 
 void Bullet::calculateRoadToTarget() {
+    road.clear();
     Position target_pos = target->getPosition();
     Position bullet_pos = w_size.getPosition();
 
@@ -130,5 +131,9 @@ bool Bullet::doYouHaveToDisapear() {
 
 void Bullet::disapear() {
     must_disapear = true;
+}
+
+std::string Bullet::getType() {
+    return this->type;
 }
 
