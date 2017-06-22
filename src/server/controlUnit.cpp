@@ -3,7 +3,7 @@
 //
 
 #include "controlUnit.h"
-#define WAIT 0.2
+#define WAIT 0.4
 #define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
@@ -52,7 +52,7 @@ void ControlUnit::sleepFor(double msec) {
 }
 
 void ControlUnit::unitsMakeMicroAction() {
-    for (auto x: all_units){
+    for (auto& x: all_units){
         if ((*x.second).doYouNeedToDisappear()) {
             all_units.erase(x.first);
         } else {
@@ -65,7 +65,7 @@ void ControlUnit::unitsMakeMicroAction() {
             }
             if ((*x.second).doYouHaveAnyBullets()) {
                 std::vector<Bullet *> tmp = (*x.second).collectBullets();
-                for (auto b: tmp) {
+                for (auto& b: tmp) {
                     b->setCorrectId(objects_counter);
                     ++objects_counter;
                 }

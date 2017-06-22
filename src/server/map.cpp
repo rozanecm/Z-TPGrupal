@@ -34,21 +34,11 @@ std::string Map::getTerrainType(int x, int y) {
 
 bool Map::areThisPointsEmpty(Size &size, int id) {
     bool no_collision = true;
-    std::vector<Occupant*>::iterator it = all_occupants->begin();
-    for(;it != all_occupants->end();){
-        // if Occupant is dead remove it from vector
-        if(!(*it)->areYouAlive()) {
-            //erase it from map
-            it = all_occupants->erase(it);
-        } else {
-            //make checks
-            if((*it)->getId() != id
-               && (*it)->isThereACollision(size) &&
-                    (*it)->getType() != "Bridge") {
-                no_collision = false;
-                break;
-            }
-            ++it;
+    for(auto x: *all_occupants) {
+        if(x->getId() != id
+           && x->isThereACollision(size) && x->getType() != "Bridge") {
+            no_collision = false;
+            break;
         }
     }
     return no_collision;
@@ -56,22 +46,11 @@ bool Map::areThisPointsEmpty(Size &size, int id) {
 
 bool Map::areThisPointsEmpty(Size &size, Occupant &shooter, Occupant &occupant) {
     bool no_collision = true;
-    std::vector<Occupant*>::iterator it = all_occupants->begin();
-    for(;it != all_occupants->end();){
-        // if Occupant is dead remove it from vector
-        if(!(*it)->areYouAlive()) {
-            //erase it from map
-            it = all_occupants->erase(it);
-        } else {
-            //make checks
-            if((*it)->getId() != occupant.getId() &&
-                    (*it)->isThereACollision(size)
-                    && (*it)->getType() != "Bridge"  &&
-                    (*it)->getId() != shooter.getId()) {
-                no_collision = false;
-                break;
-            }
-            ++it;
+    for(auto x: *all_occupants) {
+        if(x->getId() != occupant.getId() && x->isThereACollision(size)
+           && x->getType() != "Bridge"  && x->getId() != shooter.getId()) {
+            no_collision = false;
+            break;
         }
     }
     return no_collision;
@@ -150,20 +129,10 @@ bool Map::isThereLava(Size& other_size) {
 
 bool Map::thereIsABridge(Size& other_size) {
     bool bridge = false;
-    std::vector<Occupant*>::iterator it = all_occupants->begin();
-    for(;it != all_occupants->end();){
-        // if Occupant is dead remove it from vector
-        if(!(*it)->areYouAlive()) {
-            //erase it from map
-            it = all_occupants->erase(it);
-        } else {
-            //make checks
-            if((*it)->isThereACollision(other_size) &&
-                    (*it)->getType() == "Bridge") {
-                bridge = true;
-                break;
-            }
-            ++it;
+    for(auto x: *all_occupants) {
+        if(x->isThereACollision(other_size) && x->getType() == "Bridge") {
+            bridge = true;
+            break;
         }
     }
     return bridge;
@@ -229,21 +198,11 @@ void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
 }
 
 Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit, Occupant& enemy) {
-    std::vector<Occupant*>::iterator it = all_occupants->begin();
-    for(;it != all_occupants->end();){
-        // if Unit is dead remove it from vector
-        if(!(*it)->areYouAlive()) {
-            //erase it from map
-            it = all_occupants->erase(it);
-        } else {
-            //make checks
-            if((*it)->getId() != unit.getId() && (*it)->isThereACollision(range)
-               && types[(*it)->getType()] == "Unit" &&
-                    (*it)->getTeam() != "Neutral"
-               && unit.getTeam() != (*it)->getTeam()) {
-                return (*it);
-            }
-            ++it;
+    for(auto x: *all_occupants) {
+        if(x->getId() != unit.getId() && x->isThereACollision(range)
+           && types[x->getType()] == "Unit" && x->getTeam() != "Neutral"
+                && unit.getTeam() != x->getTeam()) {
+            return x;
         }
     }
     return &unit;

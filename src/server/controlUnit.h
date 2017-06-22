@@ -24,7 +24,7 @@ class ControlUnit {
 private:
     std::map<int,Unit*>& all_units;
 //    std::vector<Territory> territories;
-    std::vector<Occupant*> all_occupants;
+    std::vector<Occupant*>& all_occupants;
     std::vector<Messenger*> players;
     CommandMonitor &commands;
     std::mutex m;
