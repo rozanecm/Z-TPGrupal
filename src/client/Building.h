@@ -23,6 +23,7 @@ private:
 public:
     Building(BuildingsEnum type, int x, int y, int id, TeamEnum team);
 
+    Building();
     /**
      * This methods checks all the player's units to see if any of its units is
      * located within the area of selection. If so, the units' attribute

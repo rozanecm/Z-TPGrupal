@@ -9,9 +9,7 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::ApplicationWindow(cobject),
-        selected_unit(-1, {0, 0}, (UnitsEnum) 0, (TeamEnum) 0),
-        selected_building((BuildingsEnum) 0, -1, 0, 0, (TeamEnum) 0)
+        Gtk::ApplicationWindow(cobject)
 {
     builder->get_widget_derived("GameArea", gameArea);
 

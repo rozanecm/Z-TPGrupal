@@ -48,3 +48,6 @@ bool Building::is_selected() {
 void Building::unselect() {
     selected = false;
 }
+
+Building::Building() {
+}

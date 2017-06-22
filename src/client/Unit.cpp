@@ -72,3 +72,6 @@ bool Unit::is_selected() {
 void Unit::unselect() {
     selected = false;
 }
+
+Unit::Unit() {
+}

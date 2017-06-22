@@ -59,6 +59,7 @@ public:
     Unit(int id, std::pair<unsigned int, unsigned int> position,
              UnitsEnum unitType, TeamEnum team);
 
+    Unit();
     int get_ID();
 
     void update_position(int x, int y);
