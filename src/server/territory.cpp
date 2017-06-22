@@ -4,7 +4,7 @@
 
 #include "territory.h"
 
-Territory::Territory(std::map<int, Factory*>& factories,
+Territory::Territory(const std::map<int, Factory*>& factories,
                      Position flag, Size size) :
 Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
 territory_size(size), changed(false){}

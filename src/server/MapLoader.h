@@ -10,6 +10,7 @@
 #include "cell.h"
 #include "unit.h"
 #include "factory.h"
+#include "territory.h"
 
 class MapLoader {
     std::vector<std::vector<Cell>> map;
@@ -21,6 +22,7 @@ class MapLoader {
     std::map<std::string, Weapon> weapons;
     std::shared_ptr<Map> game_map;
     std::vector<Factory*> forts;
+    std::vector<Territory*> territories;
     int internal_positions;
 public:
     MapLoader(std::string path, std::string& config);
@@ -45,6 +47,11 @@ private:
     void load_factories(const pugi::xml_node &structs_cfg,
                         const pugi::xml_node &root, int id_counter);
 
+    void create_territory(int hp, const pugi::xml_node &territory, 
+                          int &id_counter,
+                          std::map<int, Factory *> &factories_in_territory);
+    
+    std::vector<Territory*> get_territories();
 };
 
 
