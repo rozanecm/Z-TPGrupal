@@ -620,16 +620,16 @@ void GameArea::loadFlagAnimations() {
             "res/assets/flags/flag_green_n03.png"));
 
     /* load neuter flags imgs */
-    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTRAL].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n00.png"));
 
-    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTRAL].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n01.png"));
 
-    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTRAL].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n02.png"));
 
-    flags[TeamEnum::NEUTER].emplace_back(Gdk::Pixbuf::create_from_file(
+    flags[TeamEnum::NEUTRAL].emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/flags/flag_null_n03.png"));
 }
 
@@ -4789,49 +4789,49 @@ void GameArea::loadNeuterVehiclesAnimations() {
 
 void GameArea::loadNeuterJeepAnimations() {
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r000].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r000.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r045].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r045.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r090].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r090.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r135].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r135.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r180].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r180.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r225].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r225.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r270].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r270.png"));
 
     unitsAnimations.operator[](
-            TeamEnum::NEUTER)[UnitsEnum::JEEP][ActionsEnum::STAND]
+            TeamEnum::NEUTRAL)[UnitsEnum::JEEP][ActionsEnum::STAND]
     [RotationsEnum::r315].
             emplace_back(Gdk::Pixbuf::create_from_file(
             "res/assets/units/vehicles/jeep/empty_r315.png"));
@@ -6279,7 +6279,7 @@ void GameArea::loadYellowHeavyTankAnimations() {
 
 unsigned short GameArea::getCounter(Unit &unit) const {
     if (unit.getType() == UnitsEnum::JEEP) {
-        if (unit.getTeam() == TeamEnum::NEUTER) {
+        if (unit.getTeam() == TeamEnum::NEUTRAL) {
             return 0;
         }
         return jeepCounter.getCounter();
