@@ -11,14 +11,16 @@
 class UnitMold {
 private:
     int tec_level, life, range, width, height, unit_speed, fire_rate,
-            creation_time;
+            creation_time, creation_quantity;
     std::string type;
 
 public:
     UnitMold(int tec_level, int life, int range, int width, int height,
-           int unit_speed, int fire_rate, int creation_time, std::string type);
+                 int unit_speed, int fire_rate, int creation_time,
+                 int creation_quantity, std::string type);
 
-    Unit *createUnit(int id, Size u_size, Map& map, Weapon &weapon);
+    Unit *createUnit(int id, Size u_size, std::shared_ptr<Map>& map,
+                     Weapon &weapon);
 
     // Returns the technology level needed to create Tough unit
     int getTechnologyLevel() const;
@@ -30,6 +32,8 @@ public:
     std::string getTypeOfUnit() const;
 
     Size getUnitSize();
+
+    int getCreationQuantity() const;
 };
 
 

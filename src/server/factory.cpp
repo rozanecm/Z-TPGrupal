@@ -10,40 +10,46 @@ Factory::Factory(int id, int life, std::string type, Size position,
                  std::map<std::string, Weapon> &weapons) :
 Occupant(id, life,type, position), running(false),time_counter(0), units(units),
 map(map), weapons(weapons){
-    it = units.begin();
+    mold = units.begin();
 }
 
 void Factory::build() {
-    if (time_counter == (*it).getCreationTime()) {
-        Size u_size = (*it).getUnitSize();
+    if (time_counter == mold->getCreationTime()) {
+        Size u_size = mold->getUnitSize();
         Position factory_pos = this->obj_size.getPosition();
         u_size.moveTo(factory_pos.getX(),factory_pos.getY());
-        Weapon u_weapon = weapons.at((*it).getTypeOfUnit());
-//        (*it).createUnit(ID,u_size,map,u_weapon);
+        Weapon u_weapon = weapons.at(mold->getTypeOfUnit());
+
+        for (int i = 0; i < mold->getCreationQuantity(); ++i) {
+            new_units.push_back(mold->createUnit(ID,u_size,map,u_weapon));
+        }
+        this->changed = true;
         time_counter = 0;
-    } else if (running && time_counter < (*it).getCreationTime()) {
+    } else if (running && time_counter < mold->getCreationTime()) {
         time_counter += 1 + tech_level;
+        this->changed = false;
     }
 }
 
-void Factory::stopBuilding(std::string &player_id) {
-    if (player_id == this->getTeam())
-        this->running = false;
-}
+//void Factory::stopBuilding(std::string &player_id) {
+//    if (player_id == this->getTeam())
+//        this->running = false;
+//}
 
 int Factory::getSelectedUnitTime() {
-    return it->getCreationTime();
+    return mold->getCreationTime();
 }
 
 std::string Factory::nextUnit() {
     int i = 0;
-    while (i == 0 || it->getTechnologyLevel() > this->tech_level) {
-        ++it;
-        if (it == units.end())
-            it = units.begin();
+    this->running = false;
+    while (i == 0 || mold->getTechnologyLevel() > this->tech_level) {
+        ++mold;
+        if (mold == units.end())
+            mold = units.begin();
         ++i;
     }
-    return it->getTypeOfUnit();
+    return mold->getTypeOfUnit();
 }
 
 Occupant *Factory::destroyFactory() {
@@ -63,15 +69,15 @@ void Factory::startBuilding(std::string &player_id) {
 }
 
 int Factory::getCreationSpeed() {
-    return ((*it).getCreationTime() / (1 + tech_level));
+    return ((*mold).getCreationTime() / (1 + tech_level));
 }
 
 bool Factory::haveNewUnits() {
     return (!this->new_units.empty());
 }
 
-std::vector<Unit> Factory::getUnits() {
-    std::vector<Unit> tmp = new_units;
+std::vector<Unit*> Factory::getUnits() {
+    std::vector<Unit*> tmp = new_units;
     new_units.clear();
     return tmp;
 }

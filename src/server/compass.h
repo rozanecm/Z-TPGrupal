@@ -60,6 +60,10 @@ public:
 
     Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
 
+    // Returns the position of destiny. If destiny is not a valid position
+    // it returns the closest valid position
+    Position getAValidPositionForDestiny(Position& destiny);
+
     ~Compass();
 
 private:
@@ -106,10 +110,6 @@ private:
 
     // checks the Neighbor nodes to see if destiny is among them
     void checkIfIsDestinyNeighbor(Node *new_node, int step);
-
-    // Returns the position of destiny. If destiny is not a valid position
-    // it returns the closest valid position
-    Position getAValidPositionForDestiny(Position& destiny);
 
     // Returns the closest valid position to pos
     Position getClosestValidPosition(Position& pos);
