@@ -19,7 +19,7 @@ public:
                  int unit_speed, int fire_rate, int creation_time,
                  int creation_quantity, std::string type);
 
-    Unit *createUnit(int id, Size u_size, std::shared_ptr<Map>& map,
+    Unit *createUnit(int id, Size u_size, Map& map,
                      Weapon &weapon);
 
     // Returns the technology level needed to create Tough unit

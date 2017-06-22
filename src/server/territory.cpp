@@ -4,7 +4,7 @@
 
 #include "territory.h"
 
-Territory::Territory(std::map<int, Factory>& factories,
+Territory::Territory(std::map<int, Factory*>& factories,
                      Position flag, Size size) :
 Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
 territory_size(size), changed(false){}
@@ -13,7 +13,7 @@ void Territory::grabFlag(std::string& new_team) {
     changed = true;
     this->changeTeam(new_team);
     for (auto fac: factories) {
-        fac.second.changeTeam(new_team);
+        fac.second->changeTeam(new_team);
     }
 }
 
@@ -23,7 +23,7 @@ int Territory::getTechLevel() {
 
 void Territory::changeFactoriesTechLevel(int tech_level) {
     for (auto fac: factories) {
-        fac.second.changeTechLevel(tech_level);
+        fac.second->changeTechLevel(tech_level);
     }
 }
 
@@ -33,11 +33,11 @@ Position Territory::getFlagPosition() {
 
 void Territory::build() {
     for (auto f: factories) {
-        f.second.build();
+        f.second->build();
     }
 }
 
-std::map<int, Factory> &Territory::getFactories() {
+std::map<int, Factory*> &Territory::getFactories() {
     return factories;
 }
 

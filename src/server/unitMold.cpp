@@ -2,7 +2,6 @@
 // Created by rodian on 22/05/17.
 //
 
-#include <bits/shared_ptr.h>
 #include "unitMold.h"
 
 UnitMold::UnitMold(int tec_level, int life, int range, int width, int height,
@@ -12,10 +11,10 @@ tec_level(tec_level), life(life), range(range), width(width), height(height),
 unit_speed(unit_speed), fire_rate(fire_rate), creation_time(time),
 creation_quantity(creation_quantity), type(type) {}
 
-Unit *UnitMold::createUnit(int id, Size u_size, std::shared_ptr<Map>& map,
+Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
                            Weapon &weapon) {
     Position u_pos = u_size.getPosition();
-    Compass compass(*map, u_size,id,unit_speed);
+    Compass compass(map, u_size,id,unit_speed);
     // get closest valid position from fabric
     Position valid_pos = compass.getAValidPositionForDestiny(u_pos);
     u_size.moveTo(valid_pos.getX(),valid_pos.getY());

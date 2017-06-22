@@ -21,7 +21,7 @@ void Factory::build() {
         Weapon u_weapon = weapons.at(mold->getTypeOfUnit());
 
         for (int i = 0; i < mold->getCreationQuantity(); ++i) {
-            new_units.push_back(mold->createUnit(ID,u_size,map,u_weapon));
+            new_units.push_back(mold->createUnit(ID,u_size,*map,u_weapon));
         }
         this->changed = true;
         time_counter = 0;

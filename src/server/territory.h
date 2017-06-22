@@ -12,13 +12,13 @@
 
 class Territory: public Teamable {
 private:
-    std::map<int,Factory>& factories;
+    std::map<int,Factory*>& factories;
     Position flag_position;
     Size territory_size;
     bool changed;
 
 public:
-    Territory(std::map<int,Factory>& factories,
+    Territory(std::map<int,Factory*>& factories,
               Position flag_position, Size territory_size);
 
     void grabFlag(std::string& new_team);
@@ -31,7 +31,7 @@ public:
 
     void build();
 
-    std::map<int,Factory>& getFactories();
+    std::map<int,Factory*>& getFactories();
 
     bool doesTerritorysOwnerChanged();
 };
