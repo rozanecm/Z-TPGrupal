@@ -17,12 +17,18 @@ void Building::markAsSelectedInRange(bool &buildingSelected,
     }
 }
 
-Building::Building(BuildingsEnum type, int x, int y, int id, TeamEnum team) :
+Building::Building(BuildingsEnum type, int x, int y, int id, TeamEnum team,
+                   const std::string& owner, unsigned int hp) :
         buildingType(type),
         position(x, y),
         id(id),
         selected(false),
-        team (team) {
+        team (team),
+        owner(owner),
+        hp(hp),
+        max_hp(hp)
+
+{
 }
 
 unsigned int Building::getXCoordinate() {
@@ -50,4 +56,16 @@ void Building::unselect() {
 }
 
 Building::Building() {
+}
+
+std::string Building::get_owner() {
+    return owner;
+}
+
+unsigned int Building::get_hp() {
+    return hp;
+}
+
+unsigned int Building::get_max_hp() {
+    return max_hp;
 }

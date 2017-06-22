@@ -85,6 +85,9 @@ bool GameWindow::change_view_to_building() {
     }
     panel->pack_start(*building_panel);
     panelLabel->set_text(building_panel->get_label());
+    building_panel->set_max_hp(selected_building.get_max_hp());
+    building_panel->set_hp(selected_building.get_hp());
+    building_panel->set_owner(selected_building.get_owner());
     return true;
 }
 
@@ -114,9 +117,9 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
     }
 
     if (gameArea->unit_selected()) { // New unit selected
-        if (unit_selection) { // We already are selecting an unit, process
-                                // attack
-            process_selected_unit_action();
+        if (unit_selection || building_selection) {
+            // We already are selecting an unit, process attack
+            process_attack();
         } else { // Select unit
             selected_unit = unitsMonitor->getSelectedUnits().at(0);
 
@@ -137,6 +140,9 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
 
     // Click on empty place
     if (unit_selection) { // Movement
+        if (selected_unit.get_owner() != me) {
+            return true;
+        }
         int id = selected_unit.get_ID();
         std::pair<int, int> coords = gameArea->get_coords();
         std::cout << gameArea->get_coords().first << ", " <<
@@ -171,7 +177,7 @@ void GameWindow::setMapData() {
     gameArea->setMapData();
 }
 
-void GameWindow::process_selected_unit_action() {
+void GameWindow::process_attack() {
     std::vector<Unit> units = unitsMonitor->getSelectedUnits();
     if (units.size()) { // other unit selected
         if (unit_selection) {

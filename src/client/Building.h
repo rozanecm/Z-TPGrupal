@@ -19,9 +19,13 @@ private:
      * with the mouse or not */
     bool selected;
     int id;
+    std::string owner;
 
+    unsigned int max_hp;
+    unsigned int hp;
 public:
-    Building(BuildingsEnum type, int x, int y, int id, TeamEnum team);
+    Building(BuildingsEnum type, int x, int y, int id, TeamEnum team,
+             const std::string& owner, unsigned int hp);
 
     Building();
     /**
@@ -44,6 +48,10 @@ public:
     TeamEnum getTeam();
     bool is_selected();
     void unselect();
+    std::string get_owner();
+    unsigned int get_hp();
+
+    unsigned int get_max_hp();
 };
 
 

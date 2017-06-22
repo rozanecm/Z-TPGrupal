@@ -74,7 +74,7 @@ public:
 
     void update_selection(int id);
 
-    void process_selected_unit_action();
+    void process_attack();
 
     void update_name(const std::string& name);
     void update_players(const std::vector<std::string>& players);

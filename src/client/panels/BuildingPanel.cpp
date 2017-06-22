@@ -11,6 +11,10 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("PrevUnitButton", prev);
     builder->get_widget("NextUnitButton", next);
     builder->get_widget("FactoryCreateButton", create);
+
+    builder->get_widget("FactoryMaxHPLabel", max_hp_label);
+    builder->get_widget("FactoryHPLabel", hp_label);
+    builder->get_widget("FactoryOwnerLabel", owner_label);
     building->set("res/buildings/base_city.png");
     unit->set("res/portraits/grunt.png");
 }
@@ -35,3 +39,14 @@ Gtk::Button *BuildingPanel::create_button() {
     return create;
 }
 
+void BuildingPanel::set_hp(int hp) {
+    hp_label->set_text(std::to_string(hp));
+}
+
+void BuildingPanel::set_max_hp(int hp) {
+    max_hp_label->set_text(std::to_string(hp));
+}
+
+void BuildingPanel::set_owner(const std::string &owner) {
+    owner_label->set_text(owner);
+}

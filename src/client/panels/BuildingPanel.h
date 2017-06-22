@@ -15,6 +15,10 @@ class BuildingPanel : public Gtk::Box {
     Gtk::Button* prev;
     Gtk::Button* next;
     Gtk::Button* create;
+
+    Gtk::Label* max_hp_label;
+    Gtk::Label* hp_label;
+    Gtk::Label* owner_label;
 public:
     BuildingPanel(BaseObjectType* cobject,
                   const Glib::RefPtr<Gtk::Builder>& builder);
@@ -24,6 +28,13 @@ public:
     Gtk::Button* create_button();
     void on_click();
     void change_unit(std::string& path);
+
+
+    void set_hp(int hp);
+
+    void set_max_hp(int hp);
+
+    void set_owner(const std::string& owner);
 };
 
 

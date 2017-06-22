@@ -6,7 +6,7 @@
 #define Y 2
 #define TYPE 3
 #define TEAM 4
-
+#define HP 5
 AddBuilding::AddBuilding(BuildingsMonitor &buildings,
                          const std::vector<std::string>& players)
         : buildings(buildings),
@@ -30,6 +30,9 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     if (team_id > players.size()) {
         team_id = 0; // set it to team NEUTRAL
     }
-    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, (TeamEnum) team_id);
+
+    unsigned int hp = std::stoul(args[HP]);
+    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, (TeamEnum) team_id,
+               owner, hp);
     buildings.addBuilding(b);
 }
