@@ -14,7 +14,7 @@ private:
     std::vector<PlayerInfo> players;
     int team_id;
 public:
-    Team(std::vector<PlayerInfo> players,int team_id);
+    Team(std::vector<PlayerInfo>& players,int team_id);
 
     bool doesTeamLose();
 

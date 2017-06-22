@@ -19,6 +19,9 @@ void Lobby::startGame() {
         MapLoader maploader(path, config);
         std::shared_ptr<Map> map = maploader.get_map();
 
+        std::vector<Occupant*>& occupants = map->getOccupants();
+        std::map<int, Unit*> units;
+
         // build teams
         std::vector<Factory*> forts = maploader.get_forts();
         std::vector<Team> teams_info;
@@ -26,7 +29,9 @@ void Lobby::startGame() {
             std::vector<PlayerInfo> players;
             for (int j = 0; j < teams[i].size(); ++j) {
                 Factory* fortress = forts.back();
-                PlayerInfo new_player(teams[i][j],*fortress);
+                PlayerInfo new_player(teams[i][j],fortress);
+
+                occupants.push_back((Occupant*) fortress);
                 forts.pop_back();
                 players.push_back(new_player);
             }
@@ -41,8 +46,6 @@ void Lobby::startGame() {
             p->getInGame();
         }
 
-        std::vector<Occupant*>& occupants = map->getOccupants();
-        std::map<int, Unit*> units;
         /// estas unidades creadas son para realizar tests
         Size r_size(0,0,3,3);
         Size range(0,0,12,12);
@@ -68,10 +71,11 @@ void Lobby::startGame() {
         units.insert(std::pair<int,Unit*>(208,jeep));
         occupants.push_back((Occupant*) robot);
         occupants.push_back((Occupant*) jeep);
-        ///
-        game = std::unique_ptr<Game> (new Game(players,messengers, map, units,
-                                               teams_info,
-                                               occupants));
+        //////////////////////////////
+        std::vector<Territory *> territories = maploader.get_territories();
+        game = std::unique_ptr<Game> (new Game(players, messengers,
+                                               map, units, teams_info,
+                                               occupants, territories));
         game.get()->start();
         std::cout << "Game started" << std::endl;
     }

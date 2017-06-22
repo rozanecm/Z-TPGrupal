@@ -23,13 +23,13 @@ class CommandMonitor;
 class ControlUnit {
 private:
     std::map<int,Unit*>& all_units;
-//    std::vector<Territory> territories;
+    std::vector<Territory*>& territories;
     std::vector<Occupant*>& all_occupants;
     std::vector<Messenger*> players;
     CommandMonitor &commands;
     std::mutex m;
     bool winning;
-    std::vector<Team> teams;
+    std::vector<Team>& teams;
     std::vector<Bullet*> all_bullets;
     std::vector<Unit> changed_units;
     std::vector<Occupant> changed_occupants;
@@ -39,7 +39,8 @@ public:
     ControlUnit(std::vector<Messenger *> &new_players,
                     std::map<int, Unit *> &all_units,
                     std::vector<Occupant *> &all_occupants,
-                    std::vector<Team> &teams, CommandMonitor &commands);
+                    std::vector<Team> &teams, CommandMonitor &commands,
+                    std::vector<Territory *>& territories);
 
     // Method to start checking commands from players
     void run();

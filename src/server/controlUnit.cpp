@@ -9,8 +9,9 @@
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
                          std::vector<Occupant *> &all_occupants,
-                         std::vector<Team> &teams, CommandMonitor &commands) :
-    all_units(all_units), /*territories(territories),*/
+                         std::vector<Team> &teams, CommandMonitor &commands,
+                         std::vector<Territory *>& territories) :
+    all_units(all_units), territories(territories),
     all_occupants(all_occupants), players(new_players), commands(commands),
     winning(false), teams(teams),objects_counter((int)all_occupants.size()) {
 }
