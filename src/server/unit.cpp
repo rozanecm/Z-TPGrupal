@@ -9,7 +9,7 @@ Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
         state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this)
-        ,grab_target(this),got_target(false){
+        ,grab_target(this),got_target(false),mount_vehicule(false){
     compass.changeUnitId(id);
 }
 
@@ -76,12 +76,13 @@ void Unit::makeAction() {
         } else {
             if (onRangeToGrabTarget()) {
                 grab();
-            } else if (!road.empty()) {
-                move();
             } else if (road.empty()) {
                 this->state = STANDINGSTATE;
                 this->action = STANDINGSTATE;
                 this->changed = true;
+                mount_vehicule = true;
+            } else if (!road.empty()) {
+                move();
             }
         }
     }
@@ -199,6 +200,7 @@ void Unit::setTargetToGrab(Teamable *object, std::string type) {
         // If is not a flag, is a vehicle
         grab_target = object;
         this->state = GRABBINGSTATE;
+        mount_vehicule = true;
     }
 }
 
@@ -207,6 +209,9 @@ void Unit::grab() {
     this->action = STANDINGSTATE;
     this->changed = true;
     grab_target->changeTeam(this->team);
+    if (mount_vehicule) {
+        this->damage_recv = this->life_points;
+    }
 }
 
 void Unit::setTargetToAttack(Occupant* target) {

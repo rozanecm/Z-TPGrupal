@@ -32,7 +32,7 @@ private:
     Occupant* target;
     Teamable* grab_target;
     std::vector<Bullet*> bullets;
-    bool got_target;
+    bool got_target, mount_vehicule;
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
