@@ -69,9 +69,9 @@ void Game::analyseOccupantsInfo(std::string& info) {
         info += std::to_string(pos.getX()) + "-";
         info += std::to_string(pos.getY()) + "-";
         info += o->getType() + "-";
+        info += o->getTeam() + "-";
+        info += std::to_string(o->getLifeLeft()) + "|";  // life left == max hp
 
-        std::string player_id = o->getTeam();
-        info += player_id + "|";
     }
 }
 

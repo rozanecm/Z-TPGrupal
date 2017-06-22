@@ -32,9 +32,9 @@ private:
     /* freq. with which the unit shoots */
     unsigned short frequency;
 
-    unsigned int lifeLeft = 0;
+    unsigned int lifeLeft;
 
-    unsigned int totalLife = 0;
+    unsigned int totalLife;
 
     unsigned short velocity;
 
@@ -60,7 +60,7 @@ private:
     std::string owner;
 public:
     Unit(int id, std::pair<unsigned int, unsigned int> position,
-             UnitsEnum unitType, TeamEnum team);
+             UnitsEnum unitType, TeamEnum team, unsigned int hp);
 
     Unit();
     int get_ID();
@@ -98,6 +98,7 @@ public:
 
     void update_unit_name(const std::string& name);
 
+    void update_hp(unsigned int hp);
     std::string get_owner();
     int get_max_hp();
     int get_hp();

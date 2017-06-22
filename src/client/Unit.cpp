@@ -4,11 +4,11 @@
 #define IMG_SIZE_IN_PX 16
 #define TEAM_NEUTRAL "None"
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
-           UnitsEnum unitType, TeamEnum team)
+           UnitsEnum unitType, TeamEnum team, unsigned int hp)
         : id(id), position(position), unitType(unitType),
           rotation(RotationsEnum::r090), team(team),
           selected(false), actionType(ActionsEnum::STAND),
-          owner(TEAM_NEUTRAL)
+          owner(TEAM_NEUTRAL), totalLife(hp), lifeLeft(hp)
 {
     /* units initial rotation is facing 'to the player'; action: standing. */
     //todo check what else should be initialized
@@ -130,4 +130,8 @@ void Unit::update_unit_name(const std::string &name) {
 
 std::string Unit::get_unit_name() {
     return unit_name;
+}
+
+void Unit::update_hp(unsigned int hp) {
+    lifeLeft = hp;
 }
