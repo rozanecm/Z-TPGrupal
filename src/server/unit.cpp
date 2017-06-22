@@ -25,7 +25,7 @@ void Unit::makeAction() {
                     got_target = true;
                 }
             } else {
-                if (target->areYouAlive()) {
+                if (target->areYouAlive() && checkIfTargetIsOnRange()) {
                     attack();
                     this->action = ATKSTATE;
                 } else {
