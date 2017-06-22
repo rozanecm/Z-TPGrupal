@@ -28,13 +28,7 @@ public:
     Map(int x, int y, int width, int height,
         std::vector<std::vector<Cell>>& terrain_map,
         std::vector<Occupant*>* all_occupants,
-        std::string& xml
-    );
-
-//    void addUnits(std::vector<Unit>& all_units);
-    // I'm gonna add Occupants on Game
-    // Adds a new Occupant to the list of Occupants of the map
-//    void addOccupant(Occupant* new_occupant);
+        std::string& xml);
 
     // Recieves the coordinates (x,y) and returns the terrain factor on that
     // position on the map.
