@@ -52,25 +52,34 @@ void ControlUnit::sleepFor(double msec) {
 }
 
 void ControlUnit::unitsMakeMicroAction() {
+    // erase units with life 0
+    std::vector<int> units_id;
+    for (auto& x: all_units) {
+        Unit& unit = *x.second;
+        if (unit.doYouNeedToDisappear()) {
+            units_id.push_back(x.first);
+        }
+    }
+    for (auto& id: units_id) {
+        all_units.erase(id);
+    }
+
+    // units alive make micro action
     for (auto& x: all_units){
-        if ((*x.second).doYouNeedToDisappear()) {
-            all_units.erase(x.first);
-        } else {
-            (*x.second).makeAction();
-            if ((*x.second).haveYouChanged()) {
-                changed_units.push_back((*x.second));
+        Unit& unit = *x.second;
+        unit.makeAction();
+        if (unit.haveYouChanged()) {
+            changed_units.push_back(unit);
+        }
+        if (!unit.areYouAlive()) {
+            unit.mustDisappear();
+        } else if (unit.doYouHaveAnyBullets()) {
+            std::vector<Bullet *> tmp = unit.collectBullets();
+            for (auto& b: tmp) {
+                b->setCorrectId(objects_counter);
+                ++objects_counter;
             }
-            if (!(*x.second).areYouAlive()) {
-                (*x.second).mustDisappear();
-            }
-            if ((*x.second).doYouHaveAnyBullets()) {
-                std::vector<Bullet *> tmp = (*x.second).collectBullets();
-                for (auto& b: tmp) {
-                    b->setCorrectId(objects_counter);
-                    ++objects_counter;
-                }
-                all_bullets.insert(all_bullets.end(), tmp.begin(), tmp.end());
-            }
+            all_bullets.insert(all_bullets.end(), tmp.begin(), tmp.end());
         }
     }
 }
