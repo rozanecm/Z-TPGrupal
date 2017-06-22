@@ -25,6 +25,8 @@ private:
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
 
+    std::string owner;
+
     Camera camera;
 
     /* general resources */
@@ -294,7 +296,7 @@ public:
     void
     setResources(UnitsMonitor *playersMonitor,
                  BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor);
+                 MapMonitor *mapMonitor, std::string owner);
 
     void processClick();
 

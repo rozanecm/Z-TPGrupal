@@ -23,6 +23,8 @@ public:
 
     std::shared_ptr<ServerMessenger> get_socket();
 
+    const std::string &get_username();
+
 private:
     void on_click();
 };

@@ -49,9 +49,9 @@ public:
      * Saves resources' monitors and passes them to the gameArea.
      */
     void
-    setResources(UnitsMonitor *unitsMonitor,
-                 BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor, ServerMessenger *messenger);
+    setResources(UnitsMonitor *unitsMonitor, BuildingsMonitor *buildingsMonitor,
+                 MapMonitor *mapMonitor, ServerMessenger *messenger,
+                 const std::string &owner);
 
     void setMapData();
 

@@ -42,4 +42,8 @@ std::shared_ptr<ServerMessenger> InitialWindow::get_socket() {
     return messenger;
 }
 
+const std::string &InitialWindow::get_username() {
+    return name;
+}
+
 

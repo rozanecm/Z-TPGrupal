@@ -56,12 +56,13 @@ bool GameWindow::onTimeout() {
 void GameWindow::setResources(UnitsMonitor *unitsMonitor,
                               BuildingsMonitor *buildingsMonitor,
                               MapMonitor *mapMonitor,
-                              ServerMessenger *messenger) {
+                              ServerMessenger *messenger,
+                              const std::string &owner) {
     this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
     this->messenger = messenger;
-    gameArea->setResources(unitsMonitor, buildingsMonitor, mapMonitor);
+    gameArea->setResources(unitsMonitor, buildingsMonitor, mapMonitor, owner);
 }
 
 

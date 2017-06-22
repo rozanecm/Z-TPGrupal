@@ -378,10 +378,11 @@ GameArea::displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &cr,
 
 void GameArea::setResources(UnitsMonitor *unitsMonitor,
                             BuildingsMonitor *buildingsMonitor,
-                            MapMonitor *mapMonitor) {
+                            MapMonitor *mapMonitor, std::string owner) {
     this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
+    this->owner = owner;
 }
 
 bool GameArea::on_key_press_event(GdkEventKey *event) {

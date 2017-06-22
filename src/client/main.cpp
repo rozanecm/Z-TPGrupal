@@ -58,9 +58,9 @@ int main(int argc, char **argv) {
             app->run(*lobby);
             // HARDCODED DEBUG MESSAGES TO START A GAME
 
-
             GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
-                                          mapMonitor, messenger, *gwindow);
+                                          mapMonitor, messenger, *gwindow,
+                                          window->get_username());
 
 
             graphicsThread.start();
