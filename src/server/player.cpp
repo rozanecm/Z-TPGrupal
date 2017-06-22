@@ -14,7 +14,7 @@ void Player::run() {
         while (messenger->isConnected()) {
             std::string new_cmd = messenger->recieveMessage();
 
-            std::cout << "Player " << id << "ejecuta " << new_cmd << std::endl;
+            std::cout << "Player " << id << " ejecuta " << new_cmd << std::endl;
             if (on_menu) {
                 processMenuCommands(new_cmd);
             } else if (on_lobby) {
@@ -58,7 +58,9 @@ void Player::processMenuCommands(std::string &full_cmd) {
         int id = std::stoi(lobby_id);
         this->menu.addToLobby(id,this);
         on_menu = false;
-    }  else {
+    }  else if (cmd == "lobbyinfo") {
+        messenger->sendMessage(this->menu.getLobbiesInfo());
+    } else {
         messenger->sendMessage("Invalid cmd");
     }
 }
@@ -94,6 +96,8 @@ std::string Player::getNextData(std::string& line) {
 }
 
 void Player::getInGame() {
+    // Notify the client the game is starting
+    messenger->sendMessage("startgame");
     this->on_lobby = false;
     this->playing = true;
 }

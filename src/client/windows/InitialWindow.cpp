@@ -1,6 +1,9 @@
 #include <iostream>
 #include "InitialWindow.h"
 
+#define ERROR_MSG "error"
+#define OK_MSG "ok"
+
 InitialWindow::InitialWindow(BaseObjectType *cobject,
                              const Glib::RefPtr<Gtk::Builder> &builder) :
         Gtk::Window(cobject) {
@@ -20,16 +23,23 @@ void InitialWindow::on_click() {
     int port = 0;
     try {
         port = std::stoi(port_str);
-        s = std::shared_ptr<Socket>(new Socket(addr_str.c_str(), port));
-    } catch (std::exception &e) {
+        Socket s(addr_str.c_str(), port);
+        messenger = std::shared_ptr<ServerMessenger>(new ServerMessenger(s));
+    } catch (SocketError &e) {
         std::cout << "Could not connect to specified addr/port" << std::endl;
+        return;
+    }
+    messenger.get()->send(name);
+    std::string response = messenger.get()->receive();
+    if (response == ERROR_MSG) {
+        std::cout << "A player with this name already exists" << std::endl;
         return;
     }
     this->hide();
 }
 
-std::shared_ptr<Socket> InitialWindow::get_socket() {
-    return s;
+std::shared_ptr<ServerMessenger> InitialWindow::get_socket() {
+    return messenger;
 }
 
 

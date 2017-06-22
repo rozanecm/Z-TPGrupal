@@ -6,11 +6,17 @@
 
 Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
-void Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
+bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
     Lock l(m);
 //    std::string player_id = msgr->recieveMessage();
+    for(Player* p : players) {
+        if (p->getId() == player_id) {
+            return false;
+        }
+    }
     this->players.push_back(new Player(msgr, menu, player_id));
     this->players.back()->start();
+    return true;
 }
 
 void Menu::createNewLobby(Player* player) {
@@ -25,15 +31,21 @@ void Menu::createNewLobby(Player* player) {
 }
 
 std::string Menu::getLobbiesInfo() {
-    std::string info = "No lobbies";
-    // if (there are lobbies)
-    // ....
+    std::string info = "lobbyinfo-";
+    for (int i = 0; i < lobbies.size(); ++i) {
+        info += std::to_string(i) + "-";
+    }
     return info;
 }
 
-void Menu::addToLobby(int id_lobbie, Player* player) {
-    lobbies[id_lobbie-1]->addPlayer(player);
-    player->addLobby(lobbies[id_lobbie-1]);
+void Menu::addToLobby(int id_lobby, Player* player) {
+    if(lobbies.size() < id_lobby) {
+        return;
+    }
+    Lobby* lobby = lobbies[id_lobby];
+
+    lobby->addPlayer(player);
+    player->addLobby(lobbies[id_lobby]);
 }
 
 Menu::~Menu() {

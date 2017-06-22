@@ -9,6 +9,7 @@
 #include "commands/Command.h"
 #include "UnitsMonitor.h"
 #include "windows/GameWindow.h"
+#include "windows/LobbyWindow.h"
 #include <Thread.h>
 
 class ClientThread : public Thread {
@@ -17,6 +18,7 @@ class ClientThread : public Thread {
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
     GameWindow &window;
+    LobbyWindow& lobby;
     bool finished = false; // Flag for finishing execution
     std::map<std::string, Command *> commands;
 
@@ -34,7 +36,7 @@ public:
     ClientThread(UnitsMonitor &unitsMonitor,
                  BuildingsMonitor &buildingsMonitor,
                  MapMonitor &mapMonitor, ServerMessenger &messenger,
-                 GameWindow &window);
+                 LobbyWindow& lobby, GameWindow &window);
 
     virtual void run();
 

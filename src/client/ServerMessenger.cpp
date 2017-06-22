@@ -20,3 +20,8 @@ std::string ServerMessenger::receive() {
 void ServerMessenger::kill() {
     messenger.shutdown();
 }
+
+ServerMessenger::ServerMessenger(ServerMessenger &other) :
+    messenger(other.messenger)
+{
+}

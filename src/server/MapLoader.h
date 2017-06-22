@@ -21,6 +21,7 @@ class MapLoader {
     std::map<std::string, Weapon> weapons;
     std::shared_ptr<Map> game_map;
     std::vector<Factory*> forts;
+
     int internal_positions;
 public:
     MapLoader(std::string path, std::string& config);
