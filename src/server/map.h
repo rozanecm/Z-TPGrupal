@@ -75,6 +75,8 @@ public:
 
     Occupant* checkForEnemiesOn(Size& range, Occupant& unit, Occupant& enemy);
 
+    bool tellIfItIsGrabbable(std::string& type);
+
 private:
     void buildTypeMap();
 };

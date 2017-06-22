@@ -56,9 +56,11 @@ public:
 
     // Command move unit. Meant to give the order to the unit to start moving
     // to de (x,y) position
-    void cmdMoveUnit(std::string& id_player, int id, int x, int y);
+    void cmdMoveUnit(const std::string& id_player, int id, int x, int y);
 
-    void cmdAttack(std::string attacker_team, int id_unit, int target);
+    void cmdAttack(const std::string& attacker_team, int id_unit, int target);
+
+    void cmdGrab(const std::string& id_player, int id_unit, int target);
 
 private:
     // Process all commands on commands vector and leaves the vector empty

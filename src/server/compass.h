@@ -56,7 +56,7 @@ public:
 
     void clearCompass();
 
-//    Occupant* getFoundEnemy();
+    bool checkIfItIsGrabbable(std::string& type) const;
 
     Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
 

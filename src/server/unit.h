@@ -14,8 +14,9 @@
 #define ATKSTATE "atk"
 #define MOVESTATE "mv"
 #define STANDINGSTATE "std"
-#define FLAGTYPE "Flag"
-#define GRUNTTYPE "Grunt"
+#define GRABBINGSTATE "grb"
+#define FLAGTYPE "flag"
+#define GRUNTTYPE "grunt"
 
 
 class Unit: public Occupant {
@@ -29,6 +30,7 @@ private:
     Size range;
     std::vector<Position> road;
     Occupant* target;
+    Teamable* grab_target;
     std::vector<Bullet*> bullets;
     bool got_target;
 
@@ -54,10 +56,11 @@ public:
     // is standing still
     std::string getActionState() const;
 
-    void grab(Teamable* object, std::string type);
-
+    void grab();
+//-> make check is i have explosive attack for buildings
     void setTargetToAttack(Occupant* target);
-    //-> make check is i have explosive attack for buildings
+
+    void setTargetToGrab(Teamable* object, std::string type);
 
     bool doYouHaveAnyBullets();
 
@@ -74,6 +77,8 @@ public:
     bool checkIfAlreadyOnMyWay(int x, int y);
 
     Size getNextPosition(int steps);
+
+    bool onRangeToGrabTarget();
 };
 
 

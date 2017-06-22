@@ -3,6 +3,11 @@
 //
 
 #include "map.h"
+#define BUILDING "Building"
+#define NATURE "Nature"
+#define UNIT "Unit"
+#define VEHICLE "Vehicule"
+#define FLAG "flag"
 
 Map::Map(int x, int y, int width, int height,
    std::vector<std::vector<Cell>>& terrain_map,
@@ -196,8 +201,8 @@ void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
 Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit, Occupant& enemy) {
     for(auto x: *all_occupants) {
         if(x->getId() != unit.getId() && x->isThereACollision(range)
-           && types[x->getType()] == "Unit" && x->getTeam() != "Neutral"
-                && unit.getTeam() != x->getTeam()) {
+           && (types[x->getType()] == UNIT || types[x->getType()] == VEHICLE)
+           && x->getTeam() != "Neutral" && unit.getTeam() != x->getTeam()) {
             return x;
         }
     }
@@ -205,24 +210,30 @@ Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit, Occupant& enemy) {
 }
 
 void Map::buildTypeMap() {
-    types.insert(std::pair<std::string,std::string>("Fort","Building"));
+    types.insert(std::pair<std::string,std::string>("Fort",BUILDING));
     types.insert(std::pair<std::string,std::string>
-                         ("vehiculeFactory","Building"));
-    types.insert(std::pair<std::string,std::string>("robotFactory","Building"));
-    types.insert(std::pair<std::string,std::string>("Factory","Building"));
-    types.insert(std::pair<std::string,std::string>("Rock","Nature"));
-    types.insert(std::pair<std::string,std::string>("iceblock","Nature"));
-    types.insert(std::pair<std::string,std::string>("grunt","Unit"));
-    types.insert(std::pair<std::string,std::string>("Psycho","Unit"));
-    types.insert(std::pair<std::string,std::string>("Tough","Unit"));
-    types.insert(std::pair<std::string,std::string>("Pyro","Unit"));
-    types.insert(std::pair<std::string,std::string>("Sniper","Unit"));
-    types.insert(std::pair<std::string,std::string>("laser","Unit"));
-    types.insert(std::pair<std::string,std::string>("jeep","Unit"));
-    types.insert(std::pair<std::string,std::string>("MediumTank","Unit"));
-    types.insert(std::pair<std::string,std::string>("LightTank","Unit"));
-    types.insert(std::pair<std::string,std::string>("HeavyTank","Unit"));
-    types.insert(std::pair<std::string,std::string>("MML","Unit"));
+                         ("vehiculeFactory",BUILDING));
+    types.insert(std::pair<std::string,std::string>("robotFactory",BUILDING));
+    types.insert(std::pair<std::string,std::string>("Factory",BUILDING));
+    types.insert(std::pair<std::string,std::string>("Rock",NATURE));
+    types.insert(std::pair<std::string,std::string>("iceblock",NATURE));
+    types.insert(std::pair<std::string,std::string>("grunt",UNIT));
+    types.insert(std::pair<std::string,std::string>("Psycho",UNIT));
+    types.insert(std::pair<std::string,std::string>("Tough",UNIT));
+    types.insert(std::pair<std::string,std::string>("Pyro",UNIT));
+    types.insert(std::pair<std::string,std::string>("Sniper",UNIT));
+    types.insert(std::pair<std::string,std::string>("laser",UNIT));
+    types.insert(std::pair<std::string,std::string>("jeep",VEHICLE));
+    types.insert(std::pair<std::string,std::string>("MediumTank",VEHICLE));
+    types.insert(std::pair<std::string,std::string>("LightTank",VEHICLE));
+    types.insert(std::pair<std::string,std::string>("HeavyTank",VEHICLE));
+    types.insert(std::pair<std::string,std::string>("MML",VEHICLE));
+    types.insert(std::pair<std::string,std::string>("flag",FLAG));
+}
+
+bool Map::tellIfItIsGrabbable(std::string& type) {
+    std::string tmp = type;
+    return types[tmp] == VEHICLE || types[tmp] == FLAG ;
 }
 
 

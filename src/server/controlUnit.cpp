@@ -67,8 +67,15 @@ void ControlUnit::unitsMakeMicroAction() {
     // units alive make micro action
     for (auto& x: all_units){
         Unit& unit = *x.second;
-        unit.makeAction();
+        // check if someone changed the unit
+        bool was_changed = false;
         if (unit.haveYouChanged()) {
+            changed_units.push_back(unit);
+            was_changed = true;
+        }
+        unit.makeAction();
+        // check if the unit changed
+        if (unit.haveYouChanged() && !was_changed) {
             changed_units.push_back(unit);
         }
         if (!unit.areYouAlive()) {
@@ -103,14 +110,15 @@ void ControlUnit::checkAllLivingOccupants() {
     }
 }
 
-void ControlUnit::cmdMoveUnit(std::string& id_player,int id, int x, int y) {
+void ControlUnit::cmdMoveUnit(const std::string& id_player,int id, int x,
+                              int y) {
     std::map<int,Unit*>::iterator it;
     it = all_units.find(id);
     if ((*it->second).getTeam() == id_player)
         (*it->second).calculateRoadTo(x,y);
 }
 
-void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
+void ControlUnit::cmdAttack(const std::string& attacker_team, int id_unit,
                             int target) {
     std::map<int,Unit*>::iterator it;
     it = all_units.find(id_unit);
@@ -120,6 +128,26 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
                 if (z->getTeam() != attacker_team) {
                     (*it->second).setTargetToAttack(z);
                     break;
+                }
+            }
+        }
+    }
+}
+
+void ControlUnit::cmdGrab(const std::string &id_player, int id_unit,
+                          int target) {
+    std::map<int,Unit*>::iterator it;
+    it = all_units.find(id_unit);
+    Unit& unit = (*it->second);
+    bool found = false;
+    if (unit.getTeam() == id_player) {
+        // for (auto t: territories) {
+//        if (flag.id == target)
+//    }
+        if (!found) {
+            for (auto& z: all_occupants) {
+                if (z->getId() == target) {
+                    unit.setTargetToGrab(z, z->getType());
                 }
             }
         }
@@ -192,7 +220,8 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     info += unit.getActionState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
-    info += std::to_string(unit.getLifeLeft()) + "|";
+    info += std::to_string(unit.getLifeLeft()) + "-";
+    info += unit.getTeam() + "|";
     return info;
 }
 
@@ -273,3 +302,4 @@ void ControlUnit::sendFinnalMessage() {
         y->sendMessage(winner);
     }
 }
+

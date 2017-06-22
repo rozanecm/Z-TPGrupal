@@ -27,6 +27,11 @@ void Command::run() {
         int target = std::stoi(target_str);
         control->cmdAttack(player_id,id_unit,target);
     } else if (action == "grab") {
+        std::string id_unit_str = getNextData(cmd);
+        int id_unit = std::stoi(id_unit_str);
+        std::string target_str = getNextData(cmd);
+        int target = std::stoi(target_str);
+        control->cmdGrab(player_id,id_unit,target);
     }
 }
 

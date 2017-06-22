@@ -6,9 +6,9 @@
 
 #define SIDEWALK 10
 #define DIAGONALWALK 14
-#define HMIN 1000
+#define HMIN 10
 #define STEP 2
-#define CLOSERAREA 16
+#define CLOSERAREA 32
 #define MIDDLEAREA 120
 
 Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
@@ -25,7 +25,7 @@ void Compass::setTerrainModifier() {
     terrain_modifier.insert(std::pair<std::string,int>("Tierra",2));
     terrain_modifier.insert(std::pair<std::string,int>("Pradera",2));
     terrain_modifier.insert(std::pair<std::string,int>("Nieve",2));
-    terrain_modifier.insert(std::pair<std::string, int>("Agua", 3));
+    terrain_modifier.insert(std::pair<std::string, int>("Agua", 4));
 }
 
 void Compass::buildNodeMap() {
@@ -626,6 +626,10 @@ int Compass::getModule(int x, int y) {
 
 Occupant* Compass::checkForEnemiesOnRange(Occupant& unit, Size &range) {
     return map.checkForEnemiesOn(range,unit,enemy);
+}
+
+bool Compass::checkIfItIsGrabbable(std::string& type) const {
+    return map.tellIfItIsGrabbable(type);
 }
 
 //Occupant* Compass::getFoundEnemy() {
