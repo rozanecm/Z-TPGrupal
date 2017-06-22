@@ -6,9 +6,6 @@
 #define FORTRESS "Fort"
 #define VFABRIC "vehiculeFabric"
 #define RFABRIC "robotFabric"
-#define VFABRIC "vehiculeFabric"
-#define VFABRIC "vehiculeFabric"
-#define VFABRIC "vehiculeFabric"
 
 // get terrain map from map loader
 Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,

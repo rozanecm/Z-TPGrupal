@@ -28,10 +28,16 @@ public:
     std::string getTerrainTypeAt(unsigned int xCoordinate,
                                  unsigned int yCoordinate);
 
+    void addNature(Nature nature);
+
     void markAsSelectedInRange(bool& terrainSelected, double xStartCoordinate,
                                double yStartCoordinate,
                                double xFinishCoordinate,
                                double yFinishCoordinate);
+
+    std::vector<Nature>
+    getNatureToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
+                    unsigned int maxY);
 };
 
 

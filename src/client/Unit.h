@@ -64,6 +64,8 @@ public:
 
     void update_position(int x, int y);
 
+    void update_state(ActionsEnum state);
+
     void markAsSelectedInRange(bool &unitsSelected, gdouble xStartCoordinate,
                                gdouble yStartCoordinate,
                                gdouble xFinishCoordinate,
@@ -86,6 +88,8 @@ public:
     bool is_selected();
 
     void unselect();
+
+    void update_rotation();
 };
 
 

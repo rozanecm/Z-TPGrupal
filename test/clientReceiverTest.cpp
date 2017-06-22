@@ -11,8 +11,8 @@ void clientReceiverTest::run() {
     while (listen) {
         std::string msg = messenger.recieveMessage();
 
-        m.lock();
+//        m.lock();
         std::cerr << "Answer: " << msg << std::endl;
-        m.unlock();
+//        m.unlock();
     }
 }

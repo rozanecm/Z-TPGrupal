@@ -27,3 +27,11 @@ std::string
 Map::getTerrainTypeAt(unsigned int xCoordinate, unsigned int yCoordinate) {
     return baseMap.at(xCoordinate).at(yCoordinate).getTerrainType();
 }
+
+void Map::addNature(Nature nature) {
+    this->nature.emplace_back(nature);
+}
+
+std::vector<Nature> Map::getNature() {
+    return nature;
+}

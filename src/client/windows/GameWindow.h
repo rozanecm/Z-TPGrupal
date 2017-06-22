@@ -35,6 +35,7 @@ class GameWindow : public Gtk::ApplicationWindow {
     bool unit_selection;
     bool building_selection;
     int selection_id = 0;
+
 protected:
     bool onTimeout();
 
@@ -48,9 +49,9 @@ public:
      * Saves resources' monitors and passes them to the gameArea.
      */
     void
-    setResources(UnitsMonitor *unitsMonitor,
-                 BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor, ServerMessenger *messenger);
+    setResources(UnitsMonitor *unitsMonitor, BuildingsMonitor *buildingsMonitor,
+                 MapMonitor *mapMonitor, ServerMessenger *messenger,
+                 const std::string &owner);
 
     void setMapData();
 

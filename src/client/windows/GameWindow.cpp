@@ -54,12 +54,13 @@ bool GameWindow::onTimeout() {
 void GameWindow::setResources(UnitsMonitor *unitsMonitor,
                               BuildingsMonitor *buildingsMonitor,
                               MapMonitor *mapMonitor,
-                              ServerMessenger *messenger) {
+                              ServerMessenger *messenger,
+                              const std::string &owner) {
     this->unitsMonitor = unitsMonitor;
     this->buildingsMonitor = buildingsMonitor;
     this->mapMonitor = mapMonitor;
     this->messenger = messenger;
-    gameArea->setResources(unitsMonitor, buildingsMonitor, mapMonitor);
+    gameArea->setResources(unitsMonitor, buildingsMonitor, mapMonitor, owner);
 }
 
 
@@ -109,8 +110,8 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
     }
 
     if (gameArea->unit_selected()) { // New unit selected
-
-        if (unit_selection) { // We already are selecting an unit, process attack
+        if (unit_selection) { // We already are selecting an unit, process
+                                // attack
             process_selected_unit_action();
         } else { // Select unit
             selected_unit = unitsMonitor->getSelectedUnits().at(0);

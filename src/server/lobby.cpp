@@ -46,15 +46,16 @@ void Lobby::startGame() {
         /// estas unidades creadas son para realizar tests
         Size r_size(0,0,3,3);
         Size range(0,0,12,12);
-
+        Size laser_size(0,0,3,1);
 //        Size r_size(415,431,6,6);
 //        Size range(415,431,12,12);
 
-        Size j_size(200,200,3,3);
-        Size j_range(10,10,6,6);
+        Size j_size(20,20,3,3);
+        Size j_range(20,20,6,6);
         Compass* r_compass = new Compass(*map, r_size,204, 4);
         Compass* j_compass = new Compass(*map, j_size,208, 4);
-        Weapon weapon("laser",25,20,false,r_size);
+        std::string w_type = "laser";
+        Weapon weapon(w_type,25,20,false,laser_size);
         Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
         Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,
                               weapon,2);

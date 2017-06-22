@@ -14,7 +14,7 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
     builder->get_widget("StartGame", start);
 
     start->signal_clicked().connect(sigc::mem_fun(*this,
-                                                    &LobbyWindow::on_click));
+                                                  &LobbyWindow::on_click));
 }
 
 void LobbyWindow::on_click() {

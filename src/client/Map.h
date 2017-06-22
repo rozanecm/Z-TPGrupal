@@ -4,14 +4,20 @@
 
 #include <vector>
 #include "Cell.h"
+#include "Nature.h"
 #include <string>
 
 class Map {
 private:
     std::vector<std::vector<Cell>> baseMap;
+    std::vector<Nature> nature;
 
 public:
     void initializeMap(unsigned int xSize, unsigned int ySize);
+
+    void addNature(Nature nature);
+
+    std::vector<Nature> getNature();
 
     void setCell(unsigned int xCoordinate,
                  unsigned int yCoordinate,

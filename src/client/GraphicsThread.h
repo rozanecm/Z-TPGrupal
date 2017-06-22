@@ -14,12 +14,13 @@ class GraphicsThread : public Thread {
     MapMonitor &mapMonitor;
     ServerMessenger &messenger;
     GameWindow &window;
+    const std::string &owner;
 public:
     GraphicsThread(UnitsMonitor &monitor,
                    BuildingsMonitor &buildingsMonitor,
                    MapMonitor &mapMonitor,
                    ServerMessenger &messenger,
-                   GameWindow &window);
+                   GameWindow &window, const std::string &owner);
 
     virtual void run();
 };

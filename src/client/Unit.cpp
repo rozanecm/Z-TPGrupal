@@ -6,7 +6,7 @@
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, TeamEnum team)
         : id(id), position(position), unitType(unitType),
-          rotation (RotationsEnum::r090), team(team),
+          rotation(RotationsEnum::r090), team(team),
           selected(false), actionType(ActionsEnum::STAND) {
     /* units initial rotation is facing 'to the player'; action: standing. */
     //todo check what else should be initialized
@@ -21,6 +21,36 @@ void Unit::update_position(int x, int y) {
 
     prev_position = position;
     position = new_pos;
+    update_rotation();
+}
+
+void Unit::update_rotation() {
+    auto prev_x = prev_position.first;
+    auto prev_y = prev_position.second;
+    auto x = position.first;
+    auto y = position.second;
+
+    if (x == prev_x and y < prev_y) {
+        rotation = RotationsEnum::r090;
+    } else if (x > prev_x and y < prev_y) {
+        rotation = RotationsEnum::r045;
+    } else if (x > prev_x and y == prev_y) {
+        rotation = RotationsEnum::r000;
+    } else if (x > prev_x and y > prev_y) {
+        rotation = RotationsEnum::r315;
+    } else if (x == prev_x and y > prev_y) {
+        rotation = RotationsEnum::r270;
+    } else if (x < prev_x and y > prev_y) {
+        rotation = RotationsEnum::r225;
+    } else if (x < prev_x, y == prev_y) {
+        rotation = RotationsEnum::r180;
+    } else if (x < prev_x and y < prev_y) {
+        rotation = RotationsEnum::r135;
+    }
+}
+
+void Unit::update_state(ActionsEnum state) {
+    this->actionType = state;
 }
 
 void

@@ -12,17 +12,13 @@ ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::vector<Team> &teams, CommandMonitor &commands) :
     all_units(all_units), /*territories(territories),*/
     all_occupants(all_occupants), players(new_players), commands(commands),
-    winning(false), teams(teams) {
+    winning(false), teams(teams),objects_counter((int)all_occupants.size()) {
 }
 
 void ControlUnit::run() {
     while(!winning) {
         double t3(WAIT);
-        auto it = all_occupants.begin();
-        // Copy starting state of Occupants
-        for (auto o: all_occupants) {
-            changed_occupants.push_back(*o);
-        }
+
         auto t1 = std::chrono::high_resolution_clock::now();
 
         // execute commands
@@ -58,48 +54,48 @@ void ControlUnit::sleepFor(double msec) {
 void ControlUnit::unitsMakeMicroAction() {
     for (auto x: all_units){
         // Save previous state
-        std::string state = (*x.second).getState();
-        std::string team = (*x.second).getTeam();
-        int life = (*x.second).getLifeLeft();
-        Position pos = (*x.second).getPosition();
+//        std::string state = (*x.second).getActionState();
+//        std::string team = (*x.second).getTeam();
+//        int life = (*x.second).getLifeLeft();
+//        Position pos = (*x.second).getPosition();
 
-        (*x.second).makeAction();
-        if (differenceOnUnits((*x.second),state,team,life,pos)) {
-            changed_units.push_back((*x.second));
-        }
-        if (!(*x.second).areYouAlive()) {
+        if ((*x.second).doYouNeedToDisappear()) {
             all_units.erase(x.first);
         } else {
-            std::vector<Bullet*> tmp = (*x.second).collectBullets();
-            all_bullets.insert(all_bullets.end(),tmp.begin(),tmp.end());
+            (*x.second).makeAction();
+            if ((*x.second).haveYouChanged()) {
+                changed_units.push_back((*x.second));
+            }
+            if (!(*x.second).areYouAlive()) {
+                (*x.second).mustDisappear();
+            }
+            if ((*x.second).doYouHaveAnyBullets()) {
+                std::vector<Bullet *> tmp = (*x.second).collectBullets();
+                for (auto b: tmp) {
+                    b->setCorrectId(objects_counter);
+                    ++objects_counter;
+                }
+                all_bullets.insert(all_bullets.end(), tmp.begin(), tmp.end());
+            }
         }
     }
 }
 
 
 void ControlUnit::checkAllLivingOccupants() {
-    std::vector<Occupant>::iterator it = changed_occupants.begin();
-    std::cout<< changed_occupants.size() << std::endl;
-    int i = 0;
-    for (; it != changed_occupants.end();) {
-        if (all_occupants[i]->getLifeLeft() ==
-                (it)->getLifeLeft()) {
-            it = changed_occupants.erase(it);
-        } else {
-            ++it;
-        }
-        ++i;
-    }
-    std::cout<< changed_occupants.size() << std::endl;
-    // if dead erase Occupant
-    std::vector<Occupant*>::iterator ito = all_occupants.begin();
-    for(;ito != all_occupants.end();){
-        if(!(*ito)->areYouAlive()) {
+    std::vector<Occupant*>::iterator it = all_occupants.begin();
+    for(;it != all_occupants.end();){
+        if((*it)->doYouNeedToDisappear()) {
             //erase it from map
-            ito = all_occupants.erase(ito);
+            it = all_occupants.erase(it);
             // if building put ruins
         } else {
-            ++ito;
+            if((*it)->haveYouChanged())
+                changed_occupants.push_back(*(*it));
+            if(!(*it)->areYouAlive()) {
+                (*it)->mustDisappear();
+            }
+            ++it;
         }
     }
 }
@@ -119,7 +115,7 @@ void ControlUnit::cmdAttack(std::string attacker_team, int id_unit,
         for (auto z: all_occupants) {
             if (z->getId() == target) {
                 if (z->getTeam() != attacker_team) {
-//                    (*it->second).setTargetToAttack(z);
+                    (*it->second).setTargetToAttack(z);
                     break;
                 }
             }
@@ -158,6 +154,10 @@ std::string ControlUnit::getUpdateInfo() {
         update_msg += getInfoFromOccupant(y);
     }
 
+    for (auto b: all_bullets) {
+        update_msg += getInfoFromBullets(*b) ;
+    }
+
 //    for(auto t: territories) {
 //       if (t.doesTerritorysOwnerChanged()) {
 //           update_msg += getInfoFromTerritory(t);
@@ -167,26 +167,26 @@ std::string ControlUnit::getUpdateInfo() {
     return update_msg;
 }
 
-bool ControlUnit::differenceOnUnits(Unit &x,std::string& state,
-                                    std::string& team,
-                                    int life, Position& pos) {
-    bool differ = false;
-    if (x.getState() != state)
-        differ = true;
-    if (x.getTeam() != team) // For neutral vehicules
-        differ = true;
-    if (x.getLifeLeft() != life)
-        differ = true;
-    if ((x.getCurrentPosition().getX() != pos.getX()) ||
-            (x.getCurrentPosition().getY() != pos.getY()))
-        differ = true;
-    return differ;
-}
+//bool ControlUnit::differenceOnUnits(Unit &x,std::string& state,
+//                                    std::string& team,
+//                                    int life, Position& pos) {
+//    bool differ = false;
+//    if (x.getActionState() != state)
+//        differ = true;
+//    if (x.getTeam() != team) // For neutral vehicules
+//        differ = true;
+//    if (x.getLifeLeft() != life)
+//        differ = true;
+//    if ((x.getCurrentPosition().getX() != pos.getX()) ||
+//            (x.getCurrentPosition().getY() != pos.getY()))
+//        differ = true;
+//    return differ;
+//}
 
 std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     std::string info = "";
     info += std::to_string(unit.getId()) + "-";
-    info += unit.getState() + "-";
+    info += unit.getActionState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
     info += std::to_string(unit.getCurrentPosition().getY()) + "-";
     info += std::to_string(unit.getLifeLeft()) + "|";
@@ -199,6 +199,14 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
     info += std::to_string(Occupant.getPosition().getX()) + "-";
     info += std::to_string(Occupant.getPosition().getY()) + "-";
     info += std::to_string(Occupant.getLifeLeft()) + "|";
+    return info;
+}
+
+std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
+    std::string info = "";
+    info += std::to_string(bullet.getId()) + "-";
+    info += std::to_string(bullet.getPosition().getX()) + "-";
+    info += std::to_string(bullet.getPosition().getY()) + "|";
     return info;
 }
 
@@ -215,9 +223,11 @@ void ControlUnit::moveAllBullets() {
     std::vector<Bullet*>::iterator it = all_bullets.begin();
     for (; it != all_bullets.end();) {
         (*it)->move();
-        if ((*it)->didHit()) {
+        if ((*it)->doYouHaveToDisapear()) {
             it = all_bullets.erase(it);
         } else {
+            if ((*it)->didHit())
+                (*it)->disapear();
             ++it;
         }
     }
@@ -259,5 +269,3 @@ void ControlUnit::sendFinnalMessage() {
         y->sendMessage(winner);
     }
 }
-
-

@@ -17,19 +17,19 @@ private:
     int damage, w_speed;
     bool explosive;
     Size w_size;
-    std::vector<Bullet*> bullets;
+    Bullet* bullet;
 
 public:
-    Weapon(std::string type, int damage, int w_speed, bool explosive,
+    Weapon(std::string& type, int damage, int w_speed, bool explosive,
                                                         Size w_size);
 
-    void setNewTarget(Occupant& target);
+    void setNewTarget(Occupant* target);
 
-    Bullet* shotTarget(Occupant& target);
+    Bullet* shotTarget(Occupant* target);
 
     bool isTheAttackExplosive();
 
-    std::vector<Position>* getBulletRoad();
+    std::vector<Position>& getBulletRoad();
 
     Size getBulletSize() const;
 

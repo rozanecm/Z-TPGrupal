@@ -16,7 +16,7 @@ void BuildingsMonitor::markAsSelectedInRange(bool &buildingSelected,
         building.markAsSelectedInRange(buildingSelected, xStartCoordinate,
                                        yStartCoordinate, xFinishCoordinate,
                                        yFinishCoordinate);
-        if (buildingSelected){
+        if (buildingSelected) {
             break;
         }
     }
@@ -46,8 +46,8 @@ BuildingsMonitor::getBuildingsToDraw(unsigned int minX, unsigned int maxX,
 
 std::vector<Building> BuildingsMonitor::get_selected() {
     std::vector<Building> selected_buildings;
-    for(Building& building : buildings) {
-        if(building.is_selected()) {
+    for (Building &building : buildings) {
+        if (building.is_selected()) {
             selected_buildings.push_back(building);
         }
     }
@@ -55,7 +55,7 @@ std::vector<Building> BuildingsMonitor::get_selected() {
 }
 
 void BuildingsMonitor::wipe_selected() {
-    for(Building& b: buildings) {
+    for (Building &b: buildings) {
         b.unselect();
     }
 }

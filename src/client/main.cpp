@@ -1,34 +1,11 @@
 #include <gtkmm.h>
 #include <iostream>
-#include <SDL2/SDL_mixer.h>
 #include "GraphicsThread.h"
 #include "ClientThread.h"
 #include "GameBuilder.h"
 #include <split.h>
 
 #define SUCCESSRETURNCODE 0
-
-void play_sound() {
-    // Init, open the audio channel
-    Mix_Init(0);
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
-        std::cout << "ERROR ON OPENING AUDIO" << Mix_GetError() << std::endl;
-        return;
-    }
-
-
-    Mix_AllocateChannels(16);
-    Mix_Chunk *sample = Mix_LoadWAV("test.wav");
-    if (!sample) {
-        //todo throw exception
-        std::cout << "ERROR ON PLAYING TEST.WAV " << Mix_GetError()
-                  << std::endl;
-        return;
-    }
-
-    // Plays
-    Mix_PlayChannel(-1, sample, -1);
-}
 
 void setup_lobby(ServerMessenger& m) {
     m.send("lobbyinfo");
@@ -44,8 +21,6 @@ void setup_lobby(ServerMessenger& m) {
 
 int main(int argc, char **argv) {
     try {
-        // play_sound();
-
         /* create map; bind with monitor */
         Map map;
         MapMonitor mapMonitor(map);
@@ -70,7 +45,6 @@ int main(int argc, char **argv) {
 
             GameWindow *gwindow = builder.get_window();
 
-
             LobbyWindow* lobby = builder.get_lobby_window();
             lobby->set_messenger(messenger);
             app.clear();
@@ -84,9 +58,9 @@ int main(int argc, char **argv) {
             app->run(*lobby);
             // HARDCODED DEBUG MESSAGES TO START A GAME
 
-
             GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
-                                          mapMonitor, messenger, *gwindow);
+                                          mapMonitor, messenger, *gwindow,
+                                          window->get_username());
 
 
             graphicsThread.start();

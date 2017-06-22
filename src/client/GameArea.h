@@ -25,15 +25,15 @@ private:
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
 
+    std::string owner;
+
     Camera camera;
 
     /* general resources */
     std::map<std::string, Glib::RefPtr<Gdk::Pixbuf>> tiles;
 
+    std::map<NatureEnum, Glib::RefPtr<Gdk::Pixbuf>> nature;
     Glib::RefPtr<Gdk::Pixbuf> someImg;
-
-    /* map holding all flags */
-    std::map<TeamEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
     /* map holding all units imgs */
     std::map<TeamEnum,
@@ -43,10 +43,13 @@ private:
                                     std::vector<Glib::RefPtr<Gdk::Pixbuf>>>>>>
             unitsAnimations;
 
+    std::map<RotationsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> jeepTires;
+
     /* BUILDINGS RESOURCES */
     std::map<BuildingsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> buildings;
 
-    std::map<RotationsEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> jeepTires;
+    /* map holding all flags */
+    std::map<TeamEnum, std::vector<Glib::RefPtr<Gdk::Pixbuf>>> flags;
 
     /* declare counter used to know which of the flag imgs
      * which compose the flag's animation should be showed. This counters are
@@ -66,8 +69,7 @@ private:
     std::pair<int, int> coords;
 
     /* DRAWING METHODS */
-    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr,
-                     std::pair<unsigned int, unsigned int> cameraPosition);
+    void drawBaseMap(const Cairo::RefPtr<Cairo::Context> &cr);
 
     void drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
                     unsigned int xTileCoordinate, unsigned int yTileCoordinate,
@@ -294,7 +296,7 @@ public:
     void
     setResources(UnitsMonitor *playersMonitor,
                  BuildingsMonitor *buildingsMonitor,
-                 MapMonitor *mapMonitor);
+                 MapMonitor *mapMonitor, std::string owner);
 
     void processClick();
 
@@ -311,7 +313,9 @@ public:
 
     std::pair<int, int> get_coords();
 
-    unsigned int realMapToCamera(gdouble coordinate);
+    unsigned int screenMapToCameraX(gdouble coordinate);
+
+    unsigned int screenMapToCameraY(gdouble coordinate);
 
     void setMapData();
 
@@ -324,10 +328,20 @@ public:
     bool unitIsRobot(UnitsEnum unitType);
 
     void drawFlag(const TeamEnum &team, const Cairo::RefPtr<Cairo::Context> &cr,
-                  unsigned int xGraphicCoordinate, unsigned int yGraphicCoordinate) const;
+                  unsigned int xGraphicCoordinate,
+                  unsigned int yGraphicCoordinate) const;
 
     bool unit_selected();
+
     bool buildings_selected();
+
+    void drawNatureInView(const Cairo::RefPtr<Cairo::Context> &cr);
+
+    void
+    drawNature(NatureEnum natureType, const Cairo::RefPtr<Cairo::Context> &cr,
+               unsigned int x, unsigned int y);
+
+    void loadMapResources();
 };
 
 

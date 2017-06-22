@@ -5,10 +5,8 @@
 void GraphicsThread::run() {
     auto app = Gtk::Application::create();
 
-    window.setResources(&unitsMonitor,
-                        &buildingsMonitor,
-                        &mapMonitor,
-                        &messenger);
+    window.setResources(&unitsMonitor, &buildingsMonitor, &mapMonitor,
+                        &messenger, owner);
     
     app->run(window);
     //todo check exit status. Couldn't find exit status codes,
@@ -19,10 +17,11 @@ GraphicsThread::GraphicsThread(UnitsMonitor &monitor,
                                BuildingsMonitor &buildingsMonitor,
                                MapMonitor &mapMonitor,
                                ServerMessenger &messenger,
-                               GameWindow &window) :
+                               GameWindow &window, const std::string &owner) :
         unitsMonitor(monitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger),
-        window(window) {
+        window(window),
+        owner(owner){
 }
