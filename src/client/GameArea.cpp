@@ -411,6 +411,7 @@ bool GameArea::on_key_press_event(GdkEventKey *event) {
 //  todo ver si el event handling se pasa arriba o no
 //    //if the event has not been handled, call the base class
 //    return Gtk::Window::on_key_press_event(key_event);
+    return false;
 }
 
 bool GameArea::on_button_press_event(GdkEventButton *event) {

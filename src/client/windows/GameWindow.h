@@ -78,6 +78,9 @@ public:
 
     void update_name(const std::string& name);
     void update_players(const std::vector<std::string>& players);
+
+    bool on_key_press_event(GdkEventKey *event) override;
+
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

@@ -35,6 +35,7 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     Glib::signal_timeout().connect(mySlot, 1000 / FRAMERATE);
 
     show_all_children();
+    add_events(Gdk::EventMask::KEY_PRESS_MASK);
 }
 
 GameWindow::~GameWindow() {
@@ -115,9 +116,8 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
         change_view_to_building();
         return true;
     }
-
     if (gameArea->unit_selected()) { // New unit selected
-        if (unit_selection || building_selection) {
+        if (unit_selection && selected_unit.get_owner() == me) {
             // We already are selecting an unit, process attack
             process_attack();
         } else { // Select unit
@@ -196,4 +196,17 @@ void GameWindow::update_name(const std::string &name) {
 
 void GameWindow::update_players(const std::vector<std::string> &players) {
     this->players = players;
+}
+
+bool GameWindow::on_key_press_event(GdkEventKey *event) {
+    // Clear selection
+    if (event->keyval == GDK_KEY_Escape) {
+        selected_building = Building();
+        selected_unit = Unit();
+        for (auto child : panel->get_children()) {
+            panel->remove(*child);
+        }
+        panelLabel->set_text("Z");
+    }
+    return true;
 }
