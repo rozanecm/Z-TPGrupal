@@ -21,6 +21,8 @@ private:
     /* unitType can be: robot, vehicle, tank */
     UnitsEnum unitType;
 
+    std::string unit_name;
+
     ActionsEnum actionType;
 
     RotationsEnum rotation;
@@ -30,9 +32,9 @@ private:
     /* freq. with which the unit shoots */
     unsigned short frequency;
 
-    unsigned int lifeLeft;
+    unsigned int lifeLeft = 0;
 
-    unsigned int totalLife;
+    unsigned int totalLife = 0;
 
     unsigned short velocity;
 
@@ -55,6 +57,7 @@ private:
     unsigned short standingDrawingCounter;
     unsigned short walkingDrawingCounter;
 
+    std::string owner;
 public:
     Unit(int id, std::pair<unsigned int, unsigned int> position,
              UnitsEnum unitType, TeamEnum team);
@@ -90,6 +93,15 @@ public:
     void unselect();
 
     void update_rotation();
+
+    void update_owner(const std::string& owner);
+
+    void update_unit_name(const std::string& name);
+
+    std::string get_owner();
+    int get_max_hp();
+    int get_hp();
+    std::string get_unit_name();
 };
 
 

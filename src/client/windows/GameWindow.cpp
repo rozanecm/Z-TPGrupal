@@ -71,6 +71,10 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
+    unit_panel->set_name(selected_unit.get_unit_name());
+    unit_panel->set_owner(selected_unit.get_owner());
+    unit_panel->set_max_hp(selected_unit.get_max_hp());
+    unit_panel->set_hp(selected_unit.get_hp());
 
     return true;
 }
@@ -178,4 +182,12 @@ void GameWindow::process_selected_unit_action() {
             return;
         }
     }
+}
+
+void GameWindow::update_name(const std::string &name) {
+    me = name;
+}
+
+void GameWindow::update_players(const std::vector<std::string> &players) {
+    this->players = players;
 }

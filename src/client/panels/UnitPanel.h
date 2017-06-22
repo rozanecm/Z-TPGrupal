@@ -8,15 +8,23 @@
 #include <gtkmm/label.h>
 
 class UnitPanel : public Gtk::Box {
-    Gtk::Label* hp_label;
-    Gtk::Label* name_label;
+    Gtk::Label *owner;
+    Gtk::Label *max_hp_label;
+    Gtk::Label *hp_label;
+    Gtk::Label *name_label;
 public:
-    UnitPanel(BaseObjectType* cobject,
-    const Glib::RefPtr<Gtk::Builder>& builder);
+    UnitPanel(BaseObjectType *cobject,
+              const Glib::RefPtr<Gtk::Builder> &builder);
+
     std::string get_label();
 
     void set_name(std::string name);
+
     void set_hp(int hp);
+
+    void set_max_hp(int hp);
+
+    void set_owner(const std::string& owner);
 };
 
 

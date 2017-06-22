@@ -12,7 +12,7 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
     builder->get_widget("PlayerStatus3", players[2]);
     builder->get_widget("PlayerStatus4", players[3]);
     builder->get_widget("StartGame", start);
-
+    default_label = players[0]->get_text();
     start->signal_clicked().connect(sigc::mem_fun(*this,
                                                   &LobbyWindow::on_click));
 }
@@ -29,5 +29,17 @@ void LobbyWindow::update_player_name(int at, const std::string &name) {
     if (at < 4) {
         players[at]->set_text(name);
     }
+}
+
+std::vector<std::string> LobbyWindow::get_player_names() {
+    std::vector<std::string> names;
+    for (Gtk::Label* player : players) {
+        std::string name = player->get_text();
+        if (name == default_label) {
+            name = "";
+        }
+        names.push_back(name);
+    }
+    return names;
 }
 

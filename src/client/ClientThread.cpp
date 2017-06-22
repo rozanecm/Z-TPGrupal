@@ -69,12 +69,12 @@ void ClientThread::finish() {
 
 void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
-    commands["addunit"] = new AddUnit(unitsMonitor);
+    commands["addunit"] = new AddUnit(unitsMonitor, players);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
     commands["update"] = new Update(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
-    commands["addbuilding"] = new AddBuilding(buildingsMonitor);
+    commands["addbuilding"] = new AddBuilding(buildingsMonitor, players);
     commands["addnature"] = new AddNature(mapMonitor);
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
@@ -84,4 +84,8 @@ ClientThread::~ClientThread() {
     for (std::pair<std::string, Command *> c : commands) {
         delete c.second;
     }
+}
+
+void ClientThread::update_player_names(const std::vector<std::string>& names) {
+    players = names;
 }

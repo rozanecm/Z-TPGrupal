@@ -32,6 +32,7 @@ public:
     std::vector<Unit> getSelectedUnits();
 
     void update_position(int id, ActionsEnum state, int x, int y);
+
 };
 
 

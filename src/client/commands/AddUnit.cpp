@@ -5,7 +5,7 @@
 #define UNIT_ID 0
 #define X 1
 #define Y 2
-#define UNIT_TYPE 3
+#define UNIT_NAME 3
 #define TEAM 4
 
 const std::map<std::string, UnitsEnum> units = {
@@ -27,16 +27,34 @@ void AddUnit::execute(const std::vector<std::string> &args) {
     int x = std::stoi(args[X]);
     int y = std::stoi(args[Y]);
     int id = std::stoi(args[UNIT_ID]);
-    auto type = units.find(args[UNIT_TYPE]);
+    std::string name = args[UNIT_NAME];
+    auto type = units.find(name);
     if (type == units.end()) {
-        std::cerr << "Error adding unit: received type " << args[UNIT_TYPE] <<
+        std::cerr << "Error adding unit: received type " << args[UNIT_NAME] <<
                   std::endl;
         return;
     }
 
-    Unit unit(id, {x, y}, type->second, (TeamEnum) std::stoi(args[TEAM]));
+    std::string owner = args[TEAM];
+    int team_id = 1;
+    for (const std::string& player : players) {
+        if (player == owner) {
+            break;
+        }
+        team_id++;
+    }
+    if (team_id > players.size()) {
+        team_id = 0; // set it to team NEUTRAL
+    }
+    Unit unit(id, {x, y}, type->second, (TeamEnum) team_id);
+    unit.update_owner(owner);
+    unit.update_unit_name(name);
     unitsMonitor.addUnit(unit);
 }
 
-AddUnit::AddUnit(UnitsMonitor &unitsMonitor) : unitsMonitor(unitsMonitor) {
+AddUnit::AddUnit(UnitsMonitor &unitsMonitor,
+                 const std::vector<std::string>& players)
+        : unitsMonitor(unitsMonitor),
+          players(players)
+{
 }

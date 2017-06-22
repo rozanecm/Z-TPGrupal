@@ -36,6 +36,8 @@ class GameWindow : public Gtk::ApplicationWindow {
     bool building_selection;
     int selection_id = 0;
 
+    std::string me;
+    std::vector<std::string> players;
 protected:
     bool onTimeout();
 
@@ -73,6 +75,9 @@ public:
     void update_selection(int id);
 
     void process_selected_unit_action();
+
+    void update_name(const std::string& name);
+    void update_players(const std::vector<std::string>& players);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

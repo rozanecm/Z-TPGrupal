@@ -2,12 +2,14 @@
 #include <iostream>
 
 #define IMG_SIZE_IN_PX 16
-
+#define TEAM_NEUTRAL "None"
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, TeamEnum team)
         : id(id), position(position), unitType(unitType),
           rotation(RotationsEnum::r090), team(team),
-          selected(false), actionType(ActionsEnum::STAND) {
+          selected(false), actionType(ActionsEnum::STAND),
+          owner(TEAM_NEUTRAL)
+{
     /* units initial rotation is facing 'to the player'; action: standing. */
     //todo check what else should be initialized
 }
@@ -104,4 +106,28 @@ void Unit::unselect() {
 }
 
 Unit::Unit() {
+}
+
+void Unit::update_owner(const std::string &owner) {
+    this->owner = owner;
+}
+
+std::string Unit::get_owner() {
+    return owner;
+}
+
+int Unit::get_max_hp() {
+    return totalLife;
+}
+
+int Unit::get_hp() {
+    return lifeLeft;
+}
+
+void Unit::update_unit_name(const std::string &name) {
+    unit_name = name;
+}
+
+std::string Unit::get_unit_name() {
+    return unit_name;
 }

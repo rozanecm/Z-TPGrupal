@@ -13,12 +13,15 @@ class LobbyWindow : public Gtk::Window {
     Gtk::Button* start;
     Gtk::Label* players[PLAYERS_AMT];
     ServerMessenger* m;
+    std::string default_label;
 public:
     LobbyWindow(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
     void set_messenger(ServerMessenger& m);
     void update_player_name(int at, const std::string& name);
+
+    std::vector<std::string> get_player_names();
 private:
     void on_click();
 };

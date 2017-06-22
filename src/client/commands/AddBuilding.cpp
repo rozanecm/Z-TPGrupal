@@ -7,15 +7,29 @@
 #define TYPE 3
 #define TEAM 4
 
-AddBuilding::AddBuilding(BuildingsMonitor &buildings) : buildings(buildings) {
+AddBuilding::AddBuilding(BuildingsMonitor &buildings,
+                         const std::vector<std::string>& players)
+        : buildings(buildings),
+          players(players)
+{
 }
 
 void AddBuilding::execute(const std::vector<std::string> &args) {
     int id = std::stoi(args[ID]);
     int x = std::stoi(args[X]);
     int y = std::stoi(args[Y]);
-    TeamEnum team = (TeamEnum) std::stoi(args[TEAM]);
 
-    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, team);
+    std::string owner = args[TEAM];
+    int team_id = 1;
+    for (const std::string& player : players) {
+        if (player == owner) {
+            break;
+        }
+        team_id++;
+    }
+    if (team_id > players.size()) {
+        team_id = 0; // set it to team NEUTRAL
+    }
+    Building b(BuildingsEnum::ROBOT_FABRIC, x, y, id, (TeamEnum) team_id);
     buildings.addBuilding(b);
 }

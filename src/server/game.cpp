@@ -70,14 +70,8 @@ void Game::analyseOccupantsInfo(std::string& info) {
         info += std::to_string(pos.getY()) + "-";
         info += o->getType() + "-";
 
-        int id = 0; // Neutral ID: 0
         std::string player_id = o->getTeam();
-        for (unsigned int i = 0; i < players.size(); ++i) {
-            if (players.at(i)->getId() == player_id) {
-                id = i + 1;
-            }
-        }
-        info += std::to_string(id) + "|";
+        info += player_id + "|";
     }
 }
 

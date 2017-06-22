@@ -21,17 +21,7 @@ class ClientThread : public Thread {
     LobbyWindow& lobby;
     bool finished = false; // Flag for finishing execution
     std::map<std::string, Command *> commands;
-
-    /* Loads commands */
-    void initCommands();
-
-    /** Main thread loop, receives commands from the server, parses them and
-     * executes them */
-    void loop();
-
-    /* Parses a command string and executes it */
-    void parse(std::string &s);
-
+    std::vector<std::string> players;
 public:
     ClientThread(UnitsMonitor &unitsMonitor,
                  BuildingsMonitor &buildingsMonitor,
@@ -44,6 +34,21 @@ public:
 
     /* Finish the thread's execution */
     void finish();
+
+    void update_player_names(const std::vector<std::string>& names);
+
+private:
+    /* Loads commands */
+    void initCommands();
+
+    /** Main thread loop, receives commands from the server, parses them and
+     * executes them */
+    void loop();
+
+    /* Parses a command string and executes it */
+    void parse(std::string &s);
+
+
 };
 
 

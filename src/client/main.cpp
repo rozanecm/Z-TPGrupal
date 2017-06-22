@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
             ServerMessenger messenger = *m.get();
 
             GameWindow *gwindow = builder.get_window();
-
+            gwindow->update_name(window->get_username());
             LobbyWindow* lobby = builder.get_lobby_window();
             lobby->set_messenger(messenger);
             app.clear();
@@ -55,7 +55,11 @@ int main(int argc, char **argv) {
                                       messenger, *lobby, *gwindow);
             clientThread.start();
 
+
             app->run(*lobby);
+
+            gwindow->update_players(lobby->get_player_names());
+            clientThread.update_player_names(lobby->get_player_names());
             // HARDCODED DEBUG MESSAGES TO START A GAME
 
             GraphicsThread graphicsThread(unitsrMonitor, buildingsMonitor,
