@@ -87,6 +87,7 @@ public:
     void factory_prev();
 
     void update_factory_panel(const std::string& type, int fire_rate, int hp);
+    void update_factory_timer(int minutes, int seconds);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

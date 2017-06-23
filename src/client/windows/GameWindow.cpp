@@ -112,6 +112,8 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
         unit_selection = false;
         building_selection = true;
         change_view_to_building();
+        messenger->send("factory-"+std::to_string(selected_building.get_ID())
+                        +"-current");
         return true;
     }
     if (gameArea->unit_selected()) { // New unit selected
@@ -240,4 +242,8 @@ void GameWindow::update_factory_panel(const std::string &type, int fire_rate,
     building_panel->set_unit_hp(hp);
     building_panel->set_unit_fire_rate(fire_rate);
     building_panel->set_unit_type(type);
+}
+
+void GameWindow::update_factory_timer(int minutes, int seconds) {
+    building_panel->set_time_left(std::pair<int, int>(minutes, seconds));
 }
