@@ -77,6 +77,11 @@ Gtk::Button* BuildingPanel::prev_button() {
 }
 
 void BuildingPanel::set_time_left(std::pair<int, int> time) {
+    if (time == std::pair<int, int>(0, 0)) {
+        minutes->get_parent()->hide();
+    } else {
+        minutes->get_parent()->show();
+    };
     minutes->set_text(std::to_string(time.first));
     seconds->set_text(std::to_string(time.second));
 }

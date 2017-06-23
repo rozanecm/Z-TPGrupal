@@ -247,3 +247,10 @@ void GameWindow::factory_prev() {
     int id = selected_building.get_ID();
     messenger->send("factory-"+std::to_string(id)+"-prev");
 }
+
+void GameWindow::update_factory_panel(const std::string &type, int fire_rate,
+                                      int hp) {
+    building_panel->set_unit_hp(hp);
+    building_panel->set_unit_fire_rate(fire_rate);
+    building_panel->set_unit_type(type);
+}

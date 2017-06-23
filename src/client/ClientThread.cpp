@@ -81,7 +81,7 @@ void ClientThread::initCommands() {
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
     commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
-    commands["factorystats"] = new FactoryStats(buildingsMonitor);
+    commands["factorystats"] = new FactoryStats(window);
 }
 
 ClientThread::~ClientThread() {

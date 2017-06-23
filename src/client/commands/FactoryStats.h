@@ -4,11 +4,12 @@
 
 #include "Command.h"
 #include "../BuildingsMonitor.h"
+#include "../windows/GameWindow.h"
 
 class FactoryStats : public Command {
-    BuildingsMonitor& buildings;
+    GameWindow& window;
 public:
-    FactoryStats(BuildingsMonitor& buildings);
+    FactoryStats(GameWindow& window);
     void execute(const std::vector<std::string> &args);
 
 };
