@@ -6,7 +6,7 @@
 
 #define SIDEWALK 10
 #define DIAGONALWALK 14
-#define HMIN 10
+#define HMIN 100
 #define STEP 2
 #define CLOSERAREA 32
 #define MIDDLEAREA 120
@@ -42,6 +42,7 @@ void Compass::buildNodeMap() {
 }
 
 std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
+    counter = 0;
     if (!clear)
         clearCompass();
     // check if it's a possible position
@@ -75,7 +76,8 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
         bool open_nodes_empty = false;
 
         int step = 1;
-
+        int step_check = step;
+        int i = 0;
         while (!finished && (!open_nodes_empty)) {
             // get adjacent's and add them to looking list in order of F value.
             // On tie use H value.
@@ -101,7 +103,15 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
                     manageSteps(step,start_pos ,cls_pos,
                             destiny);
             }
+
+            if (step_check != step) {
+                std::cout << "step :" << step << "  en loop :" << i << std::endl;
+                step_check = step;
+            }
+            ++i;
         }
+        std::cout << "cantidad de nodos visitados: " << counter << std::endl;
+        std::cout << "cantidad de loops: " << i << std::endl;
         Node *closest;
         if (finished) {
             this->getRoad(from, closer_node);
@@ -139,6 +149,7 @@ void Compass::getAdjacents(Node *node, int step) {
     for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
         for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
+                ++counter;
                 adj = astar_map[x_pos][y_pos];
                 Size size = adj->getSize();
 
@@ -324,6 +335,7 @@ void Compass::checkIfIsDestinyNeighbor(Node *node, int step) {
         for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
             for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
                 if (map.doesThisPositionExist(x_pos, y_pos)) {
+                    ++counter;
                     adj = astar_map[x_pos][y_pos];
                     Size size = adj->getSize();
                     this->setHValueOnNode(adj);
@@ -538,17 +550,17 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
     int start_h =  HMIN * (close_x  + close_y);
     int mid_h = HMIN * (mid_x + mid_y);
     // select step
-    if (tmp_h < closer_h || getModule(start_h, tmp_h) < CLOSERAREA) {
+    if (tmp_h < closer_h || getModule(start_h, tmp_h) < closer_h) {
         step = 1;
-    } else if ((tmp_h > closer_h || getModule(start_h, tmp_h) > CLOSERAREA)
+    } else if ((tmp_h > closer_h || getModule(start_h, tmp_h) > closer_h)
                && tmp_h < mid_h) {
         if (unit_size.getWidth() > unit_size.getHeight()) {
-            step = (int) (unit_size.getHeight() * 2);
+            step = (int) (unit_size.getHeight()*2);
         } else {
-            step = (int) (unit_size.getWidth() * 2);
+            step = (int) (unit_size.getWidth()*2);
         }
     } else {
-        step = (int) (unit_size.getHeight() * 15);
+        step = (int) (unit_size.getHeight() * 10);
     }
 }
 
