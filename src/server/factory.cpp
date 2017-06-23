@@ -14,7 +14,7 @@ map(map), weapons(weapons){
 }
 
 void Factory::build(int& id_counter) {
-    if (time_counter == (*mold)->getCreationTime()) {
+    if (time_counter >= (*mold)->getCreationTime()) {
         Size u_size = (*mold)->getUnitSize();
         Position factory_pos = this->obj_size.getPosition();
         u_size.moveTo(factory_pos.getX(),factory_pos.getY());
@@ -102,4 +102,8 @@ std::string Factory::previousUnit() {
         ++i;
     }
     return (*mold)->getTypeOfUnit();
+}
+
+void Factory::resetSelectedUnit() {
+    mold = units.begin();
 }

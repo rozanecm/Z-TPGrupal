@@ -29,6 +29,9 @@ void Lobby::startGame() {
             std::vector<PlayerInfo> playersInfo;
             for (int j = 0; j < teams[i].size(); ++j) {
                 Factory* fortress = forts.back();
+                fortress->changeTeam(teams[i][j]);
+                // set changed boolean to false
+                fortress->haveYouChanged();
                 PlayerInfo new_player(teams[i][j],fortress);
                 for (auto p: players) {
                     if (p->getId() == teams[i][j])

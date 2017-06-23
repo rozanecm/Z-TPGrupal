@@ -102,6 +102,7 @@ void Game::sincronizeOccupants() {
     for (auto& t: territories) {
         std::map<int, Factory*>& factories = t->getFactories();
         for (auto& f: factories) {
+            (f.second)->resetSelectedUnit();
             all_occupants.push_back((Occupant*)(f.second));
         }
 //        for (auto& team: teams) {

@@ -48,6 +48,8 @@ public:
     bool haveNewUnits();
 
     std::vector<Unit*> getUnits();
+
+    void resetSelectedUnit();
 };
 
 

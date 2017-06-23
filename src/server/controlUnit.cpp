@@ -42,6 +42,7 @@ void ControlUnit::run() {
         sleepFor(time_span);
         changed_units.clear();
         changed_occupants.clear();
+        changed_factories.clear();
     }
     // send victory or defeated message
     this->sendFinnalMessage();
@@ -115,7 +116,7 @@ void ControlUnit::makeTerritoriesChecks() {
     for (auto t: territories) {
 //
     }
-//    makeFactoryChecks();
+    makeFactoryChecks();
 }
 
 void ControlUnit::makeFactoryChecks() {
@@ -123,31 +124,35 @@ void ControlUnit::makeFactoryChecks() {
         std::map<int,Factory*>& factories = t->getFactories();
         auto it = factories.begin();
         for (; it != factories.end();) {
-            Factory* f = it->second;
-
-            bool was_changed = false;
-            if (f->haveYouChanged()) {
-                changed_factories.push_back(*f);
-                was_changed = true;
-            }
-            f->build(objects_counter);
-            // check if the factory changed
-            if (f->haveYouChanged() && !was_changed) {
-                changed_factories.push_back(*f);
-            }
-            if (!f->areYouAlive()) {
-                f->mustDisappear();
-            } else if (f->haveNewUnits()) {
-                std::vector<Unit *> tmp = f->getUnits();
-                std::string msg = "";
-                for (auto& u: tmp) {
-                    all_units[u->getId()] = u;
-                    msg += "addunit-";
-                    msg += getInfoFromUnit(*u);
+            Factory *f = it->second;
+            if (f->doYouNeedToDisappear()) {
+                factories.erase(it);
+            } else {
+                bool was_changed = false;
+                if (f->haveYouChanged()) {
+                    changed_factories.push_back(*f);
+                    was_changed = true;
                 }
-                for (auto y: players) {
-                    y->sendMessage(msg);
+                f->build(objects_counter);
+                // check if the factory changed
+                if (f->haveYouChanged() && !was_changed) {
+                    changed_factories.push_back(*f);
                 }
+                if (!f->areYouAlive()) {
+                    f->mustDisappear();
+                } else if (f->haveNewUnits()) {
+                    std::vector<Unit *> tmp = f->getUnits();
+                    std::string msg = "";
+                    for (auto &u: tmp) {
+                        all_units[u->getId()] = u;
+                        msg += "addunit-";
+                        msg += getInfoFromUnit(*u);
+                    }
+                    for (auto y: players) {
+                        y->sendMessage(msg);
+                    }
+                }
+                ++it;
             }
         }
     }
