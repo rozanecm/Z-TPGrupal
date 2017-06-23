@@ -31,12 +31,6 @@ Position Territory::getFlagPosition() {
     return flag_position;
 }
 
-void Territory::build() {
-    for (auto f: factories) {
-        f.second->build();
-    }
-}
-
 std::map<int, Factory*> &Territory::getFactories() {
     return factories;
 }

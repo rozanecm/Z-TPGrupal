@@ -22,7 +22,7 @@ public:
                 std::map<std::string, Weapon> &weapons);
 
     // starts the creation of the selected unit
-    void build();
+    void build(int& id_counter);
 
     void startBuilding(std::string& player_id);
 

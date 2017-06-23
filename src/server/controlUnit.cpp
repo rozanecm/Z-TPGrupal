@@ -111,6 +111,47 @@ void ControlUnit::checkAllLivingOccupants() {
     }
 }
 
+void ControlUnit::makeTerritoriesChecks() {
+    for (auto t: territories) {
+
+    }
+}
+
+void ControlUnit::makeFactoryChecks() {
+    for (auto t: territories) {
+        std::map<int,Factory*>& factories = t->getFactories();
+        auto it = factories.begin();
+        for (; it != factories.end();) {
+            Factory* f = it->second;
+
+            bool was_changed = false;
+            if (f->haveYouChanged()) {
+                changed_factories.push_back(*f);
+                was_changed = true;
+            }
+            f->build(objects_counter);
+            // check if the factory changed
+            if (f->haveYouChanged() && !was_changed) {
+                changed_factories.push_back(*f);
+            }
+            if (!f->areYouAlive()) {
+                f->mustDisappear();
+            } else if (f->haveNewUnits()) {
+                std::vector<Unit *> tmp = f->getUnits();
+                std::string msg = "";
+                for (auto& u: tmp) {
+                    all_units[u->getId()] = u;
+                    msg += "addunit-";
+                    msg += getInfoFromUnit(*u);
+                }
+                for (auto y: players) {
+                    y->sendMessage(msg);
+                }
+            }
+        }
+    }
+}
+
 void ControlUnit::cmdMoveUnit(const std::string& id_player,int id, int x,
                               int y) {
     std::map<int,Unit*>::iterator it;
@@ -170,7 +211,7 @@ void ControlUnit::sendUpdateMessage() {
     if (!info.size()) {
         return;
     }
-    info = "update-" + info;
+
     for (auto y: players) {
         y->sendMessage(info);
     }
@@ -179,16 +220,19 @@ void ControlUnit::sendUpdateMessage() {
 std::string ControlUnit::getUpdateInfo() {
     std::string  update_msg = "";
     for (auto z: changed_units) {
+        update_msg += "updateunit-";
         update_msg += getInfoFromUnit(z);
     }
 
     for (auto y: changed_occupants) {
+        update_msg += "updateoccupant-";
         update_msg += getInfoFromOccupant(y);
     }
 
-    for (auto b: all_bullets) {
-        update_msg += getInfoFromBullets(*b) ;
-    }
+//    for (auto b: all_bullets) {
+//        update_msg += "updatebullet-";
+//        update_msg += getInfoFromBullets(*b) ;
+//    }
 
 //    for(auto t: territories) {
 //       if (t.doesTerritorysOwnerChanged()) {
@@ -236,8 +280,8 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
 }
 
 std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
-    std::string info = BULLET;
-    info +=  "-" + bullet.getType() + "-";
+    std::string info = "";
+    info +=  bullet.getType() + "-";
     info += std::to_string(bullet.getId()) + "-";
     info += std::to_string(bullet.getPosition().getX()) + "-";
     info += std::to_string(bullet.getPosition().getY()) + "|";
@@ -267,14 +311,6 @@ void ControlUnit::moveAllBullets() {
     }
 }
 
-void ControlUnit::makeTerritoriesChecks() {
-//    for (auto t: territories) {
-//        std::map<int,Factory>& fac = t.getFactories();
-//        for (auto f: fac) {
-//            f.second.build();
-//        }
-//    }
-}
 
 void ControlUnit::checkForWinner() {
     int teams_alive = 0;
@@ -303,4 +339,6 @@ void ControlUnit::sendFinnalMessage() {
         y->sendMessage(winner);
     }
 }
+
+
 

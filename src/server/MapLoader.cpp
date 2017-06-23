@@ -196,6 +196,7 @@ void MapLoader::create_territory(int hp, const pugi::xml_node &territory,
     if (name == "Fort") {
             Factory* f = create_factory(id_counter++, hp, name,
                                         Size(x, y, 20, 20));
+            factories_in_territory[id_counter] = f;
             forts.push_back(f);
         }
 }

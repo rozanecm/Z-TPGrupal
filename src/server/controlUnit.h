@@ -33,6 +33,7 @@ private:
     std::vector<Bullet*> all_bullets;
     std::vector<Unit> changed_units;
     std::vector<Occupant> changed_occupants;
+    std::vector<Factory> changed_factories;
     int objects_counter;
 
 public:
@@ -83,6 +84,8 @@ private:
     std::string getInfoFromBullets(Bullet& bullet);
 
     void makeTerritoriesChecks();
+
+    void makeFactoryChecks();
 
     void checkForWinner();
 

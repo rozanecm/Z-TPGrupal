@@ -111,13 +111,13 @@ void Game::sincronizeOccupants() {
         for (auto& f: factories) {
             all_occupants.push_back((Occupant*)(f.second));
         }
-        for (auto& team: teams) {
-            std::vector<PlayerInfo>& players = team.getPlayersInfo();
-            for (auto& p : players) {
-                Factory* fortress = p.getFortress();
-                all_occupants.push_back((Occupant*)fortress);
-            }
-        }
+//        for (auto& team: teams) {
+//            std::vector<PlayerInfo>& players = team.getPlayersInfo();
+//            for (auto& p : players) {
+//                Factory* fortress = p.getFortress();
+//                all_occupants.push_back((Occupant*)fortress);
+//            }
+//        }
     }
 }
 
