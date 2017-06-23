@@ -9,7 +9,7 @@ Factory::Factory(int id, int life, std::string& type, Size position,
                  std::vector<UnitMold*>& units, std::shared_ptr<Map> map,
                  std::map<std::string, Weapon> &weapons) :
 Occupant(id, life,type, position), running(false),time_counter(0), units(units),
-map(map), weapons(weapons){
+map(map), weapons(weapons), tech_level(3){
     mold = units.begin();
 }
 
@@ -46,7 +46,7 @@ int Factory::getSelectedUnitTime() {
     return (*mold)->getCreationTime();
 }
 
-std::string Factory::nextUnit() {
+UnitMold* Factory::nextUnit() {
     int i = 0;
     this->running = false;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
@@ -55,7 +55,7 @@ std::string Factory::nextUnit() {
             mold = units.begin();
         ++i;
     }
-    return (*mold)->getTypeOfUnit();
+    return *mold;
 }
 
 Occupant *Factory::destroyFactory() {
@@ -92,18 +92,17 @@ std::string Factory::getSelectedUnit() {
     return (*mold)->getTypeOfUnit();
 }
 
-std::string Factory::previousUnit() {
+UnitMold* Factory::previousUnit() {
     int i = 0;
     this->running = false;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
-        --mold;
         if (mold == units.begin()) {
             mold = units.end();
-            --mold;
         }
+        --mold;
         ++i;
     }
-    return (*mold)->getTypeOfUnit();
+    return *mold;
 }
 
 void Factory::resetSelectedUnit() {

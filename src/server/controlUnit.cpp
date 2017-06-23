@@ -225,7 +225,9 @@ void ControlUnit::cmdFactoryNext(const std::string &player_id, int id_factory) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
             if (f.first == id_factory && f.second->getTeam() == player_id) {
-                info = f.second->nextUnit();
+                UnitMold* mold = f.second->nextUnit();
+                info += "factorystats-";
+                info += getInfoFromUnitMold(*mold);
                 break;
             }
         }
@@ -239,7 +241,9 @@ void ControlUnit::cmdFactoryPrev(const std::string &player_id, int id_factory) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
             if (f.first == id_factory && f.second->getTeam() == player_id) {
-                info = f.second->previousUnit();
+                UnitMold* mold = f.second->previousUnit();
+                info += "factorystats-";
+                info += getInfoFromUnitMold(*mold);
                 break;
             }
         }
@@ -339,7 +343,7 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
 std::string ControlUnit::getInfoFromFactories(Factory &factory) {
     std::string info = "";
     info += std::to_string(factory.getId()) + "-";
-    info += factory.getSelectedUnit() + "-";
+//    info += factory.getSelectedUnit() + "-";
     // This is the time needed before the next unit is build in seconds
     double time = WAIT * factory.getCreationSpeed();
     int min = 0, sec = 0;
@@ -367,6 +371,15 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
     info += territory.getTeam() + "|";
     return info;
 }
+
+std::string ControlUnit::getInfoFromUnitMold(UnitMold &mold) {
+    std::string info = "";
+    info += mold.getTypeOfUnit() + "-";
+    info += std::to_string(mold.getFireRate()) + "-";
+    info += std::to_string(mold.getLife()) + "|";
+    return info;
+}
+
 
 void ControlUnit::moveAllBullets() {
     std::vector<Bullet*>::iterator it = all_bullets.begin();
@@ -418,5 +431,6 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     sec = sec * 60;
     seconds = (int) sec;
 }
+
 
 

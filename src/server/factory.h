@@ -33,9 +33,9 @@ public:
     int getSelectedUnitTime();
 
     // Returns the type of the unit that now is selected
-    std::string nextUnit();
+    UnitMold* nextUnit();
 
-    std::string previousUnit();
+    UnitMold* previousUnit();
 
     std::string getSelectedUnit();
 

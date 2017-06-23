@@ -38,6 +38,10 @@ public:
 
     int getCreationQuantity() const;
 
+    int getFireRate() const;
+
+    int getLife() const;
+
 
 };
 

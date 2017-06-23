@@ -90,6 +90,8 @@ private:
 
     std::string getInfoFromFactories(Factory& factory);
 
+    std::string getInfoFromUnitMold(UnitMold& mold);
+
     void makeTerritoriesChecks();
 
     void makeFactoryChecks();
