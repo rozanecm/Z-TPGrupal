@@ -75,7 +75,7 @@ void Factory::startBuilding(const std::string &player_id) {
 }
 
 int Factory::getCreationSpeed() {
-    return ((*mold)->getCreationTime() / (1 + tech_level));
+    return (((*mold)->getCreationTime() - time_counter) / (1 + tech_level));
 }
 
 bool Factory::haveNewUnits() {
