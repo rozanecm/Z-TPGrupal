@@ -69,3 +69,7 @@ unsigned int Building::get_hp() {
 unsigned int Building::get_max_hp() {
     return max_hp;
 }
+
+int Building::get_ID() {
+    return id;
+}

@@ -81,6 +81,7 @@ public:
 
     bool on_key_press_event(GdkEventKey *event) override;
 
+    void update_side_panels();
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

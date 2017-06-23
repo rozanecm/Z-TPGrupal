@@ -52,6 +52,10 @@ public:
     unsigned int get_hp();
 
     unsigned int get_max_hp();
+
+    int get_ID();
+
+    Building get_building();
 };
 
 

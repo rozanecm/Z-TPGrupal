@@ -33,6 +33,8 @@ public:
 
     void update_position(int id, ActionsEnum state, int x, int y);
     void update_health(int id, unsigned int hp);
+
+    Unit get_unit(int id);
 };
 
 

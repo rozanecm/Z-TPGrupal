@@ -148,22 +148,6 @@ void GameArea::drawTileAt(const Cairo::RefPtr<Cairo::Context> &cr,
     cr->restore();
 }
 
-void GameArea::drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &cr,
-                                 int xGraphicCoordinate,
-                                 int yGraphicCoordinate) {
-    cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, flags.at(TeamEnum::BLUE).
-                                          at(flagCounter.getCounter()),
-                                  xGraphicCoordinate, yGraphicCoordinate);
-
-    cr->rectangle(xGraphicCoordinate, yGraphicCoordinate,
-                  flags.at(TeamEnum::BLUE).
-                          at(flagCounter.getCounter())->get_width(),
-                  flags.at(TeamEnum::BLUE).
-                          at(flagCounter.getCounter())->get_height());
-    cr->fill();
-    cr->restore();
-}
 
 void GameArea::drawJeepTires(const Cairo::RefPtr<Cairo::Context> &cr,
                              unsigned int xGraphicCoordinate,
@@ -364,17 +348,6 @@ void GameArea::drawFlag(const TeamEnum &team,
     cr->restore();
 }
 
-void
-GameArea::displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &cr,
-                               int xCoordinate,
-                               int yCoordinate) {
-    cr->save();
-    Gdk::Cairo::set_source_pixbuf(cr, someImg, xCoordinate, yCoordinate);
-    cr->rectangle(xCoordinate, yCoordinate,
-                  someImg->get_width(), someImg->get_height());
-    cr->fill();
-    cr->restore();
-}
 
 void GameArea::setResources(UnitsMonitor *unitsMonitor,
                             BuildingsMonitor *buildingsMonitor,
@@ -409,9 +382,8 @@ bool GameArea::on_key_press_event(GdkEventKey *event) {
         return true;
     }
 //  todo ver si el event handling se pasa arriba o no
-//    //if the event has not been handled, call the base class
-//    return Gtk::Window::on_key_press_event(key_event);
-    return false;
+    //if the event has not been handled, call the base class
+    return Gtk::DrawingArea::on_key_press_event(event);
 }
 
 bool GameArea::on_button_press_event(GdkEventButton *event) {

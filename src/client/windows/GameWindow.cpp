@@ -49,6 +49,7 @@ bool GameWindow::onTimeout() {
                          get_allocation().get_height());
         win->invalidate_rect(r, false);
     }
+    update_side_panels();
     return true;
 }
 
@@ -72,11 +73,8 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
-    unit_panel->set_name(selected_unit.get_unit_name());
-    unit_panel->set_owner(selected_unit.get_owner());
-    unit_panel->set_max_hp(selected_unit.get_max_hp());
-    unit_panel->set_hp(selected_unit.get_hp());
 
+    update_side_panels();
     return true;
 }
 
@@ -86,9 +84,8 @@ bool GameWindow::change_view_to_building() {
     }
     panel->pack_start(*building_panel);
     panelLabel->set_text(building_panel->get_label());
-    building_panel->set_max_hp(selected_building.get_max_hp());
-    building_panel->set_hp(selected_building.get_hp());
-    building_panel->set_owner(selected_building.get_owner());
+    update_side_panels();
+
     return true;
 }
 
@@ -98,7 +95,9 @@ bool GameWindow::change_view_to_unit_group() {
     }
 
     panel->pack_start(*group_panel);
-    return false;
+    update_side_panels();
+
+    return true;
 }
 
 
@@ -212,5 +211,20 @@ bool GameWindow::on_key_press_event(GdkEventKey *event) {
         }
         panelLabel->set_text("Z");
     }
-    return false;
+    return Gtk::Window::on_key_press_event(event);
+}
+
+void GameWindow::update_side_panels() {
+    if (selected_unit.get_ID()) {
+        // Update the unit reference
+        selected_unit = unitsMonitor->get_unit(selected_unit.get_ID());
+        unit_panel->set_name(selected_unit.get_unit_name());
+        unit_panel->set_owner(selected_unit.get_owner());
+        unit_panel->set_max_hp(selected_unit.get_max_hp());
+        unit_panel->set_hp(selected_unit.get_hp());
+    } else if (selected_building.get_ID()) {
+        building_panel->set_max_hp(selected_building.get_max_hp());
+        building_panel->set_hp(selected_building.get_hp());
+        building_panel->set_owner(selected_building.get_owner());
+    }
 }

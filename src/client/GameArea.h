@@ -75,13 +75,7 @@ private:
                     unsigned int xTileCoordinate, unsigned int yTileCoordinate,
                     std::string terrainType);
 
-    void drawFlagAnimation(const Cairo::RefPtr<Cairo::Context> &ptr,
-                           int xGraphicCoordinate, int yGraphicCoordinate);
-
     void drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr);
-
-    void displaySomeStaticImg(const Cairo::RefPtr<Cairo::Context> &refPtr,
-                              int xCoordinate, int yCoordinate);
 
 
     /* Event handling methods */

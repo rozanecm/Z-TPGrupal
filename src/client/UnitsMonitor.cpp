@@ -91,6 +91,7 @@ void UnitsMonitor::wipeSelected() {
 }
 
 void UnitsMonitor::update_health(int id, unsigned int hp) {
+    Lock l(m);
     for(auto unit = units.begin(); unit != units.end(); ++unit) {
         if (unit->get_ID() == id) {
             if (!hp) {
@@ -101,4 +102,13 @@ void UnitsMonitor::update_health(int id, unsigned int hp) {
             }
         }
     }
+}
+
+Unit UnitsMonitor::get_unit(int id) {
+    for (Unit& unit: units) {
+        if (unit.get_ID() == id){
+            return unit;
+        }
+    }
+    return Unit();
 }
