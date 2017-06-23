@@ -74,9 +74,6 @@ private:
 
     std::string getUpdateInfo();
 
-//    bool differenceOnUnits(Unit& x, std::string& state,std::string& team,
-//                           int life, Position& pos);
-
     std::string getInfoFromUnit(Unit& unit);
 
     std::string getInfoFromOccupant(Occupant& Occupant);
@@ -94,6 +91,8 @@ private:
     void checkForWinner();
 
     void sendFinnalMessage();
+
+    void getTime(int& minutes, int& seconds, double time);
 };
 
 

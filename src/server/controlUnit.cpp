@@ -261,22 +261,6 @@ std::string ControlUnit::getUpdateInfo() {
     return update_msg;
 }
 
-//bool ControlUnit::differenceOnUnits(Unit &x,std::string& state,
-//                                    std::string& team,
-//                                    int life, Position& pos) {
-//    bool differ = false;
-//    if (x.getActionState() != state)
-//        differ = true;
-//    if (x.getTeam() != team) // For neutral vehicules
-//        differ = true;
-//    if (x.getLifeLeft() != life)
-//        differ = true;
-//    if ((x.getCurrentPosition().getX() != pos.getX()) ||
-//            (x.getCurrentPosition().getY() != pos.getY()))
-//        differ = true;
-//    return differ;
-//}
-
 std::string ControlUnit::getInfoFromUnit(Unit &unit) {
     std::string info = "";
     info += std::to_string(unit.getId()) + "-";
@@ -302,8 +286,10 @@ std::string ControlUnit::getInfoFromFactories(Factory &factory) {
     info += std::to_string(factory.getId()) + "-";
     info += factory.getSelectedUnit() + "-";
     // This is the time needed before the next unit is build in seconds
-    double seconds = WAIT * factory.getCreationSpeed();
-    info += std::to_string(seconds) + "-";
+    double time = WAIT * factory.getCreationSpeed();
+    int min = 0, sec = 0;
+    getTime(min, sec, time);
+    info += std::to_string(min)+ "-" +std::to_string(sec) + "-";
     info += std::to_string(factory.getLifeLeft()) + "-";
     info += factory.getTeam() + "|";
     return info;
@@ -368,5 +354,12 @@ void ControlUnit::sendFinnalMessage() {
     for (auto y: players) {
         y->sendMessage(winner);
     }
+}
+
+void ControlUnit::getTime(int &minutes, int &seconds, double time) {
+    double min = (int) time * 60;
+    minutes = (int)min;
+    double sec = min - minutes;
+    seconds = (int)sec * 60;
 }
 

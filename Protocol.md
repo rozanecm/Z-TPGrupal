@@ -18,8 +18,8 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - addnature-[id]-[x]-[y]-[Team]-[lifePoints]
 - updateunit-[id]-[state]-[x]-[y]-[lifePoints]-[Team]
 - updateoccupant-[id]-[x]-[y]-[lifePoints]
-##### id: id de la Factory; unitType: tipo de unidad creandose; time: tiempo que falta para siguiente creacion de unidades(tipo double, medido en segundos); lifePoints: la vida que le queda a la factory; team: el team de la factory (string con id_player)
-- updatefactory-[id]-[unitType]-[time]-[lifePoints]-[Team]
+##### id: id de la Factory; unitType: tipo de unidad creandose; min - sec: tiempo que falta para siguiente creacion de unidades, minutos y segundos respectivamente; lifePoints: la vida que le queda a la factory; team: el team de la factory (string con id_player)
+- updatefactory-[id]-[unitType]-[min]-[sec]-[lifePoints]-[Team]
 - updatebullet-[type]-[id]-[x]-[y]
 
 ### comandos que recibe el server
