@@ -169,7 +169,6 @@ void ControlUnit::sendUpdateMessage() {
     if (!info.size()) {
         return;
     }
-    info = "update-" + info;
     for (auto y: players) {
         y->sendMessage(info);
     }
@@ -184,11 +183,11 @@ std::string ControlUnit::getUpdateInfo() {
     for (auto y: changed_occupants) {
         update_msg += getInfoFromOccupant(y);
     }
-
+/*
     for (auto b: all_bullets) {
         update_msg += getInfoFromBullets(*b) ;
     }
-
+*/
 //    for(auto t: territories) {
 //       if (t.doesTerritorysOwnerChanged()) {
 //           update_msg += getInfoFromTerritory(t);
@@ -215,7 +214,7 @@ std::string ControlUnit::getUpdateInfo() {
 //}
 
 std::string ControlUnit::getInfoFromUnit(Unit &unit) {
-    std::string info = "";
+    std::string info = "update-";
     info += std::to_string(unit.getId()) + "-";
     info += unit.getActionState() + "-";
     info += std::to_string(unit.getCurrentPosition().getX()) + "-";
@@ -226,7 +225,7 @@ std::string ControlUnit::getInfoFromUnit(Unit &unit) {
 }
 
 std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
-    std::string info = "";
+    std::string info = "update-";
     info += std::to_string(Occupant.getId()) + "-";
     info += std::to_string(Occupant.getPosition().getX()) + "-";
     info += std::to_string(Occupant.getPosition().getY()) + "-";

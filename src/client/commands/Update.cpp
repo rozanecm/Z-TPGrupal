@@ -21,5 +21,7 @@ void Update::execute(const std::vector<std::string> &args) {
     int x = std::stoi(args[X]);
     int y = std::stoi(args[Y]);
     ActionsEnum state = states.find(args[STATE])->second;
+    unsigned int hp = std::stoul(args[HP]);
     units.update_position(id, state, x, y);
+    units.update_health(id, hp);
 }

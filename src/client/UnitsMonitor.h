@@ -32,7 +32,7 @@ public:
     std::vector<Unit> getSelectedUnits();
 
     void update_position(int id, ActionsEnum state, int x, int y);
-
+    void update_health(int id, unsigned int hp);
 };
 
 

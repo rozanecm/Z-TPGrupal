@@ -89,3 +89,16 @@ void UnitsMonitor::wipeSelected() {
         unit.unselect();
     }
 }
+
+void UnitsMonitor::update_health(int id, unsigned int hp) {
+    for(auto unit = units.begin(); unit != units.end(); ++unit) {
+        if (unit->get_ID() == id) {
+            if (!hp) {
+                units.erase(unit);
+                break;
+            } else {
+                unit->update_hp(hp);
+            }
+        }
+    }
+}

@@ -183,6 +183,10 @@ void GameWindow::process_attack() {
         if (unit_selection) {
             Unit other = units.at(0);
             if (selected_unit.getTeam() != other.getTeam()) {
+                std::string attack = "atk-" +
+                        std::to_string(selected_unit.get_ID()) + "-" +
+                        std::to_string(other.get_ID());
+                messenger->send(attack);
                 // attack
             }
             return;
@@ -208,5 +212,5 @@ bool GameWindow::on_key_press_event(GdkEventKey *event) {
         }
         panelLabel->set_text("Z");
     }
-    return true;
+    return false;
 }
