@@ -13,9 +13,9 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 ## Server
 
 ### comandos que envia el server
-- addunit-[id]-[x]-[y]-[Team]
-- addbuilding-[id]-[x]-[y]-[Team]
-- addnature-[id]-[x]-[y]-[Team]
+- addunit-[id]-[x]-[y]-[Team]-[lifePoints]
+- addbuilding-[id]-[x]-[y]-[Team]-[lifePoints]
+- addnature-[id]-[x]-[y]-[Team]-[lifePoints]
 - updateunit-[id]-[state]-[x]-[y]-[lifePoints]-[Team]
 - updateoccupant-[id]-[x]-[y]-[lifePoints]
 ##### id: id de la Factory; unitType: tipo de unidad creandose; time: tiempo que falta para siguiente creacion de unidades(tipo double, medido en segundos); lifePoints: la vida que le queda a la factory; team: el team de la factory (string con id_player)

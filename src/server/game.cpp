@@ -80,7 +80,8 @@ void Game::analyseOccupantsInfo(std::string& info) {
                 id = i;
             }
         }
-        info += std::to_string(id) + "|";
+        info += std::to_string(id) + "-";
+        info += o->getLifeLeft() + "|";
     }
 }
 
