@@ -49,6 +49,7 @@ int Factory::getSelectedUnitTime() {
 UnitMold* Factory::nextUnit() {
     int i = 0;
     this->running = false;
+    time_counter = 0;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
         ++mold;
         if (mold == units.end())
@@ -95,6 +96,7 @@ std::string Factory::getSelectedUnit() {
 UnitMold* Factory::previousUnit() {
     int i = 0;
     this->running = false;
+    time_counter = 0;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
         if (mold == units.begin()) {
             mold = units.end();
