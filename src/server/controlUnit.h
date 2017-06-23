@@ -46,7 +46,7 @@ public:
     // Method to start checking commands from players
     void run();
 
-    void sleepFor(double sec);
+    void sleepFor(std::chrono::duration<double> sec);
 
     // Meant to make every unit make a micro action on the Tic
     void unitsMakeMicroAction();
@@ -63,6 +63,8 @@ public:
     void cmdAttack(const std::string& attacker_team, int id_unit, int target);
 
     void cmdGrab(const std::string& id_player, int id_unit, int target);
+
+    void cmdFactoryCreate(const std::string& player_id, int id_factory);
 
 private:
     // Process all commands on commands vector and leaves the vector empty
@@ -82,6 +84,8 @@ private:
     std::string getInfoFromTerritory(Territory& territory);
 
     std::string getInfoFromBullets(Bullet& bullet);
+
+    std::string getInfoFromFactories(Factory& factory);
 
     void makeTerritoriesChecks();
 

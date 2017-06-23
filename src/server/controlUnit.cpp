@@ -18,7 +18,7 @@ ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
 
 void ControlUnit::run() {
     while(!winning) {
-        double t3(WAIT);
+        std::chrono::duration<double> t3(WAIT);
 
         auto t1 = std::chrono::high_resolution_clock::now();
 
@@ -37,10 +37,9 @@ void ControlUnit::run() {
 //        this->checkForWinner();
 
         auto t2 = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> time_span =
-             std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
-        std::cout << t3 - time_span.count() << std::endl;
-        sleepFor(t3 - time_span.count());
+        std::chrono::duration<double> time_span = t3 - (t2 - t1);
+        std::cout << "sleep: "<< time_span.count() <<std::endl;
+        sleepFor(time_span);
         changed_units.clear();
         changed_occupants.clear();
     }
@@ -48,8 +47,9 @@ void ControlUnit::run() {
     this->sendFinnalMessage();
 }
 
-void ControlUnit::sleepFor(double msec) {
-    std::this_thread::sleep_for(std::chrono::duration<double> (msec));
+void ControlUnit::sleepFor(std::chrono::duration<double> msec) {
+    std::this_thread::sleep_for((msec));
+//    std::this_thread::sleep_for(std::chrono::duration<double> (msec));
 }
 
 void ControlUnit::unitsMakeMicroAction() {
@@ -113,8 +113,9 @@ void ControlUnit::checkAllLivingOccupants() {
 
 void ControlUnit::makeTerritoriesChecks() {
     for (auto t: territories) {
-
+//
     }
+//    makeFactoryChecks();
 }
 
 void ControlUnit::makeFactoryChecks() {
@@ -196,6 +197,18 @@ void ControlUnit::cmdGrab(const std::string &id_player, int id_unit,
     }
 }
 
+void ControlUnit::cmdFactoryCreate(const std::string& player_id,
+                                   int id_factory) {
+    for (auto t: territories) {
+        std::map<int, Factory *> &factories = t->getFactories();
+        for (auto& f: factories) {
+            if (f.first == id_factory) {
+                f.second->startBuilding(player_id);
+            }
+        }
+    }
+}
+
 void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
     commands.copyCommands(commands_copy);
@@ -227,6 +240,11 @@ std::string ControlUnit::getUpdateInfo() {
     for (auto y: changed_occupants) {
         update_msg += "updateoccupant-";
         update_msg += getInfoFromOccupant(y);
+    }
+
+    for (auto& f: changed_factories) {
+        update_msg += "updatefactory-";
+        update_msg += getInfoFromFactories(f);
     }
 
 //    for (auto b: all_bullets) {
@@ -276,6 +294,18 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
     info += std::to_string(Occupant.getPosition().getX()) + "-";
     info += std::to_string(Occupant.getPosition().getY()) + "-";
     info += std::to_string(Occupant.getLifeLeft()) + "|";
+    return info;
+}
+
+std::string ControlUnit::getInfoFromFactories(Factory &factory) {
+    std::string info = "";
+    info += std::to_string(factory.getId()) + "-";
+    info += factory.getSelectedUnit() + "-";
+    // This is the time needed before the next unit is build in seconds
+    double seconds = WAIT * factory.getCreationSpeed();
+    info += std::to_string(seconds) + "-";
+    info += std::to_string(factory.getLifeLeft()) + "-";
+    info += factory.getTeam() + "|";
     return info;
 }
 
@@ -339,6 +369,4 @@ void ControlUnit::sendFinnalMessage() {
         y->sendMessage(winner);
     }
 }
-
-
 

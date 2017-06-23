@@ -29,6 +29,8 @@ void Factory::build(int& id_counter) {
         time_counter = 0;
     } else if (running && time_counter < mold->getCreationTime()) {
         time_counter += 1 + tech_level;
+        this->changed = true;
+    } else {
         this->changed = false;
     }
 }
@@ -65,7 +67,7 @@ void Factory::changeTechLevel(int tech_level) {
     this->tech_level = tech_level;
 }
 
-void Factory::startBuilding(std::string &player_id) {
+void Factory::startBuilding(const std::string &player_id) {
     if (player_id == this->getTeam())
         running = true;
 }
@@ -82,4 +84,8 @@ std::vector<Unit*> Factory::getUnits() {
     std::vector<Unit*> tmp = new_units;
     new_units.clear();
     return tmp;
+}
+
+std::string Factory::getSelectedUnit() {
+    return mold->getTypeOfUnit();
 }

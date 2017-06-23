@@ -24,7 +24,7 @@ public:
     // starts the creation of the selected unit
     void build(int& id_counter);
 
-    void startBuilding(std::string& player_id);
+    void startBuilding(const std::string& player_id);
 
     // Stops the creation of units
 //    void stopBuilding(std::string &player_id);
@@ -34,6 +34,8 @@ public:
 
     // Returns the type of the unit that now is selected
     std::string nextUnit();
+
+    std::string getSelectedUnit();
 
     Occupant* destroyFactory();
 
