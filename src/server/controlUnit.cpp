@@ -412,10 +412,11 @@ void ControlUnit::sendFinnalMessage() {
 }
 
 void ControlUnit::getTime(int &minutes, int &seconds, double time) {
-    double min = (int) time * 60;
+    double min = time/60;
     minutes = (int)min;
     double sec = min - minutes;
-    seconds = (int)sec * 60;
+    sec = sec * 60;
+    seconds = (int) sec;
 }
 
 
