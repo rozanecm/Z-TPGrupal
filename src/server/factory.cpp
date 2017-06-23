@@ -18,11 +18,13 @@ void Factory::build(int& id_counter) {
         Size u_size = (*mold)->getUnitSize();
         Position factory_pos = this->obj_size.getPosition();
         u_size.moveTo(factory_pos.getX(),factory_pos.getY());
-        Weapon u_weapon = weapons.at((*mold)->getTypeOfUnit());
+        Weapon u_weapon = weapons.at((*mold)->getWeaponType());
 
-        for (int i = 0; i < (*mold)->getCreationQuantity(); ++i) {
-            new_units.push_back((*mold)->createUnit(
-                                             id_counter,u_size,*map,u_weapon));
+        for (int i = 0; i <= (*mold)->getCreationQuantity(); ++i) {
+            Unit* new_unit = (*mold)->createUnit(
+                    id_counter,u_size,*map,u_weapon);
+            new_unit->changeTeam(this->team);
+            new_units.push_back(new_unit);
             ++id_counter;
         }
         this->changed = true;

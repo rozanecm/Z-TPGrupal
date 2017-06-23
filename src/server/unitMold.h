@@ -12,12 +12,13 @@ class UnitMold {
 private:
     int tec_level, life, range, width, height, unit_speed, fire_rate,
             creation_time, creation_quantity;
-    std::string type;
+    std::string type,weapon_type;
 
 public:
     UnitMold(int tec_level, int life, int range, int width, int height,
                  int unit_speed, int fire_rate, int creation_time,
-                 int creation_quantity, std::string type);
+                 int creation_quantity, std::string &type,
+                 std::string &weapon_type);
 
     Unit *createUnit(int id, Size u_size, Map& map,
                      Weapon &weapon);
@@ -31,9 +32,13 @@ public:
     // Returns the type of unit that this mold creates
     std::string getTypeOfUnit() const;
 
+    std::string getWeaponType() const;
+
     Size getUnitSize();
 
     int getCreationQuantity() const;
+
+
 };
 
 

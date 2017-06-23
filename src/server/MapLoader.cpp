@@ -59,8 +59,8 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
 
     create_map();
     load_unit_molds(cfg_node.child("Units"));
-    load_structs(root, cfg_node.child("Structs"));
     load_weapons(cfg_node.child("Weapons"));
+    load_structs(root, cfg_node.child("Structs"));
 }
 
 void MapLoader::load_structs(const pugi::xml_node &root,
@@ -116,6 +116,7 @@ Factory *MapLoader::create_factory(int id, int hp, std::string &type, Size size)
 void MapLoader::load_unit_molds(pugi::xml_node units) {
     for (auto& unit : units.children()) {
         std::string type = unit.attribute("type").value();
+        std::string weapon = "bullet";
         int width = std::stoi(unit.attribute("size_x").value());
         int height = std::stoi(unit.attribute("size_y").value());
         int hp = std::stoi(unit.attribute("hp").value());
@@ -125,8 +126,9 @@ void MapLoader::load_unit_molds(pugi::xml_node units) {
         int time = std::stoi(unit.attribute("time").value());
         int quantity = std::stoi(unit.attribute("quantity").value());
         int tech_level = std::stoi(unit.attribute("tech_level").value());
-        unit_mold.push_back(new UnitMold(tech_level, hp, range, width, height,
-                speed, fire_rate, time, quantity, type));
+        unit_mold.push_back(
+                new UnitMold(tech_level, hp, range, width, height, speed,
+                             fire_rate, time, quantity, type, weapon));
     }
 }
 

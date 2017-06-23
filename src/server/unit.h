@@ -79,6 +79,8 @@ public:
     Size getNextPosition(int steps);
 
     bool onRangeToGrabTarget();
+
+    void recalculateMyStartPosition();
 };
 
 

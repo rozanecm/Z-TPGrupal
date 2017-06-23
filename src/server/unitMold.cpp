@@ -6,10 +6,10 @@
 
 UnitMold::UnitMold(int tec_level, int life, int range, int width, int height,
                    int unit_speed, int fire_rate, int time, int creation_quantity,
-                   std::string type) :
+                   std::string &type, std::string &weapon_type) :
 tec_level(tec_level), life(life), range(range), width(width), height(height),
 unit_speed(unit_speed), fire_rate(fire_rate), creation_time(time),
-creation_quantity(creation_quantity), type(type) {}
+creation_quantity(creation_quantity), type(type),weapon_type(weapon_type) {}
 
 Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
                            Weapon &weapon) {
@@ -44,4 +44,8 @@ Size UnitMold::getUnitSize() {
 
 int UnitMold::getCreationQuantity() const {
     return creation_quantity;
+}
+
+std::string UnitMold::getWeaponType() const {
+    return this->weapon_type;
 }

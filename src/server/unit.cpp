@@ -286,3 +286,11 @@ bool Unit::onRangeToGrabTarget() {
     return range.isThereACollision(trg_size);
 }
 
+void Unit::recalculateMyStartPosition() {
+    Position actual = getPosition();
+    Position valid_pos = compass.getAValidPositionForDestiny(actual);
+    this->obj_size.moveTo(valid_pos.getX(),valid_pos.getY());
+    this->range.moveTo(valid_pos.getX(),valid_pos.getY());
+    this->weapon.movePosition(valid_pos.getX(),valid_pos.getY());
+}
+

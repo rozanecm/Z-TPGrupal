@@ -3,20 +3,21 @@
 //
 
 #include "controlUnit.h"
-#define WAIT 0.4
+#define WAIT 0.5
 #define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
-                         std::vector<Occupant *> &all_occupants,
+                         std::vector<Occupant *> &occupants,
                          std::vector<Team> &teams, CommandMonitor &commands,
                          std::vector<Territory *>& territories) :
     all_units(all_units), territories(territories),
-    all_occupants(all_occupants), players(new_players), commands(commands),
-    winning(false), teams(teams),objects_counter((int)all_occupants.size()) {
+    all_occupants(occupants), players(new_players), commands(commands),
+    winning(false), teams(teams) {
 }
 
 void ControlUnit::run() {
+    objects_counter = (int)all_occupants.size();
     while(!winning) {
         std::chrono::duration<double> t3(WAIT);
 
@@ -144,7 +145,11 @@ void ControlUnit::makeFactoryChecks() {
                     std::vector<Unit *> tmp = f->getUnits();
                     std::string msg = "";
                     for (auto &u: tmp) {
+                        u->recalculateMyStartPosition();
                         all_units[u->getId()] = u;
+                        all_occupants.push_back((Occupant*)u);
+                        // set changed boolean to false
+                        u->haveYouChanged();
                         msg += "addunit-";
                         msg += getInfoFromUnit(*u);
                     }
