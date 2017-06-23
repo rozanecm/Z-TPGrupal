@@ -92,6 +92,8 @@ private:
 
     std::string getInfoFromUnitMold(UnitMold& mold);
 
+    std::string getInfoForAddUnit(Unit& unit);
+
     void makeTerritoriesChecks();
 
     void makeFactoryChecks();

@@ -151,7 +151,7 @@ void ControlUnit::makeFactoryChecks() {
                         // set changed boolean to false
                         u->haveYouChanged();
                         msg += "addunit-";
-                        msg += getInfoFromUnit(*u);
+                        msg += getInfoForAddUnit(*u);
                     }
                     for (auto y: players) {
                         y->sendMessage(msg);
@@ -380,6 +380,17 @@ std::string ControlUnit::getInfoFromUnitMold(UnitMold &mold) {
     return info;
 }
 
+std::string ControlUnit::getInfoForAddUnit(Unit &unit) {
+    std::string info = "";
+    info += std::to_string(unit.getId()) + "-";
+    Position pos = unit.getPosition();
+    info += std::to_string(pos.getX()) + "-";
+    info += std::to_string(pos.getY()) + "-";
+    info += unit.getType() + "-";
+    info += unit.getTeam() + "-";
+    info += std::to_string(unit.getLifeLeft()) + "|";
+    return info;
+}
 
 void ControlUnit::moveAllBullets() {
     std::vector<Bullet*>::iterator it = all_bullets.begin();
@@ -431,6 +442,4 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     sec = sec * 60;
     seconds = (int) sec;
 }
-
-
 
