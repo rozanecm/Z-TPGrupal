@@ -18,7 +18,7 @@ class MapLoader {
     std::vector<Unit> units;
     std::string map_string;
     std::string &config;
-    std::vector<UnitMold> unit_mold;
+    std::vector<UnitMold*> unit_mold;
     std::map<std::string, Weapon> weapons;
     std::shared_ptr<Map> game_map;
     std::vector<Factory*> forts;

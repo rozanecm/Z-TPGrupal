@@ -9,16 +9,16 @@
 class Factory: public Occupant {
     bool running;
     int tech_level,time_counter;
-    std::vector<UnitMold> units;
-    std::vector<UnitMold>::iterator mold;
+    std::vector<UnitMold*> units;
+    std::vector<UnitMold*>::iterator mold;
     std::vector<Unit*> new_units;
     std::shared_ptr<Map> map;
     std::map<std::string, Weapon> weapons;
 
 
 public:
-    Factory(int id, int life, std::string type, Size position,
-                std::vector<UnitMold> units, std::shared_ptr<Map> map,
+    Factory(int id, int life, std::string& type, Size position,
+                std::vector<UnitMold*>& units, std::shared_ptr<Map> map,
                 std::map<std::string, Weapon> &weapons);
 
     // starts the creation of the selected unit
