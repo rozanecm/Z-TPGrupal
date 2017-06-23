@@ -30,6 +30,10 @@ GameWindow::GameWindow(BaseObjectType *cobject,
             signal_clicked().connect(
             sigc::mem_fun(*this, &GameWindow::factory_create_unit));
 
+
+    building_panel->prev_button()->
+            signal_clicked().connect(
+            sigc::mem_fun(*this, &GameWindow::factory_prev));
     // Logic for redrawing the map every frame
     sigc::slot<bool> mySlot = sigc::mem_fun(*this, &GameWindow::onTimeout);
     Glib::signal_timeout().connect(mySlot, 1000 / FRAMERATE);
@@ -155,9 +159,8 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
 }
 
 void GameWindow::factory_next() {
-    messenger->send("nextunit-" + selection_id);
-    std::string path = "res/portraits/psycho.png";
-    factory_change_unit(path);
+    int id = selected_building.get_ID();
+    messenger->send("factory-"+std::to_string(id)+"-next");
 }
 
 void GameWindow::update_selection(int id) {
@@ -169,7 +172,8 @@ void GameWindow::factory_change_unit(std::string &path) {
 }
 
 void GameWindow::factory_create_unit() {
-    messenger->send("createunit-" + selection_id);
+    int id = selected_building.get_ID();
+    messenger->send("factory-"+std::to_string(id)+"-create");
 }
 
 void GameWindow::setMapData() {
@@ -235,5 +239,18 @@ void GameWindow::update_side_panels() {
         building_panel->set_max_hp(selected_building.get_max_hp());
         building_panel->set_hp(selected_building.get_hp());
         building_panel->set_owner(selected_building.get_owner());
+        building_panel->set_time_left(selected_building.get_time_left());
     }
+}
+
+void GameWindow::factory_prev() {
+    int id = selected_building.get_ID();
+    messenger->send("factory-"+std::to_string(id)+"-prev");
+}
+
+void GameWindow::update_factory_panel(const std::string &type, int fire_rate,
+                                      int hp) {
+    building_panel->set_unit_hp(hp);
+    building_panel->set_unit_fire_rate(fire_rate);
+    building_panel->set_unit_type(type);
 }

@@ -84,6 +84,10 @@ public:
     void update_side_panels();
 
     void remove_side_panel();
+
+    void factory_prev();
+
+    void update_factory_panel(const std::string& type, int fire_rate, int hp);
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

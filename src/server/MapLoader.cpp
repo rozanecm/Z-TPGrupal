@@ -116,7 +116,7 @@ Factory *MapLoader::create_factory(int id, int hp, std::string &type, Size size)
 void MapLoader::load_unit_molds(pugi::xml_node units) {
     for (auto& unit : units.children()) {
         std::string type = unit.attribute("type").value();
-        std::string weapon = "bullet";
+        std::string weapon = unit.attribute("weapon").value();
         int width = std::stoi(unit.attribute("size_x").value());
         int height = std::stoi(unit.attribute("size_y").value());
         int hp = std::stoi(unit.attribute("hp").value());

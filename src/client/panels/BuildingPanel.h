@@ -19,6 +19,12 @@ class BuildingPanel : public Gtk::Box {
     Gtk::Label* max_hp_label;
     Gtk::Label* hp_label;
     Gtk::Label* owner_label;
+    Gtk::Label* unit_type;
+    Gtk::Label* unit_hp;
+    Gtk::Label* unit_fire_rate;
+
+    Gtk::Label* minutes;
+    Gtk::Label* seconds;
 public:
     BuildingPanel(BaseObjectType* cobject,
                   const Glib::RefPtr<Gtk::Builder>& builder);
@@ -35,6 +41,15 @@ public:
     void set_max_hp(int hp);
 
     void set_owner(const std::string& owner);
+
+    void set_unit_hp(int hp);
+
+    void set_unit_type(const std::string& type);
+
+    void set_unit_fire_rate(int fire_rate);
+
+    void set_time_left(std::pair<int, int> time);
+    Gtk::Button * prev_button();
 };
 
 

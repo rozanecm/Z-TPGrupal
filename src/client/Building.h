@@ -20,7 +20,8 @@ private:
     bool selected;
     int id;
     std::string owner;
-
+    int minutes;
+    int seconds;
     unsigned int max_hp;
     unsigned int hp;
 public:
@@ -55,7 +56,11 @@ public:
 
     int get_ID();
 
-    Building get_building();
+    void update_time_left(int minutes, int seconds);
+
+    void update_hp(unsigned int hp);
+
+    std::pair<int, int> get_time_left();
 };
 
 

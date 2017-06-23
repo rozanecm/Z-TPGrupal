@@ -69,3 +69,14 @@ Building BuildingsMonitor::get_building(int id) {
     }
     return Building();
 }
+
+void
+BuildingsMonitor::update_building(int id, int minutes, int seconds, int hp) {
+    Lock l(m);
+    for (Building& b : buildings) {
+        if (b.get_ID() == id) {
+            b.update_hp(hp);
+            b.update_time_left(minutes, seconds);
+        }
+    }
+}
