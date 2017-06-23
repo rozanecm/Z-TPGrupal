@@ -59,5 +59,7 @@ void Command::analizeFactoryCommand(std::string& cmd, int id_factory) {
         control->cmdFactoryPrev(player_id,id_factory);
     } else if (action == "next") {
         control->cmdFactoryNext(player_id,id_factory);
+    } else if (action == "current") {
+        control->cmdFactoryCurrent(player_id,id_factory);
     }
 }

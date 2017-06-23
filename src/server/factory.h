@@ -37,7 +37,7 @@ public:
 
     UnitMold* previousUnit();
 
-    std::string getSelectedUnit();
+    UnitMold * getSelectedUnit();
 
     Occupant* destroyFactory();
 

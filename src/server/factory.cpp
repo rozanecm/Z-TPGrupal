@@ -89,8 +89,8 @@ std::vector<Unit*> Factory::getUnits() {
     return tmp;
 }
 
-std::string Factory::getSelectedUnit() {
-    return (*mold)->getTypeOfUnit();
+UnitMold * Factory::getSelectedUnit() {
+    return *mold;
 }
 
 UnitMold* Factory::previousUnit() {
