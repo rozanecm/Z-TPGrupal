@@ -223,6 +223,8 @@ void GameWindow::update_side_panels() {
         unit_panel->set_max_hp(selected_unit.get_max_hp());
         unit_panel->set_hp(selected_unit.get_hp());
     } else if (selected_building.get_ID()) {
+        selected_building = buildingsMonitor->get_building(
+                selected_building.get_ID());
         building_panel->set_max_hp(selected_building.get_max_hp());
         building_panel->set_hp(selected_building.get_hp());
         building_panel->set_owner(selected_building.get_owner());

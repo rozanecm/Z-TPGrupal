@@ -59,3 +59,13 @@ void BuildingsMonitor::wipe_selected() {
         b.unselect();
     }
 }
+
+Building BuildingsMonitor::get_building(int id) {
+    Lock l(m);
+    for (Building& building: buildings) {
+        if (building.get_ID() == id) {
+            return building;
+        }
+    }
+    return Building();
+}

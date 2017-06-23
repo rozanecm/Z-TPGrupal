@@ -28,6 +28,7 @@ public:
 
     std::vector<Building> get_selected();
     void wipe_selected();
+    Building get_building(int id);
 };
 
 
