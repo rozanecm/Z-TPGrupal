@@ -227,7 +227,8 @@ void ControlUnit::cmdFactoryNext(const std::string &player_id, int id_factory) {
             if (f.first == id_factory && f.second->getTeam() == player_id) {
                 UnitMold* mold = f.second->nextUnit();
                 info += "factorystats-";
-                info += getInfoFromUnitMold(*mold);
+                int creation_time = f.second->getCreationSpeed();
+                info += getInfoFromUnitMold(*mold,creation_time);
                 break;
             }
         }
@@ -243,7 +244,27 @@ void ControlUnit::cmdFactoryPrev(const std::string &player_id, int id_factory) {
             if (f.first == id_factory && f.second->getTeam() == player_id) {
                 UnitMold* mold = f.second->previousUnit();
                 info += "factorystats-";
-                info += getInfoFromUnitMold(*mold);
+                int creation_time = f.second->getCreationSpeed();
+                info += getInfoFromUnitMold(*mold,creation_time);
+                break;
+            }
+        }
+    }
+    sendMessageTo(player_id,info);
+}
+
+
+void ControlUnit::cmdFactoryCurrent(const std::string &player_id,
+                                    int id_factory) {
+    std::string info = "";
+    for (auto t: territories) {
+        std::map<int, Factory *> &factories = t->getFactories();
+        for (auto& f: factories) {
+            if (f.first == id_factory && f.second->getTeam() == player_id) {
+                UnitMold* mold = f.second->getSelectedUnit();
+                info += "factorystats-";
+                int creation_time = f.second->getCreationSpeed();
+                info += getInfoFromUnitMold(*mold,creation_time);
                 break;
             }
         }
@@ -372,10 +393,15 @@ std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
     return info;
 }
 
-std::string ControlUnit::getInfoFromUnitMold(UnitMold &mold) {
+std::string ControlUnit::getInfoFromUnitMold(UnitMold &mold,
+                                             double creation_time) {
     std::string info = "";
     info += mold.getTypeOfUnit() + "-";
     info += std::to_string(mold.getFireRate()) + "-";
+    double time = WAIT * creation_time;
+    int min = 0, sec = 0;
+    getTime(min, sec, time);
+    info += std::to_string(min)+ "-" +std::to_string(sec) + "-";
     info += std::to_string(mold.getLife()) + "|";
     return info;
 }
@@ -442,4 +468,5 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     sec = sec * 60;
     seconds = (int) sec;
 }
+
 

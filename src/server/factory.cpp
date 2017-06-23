@@ -49,6 +49,7 @@ int Factory::getSelectedUnitTime() {
 UnitMold* Factory::nextUnit() {
     int i = 0;
     this->running = false;
+    time_counter = 0;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
         ++mold;
         if (mold == units.end())
@@ -88,13 +89,14 @@ std::vector<Unit*> Factory::getUnits() {
     return tmp;
 }
 
-std::string Factory::getSelectedUnit() {
-    return (*mold)->getTypeOfUnit();
+UnitMold * Factory::getSelectedUnit() {
+    return *mold;
 }
 
 UnitMold* Factory::previousUnit() {
     int i = 0;
     this->running = false;
+    time_counter = 0;
     while (i == 0 || (*mold)->getTechnologyLevel() > this->tech_level) {
         if (mold == units.begin()) {
             mold = units.end();

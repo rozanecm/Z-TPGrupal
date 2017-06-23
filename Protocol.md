@@ -21,6 +21,7 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 ##### id: id de la Factory; unitType: tipo de unidad creandose; min - sec: tiempo que falta para siguiente creacion de unidades, minutos y segundos respectivamente; lifePoints: la vida que le queda a la factory; team: el team de la factory (string con id_player)
 - updatefactory-[id]-[unitType]-[min]-[sec]-[lifePoints]-[Team]
 - updatebullet-[type]-[id]-[x]-[y]
+- factorystats-[unitType]-[fireRate]-[min]-[sec]-[life]
 
 ### comandos que recibe el server
 ##### mover unidad con "id" a la posicion (x,y)

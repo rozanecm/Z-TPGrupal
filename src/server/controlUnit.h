@@ -70,6 +70,8 @@ public:
 
     void cmdFactoryPrev(const std::string& player_id, int id_factory);
 
+    void cmdFactoryCurrent(const std::string& player_id, int id_factory);
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
@@ -90,7 +92,7 @@ private:
 
     std::string getInfoFromFactories(Factory& factory);
 
-    std::string getInfoFromUnitMold(UnitMold& mold);
+    std::string getInfoFromUnitMold(UnitMold& mold, double time);
 
     std::string getInfoForAddUnit(Unit& unit);
 
