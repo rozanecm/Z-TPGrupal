@@ -110,7 +110,7 @@ std::vector<Unit> MapLoader::getUnits() {
 
 Factory *MapLoader::create_factory(int id, int hp, std::string &type, Size size) {
 
-    return new Factory(id, hp, type, size, unit_mold, game_map, weapons);
+    return (new Factory(id, hp, type, size, unit_mold, game_map, weapons));
 }
 
 void MapLoader::load_unit_molds(pugi::xml_node units) {
@@ -125,8 +125,8 @@ void MapLoader::load_unit_molds(pugi::xml_node units) {
         int time = std::stoi(unit.attribute("time").value());
         int quantity = std::stoi(unit.attribute("quantity").value());
         int tech_level = std::stoi(unit.attribute("tech_level").value());
-        unit_mold.emplace_back(tech_level, hp, range, width, height,
-                speed, fire_rate, time, quantity, type);
+        unit_mold.emplace_back(new UnitMold(tech_level, hp, range, width, height,
+                speed, fire_rate, time, quantity, type));
     }
 }
 
@@ -166,7 +166,7 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
             int y = std::stoi(factory.attribute("y").value()) *
                 internal_positions;
             Size s(x, y, size_x, size_y);
-            Factory* f = create_factory(id_counter++, hp, type, s);
+            Factory* f = new Factory(id_counter++, hp, type, s, unit_mold, game_map, weapons);
             factories_in_territory[id_counter] = f;
         }
         create_territory(hp, territory, id_counter, factories_in_territory);

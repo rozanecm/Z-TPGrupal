@@ -11,4 +11,23 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 
 
 ## Server
-- ready
+
+### comandos que envia el server
+- addunit-[id]-[x]-[y]-[Team]-[lifePoints]
+- addbuilding-[id]-[x]-[y]-[Team]-[lifePoints]
+- addnature-[id]-[x]-[y]-[Team]-[lifePoints]
+- updateunit-[id]-[state]-[x]-[y]-[lifePoints]-[Team]
+- updateoccupant-[id]-[x]-[y]-[lifePoints]
+##### id: id de la Factory; unitType: tipo de unidad creandose; min - sec: tiempo que falta para siguiente creacion de unidades, minutos y segundos respectivamente; lifePoints: la vida que le queda a la factory; team: el team de la factory (string con id_player)
+- updatefactory-[id]-[unitType]-[min]-[sec]-[lifePoints]-[Team]
+- updatebullet-[type]-[id]-[x]-[y]
+
+### comandos que recibe el server
+##### mover unidad con "id" a la posicion (x,y)
+- mv-[id]-[x]-[y]
+##### indica que la unidad idUnit ataque a target
+- atk-[idUnit]-[target]
+##### indica que la unidad idUnit cambie el team a target
+- grab-[idUnit]-[target]
+##### indica que la factory id_factory ejecute un factory_cmd. Los factory_cmd son: "create" que empieza a crear la unidad ya seleccionada; "prev" que selecciona la unidad anterior dejando de crear unidades; "next" que selecciona la unidad siguiente dejando de crear unidades
+- factory-[id_factory]-[factory_cmd]

@@ -15,7 +15,6 @@ private:
     std::map<int,Factory*> factories;
     Position flag_position;
     Size territory_size;
-    bool changed;
 
 public:
     Territory(const std::map<int,Factory*>& factories,

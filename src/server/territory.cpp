@@ -7,7 +7,7 @@
 Territory::Territory(const std::map<int, Factory*>& factories,
                      Position flag, Size size) :
 Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
-territory_size(size), changed(false){}
+territory_size(size){}
 
 void Territory::grabFlag(std::string& new_team) {
     changed = true;

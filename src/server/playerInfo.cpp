@@ -30,3 +30,11 @@ void PlayerInfo::decreaseTechLevel() {
 Factory *PlayerInfo::getFortress() {
     return fortress;
 }
+
+void PlayerInfo::addMessenger(Messenger *messenger) {
+    this->player_messenger = messenger;
+}
+
+Messenger *PlayerInfo::getMessenger() {
+    return this->player_messenger;
+}

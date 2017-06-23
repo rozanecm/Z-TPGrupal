@@ -32,6 +32,11 @@ void Command::run() {
         std::string target_str = getNextData(cmd);
         int target = std::stoi(target_str);
         control->cmdGrab(player_id,id_unit,target);
+    }else if (action == "factory") {
+        std::string id_unit_str = getNextData(cmd);
+        int id_factory = std::stoi(id_unit_str);
+        std::string factory_cmd = getNextData(cmd);
+        analizeFactoryCommand(factory_cmd, id_factory);
     }
 }
 
@@ -44,4 +49,15 @@ std::string Command::getNextData(std::string& line) {
     std::string data = line.substr(0,found);
     line.erase(0,found+1);
     return data;
+}
+
+void Command::analizeFactoryCommand(std::string& cmd, int id_factory) {
+    std::string action = getNextData(cmd);
+    if (action == "create") {
+        control->cmdFactoryCreate(player_id,id_factory);
+    } else if (action == "prev") {
+        control->cmdFactoryPrev(player_id,id_factory);
+    } else if (action == "next") {
+        control->cmdFactoryNext(player_id,id_factory);
+    }
 }

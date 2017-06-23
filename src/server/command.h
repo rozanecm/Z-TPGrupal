@@ -22,6 +22,8 @@ public:
 
 private:
     std::string getNextData(std::string& line);
+    
+    void analizeFactoryCommand(std::string& cmd, int id_factory );
 };
 
 

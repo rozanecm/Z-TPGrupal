@@ -26,16 +26,19 @@ void Lobby::startGame() {
         std::vector<Factory*> forts = maploader.get_forts();
         std::vector<Team> teams_info;
         for (int i = 0; i < teams.size(); ++i) {
-            std::vector<PlayerInfo> players;
+            std::vector<PlayerInfo> playersInfo;
             for (int j = 0; j < teams[i].size(); ++j) {
                 Factory* fortress = forts.back();
                 PlayerInfo new_player(teams[i][j],fortress);
-
+                for (auto p: players) {
+                    if (p->getId() == teams[i][j])
+                        new_player.addMessenger(p->getMessenger());
+                }
                 occupants.push_back((Occupant*) fortress);
                 forts.pop_back();
-                players.push_back(new_player);
+                playersInfo.push_back(new_player);
             }
-            Team new_team(players,i);
+            Team new_team(playersInfo,i);
             teams_info.push_back(new_team);
         }
 

@@ -46,7 +46,7 @@ public:
     // Method to start checking commands from players
     void run();
 
-    void sleepFor(double sec);
+    void sleepFor(std::chrono::duration<double> sec);
 
     // Meant to make every unit make a micro action on the Tic
     void unitsMakeMicroAction();
@@ -64,16 +64,21 @@ public:
 
     void cmdGrab(const std::string& id_player, int id_unit, int target);
 
+    void cmdFactoryCreate(const std::string& player_id, int id_factory);
+
+    void cmdFactoryNext(const std::string& player_id, int id_factory);
+
+    void cmdFactoryPrev(const std::string& player_id, int id_factory);
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
 
     void sendUpdateMessage();
 
-    std::string getUpdateInfo();
+    void sendMessageTo(const std::string& player_id, std::string& msg);
 
-//    bool differenceOnUnits(Unit& x, std::string& state,std::string& team,
-//                           int life, Position& pos);
+    std::string getUpdateInfo();
 
     std::string getInfoFromUnit(Unit& unit);
 
@@ -83,6 +88,8 @@ private:
 
     std::string getInfoFromBullets(Bullet& bullet);
 
+    std::string getInfoFromFactories(Factory& factory);
+
     void makeTerritoriesChecks();
 
     void makeFactoryChecks();
@@ -90,6 +97,8 @@ private:
     void checkForWinner();
 
     void sendFinnalMessage();
+
+    void getTime(int& minutes, int& seconds, double time);
 };
 
 
