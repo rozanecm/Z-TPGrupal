@@ -15,6 +15,7 @@
 #include "commands/StartGame.h"
 #include "commands/PlayerNames.h"
 #include "commands/UpdateFactory.h"
+#include "commands/FactoryStats.h"
 
 void ClientThread::run() {
     initCommands();
@@ -80,6 +81,7 @@ void ClientThread::initCommands() {
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
     commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
+    commands["factorystats"] = new FactoryStats(buildingsMonitor);
 }
 
 ClientThread::~ClientThread() {
