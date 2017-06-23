@@ -84,6 +84,8 @@ public:
     void update_side_panels();
 
     void remove_side_panel();
+
+    void factory_prev();
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

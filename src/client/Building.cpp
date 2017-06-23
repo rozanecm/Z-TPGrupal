@@ -26,7 +26,9 @@ Building::Building(BuildingsEnum type, int x, int y, int id, TeamEnum team,
         team (team),
         owner(owner),
         hp(hp),
-        max_hp(hp)
+        max_hp(hp),
+        minutes(0),
+        seconds(0)
 
 {
 }
@@ -73,4 +75,17 @@ unsigned int Building::get_max_hp() {
 
 int Building::get_ID() {
     return id;
+}
+
+void Building::update_time_left(int minutes, int seconds) {
+    this->minutes = minutes;
+    this->seconds = seconds;
+}
+
+void Building::update_hp(unsigned int hp) {
+    this->hp = hp;
+}
+
+std::pair<int, int> Building::get_time_left() {
+    return {minutes, seconds};
 }

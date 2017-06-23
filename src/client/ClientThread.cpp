@@ -14,6 +14,7 @@
 #include "commands/AddNature.h"
 #include "commands/StartGame.h"
 #include "commands/PlayerNames.h"
+#include "commands/UpdateFactory.h"
 
 void ClientThread::run() {
     initCommands();
@@ -78,6 +79,7 @@ void ClientThread::initCommands() {
     commands["addnature"] = new AddNature(mapMonitor);
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
+    commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
 }
 
 ClientThread::~ClientThread() {
