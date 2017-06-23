@@ -35,6 +35,8 @@ public:
     // Returns the type of the unit that now is selected
     std::string nextUnit();
 
+    std::string previousUnit();
+
     std::string getSelectedUnit();
 
     Occupant* destroyFactory();

@@ -6,6 +6,7 @@
 #define Z_TPGRUPAL_PLAYERINFO_H
 
 
+#include <messenger.h>
 #include "factory.h"
 
 class PlayerInfo {
@@ -13,6 +14,7 @@ private:
     std::string id;
     Factory* fortress;
     int tech_level;
+    Messenger* player_messenger;
 
 public:
     PlayerInfo(std::string id ,Factory* fortress);
@@ -28,6 +30,10 @@ public:
     void decreaseTechLevel();
 
     Factory* getFortress();
+
+    void addMessenger(Messenger* player_messenger);
+
+    Messenger* getMessenger();
 };
 
 

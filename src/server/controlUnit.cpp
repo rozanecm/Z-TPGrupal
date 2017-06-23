@@ -209,6 +209,35 @@ void ControlUnit::cmdFactoryCreate(const std::string& player_id,
     }
 }
 
+void ControlUnit::cmdFactoryNext(const std::string &player_id, int id_factory) {
+    std::string info = "";
+    for (auto t: territories) {
+        std::map<int, Factory *> &factories = t->getFactories();
+        for (auto& f: factories) {
+            if (f.first == id_factory && f.second->getTeam() == player_id) {
+                info = f.second->nextUnit();
+                break;
+            }
+        }
+    }
+    sendMessageTo(player_id,info);
+}
+
+void ControlUnit::cmdFactoryPrev(const std::string &player_id, int id_factory) {
+    std::string info = "";
+    for (auto t: territories) {
+        std::map<int, Factory *> &factories = t->getFactories();
+        for (auto& f: factories) {
+            if (f.first == id_factory && f.second->getTeam() == player_id) {
+                info = f.second->previousUnit();
+                break;
+            }
+        }
+    }
+    sendMessageTo(player_id,info);
+}
+
+
 void ControlUnit::executeCommands() {
     std::vector<Command> commands_copy;
     commands.copyCommands(commands_copy);
@@ -216,6 +245,23 @@ void ControlUnit::executeCommands() {
     // Execute command
     for (auto cmd: commands_copy) {
         cmd();
+    }
+}
+
+void ControlUnit::sendMessageTo(const std::string& player_id,
+                                std::string& msg) {
+    bool found = false;
+    for (auto& t: teams) {
+        std::vector<PlayerInfo>& plyrs = t.getPlayersInfo();
+        for (auto& p: plyrs) {
+            if (p.getPlayerId() == player_id) {
+                p.getMessenger()->sendMessage(msg);
+                found = true;
+                break;
+            }
+        }
+        if (found)
+            break;
     }
 }
 
@@ -362,4 +408,5 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     double sec = min - minutes;
     seconds = (int)sec * 60;
 }
+
 

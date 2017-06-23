@@ -54,10 +54,10 @@ std::string Command::getNextData(std::string& line) {
 void Command::analizeFactoryCommand(std::string& cmd, int id_factory) {
     std::string action = getNextData(cmd);
     if (action == "create") {
-
+        control->cmdFactoryCreate(player_id,id_factory);
     } else if (action == "prev") {
-
+        control->cmdFactoryPrev(player_id,id_factory);
     } else if (action == "next") {
-
+        control->cmdFactoryNext(player_id,id_factory);
     }
 }

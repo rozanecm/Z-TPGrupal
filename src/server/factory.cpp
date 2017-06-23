@@ -89,3 +89,17 @@ std::vector<Unit*> Factory::getUnits() {
 std::string Factory::getSelectedUnit() {
     return mold->getTypeOfUnit();
 }
+
+std::string Factory::previousUnit() {
+    int i = 0;
+    this->running = false;
+    while (i == 0 || mold->getTechnologyLevel() > this->tech_level) {
+        --mold;
+        if (mold == units.begin()) {
+            mold = units.end();
+            --mold;
+        }
+        ++i;
+    }
+    return mold->getTypeOfUnit();
+}

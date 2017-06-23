@@ -66,11 +66,17 @@ public:
 
     void cmdFactoryCreate(const std::string& player_id, int id_factory);
 
+    void cmdFactoryNext(const std::string& player_id, int id_factory);
+
+    void cmdFactoryPrev(const std::string& player_id, int id_factory);
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
 
     void sendUpdateMessage();
+
+    void sendMessageTo(const std::string& player_id, std::string& msg);
 
     std::string getUpdateInfo();
 
