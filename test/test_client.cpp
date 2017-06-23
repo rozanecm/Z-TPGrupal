@@ -11,6 +11,9 @@ int main() {
     clientReceiverTest client(m,mutex);
     client.start();
 
+    std::string msg0 = "player1";
+    m.sendMessage(msg0);
+
     std::string msg1 = "createlobby";
     m.sendMessage(msg1);
 
