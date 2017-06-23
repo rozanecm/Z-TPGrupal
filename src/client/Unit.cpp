@@ -106,6 +106,7 @@ void Unit::unselect() {
 }
 
 Unit::Unit() {
+    id = 0;
 }
 
 void Unit::update_owner(const std::string &owner) {

@@ -204,27 +204,34 @@ void GameWindow::update_players(const std::vector<std::string> &players) {
 bool GameWindow::on_key_press_event(GdkEventKey *event) {
     // Clear selection
     if (event->keyval == GDK_KEY_Escape) {
-        selected_building = Building();
-        selected_unit = Unit();
-        for (auto child : panel->get_children()) {
-            panel->remove(*child);
-        }
-        panelLabel->set_text("Z");
+        remove_side_panel();
     }
     return Gtk::Window::on_key_press_event(event);
 }
 
+void GameWindow::remove_side_panel() {
+    selected_building = Building();
+    selected_unit = Unit();
+    for (auto child : panel->get_children()) {
+            panel->remove(*child);
+        }
+    panelLabel->set_text("Z");
+}
+
 void GameWindow::update_side_panels() {
-    if (selected_unit.get_ID()) {
-        // Update the unit reference
-        selected_unit = unitsMonitor->get_unit(selected_unit.get_ID());
+    int unit_id = selected_unit.get_ID();
+    int building_id = selected_building.get_ID();
+    if (!unit_id && !building_id) {
+        remove_side_panel();
+    } else if (unit_id) {
+        // UpdateUnit the unit reference
+        selected_unit = unitsMonitor->get_unit(unit_id);
         unit_panel->set_name(selected_unit.get_unit_name());
         unit_panel->set_owner(selected_unit.get_owner());
         unit_panel->set_max_hp(selected_unit.get_max_hp());
         unit_panel->set_hp(selected_unit.get_hp());
-    } else if (selected_building.get_ID()) {
-        selected_building = buildingsMonitor->get_building(
-                selected_building.get_ID());
+    } else {
+        selected_building = buildingsMonitor->get_building(building_id);
         building_panel->set_max_hp(selected_building.get_max_hp());
         building_panel->set_hp(selected_building.get_hp());
         building_panel->set_owner(selected_building.get_owner());

@@ -9,11 +9,13 @@
 
 // get terrain map from map loader
 Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
-           std::shared_ptr<Map> map, std::map<int, Unit*> units,
-           std::vector<Team> teams_info, std::vector<Occupant*> occupants) :
+           std::shared_ptr<Map> map, std::map<int, Unit *> units,
+           std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
+           std::vector<Territory *> &terr) :
            commands(m), players(players),all_occupants(occupants),
-           all_units(units),
-           control(msgr, all_units, all_occupants, teams_info,commands),
+           territories(terr), teams(teams_info),all_units(units),
+           control(msgr, all_units, all_occupants, teams,
+                   commands, territories),
            map(map){}
 
 
@@ -21,6 +23,7 @@ Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
 //map(map){}
 
 void Game::run() {
+    sincronizeOccupants();
     map->updateOccupants(&all_occupants);
     this->sendMapInfo();
     this->buildTypeMap();
@@ -94,6 +97,22 @@ void Game::buildTypeMap() {
     types.insert(std::pair<std::string,std::string>("LightTank","Unit"));
     types.insert(std::pair<std::string,std::string>("HeavyTank","Unit"));
     types.insert(std::pair<std::string,std::string>("MML","Unit"));
+}
+
+void Game::sincronizeOccupants() {
+    for (auto& t: territories) {
+        std::map<int, Factory*>& factories = t->getFactories();
+        for (auto& f: factories) {
+            all_occupants.push_back((Occupant*)(f.second));
+        }
+//        for (auto& team: teams) {
+//            std::vector<PlayerInfo>& players = team.getPlayersInfo();
+//            for (auto& p : players) {
+//                Factory* fortress = p.getFortress();
+//                all_occupants.push_back((Occupant*)fortress);
+//            }
+//        }
+    }
 }
 
 

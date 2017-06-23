@@ -4,7 +4,7 @@
 
 #include "playerInfo.h"
 
-PlayerInfo::PlayerInfo(std::string id, Factory &fortress) :
+PlayerInfo::PlayerInfo(std::string id, Factory *fortress) :
         id(id), fortress(fortress), tech_level(1) {}
 
 std::string PlayerInfo::getPlayerId() const {
@@ -12,7 +12,7 @@ std::string PlayerInfo::getPlayerId() const {
 }
 
 bool PlayerInfo::checkIfFortressLives() {
-    return fortress.areYouAlive();
+    return fortress->areYouAlive();
 }
 
 int PlayerInfo::getTechLevel() {
@@ -25,4 +25,8 @@ void PlayerInfo::increaseTechLevel() {
 
 void PlayerInfo::decreaseTechLevel() {
     this->tech_level -= 1;
+}
+
+Factory *PlayerInfo::getFortress() {
+    return fortress;
 }

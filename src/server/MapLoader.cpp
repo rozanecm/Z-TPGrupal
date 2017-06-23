@@ -167,7 +167,6 @@ void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
                 internal_positions;
             Size s(x, y, size_x, size_y);
             Factory* f = create_factory(id_counter++, hp, type, s);
-            occupants.push_back((Occupant*) f);
             factories_in_territory[id_counter] = f;
         }
         create_territory(hp, territory, id_counter, factories_in_territory);
@@ -197,7 +196,7 @@ void MapLoader::create_territory(int hp, const pugi::xml_node &territory,
     if (name == "Fort") {
             Factory* f = create_factory(id_counter++, hp, name,
                                         Size(x, y, 20, 20));
-            occupants.push_back((Occupant*) f);
+            factories_in_territory[id_counter] = f;
             forts.push_back(f);
         }
 }

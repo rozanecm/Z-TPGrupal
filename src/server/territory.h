@@ -29,8 +29,6 @@ public:
 
     Position getFlagPosition();
 
-    void build();
-
     std::map<int,Factory*>& getFactories();
 
     bool doesTerritorysOwnerChanged();

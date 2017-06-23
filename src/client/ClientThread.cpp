@@ -8,7 +8,7 @@
 #include "commands/RemoveUnit.h"
 #include "commands/UpdatePosition.h"
 #include "commands/LoadMap.h"
-#include "commands/Update.h"
+#include "commands/UpdateUnit.h"
 #include "commands/FactoryNextUnit.h"
 #include "commands/AddBuilding.h"
 #include "commands/AddNature.h"
@@ -72,7 +72,7 @@ void ClientThread::initCommands() {
     commands["addunit"] = new AddUnit(unitsMonitor, players);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
-    commands["update"] = new Update(unitsMonitor);
+    commands["updateunit"] = new UpdateUnit(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor, players);
     commands["addnature"] = new AddNature(mapMonitor);

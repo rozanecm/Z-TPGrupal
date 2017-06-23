@@ -13,7 +13,7 @@ map(map), weapons(weapons){
     mold = units.begin();
 }
 
-void Factory::build() {
+void Factory::build(int& id_counter) {
     if (time_counter == mold->getCreationTime()) {
         Size u_size = mold->getUnitSize();
         Position factory_pos = this->obj_size.getPosition();
@@ -21,7 +21,9 @@ void Factory::build() {
         Weapon u_weapon = weapons.at(mold->getTypeOfUnit());
 
         for (int i = 0; i < mold->getCreationQuantity(); ++i) {
-            new_units.push_back(mold->createUnit(ID,u_size,*map,u_weapon));
+            new_units.push_back(mold->createUnit(
+                                             id_counter,u_size,*map,u_weapon));
+            ++id_counter;
         }
         this->changed = true;
         time_counter = 0;

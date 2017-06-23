@@ -36,7 +36,11 @@ public:
     std::vector<Unit> getUnits();
 
     std::shared_ptr<Map> get_map();
+
     std::vector<Factory*> get_forts();
+
+    std::vector<Territory*> get_territories();
+
 private:
     void load_structs(const pugi::xml_node &root, const pugi::xml_node &cfg);
 
@@ -51,8 +55,6 @@ private:
     void create_territory(int hp, const pugi::xml_node &territory, 
                           int &id_counter,
                           std::map<int, Factory *> &factories_in_territory);
-    
-    std::vector<Territory*> get_territories();
 };
 
 

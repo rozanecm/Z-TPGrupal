@@ -11,11 +11,11 @@
 class PlayerInfo {
 private:
     std::string id;
-    Factory& fortress;
+    Factory* fortress;
     int tech_level;
 
 public:
-    PlayerInfo(std::string id ,Factory& fortress);
+    PlayerInfo(std::string id ,Factory* fortress);
 
     std::string getPlayerId() const;
 
@@ -26,6 +26,8 @@ public:
     void increaseTechLevel();
 
     void decreaseTechLevel();
+
+    Factory* getFortress();
 };
 
 

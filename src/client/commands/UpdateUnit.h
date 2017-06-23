@@ -5,10 +5,10 @@
 #include "Command.h"
 #include "../UnitsMonitor.h"
 
-class Update : public Command {
+class UpdateUnit : public Command {
     UnitsMonitor& units;
 public:
-    explicit Update(UnitsMonitor& units);
+    explicit UpdateUnit(UnitsMonitor& units);
 
     void execute(const std::vector<std::string> &args);
 };

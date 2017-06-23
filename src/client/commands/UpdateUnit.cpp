@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Update.h"
+#include "UpdateUnit.h"
 
 #define ID 0
 #define STATE 1
@@ -13,10 +13,10 @@ const std::map<std::string, ActionsEnum> states = {
         {std::string("std"), ActionsEnum::STAND}
 };
 
-Update::Update(UnitsMonitor& units) : units(units){
+UpdateUnit::UpdateUnit(UnitsMonitor& units) : units(units){
 }
 
-void Update::execute(const std::vector<std::string> &args) {
+void UpdateUnit::execute(const std::vector<std::string> &args) {
     int id = std::stoi(args[ID]);
     int x = std::stoi(args[X]);
     int y = std::stoi(args[Y]);

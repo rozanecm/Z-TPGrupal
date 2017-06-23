@@ -56,6 +56,7 @@ void Building::unselect() {
 }
 
 Building::Building() {
+    id = 0;
 }
 
 std::string Building::get_owner() {
