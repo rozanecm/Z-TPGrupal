@@ -1,5 +1,22 @@
 #include <iostream>
 #include "UnitPanel.h"
+#include "../enums/UnitsEnum.h"
+
+#define PORTRAITS "res/portraits/"
+const std::map<UnitsEnum, std::string> units = {
+        {UnitsEnum::GRUNT, std::string("grunt")},
+        {UnitsEnum::PSYCHO, std::string("psycho"),},
+        {UnitsEnum::TOUGH, std::string("tough")},
+        {UnitsEnum::PYRO, std::string("pyro")},
+        {UnitsEnum::SNIPER, std::string("sniper")},
+        {UnitsEnum::LASER, std::string("laser")},
+        {UnitsEnum::GENERIC_ROBOT, std::string("generic_robot")},
+        {UnitsEnum::JEEP, std::string("jeep")},
+        {UnitsEnum::MEDIUM_TANK, std::string("medium_tank")},
+        {UnitsEnum::LIGHT_TANK, std::string("light_tank")},
+        {UnitsEnum::HEAVY_TANK, std::string("heavy_tank")},
+        {UnitsEnum::MML, std::string("mml")}
+};
 
 UnitPanel::UnitPanel(BaseObjectType *cobject,
                      const Glib::RefPtr<Gtk::Builder> &builder) :
@@ -9,6 +26,8 @@ UnitPanel::UnitPanel(BaseObjectType *cobject,
     builder->get_widget("MaxHPLabel", max_hp_label);
     builder->get_widget("HPLabel", hp_label);
     builder->get_widget("NameLabel", name_label);
+    builder->get_widget("Portrait", portrait);
+
 }
 
 std::string UnitPanel::get_label() {
@@ -29,5 +48,12 @@ void UnitPanel::set_max_hp(int hp) {
 
 void UnitPanel::set_owner(const std::string &owner) {
     this->owner->set_text(owner);
+}
+
+void UnitPanel::update_portrait(UnitsEnum unit) {
+    std::string unit_name = units.find(unit)->second;
+    std::string path = PORTRAITS + unit_name + ".png";
+    portrait->set(path);
+    set_name(unit_name);
 }
 

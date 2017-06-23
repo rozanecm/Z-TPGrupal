@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include <iostream>
 
-#define IMG_SIZE_IN_PX 16
+#define IMG_SIZE_IN_PX 4
 #define TEAM_NEUTRAL "None"
 Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
            UnitsEnum unitType, TeamEnum team, unsigned int hp)

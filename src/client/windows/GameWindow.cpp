@@ -19,7 +19,6 @@ GameWindow::GameWindow(BaseObjectType *cobject,
     builder->get_widget_derived("UnitView", unit_panel);
     builder->get_widget("GroupView", group_panel);
     builder->get_widget("PanelDisplayLabel", panelLabel);
-    builder->get_widget("Portrait", portrait);
 
 
     building_panel->next_button()->
@@ -77,7 +76,7 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
-
+    unit_panel->update_portrait(selected_unit.getType());
     update_side_panels();
     return true;
 }
@@ -105,10 +104,6 @@ bool GameWindow::change_view_to_unit_group() {
 }
 
 
-const std::map<UnitsEnum, std::string> portraits = {
-        {UnitsEnum::GRUNT, std::string("grunt")}
-};
-
 bool GameWindow::on_button_release_event(GdkEventButton *event) {
     if (gameArea->buildings_selected()) { // Change view to building
         selected_building = buildingsMonitor->get_selected().at(0);
@@ -125,14 +120,6 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
             process_attack();
         } else { // Select unit
             selected_unit = unitsMonitor->getSelectedUnits().at(0);
-
-            std::string name = "grunt";
-            if (portraits.find(selected_unit.getType()) != portraits.end()) {
-                name = portraits.find(selected_unit.getType())->second;
-            }
-            unit_panel->set_name(name);
-            std::string path = "res/portraits/" + name + ".png";
-            portrait->set(path);
             change_view_to_unit();
         }
         // Change selection status

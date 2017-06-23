@@ -23,7 +23,6 @@ class GameWindow : public Gtk::ApplicationWindow {
     Gtk::Box *group_panel;
     Gtk::Label *panelLabel;
 
-    Gtk::Image *portrait;
     UnitsMonitor *unitsMonitor;
     BuildingsMonitor *buildingsMonitor;
     MapMonitor *mapMonitor;
