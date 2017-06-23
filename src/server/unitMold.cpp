@@ -49,3 +49,11 @@ int UnitMold::getCreationQuantity() const {
 std::string UnitMold::getWeaponType() const {
     return this->weapon_type;
 }
+
+int UnitMold::getFireRate() const {
+    return fire_rate;
+}
+
+int UnitMold::getLife() const {
+    return life;
+}
