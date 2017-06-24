@@ -131,3 +131,7 @@ std::vector<std::string> Lobby::get_player_names() {
     }
     return names;
 }
+
+int Lobby::get_id() {
+    return lobby_id;
+}

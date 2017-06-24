@@ -105,46 +105,51 @@ bool GameWindow::change_view_to_unit_group() {
 
 
 bool GameWindow::on_button_release_event(GdkEventButton *event) {
-    if (gameArea->buildings_selected()) { // Change view to building
-        selected_building = buildingsMonitor->get_selected().at(0);
-
-        // Change selection status
-        unit_selection = false;
-        building_selection = true;
-        change_view_to_building();
-        messenger->send("factory-"+std::to_string(selected_building.get_ID())
-                        +"-current");
-        return true;
-    }
-    if (gameArea->unit_selected()) { // New unit selected
-        if (unit_selection && selected_unit.get_owner() == me) {
-            // We already are selecting an unit, process attack
-            process_attack();
-        } else { // Select unit
-            selected_unit = unitsMonitor->getSelectedUnits().at(0);
-            change_view_to_unit();
-        }
-        // Change selection status
-        building_selection = false;
-        unit_selection = true;
-        return true;
-    }
-
-    // Click on empty place
-    if (unit_selection) { // Movement
-        if (selected_unit.get_owner() != me) {
+    if (event->button == GDK_BUTTON_SECONDARY) {
+        if (!(selected_unit.get_owner() == me)) {
             return true;
         }
-        int id = selected_unit.get_ID();
-        std::pair<int, int> coords = gameArea->get_coords();
-        std::cout << gameArea->get_coords().first << ", " <<
-                  gameArea->get_coords().second << std::endl;
 
-        std::stringstream s;
-        s << "mv-" << id << "-" << coords.first << "-" << coords.second;
-        messenger->send(s.str());
+        if (gameArea->unit_selected() || gameArea->buildings_selected()) {
+            // We already are selecting an unit, process attack
+            process_attack();
+        } else {  // Click on empty place, movement
+            process_movement();
+        }
+    } else if (event->button == GDK_BUTTON_PRIMARY) {
+        if (gameArea->buildings_selected()) { // New building selected
+            selected_building = buildingsMonitor->get_selected().at(0);
+            messenger->send(
+                    "factory-" + std::to_string(selected_building.get_ID())
+                    + "-current");
+
+            change_view_to_building();
+
+            // Change selection status
+            unit_selection = false;
+            building_selection = true;
+        } else if (gameArea->unit_selected()) { // New unit selected
+            selected_unit = unitsMonitor->getSelectedUnits().at(0);
+            change_view_to_unit();
+
+            // Change selection status
+            building_selection = false;
+            unit_selection = true;
+        }
     }
     return true;
+}
+
+
+void GameWindow::process_movement() const {
+    int id = selected_unit.get_ID();
+    std::pair<int, int> coords = gameArea->get_coords();
+    std::cout << gameArea->get_coords().first << ", " <<
+              gameArea->get_coords().second << std::endl;
+
+    std::stringstream s;
+    s << "mv-" << id << "-" << coords.first << "-" << coords.second;
+    messenger->send(s.str());
 }
 
 void GameWindow::factory_next() {
@@ -171,19 +176,26 @@ void GameWindow::setMapData() {
 
 void GameWindow::process_attack() {
     std::vector<Unit> units = unitsMonitor->getSelectedUnits();
+    std::string target;
     if (units.size()) { // other unit selected
-        if (unit_selection) {
-            Unit other = units.at(0);
-            if (selected_unit.getTeam() != other.getTeam()) {
-                std::string attack = "atk-" +
-                        std::to_string(selected_unit.get_ID()) + "-" +
-                        std::to_string(other.get_ID());
-                messenger->send(attack);
-                // attack
-            }
+        Unit other = units.at(0);
+        if (selected_unit.getTeam() == other.getTeam()) {
             return;
         }
+        target = std::to_string(other.get_ID());
     }
+    std::vector<Building> buildings = buildingsMonitor->get_selected();
+    if (buildings.size()) {
+        Building other = buildings.at(0);
+        if (selected_unit.getTeam() == other.getTeam()) {
+            return;
+        }
+        target = std::to_string(other.get_ID());
+    }
+
+    std::string attack = "atk-" + std::to_string(selected_unit.get_ID()) +
+                         "-" + target;
+    messenger->send(attack);
 }
 
 void GameWindow::update_name(const std::string &name) {

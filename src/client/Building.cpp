@@ -1,6 +1,8 @@
 #include "Building.h"
 
-#define LENIENCY 8
+#define LENIENCY_FORT 32
+#define LENIENCY_FACTORY 16
+
 void Building::markAsSelectedInRange(bool &buildingSelected,
                                      gdouble xStartCoordinate,
                                      gdouble yStartCoordinate,
@@ -11,7 +13,17 @@ void Building::markAsSelectedInRange(bool &buildingSelected,
     int x_abs = abs(position.first - x);
     int y_abs = abs(position.second - y);
 
-    if (x_abs <= LENIENCY && y_abs <= LENIENCY) {
+    unsigned int leniency;
+
+    if (buildingType == BuildingsEnum::FORT or
+            buildingType == BuildingsEnum::FORT_DESTROYED) {
+        /* case building is fort... */
+        leniency = LENIENCY_FORT;
+    } else {
+        /* case building is factory... */
+        leniency = LENIENCY_FACTORY;
+    }
+    if (x_abs <= leniency && y_abs <= leniency) {
         selected = true;
         buildingSelected = true;
     }
@@ -84,8 +96,21 @@ void Building::update_time_left(int minutes, int seconds) {
 
 void Building::update_hp(unsigned int hp) {
     this->hp = hp;
+    if (hp <= 0) {
+        destroy();
+    }
 }
 
 std::pair<int, int> Building::get_time_left() {
     return {minutes, seconds};
+}
+
+void Building::destroy() {
+    if (buildingType == BuildingsEnum::ROBOT_FABRIC) {
+        buildingType = BuildingsEnum::ROBOT_FABRI_DESTROYED;
+    } else if (buildingType == BuildingsEnum::VEHICLE_FABRIC) {
+        buildingType = BuildingsEnum::VEHICLE_FABRIC_DESTROYED;
+    } else if (buildingType == BuildingsEnum::FORT) {
+        buildingType = BuildingsEnum ::FORT_DESTROYED;
+    }
 }

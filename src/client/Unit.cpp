@@ -14,7 +14,7 @@ Unit::Unit(int id, std::pair<unsigned int, unsigned int> position,
     //todo check what else should be initialized
 }
 
-int Unit::get_ID() {
+int Unit::get_ID() const {
     return id;
 }
 

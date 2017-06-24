@@ -61,6 +61,7 @@ public:
     void update_hp(unsigned int hp);
 
     std::pair<int, int> get_time_left();
+    void destroy();
 };
 
 
