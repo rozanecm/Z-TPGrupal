@@ -34,7 +34,7 @@ void ControlUnit::run() {
         //send update message
         this->sendUpdateMessage();
 
-//        this->checkForWinner();
+        this->checkForWinner();
 
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span = t3 - (t2 - t1);
