@@ -161,11 +161,11 @@ void Compass::getAdjacents(Node *node, int step) {
                     // G value differs when the node is diagonal or next to it
                     if (this->isThisNodeOnDiagonal(node, adj)) {
                         adj_new_g = this->writeGandSetParent(node, adj,
-                                                             DIAGONALWALK);
+                                                             DIAGONALWALK, 0);
 
                     } else {
                         adj_new_g = this->writeGandSetParent(node, adj,
-                                                             SIDEWALK);
+                                                             SIDEWALK, 0);
                     }
                     if (adj_new_g)
                         this->addToOpenInOrder(adj);
@@ -202,15 +202,32 @@ void Compass::addToOpenInOrder(Node* new_node) {
     }
 }
 
-bool Compass::writeGandSetParent(Node* ref, Node* adj, int walk) {
+bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk, int steps) {
+    Size adj_size = adj->getSize();
+    //calculate new g
     int new_g = walk + ref->getGValue();
+    // get additional g for all steps
+    road.push_back(adj->getPosition());
+    Position actual = ref->getPosition();
+    addPositions(actual);
+    for (auto& pos: road) {
+        std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
+        // when is a vehicle and it's water, don't add it to open list
+        if (!(unit_speed != 4 && terrain_type == "Agua" &&
+              !map.thereIsABridge(adj_size))) {
+            new_g += terrain_modifier[terrain_type];
+        } else {
+            new_g += (terrain_modifier[terrain_type] * 20);
+        }
+    }
+    road.clear();
+
     bool adj_change_g = false;
     // if F value from node is lower than previous or this
     // adjacent hasn't been seen yet,
     // add new g value and change parent.
     Position pos = adj->getPosition();
     std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
-    Size adj_size = adj->getSize();
     // when is a vehicle and it's water, don't add it to open list
     if (!(unit_speed != 4 && terrain_type == "Agua" &&
           !map.thereIsABridge(adj_size))) {
@@ -346,10 +363,12 @@ void Compass::checkIfIsDestinyNeighbor(Node *node, int step) {
                             this->isNotMe(node, adj)) {
                             if (this->isThisNodeOnDiagonal(node, adj)) {
                                 adj_new_g = this->writeGandSetParent(node, adj,
-                                                                 DIAGONALWALK);
+                                                                     DIAGONALWALK,
+                                                                     0);
                             } else {
                                 adj_new_g = this->writeGandSetParent(node, adj,
-                                                                     SIDEWALK);
+                                                                     SIDEWALK,
+                                                                     0);
                             }
                             if (adj_new_g)
                                 this->addToOpenInOrder(adj);

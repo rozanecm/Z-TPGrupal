@@ -4,7 +4,6 @@
 
 #include "controlUnit.h"
 #define WAIT 0.5
-#define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -114,8 +113,27 @@ void ControlUnit::checkAllLivingOccupants() {
 }
 
 void ControlUnit::makeTerritoriesChecks() {
-    for (auto t: territories) {
-//
+    for (auto& t: territories) {
+        if (t->doesTerritorysOwnerChanged()) {
+            std::string info = "updateterritory-";
+            info += std::to_string(t->getId()) + t->getTeam();
+            for (auto& team: teams) {
+                std::vector<PlayerInfo>& players = team.getPlayersInfo();
+                for (auto& p : players) {
+                    // the last owner must eliminate the territory from his
+                    // vector
+                    p.eliminateThisTerritory(t);
+
+                    // the new owner must add it
+                    if (t->getTeam() == p.getPlayerId()) {
+                        p.addTerritory(t);
+                    }
+                }
+            }
+            for (auto y: players) {
+                y->sendMessage(info);
+            }
+        }
     }
     makeFactoryChecks();
 }

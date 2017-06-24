@@ -92,7 +92,7 @@ private:
 
     // If adj node hasn't been seen or the g value from ref node is lower
     // than previous, it chages g value and the parent.
-    bool writeGandSetParent(Node* ref, Node* adj, int walk);
+    bool writeGandSetParent(Node *ref, Node *adj, int walk, int steps);
 
     // Changes the position of the node
     void changeNodePosition(Node* node);

@@ -15,10 +15,11 @@ private:
     std::map<int,Factory*> factories;
     Position flag_position;
     Size territory_size;
+    int id;
 
 public:
-    Territory(const std::map<int,Factory*>& factories,
-              Position flag_position, Size territory_size);
+    Territory(const std::map<int, Factory *> &factories, Position flag_position,
+                  Size territory_size, int id);
 
     void grabFlag(std::string& new_team);
 
@@ -31,6 +32,8 @@ public:
     std::map<int,Factory*>& getFactories();
 
     bool doesTerritorysOwnerChanged();
+
+    int getId();
 };
 
 

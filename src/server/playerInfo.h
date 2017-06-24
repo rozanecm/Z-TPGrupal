@@ -8,6 +8,7 @@
 
 #include <messenger.h>
 #include "factory.h"
+#include "territory.h"
 
 class PlayerInfo {
 private:
@@ -15,6 +16,7 @@ private:
     Factory* fortress;
     int tech_level;
     Messenger* player_messenger;
+    std::vector<Territory*> territories;
 
 public:
     PlayerInfo(std::string id ,Factory* fortress);
@@ -34,6 +36,12 @@ public:
     void addMessenger(Messenger* player_messenger);
 
     Messenger* getMessenger();
+
+    void addTerritory(Territory* territory);
+
+    void recalculateTechLevel();
+
+    void eliminateThisTerritory(Territory* territory);
 };
 
 

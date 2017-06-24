@@ -201,7 +201,7 @@ void MapLoader::create_territory(int hp, const pugi::xml_node &territory,
     int height = (min_y + max_y) / 2;
     Size flag(x, y, width, height);
     Position flag_position(x, y);
-    Territory* t = new Territory(factories_in_territory, flag_position, flag);
+    Territory* t = new Territory(factories_in_territory, flag_position, flag, 0);
     territories.emplace_back(t);
 }
 

@@ -105,13 +105,18 @@ void Game::sincronizeOccupants() {
             (f.second)->resetSelectedUnit();
             all_occupants.push_back((Occupant*)(f.second));
         }
-//        for (auto& team: teams) {
-//            std::vector<PlayerInfo>& players = team.getPlayersInfo();
-//            for (auto& p : players) {
-//                Factory* fortress = p.getFortress();
-//                all_occupants.push_back((Occupant*)fortress);
-//            }
-//        }
+        for (auto& team: teams) {
+            std::vector<PlayerInfo>& players = team.getPlayersInfo();
+            for (auto& p : players) {
+                Factory* fortress = p.getFortress();
+                for (auto& f: factories) {
+                    if (fortress->getId() == f.second->getId()) {
+                        t->changeTeam(p.getPlayerId());
+                        p.addTerritory(t);
+                    }
+                }
+            }
+        }
     }
 }
 
