@@ -119,11 +119,11 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
     } else if (event->button == GDK_BUTTON_PRIMARY) {
         if (gameArea->buildings_selected()) { // New building selected
             selected_building = buildingsMonitor->get_selected().at(0);
-
-            change_view_to_building();
             messenger->send(
                     "factory-" + std::to_string(selected_building.get_ID())
                     + "-current");
+
+            change_view_to_building();
 
             // Change selection status
             unit_selection = false;

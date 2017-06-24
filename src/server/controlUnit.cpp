@@ -141,11 +141,10 @@ void ControlUnit::makeTerritoriesChecks() {
 void ControlUnit::makeFactoryChecks() {
     for (auto t: territories) {
         std::map<int,Factory*>& factories = t->getFactories();
-        auto it = factories.begin();
-        for (; it != factories.end();) {
+        for (auto it = factories.begin(); it != factories.end(); ++it) {
             Factory *f = it->second;
             if (f->doYouNeedToDisappear()) {
-                factories.erase(it);
+                it = factories.erase(it);
             } else {
                 bool was_changed = false;
                 if (f->haveYouChanged()) {
@@ -175,7 +174,6 @@ void ControlUnit::makeFactoryChecks() {
                         y->sendMessage(msg);
                     }
                 }
-                ++it;
             }
         }
     }

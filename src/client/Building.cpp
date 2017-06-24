@@ -97,8 +97,8 @@ void Building::destroy() {
     if (buildingType == BuildingsEnum::ROBOT_FABRIC) {
         buildingType = BuildingsEnum::ROBOT_FABRI_DESTROYED;
     } else if (buildingType == BuildingsEnum::VEHICLE_FABRIC) {
-        buildingType = BuildingsEnum::VEHICLE_FABRIC_DESTROYED);
+        buildingType = BuildingsEnum::VEHICLE_FABRIC_DESTROYED;
     } else if (buildingType == BuildingsEnum::FORT) {
-        buildingType = BuildingsEnum ::FORT_DESTROYED);
+        buildingType = BuildingsEnum ::FORT_DESTROYED;
     }
 }
