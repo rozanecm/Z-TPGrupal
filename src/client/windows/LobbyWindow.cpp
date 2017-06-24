@@ -12,15 +12,18 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
     builder->get_widget("PlayerStatus3", players[2]);
     builder->get_widget("PlayerStatus4", players[3]);
     builder->get_widget("StartGame", start);
-    builder->get_widget_derived("ReadyButton", ready);
+    builder->get_widget("ReadyButton", ready);
+    builder->get_widget("MapsLabel", maps_label);
+    builder->get_widget("MapsEntry", maps_entry);
     default_label = players[0]->get_text();
     start->signal_clicked().connect(sigc::mem_fun(*this,
-                                                  &LobbyWindow::on_click));
-    ready->signal_toggled().connect(sigc::mem_fun(*this,
+                                                  &LobbyWindow::click_start));
+    ready->signal_clicked().connect(sigc::mem_fun(*this,
                                                   &LobbyWindow::click_ready));
 }
 
-void LobbyWindow::on_click() {
+void LobbyWindow::click_start() {
+    std::string map = maps_entry->get_text();
     m->send("startgame");
 }
 

@@ -7,16 +7,20 @@
 #include <gtkmm/label.h>
 #include <gtkmm/builder.h>
 #include <gtkmm/togglebutton.h>
+#include <gtkmm/entry.h>
 
 #define PLAYERS_AMT 4
 #include "../ServerMessenger.h"
 #include "ReadyToggle.h"
 
 class LobbyWindow : public Gtk::Window {
-    Gtk::Button* start;
-    ReadyToggle* ready;
-    Gtk::Label* players[PLAYERS_AMT];
-    ServerMessenger* m;
+
+    Gtk::Button *start;
+    Gtk::Button *ready;
+    Gtk::Label *players[PLAYERS_AMT];
+    ServerMessenger *m;
+    Gtk::Label* maps_label;
+    Gtk::Entry* maps_entry;
     std::string default_label;
 
     bool started = false;
@@ -31,7 +35,7 @@ public:
     void start_game();
     bool game_started();
 private:
-    void on_click();
+    void click_start();
     void click_ready();
 };
 
