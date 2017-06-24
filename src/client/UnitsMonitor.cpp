@@ -3,9 +3,6 @@
 #include "UnitsMonitor.h"
 
 
-UnitsMonitor::UnitsMonitor(std::vector<Unit> &units) : units(units) {
-}
-
 void UnitsMonitor::addUnit(Unit &unit) {
     Lock l(m);
     units.push_back(unit);

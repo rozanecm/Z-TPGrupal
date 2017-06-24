@@ -8,12 +8,11 @@
 
 class MapMonitor {
 private:
-    Map &map;
+    Map map;
 
     std::mutex m;
 
 public:
-    explicit MapMonitor(Map &map);
 
     void setCell(unsigned int xCoordinate,
                  unsigned int yCoordinate,

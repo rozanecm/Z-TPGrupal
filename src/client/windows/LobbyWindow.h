@@ -11,7 +11,6 @@
 
 #define PLAYERS_AMT 4
 #include "../ServerMessenger.h"
-#include "ReadyToggle.h"
 
 class LobbyWindow : public Gtk::Window {
 

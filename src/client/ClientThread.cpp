@@ -16,9 +16,10 @@
 #include "commands/PlayerNames.h"
 #include "commands/UpdateFactory.h"
 #include "commands/FactoryStats.h"
-#include "GameBuilder.h"
 #include "commands/LobbyInfo.h"
 #include "commands/JoinLobby.h"
+#include "Winner.h"
+#include "commands/Loser.h"
 
 void ClientThread::run() {
     initCommands();
@@ -36,7 +37,10 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
         messenger(messenger),
         lobby(*builder.get_lobby_window()),
         window(*builder.get_window()),
-        menu(*builder.get_menu_window()){
+        menu(*builder.get_menu_window()),
+        winner(false),
+        loser(false)
+{
 }
 
 void ClientThread::loop() {
@@ -86,6 +90,8 @@ void ClientThread::initCommands() {
     commands["factorystats"] = new FactoryStats(window);
     commands["lobbyinfo"] = new LobbyInfo(menu);
     commands["joinlobby"] = new JoinLobby(menu, lobby);
+    commands["winner"] = new Winner(winner, window);
+    commands["loseryousuck"] = new Loser(loser, window);
 }
 
 ClientThread::~ClientThread() {
@@ -96,4 +102,20 @@ ClientThread::~ClientThread() {
 
 void ClientThread::update_player_names(const std::vector<std::string>& names) {
     players = names;
+}
+
+void ClientThread::finish_winner() {
+    winner = true;
+}
+
+void ClientThread::finish_loser() {
+    loser = true;
+}
+
+bool ClientThread::is_winner() {
+    return winner;
+}
+
+bool ClientThread::is_loser() {
+    return loser;
 }

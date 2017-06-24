@@ -7,6 +7,7 @@
 #include <gtkmm/builder.h>
 #include <string>
 #include <gtkmm/button.h>
+#include "../enums/TeamEnum.h"
 
 class BuildingPanel : public Gtk::Box {
     Gtk::Image* building;
@@ -44,7 +45,7 @@ public:
 
     void set_unit_hp(int hp);
 
-    void set_unit_type(const std::string& type);
+    void set_unit_type(const std::string& type, TeamEnum team);
 
     void set_unit_fire_rate(int fire_rate);
 
