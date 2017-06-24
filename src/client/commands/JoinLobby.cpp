@@ -4,14 +4,19 @@
 
 #define OK "ok"
 #define ERROR "error"
-JoinLobby::JoinLobby(MenuWindow &menu, LobbyWindow &lobby) :
+JoinLobby::JoinLobby(MenuWindow &menu, LobbyWindow &lobby,
+                     ServerMessenger& messenger) :
         menu(menu),
-        lobby(lobby)
+        lobby(lobby),
+        messenger(messenger)
 {
 }
 
 void JoinLobby::execute(const std::vector<std::string> &args) {
     if (args[STATUS] == OK) {
         menu.hide();
+
+        // Fetch available maps
+        messenger.send("mapsinfo");
     }
 }

@@ -20,6 +20,7 @@
 #include "commands/JoinLobby.h"
 #include "Winner.h"
 #include "commands/Loser.h"
+#include "commands/MapsInfo.h"
 
 void ClientThread::run() {
     initCommands();
@@ -89,9 +90,10 @@ void ClientThread::initCommands() {
     commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
     commands["factorystats"] = new FactoryStats(window);
     commands["lobbyinfo"] = new LobbyInfo(menu);
-    commands["joinlobby"] = new JoinLobby(menu, lobby);
+    commands["joinlobby"] = new JoinLobby(menu, lobby, messenger);
     commands["winner"] = new Winner(winner, window);
     commands["loseryousuck"] = new Loser(loser, window);
+    commands["mapsinfo"] = new MapsInfo(lobby);
 }
 
 ClientThread::~ClientThread() {

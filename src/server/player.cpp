@@ -2,8 +2,12 @@
 // Created by rodian on 29/05/17.
 //
 
+#include <sstream>
 #include "player.h"
+
 #define RETURNTOMENU "returntomenu"
+#define ERROR "error"
+#define OK "ok"
 
 Player::Player(Messenger *msg, Menu &menu, std::string& id) :
         messenger(msg),id(id), conected(true),on_menu(true),on_lobby(false),
@@ -68,9 +72,11 @@ void Player::processMenuCommands(std::string &full_cmd) {
     }
 }
 
-void Player::processLobbyCommands(std::string &cmd) {
+void Player::processLobbyCommands(std::string &full_cmd) {
+    std::string cmd = getNextData(full_cmd);
     if (cmd == "startgame") {
-        this->lobby->startGame();
+        std::string map = getNextData(full_cmd);
+        this->lobby->startGame(map);
     } else if (cmd == "ready") {
         this->ready = true;
         this->lobby->ready(this);
@@ -83,6 +89,8 @@ void Player::processLobbyCommands(std::string &cmd) {
         this->on_lobby = false;
         this->on_menu = true;
         this->lobby->exitLobby(this);
+    } else if (cmd == "mapsinfo") {
+        messenger->sendMessage(lobby->get_loaded_maps());
     } else {
         messenger->sendMessage("Invalid cmd");
     }
@@ -106,7 +114,9 @@ std::string Player::getNextData(std::string& line) {
 
 void Player::getInGame() {
     // Notify the client the game is starting
-    messenger->sendMessage("startgame");
+    std::stringstream msg;
+    msg << "startgame-" << OK;
+    messenger->sendMessage(msg.str());
     this->on_lobby = false;
     this->playing = true;
 }

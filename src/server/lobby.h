@@ -25,7 +25,7 @@ public:
 
     bool addPlayer(Player* player);
 
-    void startGame();
+    bool startGame(const std::string& map_name);
 
     void ready(Player* player);
 
@@ -37,7 +37,10 @@ public:
 
     void exitLobby(Player* player);
 
+    std::string get_loaded_maps();
     ~Lobby();
+
+    std::string get_path_from_map_name(const std::string &map_name);
 };
 
 

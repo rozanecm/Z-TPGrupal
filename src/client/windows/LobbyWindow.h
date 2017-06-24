@@ -33,6 +33,8 @@ public:
     std::vector<std::string> get_player_names();
     void start_game();
     bool game_started();
+
+    void update_maps(const std::string& maps);
 private:
     void click_start();
     void click_ready();

@@ -9,8 +9,9 @@
 class JoinLobby : public Command {
     MenuWindow& menu;
     LobbyWindow& lobby;
+    ServerMessenger& messenger;
 public:
-    JoinLobby(MenuWindow& menu, LobbyWindow& lobby);
+    JoinLobby(MenuWindow& menu, LobbyWindow& lobby, ServerMessenger& messenger);
     void execute(const std::vector<std::string> &args);
 };
 

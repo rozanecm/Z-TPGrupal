@@ -25,7 +25,7 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
 
 void LobbyWindow::click_start() {
     std::string map = maps_entry->get_text();
-    m->send("startgame");
+    m->send("startgame-" + map);
 }
 
 void LobbyWindow::set_messenger(ServerMessenger &m) {
@@ -68,5 +68,9 @@ void LobbyWindow::start_game() {
 
 bool LobbyWindow::game_started() {
     return started;
+}
+
+void LobbyWindow::update_maps(const std::string &maps) {
+    maps_label->set_text(maps);
 }
 
