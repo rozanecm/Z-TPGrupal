@@ -14,7 +14,7 @@ void start_game(MapMonitor &mapMonitor, UnitsMonitor &units_monitor,
 
     GameWindow *gwindow = builder.get_window();
     gwindow->update_players(names);
-
+    gwindow->update_name(me);
     // Start up the game
     GraphicsThread graphicsThread(units_monitor, buildingsMonitor,
                                   mapMonitor, messenger, *gwindow,me);
