@@ -76,7 +76,15 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
-    unit_panel->update_portrait(selected_unit.getType());
+    int team = 1;
+    for(std::string& player: players){
+        if (player == me) {
+            break;
+        }
+        team++;
+    }
+
+    unit_panel->update_portrait(selected_unit.getType(), (TeamEnum) team);
     return true;
 }
 
