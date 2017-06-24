@@ -431,7 +431,7 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
      *                      the root of the screen.
      *
      */
-    if (event->button == 1) {
+    if (event->button == 1 || event->button == 3) {
         unitsMonitor->wipeSelected();
         buildingsMonitor->wipe_selected();
         unitsSelected = false;
@@ -444,7 +444,7 @@ bool GameArea::on_button_press_event(GdkEventButton *event) {
 }
 
 bool GameArea::on_button_release_event(GdkEventButton *event) {
-    if (event->button == 1) {
+    if (event->button == 1 || event->button == 3) {
         xFinishCoordinate = event->x;
         yFinishCoordinate = event->y;
         makeSelection();
@@ -4672,7 +4672,7 @@ void GameArea::loadBuildingsResources() {
             Gdk::Pixbuf::create_from_file(
                     "res/assets/buildings/robot/base_jungle.png"));
 
-    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYEDC].emplace_back(
+    buildings[BuildingsEnum::ROBOT_FABRI_DESTROYED].emplace_back(
             Gdk::Pixbuf::create_from_file(
                     "res/assets/buildings/robot/base_destroyed_jungle.png"));
 }

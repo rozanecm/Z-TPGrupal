@@ -63,7 +63,7 @@ public:
              UnitsEnum unitType, TeamEnum team, unsigned int hp);
 
     Unit();
-    int get_ID();
+    int get_ID() const;
 
     void update_position(int x, int y);
 

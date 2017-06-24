@@ -7,6 +7,7 @@
 #define TYPE 3
 #define TEAM 4
 #define HP 5
+
 AddBuilding::AddBuilding(BuildingsMonitor &buildings,
                          const std::vector<std::string>& players)
         : buildings(buildings),
