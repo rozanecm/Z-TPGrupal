@@ -30,5 +30,5 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - atk-[idUnit]-[target]
 ##### indica que la unidad idUnit cambie el team a target
 - grab-[idUnit]-[target]
-##### indica que la factory id_factory ejecute un factory_cmd. Los factory_cmd son: "create" que empieza a crear la unidad ya seleccionada; "prev" que selecciona la unidad anterior dejando de crear unidades; "next" que selecciona la unidad siguiente dejando de crear unidades
+##### indica que la factory id_factory ejecute un factory_cmd. Los factory_cmd son: "create" que empieza a crear la unidad ya seleccionada; "prev" que selecciona la unidad anterior dejando de crear unidades; "next" que selecciona la unidad siguiente dejando de crear unidades; "current" que devuelve el estado actual de la fabrica
 - factory-[id_factory]-[factory_cmd]

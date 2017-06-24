@@ -4,7 +4,6 @@
 
 #include "controlUnit.h"
 #define WAIT 0.5
-#define BULLET "bullet"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
