@@ -4,7 +4,6 @@
 
 #include <sstream>
 #include "lobby.h"
-#define PATH "maps/map.xml"
 
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),

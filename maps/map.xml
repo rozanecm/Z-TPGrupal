@@ -1,0 +1,1016 @@
+<?xml version="1.0"?>
+<Map>
+	<Terrain>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Lava" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+		<Row>
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Agua" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Lava" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+			<Cell terrain="Tierra" />
+		</Row>
+	</Terrain>
+	<Territories>
+		<Fort center_x="0" center_y="1" min_x="0" min_y="0" max_x="9" max_y="9">
+			<VehicleFactory x="6" y="8" />
+			<VehicleFactory x="6" y="5" />
+		</Fort>
+		<Flag center_x="11" center_y="2" min_x="10" min_y="0" max_x="19" max_y="9">
+			<VehicleFactory x="14" y="7" />
+			<UnitFactory x="17" y="8" />
+		</Flag>
+		<Flag center_x="22" center_y="1" min_x="20" min_y="0" max_x="29" max_y="9">
+			<UnitFactory x="28" y="5" />
+			<UnitFactory x="20" y="1" />
+		</Flag>
+		<Fort center_x="1" center_y="10" min_x="0" min_y="10" max_x="9" max_y="19">
+			<UnitFactory x="4" y="16" />
+			<UnitFactory x="0" y="11" />
+		</Fort>
+		<Flag center_x="10" center_y="10" min_x="10" min_y="10" max_x="19" max_y="19">
+			<UnitFactory x="16" y="15" />
+			<UnitFactory x="16" y="10" />
+		</Flag>
+		<Flag center_x="22" center_y="11" min_x="20" min_y="10" max_x="29" max_y="19">
+			<UnitFactory x="24" y="13" />
+			<UnitFactory x="20" y="16" />
+		</Flag>
+		<Fort center_x="1" center_y="21" min_x="0" min_y="20" max_x="9" max_y="29">
+			<VehicleFactory x="8" y="26" />
+			<VehicleFactory x="4" y="25" />
+		</Fort>
+		<Flag center_x="10" center_y="21" min_x="10" min_y="20" max_x="19" max_y="29">
+			<VehicleFactory x="10" y="25" />
+			<UnitFactory x="18" y="25" />
+		</Flag>
+		<Fort center_x="21" center_y="20" min_x="20" min_y="20" max_x="29" max_y="29">
+			<UnitFactory x="24" y="24" />
+			<VehicleFactory x="20" y="25" />
+		</Fort>
+	</Territories>
+	<Structures>
+		<Struct Type="Rock" x="0" y="19" />
+		<Struct Type="Rock" x="0" y="25" />
+		<Struct Type="Rock" x="1" y="14" />
+		<Struct Type="Rock" x="1" y="25" />
+		<Struct Type="Rock" x="2" y="18" />
+		<Struct Type="Rock" x="5" y="7" />
+		<Struct Type="Rock" x="13" y="25" />
+		<Struct Type="Rock" x="16" y="9" />
+		<Struct Type="Rock" x="17" y="25" />
+		<Struct Type="Rock" x="19" y="14" />
+		<Struct Type="Rock" x="21" y="4" />
+	</Structures>
+</Map>
