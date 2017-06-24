@@ -16,6 +16,7 @@
 #include "commands/PlayerNames.h"
 #include "commands/UpdateFactory.h"
 #include "commands/FactoryStats.h"
+#include "GameBuilder.h"
 
 void ClientThread::run() {
     initCommands();
@@ -26,15 +27,14 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
                            BuildingsMonitor &buildingsMonitor,
                            MapMonitor &mapMonitor,
                            ServerMessenger &messenger,
-                           LobbyWindow& lobby,
-                           GameWindow &window
-) :
+                           GameBuilder& builder) :
         unitsMonitor(unitsMonitor),
         buildingsMonitor(buildingsMonitor),
         mapMonitor(mapMonitor),
         messenger(messenger),
-        lobby(lobby),
-        window(window) {
+        lobby(*builder.get_lobby_window()),
+        window(*builder.get_window()),
+        menu(*builder.get_menu_window()){
 }
 
 void ClientThread::loop() {

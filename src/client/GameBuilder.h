@@ -10,18 +10,14 @@
 #include "ServerMessenger.h"
 #include "windows/InitialWindow.h"
 #include "windows/LobbyWindow.h"
+#include "windows/MenuWindow.h"
 
 class GameBuilder {
-    GameWindow *window;
     InitialWindow *init_window;
+    MenuWindow* menu_window;
     LobbyWindow* lobby_window;
+    GameWindow *window;
     Glib::RefPtr<Gtk::Builder> refBuilder;
-    Gtk::Image *portrait;
-    Gtk::Box *panel;
-    Gtk::Box *unit_panel;
-    Gtk::Box *building_panel;
-    Gtk::Box *group_panel;
-    Gtk::Button *button;
 
 public:
     GameBuilder();
@@ -33,6 +29,7 @@ public:
 
     InitialWindow *get_initial_window();
     LobbyWindow* get_lobby_window();
+    MenuWindow* get_menu_window();
 };
 
 

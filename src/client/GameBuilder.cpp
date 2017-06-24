@@ -23,11 +23,9 @@ GameBuilder::GameBuilder() {
 
     // Save the widget refs in the class attributes
     refBuilder->get_widget_derived("GameWindow", window);
-
-    refBuilder->get_widget("Portrait", portrait);
-    refBuilder->get_widget("SidePanel", panel);
     refBuilder->get_widget_derived("InitialWindow", init_window);
     refBuilder->get_widget_derived("LobbyWindow", lobby_window);
+    refBuilder->get_widget_derived("MenuWindow", menu_window);
 }
 
 
@@ -47,6 +45,10 @@ InitialWindow *GameBuilder::get_initial_window() {
 
 LobbyWindow *GameBuilder::get_lobby_window() {
     return lobby_window;
+}
+
+MenuWindow *GameBuilder::get_menu_window() {
+    return menu_window;
 }
 
 
