@@ -1,6 +1,7 @@
 #include <iostream>
 #include "UnitPanel.h"
 #include "../enums/UnitsEnum.h"
+#include "../enums/TeamEnum.h"
 
 #define PORTRAITS "res/portraits/"
 const std::map<UnitsEnum, std::string> units = {
@@ -16,6 +17,13 @@ const std::map<UnitsEnum, std::string> units = {
         {UnitsEnum::LIGHT_TANK, std::string("light_tank")},
         {UnitsEnum::HEAVY_TANK, std::string("heavy_tank")},
         {UnitsEnum::MML, std::string("mml")}
+};
+
+const std::map<TeamEnum, std::string> teams = {
+        {TeamEnum::BLUE, "blue"},
+        {TeamEnum::GREEN, "green"},
+        {TeamEnum::RED, "red"},
+        {TeamEnum ::YELLOW, "yellow"}
 };
 
 UnitPanel::UnitPanel(BaseObjectType *cobject,
@@ -50,9 +58,10 @@ void UnitPanel::set_owner(const std::string &owner) {
     this->owner->set_text(owner);
 }
 
-void UnitPanel::update_portrait(UnitsEnum unit) {
+void UnitPanel::update_portrait(UnitsEnum unit, TeamEnum team) {
     std::string unit_name = units.find(unit)->second;
-    std::string path = PORTRAITS + unit_name + ".png";
+    std::string color = teams.find(team)->second;
+    std::string path = PORTRAITS + unit_name + "_" + color + ".png";
     portrait->set(path);
     set_name(unit_name);
 }

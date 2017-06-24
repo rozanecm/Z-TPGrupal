@@ -24,7 +24,6 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("FactoryMinutesLabel", minutes);
     builder->get_widget("FactorySecondsLabel", seconds);
     building->set("res/buildings/base_city.png");
-    unit->set("res/portraits/grunt.png");
 }
 
 const std::string &BuildingPanel::get_label() {

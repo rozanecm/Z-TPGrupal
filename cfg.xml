@@ -15,4 +15,7 @@
     <Weapons>
         <Weapon type="bullet" damage="2" size_x="1" size_y="1" speed="100" explosive="no"/>
     </Weapons>
+    <Maps>
+        <Map name="Mapa default" path="maps/map.xml"/>
+    </Maps>
 </Config>
