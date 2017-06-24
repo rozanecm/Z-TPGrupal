@@ -465,6 +465,11 @@ void ControlUnit::checkForWinner() {
     for (auto t: teams) {
         if (!t.doesTeamLose()) {
             teams_alive += 1;
+        } else {
+            std::vector<PlayerInfo>& losers = t.getPlayersInfo();
+            for (auto& w: losers) {
+                w.getMessenger()->sendMessage("loseryousuck");
+            }
         }
     }
 
@@ -475,16 +480,18 @@ void ControlUnit::checkForWinner() {
 
 void ControlUnit::sendFinnalMessage() {
     std::string winner = "winner-";
-    for (auto t: teams) {
+    for (auto& t: teams) {
         if (!t.doesTeamLose()) {
             std::vector<PlayerInfo>& winners = t.getPlayersInfo();
-            for (auto w: winners) {
-                winner += w.getPlayerId();
+            for (auto& w: winners) {
+                w.getMessenger()->sendMessage("winner");
+            }
+        } else {
+            std::vector<PlayerInfo>& losers = t.getPlayersInfo();
+            for (auto& w: losers) {
+                w.getMessenger()->sendMessage("loseryousuck");
             }
         }
-    }
-    for (auto y: players) {
-        y->sendMessage(winner);
     }
 }
 

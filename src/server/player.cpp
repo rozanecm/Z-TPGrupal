@@ -3,7 +3,7 @@
 //
 
 #include "player.h"
-
+#define RETURNTOMENU "returntomenu"
 
 Player::Player(Messenger *msg, Menu &menu, std::string& id) :
         messenger(msg),id(id), conected(true),on_menu(true),on_lobby(false),
@@ -19,6 +19,9 @@ void Player::run() {
                 processMenuCommands(new_cmd);
             } else if (on_lobby) {
                 processLobbyCommands(new_cmd);
+            } else if (new_cmd == RETURNTOMENU) {
+                this->playing = false;
+                this->on_menu = true;
             } else if (playing) {
                 commands->addCommand(this->id, new_cmd, control);
             }
