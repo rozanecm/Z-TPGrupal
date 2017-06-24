@@ -84,7 +84,7 @@ void MapLoader::load_structs(const pugi::xml_node &root,
         occupants.push_back(f);
     }
 
-    load_factories(cfg, root.child("Territories"), id_counter);
+    load_territories(cfg, root.child("Territories"), id_counter);
 
 }
 
@@ -150,8 +150,8 @@ std::shared_ptr<Map> MapLoader::get_map() {
     return game_map;
 }
 
-void MapLoader::load_factories(const pugi::xml_node &structs_cfg,
-                               const pugi::xml_node &root, int id_counter) {
+void MapLoader::load_territories(const pugi::xml_node &structs_cfg,
+                                 const pugi::xml_node &root, int id_counter) {
     pugi::xml_node factory_cfg = structs_cfg.
             find_child_by_attribute("type", "Factory");
 
@@ -201,7 +201,8 @@ void MapLoader::create_territory(int hp, const pugi::xml_node &territory,
     int height = (min_y + max_y) / 2;
     Size flag(x, y, width, height);
     Position flag_position(x, y);
-    Territory* t = new Territory(factories_in_territory, flag_position, flag, 0);
+    Territory* t = new Territory(factories_in_territory, flag_position, flag, 
+    ++id_counter);
     territories.emplace_back(t);
 }
 
