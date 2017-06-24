@@ -17,6 +17,7 @@
 #include "commands/UpdateFactory.h"
 #include "commands/FactoryStats.h"
 #include "GameBuilder.h"
+#include "commands/LobbyInfo.h"
 
 void ClientThread::run() {
     initCommands();
@@ -82,6 +83,7 @@ void ClientThread::initCommands() {
     commands["names"] = new PlayerNames(lobby);
     commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
     commands["factorystats"] = new FactoryStats(window);
+    commands["lobbyinfo"] = new LobbyInfo(menu);
 }
 
 ClientThread::~ClientThread() {

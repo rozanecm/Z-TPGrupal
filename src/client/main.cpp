@@ -7,18 +7,6 @@
 
 #define SUCCESSRETURNCODE 0
 
-void setup_lobby(ServerMessenger& m) {
-    m.send("lobbyinfo");
-    std::string response = m.receive();
-    std::vector<std::string> args = split(response, '-');
-    if (args.size() > 1) {
-        m.send("getinlobby-0");
-    } else {
-        m.send("createlobby");
-    }
-    m.send("ready");
-}
-
 int main(int argc, char **argv) {
     try {
         /* create map; bind with monitor */
@@ -49,6 +37,8 @@ int main(int argc, char **argv) {
             clientThread.start();
 
             MenuWindow* menu = builder.get_menu_window();
+            menu->load_messenger(&messenger);
+            messenger.send("lobbyinfo");
             app = Gtk::Application::create();
             app->run(*menu);
 
@@ -56,8 +46,6 @@ int main(int argc, char **argv) {
             lobby->set_messenger(messenger);
 
             app = Gtk::Application::create();
-            setup_lobby(messenger);
-
             app->run(*lobby);
 
 

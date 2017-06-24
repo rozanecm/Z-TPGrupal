@@ -764,6 +764,7 @@ GUI here</property>
       <object class="GtkGrid" id="grid5">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="vexpand">True</property>
         <property name="column_homogeneous">True</property>
         <child>
           <object class="GtkLabel" id="label23">
@@ -775,16 +776,6 @@ GUI here</property>
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkListBox" id="AvailableLobbies">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
           </packing>
         </child>
         <child>
@@ -809,7 +800,7 @@ GUI here</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkEntry" id="entry1">
+                  <object class="GtkEntry" id="LobbyEntry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                   </object>
@@ -851,10 +842,30 @@ GUI here</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="valign">start</property>
             <property name="relief">half</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="AvailableLobbies">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
+            <property name="margin_left">8</property>
+            <property name="vexpand">True</property>
+            <property name="label" translatable="yes">0
+1
+2
+3
+</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">1</property>
           </packing>
         </child>
@@ -1001,4 +1012,5 @@ GUI here</property>
       </packing>
     </child>
   </object>
+  <object class="GtkListStore" id="liststore1"/>
 </interface>
