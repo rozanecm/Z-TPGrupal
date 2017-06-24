@@ -7,6 +7,22 @@
 
 #define SUCCESSRETURNCODE 0
 
+void start_game(MapMonitor &mapMonitor, UnitsMonitor &units_monitor,
+                BuildingsMonitor &buildingsMonitor, GameBuilder &builder,
+                const std::string& me, ServerMessenger &messenger,
+                const std::vector<std::string> &names) {
+
+    GameWindow *gwindow = builder.get_window();
+    gwindow->update_players(names);
+
+    // Start up the game
+    GraphicsThread graphicsThread(units_monitor, buildingsMonitor,
+                                  mapMonitor, messenger, *gwindow,me);
+
+    graphicsThread.start();
+    graphicsThread.join();
+}
+
 int main(int argc, char **argv) {
     try {
         /* create map; bind with monitor */
@@ -28,6 +44,7 @@ int main(int argc, char **argv) {
 
         // Once the window closes, we fetch the socket
         std::shared_ptr<ServerMessenger> m = window->get_socket();
+        std::string me = window->get_username();
         if (m) {
             ServerMessenger messenger = *m.get();
 
@@ -42,32 +59,24 @@ int main(int argc, char **argv) {
             app = Gtk::Application::create();
             app->run(*menu);
 
-            LobbyWindow* lobby = builder.get_lobby_window();
-            lobby->set_messenger(messenger);
+            if (menu->joined_succesfully()) {
+                LobbyWindow *lobby = builder.get_lobby_window();
+                lobby->set_messenger(messenger);
+                app = Gtk::Application::create();
+                app->run(*lobby);
 
-            app = Gtk::Application::create();
-            app->run(*lobby);
+                if (lobby->game_started()) {
+                    std::vector<std::string> names = lobby->get_player_names();
+                    clientThread.update_player_names(names);
 
-
-            GameWindow *gwindow = builder.get_window();
-            gwindow->update_name(window->get_username());
-            gwindow->update_players(lobby->get_player_names());
-            clientThread.update_player_names(lobby->get_player_names());
-
-            // Start up the game
-            GraphicsThread graphicsThread(units_monitor, buildingsMonitor,
-                                          mapMonitor, messenger, *gwindow,
-                                          window->get_username());
-
-
-            graphicsThread.start();
-            graphicsThread.join();
-
+                    start_game(mapMonitor, units_monitor, buildingsMonitor,
+                               builder, me, messenger, names);
+                }
+            }
             /* once graphics join (window closes), we kill client thread */
             clientThread.finish();
             clientThread.join();
         }
-
         return SUCCESSRETURNCODE;
     } catch (std::exception const &ex) {
         std::cerr << ex.what() << std::endl;

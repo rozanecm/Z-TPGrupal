@@ -30,6 +30,8 @@ public:
     void ready(Player* player);
 
     std::vector<std::string> get_player_names();
+
+    int get_id();
     ~Lobby();
 };
 

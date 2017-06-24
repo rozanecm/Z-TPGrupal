@@ -14,14 +14,18 @@ MenuWindow::MenuWindow(BaseObjectType *cobject,
                                                         &MenuWindow::join_lobby));
     create_button->signal_clicked().connect(sigc::mem_fun(*this,
                                                           &MenuWindow::create_lobby));
+    joined_successfully = false;
 }
 
 void MenuWindow::join_lobby() {
     std::string lobby = lobby_entry->get_text();
+    try {
+        std::stoi(lobby);
+    } catch(std::invalid_argument& e) {
+        std::cout << "Invalid lobby ID. Insert only numbers!" << std::endl;
+        return;
+    }
     messenger->send("joinlobby-" + lobby);
-    this->hide();
-    messenger->send("ready");
-
 }
 
 void MenuWindow::load_messenger(ServerMessenger *messenger) {
@@ -30,8 +34,6 @@ void MenuWindow::load_messenger(ServerMessenger *messenger) {
 
 void MenuWindow::create_lobby() {
     messenger->send("createlobby");
-    this->hide();
-    messenger->send("ready");
 }
 
 void MenuWindow::update_lobbies(const std::vector<std::string> &lobbies) {
@@ -40,4 +42,13 @@ void MenuWindow::update_lobbies(const std::vector<std::string> &lobbies) {
         text << lobby << std::endl;
     }
     available_lobbies->set_text(text.str());
+}
+
+void MenuWindow::hide() {
+    joined_successfully = true;
+    return Gtk::Widget::hide();
+}
+
+bool MenuWindow::joined_succesfully() {
+    return joined_successfully;
 }

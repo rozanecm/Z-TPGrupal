@@ -12,9 +12,12 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
     builder->get_widget("PlayerStatus3", players[2]);
     builder->get_widget("PlayerStatus4", players[3]);
     builder->get_widget("StartGame", start);
+    builder->get_widget_derived("ReadyButton", ready);
     default_label = players[0]->get_text();
     start->signal_clicked().connect(sigc::mem_fun(*this,
                                                   &LobbyWindow::on_click));
+    ready->signal_toggled().connect(sigc::mem_fun(*this,
+                                                  &LobbyWindow::click_ready));
 }
 
 void LobbyWindow::on_click() {
@@ -41,5 +44,22 @@ std::vector<std::string> LobbyWindow::get_player_names() {
         names.push_back(name);
     }
     return names;
+}
+
+
+void LobbyWindow::click_ready() {
+    if (ready->get_active()) { // already pressed
+        return;
+    }
+    m->send("ready");
+}
+
+void LobbyWindow::start_game() {
+    started = true;
+    this->hide();
+}
+
+bool LobbyWindow::game_started() {
+    return started;
 }
 
