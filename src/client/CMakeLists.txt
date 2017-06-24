@@ -53,8 +53,6 @@ set(SOURCE_FILES
         GameArea.h
         GameBuilder.cpp
         GameBuilder.h
-        GraphicsThread.cpp
-        GraphicsThread.h
         main.cpp
         Map.cpp
         Map.h

@@ -259,7 +259,15 @@ void GameWindow::update_factory_panel(const std::string &type, int fire_rate,
                                       int hp) {
     building_panel->set_unit_hp(hp);
     building_panel->set_unit_fire_rate(fire_rate);
-    building_panel->set_unit_type(type);
+
+    int team = 1;
+    for(std::string& player: players){
+        if (player == me) {
+            break;
+        }
+        team++;
+    }
+    building_panel->set_unit_type(type, (TeamEnum) team);
 }
 
 void GameWindow::update_factory_timer(int minutes, int seconds) {

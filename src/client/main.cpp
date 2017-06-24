@@ -1,6 +1,5 @@
 #include <gtkmm.h>
 #include <iostream>
-#include "GraphicsThread.h"
 #include "ClientThread.h"
 #include "GameBuilder.h"
 #include <split.h>
@@ -16,11 +15,10 @@ void start_game(MapMonitor &mapMonitor, UnitsMonitor &units_monitor,
     gwindow->update_players(names);
     gwindow->update_name(me);
     // Start up the game
-    GraphicsThread graphicsThread(units_monitor, buildingsMonitor,
-                                  mapMonitor, messenger, *gwindow,me);
-
-    graphicsThread.start();
-    graphicsThread.join();
+    gwindow->setResources(&units_monitor, &buildingsMonitor,
+                          &mapMonitor, &messenger, me);
+    auto app = Gtk::Application::create();
+    app->run(*gwindow);
 }
 
 int main(int argc, char **argv) {
