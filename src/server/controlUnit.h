@@ -34,6 +34,7 @@ private:
     std::vector<Unit> changed_units;
     std::vector<Occupant> changed_occupants;
     std::vector<Factory> changed_factories;
+//    std::vector<Unit*> eliminated_units;
     int objects_counter;
 
 public:

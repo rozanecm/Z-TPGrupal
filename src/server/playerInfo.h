@@ -42,6 +42,8 @@ public:
     void recalculateTechLevel();
 
     void eliminateThisTerritory(Territory* territory);
+
+    ~PlayerInfo();
 };
 
 

@@ -198,7 +198,7 @@ void Map::updateOccupants(std::vector<Occupant *> *all_occupants) {
     this->all_occupants = all_occupants;
 }
 
-Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit, Occupant& enemy) {
+Occupant* Map::checkForEnemiesOn(Size &range, Occupant& unit) {
     for(auto x: *all_occupants) {
         if(x->getId() != unit.getId() && x->isThereACollision(range)
            && (types[x->getType()] == UNIT || types[x->getType()] == VEHICLE)

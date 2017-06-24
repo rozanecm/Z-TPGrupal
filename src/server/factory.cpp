@@ -110,3 +110,5 @@ UnitMold* Factory::previousUnit() {
 void Factory::resetSelectedUnit() {
     mold = units.begin();
 }
+
+Factory::~Factory() {}
