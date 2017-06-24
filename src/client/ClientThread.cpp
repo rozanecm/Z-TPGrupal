@@ -16,7 +16,6 @@
 #include "commands/PlayerNames.h"
 #include "commands/UpdateFactory.h"
 #include "commands/FactoryStats.h"
-#include "GameBuilder.h"
 #include "commands/LobbyInfo.h"
 #include "commands/JoinLobby.h"
 

@@ -1,8 +1,6 @@
 #include "MapMonitor.h"
 #include <Lock.h>
 
-MapMonitor::MapMonitor(Map &map) : map(map) {
-}
 
 void MapMonitor::setCell(unsigned int xCoordinate, unsigned int yCoordinate,
                          std::string terrainType) {

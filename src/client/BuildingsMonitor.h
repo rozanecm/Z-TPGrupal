@@ -8,11 +8,10 @@
 
 class BuildingsMonitor {
 private:
-    std::vector<Building> &buildings;
+    std::vector<Building> buildings;
 
     std::mutex m;
 public:
-    explicit BuildingsMonitor(std::vector<Building> &buildings);
 
     void markAsSelectedInRange(bool &buildingSelected,
                                    gdouble xStartCoordinate,
