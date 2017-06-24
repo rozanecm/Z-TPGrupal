@@ -38,3 +38,32 @@ void PlayerInfo::addMessenger(Messenger *messenger) {
 Messenger *PlayerInfo::getMessenger() {
     return this->player_messenger;
 }
+
+void PlayerInfo::addTerritory(Territory *territory) {
+    territories.push_back(territory);
+    recalculateTechLevel();
+}
+
+void PlayerInfo::recalculateTechLevel() {
+    tech_level = 0;
+    for (auto& t: territories) {
+        tech_level += t->getTechLevel();
+    }
+
+    for (auto& t: territories) {
+        t->changeFactoriesTechLevel(tech_level);
+    }
+}
+
+void PlayerInfo::eliminateThisTerritory(Territory* territory) {
+    std::vector<Territory*>::iterator it = territories.begin();
+    for (; it != territories.end();) {
+        if (territory->getId() == (*it)->getId()) {
+            it = territories.erase(it);
+        } else {
+            ++it;
+        }
+    }
+    recalculateTechLevel();
+}
+

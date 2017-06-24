@@ -4,10 +4,10 @@
 
 #include "territory.h"
 
-Territory::Territory(const std::map<int, Factory*>& factories,
-                     Position flag, Size size) :
+Territory::Territory(const std::map<int, Factory *> &factories, Position flag,
+                     Size size, int id) :
 Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
-territory_size(size){}
+territory_size(size), id(id){}
 
 void Territory::grabFlag(std::string& new_team) {
     changed = true;
@@ -39,6 +39,10 @@ bool Territory::doesTerritorysOwnerChanged() {
     bool tmp = changed;
     changed = false;
     return tmp;
+}
+
+int Territory::getId() {
+    return id;
 }
 
 
