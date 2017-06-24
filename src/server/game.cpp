@@ -111,7 +111,8 @@ void Game::sincronizeOccupants() {
                 Factory* fortress = p.getFortress();
                 for (auto& f: factories) {
                     if (fortress->getId() == f.second->getId()) {
-                        t->changeTeam(p.getPlayerId());
+                        std::string new_team = p.getPlayerId();
+                        t->grabFlag(new_team);
                         p.addTerritory(t);
                     }
                 }
