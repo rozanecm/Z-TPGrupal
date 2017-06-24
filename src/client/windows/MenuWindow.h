@@ -16,6 +16,8 @@ class MenuWindow : public Gtk::Window {
     Gtk::Button* create_button;
     Gtk::Entry* lobby_entry;
     ServerMessenger* messenger;
+
+    bool joined_successfully;
 public:
     MenuWindow(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder);
@@ -26,6 +28,10 @@ public:
 
     void create_lobby();
     void update_lobbies(const std::vector<std::string>& lobbies);
+
+    void hide();
+
+    bool joined_succesfully();
 };
 
 

@@ -9,6 +9,6 @@ StartGame::StartGame(ServerMessenger &m,
 }
 
 void StartGame::execute(const std::vector<std::string> &args) {
-    lobby.hide();
+    lobby.start_game();
 }
 

@@ -4,6 +4,9 @@
 
 #include "menu.h"
 
+#define ERROR_MSG "joinlobby-error"
+#define OK_MSG "joinlobby-ok"
+
 Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
 bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
@@ -20,14 +23,12 @@ bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
 }
 
 void Menu::createNewLobby(Player* player) {
-    lobby_counter += 1;
-
-    Lobby* new_lobby = new Lobby(lobby_counter, config);
+    Lobby* new_lobby = new Lobby(lobby_counter++, config);
     std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
     lobbies.back()->addPlayer(player);
     player->addLobby(new_lobby);
-    player->getMessenger()->sendMessage("New Lobby created");
+    player->getMessenger()->sendMessage(OK_MSG);
 }
 
 std::string Menu::getLobbiesInfo() {
@@ -39,13 +40,15 @@ std::string Menu::getLobbiesInfo() {
 }
 
 void Menu::addToLobby(int id_lobby, Player* player) {
-    if(lobbies.size() < id_lobby) {
-        return;
+    for (Lobby* lobby : lobbies) {
+        if (lobby->get_id() == id_lobby) {
+            lobby->addPlayer(player);
+            player->addLobby(lobby);
+            player->getMessenger()->sendMessage(OK_MSG);
+            return;
+        }
     }
-    Lobby* lobby = lobbies[id_lobby];
-
-    lobby->addPlayer(player);
-    player->addLobby(lobbies[id_lobby]);
+    player->getMessenger()->sendMessage(ERROR_MSG);
 }
 
 Menu::~Menu() {
