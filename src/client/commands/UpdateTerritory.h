@@ -1,0 +1,10 @@
+#ifndef Z_TPGRUPAL_UPDATETERRITORY_H
+#define Z_TPGRUPAL_UPDATETERRITORY_H
+
+
+class UpdateTerritory {
+
+};
+
+
+#endif //Z_TPGRUPAL_UPDATETERRITORY_H

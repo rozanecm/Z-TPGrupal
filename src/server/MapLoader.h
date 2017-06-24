@@ -49,8 +49,8 @@ private:
     void load_unit_molds(pugi::xml_node node);
     void load_weapons(pugi::xml_node weapons);
     void create_map();
-    void load_factories(const pugi::xml_node &structs_cfg,
-                        const pugi::xml_node &root, int id_counter);
+    void load_territories(const pugi::xml_node &structs_cfg,
+                          const pugi::xml_node &root, int id_counter);
 
     void create_territory(int hp, const pugi::xml_node &territory, 
                           int &id_counter,
