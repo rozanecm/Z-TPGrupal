@@ -4,7 +4,8 @@
 #include "GameArea.h"
 #include <giomm.h>
 
-#define TILESIZE 16    //tile width in pixels.
+#define TILESIZE 16    //tile width in pixels. This define is also present
+                        //in AddBuilding Command
 #define NUMBER_OF_TILES_TO_SHOW 10
 
 GameArea::GameArea(BaseObjectType *cobject,
@@ -235,9 +236,11 @@ void GameArea::drawUnit(TeamEnum team, UnitsEnum unitType,
         std::cerr << "Drawing failed at finding valid rotation" << std::endl;
     }
 
-//    if (unitIsRobot(unitType)){
-//        cr->scale(1.5, 1.5);
-//    }
+    if (unitIsRobot(unitType)){
+        cr->scale(1.5, 1.5);
+        xGraphicCoordinate = xGraphicCoordinate/1.5;
+        yGraphicCoordinate = yGraphicCoordinate/1.5;
+    }
 
     auto next = rotations_map->second.at(unitCounter);
     /* perform actual drawing */

@@ -42,7 +42,6 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     }
 
     unsigned int hp = std::stoul(args[HP]);
-    Building b(building_type, x, y, id, (TeamEnum) team_id,
-               owner, hp);
+    Building b(building_type, x, y, id, (TeamEnum) team_id, owner, hp);
     buildings.addBuilding(b);
 }
