@@ -24,6 +24,9 @@ class ClientThread : public Thread {
     bool finished = false; // Flag for finishing execution
     std::map<std::string, Command *> commands;
     std::vector<std::string> players;
+
+    bool winner;
+    bool loser;
 public:
     ClientThread(UnitsMonitor &unitsMonitor,
                  BuildingsMonitor &buildingsMonitor,
@@ -39,6 +42,12 @@ public:
 
     void update_player_names(const std::vector<std::string>& names);
 
+
+    void finish_winner();
+    void finish_loser();
+
+    bool is_winner();
+    bool is_loser();
 private:
     /* Loads commands */
     void initCommands();

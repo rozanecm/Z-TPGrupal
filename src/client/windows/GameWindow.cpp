@@ -9,7 +9,9 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::ApplicationWindow(cobject)
+        Gtk::ApplicationWindow(cobject),
+        winner(false),
+        loser(false)
 {
     builder->get_widget_derived("GameArea", gameArea);
 
@@ -162,9 +164,6 @@ void GameWindow::factory_next() {
     messenger->send("factory-"+std::to_string(id)+"-next");
 }
 
-void GameWindow::update_selection(int id) {
-    selection_id = id;
-}
 
 void GameWindow::factory_change_unit(std::string &path) {
     building_panel->change_unit(path);

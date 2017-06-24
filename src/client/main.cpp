@@ -15,14 +15,20 @@ int main(int argc, char **argv) {
         InitialWindow *window = builder.get_initial_window();
         app->run(*window);
 
-        // Once the window closes, we fetch the socket
+        // Once initial window closes, we fetch the socket
         std::shared_ptr<ServerMessenger> m = window->get_socket();
         std::string player_name = window->get_username();
         if (m) {
             ServerMessenger messenger = *m.get();
 
-            // Starts the game
-            Game g(builder, messenger, player_name);
+            bool keep_playing = true;
+            while(keep_playing) {
+                // Starts the game
+                Game g(builder, messenger, player_name);
+
+                // Game finishes
+                keep_playing = g.get_play_again_status();
+            }
         }
         return SUCCESSRETURNCODE;
     } catch (std::exception const &ex) {

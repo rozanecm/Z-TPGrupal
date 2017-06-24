@@ -12,9 +12,20 @@ class ResultWindow : public Gtk::Window {
     Gtk::Button* close;
     Gtk::Label* winner;
     Gtk::Label* loser;
+
+    bool back_to_menu;
 public:
     ResultWindow(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder);
+
+    void display_lose_screen();
+    void display_win_screen();
+
+    void menu_click();
+
+    void close_click();
+
+    bool go_back_to_menu();
 };
 
 

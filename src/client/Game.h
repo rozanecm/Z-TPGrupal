@@ -21,16 +21,21 @@ class Game {
     LobbyWindow* lobby;
     GameWindow* game;
     ResultWindow* result;
+
+    bool play_again = false;
 public:
     Game(GameBuilder& builder, ServerMessenger& server_messenger,
          const std::string& player_name);
 
+    bool get_play_again_status();
 private:
     void start_menu();
 
     void start_lobby() const;
 
     void start_game(const std::vector<std::string> &names);
+
+    void results_screen(bool winner, bool loser);
 };
 
 

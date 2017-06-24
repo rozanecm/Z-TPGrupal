@@ -19,7 +19,6 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
     lobby(builder.get_lobby_window()),
     game(builder.get_window())
 {
-
     // Start thread that handles server communication
     ClientThread clientThread(units_monitor, buildingsMonitor,
                               mapMonitor, messenger, builder);
@@ -35,6 +34,12 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
             start_game(names);
         }
     }
+
+    bool winner = clientThread.is_winner();
+    bool loser = clientThread.is_loser();
+    results_screen(winner, loser);
+
+
     /* once graphics join (window closes), we kill client thread */
     clientThread.finish();
     clientThread.join();
@@ -51,4 +56,23 @@ void Game::start_menu() {
     messenger.send("lobbyinfo");
     auto app = Gtk::Application::create();
     app->run(*menu);
+}
+
+void Game::results_screen(bool winner, bool loser) {
+    if (!winner && !loser) { // Played closed the window before game was over
+        play_again = false;
+        return;
+    } else if (winner) {
+        result->display_win_screen();
+    } else {
+        result->display_lose_screen();
+    }
+
+    auto app = Gtk::Application::create();
+    app->run(*result);
+    play_again = result->go_back_to_menu();
+}
+
+bool Game::get_play_again_status() {
+    return play_again;
 }
