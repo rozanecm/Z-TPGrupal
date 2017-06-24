@@ -23,6 +23,7 @@ bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
 }
 
 void Menu::createNewLobby(Player* player) {
+    Lock l(m);
     Lobby* new_lobby = new Lobby(lobby_counter++, config);
     std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
@@ -32,6 +33,7 @@ void Menu::createNewLobby(Player* player) {
 }
 
 std::string Menu::getLobbiesInfo() {
+    Lock l(m);
     std::string info = "lobbyinfo-";
     for (int i = 0; i < lobbies.size(); ++i) {
         info += std::to_string(i) + "-";
@@ -40,6 +42,7 @@ std::string Menu::getLobbiesInfo() {
 }
 
 void Menu::addToLobby(int id_lobby, Player* player) {
+    Lock l(m);
     for (Lobby* lobby : lobbies) {
         if (lobby->get_id() == id_lobby) {
             lobby->addPlayer(player);

@@ -67,3 +67,7 @@ void PlayerInfo::eliminateThisTerritory(Territory* territory) {
     recalculateTechLevel();
 }
 
+PlayerInfo::~PlayerInfo() {
+    player_messenger = nullptr;
+}
+

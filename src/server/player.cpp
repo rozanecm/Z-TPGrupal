@@ -3,7 +3,7 @@
 //
 
 #include "player.h"
-
+#define RETURNTOMENU "returntomenu"
 
 Player::Player(Messenger *msg, Menu &menu, std::string& id) :
         messenger(msg),id(id), conected(true),on_menu(true),on_lobby(false),
@@ -19,6 +19,9 @@ void Player::run() {
                 processMenuCommands(new_cmd);
             } else if (on_lobby) {
                 processLobbyCommands(new_cmd);
+            } else if (new_cmd == RETURNTOMENU) {
+                this->playing = false;
+                this->on_menu = true;
             } else if (playing) {
                 commands->addCommand(this->id, new_cmd, control);
             }
@@ -67,17 +70,23 @@ void Player::processMenuCommands(std::string &full_cmd) {
 
 void Player::processLobbyCommands(std::string &cmd) {
     if (cmd == "startgame") {
-        std::cout << "Entre en player a start game" << std::endl;
         this->lobby->startGame();
     } else if (cmd == "ready") {
         this->ready = true;
         this->lobby->ready(this);
-    }  else {
+    }  else if (cmd == "unready") {
+        this->ready = false;
+        this->lobby->unReady();
+    }  else if (cmd == "exitlobby") {
+        this->ready = false;
+        this->lobby->unReady();
+        this->on_lobby = false;
+        this->on_menu = true;
+        this->lobby->exitLobby(this);
+    } else {
         messenger->sendMessage("Invalid cmd");
     }
 }
-
-Player::~Player() {}
 
 void Player::shutDown() {
     conected = false;
@@ -106,3 +115,8 @@ bool Player::areYouReady() {
     return this->ready;
 }
 
+Player::~Player() {
+    commands = nullptr;
+    control = nullptr;
+    lobby = nullptr;
+}

@@ -31,7 +31,12 @@ public:
 
     std::vector<std::string> get_player_names();
 
+    void unReady();
+
     int get_id();
+
+    void exitLobby(Player* player);
+
     ~Lobby();
 };
 

@@ -96,8 +96,9 @@ void Lobby::ready(Player* player) {
     }
     if (!any_not_ready)
         all_ready = true;
-//    player->getMessenger()->sendMessage("ready-to-go");
 }
+
+
 
 bool Lobby::addPlayer(Player* player) {
     if (players.size() < 4)
@@ -119,11 +120,6 @@ bool Lobby::addPlayer(Player* player) {
     return (players.size() < 4);
 }
 
-Lobby::~Lobby() {
-    game.get()->shutDownGame();
-    game.get()->join();
-}
-
 std::vector<std::string> Lobby::get_player_names() {
     std::vector<std::string> names;
     for (Player* p : players) {
@@ -134,4 +130,42 @@ std::vector<std::string> Lobby::get_player_names() {
 
 int Lobby::get_id() {
     return lobby_id;
+}
+
+void Lobby::unReady() {
+    all_ready = false;
+}
+
+Lobby::~Lobby() {
+    game.get()->shutDownGame();
+    game.get()->join();
+}
+
+void Lobby::exitLobby(Player *player) {
+    std::vector<Player *>::iterator it = players.begin();
+    for (; it != players.end(); ++it) {
+        if ((*it)->getId() == player->getId()) {
+            players.erase(it);
+            break;
+        }
+    }
+
+    for (auto& t: teams) {
+        std::vector<std::string>::iterator ito = t.begin();
+        for (;ito != t.end(); ++ito) {
+            if (*ito == player->getId()) {
+                t.erase(ito);
+                break;
+            }
+        }
+    }
+
+    std::string names_cmd = "names-";
+    for (std::string name : get_player_names()) {
+        names_cmd += name + "-";
+    }
+
+    for(Player* p : players) {
+        p->getMessenger()->sendMessage(names_cmd);
+    }
 }

@@ -325,20 +325,6 @@ int Compass::getModuleOfSubtraction(int x, int y) {
     return y - x;
 }
 
-Compass::~Compass() {
-    if (!astar_map.empty()) {
-        int j = 0;
-        for (auto x: astar_map) {
-            int i = 0;
-            for (auto y: x) {
-//                delete (y);
-                ++i;
-            }
-            ++j;
-        }
-    }
-}
-
 void Compass::checkIfIsDestinyNeighbor(Node *node, int step) {
     if ((node->getHvalue() <= HMIN*2) && (node->getHvalue() != 0)){
         // get limits
@@ -656,14 +642,26 @@ int Compass::getModule(int x, int y) {
 }
 
 Occupant* Compass::checkForEnemiesOnRange(Occupant& unit, Size &range) {
-    return map.checkForEnemiesOn(range,unit,enemy);
+    return map.checkForEnemiesOn(range,unit);
 }
 
 bool Compass::checkIfItIsGrabbable(std::string& type) const {
     return map.tellIfItIsGrabbable(type);
 }
 
-//Occupant* Compass::getFoundEnemy() {
-//    return &enemy;
-//}
-
+Compass::~Compass() {
+    if (!astar_map.empty()) {
+        int j = 0;
+        for (auto x: astar_map) {
+            int i = 0;
+            for (auto& y: x) {
+                delete (y);
+                ++i;
+            }
+            ++j;
+            std::cout << " elimine i nodos :" << i << std::endl;
+        }
+        std::cout << " elimine j veces :" << j << std::endl;
+    }
+    std::cout << " sali" << std::endl;
+}

@@ -36,8 +36,6 @@ Node* Node::getParent() const {
     return this->parent;
 }
 
-Node::~Node() {}
-
 Position Node::getPosition() const{
     return size.getPosition();
 }
@@ -58,5 +56,9 @@ void Node::clean() {
     this->h_value = 0;
     this->g_value = 0;
     this->was_visited = false;
+}
+
+Node::~Node() {
+    this->parent = nullptr;
 }
 
