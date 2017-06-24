@@ -19,9 +19,6 @@ Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
            map(map){}
 
 
-//Game::Game(std::vector<Player*> players, std::shared_ptr<Map> map) : players(players),
-//map(map){}
-
 void Game::run() {
     sincronizeOccupants();
     map->updateOccupants(&all_occupants);
@@ -29,10 +26,6 @@ void Game::run() {
     this->buildTypeMap();
     this->sendOccupantsInfo();
     control.run();
-}
-
-void Game::addBuildings(std::vector<Occupant> buildings) {
-
 }
 
 void Game::shutDownGame() {

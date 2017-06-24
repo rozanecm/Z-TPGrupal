@@ -33,8 +33,6 @@ public:
              std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
              std::vector<Territory *> &territories);
 
-    void addBuildings(std::vector<Occupant> buildings);
-
     void run();
 
     void shutDownGame();
