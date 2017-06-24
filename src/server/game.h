@@ -47,6 +47,8 @@ private:
     void buildTypeMap();
 
     void sincronizeOccupants();
+
+    void sendTerritoryInfo();
 };
 
 

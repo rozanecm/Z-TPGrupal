@@ -24,6 +24,7 @@ void Game::run() {
     map->updateOccupants(&all_occupants);
     this->sendMapInfo();
     this->buildTypeMap();
+    this->sendTerritoryInfo();
     this->sendOccupantsInfo();
     control.run();
 }
@@ -111,6 +112,20 @@ void Game::sincronizeOccupants() {
                 }
             }
         }
+    }
+}
+
+void Game::sendTerritoryInfo() {
+    std::string info = "";
+    for (auto& t: territories) {
+        info = "updateterritory-";
+        info += std::to_string(t->getId()) + t->getTeam();
+        Position flag = t->getFlagPosition();
+        info += std::to_string(flag.getX()) + "-" +
+                std::to_string(flag.getY())+ "|";
+    }
+    for(auto& player : players) {
+        player->getMessenger()->sendMessage(info);
     }
 }
 
