@@ -50,6 +50,8 @@ public:
     std::vector<Unit*> getUnits();
 
     void resetSelectedUnit();
+
+    ~Factory();
 };
 
 

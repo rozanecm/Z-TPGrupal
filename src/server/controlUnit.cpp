@@ -3,7 +3,7 @@
 //
 
 #include "controlUnit.h"
-#define WAIT 0.5
+#define WAIT 0.2
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -63,6 +63,7 @@ void ControlUnit::unitsMakeMicroAction() {
         }
     }
     for (auto& id: units_id) {
+//        delete (all_units[id]);
         all_units.erase(id);
     }
 
@@ -142,11 +143,11 @@ void ControlUnit::makeFactoryChecks() {
     for (auto t: territories) {
         std::map<int,Factory*>& factories = t->getFactories();
         auto it = factories.begin();
+        // vector to know witch factories erase
+        std::vector<int> factories_id;
         for (; it != factories.end();) {
             Factory *f = it->second;
-            if (f->doYouNeedToDisappear()) {
-                factories.erase(it);
-            } else {
+            if (f->areYouAlive()) {
                 bool was_changed = false;
                 if (f->haveYouChanged()) {
                     changed_factories.push_back(*f);
@@ -157,9 +158,7 @@ void ControlUnit::makeFactoryChecks() {
                 if (f->haveYouChanged() && !was_changed) {
                     changed_factories.push_back(*f);
                 }
-                if (!f->areYouAlive()) {
-                    f->mustDisappear();
-                } else if (f->haveNewUnits()) {
+                if (f->haveNewUnits()) {
                     std::vector<Unit *> tmp = f->getUnits();
                     std::string msg = "";
                     for (auto &u: tmp) {
@@ -175,8 +174,11 @@ void ControlUnit::makeFactoryChecks() {
                         y->sendMessage(msg);
                     }
                 }
-                ++it;
             }
+            ++it;
+        }
+        for (auto& fact: factories_id) {
+            factories.erase(fact);
         }
     }
 }
@@ -230,7 +232,7 @@ void ControlUnit::cmdFactoryCreate(const std::string& player_id,
     for (auto t: territories) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
-            if (f.first == id_factory) {
+            if (f.first == id_factory && f.second->areYouAlive()) {
                 f.second->startBuilding(player_id);
             }
         }
@@ -242,7 +244,8 @@ void ControlUnit::cmdFactoryNext(const std::string &player_id, int id_factory) {
     for (auto t: territories) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
-            if (f.first == id_factory && f.second->getTeam() == player_id) {
+            if (f.first == id_factory && f.second->getTeam() == player_id
+                                         && f.second->areYouAlive()) {
                 UnitMold* mold = f.second->nextUnit();
                 info += "factorystats-";
                 int creation_time = f.second->getCreationSpeed();
@@ -259,7 +262,8 @@ void ControlUnit::cmdFactoryPrev(const std::string &player_id, int id_factory) {
     for (auto t: territories) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
-            if (f.first == id_factory && f.second->getTeam() == player_id) {
+            if (f.first == id_factory && f.second->getTeam() == player_id
+                                         && f.second->areYouAlive()) {
                 UnitMold* mold = f.second->previousUnit();
                 info += "factorystats-";
                 int creation_time = f.second->getCreationSpeed();
@@ -278,7 +282,8 @@ void ControlUnit::cmdFactoryCurrent(const std::string &player_id,
     for (auto t: territories) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
-            if (f.first == id_factory && f.second->getTeam() == player_id) {
+            if (f.first == id_factory && f.second->getTeam() == player_id
+                                         && f.second->areYouAlive()) {
                 UnitMold* mold = f.second->getSelectedUnit();
                 info += "factorystats-";
                 int creation_time = f.second->getCreationSpeed();
@@ -441,6 +446,7 @@ void ControlUnit::moveAllBullets() {
     for (; it != all_bullets.end();) {
         (*it)->move();
         if ((*it)->doYouHaveToDisapear()) {
+            delete((*it));
             it = all_bullets.erase(it);
         } else {
             if ((*it)->didHit())

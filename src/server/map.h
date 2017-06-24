@@ -73,7 +73,7 @@ public:
 
     void updateOccupants(std::vector<Occupant*>* all_occupants);
 
-    Occupant* checkForEnemiesOn(Size& range, Occupant& unit, Occupant& enemy);
+    Occupant* checkForEnemiesOn(Size& range, Occupant& unit);
 
     bool tellIfItIsGrabbable(std::string& type);
 

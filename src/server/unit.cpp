@@ -174,9 +174,6 @@ void Unit::attack() {
         this->action = ATKSTATE;
         this->changed = true;
         fire_count = 0;
-    } else {
-        this->action = STANDINGSTATE;
-        this->changed = true;
     }
     fire_count += 1;
 }
@@ -292,5 +289,11 @@ void Unit::recalculateMyStartPosition() {
     this->obj_size.moveTo(valid_pos.getX(),valid_pos.getY());
     this->range.moveTo(valid_pos.getX(),valid_pos.getY());
     this->weapon.movePosition(valid_pos.getX(),valid_pos.getY());
+}
+
+Unit::~Unit() {
+    target = nullptr;
+    grab_target = nullptr;
+    std::cout << "sali de unit" << std::endl;
 }
 

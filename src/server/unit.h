@@ -81,6 +81,8 @@ public:
     bool onRangeToGrabTarget();
 
     void recalculateMyStartPosition();
+
+    ~Unit();
 };
 
 
