@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
             bool keep_playing = true;
             while(keep_playing) {
                 // Starts the game
+                builder.start();
                 Game g(builder, messenger, player_name);
 
                 // Game finishes

@@ -17,7 +17,8 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
     me(player_name),
     menu(builder.get_menu_window()),
     lobby(builder.get_lobby_window()),
-    game(builder.get_window())
+    game(builder.get_window()),
+    result(builder.get_result_window())
 {
     // Start thread that handles server communication
     ClientThread clientThread(units_monitor, buildingsMonitor,
@@ -38,7 +39,6 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
     bool winner = clientThread.is_winner();
     bool loser = clientThread.is_loser();
     results_screen(winner, loser);
-
 
     /* once graphics join (window closes), we kill client thread */
     clientThread.finish();
@@ -70,7 +70,11 @@ void Game::results_screen(bool winner, bool loser) {
 
     auto app = Gtk::Application::create();
     app->run(*result);
-    play_again = result->go_back_to_menu();
+    bool play_again = result->go_back_to_menu();
+    if (play_again) {
+        messenger.send("returntomenu");
+    }
+    this->play_again = play_again;
 }
 
 bool Game::get_play_again_status() {
