@@ -24,6 +24,10 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - updatefactory-[id]-[unitType]-[min]-[sec]-[lifePoints]-[Team]
 - updatebullet-[type]-[id]-[x]-[y]
 - factorystats-[unitType]-[fireRate]-[min]-[sec]-[life]
+#### indica al jugador que gano el juego
+- winner
+#### indica al jugador que perdio el juego
+- loseryousuck
 
 ### comandos que recibe el server
 ##### mover unidad con "id" a la posicion (x,y)
@@ -34,3 +38,5 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - grab-[idUnit]-[target]
 ##### indica que la factory id_factory ejecute un factory_cmd. Los factory_cmd son: "create" que empieza a crear la unidad ya seleccionada; "prev" que selecciona la unidad anterior dejando de crear unidades; "next" que selecciona la unidad siguiente dejando de crear unidades; "current" que devuelve el estado actual de la fabrica
 - factory-[id_factory]-[factory_cmd]
+#### comando utilizado para volver al menu una vez terminado de jugar
+- returntomenu
