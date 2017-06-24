@@ -39,7 +39,8 @@ void GameArea::loadResources() {
         loadBuildingsResources();
 
         /* load some img */
-        someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt.png");
+        someImg = Gdk::Pixbuf::create_from_file("res/portraits/grunt_green"
+                                                        ".png");
         loadMapResources();
     } catch (Glib::FileError e) {
         std::cerr << e.what();
