@@ -80,7 +80,6 @@ public:
 
     bool on_key_press_event(GdkEventKey *event) override;
 
-    void update_side_panels();
 
     void remove_side_panel();
 
@@ -90,6 +89,10 @@ public:
     void update_factory_timer(int minutes, int seconds);
 
     void process_movement() const;
+
+private:
+    void update_side_panels();
+
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

@@ -8,6 +8,7 @@
 #include <gtkmm/label.h>
 #include <gtkmm/image.h>
 #include "../enums/UnitsEnum.h"
+#include "../enums/TeamEnum.h"
 
 class UnitPanel : public Gtk::Box {
     Gtk::Label *owner;
@@ -29,7 +30,7 @@ public:
 
     void set_owner(const std::string& owner);
 
-    void update_portrait(UnitsEnum unit);
+    void update_portrait(UnitsEnum unit, TeamEnum team);
 };
 
 

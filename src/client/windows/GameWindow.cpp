@@ -76,8 +76,15 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
-    unit_panel->update_portrait(selected_unit.getType());
-    update_side_panels();
+    int team = 1;
+    for(std::string& player: players){
+        if (player == me) {
+            break;
+        }
+        team++;
+    }
+
+    unit_panel->update_portrait(selected_unit.getType(), (TeamEnum) team);
     return true;
 }
 
@@ -87,7 +94,6 @@ bool GameWindow::change_view_to_building() {
     }
     panel->pack_start(*building_panel);
     panelLabel->set_text(building_panel->get_label());
-    update_side_panels();
 
     return true;
 }
@@ -98,7 +104,6 @@ bool GameWindow::change_view_to_unit_group() {
     }
 
     panel->pack_start(*group_panel);
-    update_side_panels();
 
     return true;
 }
@@ -224,18 +229,19 @@ void GameWindow::remove_side_panel() {
 }
 
 void GameWindow::update_side_panels() {
-    int unit_id = selected_unit.get_ID();
-    int building_id = selected_building.get_ID();
-    if (!unit_id && !building_id) {
+    if (!unit_selection && !building_selection) {
         remove_side_panel();
-    } else if (unit_id) {
+    } else if (unit_selection) {
+        int unit_id = selected_unit.get_ID();
         // UpdateUnit the unit reference
         selected_unit = unitsMonitor->get_unit(unit_id);
         unit_panel->set_name(selected_unit.get_unit_name());
         unit_panel->set_owner(selected_unit.get_owner());
         unit_panel->set_max_hp(selected_unit.get_max_hp());
         unit_panel->set_hp(selected_unit.get_hp());
-    } else {
+    } else if (building_selection){
+        int building_id = selected_building.get_ID();
+
         selected_building = buildingsMonitor->get_building(building_id);
         building_panel->set_max_hp(selected_building.get_max_hp());
         building_panel->set_hp(selected_building.get_hp());
