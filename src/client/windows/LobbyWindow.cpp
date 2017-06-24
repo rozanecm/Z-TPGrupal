@@ -12,11 +12,11 @@ LobbyWindow::LobbyWindow(BaseObjectType *cobject,
     builder->get_widget("PlayerStatus3", players[2]);
     builder->get_widget("PlayerStatus4", players[3]);
     builder->get_widget("StartGame", start);
-    builder->get_widget_derived("ReadyButton", ready);
+    builder->get_widget("ReadyButton", ready);
     default_label = players[0]->get_text();
     start->signal_clicked().connect(sigc::mem_fun(*this,
                                                   &LobbyWindow::on_click));
-    ready->signal_toggled().connect(sigc::mem_fun(*this,
+    ready->signal_clicked().connect(sigc::mem_fun(*this,
                                                   &LobbyWindow::click_ready));
 }
 
@@ -48,10 +48,13 @@ std::vector<std::string> LobbyWindow::get_player_names() {
 
 
 void LobbyWindow::click_ready() {
-    if (ready->get_active()) { // already pressed
-        return;
+    if (ready->get_label() == "Ready") { // already pressed
+        m->send("ready");
+        ready->set_label("Unready");
+    } else if(ready->get_label() == "Unready") {
+        m->send("unready");
+        ready->set_label("Ready");
     }
-    m->send("ready");
 }
 
 void LobbyWindow::start_game() {

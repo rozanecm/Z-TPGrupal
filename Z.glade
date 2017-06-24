@@ -642,12 +642,10 @@ GUI here</property>
   <object class="GtkWindow" id="LobbyWindow">
     <property name="can_focus">False</property>
     <property name="default_width">300</property>
-    <property name="default_height">400</property>
     <child>
       <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="row_homogeneous">True</property>
         <property name="column_homogeneous">True</property>
         <child>
           <object class="GtkLabel" id="label8">
@@ -692,18 +690,6 @@ GUI here</property>
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="StartGame">
-            <property name="label" translatable="yes">Start Game</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">4</property>
           </packing>
         </child>
         <child>
@@ -761,6 +747,58 @@ GUI here</property>
             <property name="left_attach">0</property>
             <property name="top_attach">4</property>
           </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label22">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Available maps:</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label25">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Map1
+Map2
+Map3</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="StartGame">
+            <property name="label" translatable="yes">Start Game</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">4</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>
