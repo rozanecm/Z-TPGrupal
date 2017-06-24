@@ -38,7 +38,6 @@ void GameArea::loadResources() {
         /* load buildings resources */
         loadBuildingsResources();
 
-        /* load some img */
         loadMapResources();
     } catch (Glib::FileError e) {
         std::cerr << e.what();
