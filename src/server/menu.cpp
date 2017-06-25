@@ -77,8 +77,6 @@ std::string Menu::changeName(std::string &new_name) {
             return "error";
         }
     }
-    std::stringstream ans;
-    ans << "ok";
-    return ans.str();
+    return "ok";
 }
 
