@@ -26,6 +26,13 @@ class BuildingPanel : public Gtk::Box {
 
     Gtk::Label* minutes;
     Gtk::Label* seconds;
+
+    int max_hp;
+    int hp;
+    std::string owner;
+    std::string type;
+    int fire_rate;
+    std::pair<int, int> time_left;
 public:
     BuildingPanel(BaseObjectType* cobject,
                   const Glib::RefPtr<Gtk::Builder>& builder);
@@ -49,8 +56,13 @@ public:
 
     void set_unit_fire_rate(int fire_rate);
 
+    void on_show();
+    void on_hide();
     void set_time_left(std::pair<int, int> time);
     Gtk::Button * prev_button();
+
+protected:
+    bool update_labels();
 };
 
 

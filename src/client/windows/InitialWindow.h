@@ -27,6 +27,8 @@ public:
 
 private:
     void on_click();
+
+    void send_name();
 };
 
 
