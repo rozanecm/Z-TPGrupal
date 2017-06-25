@@ -19,6 +19,7 @@ class MapLoader {
     std::string map_string;
     std::string &config;
     std::vector<UnitMold*> unit_mold;
+    std::vector<UnitMold*> vehicle_mold;
     std::map<std::string, Weapon> weapons;
     std::shared_ptr<Map> game_map;
     std::vector<Factory*> forts;
@@ -54,6 +55,11 @@ private:
     void create_territory(int hp, const pugi::xml_node &territory, 
                           int &id_counter,
                           std::map<int, Factory *> &factories_in_territory);
+
+    void load_vehicle_molds(const pugi::xml_node &vehicles);
+
+    void load_mold(std::vector<UnitMold*>& mold,
+                   const pugi::xml_node& source);
 };
 
 

@@ -2,11 +2,19 @@
     <Port port="8000"/>
     <Cells internal_positions="16"/>
     <Units>
-        <Unit type="grunt" fire_rate="2" range="7" hp="60" tech_level="3" time="100" speed="4" size_x="3" size_y="5" quantity="2" weapon="bullet"/>
-        <Unit type="psycho" fire_rate="10" range="7" hp="80" tech_level="3" time="125" speed="4" size_x="3" size_y="5" quantity="2" weapon="bullet"/>
-
+        <Unit type="grunt" fire_rate="2" range="7" hp="60" tech_level="3" time="935" speed="4" size_x="3" size_y="5" quantity="2" weapon="bullet"/>
+        <Unit type="psycho" fire_rate="10" range="7" hp="80" tech_level="3" time="1000" speed="4" size_x="3" size_y="5" quantity="2" weapon="bullet"/>
+        <Unit type="tough" fire_rate="2" range="5" hp="300" tech_level="3" time="1222" speed="4" size_x="3" size_y="5" quantity="2" weapon="missile"/>
+        <Unit type="pyro" fire_rate="4" range="6" hp="100" tech_level="3" time="1400" speed="4" size_x="3" size_y="5" quantity="4" weapon="flamethrower"/>
+        <Unit type="sniper" fire_rate="4" range="10" hp="80" tech_level="3" time="935" speed="4" size_x="3" size_y="5" quantity="4" weapon="bullet"/>
+        <Unit type="laser" fire_rate="4" range="7" hp="100" tech_level="3" time="1500" speed="4" size_x="3" size_y="5" quantity="5" weapon="laser"/>
     </Units>
     <Vehicles>
+        <Unit type="jeep" fire_rate="6" range="6" hp="60" tech_level="3" time="1100" speed="8" size_x="3" size_y="5" quantity="1" weapon="bullet"/>
+        <Unit type="light_tank" fire_rate="0.5" range="6" hp="80" tech_level="3" time="1400" speed="6" size_x="3" size_y="5" quantity="1" weapon="highcal"/>
+        <Unit type="medium_tank" fire_rate="0.5" range="7" hp="120" tech_level="3" time="1800" speed="5" size_x="3" size_y="5" quantity="1" weapon="highcal"/>
+        <Unit type="heavy_tank" fire_rate="0.5" range="8" hp="180" tech_level="3" time="2000" speed="5" size_x="3" size_y="5" quantity="1" weapon="highcal"/>
+        <Unit type="mml" fire_rate="2" range="8" hp="200" tech_level="3" time="2200" speed="6" size_x="3" size_y="5" quantity="1" weapon="missile"/>
     </Vehicles>
     <Structs>
         <Struct type="Rock" size_x="3" size_y="3" hp="10"/>
@@ -14,6 +22,10 @@
     </Structs>
     <Weapons>
         <Weapon type="bullet" damage="2" size_x="1" size_y="1" speed="100" explosive="no"/>
+        <Weapon type="flamethrower" damage="10" size_x="1" size_y="1" speed="30" explosive="yes"/>
+        <Weapon type="laser" damage="10" size_x="1" size_y="1" speed="30" explosive="no"/>
+        <Weapon type="missile" damage="25" size_x="1" size_y="1" speed="30" explosive="yes"/>
+        <Weapon type="highcal" damage="20" size_x="1" size_y="1" speed="30" explosive="no"/>
     </Weapons>
     <Maps>
         <Map name="Mapa default" path="maps/map.xml"/>
