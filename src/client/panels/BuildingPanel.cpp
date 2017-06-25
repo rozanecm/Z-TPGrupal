@@ -1,9 +1,8 @@
+#include <giomm.h>
 #include "BuildingPanel.h"
 #include "../windows/GameWindow.h"
-#include <string>
-#include <iostream>
-
 #define PORTRAITS_PATH "res/portraits/"
+
 BuildingPanel::BuildingPanel(BaseObjectType *cobject,
                              const Glib::RefPtr<Gtk::Builder> &builder) :
     Gtk::Box(cobject) {
@@ -24,6 +23,7 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("FactoryMinutesLabel", minutes);
     builder->get_widget("FactorySecondsLabel", seconds);
     building->set("res/buildings/base_city.png");
+
 }
 
 
@@ -32,7 +32,7 @@ const std::map<TeamEnum, std::string> teams = {
         {TeamEnum::BLUE, "blue"},
         {TeamEnum::GREEN, "green"},
         {TeamEnum::RED, "red"},
-        {TeamEnum ::YELLOW, "yellow"}
+        {TeamEnum::YELLOW, "yellow"}
 };
 
 const std::string &BuildingPanel::get_label() {
@@ -52,15 +52,15 @@ Gtk::Button *BuildingPanel::create_button() {
 }
 
 void BuildingPanel::set_hp(int hp) {
-    hp_label->set_text(std::to_string(hp));
+    this->hp = hp;
 }
 
 void BuildingPanel::set_max_hp(int hp) {
-    max_hp_label->set_text(std::to_string(hp));
+    this->max_hp = hp;
 }
 
 void BuildingPanel::set_owner(const std::string &owner) {
-    owner_label->set_text(owner);
+    this->owner = owner;
 }
 
 void BuildingPanel::set_unit_hp(int hp) {
@@ -69,12 +69,12 @@ void BuildingPanel::set_unit_hp(int hp) {
 
 void BuildingPanel::set_unit_type(const std::string &type, TeamEnum team) {
     std::string color = teams.find(team)->second;
-    unit_type->set_text(type);
+    this->type = type;
     unit->set(PORTRAITS_PATH + type + "_" + color + ".png");
 }
 
 void BuildingPanel::set_unit_fire_rate(int fire_rate) {
-    unit_fire_rate->set_text(std::to_string(fire_rate));
+    this->fire_rate = fire_rate;
 }
 
 Gtk::Button* BuildingPanel::prev_button() {
@@ -82,18 +82,23 @@ Gtk::Button* BuildingPanel::prev_button() {
 }
 
 void BuildingPanel::set_time_left(std::pair<int, int> time) {
-    if (time == std::pair<int, int>(0, 0)) {
-        return;
-    }
-    std::string minutes = std::to_string(time.first);
-    if(time.first < 10) {
-        minutes = "0" + minutes;
-    }
-    this->minutes->set_text(minutes);
+    this->time_left = time;
+}
 
-    std::string seconds = std::to_string(time.second);
-    if (time.second < 10) {
-        seconds = "0" + seconds;
-    }
-    this->seconds->set_text(seconds);
+bool BuildingPanel::update_labels() {
+    hp_label->set_text(std::to_string(hp));
+    max_hp_label->set_text(std::to_string(max_hp));
+    minutes->set_text(std::to_string(time_left.first));
+    seconds->set_text(std::to_string(time_left.second));
+    unit_fire_rate->set_text(std::to_string(fire_rate));
+    unit_type->set_text(type);
+    return true;
+}
+
+void BuildingPanel::on_show() {
+    Glib::signal_idle().connect(sigc::mem_fun(*this,
+                                              &BuildingPanel::update_labels));
+}
+
+void BuildingPanel::on_hide() {
 }
