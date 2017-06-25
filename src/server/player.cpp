@@ -69,7 +69,7 @@ void Player::processMenuCommands(std::string &full_cmd) {
         messenger->sendMessage(this->menu.getLobbiesInfo());
     }   else if (cmd == "changename") {
         std::string new_name = getNextData(full_cmd);
-        std::string ans = this->menu.getLobbiesInfo();
+        std::string ans = this->menu.changeName(new_name);
         if (ans == ("Successfully change name to " + new_name))
             this->id = new_name;
         messenger->sendMessage(ans);
