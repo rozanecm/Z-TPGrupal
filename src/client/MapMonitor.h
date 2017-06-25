@@ -9,9 +9,12 @@
 class MapMonitor {
 private:
     Map map;
+    std::vector<std::string> players;
 
     std::mutex m;
 
+    bool winner;
+    bool loser;
 public:
 
     void setCell(unsigned int xCoordinate,
@@ -37,6 +40,16 @@ public:
     std::vector<Nature>
     getNatureToDraw(unsigned int minX, unsigned int maxX, unsigned int minY,
                     unsigned int maxY);
+
+    void update_players(const std::vector<std::string>& names);
+    int get_player_id(const std::string& player);
+
+    void finish_winner();
+    void finish_loser();
+
+    bool is_winner();
+    bool is_loser();
+
 };
 
 

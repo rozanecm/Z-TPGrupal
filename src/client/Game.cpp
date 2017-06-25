@@ -12,18 +12,18 @@ void Game::start_game(const std::vector<std::string> &names) {
 }
 
 Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
-           const std::string& player_name) :
+           const std::string& player_name, MapMonitor& map,
+           UnitsMonitor& units, BuildingsMonitor& buildings) :
     messenger(server_messenger),
     me(player_name),
     menu(builder.get_menu_window()),
     lobby(builder.get_lobby_window()),
     game(builder.get_window()),
-    result(builder.get_result_window())
+    result(builder.get_result_window()),
+    mapMonitor(map),
+    units_monitor(units),
+    buildingsMonitor(buildings)
 {
-    // Start thread that handles server communication
-    ClientThread clientThread(units_monitor, buildingsMonitor,
-                              mapMonitor, messenger, builder);
-    clientThread.start();
 
     start_menu();
 
@@ -31,18 +31,14 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
         start_lobby();
         if (lobby->game_started()) {
             std::vector<std::string> names = lobby->get_player_names();
-            clientThread.update_player_names(names);
+            mapMonitor.update_players(names);
             start_game(names);
         }
     }
 
-    bool winner = clientThread.is_winner();
-    bool loser = clientThread.is_loser();
+    bool winner = mapMonitor.is_winner();
+    bool loser = mapMonitor.is_loser();
     results_screen(winner, loser);
-
-    /* once graphics join (window closes), we kill client thread */
-    clientThread.finish();
-    clientThread.join();
 }
 
 void Game::start_lobby() const {

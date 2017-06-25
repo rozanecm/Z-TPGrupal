@@ -5,13 +5,14 @@
 #include <string>
 #include "Command.h"
 #include "../UnitsMonitor.h"
+#include "../MapMonitor.h"
 
 class AddUnit : public Command {
     UnitsMonitor &unitsMonitor;
-    const std::vector<std::string>& players;
+    MapMonitor& map;
 public:
     explicit AddUnit(UnitsMonitor &unitsMonitor,
-                     const std::vector<std::string>& players);
+                     MapMonitor& map);
 
     void execute(const std::vector<std::string> &args);
 };

@@ -6,11 +6,11 @@
 #include "windows/GameWindow.h"
 
 class Winner : public Command {
-    bool& winner;
+    MapMonitor& map;
     GameWindow& window;
 
 public:
-    Winner(bool& winner, GameWindow& window);
+    Winner(MapMonitor& map, GameWindow& window);
     void execute(const std::vector<std::string> &args);
 
 };

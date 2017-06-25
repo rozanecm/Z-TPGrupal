@@ -58,3 +58,44 @@ MapMonitor::getNatureToDraw(unsigned int minX, unsigned int maxX,
     }
     return returnVector;
 }
+
+void MapMonitor::update_players(const std::vector<std::string> &names) {
+    Lock l(m);
+    this->players = names;
+}
+
+int MapMonitor::get_player_id(const std::string &player) {
+    int id = 1; // id 0 is neutral
+    Lock l(m);
+    auto it = players.begin();
+    for (; it != players.end(); ++it) {
+        if (*it == player) {
+            break;
+        }
+        id++;
+    }
+    if (it == players.end()) {
+        return 0;
+    }
+    return id; // Not found, return NEUTRAL id
+}
+
+void MapMonitor::finish_winner() {
+    Lock l(m);
+    winner = true;
+}
+
+void MapMonitor::finish_loser() {
+    Lock l(m);
+    loser = true;
+}
+
+bool MapMonitor::is_winner() {
+    Lock l(m);
+    return winner;
+}
+
+bool MapMonitor::is_loser() {
+    Lock l(m);
+    return loser;
+}

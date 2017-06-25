@@ -4,13 +4,14 @@
 
 #include "../BuildingsMonitor.h"
 #include "Command.h"
+#include "../MapMonitor.h"
 
 class AddBuilding : public Command {
     BuildingsMonitor &buildings;
-    const std::vector<std::string>& players;
+    MapMonitor& map;
 public:
     explicit AddBuilding(BuildingsMonitor &buildings,
-                         const std::vector<std::string>& players);
+                         MapMonitor& map);
 
     void execute(const std::vector<std::string> &args);
 };

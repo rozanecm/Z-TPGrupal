@@ -23,7 +23,6 @@ class GameBuilder {
 
 public:
     GameBuilder();
-    void start();
     ~GameBuilder();
 
     // returns the generated window
@@ -35,6 +34,7 @@ public:
     ResultWindow* get_result_window();
 
 private:
+    void start();
     void clean();
 };
 

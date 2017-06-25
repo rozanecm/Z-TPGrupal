@@ -1,10 +1,10 @@
 #include "Loser.h"
 
 
-Loser::Loser(bool &loser, GameWindow &window) : loser(loser), window(window) {
+Loser::Loser(MapMonitor& map, GameWindow &window) : map(map), window(window) {
 }
 
 void Loser::execute(const std::vector<std::string> &args) {
-    loser = true;
+    map.finish_loser();
     window.hide();
 }

@@ -16,9 +16,9 @@ const std::map<std::string, BuildingsEnum> buildingsMap = {
 };
 
 AddBuilding::AddBuilding(BuildingsMonitor &buildings,
-                         const std::vector<std::string>& players)
+                         MapMonitor& map)
         : buildings(buildings),
-          players(players)
+          map(map)
 {
 }
 
@@ -30,16 +30,7 @@ void AddBuilding::execute(const std::vector<std::string> &args) {
     BuildingsEnum building_type = buildingsMap.find(args[TYPE])->second;
 
     std::string owner = args[TEAM];
-    int team_id = 1;
-    for (const std::string& player : players) {
-        if (player == owner) {
-            break;
-        }
-        team_id++;
-    }
-    if (team_id > players.size()) {
-        team_id = 0; // set it to team NEUTRAL
-    }
+    int team_id = map.get_player_id(owner);
 
     unsigned int hp = std::stoul(args[HP]);
     Building b(building_type, x, y, id, (TeamEnum) team_id, owner, hp);

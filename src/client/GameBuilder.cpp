@@ -16,7 +16,6 @@ GameBuilder::GameBuilder() :
 }
 
 void GameBuilder::start() {
-    clean();
     this->refBuilder = Gtk::Builder::create();
     try {
         this->refBuilder->add_from_file("Z.glade");

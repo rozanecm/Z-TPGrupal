@@ -6,10 +6,10 @@
 #include "../windows/GameWindow.h"
 
 class Loser : public Command {
-    bool& loser;
+    MapMonitor& map;
     GameWindow& window;
 public:
-    Loser(bool& loser, GameWindow& window);
+    Loser(MapMonitor& map, GameWindow &window);
     void execute(const std::vector<std::string> &args);
 };
 

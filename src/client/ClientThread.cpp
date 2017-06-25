@@ -38,9 +38,7 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
         messenger(messenger),
         lobby(*builder.get_lobby_window()),
         window(*builder.get_window()),
-        menu(*builder.get_menu_window()),
-        winner(false),
-        loser(false)
+        menu(*builder.get_menu_window())
 {
 }
 
@@ -78,12 +76,12 @@ void ClientThread::finish() {
 
 void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
-    commands["addunit"] = new AddUnit(unitsMonitor, players);
+    commands["addunit"] = new AddUnit(unitsMonitor, mapMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
     commands["updateunit"] = new UpdateUnit(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
-    commands["addbuilding"] = new AddBuilding(buildingsMonitor, players);
+    commands["addbuilding"] = new AddBuilding(buildingsMonitor, mapMonitor);
     commands["addnature"] = new AddNature(mapMonitor);
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
@@ -91,8 +89,8 @@ void ClientThread::initCommands() {
     commands["factorystats"] = new FactoryStats(window);
     commands["lobbyinfo"] = new LobbyInfo(menu);
     commands["joinlobby"] = new JoinLobby(menu, lobby, messenger);
-    commands["winner"] = new Winner(winner, window);
-    commands["loseryousuck"] = new Loser(loser, window);
+    commands["winner"] = new Winner(mapMonitor, window);
+    commands["loseryousuck"] = new Loser(mapMonitor, window);
     commands["mapsinfo"] = new MapsInfo(lobby);
 }
 
@@ -100,24 +98,4 @@ ClientThread::~ClientThread() {
     for (std::pair<std::string, Command *> c : commands) {
         delete c.second;
     }
-}
-
-void ClientThread::update_player_names(const std::vector<std::string>& names) {
-    players = names;
-}
-
-void ClientThread::finish_winner() {
-    winner = true;
-}
-
-void ClientThread::finish_loser() {
-    loser = true;
-}
-
-bool ClientThread::is_winner() {
-    return winner;
-}
-
-bool ClientThread::is_loser() {
-    return loser;
 }

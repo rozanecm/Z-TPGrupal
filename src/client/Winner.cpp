@@ -1,10 +1,10 @@
 #include "Winner.h"
 
-Winner::Winner(bool &winner, GameWindow &window) :
-        winner(winner), window(window) {
+Winner::Winner(MapMonitor& map, GameWindow &window) :
+        map(map), window(window) {
 }
 
 void Winner::execute(const std::vector<std::string> &args) {
-    winner = true;
+    map.finish_winner();
     window.hide();
 }
