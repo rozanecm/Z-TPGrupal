@@ -22,16 +22,17 @@ public:
     MenuWindow(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void join_lobby();
+    void join_click();
 
     void load_messenger(ServerMessenger* messenger);
 
-    void create_lobby();
+    void create_click();
     void update_lobbies(const std::vector<std::string>& lobbies);
 
-    void hide();
+    void on_show();
 
-    bool joined_succesfully();
+    void join_lobby();
+    bool joined_lobby();
 };
 
 

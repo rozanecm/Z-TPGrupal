@@ -27,6 +27,8 @@ public:
          UnitsMonitor& units, BuildingsMonitor& buildings);
 
     bool get_play_again_status();
+
+    ~Game();
 private:
     void start_menu();
 

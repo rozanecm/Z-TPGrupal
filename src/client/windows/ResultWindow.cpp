@@ -2,8 +2,7 @@
 
 ResultWindow::ResultWindow(BaseObjectType *cobject,
                            const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::Window(cobject),
-        back_to_menu(false)
+        Gtk::Window(cobject)
 {
 
     builder->get_widget("BackToMenuButton", menu);
@@ -37,6 +36,11 @@ void ResultWindow::close_click() {
 
 bool ResultWindow::go_back_to_menu() {
     return back_to_menu;
+}
+
+void ResultWindow::on_show() {
+    back_to_menu = false;
+    Gtk::Widget::on_show();
 }
 
 

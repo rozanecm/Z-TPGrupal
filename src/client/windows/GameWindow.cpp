@@ -9,9 +9,7 @@
 
 GameWindow::GameWindow(BaseObjectType *cobject,
                        const Glib::RefPtr<Gtk::Builder> &builder) :
-        Gtk::ApplicationWindow(cobject),
-        winner(false),
-        loser(false)
+        Gtk::ApplicationWindow(cobject)
 {
     builder->get_widget_derived("GameArea", gameArea);
 
@@ -78,15 +76,8 @@ bool GameWindow::change_view_to_unit() {
 
     panel->pack_start(*unit_panel);
     panelLabel->set_text(unit_panel->get_label());
-    int team = 1;
-    for(std::string& player: players){
-        if (player == me) {
-            break;
-        }
-        team++;
-    }
-
-    unit_panel->update_portrait(selected_unit.getType(), (TeamEnum) team);
+    unit_panel->update_portrait(selected_unit.getType(),
+                                selected_unit.getTeam());
     return true;
 }
 

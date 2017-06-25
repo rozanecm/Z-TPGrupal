@@ -5,7 +5,7 @@
 
 /* Random number generator */
 class Random {
-    unsigned int seed = (unsigned int) time(NULL);
+    unsigned int seed;
 public:
     Random();
 

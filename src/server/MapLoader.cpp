@@ -59,6 +59,7 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
 
     create_map();
     load_unit_molds(cfg_node.child("Units"));
+    load_vehicle_molds(cfg_node.child("Vehicles"));
     load_weapons(cfg_node.child("Weapons"));
     load_structs(root, cfg_node.child("Structs"));
 }
@@ -109,27 +110,15 @@ std::vector<Unit> MapLoader::getUnits() {
 }
 
 Factory *MapLoader::create_factory(int id, int hp, std::string &type, Size size) {
-
-    return (new Factory(id, hp, type, size, unit_mold, game_map, weapons));
+    std::vector<UnitMold*> both = unit_mold;
+    for (UnitMold* vehicle : vehicle_mold) {
+        both.push_back(vehicle);
+    }
+    return (new Factory(id, hp, type, size, both, game_map, weapons));
 }
 
 void MapLoader::load_unit_molds(pugi::xml_node units) {
-    for (auto& unit : units.children()) {
-        std::string type = unit.attribute("type").value();
-        std::string weapon = unit.attribute("weapon").value();
-        int width = std::stoi(unit.attribute("size_x").value());
-        int height = std::stoi(unit.attribute("size_y").value());
-        int hp = std::stoi(unit.attribute("hp").value());
-        int fire_rate = std::stoi(unit.attribute("fire_rate").value());
-        int range = std::stoi(unit.attribute("range").value());
-        int speed = std::stoi(unit.attribute("speed").value());
-        int time = std::stoi(unit.attribute("time").value());
-        int quantity = std::stoi(unit.attribute("quantity").value());
-        int tech_level = std::stoi(unit.attribute("tech_level").value());
-        unit_mold.push_back(
-                new UnitMold(tech_level, hp, range, width, height, speed,
-                             fire_rate, time, quantity, type, weapon));
-    }
+    load_mold(unit_mold, units);
 }
 
 void MapLoader::load_weapons(pugi::xml_node weapons) {
@@ -163,12 +152,18 @@ void MapLoader::load_territories(const pugi::xml_node &structs_cfg,
     for(auto& territory : root.children()) {
         std::map<int, Factory*> factories_in_territory;
         for(auto& factory : territory.children()) {
+            std::vector<UnitMold*>& mold = unit_mold;
+            std::string name = factory.name();
+            if (name == "VehicleFactory") {
+                mold = vehicle_mold;
+            }
+
             int x = std::stoi(factory.attribute("x").value()) *
                 internal_positions;
             int y = std::stoi(factory.attribute("y").value()) *
                 internal_positions;
             Size s(x, y, size_x, size_y);
-            Factory* f = new Factory(id_counter, hp, type, s, unit_mold, game_map, weapons);
+            Factory* f = new Factory(id_counter, hp, type, s, mold, game_map, weapons);
             factories_in_territory[id_counter] = f;
             ++id_counter;
         }
@@ -213,5 +208,30 @@ std::vector<Factory *> MapLoader::get_forts() {
 std::vector<Territory *> MapLoader::get_territories() {
     return territories;
 }
+
+void MapLoader::load_vehicle_molds(const pugi::xml_node &vehicles) {
+    load_mold(vehicle_mold, vehicles);
+}
+
+void MapLoader::load_mold(std::vector<UnitMold *>& mold,
+                          const pugi::xml_node &source) {
+    for (auto& unit : source.children()) {
+        std::string type = unit.attribute("type").value();
+        std::string weapon = unit.attribute("weapon").value();
+        int width = std::stoi(unit.attribute("size_x").value());
+        int height = std::stoi(unit.attribute("size_y").value());
+        int hp = std::stoi(unit.attribute("hp").value());
+        int fire_rate = std::stoi(unit.attribute("fire_rate").value());
+        int range = std::stoi(unit.attribute("range").value());
+        int speed = std::stoi(unit.attribute("speed").value());
+        int time = std::stoi(unit.attribute("time").value());
+        int quantity = std::stoi(unit.attribute("quantity").value());
+        int tech_level = std::stoi(unit.attribute("tech_level").value());
+        mold.push_back(
+                new UnitMold(tech_level, hp, range, width, height, speed,
+                             fire_rate, time, quantity, type, weapon));
+    }
+}
+
 
 
