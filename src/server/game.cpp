@@ -28,13 +28,13 @@ void Game::run() {
     this->buildMap();
     this->sincronizeOccupants();
     std::vector<Messenger*> messengers = getMessengers();
-    ControlUnit control(messengers,all_units,all_occupants,
+    control = new ControlUnit(messengers,all_units,all_occupants,
                         teams,commands,territories);
-    this->sendMapInfo(control);
+    this->sendMapInfo(*control);
     this->buildTypeMap();
     this->sendTerritoryInfo();
     this->sendOccupantsInfo();
-    control.run();
+    control->run();
 
     for (auto& m: unit_molds) {
         delete(m);
@@ -62,12 +62,11 @@ void Game::buildMap() {
             forts.pop_back();
         }
     }
-
     territories = maploader.get_territories();
 }
 
 void Game::shutDownGame() {
-    /*control unit shut down */
+    control->finishGame();
 }
 
 void Game::sendOccupantsInfo() {

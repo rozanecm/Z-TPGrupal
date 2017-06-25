@@ -54,9 +54,8 @@ bool Lobby::startGame(const std::string& map_name) {
 //        game = std::unique_ptr<Game> (new Game(players, messengers,
 //                                               map, units, teams_info,
 //                                               occupants, territories));
-        game = std::unique_ptr<Game> (new Game(path, config,
-                                               teams_info, players));
-        game.get()->start();
+        game = new Game(path, config,teams_info, players);
+        game->start();
         std::cout << "Game started" << std::endl;
         return true;
     }
@@ -112,11 +111,6 @@ void Lobby::unReady() {
     all_ready = false;
 }
 
-Lobby::~Lobby() {
-    game.get()->shutDownGame();
-    game.get()->join();
-}
-
 void Lobby::exitLobby(Player *player) {
     std::vector<Player *>::iterator it = players.begin();
     for (; it != players.end(); ++it) {
@@ -165,3 +159,10 @@ void Lobby::load_maps() {
         maps[map.attribute("name").value()] = map.attribute("path").value();
     }
 }
+
+void Lobby::shutDown() {
+    game->shutDownGame();
+    game->join();
+}
+
+Lobby::~Lobby() {}

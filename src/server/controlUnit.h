@@ -73,6 +73,8 @@ public:
 
     void cmdFactoryCurrent(const std::string& player_id, int id_factory);
 
+    void finishGame();
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();

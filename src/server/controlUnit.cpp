@@ -540,4 +540,8 @@ void ControlUnit::freeMemory() {
     all_bullets.clear();
 }
 
+void ControlUnit::finishGame() {
+    winning = true;
+}
+
 
