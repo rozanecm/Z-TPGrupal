@@ -7,6 +7,7 @@ void Game::start_game(const std::vector<std::string> &names) {
     // Start up the game
     game->setResources(&units_monitor, &buildingsMonitor,
                           &mapMonitor, &messenger, me);
+
     auto app = Gtk::Application::create();
     app->run(*game);
 }
@@ -27,7 +28,7 @@ Game::Game(GameBuilder &builder, ServerMessenger &server_messenger,
 
     start_menu();
 
-    if (menu->joined_succesfully()) {
+    if (menu->joined_lobby()) {
         start_lobby();
         if (lobby->game_started()) {
             std::vector<std::string> names = lobby->get_player_names();
@@ -75,4 +76,10 @@ void Game::results_screen(bool winner, bool loser) {
 
 bool Game::get_play_again_status() {
     return play_again;
+}
+
+Game::~Game() { // Game finishes, clear assets
+    units_monitor.clear();
+    mapMonitor.clear();
+    buildingsMonitor.clear();
 }

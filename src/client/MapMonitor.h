@@ -13,8 +13,8 @@ private:
 
     std::mutex m;
 
-    bool winner;
-    bool loser;
+    bool winner = false;
+    bool loser = false;
 public:
 
     void setCell(unsigned int xCoordinate,
@@ -50,6 +50,7 @@ public:
     bool is_winner();
     bool is_loser();
 
+    void clear();
 };
 
 

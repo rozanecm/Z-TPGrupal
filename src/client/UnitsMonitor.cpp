@@ -109,3 +109,8 @@ Unit UnitsMonitor::get_unit(int id) {
     }
     return Unit();
 }
+
+void UnitsMonitor::clear() {
+    Lock l(m);
+    units.clear();
+}

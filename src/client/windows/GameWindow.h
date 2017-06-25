@@ -36,10 +36,6 @@ class GameWindow : public Gtk::ApplicationWindow {
 
     std::string me;
     std::vector<std::string> players;
-
-    bool winner;
-    bool loser;
-
 public:
     GameWindow(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder);

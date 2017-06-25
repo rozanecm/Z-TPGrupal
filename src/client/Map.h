@@ -29,6 +29,8 @@ public:
 
     std::string getTerrainTypeAt(unsigned int xCoordinate,
                                  unsigned int yCoordinate);
+
+    void clear();
 };
 
 

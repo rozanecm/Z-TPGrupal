@@ -16,6 +16,7 @@ std::string Messenger::recieveMessage() {
     char* buf = new char[len];
     ssize_t sent = socket.receive(buf, len);
     if (sent <= 0) {
+        socket.close();
         throw(SocketError("Socket closed"));
     }
     std::string result(buf);

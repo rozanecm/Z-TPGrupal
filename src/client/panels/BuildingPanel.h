@@ -33,7 +33,7 @@ public:
     const std::string& get_label();
     Gtk::Button* next_button();
     Gtk::Button* create_button();
-    void on_click();
+
     void change_unit(std::string& path);
 
 

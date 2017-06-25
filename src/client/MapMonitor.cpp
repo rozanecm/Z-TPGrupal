@@ -99,3 +99,12 @@ bool MapMonitor::is_loser() {
     Lock l(m);
     return loser;
 }
+
+void MapMonitor::clear() {
+    Lock l(m);
+    loser = false;
+    winner = false;
+    map.clear();
+    players.clear();
+
+}

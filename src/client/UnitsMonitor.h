@@ -34,6 +34,8 @@ public:
     void update_health(int id, unsigned int hp);
 
     Unit get_unit(int id);
+
+    void clear();
 };
 
 

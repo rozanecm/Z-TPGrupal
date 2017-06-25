@@ -74,3 +74,8 @@ void LobbyWindow::update_maps(const std::string &maps) {
     maps_label->set_text(maps);
 }
 
+void LobbyWindow::on_show() {
+    started = false;
+    Gtk::Widget::on_show();
+}
+

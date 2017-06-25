@@ -35,3 +35,8 @@ void Map::addNature(Nature nature) {
 std::vector<Nature> Map::getNature() {
     return nature;
 }
+
+void Map::clear() {
+    baseMap.clear();
+    nature.clear();
+}
