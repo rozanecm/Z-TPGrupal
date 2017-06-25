@@ -39,6 +39,7 @@ std::vector<Nature> Map::getNature() {
 void Map::clear() {
     baseMap.clear();
     nature.clear();
+    flags.clear();
 }
 
 void Map::update_territory(const int &id, const TeamEnum &team, const int &x,
