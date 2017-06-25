@@ -415,7 +415,7 @@ std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
 }
 
 std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
-    Position flag_pos = territory.getFlagPosition();
+    Position flag_pos = territory.getFlag()->getPosition();
     std::string info = "flagOn-";
     info += std::to_string(flag_pos.getX()) + "-";
     info += std::to_string(flag_pos.getY()) + "-";

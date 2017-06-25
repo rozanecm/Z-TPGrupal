@@ -126,7 +126,7 @@ void Game::sendTerritoryInfo() {
     for (auto& t: territories) {
         info = "updateterritory-";
         info += std::to_string(t->getId()) + t->getTeam();
-        Position flag = t->getFlagPosition();
+        Position flag = t->getFlag()->getPosition();
         info += std::to_string(flag.getX()) + "-" +
                 std::to_string(flag.getY())+ "|";
     }
