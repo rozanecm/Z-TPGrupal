@@ -28,6 +28,10 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - winner
 #### indica al jugador que perdio el juego
 - loseryousuck
+#### indica que el nombre ya esta tomado y no pudiste cambiar el nombre
+- "name is already taken"
+#### indica que lograste cambiar el nombre
+- "Successfully change name to "-[new_name]
 
 ### comandos que recibe el server
 ##### mover unidad con "id" a la posicion (x,y)
@@ -40,3 +44,5 @@ Bajo ningún caso el cliente hace chequeos sobre las posiciones pasadas. *Estas 
 - factory-[id_factory]-[factory_cmd]
 #### comando utilizado para volver al menu una vez terminado de jugar
 - returntomenu
+#### comando para cambiar el id del jugador
+- changename-[new_name]

@@ -2,6 +2,8 @@
 // Created by rodian on 29/05/17.
 //
 
+#include <sstream>
+#include <string>
 #include "game.h"
 #define FORTRESS "Fort"
 #define VFABRIC "vehiculeFabric"
@@ -154,16 +156,17 @@ void Game::sincronizeOccupants() {
 }
 
 void Game::sendTerritoryInfo() {
-    std::string info = "";
+    std::stringstream info;
     for (auto& t: territories) {
-        info = "updateterritory-";
-        info += std::to_string(t->getId()) + "-"  + t->getTeam() + "-";
+        info << "updateterritory-";
+        info << std::to_string(t->getId()) << "-"  << t->getTeam() << "-";
         Position flag = t->getFlag()->getPosition();
-        info += std::to_string(flag.getX()) + "-" +
-                std::to_string(flag.getY())+ "|";
+        info << std::to_string(flag.getX()) << "-" <<
+                std::to_string(flag.getY()) << "|";
     }
+    std::cout << info.str()<< std::endl;
     for(auto& player : players) {
-        player->getMessenger()->sendMessage(info);
+        player->getMessenger()->sendMessage(info.str());
     }
 }
 

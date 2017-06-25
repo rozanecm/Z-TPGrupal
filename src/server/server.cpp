@@ -22,6 +22,7 @@ void Server::run() {
             id_new_player << "Player" << i;
             bool added = menu.addPlayer(messenger, menu,id_new_player.str());
             while (!added) {
+                id_new_player.clear();
                 ++i;
                 id_new_player << "Player" << i;
                 added = menu.addPlayer(messenger, menu,id_new_player.str());
