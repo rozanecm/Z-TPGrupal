@@ -48,6 +48,8 @@ public:
 
     void createStartingUnits(int &id_counter);
 
+    std::vector<UnitMold*> getMolds();
+
     ~Factory();
 };
 

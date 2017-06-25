@@ -295,6 +295,9 @@ void Unit::recalculateMyStartPosition() {
 Unit::~Unit() {
     target = nullptr;
     grab_target = nullptr;
+    for(auto& b: bullets) {
+        delete(b);
+    }
     delete(compass);
 }
 

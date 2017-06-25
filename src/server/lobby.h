@@ -15,9 +15,9 @@ class Player;
 class Lobby {
 private:
     int lobby_id;
-    bool all_ready;
+    bool all_ready, game_started;
     std::vector<Player*> players;
-    std::unique_ptr<Game> game;
+    Game* game;
     std::vector<std::vector<std::string>> teams;
     std::map<std::string, std::string> maps;
     std::string& config;
@@ -39,9 +39,12 @@ public:
     void exitLobby(Player* player);
 
     std::string get_loaded_maps();
-    ~Lobby();
 
     void load_maps();
+
+    void shutDown();
+
+    ~Lobby();
 };
 
 

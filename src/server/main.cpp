@@ -51,6 +51,8 @@ int main (int argc, char **argv) {
         server_accepter.stop();
         server_accepter.join();
 
+        menu.shutDown();
+
         return 0;
     } catch (SocketError& e) {
         std::cout<< e.what();

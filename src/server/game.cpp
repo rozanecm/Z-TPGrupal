@@ -8,33 +8,65 @@
 #define RFABRIC "robotFabric"
 
 // get terrain map from map loader
-Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
-           std::shared_ptr<Map> map, std::map<int, Unit *> units,
-           std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
-           std::vector<Territory *> &terr) :
-           commands(m), players(players),all_occupants(occupants),
-           territories(terr), teams(teams_info),all_units(units),
-           control(msgr, all_units, all_occupants, teams,
-                   commands, territories),
-           map(map){}
+//Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
+//           std::shared_ptr<Map> map, std::map<int, Unit *> units,
+//           std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
+//           std::vector<Territory *> &terr) :
+//           commands(m), players(players),all_occupants(occupants),
+//           territories(terr), teams(teams_info),all_units(units),
+//           control(msgr, all_units, all_occupants, teams,
+//                   commands, territories),
+//           map(map){}
 
+
+Game::Game(std::string path, std::string &config, std::vector<Team> &teams_info,
+           std::vector<Player *> &players) :
+        commands(m),teams(teams_info), path(path), config(config),
+        players(players) {}
 
 void Game::run() {
+    this->buildMap();
     this->sincronizeOccupants();
-    this->sendMapInfo();
+    std::vector<Messenger*> messengers = getMessengers();
+    control = new ControlUnit(messengers,all_units,all_occupants,
+                        teams,commands,territories);
+    this->sendMapInfo(*control);
     this->buildTypeMap();
     this->sendTerritoryInfo();
     this->sendOccupantsInfo();
-    control.run();
-    for (auto& p: players) {
-        if (!p->getMessenger()->isConnected()) {
-            p->shutDown();
-        }
+    control->run();
+
+    for (auto& m: unit_molds) {
+        delete(m);
     }
 }
 
+void Game::buildMap() {
+    MapLoader maploader(path,config);
+    map = maploader.get_map();
+
+    all_occupants = map->getOccupants();
+
+    // add a Fortress to each player
+    std::vector<Factory*> forts = maploader.get_forts();
+    unit_molds = forts.back()->getMolds();
+    for (auto& t: teams) {
+        std::vector<PlayerInfo>& playersInfo = t.getPlayersInfo();
+        for (auto& p: playersInfo) {
+            Factory* fortress = forts.back();
+            fortress->changeTeam(p.getPlayerId());
+            // set changed boolean to false
+            fortress->haveYouChanged();
+            p.addFortress(fortress);
+            all_occupants.push_back((Occupant*) fortress);
+            forts.pop_back();
+        }
+    }
+    territories = maploader.get_territories();
+}
+
 void Game::shutDownGame() {
-    /*control unit shut down */
+    control->finishGame();
 }
 
 void Game::sendOccupantsInfo() {
@@ -45,7 +77,7 @@ void Game::sendOccupantsInfo() {
     }
 }
 
-void Game::sendMapInfo() {
+void Game::sendMapInfo(ControlUnit &control) {
     std::string& map_str = map.get()->get_map();
     for(auto& player : players) {
         std::cout << "Sending map to players" << std::endl;
@@ -125,8 +157,8 @@ void Game::sendTerritoryInfo() {
     std::string info = "";
     for (auto& t: territories) {
         info = "updateterritory-";
-        info += std::to_string(t->getId()) + t->getTeam();
-        Position flag = t->getFlagPosition();
+        info += std::to_string(t->getId()) + "-"  + t->getTeam() + "-";
+        Position flag = t->getFlag()->getPosition();
         info += std::to_string(flag.getX()) + "-" +
                 std::to_string(flag.getY())+ "|";
     }
@@ -152,6 +184,14 @@ void Game::createStartingUnits() {
             }
         }
     }
+}
+
+std::vector<Messenger *> Game::getMessengers() {
+    std::vector<Messenger *> messengers;
+    for (auto& p: players) {
+        messengers.push_back(p->getMessenger());
+    }
+    return messengers;
 }
 
 

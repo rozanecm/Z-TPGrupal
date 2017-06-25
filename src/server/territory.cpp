@@ -3,10 +3,12 @@
 //
 
 #include "territory.h"
-
+#define FLAGWIDTH 2
+#define FLAGHEIGHT 3
 Territory::Territory(const std::map<int, Factory *> &factories, Position flag,
                      Size size, int id) :
-Teamable("Neutral",territory_size),factories(factories) , flag_position(flag),
+Teamable("Neutral",territory_size),factories(factories) ,
+flag("Neutral",Size(flag.getX(),flag.getY(),FLAGWIDTH,FLAGHEIGHT)),
 territory_size(size), id(id){}
 
 void Territory::grabFlag(std::string& new_team) {
@@ -27,10 +29,6 @@ void Territory::changeFactoriesTechLevel(int tech_level) {
     }
 }
 
-Position Territory::getFlagPosition() {
-    return flag_position;
-}
-
 std::map<int, Factory*> &Territory::getFactories() {
     return factories;
 }
@@ -43,6 +41,17 @@ bool Territory::doesTerritorysOwnerChanged() {
 
 int Territory::getId() {
     return id;
+}
+
+Teamable *Territory::getFlag() {
+    return &flag;
+}
+
+Territory::~Territory() {
+    for(auto& f: factories) {
+        delete(f.second);
+    }
+    factories.clear();
 }
 
 

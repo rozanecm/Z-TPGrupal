@@ -4,6 +4,8 @@
 
 #include "controlUnit.h"
 #define WAIT 0.2
+#define FLAG "flag"
+#define NATURE "Rock"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -43,7 +45,12 @@ void ControlUnit::run() {
         changed_units.clear();
         changed_occupants.clear();
         changed_factories.clear();
+        for (auto& u: eliminated_units) {
+            delete(u);
+        }
+        eliminated_units.clear();
     }
+    this->freeMemory();
     // send victory or defeated message
     this->sendFinnalMessage();
 }
@@ -63,7 +70,7 @@ void ControlUnit::unitsMakeMicroAction() {
         }
     }
     for (auto& id: units_id) {
-//        delete (all_units[id]);
+        eliminated_units.push_back(all_units[id]);
         all_units.erase(id);
     }
 
@@ -100,6 +107,9 @@ void ControlUnit::checkAllLivingOccupants() {
     for(;it != all_occupants.end();){
         if((*it)->doYouNeedToDisappear()) {
             //erase it from map
+            if ((*it)->getType() == NATURE) {
+                delete((*it));
+            }
             it = all_occupants.erase(it);
             // if building put ruins
         } else {
@@ -117,8 +127,8 @@ void ControlUnit::makeTerritoriesChecks() {
     for (auto& t: territories) {
         if (t->doesTerritorysOwnerChanged()) {
             std::string info = "updateterritory-";
-            info += std::to_string(t->getId()) + t->getTeam();
-            Position flag = t->getFlagPosition();
+            info += std::to_string(t->getId()) + "-" + t->getTeam() + "-";
+            Position flag = t->getFlag()->getPosition();
             info += std::to_string(flag.getX()) + "-" +
                     std::to_string(flag.getY());
             for (auto& team: teams) {
@@ -217,9 +227,12 @@ void ControlUnit::cmdGrab(const std::string &id_player, int id_unit,
     Unit& unit = (*it->second);
     bool found = false;
     if (unit.getTeam() == id_player) {
-        // for (auto t: territories) {
-//        if (flag.id == target)
-//    }
+        for (auto t: territories) {
+            if (t->getId() == target) {
+                unit.setTargetToGrab(t->getFlag(),FLAG);
+                found = true;
+            }
+        }
         if (!found) {
             for (auto& z: all_occupants) {
                 if (z->getId() == target) {
@@ -410,7 +423,7 @@ std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
 }
 
 std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
-    Position flag_pos = territory.getFlagPosition();
+    Position flag_pos = territory.getFlag()->getPosition();
     std::string info = "flagOn-";
     info += std::to_string(flag_pos.getX()) + "-";
     info += std::to_string(flag_pos.getY()) + "-";
@@ -500,6 +513,36 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     double sec = min - minutes;
     sec = sec * 60;
     seconds = (int) sec;
+}
+
+void ControlUnit::freeMemory() {
+    // free memory
+
+    std::vector<Occupant*>::iterator it = all_occupants.begin();
+    for (;it != all_occupants.end();++it){
+        if ((*it)->getType() == NATURE) {
+            delete((*it));
+        }
+        it = all_occupants.erase(it);
+    }
+
+    for (auto& u: all_units) {
+        delete(u.second);
+    }
+    all_units.clear();
+
+    for (auto& t: territories) {
+        delete(t);
+    }
+
+    for (auto& b: all_bullets) {
+        delete(b);
+    }
+    all_bullets.clear();
+}
+
+void ControlUnit::finishGame() {
+    winning = true;
 }
 
 

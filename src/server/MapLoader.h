@@ -30,7 +30,6 @@ public:
 
     ~MapLoader();
 
-
     std::vector<Occupant*> getOccupants();
 
     std::vector<Unit> getUnits();
