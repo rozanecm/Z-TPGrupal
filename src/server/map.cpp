@@ -143,53 +143,6 @@ std::string &Map::get_map() {
     return xml;
 }
 
-//void Map::getAClosePlaceNextTo(Size& u_size, Size& fac_size) {
-//    bool have_position = false;
-//    Position fac_pos = fac_size.getPosition();
-//    int i = 0;
-//    while (!have_position) {
-//        int tmp_x = u_size.getWidth() + fac_size.getWidth() + fac_pos.getX()
-//                    + i;
-//        int tmp_y = u_size.getHeight() + fac_size.getHeight() + fac_pos.getY()
-//                    + i;
-//        u_size.moveTo(tmp_x,tmp_y);
-//        if (this->canIWalkToThisPosition(u_size, 0)) {
-//            have_position = true;
-//        }
-//        if (!have_position) {
-//            tmp_x = fac_pos.getX() - u_size.getWidth() - fac_size.getWidth()
-//                    - i;
-//            tmp_y = fac_pos.getY() - u_size.getHeight() - fac_size.getHeight()
-//                    - i;
-//            u_size.moveTo(tmp_x, tmp_y);
-//            if (this->canIWalkToThisPosition(u_size, 0)) {
-//                have_position = true;
-//            }
-//        }
-//        if (!have_position) {
-//            tmp_x = fac_pos.getX() - u_size.getWidth() - fac_size.getWidth()
-//                    - i;
-//            tmp_y = fac_pos.getY() + u_size.getHeight() + fac_size.getHeight()
-//                    + i;
-//            u_size.moveTo(tmp_x, tmp_y);
-//            if (this->canIWalkToThisPosition(u_size, 0)) {
-//                have_position = true;
-//            }
-//        }
-//        if (!have_position) {
-//            tmp_x = fac_pos.getX() + u_size.getWidth() + fac_size.getWidth()
-//                    + i;
-//            tmp_y = fac_pos.getY() - u_size.getHeight() - fac_size.getHeight()
-//                    - i;
-//            u_size.moveTo(tmp_x, tmp_y);
-//            if (this->canIWalkToThisPosition(u_size, 0)) {
-//                have_position = true;
-//            }
-//        }
-//        ++i;
-//    }
-//}
-
 std::vector<Occupant *> &Map::getOccupants() {
     return *this->all_occupants;
 }
