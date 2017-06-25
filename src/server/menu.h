@@ -31,6 +31,8 @@ public:
 
     void addToLobby(int id_lobby, Player *player);
 
+    void shutDown();
+
     ~Menu();
 };
 

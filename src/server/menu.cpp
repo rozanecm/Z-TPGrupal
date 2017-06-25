@@ -54,7 +54,7 @@ void Menu::addToLobby(int id_lobby, Player* player) {
     player->getMessenger()->sendMessage(ERROR_MSG);
 }
 
-Menu::~Menu() {
+void Menu::shutDown() {
     for(auto p: players) {
         p->shutDown();
         p->join();
@@ -62,6 +62,10 @@ Menu::~Menu() {
     }
 
     for(auto l: lobbies) {
+        l->shutDown();
         delete(l);
     }
 }
+
+Menu::~Menu() {}
+

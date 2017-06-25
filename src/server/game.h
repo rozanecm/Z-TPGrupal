@@ -23,10 +23,11 @@ private:
     std::vector<Occupant*> all_occupants;
     std::vector<Territory*> territories;
     std::vector<Team> teams;
-//    ControlUnit control;
+    ControlUnit* control;
     std::shared_ptr<Map> map;
     std::string path, config;
     std::map<std::string,std::string> types;
+    std::vector<UnitMold*> unit_molds;
 
 public:
 //    Game(std::vector<Player *> players, std::vector<Messenger *> msgr,

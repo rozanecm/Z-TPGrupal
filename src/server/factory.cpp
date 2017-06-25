@@ -20,7 +20,7 @@ void Factory::build(int& id_counter) {
         u_size.moveTo(factory_pos.getX(),factory_pos.getY());
         Weapon u_weapon = weapons.at((*mold)->getWeaponType());
 
-        for (int i = 0; i <= (*mold)->getCreationQuantity(); ++i) {
+        for (int i = 0; i < (*mold)->getCreationQuantity(); ++i) {
             Unit* new_unit = (*mold)->createUnit(
                     id_counter,u_size,*map,u_weapon);
             new_unit->changeTeam(this->team);
@@ -105,4 +105,8 @@ void Factory::createStartingUnits(int &id_counter) {
 }
 
 Factory::~Factory() {}
+
+std::vector<UnitMold *> Factory::getMolds() {
+    return units;
+}
 

@@ -34,7 +34,7 @@ private:
     std::vector<int> changed_units;
     std::vector<Occupant> changed_occupants;
     std::vector<Factory> changed_factories;
-//    std::vector<Unit*> eliminated_units;
+    std::vector<Unit*> eliminated_units;
     int objects_counter;
 
 public:
@@ -73,6 +73,8 @@ public:
 
     void cmdFactoryCurrent(const std::string& player_id, int id_factory);
 
+    void finishGame();
+
 private:
     // Process all commands on commands vector and leaves the vector empty
     void executeCommands();
@@ -106,6 +108,8 @@ private:
     void sendFinnalMessage();
 
     void getTime(int& minutes, int& seconds, double time);
+
+    void freeMemory();
 };
 
 
