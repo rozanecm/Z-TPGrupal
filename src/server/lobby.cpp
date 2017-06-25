@@ -8,18 +8,18 @@
 Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
                                             all_ready(false) {
-
+    load_maps();
 }
 
 bool Lobby::startGame(const std::string& map_name) {
     std::cout << "Beginning game" << std::endl;
     if(all_ready){
         //start game
-        std::string path = get_path_from_map_name(map_name);
-        if (!path.size()) {
+        auto path_it = maps.find(map_name);
+        if (path_it == maps.end()) {
             return false;
         }
-
+        std::string path = path_it->second;
         MapLoader maploader(path, config);
         std::shared_ptr<Map> map = maploader.get_map();
 
@@ -179,27 +179,19 @@ void Lobby::exitLobby(Player *player) {
 std::string Lobby::get_loaded_maps() {
     std::stringstream s;
     s << "mapsinfo-";
-    pugi::xml_document doc;
-    doc.load_file(config.c_str());
-    pugi::xml_node cfg_root = doc.child("Config");
-    std::vector<std::string> maps;
-    pugi::xml_node maps_node = cfg_root.child("Maps");
-    for (pugi::xml_node map : maps_node.children()) {
-        s << map.attribute("name").value() << "-";
+    for (auto map : maps) {
+        s << map.first << "-";
     }
     return s.str();
 }
 
-std::string Lobby::get_path_from_map_name(const std::string &map_name) {
+
+void Lobby::load_maps() {
     pugi::xml_document doc;
     doc.load_file(config.c_str());
     pugi::xml_node cfg_root = doc.child("Config");
-    std::vector<std::string> maps;
     pugi::xml_node maps_node = cfg_root.child("Maps");
     for (pugi::xml_node map : maps_node.children()) {
-        if (map.attribute("name").value() == map_name) {
-            return map.attribute("path").value();
-        }
+        maps[map.attribute("name").value()] = map.attribute("path").value();
     }
-    return "";
 }

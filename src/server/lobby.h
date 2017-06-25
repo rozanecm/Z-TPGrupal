@@ -19,6 +19,7 @@ private:
     std::vector<Player*> players;
     std::unique_ptr<Game> game;
     std::vector<std::vector<std::string>> teams;
+    std::map<std::string, std::string> maps;
     std::string& config;
 public:
     Lobby(int id, std::string& config);
@@ -40,7 +41,7 @@ public:
     std::string get_loaded_maps();
     ~Lobby();
 
-    std::string get_path_from_map_name(const std::string &map_name);
+    void load_maps();
 };
 
 
