@@ -3,6 +3,7 @@
 //
 
 #include "server.h"
+#include <sstream>
 
 Server::Server(unsigned int port, Menu &menu) : socket(port),
                                                 running(true),
@@ -17,15 +18,14 @@ void Server::run() {
         while(this->running) {
             Socket new_client = this->socket.accept_client();
             Messenger* messenger = new Messenger(new_client);
-            std::string id_new_player =  messenger->recieveMessage();
-
-            bool added = menu.addPlayer(messenger, menu,id_new_player);
-            if (!added) {
-                messenger->sendMessage("error");
-                messenger->shutdown();
+            std::stringstream id_new_player;
+            id_new_player << "Player" << i;
+            bool added = menu.addPlayer(messenger, menu,id_new_player.str());
+            while (!added) {
+                ++i;
+                id_new_player << "Player" << i;
+                added = menu.addPlayer(messenger, menu,id_new_player.str());
             }
-            ++i;
-            messenger->sendMessage("ok");
             std::cout << "new player conectado" << std::endl;
 
         }

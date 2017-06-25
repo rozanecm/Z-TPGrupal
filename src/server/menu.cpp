@@ -2,6 +2,8 @@
 // Created by rodian on 29/05/17.
 //
 
+#include <sstream>
+#include <string>
 #include "menu.h"
 
 #define ERROR_MSG "joinlobby-error"
@@ -11,7 +13,6 @@ Menu::Menu(std::string& config) : lobby_counter(0), config(config) {}
 
 bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
     Lock l(m);
-//    std::string player_id = msgr->recieveMessage();
     for(Player* p : players) {
         if (p->getId() == player_id) {
             return false;
@@ -68,4 +69,16 @@ void Menu::shutDown() {
 }
 
 Menu::~Menu() {}
+
+std::string Menu::changeName(std::string &new_name) {
+    Lock l(m);
+    for(Player* p : players) {
+        if (p->getId() == new_name) {
+            return "name is already taken";
+        }
+    }
+    std::stringstream ans;
+    ans << "Successfully change name to " << new_name;
+    return ans.str();
+}
 

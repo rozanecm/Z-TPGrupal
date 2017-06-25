@@ -517,10 +517,6 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
 
 void ControlUnit::freeMemory() {
     // free memory
-    for (auto& u: all_units) {
-        delete(u.second);
-    }
-    all_units.clear();
 
     std::vector<Occupant*>::iterator it = all_occupants.begin();
     for (;it != all_occupants.end();++it){
@@ -529,6 +525,11 @@ void ControlUnit::freeMemory() {
         }
         it = all_occupants.erase(it);
     }
+
+    for (auto& u: all_units) {
+        delete(u.second);
+    }
+    all_units.clear();
 
     for (auto& t: territories) {
         delete(t);
