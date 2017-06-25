@@ -19,9 +19,13 @@ void InitialWindow::on_click() {
     std::string addr_str = address_entry->get_text();
     std::string port_str = port_entry->get_text();
     name = name_entry->get_text();
+    if (messenger.get()) { // Connection already established
+        send_name();
+        return;
+    }
 
-    int port = 0;
     try {
+        int port = 0;
         port = std::stoi(port_str);
         Socket s(addr_str.c_str(), port);
         messenger = std::shared_ptr<ServerMessenger>(new ServerMessenger(s));
@@ -29,13 +33,17 @@ void InitialWindow::on_click() {
         std::cout << "Could not connect to specified addr/port" << std::endl;
         return;
     }
-    messenger.get()->send(name);
+    send_name();
+}
+
+void InitialWindow::send_name() {
+    messenger.get()->send("changename-" + name);
     std::string response = messenger.get()->receive();
     if (response == ERROR_MSG) {
         std::cout << "A player with this name already exists" << std::endl;
         return;
     }
-    this->hide();
+    hide();
 }
 
 std::shared_ptr<ServerMessenger> InitialWindow::get_socket() {
