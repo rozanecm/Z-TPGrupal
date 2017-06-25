@@ -9,26 +9,14 @@
 #define UNIT 0
 #define VEHICLE 1
 
-void print_map(pugi::xml_node& root_node) {
-/* for (pugi::xml_node& row : root_node.children()) {
-        for (pugi::xml_node &node : row.children()) {
-            char terrain = node.attribute(TERRAIN).value()[0];
-            if (terrain == 'T') {
-                terrain = ' ';
-            }
-            std::cout << terrain << " ";
-        }
-        std::cout << std::endl;
-    }*/
-}
+#define TERRAIN "terrain"
 
-
-MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
-                           float terrain_variance_pct) :
+MapGenerator::MapGenerator(int size, float lava_pct,
+                           float water_pct, int territories) :
     size(size),
     lava_pct(lava_pct),
     water_pct(water_pct),
-    terrain_var(terrain_variance_pct)
+    terr(territories)
 {
     for (int i = 0; i < size; ++i) {
         std::vector<bool> row;
@@ -39,7 +27,6 @@ MapGenerator::MapGenerator(int size, float lava_pct, float water_pct,
     }
     water_cells = (int) (size * size * water_pct / 100);
     lava_cells = (int) (size * size * lava_pct / 100);
-    terr = 9;
 
     /* Adjustment to size to split territories evenly */
     int territories_per_row =  (int) floor(sqrt(terr));
@@ -220,7 +207,6 @@ void MapGenerator::generate(const std::string& name) {
 
     pugi::xml_node structs = root.append_child("Structs");
     generate_rocks(structs);
-    print_map(terrain);
     bool saved = document.save_file(path.c_str());
     if (!saved) {
         std::cout << "Error saving map to " << path << std::endl;
