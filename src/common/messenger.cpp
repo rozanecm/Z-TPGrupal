@@ -1,10 +1,11 @@
 #include <netinet/in.h>
 #include <string>
+#include <cstdint>
+#include <stdint-gcc.h>
 #include "socket.h"
 #include "messenger.h"
 
-Messenger::Messenger(Socket& socket) : socket(std::move(socket)),
-                                       connected(true) {}
+Messenger::Messenger(Socket& socket) : socket(std::move(socket)) {}
 
 
 std::string Messenger::recieveMessage() {
@@ -24,7 +25,7 @@ std::string Messenger::recieveMessage() {
 }
 
 void Messenger::sendMessage(const std::string &message) {
-    if (this->connected) {
+    if (isConnected()) {
         uint32_t len = (uint32_t) message.size() + 1;
         // Send length first, then the message
         uint32_t network_len = htonl(len);
