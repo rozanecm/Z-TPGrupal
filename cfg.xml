@@ -17,5 +17,6 @@
     </Weapons>
     <Maps>
         <Map name="Mapa default" path="maps/map.xml"/>
+        <Map name="Nivel 2" path="maps/second_map.xml"/>
     </Maps>
 </Config>

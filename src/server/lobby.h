@@ -19,13 +19,14 @@ private:
     std::vector<Player*> players;
     std::unique_ptr<Game> game;
     std::vector<std::vector<std::string>> teams;
+    std::map<std::string, std::string> maps;
     std::string& config;
 public:
     Lobby(int id, std::string& config);
 
     bool addPlayer(Player* player);
 
-    void startGame();
+    bool startGame(const std::string& map_name);
 
     void ready(Player* player);
 
@@ -37,7 +38,10 @@ public:
 
     void exitLobby(Player* player);
 
+    std::string get_loaded_maps();
     ~Lobby();
+
+    void load_maps();
 };
 
 

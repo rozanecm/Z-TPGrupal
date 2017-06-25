@@ -38,16 +38,7 @@ void AddUnit::execute(const std::vector<std::string> &args) {
     }
 
     std::string owner = args[TEAM];
-    int team_id = 1;
-    for (const std::string& player : players) {
-        if (player == owner) {
-            break;
-        }
-        team_id++;
-    }
-    if (team_id > players.size()) {
-        team_id = 0; // set it to team NEUTRAL
-    }
+    int team_id = map.get_player_id(owner);
     unsigned int hp = std::stoul(args[HP]);
     Unit unit(id, {x, y}, type->second, (TeamEnum) team_id, hp);
     unit.update_owner(owner);
@@ -57,8 +48,8 @@ void AddUnit::execute(const std::vector<std::string> &args) {
 }
 
 AddUnit::AddUnit(UnitsMonitor &unitsMonitor,
-                 const std::vector<std::string>& players)
+                 MapMonitor& map)
         : unitsMonitor(unitsMonitor),
-          players(players)
+          map(map)
 {
 }

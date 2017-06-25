@@ -33,12 +33,12 @@ class GameWindow : public Gtk::ApplicationWindow {
 
     bool unit_selection;
     bool building_selection;
-    int selection_id = 0;
 
     std::string me;
     std::vector<std::string> players;
-protected:
-    bool onTimeout();
+
+    bool winner;
+    bool loser;
 
 public:
     GameWindow(BaseObjectType *cobject,
@@ -55,7 +55,19 @@ public:
                  const std::string &owner);
 
     void setMapData();
+    void factory_change_unit(std::string &path);
 
+    void update_factory_panel(const std::string& type, int fire_rate, int hp);
+    void update_factory_timer(int minutes, int seconds);
+
+    void update_name(const std::string& name);
+    void update_players(const std::vector<std::string>& players);
+
+protected:
+    bool onTimeout();
+
+private:
+    void update_side_panels();
     // Functions to change the window's side panel
     bool change_view_to_unit();
 
@@ -67,32 +79,17 @@ public:
 
     void factory_next();
 
-    void factory_change_unit(std::string &path);
-
     void factory_create_unit();
-
-    void update_selection(int id);
 
     void process_attack();
 
-    void update_name(const std::string& name);
-    void update_players(const std::vector<std::string>& players);
-
     bool on_key_press_event(GdkEventKey *event) override;
-
 
     void remove_side_panel();
 
     void factory_prev();
 
-    void update_factory_panel(const std::string& type, int fire_rate, int hp);
-    void update_factory_timer(int minutes, int seconds);
-
     void process_movement() const;
-
-private:
-    void update_side_panels();
-
 };
 
 #endif //Z_TPGRUPAL_GAMEWINDOW_H

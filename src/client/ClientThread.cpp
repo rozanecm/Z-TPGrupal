@@ -16,9 +16,11 @@
 #include "commands/PlayerNames.h"
 #include "commands/UpdateFactory.h"
 #include "commands/FactoryStats.h"
-#include "GameBuilder.h"
 #include "commands/LobbyInfo.h"
 #include "commands/JoinLobby.h"
+#include "Winner.h"
+#include "commands/Loser.h"
+#include "commands/MapsInfo.h"
 
 void ClientThread::run() {
     initCommands();
@@ -36,7 +38,8 @@ ClientThread::ClientThread(UnitsMonitor &unitsMonitor,
         messenger(messenger),
         lobby(*builder.get_lobby_window()),
         window(*builder.get_window()),
-        menu(*builder.get_menu_window()){
+        menu(*builder.get_menu_window())
+{
 }
 
 void ClientThread::loop() {
@@ -73,27 +76,26 @@ void ClientThread::finish() {
 
 void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
-    commands["addunit"] = new AddUnit(unitsMonitor, players);
+    commands["addunit"] = new AddUnit(unitsMonitor, mapMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
     commands["move"] = new UpdatePosition(unitsMonitor);
     commands["updateunit"] = new UpdateUnit(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
-    commands["addbuilding"] = new AddBuilding(buildingsMonitor, players);
+    commands["addbuilding"] = new AddBuilding(buildingsMonitor, mapMonitor);
     commands["addnature"] = new AddNature(mapMonitor);
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
     commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
     commands["factorystats"] = new FactoryStats(window);
     commands["lobbyinfo"] = new LobbyInfo(menu);
-    commands["joinlobby"] = new JoinLobby(menu, lobby);
+    commands["joinlobby"] = new JoinLobby(menu, lobby, messenger);
+    commands["winner"] = new Winner(mapMonitor, window);
+    commands["loseryousuck"] = new Loser(mapMonitor, window);
+    commands["mapsinfo"] = new MapsInfo(lobby);
 }
 
 ClientThread::~ClientThread() {
     for (std::pair<std::string, Command *> c : commands) {
         delete c.second;
     }
-}
-
-void ClientThread::update_player_names(const std::vector<std::string>& names) {
-    players = names;
 }

@@ -1,9 +1,6 @@
 #include "BuildingsMonitor.h"
 #include <Lock.h>
 
-BuildingsMonitor::BuildingsMonitor(std::vector<Building> &buildings) :
-        buildings(buildings) {
-}
 
 void BuildingsMonitor::markAsSelectedInRange(bool &buildingSelected,
                                              gdouble xStartCoordinate,

@@ -6,11 +6,10 @@
 #include "Unit.h"
 
 class UnitsMonitor {
-    std::vector<Unit> &units;
+    std::vector<Unit> units;
     std::mutex m;
 
 public:
-    explicit UnitsMonitor(std::vector<Unit> &units);
 
     void addUnit(Unit &unit);
 

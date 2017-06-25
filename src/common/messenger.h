@@ -17,7 +17,6 @@
 class Messenger{
 private:
     Socket socket;
-    bool connected;
 
 public:
     // Recieves a unique socket to send

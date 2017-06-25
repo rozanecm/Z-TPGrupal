@@ -26,6 +26,15 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     building->set("res/buildings/base_city.png");
 }
 
+
+const std::map<TeamEnum, std::string> teams = {
+        {TeamEnum::NEUTRAL, "blue"},
+        {TeamEnum::BLUE, "blue"},
+        {TeamEnum::GREEN, "green"},
+        {TeamEnum::RED, "red"},
+        {TeamEnum ::YELLOW, "yellow"}
+};
+
 const std::string &BuildingPanel::get_label() {
     return label;
 }
@@ -62,9 +71,10 @@ void BuildingPanel::set_unit_hp(int hp) {
     unit_hp->set_text(std::to_string(hp));
 }
 
-void BuildingPanel::set_unit_type(const std::string &type) {
+void BuildingPanel::set_unit_type(const std::string &type, TeamEnum team) {
+    std::string color = teams.find(team)->second;
     unit_type->set_text(type);
-    unit->set(PORTRAITS_PATH + type + ".png");
+    unit->set(PORTRAITS_PATH + type + "_" + color + ".png");
 }
 
 void BuildingPanel::set_unit_fire_rate(int fire_rate) {
