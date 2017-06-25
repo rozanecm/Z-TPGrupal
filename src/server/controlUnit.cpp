@@ -118,7 +118,7 @@ void ControlUnit::makeTerritoriesChecks() {
     for (auto& t: territories) {
         if (t->doesTerritorysOwnerChanged()) {
             std::string info = "updateterritory-";
-            info += std::to_string(t->getId()) + t->getTeam();
+            info += std::to_string(t->getId()) + "-" + t->getTeam() + "-";
             Position flag = t->getFlag()->getPosition();
             info += std::to_string(flag.getX()) + "-" +
                     std::to_string(flag.getY());
@@ -289,8 +289,7 @@ void ControlUnit::cmdFactoryCurrent(const std::string &player_id,
     for (auto t: territories) {
         std::map<int, Factory *> &factories = t->getFactories();
         for (auto& f: factories) {
-            if (f.first == id_factory && f.second->getTeam() == player_id
-                                         && f.second->areYouAlive()) {
+            if (f.first == id_factory && f.second->areYouAlive()) {
                 UnitMold* mold = f.second->getSelectedUnit();
                 info += "factorystats-";
                 int creation_time = f.second->getCreationSpeed();
