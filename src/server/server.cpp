@@ -22,9 +22,9 @@ void Server::run() {
             id_new_player = "Player" + i;
             bool added = menu.addPlayer(messenger, menu,id_new_player);
             while (!added) {
-                id_new_player = "";
+                std::string new_player;
                 ++i;
-                id_new_player = "Player" + i;
+                new_player = "Player" + std::to_string(i);
                 added = menu.addPlayer(messenger, menu,id_new_player);
             }
             std::cout << "new player conectado" << std::endl;
