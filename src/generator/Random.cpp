@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "Random.h"
 
-Random::Random() {
+Random::Random() : seed((unsigned int) time(NULL)) {
 }
 
 int Random::generate() {

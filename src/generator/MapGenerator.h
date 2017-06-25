@@ -7,31 +7,34 @@
 #include <pugixml.hpp>
 #include "Random.h"
 
+// Config variables, percentages / amounts of features the map will have
 #define ROCK_PCT 2
 #define BRIDGE_AMT size / 20
 #define RIVER_END_PCT 5
-#define TERRAIN "terrain"
 #define FORTS_AMT 4
+
+
 
 /* Map generator. Randomly generates a readable .xml map file basing off the
  * passed arguments on the constructor. The maps are saved to the 'maps' folder
  * in the root directory. */
-
 class MapGenerator {
     std::vector<std::vector<bool>> liquid_cells;
     std::ofstream output;
     int size;
     float lava_pct;
     float water_pct;
-    float terrain_var;
     int water_cells;
     int lava_cells;
     int terr;
+
+    std::string name;
+    // Random number generator
     Random r;
 
 public:
-    MapGenerator(int size, float lava_pct, float water_pct,
-                 float terrain_variance_pct);
+    MapGenerator(int size, float lava_pct,
+                     float water_pct, int territories);
     ~MapGenerator();
 
     // Generate the map, saving it to "maps/<name>.xml".
