@@ -45,7 +45,7 @@ public:
 
     std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
     getFlags();
-    
+
     void clear();
 };
 
