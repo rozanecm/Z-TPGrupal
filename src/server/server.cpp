@@ -32,7 +32,6 @@ void Server::run() {
         }
     } catch (SocketError& e) {
         std::string error = e.what();
-//        PrintStdErr printer(error);
     }
 }
 
