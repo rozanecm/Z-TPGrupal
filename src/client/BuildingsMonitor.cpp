@@ -77,3 +77,8 @@ BuildingsMonitor::update_building(int id, int minutes, int seconds, int hp) {
         }
     }
 }
+
+void BuildingsMonitor::clear() {
+    Lock l(m);
+    buildings.clear();
+}

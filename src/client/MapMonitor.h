@@ -14,8 +14,8 @@ private:
 
     std::mutex m;
 
-    bool winner;
-    bool loser;
+    bool winner = false;
+    bool loser = false;
 public:
 
     void setCell(unsigned int xCoordinate,
@@ -56,6 +56,8 @@ public:
 
     std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
     getFlags();
+
+    void clear();
 };
 
 

@@ -39,10 +39,6 @@ const std::string &BuildingPanel::get_label() {
     return label;
 }
 
-void BuildingPanel::on_click() {
-    std::cout << "Hola " << std::endl;
-}
-
 Gtk::Button *BuildingPanel::next_button() {
     return next;
 }

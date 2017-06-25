@@ -2,8 +2,9 @@
 #define Z_TPGRUPAL_WINNER_H
 
 
-#include "commands/Command.h"
-#include "windows/GameWindow.h"
+#include "Command.h"
+#include "../windows/GameWindow.h"
+#include "../MapMonitor.h"
 
 class Winner : public Command {
     MapMonitor& map;

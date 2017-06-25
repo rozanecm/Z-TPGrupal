@@ -111,3 +111,12 @@ MapMonitor::getFlags() {
     Lock l(m);
     return map.getFlags();
 }
+
+void MapMonitor::clear() {
+    Lock l(m);
+    loser = false;
+    winner = false;
+    map.clear();
+    players.clear();
+
+}

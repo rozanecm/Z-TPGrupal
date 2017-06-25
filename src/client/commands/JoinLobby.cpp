@@ -14,7 +14,7 @@ JoinLobby::JoinLobby(MenuWindow &menu, LobbyWindow &lobby,
 
 void JoinLobby::execute(const std::vector<std::string> &args) {
     if (args[STATUS] == OK) {
-        menu.hide();
+        menu.join_lobby();
 
         // Fetch available maps
         messenger.send("mapsinfo");

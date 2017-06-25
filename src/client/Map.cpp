@@ -36,6 +36,7 @@ std::vector<Nature> Map::getNature() {
     return nature;
 }
 
+<<<<<<< HEAD
 void Map::update_territory(const int &id, const TeamEnum &team, const int &x,
                            const int &y) {
     flags[id] = {team,{x,y}};
@@ -44,4 +45,9 @@ void Map::update_territory(const int &id, const TeamEnum &team, const int &x,
 std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
 Map::getFlags() {
     return flags;
+=======
+void Map::clear() {
+    baseMap.clear();
+    nature.clear();
+>>>>>>> origin/master
 }

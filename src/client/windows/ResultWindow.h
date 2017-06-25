@@ -25,6 +25,8 @@ public:
 
     void close_click();
 
+    void on_show();
+
     bool go_back_to_menu();
 };
 

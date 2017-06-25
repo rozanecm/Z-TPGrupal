@@ -18,7 +18,7 @@
 #include "commands/FactoryStats.h"
 #include "commands/LobbyInfo.h"
 #include "commands/JoinLobby.h"
-#include "Winner.h"
+#include "commands/Winner.h"
 #include "commands/Loser.h"
 #include "commands/MapsInfo.h"
 #include "commands/UpdateTerritory.h"
