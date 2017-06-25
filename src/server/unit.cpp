@@ -8,8 +8,11 @@ Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
            Size range, Compass* compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
-        state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this)
-        ,grab_target(this),got_target(false),mount_vehicule(false){
+        state(STANDINGSTATE),action(STANDINGSTATE), range(range),
+        grab_range(size.getPosition().getX() - 1,size.getPosition().getY() - 1,
+                   size.getWidth() + 2, size.getHeight() + 2),
+        target(this),grab_target(this),got_target(false),
+        mount_vehicule(false){
     compass->changeUnitId(id);
     compass->buildNodeMap();
 }
@@ -140,8 +143,11 @@ void Unit::move() {
             double t_factor = compass->getTerrainFactorOn(pos.getX(),pos.getY());
             // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
-            this->range.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
+            int x_range = pos.getX() - range.getWidth();
+            int y_range = pos.getY() - range.getHeight();
+            this->range.moveTo(x_range,y_range);
+            this->grab_range.moveTo(pos.getX() - 1,pos.getY() - 1);
             this->changed = true;
             this->action = MOVESTATE;
             road.pop_back();
@@ -281,7 +287,7 @@ Size Unit::getNextPosition(int steps) {
 
 bool Unit::onRangeToGrabTarget() {
     Size trg_size = grab_target->getSize();
-    return range.isThereACollision(trg_size);
+    return grab_range.isThereACollision(trg_size);
 }
 
 void Unit::recalculateMyStartPosition() {

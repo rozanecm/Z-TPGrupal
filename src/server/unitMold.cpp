@@ -18,7 +18,11 @@ Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
     // get closest valid position from fabric
     Position valid_pos = compass->getAValidPositionForDestiny(u_pos);
     u_size.moveTo(valid_pos.getX(),valid_pos.getY());
-    Size unit_range(valid_pos.getX(),valid_pos.getY(),range,range);
+    int x_range = valid_pos.getX() - range;
+    int y_range = valid_pos.getY() - range;
+    int w_range = range * 2 + width;
+    int h_range = range * 2 + height;
+    Size unit_range(x_range,y_range,w_range,h_range);
 
 
     Unit* new_unit = new Unit(id, life, type, unit_speed, u_size, unit_range,

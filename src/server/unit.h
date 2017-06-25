@@ -27,7 +27,7 @@ private:
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
     // is standing still
     std::string state,action;
-    Size range;
+    Size range, grab_range;
     std::vector<Position> road;
     Occupant* target;
     Teamable* grab_target;
