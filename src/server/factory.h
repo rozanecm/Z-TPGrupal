@@ -26,9 +26,6 @@ public:
 
     void startBuilding(const std::string& player_id);
 
-    // Stops the creation of units
-//    void stopBuilding(std::string &player_id);
-
     // Returns the creational time of the selected Unit
     int getSelectedUnitTime();
 
@@ -39,8 +36,6 @@ public:
 
     UnitMold * getSelectedUnit();
 
-    Occupant* destroyFactory();
-
     void changeTechLevel(int tech_level);
 
     int getCreationSpeed();
@@ -50,6 +45,8 @@ public:
     std::vector<Unit*> getUnits();
 
     void resetSelectedUnit();
+
+    void createStartingUnits(int &id_counter);
 
     ~Factory();
 };

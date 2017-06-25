@@ -71,3 +71,7 @@ PlayerInfo::~PlayerInfo() {
     player_messenger = nullptr;
 }
 
+bool PlayerInfo::areYouStillConected() {
+    return player_messenger->isConnected();
+}
+

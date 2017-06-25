@@ -52,32 +52,32 @@ void Lobby::startGame() {
             p->getInGame();
         }
 
-        /// estas unidades creadas son para realizar tests
-        Size r_size(0,0,3,3);
-        Size range(0,0,12,12);
-        Size laser_size(0,0,3,1);
-//        Size r_size(415,431,6,6);
-//        Size range(415,431,12,12);
-
-        Size j_size(20,20,3,3);
-        Size j_range(20,20,6,6);
-        Compass* r_compass = new Compass(*map, r_size,204, 4);
-        Compass* j_compass = new Compass(*map, j_size,208, 4);
-        std::string w_type = "laser";
-        Weapon weapon(w_type,25,20,false,laser_size);
-        Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
-        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,
-                              weapon,2);
-
-        robot->changeTeam(players[0]->getId());
-        if (players.size() >= 2)
-            jeep->changeTeam(players[1]->getId());
-
-        units.insert(std::pair<int,Unit*>(204,robot));
-        units.insert(std::pair<int,Unit*>(208,jeep));
-        occupants.push_back((Occupant*) robot);
-        occupants.push_back((Occupant*) jeep);
-        //////////////////////////////
+//        /// estas unidades creadas son para realizar tests
+//        Size r_size(0,0,3,3);
+//        Size range(0,0,12,12);
+//        Size laser_size(0,0,3,1);
+////        Size r_size(415,431,6,6);
+////        Size range(415,431,12,12);
+//
+//        Size j_size(20,20,3,3);
+//        Size j_range(20,20,6,6);
+//        Compass* r_compass = new Compass(*map, r_size,204, 4);
+//        Compass* j_compass = new Compass(*map, j_size,208, 4);
+//        std::string w_type = "laser";
+//        Weapon weapon(w_type,25,20,false,laser_size);
+//        Unit* robot = new Unit(204,400,"grunt",4,r_size,range,*r_compass,weapon,2);
+//        Unit* jeep = new Unit(208,400,"jeep",5,j_size,j_range,*j_compass,
+//                              weapon,2);
+//
+//        robot->changeTeam(players[0]->getId());
+//        if (players.size() >= 2)
+//            jeep->changeTeam(players[1]->getId());
+//
+//        units.insert(std::pair<int,Unit*>(204,robot));
+//        units.insert(std::pair<int,Unit*>(208,jeep));
+//        occupants.push_back((Occupant*) robot);
+//        occupants.push_back((Occupant*) jeep);
+//        //////////////////////////////
         std::vector<Territory *> territories = maploader.get_territories();
         game = std::unique_ptr<Game> (new Game(players, messengers,
                                                map, units, teams_info,
@@ -103,9 +103,6 @@ void Lobby::ready(Player* player) {
 bool Lobby::addPlayer(Player* player) {
     if (players.size() < 4)
         players.push_back(player);
-    if (teams.size() == 0) {
-        teams.push_back(std::vector<std::string>());
-    }
 
     std::string names_cmd = "names-";
     for (std::string name : get_player_names()) {
@@ -116,6 +113,7 @@ bool Lobby::addPlayer(Player* player) {
         p->getMessenger()->sendMessage(names_cmd);
 
     }
+    teams.push_back(std::vector<std::string>());
     teams.back().push_back(player->getId());
     return (players.size() < 4);
 }

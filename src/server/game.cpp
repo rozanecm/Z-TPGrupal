@@ -20,13 +20,18 @@ Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
 
 
 void Game::run() {
-    sincronizeOccupants();
+    this->sincronizeOccupants();
     map->updateOccupants(&all_occupants);
     this->sendMapInfo();
     this->buildTypeMap();
     this->sendTerritoryInfo();
     this->sendOccupantsInfo();
     control.run();
+    for (auto& p: players) {
+        if (!p->getMessenger()->isConnected()) {
+            p->shutDown();
+        }
+    }
 }
 
 void Game::shutDownGame() {
@@ -113,6 +118,7 @@ void Game::sincronizeOccupants() {
             }
         }
     }
+    this->createStartingUnits();
 }
 
 void Game::sendTerritoryInfo() {
@@ -126,6 +132,25 @@ void Game::sendTerritoryInfo() {
     }
     for(auto& player : players) {
         player->getMessenger()->sendMessage(info);
+    }
+}
+
+void Game::createStartingUnits() {
+    for (auto& team: teams) {
+        std::vector<PlayerInfo>& players = team.getPlayersInfo();
+        for (auto& p : players) {
+            Factory* fortress = p.getFortress();
+            int id_counter = (int)(territories.size() + all_occupants.size());
+            fortress->createStartingUnits(id_counter);
+            std::vector<Unit *> tmp = fortress->getUnits();
+            for (auto &u: tmp) {
+                u->recalculateMyStartPosition();
+                all_units[u->getId()] = u;
+                all_occupants.push_back((Occupant*)u);
+                // set changed boolean to false
+                u->haveYouChanged();
+            }
+        }
     }
 }
 

@@ -37,11 +37,6 @@ void Factory::build(int& id_counter) {
     }
 }
 
-//void Factory::stopBuilding(std::string &player_id) {
-//    if (player_id == this->getTeam())
-//        this->running = false;
-//}
-
 int Factory::getSelectedUnitTime() {
     return (*mold)->getCreationTime();
 }
@@ -57,13 +52,6 @@ UnitMold* Factory::nextUnit() {
         ++i;
     }
     return *mold;
-}
-
-Occupant *Factory::destroyFactory() {
-    // capaz necesite un tipo distinto a Occupant para que no pueda ser
-    // destruido ni atacado
-//    Occupant* ruins = new Occupant(,1000,"Ruins",this->occ_size);
-//    return ruins;
 }
 
 void Factory::changeTechLevel(int tech_level) {
@@ -111,4 +99,10 @@ void Factory::resetSelectedUnit() {
     mold = units.begin();
 }
 
+void Factory::createStartingUnits(int &id_counter) {
+    time_counter = (*mold)->getCreationTime();
+    this->build(id_counter);
+}
+
 Factory::~Factory() {}
+

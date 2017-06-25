@@ -659,9 +659,6 @@ Compass::~Compass() {
                 ++i;
             }
             ++j;
-            std::cout << " elimine i nodos :" << i << std::endl;
         }
-        std::cout << " elimine j veces :" << j << std::endl;
     }
-    std::cout << " sali" << std::endl;
 }

@@ -49,6 +49,8 @@ private:
     void sincronizeOccupants();
 
     void sendTerritoryInfo();
+
+    void createStartingUnits();
 };
 
 

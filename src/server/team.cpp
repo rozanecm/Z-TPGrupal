@@ -14,6 +14,9 @@ bool Team::doesTeamLose() {
         if (p.checkIfFortressLives()) {
             lose = false;
         }
+        if (!p.areYouStillConected()) {
+            lose = true;
+        }
     }
     return lose;
 }

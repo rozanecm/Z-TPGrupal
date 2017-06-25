@@ -294,6 +294,5 @@ void Unit::recalculateMyStartPosition() {
 Unit::~Unit() {
     target = nullptr;
     grab_target = nullptr;
-    std::cout << "sali de unit" << std::endl;
 }
 

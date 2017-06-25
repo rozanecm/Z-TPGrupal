@@ -43,6 +43,8 @@ public:
 
     void eliminateThisTerritory(Territory* territory);
 
+    bool areYouStillConected();
+
     ~PlayerInfo();
 };
 
