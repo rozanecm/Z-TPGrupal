@@ -76,8 +76,6 @@ void Lobby::ready(Player* player) {
     }
 }
 
-
-
 bool Lobby::addPlayer(Player* player) {
     if (!game_started) {
         if (players.size() < 4)

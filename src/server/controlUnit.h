@@ -34,7 +34,7 @@ private:
     std::vector<int> changed_units;
     std::vector<Occupant> changed_occupants;
     std::vector<Factory> changed_factories;
-//    std::vector<Unit*> eliminated_units;
+    std::vector<Unit*> eliminated_units;
     int objects_counter;
 
 public:
@@ -106,6 +106,8 @@ private:
     void sendFinnalMessage();
 
     void getTime(int& minutes, int& seconds, double time);
+
+    void freeMemory();
 };
 
 

@@ -5,6 +5,7 @@
 #include "controlUnit.h"
 #define WAIT 0.2
 #define FLAG "flag"
+#define NATURE "Rock"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -44,7 +45,12 @@ void ControlUnit::run() {
         changed_units.clear();
         changed_occupants.clear();
         changed_factories.clear();
+        for (auto& u: eliminated_units) {
+            delete(u);
+        }
+        eliminated_units.clear();
     }
+    this->freeMemory();
     // send victory or defeated message
     this->sendFinnalMessage();
 }
@@ -64,7 +70,7 @@ void ControlUnit::unitsMakeMicroAction() {
         }
     }
     for (auto& id: units_id) {
-//        delete (all_units[id]);
+        eliminated_units.push_back(all_units[id]);
         all_units.erase(id);
     }
 
@@ -101,6 +107,9 @@ void ControlUnit::checkAllLivingOccupants() {
     for(;it != all_occupants.end();){
         if((*it)->doYouNeedToDisappear()) {
             //erase it from map
+            if ((*it)->getType() == NATURE) {
+                delete((*it));
+            }
             it = all_occupants.erase(it);
             // if building put ruins
         } else {
@@ -504,6 +513,31 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
     double sec = min - minutes;
     sec = sec * 60;
     seconds = (int) sec;
+}
+
+void ControlUnit::freeMemory() {
+    // free memory
+    for (auto& u: all_units) {
+        delete(u.second);
+    }
+    all_units.clear();
+
+    std::vector<Occupant*>::iterator it = all_occupants.begin();
+    for (;it != all_occupants.end();++it){
+        if ((*it)->getType() == NATURE) {
+            delete((*it));
+        }
+        it = all_occupants.erase(it);
+    }
+
+    for (auto& t: territories) {
+        delete(t);
+    }
+
+    for (auto& b: all_bullets) {
+        delete(b);
+    }
+    all_bullets.clear();
 }
 
 

@@ -106,3 +106,7 @@ void Factory::createStartingUnits(int &id_counter) {
 
 Factory::~Factory() {}
 
+std::vector<UnitMold *> Factory::getMolds() {
+    return units;
+}
+

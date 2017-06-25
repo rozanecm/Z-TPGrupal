@@ -34,6 +34,8 @@ public:
     bool doesTerritorysOwnerChanged();
 
     int getId();
+
+    ~Territory();
 };
 
 

@@ -35,6 +35,10 @@ void Game::run() {
     this->sendTerritoryInfo();
     this->sendOccupantsInfo();
     control.run();
+
+    for (auto& m: unit_molds) {
+        delete(m);
+    }
 }
 
 void Game::buildMap() {
@@ -45,6 +49,7 @@ void Game::buildMap() {
 
     // add a Fortress to each player
     std::vector<Factory*> forts = maploader.get_forts();
+    unit_molds = forts.back()->getMolds();
     for (auto& t: teams) {
         std::vector<PlayerInfo>& playersInfo = t.getPlayersInfo();
         for (auto& p: playersInfo) {

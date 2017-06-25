@@ -39,9 +39,10 @@ public:
     void exitLobby(Player* player);
 
     std::string get_loaded_maps();
-    ~Lobby();
 
     void load_maps();
+
+    ~Lobby();
 };
 
 

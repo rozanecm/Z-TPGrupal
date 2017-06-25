@@ -47,4 +47,11 @@ Teamable *Territory::getFlag() {
     return &flag;
 }
 
+Territory::~Territory() {
+    for(auto& f: factories) {
+        delete(f.second);
+    }
+    factories.clear();
+}
+
 
