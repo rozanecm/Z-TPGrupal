@@ -29,22 +29,15 @@ bool Lobby::startGame(const std::string& map_name) {
         std::map<int, Unit*> units;
 
         // build teams
-        std::vector<Factory*> forts = maploader.get_forts();
         std::vector<Team> teams_info;
         for (int i = 0; i < teams.size(); ++i) {
             std::vector<PlayerInfo> playersInfo;
             for (int j = 0; j < teams[i].size(); ++j) {
-                Factory* fortress = forts.back();
-                fortress->changeTeam(teams[i][j]);
-                // set changed boolean to false
-                fortress->haveYouChanged();
-                PlayerInfo new_player(teams[i][j],fortress);
+                PlayerInfo new_player(teams[i][j]);
                 for (auto p: players) {
                     if (p->getId() == teams[i][j])
                         new_player.addMessenger(p->getMessenger());
                 }
-                occupants.push_back((Occupant*) fortress);
-                forts.pop_back();
                 playersInfo.push_back(new_player);
             }
             Team new_team(playersInfo,i);
@@ -52,16 +45,17 @@ bool Lobby::startGame(const std::string& map_name) {
         }
 
         // get messengers
-        std::vector<Messenger *> messengers;
+//        std::vector<Messenger *> messengers;
         for (auto p: players) {
-            messengers.push_back(p->getMessenger());
             p->getInGame();
         }
 
         std::vector<Territory *> territories = maploader.get_territories();
-        game = std::unique_ptr<Game> (new Game(players, messengers,
-                                               map, units, teams_info,
-                                               occupants, territories));
+//        game = std::unique_ptr<Game> (new Game(players, messengers,
+//                                               map, units, teams_info,
+//                                               occupants, territories));
+        game = std::unique_ptr<Game> (new Game(path, config,
+                                               teams_info, players));
         game.get()->start();
         std::cout << "Game started" << std::endl;
         return true;
