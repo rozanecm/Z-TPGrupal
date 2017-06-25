@@ -153,9 +153,9 @@ void Unit::move() {
             road.pop_back();
 
             // increase or decrease distance til steps are more than unit speed
-            if (steps <= unit_speed && unit_speed == 4) {
+            if (steps < 1) {
                 distance = (int) (t_factor * distance);
-            } else if (steps <= unit_speed && unit_speed > 4) {
+            } else if (steps < 1 && unit_speed > 4) {
                 distance = (int) (t_factor *distance *
                                                 (1-(damage_recv/life_points)));
             }
