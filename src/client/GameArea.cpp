@@ -63,6 +63,7 @@ GameArea::~GameArea() {}
 bool GameArea::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     drawBaseMap(cr);
     drawBuildingsInView(cr);
+    drawTerritoriesFlagsInView(cr);
     drawUnitsInMap(cr);
     updateCounters();
     return true;
@@ -329,7 +330,13 @@ void GameArea::drawBuilding(BuildingsEnum buildingType, unsigned short counter,
     cr->fill();
     cr->restore();
     /* draw flag */
-    drawFlag(team, cr, xGraphicCoordinate, yGraphicCoordinate);
+    if (buildingType != BuildingsEnum::FORT_DESTROYED or
+            buildingType != BuildingsEnum::FORT) {
+        /* forts' flags are territories' flags, so we dont draw them with the
+         * building, but with the other terrritories' flags instead. */
+        //todo check flag's optimal position
+        drawFlag(team, cr, xGraphicCoordinate, yGraphicCoordinate);
+    }
 }
 
 void GameArea::drawFlag(const TeamEnum &team,
@@ -349,6 +356,19 @@ void GameArea::drawFlag(const TeamEnum &team,
     cr->restore();
 }
 
+void GameArea::drawTerritoriesFlagsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
+    std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
+    flagsToDraw = mapMonitor->getFlags();
+
+    for (auto &flag : flagsToDraw) {
+        /* call actual drawing method */
+        drawFlag(flag.second.first, cr,
+                   cameraToRealMapX(camera.idealMapToCameraXCoordinate(
+                           flag.second.second.first)),
+                   cameraToRealMapY(camera.idealMapToCameraYCoordinate(
+                           flag.second.second.second)));
+    }
+}
 
 void GameArea::setResources(UnitsMonitor *unitsMonitor,
                             BuildingsMonitor *buildingsMonitor,

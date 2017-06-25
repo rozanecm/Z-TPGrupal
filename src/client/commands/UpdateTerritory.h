@@ -2,7 +2,14 @@
 #define Z_TPGRUPAL_UPDATETERRITORY_H
 
 
-class UpdateTerritory {
+#include "Command.h"
+#include "../MapMonitor.h"
+
+class UpdateTerritory : public Command{
+    MapMonitor& mapMonitor;
+public:
+    UpdateTerritory(MapMonitor& mapMonitor1);
+    void execute(const std::vector<std::string> &args);
 
 };
 

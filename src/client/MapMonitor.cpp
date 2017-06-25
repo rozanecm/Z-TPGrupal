@@ -100,6 +100,7 @@ bool MapMonitor::is_loser() {
     return loser;
 }
 
+
 void MapMonitor::clear() {
     Lock l(m);
     loser = false;
@@ -107,4 +108,16 @@ void MapMonitor::clear() {
     map.clear();
     players.clear();
 
+}
+
+void MapMonitor::update_territory(const int &id, const TeamEnum &team,
+                                  const int &x, const int &y) {
+    Lock l(m);
+    map.update_territory(id, team, x, y);
+}
+
+std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
+MapMonitor::getFlags() {
+    Lock l(m);
+    return map.getFlags();
 }

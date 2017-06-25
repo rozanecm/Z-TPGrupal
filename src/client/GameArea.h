@@ -325,6 +325,8 @@ public:
                   unsigned int xGraphicCoordinate,
                   unsigned int yGraphicCoordinate) const;
 
+    void drawTerritoriesFlagsInView(const Cairo::RefPtr<Cairo::Context> &cr);
+
     bool unit_selected();
 
     bool buildings_selected();

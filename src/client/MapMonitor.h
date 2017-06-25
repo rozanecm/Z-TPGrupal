@@ -4,6 +4,7 @@
 
 #include <mutex>
 #include "Map.h"
+#include "enums/TeamEnum.h"
 #include <string>
 
 class MapMonitor {
@@ -51,6 +52,13 @@ public:
     bool is_loser();
 
     void clear();
+
+    void update_territory(const int &id, const TeamEnum &team, const int &x,
+                          const int &y);
+
+    std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
+    getFlags();
+
 };
 
 
