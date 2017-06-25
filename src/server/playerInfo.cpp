@@ -7,6 +7,9 @@
 PlayerInfo::PlayerInfo(std::string id, Factory *fortress) :
         id(id), fortress(fortress), tech_level(1) {}
 
+
+PlayerInfo::PlayerInfo(std::string id) : id(id), tech_level(0) {}
+
 std::string PlayerInfo::getPlayerId() const {
     return id;
 }
@@ -73,5 +76,9 @@ PlayerInfo::~PlayerInfo() {
 
 bool PlayerInfo::areYouStillConected() {
     return player_messenger->isConnected();
+}
+
+void PlayerInfo::addFortress(Factory *fortress) {
+    this->fortress = fortress;
 }
 

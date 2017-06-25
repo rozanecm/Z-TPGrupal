@@ -13,7 +13,7 @@
 class Territory: public Teamable {
 private:
     std::map<int,Factory*> factories;
-    Position flag_position;
+    Teamable flag;
     Size territory_size;
     int id;
 
@@ -27,7 +27,7 @@ public:
 
     void changeFactoriesTechLevel(int tech_level);
 
-    Position getFlagPosition();
+    Teamable* getFlag();
 
     std::map<int,Factory*>& getFactories();
 

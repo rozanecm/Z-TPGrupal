@@ -21,6 +21,8 @@ private:
 public:
     PlayerInfo(std::string id ,Factory* fortress);
 
+    PlayerInfo(std::string id);
+
     std::string getPlayerId() const;
 
     bool checkIfFortressLives();
@@ -44,6 +46,8 @@ public:
     void eliminateThisTerritory(Territory* territory);
 
     bool areYouStillConected();
+
+    void addFortress(Factory* fortress);
 
     ~PlayerInfo();
 };

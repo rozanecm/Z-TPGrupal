@@ -23,21 +23,25 @@ private:
     std::vector<Occupant*> all_occupants;
     std::vector<Territory*> territories;
     std::vector<Team> teams;
-    ControlUnit control;
+//    ControlUnit control;
     std::shared_ptr<Map> map;
+    std::string path, config;
     std::map<std::string,std::string> types;
 
 public:
-    Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
-             std::shared_ptr<Map> map, std::map<int, Unit *> units,
-             std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
-             std::vector<Territory *> &territories);
+//    Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
+//             std::shared_ptr<Map> map, std::map<int, Unit *> units,
+//             std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
+//             std::vector<Territory *> &territories);
+
+    Game(std::string path, std::string &config, std::vector<Team> &teams_info,
+             std::vector<Player *> &players);
 
     void run();
 
     void shutDownGame();
 
-    void sendMapInfo();
+    void sendMapInfo(ControlUnit &control);
 
     void sendOccupantsInfo();
 
@@ -51,6 +55,10 @@ private:
     void sendTerritoryInfo();
 
     void createStartingUnits();
+
+    void buildMap();
+
+    std::vector<Messenger*> getMessengers();
 };
 
 
