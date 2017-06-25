@@ -5,12 +5,13 @@
 #include "unit.h"
 #define NEUTRAL "Neutral"
 Unit::Unit(int id, int life, std::string type, int unit_speed, Size size,
-           Size range, Compass &compass, Weapon &weapon, int fire_rate) :
+           Size range, Compass* compass, Weapon &weapon, int fire_rate) :
         Occupant(id, life, type, size), compass(compass), weapon(weapon),
         unit_speed(unit_speed),fire_rate(fire_rate),fire_count(0),
         state(STANDINGSTATE),action(STANDINGSTATE), range(range), target(this)
         ,grab_target(this),got_target(false),mount_vehicule(false){
-    compass.changeUnitId(id);
+    compass->changeUnitId(id);
+    compass->buildNodeMap();
 }
 
 void Unit::makeAction() {
@@ -19,7 +20,7 @@ void Unit::makeAction() {
             if (!got_target) {
                 // Check for enemies around you. If so, state = ATKSTATE
                 this->changed = false;
-                target = compass.checkForEnemiesOnRange
+                target = compass->checkForEnemiesOnRange
                                                     (*(Occupant *) this, range);
                 if (target->getId() != this->id) {
                     got_target = true;
@@ -71,7 +72,7 @@ void Unit::makeAction() {
             if (!road.empty())
                 road.clear();
             Position actual = obj_size.getPosition();
-            road = compass.getFastestWay(actual, target_pos);
+            road = compass->getFastestWay(actual, target_pos);
             this->action = MOVESTATE;
         } else {
             if (onRangeToGrabTarget()) {
@@ -93,21 +94,21 @@ void Unit::calculateRoadTo(int x, int y) {
         this->state = MOVESTATE;
         Position destination(x, y);
         Position actual = obj_size.getPosition();
-        road = compass.getFastestWay(actual, destination);
+        road = compass->getFastestWay(actual, destination);
     }
 }
 
 void Unit::getOnRangeOf(int x, int y) {
     Position destination(x,y);
     Position actual = obj_size.getPosition();
-    road = compass.getFastestWay(actual,destination);
+    road = compass->getFastestWay(actual,destination);
 }
 
 void Unit::move() {
     int distance = unit_speed;
     int steps = 0;
     bool crash = false;
-    compass.clearCompass();
+    compass->clearCompass();
 //    if (!road.empty()) {
 //        Position actual = obj_size.getPosition();
 //        double t_factor = compass.getTerrainFactorOn(
@@ -135,8 +136,8 @@ void Unit::move() {
         Position pos = road.back();
         Size next_pos(pos.getX(),pos.getY(),
                         obj_size.getWidth(),obj_size.getHeight());
-        if (compass.canIWalkToThisPosition(next_pos)) {
-            double t_factor = compass.getTerrainFactorOn(pos.getX(),pos.getY());
+        if (compass->canIWalkToThisPosition(next_pos)) {
+            double t_factor = compass->getTerrainFactorOn(pos.getX(),pos.getY());
             // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
             this->range.moveTo(pos.getX(),pos.getY());
@@ -160,7 +161,7 @@ void Unit::move() {
     if (crash) {
         Position destiny = road.front();
         Position actual = obj_size.getPosition();
-        road = compass.getFastestWay(actual,destiny);
+        road = compass->getFastestWay(actual,destiny);
         this->action = STANDINGSTATE;
         this->changed = true;
     }
@@ -192,7 +193,7 @@ void Unit::setTargetToGrab(Teamable *object, std::string type) {
         grab_target = object;
         this->state = GRABBINGSTATE;
     } else if (this->type == GRUNTTYPE && object->getTeam() == NEUTRAL
-            && compass.checkIfItIsGrabbable(type)) {
+            && compass->checkIfItIsGrabbable(type)) {
         // Only Grunt robots can drive
         // If is not a flag, is a vehicle
         grab_target = object;
@@ -244,7 +245,7 @@ bool Unit::checkIfBulletWillHit(std::vector<Position>& b_road, Size &b_size) {
     bool will_hit = true;
     for (auto x: b_road) {
         b_size.moveTo(x.getX(),x.getY());
-        if (!compass.canBulletWalkToThisPosition(b_size,*this,*target))
+        if (!compass->canBulletWalkToThisPosition(b_size,*this,*target))
             will_hit = false;
     }
     return will_hit;
@@ -285,7 +286,7 @@ bool Unit::onRangeToGrabTarget() {
 
 void Unit::recalculateMyStartPosition() {
     Position actual = getPosition();
-    Position valid_pos = compass.getAValidPositionForDestiny(actual);
+    Position valid_pos = compass->getAValidPositionForDestiny(actual);
     this->obj_size.moveTo(valid_pos.getX(),valid_pos.getY());
     this->range.moveTo(valid_pos.getX(),valid_pos.getY());
     this->weapon.movePosition(valid_pos.getX(),valid_pos.getY());
@@ -294,5 +295,6 @@ void Unit::recalculateMyStartPosition() {
 Unit::~Unit() {
     target = nullptr;
     grab_target = nullptr;
+    delete(compass);
 }
 

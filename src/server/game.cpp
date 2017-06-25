@@ -21,7 +21,6 @@ Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
 
 void Game::run() {
     this->sincronizeOccupants();
-    map->updateOccupants(&all_occupants);
     this->sendMapInfo();
     this->buildTypeMap();
     this->sendTerritoryInfo();
@@ -118,6 +117,7 @@ void Game::sincronizeOccupants() {
             }
         }
     }
+    map->updateOccupants(&all_occupants);
     this->createStartingUnits();
 }
 

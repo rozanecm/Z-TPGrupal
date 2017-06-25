@@ -14,9 +14,9 @@ creation_quantity(creation_quantity), type(type),weapon_type(weapon_type) {}
 Unit *UnitMold::createUnit(int id, Size u_size, Map& map,
                            Weapon &weapon) {
     Position u_pos = u_size.getPosition();
-    Compass compass(map, u_size,id,unit_speed);
+    Compass* compass = new Compass(map, u_size,id,unit_speed);
     // get closest valid position from fabric
-    Position valid_pos = compass.getAValidPositionForDestiny(u_pos);
+    Position valid_pos = compass->getAValidPositionForDestiny(u_pos);
     u_size.moveTo(valid_pos.getX(),valid_pos.getY());
     Size unit_range(valid_pos.getX(),valid_pos.getY(),range,range);
 

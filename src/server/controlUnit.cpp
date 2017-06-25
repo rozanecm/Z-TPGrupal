@@ -73,13 +73,13 @@ void ControlUnit::unitsMakeMicroAction() {
         // check if someone changed the unit
         bool was_changed = false;
         if (unit.haveYouChanged()) {
-            changed_units.push_back(unit);
+            changed_units.push_back(unit.getId());
             was_changed = true;
         }
         unit.makeAction();
         // check if the unit changed
         if (unit.haveYouChanged() && !was_changed) {
-            changed_units.push_back(unit);
+            changed_units.push_back(unit.getId());
         }
         if (!unit.areYouAlive()) {
             unit.mustDisappear();
@@ -340,7 +340,7 @@ std::string ControlUnit::getUpdateInfo() {
     std::string  update_msg = "";
     for (auto z: changed_units) {
         update_msg += "updateunit-";
-        update_msg += getInfoFromUnit(z);
+        update_msg += getInfoFromUnit(*all_units.at(z));
     }
 
     for (auto y: changed_occupants) {

@@ -36,6 +36,9 @@ void Compass::buildNodeMap() {
         for(int jt = 0; jt < map.getHeigth(); ++jt) {
             astar_map.back().push_back(new Node(it, jt,
                                   unit_size.getWidth(), unit_size.getHeight()));
+            if (it == 386) {
+                std::cout << "aca estoy " << std::endl;
+            }
         }
     }
     std::cout << "node map size: " << astar_map[0].size() << std::endl;

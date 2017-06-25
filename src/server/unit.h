@@ -21,7 +21,7 @@
 
 class Unit: public Occupant {
 private:
-    Compass compass;
+    Compass* compass;
     Weapon weapon;
     int unit_speed, fire_rate, fire_count;
     // State of Unit can be "atk" if is attacking, "mv" if is moving, "std" if
@@ -36,7 +36,7 @@ private:
 
 public:
     Unit(int id, int life, std::string type, int unit_speed, Size size,
-             Size range, Compass &compass, Weapon &weapon, int fire_rate);
+             Size range, Compass* compass, Weapon &weapon, int fire_rate);
 
     void makeAction();
 

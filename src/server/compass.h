@@ -59,6 +59,9 @@ public:
 
     Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
 
+    // Builds a Node map with the size of the original map
+    void buildNodeMap();
+
     // Returns the position of destiny. If destiny is not a valid position
     // it returns the closest valid position
     Position getAValidPositionForDestiny(Position& destiny);
@@ -66,8 +69,6 @@ public:
     ~Compass();
 
 private:
-    // Builds a Node map with the size of the original map
-    void buildNodeMap();
 
     void setTerrainModifier();
     // Writes the H value on every node of astar_map for the received position

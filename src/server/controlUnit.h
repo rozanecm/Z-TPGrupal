@@ -31,7 +31,7 @@ private:
     bool winning;
     std::vector<Team>& teams;
     std::vector<Bullet*> all_bullets;
-    std::vector<Unit> changed_units;
+    std::vector<int> changed_units;
     std::vector<Occupant> changed_occupants;
     std::vector<Factory> changed_factories;
 //    std::vector<Unit*> eliminated_units;
