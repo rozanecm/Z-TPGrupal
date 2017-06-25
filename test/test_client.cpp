@@ -10,20 +10,20 @@ int main() {
     std::mutex mutex;
     clientReceiverTest client(m,mutex);
     client.start();
+//
+//    std::string msg0 = "player1";
+//    m.sendMessage(msg0);
 
-    std::string msg0 = "player1";
-    m.sendMessage(msg0);
+//    std::string msg1 = "createlobby";
+//    m.sendMessage(msg1);
+//
+//
+//    msg1 = "ready";
+//    m.sendMessage(msg1);
 
-    std::string msg1 = "createlobby";
-    m.sendMessage(msg1);
-
-
-    msg1 = "ready";
-    m.sendMessage(msg1);
-
-
-    msg1 = "startgame-Mapa default";
-    m.sendMessage(msg1);
+//
+//    msg1 = "startgame-Mapa default";
+//    m.sendMessage(msg1);
 
     while(true) {
         std::cout << "Enter message: " << std::endl << ">> ";
