@@ -74,11 +74,11 @@ std::string Menu::changeName(std::string &new_name) {
     Lock l(m);
     for(Player* p : players) {
         if (p->getId() == new_name) {
-            return "name is already taken";
+            return "error";
         }
     }
     std::stringstream ans;
-    ans << "Successfully change name to " << new_name;
+    ans << "ok";
     return ans.str();
 }
 

@@ -284,6 +284,9 @@ GameArea::processUnitToDrawEnums(UnitsEnum &unitType, ActionsEnum &actionType,
          * set the unit type to generic robot */
         unitType = UnitsEnum::GENERIC_ROBOT;
     }
+    if (unitType == UnitsEnum::JEEP){
+        actionType = ActionsEnum ::STAND;
+    }
 }
 
 void GameArea::drawBuildingsInView(const Cairo::RefPtr<Cairo::Context> &cr) {
