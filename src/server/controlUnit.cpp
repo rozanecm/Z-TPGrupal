@@ -4,6 +4,7 @@
 
 #include "controlUnit.h"
 #define WAIT 0.2
+#define FLAG "flag"
 
 ControlUnit::ControlUnit(std::vector<Messenger *> &new_players,
                          std::map<int, Unit *> &all_units,
@@ -217,9 +218,12 @@ void ControlUnit::cmdGrab(const std::string &id_player, int id_unit,
     Unit& unit = (*it->second);
     bool found = false;
     if (unit.getTeam() == id_player) {
-        // for (auto t: territories) {
-//        if (flag.id == target)
-//    }
+        for (auto t: territories) {
+            if (t->getId() == target) {
+                unit.setTargetToGrab(t->getFlag(),FLAG);
+                found = true;
+            }
+        }
         if (!found) {
             for (auto& z: all_occupants) {
                 if (z->getId() == target) {
