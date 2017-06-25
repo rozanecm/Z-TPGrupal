@@ -29,11 +29,11 @@ void InitialWindow::on_click() {
         port = std::stoi(port_str);
         Socket s(addr_str.c_str(), port);
         messenger = std::shared_ptr<ServerMessenger>(new ServerMessenger(s));
+        send_name();
     } catch (SocketError &e) {
         std::cout << "Could not connect to specified addr/port" << std::endl;
         return;
     }
-    send_name();
 }
 
 void InitialWindow::send_name() {
