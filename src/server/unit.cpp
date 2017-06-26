@@ -112,28 +112,6 @@ void Unit::move() {
     int steps = 0;
     bool crash = false;
     compass->clearCompass();
-//    if (!road.empty()) {
-//        Position actual = obj_size.getPosition();
-//        double t_factor = compass.getTerrainFactorOn(
-//                                                 actual.getX(),actual.getY());
-//        // increase or decrease distance til steps are more than unit speed
-//        if (unit_speed == 4) {
-//            distance = (int) (t_factor * unit_speed);
-//        } else if (unit_speed > 4) {
-//            distance = (int) (t_factor * unit_speed *
-//                              (1-(damage_recv/life_points)));
-//        }
-//        Size next_pos = getNextPosition(distance);
-//        Position pos = next_pos.getPosition();
-//        if (compass.canIWalkToThisPosition(next_pos)) {
-//            // move unit position, range and weapon
-//            this->obj_size.moveTo(pos.getX(),pos.getY());
-//            this->range.moveTo(pos.getX(),pos.getY());
-//            this->weapon.movePosition(pos.getX(),pos.getY());
-//        } else {
-//            crash = true;
-//        }
-//    }
 
     while (!road.empty() && steps <= distance && !crash){
         Position pos = road.back();
@@ -144,8 +122,10 @@ void Unit::move() {
             // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
-            int x_range = pos.getX() - range.getWidth();
-            int y_range = pos.getY() - range.getHeight();
+            int x_range = pos.getX() -
+                    (range.getWidth() - obj_size.getWidth()) / 2;
+            int y_range = pos.getY() -
+                    (range.getHeight() - obj_size.getHeight()) / 2;
             this->range.moveTo(x_range,y_range);
             this->grab_range.moveTo(pos.getX() - 1,pos.getY() - 1);
             this->changed = true;

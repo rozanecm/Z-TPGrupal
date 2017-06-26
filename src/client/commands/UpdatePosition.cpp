@@ -6,11 +6,8 @@
 #define POS_X 1
 #define POS_Y 2
 
-UpdatePosition::UpdatePosition(UnitsMonitor &monitor, MapMonitor& map,
-                               ServerMessenger& messenger) :
-        units(monitor),
-        map(map),
-        messenger(messenger)
+UpdatePosition::UpdatePosition(UnitsMonitor &monitor) :
+        units(monitor)
 {
 }
 
@@ -19,8 +16,4 @@ void UpdatePosition::execute(const std::vector<std::string> &args) {
     int x = std::stoi(args[POS_X]);
     int y = std::stoi(args[POS_Y]);
     units.update_position(id, x, y);
-    int flag = map.get_flag_at(x, y);
-    if (flag > 0) {
-        messenger.send("grab-" + std::to_string(id) + "-" +std::to_string(flag));
-    }
 }

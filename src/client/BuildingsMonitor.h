@@ -29,8 +29,8 @@ public:
     void wipe_selected();
     Building get_building(int id);
 
-    void update_building(int id, int minutes, int seconds, int hp);
-
+    void update_building(int id, int minutes, int seconds, int hp,
+                             TeamEnum team);
     void clear();
 };
 

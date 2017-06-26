@@ -60,7 +60,10 @@ public:
 
     void update_hp(unsigned int hp);
 
+    void update_team(TeamEnum team);
+
     std::pair<int, int> get_time_left();
+
     void destroy();
 };
 

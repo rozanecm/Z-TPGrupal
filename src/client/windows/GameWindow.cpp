@@ -71,10 +71,10 @@ void GameWindow::setResources(UnitsMonitor *unitsMonitor,
 
 bool GameWindow::change_view_to_unit() {
     for (auto child : panel->get_children()) {
-        panel->remove(*child);
+        child->hide();
     }
 
-    panel->pack_start(*unit_panel);
+    unit_panel->show();
     panelLabel->set_text(unit_panel->get_label());
     unit_panel->update_portrait(selected_unit.getType(),
                                 selected_unit.getTeam());
@@ -83,9 +83,9 @@ bool GameWindow::change_view_to_unit() {
 
 bool GameWindow::change_view_to_building() {
     for (auto child : panel->get_children()) {
-        panel->remove(*child);
+        child->hide();
     }
-    panel->pack_start(*building_panel);
+    building_panel->show();
     panelLabel->set_text(building_panel->get_label());
 
     return true;
@@ -93,10 +93,10 @@ bool GameWindow::change_view_to_building() {
 
 bool GameWindow::change_view_to_unit_group() {
     for (auto child : panel->get_children()) {
-        panel->remove(*child);
+        child->hide();
     }
 
-    panel->pack_start(*group_panel);
+    group_panel->show();
 
     return true;
 }
@@ -142,11 +142,18 @@ bool GameWindow::on_button_release_event(GdkEventButton *event) {
 void GameWindow::process_movement() const {
     int id = selected_unit.get_ID();
     std::pair<int, int> coords = gameArea->get_coords();
+    int x = coords.first;
+    int y = coords.second;
     std::cout << gameArea->get_coords().first << ", " <<
               gameArea->get_coords().second << std::endl;
 
     std::stringstream s;
-    s << "mv-" << id << "-" << coords.first << "-" << coords.second;
+    int flag = mapMonitor->get_flag_at(x, y);
+    if (flag > 0) { // Issue a flag grabbing cmd to move towards the position
+        s << "grab-" << id << "-" << flag;
+    } else {
+        s << "mv-" << id << "-" << x << "-" << y;
+    };
     messenger->send(s.str());
 }
 
@@ -213,8 +220,8 @@ void GameWindow::remove_side_panel() {
     selected_building = Building();
     selected_unit = Unit();
     for (auto child : panel->get_children()) {
-            panel->remove(*child);
-        }
+        child->hide();
+    }
     panelLabel->set_text("Z");
 }
 

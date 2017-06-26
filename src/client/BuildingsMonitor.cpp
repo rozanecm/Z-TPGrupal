@@ -68,12 +68,14 @@ Building BuildingsMonitor::get_building(int id) {
 }
 
 void
-BuildingsMonitor::update_building(int id, int minutes, int seconds, int hp) {
+BuildingsMonitor::update_building(int id, int minutes, int seconds, int hp,
+                                  TeamEnum team) {
     Lock l(m);
     for (auto b = buildings.begin(); b != buildings.end(); ++b) {
         if (b->get_ID() == id) {
             b->update_hp(hp);
             b->update_time_left(minutes, seconds);
+            b->update_team(team);
         }
     }
 }
