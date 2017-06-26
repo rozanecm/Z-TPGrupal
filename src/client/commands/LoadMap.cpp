@@ -21,7 +21,6 @@ void LoadMap::execute(const std::vector<std::string> &args) {
     /* initialize map so then can be completed with read data */
     mapMonitor.initializeMap(100, 100);
 
-    std::vector<std::vector<std::__cxx11::string>> map;
     pugi::xml_document doc;
     /* the only arg we receive is the map,
      * which is the whole xml saved in a string */
@@ -31,14 +30,19 @@ void LoadMap::execute(const std::vector<std::string> &args) {
         return;
     }
 
+    std::vector<std::vector<std::string>> map;
     pugi::xml_node root = doc.child("Map");
-    pugi::xml_node terrain = root.child("Terrain");
-    for (auto node_row : terrain.children()) {
-        std::vector<std::__cxx11::string> row;
+    pugi::xml_node terrain_node = root.child("Terrain");
+    for (auto node_row : terrain_node.children()) {
+        unsigned int coord_x = 0;
         for (auto cell : node_row.children()) {
-            row.push_back(cell.attribute("terrain").value());
+            if (map.size() <= coord_x) {
+                map.push_back(std::vector<std::string>());
+            }
+            std::string terrain = cell.attribute("terrain").value();
+
+            map.at(coord_x++).push_back(terrain);
         }
-        map.push_back(row);
     }
 
     unsigned long size = map.size();

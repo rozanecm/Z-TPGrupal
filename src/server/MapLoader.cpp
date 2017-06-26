@@ -25,37 +25,41 @@ MapLoader::MapLoader(std::string path, std::string& config) : config(config) {
     pugi::xml_node root = doc.child("Map");
     pugi::xml_node map_node = root.child("Terrain");
 
-    int coord_y = 0; // Y coordinate counter, each row is different Y coord
-    // Iterate over every row
-    auto row = map_node.children().begin();
-    for (; row != map_node.children().end(); ++row) {
-        int coord_x = 0; // Each Cell has a different X coord
-
-        std::vector<Cell> row_vec;
-        map.push_back(row_vec);
-        // Iterate over every row creating cells
-        auto cell = row->children().begin();
-        for (; cell != row->children().end(); ++cell) {
-            std::string terrain = cell->attribute("terrain").value();
-            std::string structure = cell->attribute("struct").value();
-
-            int factor = terrain_factor.find(terrain)->second;
-            
-            // Create a new cell and push it to the row
-            // first 10 is for width, the other is for height
-            map.back().emplace_back(coord_y, coord_x, 16, 16, terrain, factor);
-            coord_x += 16;
-        }
-        // Push the whole row to the map
-        coord_y += 16;
-    }
-
     pugi::xml_document cfg;
     cfg.load_file(config.c_str());
     pugi::xml_node cfg_node = cfg.child("Config");
 
     internal_positions = std::stoi(cfg_node.child("Cells").
             attribute("internal_positions").value());
+
+    // Iterate over every row
+    unsigned int coord_y = 0;
+    auto row = map_node.children().begin();
+    for (; row != map_node.children().end(); ++row) {
+        unsigned int coord_x = 0;
+        // Iterate over every row creating cells
+        auto cell = row->children().begin();
+        for (; cell != row->children().end(); ++cell) {
+            if (map.size() <= (coord_x)) {
+                map.push_back(std::vector<Cell>());
+            }
+
+            std::string terrain = cell->attribute("terrain").value();
+            std::string structure = cell->attribute("struct").value();
+
+            int factor = terrain_factor.find(terrain)->second;
+
+            // Create a new cell and push it to the row
+            map.at(coord_x).emplace_back(coord_x * internal_positions, coord_y,
+                                         internal_positions, internal_positions,
+                                         terrain, factor);
+            coord_x++;
+        }
+        // Push the whole row to the map
+        coord_y += internal_positions;
+    }
+
+
 
     create_map();
     load_unit_molds(cfg_node.child("Units"));
