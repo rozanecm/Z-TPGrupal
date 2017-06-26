@@ -35,7 +35,6 @@ class GameWindow : public Gtk::ApplicationWindow {
     bool building_selection;
 
     std::string me;
-    std::vector<std::string> players;
 public:
     GameWindow(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder);
@@ -57,7 +56,6 @@ public:
     void update_factory_timer(int minutes, int seconds);
 
     void update_name(const std::string& name);
-    void update_players(const std::vector<std::string>& players);
 
 protected:
     bool onTimeout();

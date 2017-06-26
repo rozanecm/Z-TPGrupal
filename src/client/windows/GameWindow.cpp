@@ -204,10 +204,6 @@ void GameWindow::update_name(const std::string &name) {
     me = name;
 }
 
-void GameWindow::update_players(const std::vector<std::string> &players) {
-    this->players = players;
-}
-
 bool GameWindow::on_key_press_event(GdkEventKey *event) {
     // Clear selection
     if (event->keyval == GDK_KEY_Escape) {
@@ -256,15 +252,7 @@ void GameWindow::update_factory_panel(const std::string &type, int fire_rate,
                                       int hp) {
     building_panel->set_unit_hp(hp);
     building_panel->set_unit_fire_rate(fire_rate);
-
-    int team = 1;
-    for(std::string& player: players){
-        if (player == me) {
-            break;
-        }
-        team++;
-    }
-    building_panel->set_unit_type(type, (TeamEnum) team);
+    building_panel->set_unit_type(type, selected_building.getTeam());
 }
 
 void GameWindow::update_factory_timer(int minutes, int seconds) {
