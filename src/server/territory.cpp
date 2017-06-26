@@ -13,6 +13,7 @@ territory_size(size), id(id){}
 
 void Territory::grabFlag(std::string& new_team) {
     changed = true;
+    this->flag.changeTeam(new_team);
     this->changeTeam(new_team);
     for (auto fac: factories) {
         fac.second->changeTeam(new_team);
