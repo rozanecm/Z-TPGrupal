@@ -47,7 +47,7 @@ void ClientThread::loop() {
     try {
         while (!finished) {
             std::string msg = messenger.receive();
-            std::vector<std::string> commands = split(msg, '|');
+            std::vector<std::string> commands = utils::split(msg, '|');
             for (std::string &cmd : commands) {
                 parse(cmd);
             }
@@ -58,7 +58,7 @@ void ClientThread::loop() {
 }
 
 void ClientThread::parse(std::string &s) {
-    std::vector<std::string> params = split(s, '-');
+    std::vector<std::string> params = utils::split(s, '-');
     int cmd = 0;
     auto result = commands.find(params[cmd]);
     if (result == commands.end()) {

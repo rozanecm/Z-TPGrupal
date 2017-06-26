@@ -9,7 +9,9 @@
  * strings in a vector. The function is guaranteed to return with at least
  * one string in the vector.
  */
-std::vector<std::string> split(const std::string& input, char delim);
+namespace utils {
+    std::vector<std::string> split(const std::string& input, char delim);
+}
 
 #endif //TP3TALLER_COMMON_SPLIT_H
 
