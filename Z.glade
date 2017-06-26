@@ -752,6 +752,7 @@ GUI here</property>
               <object class="GtkEntry" id="NameEntry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="text" translatable="yes">unnamed</property>
               </object>
               <packing>
                 <property name="expand">False</property>
