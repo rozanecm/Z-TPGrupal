@@ -3,6 +3,8 @@
 #include "../windows/GameWindow.h"
 #define PORTRAITS_PATH "res/portraits/"
 
+#define TIMEOUT 100
+
 BuildingPanel::BuildingPanel(BaseObjectType *cobject,
                              const Glib::RefPtr<Gtk::Builder> &builder) :
     Gtk::Box(cobject) {
@@ -23,7 +25,9 @@ BuildingPanel::BuildingPanel(BaseObjectType *cobject,
     builder->get_widget("FactoryMinutesLabel", minutes);
     builder->get_widget("FactorySecondsLabel", seconds);
     building->set("res/buildings/base_city.png");
-
+    Glib::signal_timeout().connect(sigc::mem_fun(*this,
+                                                 &BuildingPanel::update_labels),
+                                   TIMEOUT);
 }
 
 
@@ -96,8 +100,6 @@ bool BuildingPanel::update_labels() {
 }
 
 void BuildingPanel::on_show() {
-    Glib::signal_idle().connect(sigc::mem_fun(*this,
-                                              &BuildingPanel::update_labels));
 }
 
 void BuildingPanel::on_hide() {
