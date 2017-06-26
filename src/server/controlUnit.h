@@ -89,8 +89,6 @@ private:
 
     std::string getInfoFromOccupant(Occupant& Occupant);
 
-    std::string getInfoFromTerritory(Territory& territory);
-
     std::string getInfoFromBullets(Bullet& bullet);
 
     std::string getInfoFromFactories(Factory& factory);

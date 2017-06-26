@@ -197,4 +197,6 @@ std::vector<Messenger *> Game::getMessengers() {
     return messengers;
 }
 
-
+Game::~Game() {
+    delete (this->control);
+}

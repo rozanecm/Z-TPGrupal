@@ -370,12 +370,6 @@ std::string ControlUnit::getUpdateInfo() {
 //        update_msg += getInfoFromBullets(*b) ;
 //    }
 
-//    for(auto t: territories) {
-//       if (t.doesTerritorysOwnerChanged()) {
-//           update_msg += getInfoFromTerritory(t);
-//       }
-//    }
-
     return update_msg;
 }
 
@@ -419,15 +413,6 @@ std::string ControlUnit::getInfoFromBullets(Bullet &bullet) {
     info += std::to_string(bullet.getId()) + "-";
     info += std::to_string(bullet.getPosition().getX()) + "-";
     info += std::to_string(bullet.getPosition().getY()) + "|";
-    return info;
-}
-
-std::string ControlUnit::getInfoFromTerritory(Territory &territory) {
-    Position flag_pos = territory.getFlag()->getPosition();
-    std::string info = "flagOn-";
-    info += std::to_string(flag_pos.getX()) + "-";
-    info += std::to_string(flag_pos.getY()) + "-";
-    info += territory.getTeam() + "|";
     return info;
 }
 

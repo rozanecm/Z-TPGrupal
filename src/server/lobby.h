@@ -26,7 +26,7 @@ public:
 
     bool addPlayer(Player* player);
 
-    bool startGame(const std::string& map_name);
+    void startGame(const std::string& map_name);
 
     void ready(Player* player);
 
