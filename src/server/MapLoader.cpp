@@ -152,7 +152,7 @@ void MapLoader::load_territories(const pugi::xml_node &structs_cfg,
     for(auto& territory : root.children()) {
         std::map<int, Factory*> factories_in_territory;
         for(auto& factory : territory.children()) {
-            std::vector<UnitMold*>& mold = unit_mold;
+            std::vector<UnitMold*> mold = unit_mold;
             std::string name = factory.name();
             if (name == "VehicleFactory") {
                 mold = vehicle_mold;
