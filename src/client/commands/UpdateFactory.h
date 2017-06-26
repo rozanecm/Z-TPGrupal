@@ -4,11 +4,13 @@
 
 #include "Command.h"
 #include "../BuildingsMonitor.h"
+#include "../MapMonitor.h"
 
 class UpdateFactory : public Command {
     BuildingsMonitor& buildings;
+    MapMonitor& map;
 public:
-    UpdateFactory(BuildingsMonitor& buildings);
+    UpdateFactory(BuildingsMonitor& buildings, MapMonitor& map);
     void execute(const std::vector<std::string> &args);
 
 };

@@ -9,11 +9,8 @@
 
 class UpdateUnit : public Command {
     UnitsMonitor& units;
-    MapMonitor& map;
-    ServerMessenger& messenger;
 public:
-    explicit UpdateUnit(UnitsMonitor &units, MapMonitor& map,
-                        ServerMessenger& messenger);
+    explicit UpdateUnit(UnitsMonitor &units);
 
     void execute(const std::vector<std::string> &args);
 };

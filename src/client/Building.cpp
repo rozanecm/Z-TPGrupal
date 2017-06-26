@@ -114,3 +114,7 @@ void Building::destroy() {
         buildingType = BuildingsEnum ::FORT_DESTROYED;
     }
 }
+
+void Building::update_team(TeamEnum team) {
+    this->team = team;
+}

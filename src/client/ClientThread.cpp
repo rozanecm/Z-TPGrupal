@@ -79,14 +79,14 @@ void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
     commands["addunit"] = new AddUnit(unitsMonitor, mapMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
-    commands["move"] = new UpdatePosition(unitsMonitor, mapMonitor, messenger);
-    commands["updateunit"] = new UpdateUnit(unitsMonitor, mapMonitor, messenger);
+    commands["move"] = new UpdatePosition(unitsMonitor);
+    commands["updateunit"] = new UpdateUnit(unitsMonitor);
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor, mapMonitor);
     commands["addnature"] = new AddNature(mapMonitor);
     commands["startgame"] = new StartGame(messenger, lobby, window);
     commands["names"] = new PlayerNames(lobby);
-    commands["updatefactory"] = new UpdateFactory(buildingsMonitor);
+    commands["updatefactory"] = new UpdateFactory(buildingsMonitor, mapMonitor);
     commands["factorystats"] = new FactoryStats(window);
     commands["lobbyinfo"] = new LobbyInfo(menu);
     commands["joinlobby"] = new JoinLobby(menu, lobby, messenger);

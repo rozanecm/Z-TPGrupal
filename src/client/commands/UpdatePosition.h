@@ -10,11 +10,8 @@
 
 class UpdatePosition : public Command {
     UnitsMonitor &units;
-    MapMonitor& map;
-    ServerMessenger& messenger;
 public:
-    explicit UpdatePosition(UnitsMonitor &units, MapMonitor& map,
-                            ServerMessenger& messenger);
+    explicit UpdatePosition(UnitsMonitor &units);
 
     void execute(const std::vector<std::string> &args);
 };
