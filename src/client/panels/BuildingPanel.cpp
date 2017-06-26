@@ -98,9 +98,3 @@ bool BuildingPanel::update_labels() {
     unit_type->set_text(type);
     return true;
 }
-
-void BuildingPanel::on_show() {
-}
-
-void BuildingPanel::on_hide() {
-}
