@@ -25,7 +25,7 @@ void Compass::setTerrainModifier() {
     terrain_modifier.insert(std::pair<std::string,int>("Tierra",2));
     terrain_modifier.insert(std::pair<std::string,int>("Pradera",2));
     terrain_modifier.insert(std::pair<std::string,int>("Nieve",2));
-    terrain_modifier.insert(std::pair<std::string, int>("Agua", 4));
+    terrain_modifier.insert(std::pair<std::string, int>("Agua", 10));
 }
 
 void Compass::buildNodeMap() {
@@ -213,7 +213,7 @@ bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk, int steps) {
     for (auto& pos: road) {
         std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
         // when is a vehicle and it's water, don't add it to open list
-        if (!(unit_speed != 4 && terrain_type == "Agua" &&
+        if (!(unit_speed != 2 && terrain_type == "Agua" &&
               !map.thereIsABridge(adj_size))) {
             new_g += terrain_modifier[terrain_type];
         } else {
@@ -229,7 +229,7 @@ bool Compass::writeGandSetParent(Node *ref, Node *adj, int walk, int steps) {
     Position pos = adj->getPosition();
     std::string terrain_type = map.getTerrainType(pos.getX(),pos.getY());
     // when is a vehicle and it's water, don't add it to open list
-    if (!(unit_speed != 4 && terrain_type == "Agua" &&
+    if (!(unit_speed != 2 && terrain_type == "Agua" &&
           !map.thereIsABridge(adj_size))) {
         int terrain_factor = terrain_modifier[terrain_type];
         if ((adj->beenSeen() &&
@@ -301,7 +301,7 @@ void Compass::getRoad(Position& from,Node *destiny) {
     while ((current_pos.getX() != from.getX()) ||
            (current_pos.getY() != from.getY())) {
         this->addPositions(current_pos);
-        road.push_back(current_pos);
+//        road.push_back(current_pos);
         next_node = next_node->getParent();
         current_pos = next_node->getPosition();
     }
@@ -415,7 +415,7 @@ Position Compass::getClosestValidPosition(Position &pos) {
                 // if you fit on the position. When it's a vehicule check
                 // if it's different to water.
                 if ((map.canIWalkToThisPosition(size, unit_id)) &&
-                    (!(unit_speed != 4 && terrain_type == "Agua" &&
+                    (!(unit_speed != 2 && terrain_type == "Agua" &&
                        !map.thereIsABridge(size)))) {
                     found = true;
                     closest_node = tmp;
@@ -433,7 +433,7 @@ Position Compass::getClosestValidPosition(Position &pos) {
                     // if you fit on the position. When it's a vehicule check
                     // if it's different to water.
                     if ((map.canIWalkToThisPosition(size,unit_id)) &&
-                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                        (!(unit_speed != 2 && terrain_type == "Agua" &&
                            !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
@@ -452,7 +452,7 @@ Position Compass::getClosestValidPosition(Position &pos) {
                     // if you fit on the position. When it's a vehicule check
                     // if it's different to water.
                     if ((map.canIWalkToThisPosition(size, unit_id)) &&
-                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                        (!(unit_speed != 2 && terrain_type == "Agua" &&
                            !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
@@ -471,7 +471,7 @@ Position Compass::getClosestValidPosition(Position &pos) {
                     // if you fit on the position. When it's a vehicule check
                     // if it's different to water.
                     if ((map.canIWalkToThisPosition(size, unit_id)) &&
-                        (!(unit_speed != 4 && terrain_type == "Agua" &&
+                        (!(unit_speed != 2 && terrain_type == "Agua" &&
                            !map.thereIsABridge(size)))) {
                         found = true;
                         closest_node = tmp;
@@ -521,6 +521,9 @@ void Compass::addPositions(Position& next_pos) {
     }
 
     addPositionsInOrder(increase_x,increase_y,x_max,x_min,y_max,y_min);
+    Position last = road.back();
+    if (last.getX() != next_pos.getX() || last.getY() != next_pos.getY())
+        road.push_back(next_pos);
 }
 
 void Compass::manageSteps(int &step, Position &start, Position &current_pos,

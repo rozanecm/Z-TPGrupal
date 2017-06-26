@@ -30,12 +30,13 @@ void Bullet::calculateRoadToTarget() {
 
     if (bullet_pos.getX() - target_pos.getX() != 0) {
         // solve the equation system getting the linear function y = ax + b
-        double a = (bullet_pos.getY() - target_pos.getY()) /
-                   (bullet_pos.getX() - target_pos.getX());
-        double b = bullet_pos.getY() - (a * bullet_pos.getX());
+        int res_y = (bullet_pos.getY() - target_pos.getY());
+        int res_x = (bullet_pos.getX() - target_pos.getX());
+        double a =  (double) res_y / res_x;
+        double b = (double) (bullet_pos.getY() - (a * bullet_pos.getX()));
 
         if (bullet_pos.getX() > target_pos.getX()) {
-            for (int i = target_pos.getX(); i < target_pos.getX(); ++i) {
+            for (int i = target_pos.getX(); i < bullet_pos.getX(); ++i) {
                 road.push_back(calculateNextPosition(a, b, i));
             }
         } else if (bullet_pos.getX() < target_pos.getX()) {

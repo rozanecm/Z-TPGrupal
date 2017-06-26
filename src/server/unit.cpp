@@ -84,7 +84,7 @@ void Unit::makeAction() {
                 this->state = STANDINGSTATE;
                 this->action = STANDINGSTATE;
                 this->changed = true;
-                mount_vehicule = true;
+                mount_vehicule = false;
             } else if (!road.empty()) {
                 move();
             }
@@ -179,7 +179,7 @@ void Unit::setTargetToGrab(Teamable *object, std::string type) {
         grab_target = object;
         this->state = GRABBINGSTATE;
     } else if (this->type == GRUNTTYPE && object->getTeam() == NEUTRAL
-            && compass->checkIfItIsGrabbable(type)) {
+            && compass->checkIfItIsGrabbable(type) && type != FLAGTYPE) {
         // Only Grunt robots can drive
         // If is not a flag, is a vehicle
         grab_target = object;
@@ -195,6 +195,7 @@ void Unit::grab() {
     grab_target->changeTeam(this->team);
     if (mount_vehicule) {
         this->damage_recv = this->life_points;
+        mount_vehicule = false;
     }
 }
 
