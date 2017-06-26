@@ -46,10 +46,14 @@ void Menu::addToLobby(int id_lobby, Player* player) {
     Lock l(m);
     for (Lobby* lobby : lobbies) {
         if (lobby->get_id() == id_lobby) {
-            lobby->addPlayer(player);
-            player->addLobby(lobby);
-            player->getMessenger()->sendMessage(OK_MSG);
+            if (lobby->addPlayer(player)) {
+                player->addLobby(lobby);
+                player->getMessenger()->sendMessage(OK_MSG);
+            } else {
+                player->getMessenger()->sendMessage(ERROR_MSG);
+            }
             return;
+
         }
     }
     player->getMessenger()->sendMessage(ERROR_MSG);
@@ -78,5 +82,18 @@ std::string Menu::changeName(std::string &new_name) {
         }
     }
     return "ok";
+}
+
+void Menu::disconectPlayer(Player *player) {
+    std::vector<Player*>::iterator it = players.begin();
+    for(;it != players.end();++it) {
+        if ((*it)->getId() == player->getId()) {
+            (*it)->shutDown();
+            (*it)->join();
+            delete((*it));
+            players.erase(it);
+            break;
+        }
+    }
 }
 

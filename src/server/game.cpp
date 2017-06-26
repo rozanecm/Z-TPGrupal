@@ -185,3 +185,23 @@ std::vector<Messenger *> Game::getMessengers() {
 Game::~Game() {
     delete (this->control);
 }
+
+void Game::disconectPlayer(Player *player) {
+    for (auto& t: teams) {
+        std::vector<PlayerInfo>& players_info = t.getPlayersInfo();
+        std::vector<PlayerInfo>::iterator it = players_info.begin();
+        for (; it != players_info.end(); ++it) {
+            if ((*it).getPlayerId() == player->getId()) {
+                players_info.erase(it);
+                break;
+            }
+        }
+    }
+    std::vector<Player*>::iterator it = players.begin();
+    for(;it != players.end();++it) {
+        if ((*it)->getId() == player->getId()) {
+            players.erase(it);
+            break;
+        }
+    }
+}

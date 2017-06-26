@@ -44,6 +44,8 @@ public:
 
     void shutDown();
 
+    void disconectPlayer( Player *player);
+
     ~Lobby();
 };
 

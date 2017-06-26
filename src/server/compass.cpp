@@ -665,3 +665,7 @@ Compass::~Compass() {
         }
     }
 }
+
+bool Compass::checkIfItIsABuilding(std::string &type) const {
+    return map.tellIfItIsBuilding(type);
+}

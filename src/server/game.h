@@ -46,6 +46,8 @@ public:
 
     void sendOccupantsInfo();
 
+    void disconectPlayer( Player *player);
+
     ~Game();
 private:
     void analyseOccupantsInfo(std::string& info);

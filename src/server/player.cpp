@@ -33,6 +33,9 @@ void Player::run() {
     } catch(SocketError e) {
         conected = false;
         std::cout << "Player " << id << " desconectado." << std::endl;
+        if (on_lobby || playing) {
+            lobby->disconectPlayer(this);
+        }
     }
 }
 

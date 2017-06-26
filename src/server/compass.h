@@ -57,6 +57,8 @@ public:
 
     bool checkIfItIsGrabbable(std::string& type) const;
 
+    bool checkIfItIsABuilding(std::string& type) const;
+
     Occupant* checkForEnemiesOnRange(Occupant& unit, Size &range);
 
     // Builds a Node map with the size of the original map

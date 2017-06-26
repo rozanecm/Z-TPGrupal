@@ -35,6 +35,8 @@ public:
 
     void shutDown();
 
+    void disconectPlayer( Player *player);
+
     ~Menu();
 };
 

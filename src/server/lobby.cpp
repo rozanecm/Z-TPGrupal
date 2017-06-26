@@ -78,6 +78,8 @@ bool Lobby::addPlayer(Player* player) {
         teams.push_back(std::vector<std::string>());
         teams.back().push_back(player->getId());
         return (players.size() < 4);
+    } else {
+        return !game_started;
     }
 }
 
@@ -152,3 +154,14 @@ void Lobby::shutDown() {
 }
 
 Lobby::~Lobby() {}
+
+void Lobby::disconectPlayer(Player *player) {
+    std::vector<Player*>::iterator it = players.begin();
+    for(;it != players.end();++it) {
+        if ((*it)->getId() == player->getId()) {
+            this->game->disconectPlayer(player);
+            players.erase(it);
+            break;
+        }
+    }
+}
