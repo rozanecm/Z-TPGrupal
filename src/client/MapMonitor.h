@@ -59,6 +59,8 @@ public:
     std::map<int, std::pair<TeamEnum, std::pair<unsigned int, unsigned int>>>
     getFlags();
 
+    int get_flag_at(int x, int y);
+
 };
 
 

@@ -79,8 +79,8 @@ void ClientThread::initCommands() {
     commands["loadmap"] = new LoadMap(mapMonitor, buildingsMonitor, window);
     commands["addunit"] = new AddUnit(unitsMonitor, mapMonitor);
     commands["removeunit"] = new RemoveUnit(unitsMonitor);
-    commands["move"] = new UpdatePosition(unitsMonitor);
-    commands["updateunit"] = new UpdateUnit(unitsMonitor);
+    commands["move"] = new UpdatePosition(unitsMonitor, mapMonitor, messenger);
+    commands["updateunit"] = new UpdateUnit(unitsMonitor, mapMonitor, messenger);
     commands["nextunit"] = new FactoryNextUnit(window);
     commands["addbuilding"] = new AddBuilding(buildingsMonitor, mapMonitor);
     commands["addnature"] = new AddNature(mapMonitor);

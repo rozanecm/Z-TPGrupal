@@ -121,3 +121,8 @@ MapMonitor::getFlags() {
     Lock l(m);
     return map.getFlags();
 }
+
+int MapMonitor::get_flag_at(int x, int y) {
+    Lock l(m);
+    return map.get_flag_at(x, y);
+}

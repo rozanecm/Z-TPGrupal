@@ -13,7 +13,12 @@ const std::map<std::string, ActionsEnum> states = {
         {std::string("std"), ActionsEnum::STAND}
 };
 
-UpdateUnit::UpdateUnit(UnitsMonitor& units) : units(units){
+UpdateUnit::UpdateUnit(UnitsMonitor &units, MapMonitor& map,
+                       ServerMessenger& messenger) :
+        units(units),
+        map(map),
+        messenger(messenger)
+{
 }
 
 void UpdateUnit::execute(const std::vector<std::string> &args) {
@@ -24,4 +29,10 @@ void UpdateUnit::execute(const std::vector<std::string> &args) {
     unsigned int hp = std::stoul(args[HP]);
     units.update_position(id, state, x, y);
     units.update_health(id, hp);
+
+    int flag = map.get_flag_at(x, y);
+    if (flag > 0) {
+        messenger.send("grab-" + std::to_string(id) + "-" + 
+                               std::to_string(flag));
+    }
 }

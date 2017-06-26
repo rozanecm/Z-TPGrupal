@@ -5,11 +5,16 @@
 #include <vector>
 #include "Command.h"
 #include "../UnitsMonitor.h"
+#include "../MapMonitor.h"
+#include "../ServerMessenger.h"
 
 class UpdatePosition : public Command {
-    UnitsMonitor &monitor;
+    UnitsMonitor &units;
+    MapMonitor& map;
+    ServerMessenger& messenger;
 public:
-    explicit UpdatePosition(UnitsMonitor &monitor);
+    explicit UpdatePosition(UnitsMonitor &units, MapMonitor& map,
+                            ServerMessenger& messenger);
 
     void execute(const std::vector<std::string> &args);
 };
