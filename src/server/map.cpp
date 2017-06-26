@@ -186,7 +186,7 @@ void Map::buildTypeMap() {
 
 bool Map::tellIfItIsGrabbable(std::string& type) {
     std::string tmp = type;
-    return types[tmp] == VEHICLE || types[tmp] == FLAG ;
+    return types[tmp] == VEHICLE;
 }
 
 
