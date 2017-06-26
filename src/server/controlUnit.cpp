@@ -160,12 +160,12 @@ void ControlUnit::makeFactoryChecks() {
         std::vector<int> factories_id;
         for (; it != factories.end();) {
             Factory *f = it->second;
+            bool was_changed = false;
+            if (f->haveYouChanged()) {
+                changed_factories.push_back(*f);
+                was_changed = true;
+            }
             if (f->areYouAlive()) {
-                bool was_changed = false;
-                if (f->haveYouChanged()) {
-                    changed_factories.push_back(*f);
-                    was_changed = true;
-                }
                 f->build(objects_counter);
                 // check if the factory changed
                 if (f->haveYouChanged() && !was_changed) {
@@ -502,9 +502,8 @@ void ControlUnit::getTime(int &minutes, int &seconds, double time) {
 
 void ControlUnit::freeMemory() {
     // free memory
-
     std::vector<Occupant*>::iterator it = all_occupants.begin();
-    for (;it != all_occupants.end();++it){
+    for (;it != all_occupants.end();){
         if ((*it)->getType() == NATURE) {
             delete((*it));
         }
