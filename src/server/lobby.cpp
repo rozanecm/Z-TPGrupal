@@ -12,43 +12,40 @@ Lobby::Lobby(int id, std::string& config) : lobby_id(id),
     load_maps();
 }
 
-bool Lobby::startGame(const std::string& map_name) {
+void Lobby::startGame(const std::string& map_name) {
     std::cout << "Beginning game" << std::endl;
-    if(all_ready){
+    if(all_ready) {
         //start game
         game_started = true;
         auto path_it = maps.find(map_name);
-        if (path_it == maps.end()) {
-            return false;
-        }
-        std::string path = path_it->second;
-        
-        // build teams
-        std::vector<Team> teams_info;
-        for (int i = 0; i < teams.size(); ++i) {
-            std::vector<PlayerInfo> playersInfo;
-            for (int j = 0; j < teams[i].size(); ++j) {
-                PlayerInfo new_player(teams[i][j]);
-                for (auto p: players) {
-                    if (p->getId() == teams[i][j])
-                        new_player.addMessenger(p->getMessenger());
+        if (path_it != maps.end()) {
+            std::string path = path_it->second;
+
+            // build teams
+            std::vector<Team> teams_info;
+            for (int i = 0; i < teams.size(); ++i) {
+                std::vector<PlayerInfo> playersInfo;
+                for (int j = 0; j < teams[i].size(); ++j) {
+                    PlayerInfo new_player(teams[i][j]);
+                    for (auto p: players) {
+                        if (p->getId() == teams[i][j])
+                            new_player.addMessenger(p->getMessenger());
+                    }
+                    playersInfo.push_back(new_player);
                 }
-                playersInfo.push_back(new_player);
+                Team new_team(playersInfo, i);
+                teams_info.push_back(new_team);
             }
-            Team new_team(playersInfo,i);
-            teams_info.push_back(new_team);
-        }
 
-        for (auto p: players) {
-            p->getInGame();
-        }
+            for (auto p: players) {
+                p->getInGame();
+            }
 
-        game = new Game(path, config,teams_info, players);
-        game->start();
-        std::cout << "Game started" << std::endl;
-        return true;
+            game = new Game(path, config, teams_info, players);
+            game->start();
+            std::cout << "Game started" << std::endl;
+        }
     }
-    return false;
 }
 
 void Lobby::ready(Player* player) {
