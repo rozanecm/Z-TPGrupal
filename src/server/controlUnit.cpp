@@ -3,7 +3,7 @@
 //
 
 #include "controlUnit.h"
-#define WAIT 0.2
+#define WAIT 0.3
 #define FLAG "flag"
 #define NATURE "Rock"
 

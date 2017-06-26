@@ -22,12 +22,7 @@ bool Lobby::startGame(const std::string& map_name) {
             return false;
         }
         std::string path = path_it->second;
-        MapLoader maploader(path, config);
-        std::shared_ptr<Map> map = maploader.get_map();
-
-        std::vector<Occupant*>& occupants = map->getOccupants();
-        std::map<int, Unit*> units;
-
+        
         // build teams
         std::vector<Team> teams_info;
         for (int i = 0; i < teams.size(); ++i) {
@@ -44,16 +39,10 @@ bool Lobby::startGame(const std::string& map_name) {
             teams_info.push_back(new_team);
         }
 
-        // get messengers
-//        std::vector<Messenger *> messengers;
         for (auto p: players) {
             p->getInGame();
         }
 
-        std::vector<Territory *> territories = maploader.get_territories();
-//        game = std::unique_ptr<Game> (new Game(players, messengers,
-//                                               map, units, teams_info,
-//                                               occupants, territories));
         game = new Game(path, config,teams_info, players);
         game->start();
         std::cout << "Game started" << std::endl;
