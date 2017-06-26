@@ -5,21 +5,6 @@
 #include <sstream>
 #include <string>
 #include "game.h"
-#define FORTRESS "Fort"
-#define VFABRIC "vehiculeFabric"
-#define RFABRIC "robotFabric"
-
-// get terrain map from map loader
-//Game::Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
-//           std::shared_ptr<Map> map, std::map<int, Unit *> units,
-//           std::vector<Team>& teams_info, std::vector<Occupant *> occupants,
-//           std::vector<Territory *> &terr) :
-//           commands(m), players(players),all_occupants(occupants),
-//           territories(terr), teams(teams_info),all_units(units),
-//           control(msgr, all_units, all_occupants, teams,
-//                   commands, territories),
-//           map(map){}
-
 
 Game::Game(std::string path, std::string &config, std::vector<Team> &teams_info,
            std::vector<Player *> &players) :
