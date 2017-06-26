@@ -34,6 +34,10 @@ std::map<int, Factory*> &Territory::getFactories() {
 }
 
 bool Territory::doesTerritorysOwnerChanged() {
+    if (this->flag.getTeam() != this->team) {
+        std::string new_team = flag.getTeam();
+        grabFlag(new_team);
+    }
     bool tmp = changed;
     changed = false;
     return tmp;
