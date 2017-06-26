@@ -50,9 +50,9 @@ void ControlUnit::run() {
         }
         eliminated_units.clear();
     }
-    this->freeMemory();
     // send victory or defeated message
     this->sendFinnalMessage();
+    this->freeMemory();
 }
 
 void ControlUnit::sleepFor(std::chrono::duration<double> msec) {

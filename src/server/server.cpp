@@ -8,8 +8,7 @@
 Server::Server(unsigned int port, Menu &menu) : socket(port),
                                                 running(true),
                                                 menu(menu),
-                                                port(port)
-{}
+                                                port(port) {}
 
 void Server::run() {
     std::cout << "Server started on port " << port << std::endl;
@@ -32,6 +31,7 @@ void Server::run() {
         }
     } catch (SocketError& e) {
         std::string error = e.what();
+        std::cerr << error << std::endl;
     }
 }
 
