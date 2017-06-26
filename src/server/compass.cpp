@@ -10,6 +10,7 @@
 #define STEP 2
 #define CLOSERAREA 32
 #define MIDDLEAREA 120
+#define MAXLOOP 800
 
 Compass::Compass(Map &map, Size &unit_size, int unit_id, int unit_speed)
         : map(map),
@@ -109,6 +110,10 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
                 step_check = step;
             }
             ++i;
+            if (i >= MAXLOOP) {
+                finished = true;
+                closer_node = start_node;
+            }
         }
         std::cout << "cantidad de nodos visitados: " << counter << std::endl;
         std::cout << "cantidad de loops: " << i << std::endl;

@@ -105,6 +105,11 @@ void Unit::getOnRangeOf(int x, int y) {
     Position destination(x,y);
     Position actual = obj_size.getPosition();
     road = compass->getFastestWay(actual,destination);
+    Position new_dest = road.back();
+    if (new_dest.getX() == actual.getX() && new_dest.getY() == actual.getY()) {
+        this->state = STANDINGSTATE;
+        this->action = STANDINGSTATE;
+    }
 }
 
 void Unit::move() {

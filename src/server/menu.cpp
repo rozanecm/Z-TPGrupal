@@ -85,6 +85,7 @@ std::string Menu::changeName(std::string &new_name) {
 }
 
 void Menu::disconectPlayer(Player *player) {
+    Lock l(m);
     std::vector<Player*>::iterator it = players.begin();
     for(;it != players.end();++it) {
         if ((*it)->getId() == player->getId()) {
