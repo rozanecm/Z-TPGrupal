@@ -20,10 +20,10 @@ private:
     Game* game;
     std::vector<std::vector<std::string>> teams;
     std::map<std::string, std::string> maps;
-    std::mutex m;
+    std::mutex &m;
     std::string& config;
 public:
-    Lobby(int id, std::string& config);
+    Lobby(int id, std::string& config, std::mutex &m);
 
     bool addPlayer(Player* player);
 

@@ -25,6 +25,7 @@ void Player::run() {
             } else if (new_cmd == RETURNTOMENU) {
                 this->playing = false;
                 this->on_menu = true;
+                messenger->sendMessage(this->menu.getLobbiesInfo());
             } else if (playing) {
                 commands->addCommand(this->id, new_cmd, control);
             }
@@ -136,4 +137,12 @@ Player::~Player() {
     commands = nullptr;
     control = nullptr;
     lobby = nullptr;
+}
+
+void Player::resetReady() {
+    this->ready = false;
+}
+
+bool Player::areYouInLobby() {
+    return on_lobby;
 }

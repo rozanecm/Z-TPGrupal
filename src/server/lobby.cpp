@@ -5,10 +5,11 @@
 #include <sstream>
 #include "lobby.h"
 
-Lobby::Lobby(int id, std::string& config) : lobby_id(id),
+Lobby::Lobby(int id, std::string& config, std::mutex &m) : lobby_id(id),
                                             config(config),
                                             all_ready(false),
-                                            game_started(false) {
+                                            game_started(false),
+                                            m(m){
     load_maps();
 }
 
@@ -28,13 +29,16 @@ void Lobby::startGame(const std::string& map_name) {
                 for (int j = 0; j < teams[i].size(); ++j) {
                     PlayerInfo new_player(teams[i][j]);
                     for (auto p: players) {
-                        if (p->getId() == teams[i][j])
+                        if (p->getId() == teams[i][j]) {
                             new_player.addMessenger(p->getMessenger());
+                            playersInfo.push_back(new_player);
+                        }
                     }
-                    playersInfo.push_back(new_player);
                 }
-                Team new_team(playersInfo, i);
-                teams_info.push_back(new_team);
+                if (!playersInfo.empty()) {
+                    Team new_team(playersInfo, i);
+                    teams_info.push_back(new_team);
+                }
             }
 
             for (auto p: players) {
@@ -62,9 +66,12 @@ void Lobby::ready() {
 }
 
 bool Lobby::addPlayer(Player* player) {
+    bool added = false;
     if (!game_started) {
-        if (players.size() < 4)
+        if (players.size() < 4) {
             players.push_back(player);
+            added = true;
+        }
 
         std::string names_cmd = "names-";
         for (std::string name : get_player_names()) {
@@ -77,9 +84,9 @@ bool Lobby::addPlayer(Player* player) {
         }
         teams.push_back(std::vector<std::string>());
         teams.back().push_back(player->getId());
-        return (players.size() < 4);
+        return added;
     } else {
-        return false;
+        return added;
     }
 }
 

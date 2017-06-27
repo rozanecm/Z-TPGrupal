@@ -49,6 +49,10 @@ public:
 
     bool areYouReady();
 
+    void resetReady();
+
+    bool areYouInLobby();
+
     ~Player();
 
 private:
