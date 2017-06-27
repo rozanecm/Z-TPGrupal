@@ -17,7 +17,7 @@ void Player::run() {
         while (messenger->isConnected()) {
             std::string new_cmd = messenger->recieveMessage();
 
-            std::cout << "Player " << id << " ejecuta " << new_cmd << std::endl;
+            std::cerr << "Player " << id << " ejecuta " << new_cmd << std::endl;
             if (on_menu) {
                 processMenuCommands(new_cmd);
             } else if (on_lobby) {
@@ -31,7 +31,6 @@ void Player::run() {
         }
     } catch(SocketError e) {
         conected = false;
-        std::cout << "Player " << id << " desconectado." << std::endl;
         if (on_lobby || playing) {
             lobby->disconectPlayer(this);
         }

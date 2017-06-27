@@ -23,7 +23,7 @@ private:
     std::vector<Node*> open_nodes;
     std::vector<Position> road;
     std::map<std::string,int> terrain_modifier;
-    int unit_id, unit_speed, counter;
+    int unit_id, unit_speed;
     Size unit_size;
     bool finished, clear;
     Position destiny;

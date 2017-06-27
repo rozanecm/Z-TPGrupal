@@ -69,11 +69,9 @@ void Game::sendOccupantsInfo() {
 void Game::sendMapInfo(ControlUnit &control) {
     std::string& map_str = map.get()->get_map();
     for(auto& player : players) {
-        std::cout << "Sending map to players" << std::endl;
         std::string msg = "loadmap-" + map_str;
         player->getMessenger()->sendMessage(msg);
         player->addControlUnit(&control, &commands);
-        std::cout << "size: " << map_str.size()<< std::endl;
     }
 }
 
@@ -151,7 +149,6 @@ void Game::sendTerritoryInfo() {
         info << std::to_string(flag.getX()) << "-" <<
                 std::to_string(flag.getY()) << "|";
     }
-    std::cout << info.str()<< std::endl;
     for(auto& player : players) {
         player->getMessenger()->sendMessage(info.str());
     }

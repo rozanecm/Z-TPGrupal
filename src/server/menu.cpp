@@ -26,7 +26,6 @@ bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
 void Menu::createNewLobby(Player* player) {
     Lock l(m);
     Lobby* new_lobby = new Lobby(lobby_counter++, config);
-    std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
     lobbies.back()->addPlayer(player);
     player->addLobby(new_lobby);

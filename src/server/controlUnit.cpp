@@ -57,7 +57,6 @@ void ControlUnit::run() {
 
 void ControlUnit::sleepFor(std::chrono::duration<double> msec) {
     std::this_thread::sleep_for((msec));
-//    std::this_thread::sleep_for(std::chrono::duration<double> (msec));
 }
 
 void ControlUnit::unitsMakeMicroAction() {
@@ -396,7 +395,6 @@ std::string ControlUnit::getInfoFromOccupant(Occupant& Occupant) {
 std::string ControlUnit::getInfoFromFactories(Factory &factory) {
     std::string info = "";
     info += std::to_string(factory.getId()) + "-";
-//    info += factory.getSelectedUnit() + "-";
     // This is the time needed before the next unit is build in seconds
     double time = WAIT * factory.getCreationSpeed();
     int min = 0, sec = 0;

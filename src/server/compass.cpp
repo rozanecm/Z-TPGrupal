@@ -39,11 +39,9 @@ void Compass::buildNodeMap() {
                                   unit_size.getWidth(), unit_size.getHeight()));
         }
     }
-    std::cout << "node map size: " << astar_map[0].size() << std::endl;
 }
 
 std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
-    counter = 0;
     if (!clear)
         clearCompass();
     // check if it's a possible position
@@ -62,14 +60,6 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
         Position start_pos = start_node->getPosition();
         this->closed_nodes.push_back(start_node);
         clear = false;
-        ////
-        Size start_size = start_node->getSize();
-        if (map.canIWalkToThisPosition(start_size, unit_id)) {
-            std::cout << "la posicion de salida es valida" << std::endl;
-        } else {
-            std::cout << "NO es valida la posicion de salida " << std::endl;
-        }
-        ////
 
         Node *closer_node = start_node;
         // While haven't reach destiny node or open_nodes has nodes to visit.
@@ -106,7 +96,6 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
             }
 
             if (step_check != step) {
-                std::cout << "step :" << step << "  en loop :" << i << std::endl;
                 step_check = step;
             }
             ++i;
@@ -115,8 +104,6 @@ std::vector<Position> Compass::getFastestWay(Position& from, Position& to) {
                 closer_node = start_node;
             }
         }
-        std::cout << "cantidad de nodos visitados: " << counter << std::endl;
-        std::cout << "cantidad de loops: " << i << std::endl;
         Node *closest;
         if (finished) {
             this->getRoad(from, closer_node);
@@ -154,7 +141,6 @@ void Compass::getAdjacents(Node *node, int step) {
     for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
         for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
             if (map.doesThisPositionExist(x_pos, y_pos)){
-                ++counter;
                 adj = astar_map[x_pos][y_pos];
                 Size size = adj->getSize();
 
@@ -343,7 +329,6 @@ void Compass::checkIfIsDestinyNeighbor(Node *node, int step) {
         for (int x_pos = x_min; x_pos <= x_max;x_pos += step) {
             for (int y_pos = y_min; y_pos <= y_max; y_pos += step) {
                 if (map.doesThisPositionExist(x_pos, y_pos)) {
-                    ++counter;
                     adj = astar_map[x_pos][y_pos];
                     Size size = adj->getSize();
                     this->setHValueOnNode(adj);
