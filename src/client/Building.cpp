@@ -1,6 +1,6 @@
 #include "Building.h"
 
-#define LENIENCY_FORT 32
+#define LENIENCY_FORT 16
 #define LENIENCY_FACTORY 8
 
 void Building::markAsSelectedInRange(bool &buildingSelected,
