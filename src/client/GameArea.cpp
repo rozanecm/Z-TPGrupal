@@ -6284,6 +6284,8 @@ unsigned short GameArea::getCounter(Unit &unit) const {
                unit.getType() == UnitsEnum::MEDIUM_TANK or
                unit.getType() == UnitsEnum::HEAVY_TANK) {
         return tankCounter.getCounter();
+    } else if (unit.getType() == UnitsEnum::MML){
+        return mmlCounter.getCounter();
     } else if (unit.getAction() == ActionsEnum::FIRE) {
         return shootingRobotCounter.getCounter();
     } else if (unit.getAction() == ActionsEnum::MOVE) {
@@ -6343,7 +6345,7 @@ void GameArea::initializeCounters() {
                            [RotationsEnum::r000].size());
 
     mmlCounter.initialize(unitsAnimations.operator[](TeamEnum::BLUE)
-                          [UnitsEnum::HEAVY_TANK][ActionsEnum::STAND
+                          [UnitsEnum::MML][ActionsEnum::STAND
                           ][RotationsEnum::r000].size());
 
     buildingsCounter.initialize(buildings.at(BuildingsEnum::FORT).size());
