@@ -31,7 +31,7 @@ void InitialWindow::on_click() {
         messenger = std::shared_ptr<ServerMessenger>(new ServerMessenger(s));
         send_name();
     } catch (SocketError &e) {
-        std::cout << "Could not connect to specified addr/port" << std::endl;
+        std::cerr << "Could not connect to specified addr/port" << std::endl;
         return;
     }
 }
@@ -40,7 +40,7 @@ void InitialWindow::send_name() {
     messenger.get()->send("changename-" + name);
     std::string response = messenger.get()->receive();
     if (response == ERROR_MSG) {
-        std::cout << "A player with this name already exists" << std::endl;
+        std::cerr << "A player with this name already exists" << std::endl;
         return;
     }
     hide();

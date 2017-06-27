@@ -2,8 +2,8 @@
 #define Z_TPGRUPAL_BUILDING_H
 
 #include <gtkmm/drawingarea.h>
-#include "Player.h"
 #include "enums/BuildingsEnum.h"
+#include "enums/TeamEnum.h"
 #include <utility>
 #include <map>
 #include <string>

@@ -26,7 +26,7 @@ void LoadMap::execute(const std::vector<std::string> &args) {
      * which is the whole xml saved in a string */
     pugi::xml_parse_result result = doc.load_string(args[0].c_str());
     if (!result) {
-        std::cerr << "FATAL ERROR LOADING MAP: " << result.description();
+        /* FATAL ERROR LOADING MAP */
         return;
     }
 

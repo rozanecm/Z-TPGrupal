@@ -62,11 +62,10 @@ void ClientThread::parse(std::string &s) {
     int cmd = 0;
     auto result = commands.find(params[cmd]);
     if (result == commands.end()) {
-        std::cerr << "Invalid command: " << params[cmd] << std::endl;
+        /* Invalid command */
         return;
     }
     std::vector<std::string> args(++params.begin(), params.end());
-    std::cout << "Executing " << params[cmd] << std::endl;
     result->second->execute(args);
 }
 

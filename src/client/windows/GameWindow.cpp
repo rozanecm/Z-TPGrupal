@@ -144,8 +144,6 @@ void GameWindow::process_movement() const {
     std::pair<int, int> coords = gameArea->get_coords();
     int x = coords.first;
     int y = coords.second;
-    std::cout << gameArea->get_coords().first << ", " <<
-              gameArea->get_coords().second << std::endl;
 
     std::stringstream s;
     int flag = mapMonitor->get_flag_at(x, y);
