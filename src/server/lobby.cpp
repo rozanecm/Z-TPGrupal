@@ -169,7 +169,8 @@ void Lobby::disconectPlayer(Player *player) {
     std::vector<Player*>::iterator it = players.begin();
     for(;it != players.end();++it) {
         if ((*it)->getId() == player->getId()) {
-            this->game->disconectPlayer(player->getId());
+            if (game_started)
+                this->game->disconectPlayer(player->getId());
             players.erase(it);
             break;
         }
