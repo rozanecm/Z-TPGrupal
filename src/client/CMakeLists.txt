@@ -58,8 +58,6 @@ set(SOURCE_FILES
         Map.h
         MapMonitor.cpp
         MapMonitor.h
-        Player.cpp
-        Player.h
         Unit.cpp
         Unit.h ServerMessenger.cpp ServerMessenger.h
         commands/Command.h

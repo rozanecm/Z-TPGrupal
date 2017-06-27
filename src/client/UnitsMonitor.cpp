@@ -1,6 +1,7 @@
 #include <Lock.h>
 #include <iostream>
 #include "UnitsMonitor.h"
+#include <vector>
 
 
 void UnitsMonitor::addUnit(Unit &unit) {
@@ -24,7 +25,6 @@ void UnitsMonitor::update_position(int unit_id, int x, int y) {
             unit->update_position(x, y);
         }
     }
-//    std::cerr << "update_position: Invalid unit ID: " << unit_id << std::endl;
 }
 
 void UnitsMonitor::update_position(int id, ActionsEnum state, int x, int y) {
@@ -89,7 +89,7 @@ void UnitsMonitor::wipeSelected() {
 
 void UnitsMonitor::update_health(int id, unsigned int hp) {
     Lock l(m);
-    for(auto unit = units.begin(); unit != units.end(); ++unit) {
+    for (auto unit = units.begin(); unit != units.end(); ++unit) {
         if (unit->get_ID() == id) {
             if (!hp) {
                 units.erase(unit);

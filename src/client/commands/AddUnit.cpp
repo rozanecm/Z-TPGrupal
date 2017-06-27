@@ -32,8 +32,7 @@ void AddUnit::execute(const std::vector<std::string> &args) {
     std::string name = args[UNIT_NAME];
     auto type = units.find(name);
     if (type == units.end()) {
-        std::cerr << "Error adding unit: received type " << args[UNIT_NAME] <<
-                  std::endl;
+        /* Error adding unit: received type */
         return;
     }
 
