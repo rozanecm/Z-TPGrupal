@@ -548,7 +548,7 @@ void Compass::manageSteps(int &step, Position &start, Position &current_pos,
     int start_h =  HMIN * (close_x  + close_y);
     int mid_h = HMIN * (mid_x + mid_y);
     // select step
-    if (tmp_h < closer_h || getModule(start_h, tmp_h) < closer_h) {
+    if (tmp_h < closer_h || getModule(start_h,closer_h ) < tmp_h) {
         step = 1;
     } else if ((tmp_h > closer_h || getModule(start_h, tmp_h) > closer_h)
                && tmp_h < mid_h) {

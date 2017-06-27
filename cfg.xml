@@ -25,7 +25,7 @@
         <Weapon type="flamethrower" damage="10" size_x="1" size_y="1" speed="30" explosive="yes"/>
         <Weapon type="laser" damage="10" size_x="1" size_y="1" speed="30" explosive="no"/>
         <Weapon type="missile" damage="25" size_x="1" size_y="1" speed="30" explosive="yes"/>
-        <Weapon type="highcal" damage="20" size_x="1" size_y="1" speed="30" explosive="no"/>
+        <Weapon type="highcal" damage="20" size_x="1" size_y="1" speed="30" explosive="yes"/>
     </Weapons>
     <Maps>
         <Map name="Mapa default" path="maps/map.xml"/>
