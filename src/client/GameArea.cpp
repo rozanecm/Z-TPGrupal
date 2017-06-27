@@ -42,7 +42,6 @@ void GameArea::loadResources() {
     } catch (Glib::FileError e) {
         std::cerr << e.what();
     }
-    std::cerr << "resources succesfully loaded" << std::endl;
 }
 
 void GameArea::loadMapResources() {
