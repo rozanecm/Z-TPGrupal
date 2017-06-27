@@ -5,10 +5,10 @@
 #include <sstream>
 #include "lobby.h"
 
-Lobby::Lobby(int id, std::string& config, std::mutex& m) : lobby_id(id),
+Lobby::Lobby(int id, std::string& config) : lobby_id(id),
                                             config(config),
                                             all_ready(false),
-                                            game_started(false), m(m) {
+                                            game_started(false) {
     load_maps();
 }
 
@@ -169,7 +169,7 @@ void Lobby::disconectPlayer(Player *player) {
     std::vector<Player*>::iterator it = players.begin();
     for(;it != players.end();++it) {
         if ((*it)->getId() == player->getId()) {
-            this->game->disconectPlayer(player);
+            this->game->disconectPlayer(player->getId());
             players.erase(it);
             break;
         }

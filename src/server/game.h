@@ -49,7 +49,7 @@ public:
 
     bool gameHaveFinished();
 
-    void disconectPlayer( Player *player);
+    void disconectPlayer(std::string player);
 
     ~Game();
 private:

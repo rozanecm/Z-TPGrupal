@@ -25,7 +25,7 @@ bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
 
 void Menu::createNewLobby(Player* player) {
     Lock l(m);
-    Lobby* new_lobby = new Lobby(lobby_counter++, config, m);
+    Lobby* new_lobby = new Lobby(lobby_counter++, config);
     std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
     lobbies.back()->addPlayer(player);
@@ -53,6 +53,8 @@ std::string Menu::getLobbiesInfo() {
                     (*p)->join();
                     delete((*p));
                     p = players.erase(p);
+                } else {
+                    ++p;
                 }
             }
         }
@@ -60,21 +62,22 @@ std::string Menu::getLobbiesInfo() {
     return info;
 }
 
-void Menu::addToLobby(int id_lobby, Player* player) {
+bool Menu::addToLobby(int id_lobby, Player* player) {
     Lock l(m);
     for (Lobby* lobby : lobbies) {
         if (lobby->get_id() == id_lobby) {
             if (lobby->addPlayer(player)) {
                 player->addLobby(lobby);
                 player->getMessenger()->sendMessage(OK_MSG);
+                return true;
             } else {
                 player->getMessenger()->sendMessage(ERROR_MSG);
+                return false;
             }
-            return;
-
         }
     }
     player->getMessenger()->sendMessage(ERROR_MSG);
+    return false;
 }
 
 void Menu::shutDown() {

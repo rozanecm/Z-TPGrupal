@@ -6,7 +6,6 @@
 #include "player.h"
 
 #define RETURNTOMENU "returntomenu"
-#define ERROR "error"
 #define OK "ok"
 
 Player::Player(Messenger *msg, Menu &menu, std::string& id) :
@@ -66,8 +65,8 @@ void Player::processMenuCommands(std::string &full_cmd) {
     }  else if (cmd == "joinlobby") {
         std::string lobby_id = getNextData(full_cmd);
         int id = std::stoi(lobby_id);
-        this->menu.addToLobby(id,this);
-        on_menu = false;
+        if (this->menu.addToLobby(id,this))
+            on_menu = false;
     }  else if (cmd == "lobbyinfo") {
         messenger->sendMessage(this->menu.getLobbiesInfo());
     }   else if (cmd == "changename") {

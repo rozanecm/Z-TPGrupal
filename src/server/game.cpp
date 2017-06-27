@@ -192,12 +192,12 @@ bool Game::gameHaveFinished() {
     return finished;
 }
 
-void Game::disconectPlayer(Player *player) {
+void Game::disconectPlayer(std::string id_player) {
     for (auto& t: teams) {
         std::vector<PlayerInfo>& players_info = t.getPlayersInfo();
         std::vector<PlayerInfo>::iterator it = players_info.begin();
         for (; it != players_info.end(); ++it) {
-            if ((*it).getPlayerId() == player->getId()) {
+            if ((*it).getPlayerId() == id_player) {
                 players_info.erase(it);
                 break;
             }
@@ -205,7 +205,7 @@ void Game::disconectPlayer(Player *player) {
     }
     std::vector<Player*>::iterator it = players.begin();
     for(;it != players.end();++it) {
-        if ((*it)->getId() == player->getId()) {
+        if ((*it)->getId() == id_player) {
             players.erase(it);
             break;
         }

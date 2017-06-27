@@ -31,7 +31,7 @@ public:
 
     std::string changeName(std::string &new_name);
 
-    void addToLobby(int id_lobby, Player *player);
+    bool addToLobby(int id_lobby, Player *player);
 
     void shutDown();
 
