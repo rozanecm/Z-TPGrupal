@@ -132,7 +132,10 @@ void MapLoader::load_weapons(pugi::xml_node weapons) {
         int height = std::stoi(unit.attribute("size_y").value());
         int speed = std::stoi(unit.attribute("speed").value());
         int damage = std::stoi(unit.attribute("damage").value());
-        bool explosive = type == "yes";
+        std::string exp = unit.attribute("explosive").value();
+        bool explosive = false;
+        if (exp == "yes")
+            explosive = true;
 
         Size s(0, 0, width, height);
         this->weapons.emplace(type, Weapon(type, damage, speed, explosive, s));

@@ -462,7 +462,7 @@ void ControlUnit::checkForWinner() {
         } else {
             std::vector<PlayerInfo>& losers = t.getPlayersInfo();
             for (auto& w: losers) {
-                w.getMessenger()->sendMessage("you lose");
+                w.getMessenger()->sendMessage("loseryousuck");
             }
         }
     }
@@ -483,7 +483,7 @@ void ControlUnit::sendFinnalMessage() {
         } else {
             std::vector<PlayerInfo>& losers = t.getPlayersInfo();
             for (auto& w: losers) {
-                w.getMessenger()->sendMessage("you lose");
+                w.getMessenger()->sendMessage("loseryousuck");
             }
         }
     }

@@ -9,7 +9,7 @@ Factory::Factory(int id, int life, std::string& type, Size position,
                  std::vector<UnitMold*>& units, std::shared_ptr<Map> map,
                  std::map<std::string, Weapon> &weapons) :
 Occupant(id, life,type, position), running(false),time_counter(0), units(units),
-map(map), weapons(weapons), tech_level(3){
+map(map), weapons(weapons), tech_level(1){
     mold = units.begin();
 }
 
