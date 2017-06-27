@@ -24,7 +24,7 @@ void MenuWindow::join_click() {
     try {
         std::stoi(lobby);
     } catch(std::invalid_argument& e) {
-        std::cout << "Invalid lobby ID. Insert only numbers!" << std::endl;
+        std::cerr << "Invalid lobby ID. Insert only numbers!" << std::endl;
         return;
     }
     messenger->send("joinlobby-" + lobby);

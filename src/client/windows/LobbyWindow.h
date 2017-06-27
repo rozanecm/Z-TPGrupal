@@ -8,12 +8,13 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/togglebutton.h>
 #include <gtkmm/entry.h>
+#include <string>
+#include <vector>
 
 #define PLAYERS_AMT 4
 #include "../ServerMessenger.h"
 
 class LobbyWindow : public Gtk::Window {
-
     Gtk::Button *start;
     Gtk::Button *ready;
     Gtk::Label *players[PLAYERS_AMT];
@@ -23,6 +24,7 @@ class LobbyWindow : public Gtk::Window {
     std::string default_label;
 
     bool started = false;
+
 public:
     LobbyWindow(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
@@ -35,6 +37,7 @@ public:
     bool game_started();
     void on_show();
     void update_maps(const std::string& maps);
+
 private:
     void click_start();
     void click_ready();

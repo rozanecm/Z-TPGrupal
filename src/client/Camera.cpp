@@ -48,7 +48,6 @@ void Camera::moveDown() {
 
 void Camera::moveRight() {
     if (position.first != maxXCoordinate) {
-        std::cout << position.first << std::endl;
         position.first += tileSize;
     }
 }
