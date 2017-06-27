@@ -28,6 +28,7 @@ private:
     std::string path, config;
     std::map<std::string,std::string> types;
     std::vector<UnitMold*> unit_molds;
+    bool finished;
 
 public:
 //    Game(std::vector<Player *> players, std::vector<Messenger *> msgr,
@@ -45,6 +46,8 @@ public:
     void sendMapInfo(ControlUnit &control);
 
     void sendOccupantsInfo();
+
+    bool gameHaveFinished();
 
     ~Game();
 private:

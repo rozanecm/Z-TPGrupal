@@ -85,7 +85,7 @@ void Player::processLobbyCommands(std::string &full_cmd) {
         this->lobby->startGame(map);
     } else if (cmd == "ready") {
         this->ready = true;
-        this->lobby->ready(this);
+        this->lobby->ready();
     }  else if (cmd == "unready") {
         this->ready = false;
         this->lobby->unReady();

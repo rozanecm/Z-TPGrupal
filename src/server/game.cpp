@@ -9,7 +9,7 @@
 Game::Game(std::string path, std::string &config, std::vector<Team> &teams_info,
            std::vector<Player *> &players) :
         commands(m),teams(teams_info), path(path), config(config),
-        players(players) {}
+        players(players), finished(false) {}
 
 void Game::run() {
     this->buildMap();
@@ -26,6 +26,7 @@ void Game::run() {
     for (auto& m: unit_molds) {
         delete(m);
     }
+    finished = true;
 }
 
 void Game::buildMap() {
@@ -53,7 +54,8 @@ void Game::buildMap() {
 }
 
 void Game::shutDownGame() {
-    control->finishGame();
+    if (!finished)
+        control->finishGame();
 }
 
 void Game::sendOccupantsInfo() {
@@ -184,4 +186,8 @@ std::vector<Messenger *> Game::getMessengers() {
 
 Game::~Game() {
     delete (this->control);
+}
+
+bool Game::gameHaveFinished() {
+    return finished;
 }

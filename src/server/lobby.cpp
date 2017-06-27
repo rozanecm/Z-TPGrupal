@@ -5,15 +5,15 @@
 #include <sstream>
 #include "lobby.h"
 
-Lobby::Lobby(int id, std::string& config) : lobby_id(id),
+Lobby::Lobby(int id, std::string& config, std::mutex& m) : lobby_id(id),
                                             config(config),
                                             all_ready(false),
-                                            game_started(false){
+                                            game_started(false), m(m) {
     load_maps();
 }
 
 void Lobby::startGame(const std::string& map_name) {
-    std::cout << "Beginning game" << std::endl;
+    Lock l(m);
     if(all_ready) {
         //start game
         game_started = true;
@@ -43,12 +43,12 @@ void Lobby::startGame(const std::string& map_name) {
 
             game = new Game(path, config, teams_info, players);
             game->start();
-            std::cout << "Game started" << std::endl;
         }
     }
 }
 
-void Lobby::ready(Player* player) {
+void Lobby::ready() {
+    Lock l(m);
     if (players.size() >= 2) {
         bool any_not_ready = false;
         for (auto p: players) {
@@ -78,6 +78,8 @@ bool Lobby::addPlayer(Player* player) {
         teams.push_back(std::vector<std::string>());
         teams.back().push_back(player->getId());
         return (players.size() < 4);
+    } else {
+        return false;
     }
 }
 
@@ -94,10 +96,12 @@ int Lobby::get_id() {
 }
 
 void Lobby::unReady() {
+    Lock l(m);
     all_ready = false;
 }
 
 void Lobby::exitLobby(Player *player) {
+    Lock l(m);
     std::vector<Player *>::iterator it = players.begin();
     for (; it != players.end(); ++it) {
         if ((*it)->getId() == player->getId()) {
@@ -152,3 +156,11 @@ void Lobby::shutDown() {
 }
 
 Lobby::~Lobby() {}
+
+bool Lobby::haveGameFinished() {
+    if (game_started) {
+        return game->gameHaveFinished();
+    } else {
+        return false;
+    }
+}

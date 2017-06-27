@@ -25,7 +25,7 @@ bool Menu::addPlayer(Messenger *msgr, Menu& menu, std::string player_id) {
 
 void Menu::createNewLobby(Player* player) {
     Lock l(m);
-    Lobby* new_lobby = new Lobby(lobby_counter++, config);
+    Lobby* new_lobby = new Lobby(lobby_counter++, config, m);
     std::cout << "Se creo el lobby"<< std::endl;
     lobbies.emplace_back(new_lobby);
     lobbies.back()->addPlayer(player);
@@ -36,8 +36,26 @@ void Menu::createNewLobby(Player* player) {
 std::string Menu::getLobbiesInfo() {
     Lock l(m);
     std::string info = "lobbyinfo-";
-    for (int i = 0; i < lobbies.size(); ++i) {
-        info += std::to_string(i) + "-";
+    std::vector<Lobby *>::iterator it = lobbies.begin();
+    for (;it != lobbies.end();) {
+        if (!(*it)->haveGameFinished()) {
+            info += std::to_string((*it)->get_id()) + "-";
+            ++it;
+        } else {
+            (*it)->shutDown();
+            delete(*it);
+            it = lobbies.erase(it);
+            // check desconected players
+            std::vector<Player *>::iterator p = players.begin();
+            for (;p != players.end();) {
+                if (!(*p)->getMessenger()->isConnected()) {
+                    (*p)->shutDown();
+                    (*p)->join();
+                    delete((*p));
+                    p = players.erase(p);
+                }
+            }
+        }
     }
     return info;
 }
