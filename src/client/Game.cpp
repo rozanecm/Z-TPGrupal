@@ -2,7 +2,6 @@
 #include "ClientThread.h"
 
 void Game::start_game(const std::vector<std::string> &names) {
-    game->update_players(names);
     game->update_name(me);
     // Start up the game
     game->setResources(&units_monitor, &buildingsMonitor,

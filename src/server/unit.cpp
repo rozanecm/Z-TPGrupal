@@ -105,6 +105,11 @@ void Unit::getOnRangeOf(int x, int y) {
     Position destination(x,y);
     Position actual = obj_size.getPosition();
     road = compass->getFastestWay(actual,destination);
+    Position new_dest = road.back();
+    if (new_dest.getX() == actual.getX() && new_dest.getY() == actual.getY()) {
+        this->state = STANDINGSTATE;
+        this->action = STANDINGSTATE;
+    }
 }
 
 void Unit::move() {
@@ -118,7 +123,8 @@ void Unit::move() {
         Size next_pos(pos.getX(),pos.getY(),
                         obj_size.getWidth(),obj_size.getHeight());
         if (compass->canIWalkToThisPosition(next_pos)) {
-            double t_factor = compass->getTerrainFactorOn(pos.getX(),pos.getY());
+            double t_factor = compass->getTerrainFactorOn(
+                                                      pos.getX(),pos.getY());
             // move unit position, range and weapon
             this->obj_size.moveTo(pos.getX(),pos.getY());
             this->weapon.movePosition(pos.getX(),pos.getY());
@@ -200,10 +206,20 @@ void Unit::grab() {
 }
 
 void Unit::setTargetToAttack(Occupant* target) {
-    this->state = ATKSTATE;
-    this->target = target;
-    // clean bullets on weapon when a new target is set
-    this->weapon.setNewTarget(target);
+    std::string type = target->getType();
+    if (!compass->checkIfItIsABuilding(type)) {
+        this->state = ATKSTATE;
+        this->target = target;
+        // clean bullets on weapon when a new target is set
+        this->weapon.setNewTarget(target);
+    } else {
+        if (weapon.isTheAttackExplosive()) {
+            this->state = ATKSTATE;
+            this->target = target;
+            // clean bullets on weapon when a new target is set
+            this->weapon.setNewTarget(target);
+        }
+    }
 }
 
 std::vector<Bullet*> Unit::collectBullets() {

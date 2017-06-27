@@ -49,6 +49,8 @@ public:
 
     bool gameHaveFinished();
 
+    void disconectPlayer( Player *player);
+
     ~Game();
 private:
     void analyseOccupantsInfo(std::string& info);

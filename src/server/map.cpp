@@ -189,6 +189,11 @@ bool Map::tellIfItIsGrabbable(std::string& type) {
     return types[tmp] == VEHICLE;
 }
 
+bool Map::tellIfItIsBuilding(std::string &type) {
+    std::string tmp = type;
+    return types[tmp] == BUILDING;
+}
+
 
 
 

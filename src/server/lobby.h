@@ -47,6 +47,8 @@ public:
 
     bool haveGameFinished();
 
+    void disconectPlayer( Player *player);
+
     ~Lobby();
 };
 

@@ -53,17 +53,11 @@ private:
                                                    const std::string &terrain);
 
     /* Generates river-like paths in a 'size' big square map, represented by
-     * a matrix of boolean values. You can modify the RNG seed with the 'seed'
-     * attribute. */
-    void
-    generate_path(int amt, time_t seed, std::vector<std::vector<bool>>& path);
+     * a matrix of boolean values. */
+    void  generate_path(int amt, std::vector<std::vector<bool>>& path);
 
     /* Generates rocks */
     void generate_rocks(pugi::xml_node root);
-
-    void generate_bridges();
-
-    void populate_bridge(int x, int y);
 
     /* Generates FORTS_AMT forts in the map, placed separate from each other */
     void generate_territories(pugi::xml_node root);

@@ -75,6 +75,8 @@ public:
 
     bool tellIfItIsGrabbable(std::string& type);
 
+    bool tellIfItIsBuilding(std::string& type);
+
 private:
     void buildTypeMap();
 };

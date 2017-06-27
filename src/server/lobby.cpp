@@ -164,3 +164,14 @@ bool Lobby::haveGameFinished() {
         return false;
     }
 }
+
+void Lobby::disconectPlayer(Player *player) {
+    std::vector<Player*>::iterator it = players.begin();
+    for(;it != players.end();++it) {
+        if ((*it)->getId() == player->getId()) {
+            this->game->disconectPlayer(player);
+            players.erase(it);
+            break;
+        }
+    }
+}
