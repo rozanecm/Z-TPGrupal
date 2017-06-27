@@ -40,7 +40,6 @@ void ControlUnit::run() {
 
         auto t2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_span = t3 - (t2 - t1);
-        std::cout << "sleep: "<< time_span.count() <<std::endl;
         sleepFor(time_span);
         changed_units.clear();
         changed_occupants.clear();
@@ -463,7 +462,7 @@ void ControlUnit::checkForWinner() {
         } else {
             std::vector<PlayerInfo>& losers = t.getPlayersInfo();
             for (auto& w: losers) {
-                w.getMessenger()->sendMessage("loseryousuck");
+                w.getMessenger()->sendMessage("you lose");
             }
         }
     }
@@ -484,7 +483,7 @@ void ControlUnit::sendFinnalMessage() {
         } else {
             std::vector<PlayerInfo>& losers = t.getPlayersInfo();
             for (auto& w: losers) {
-                w.getMessenger()->sendMessage("loseryousuck");
+                w.getMessenger()->sendMessage("you lose");
             }
         }
     }
